@@ -1,0 +1,61 @@
+.excercise_tbl
+  %ul.tbl_head
+    %li.width_inc Name
+    %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+      U
+      %span.heading_tool_tip
+        %p Used
+    %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+      S
+      %span.heading_tool_tip
+        %p Score
+    %li Total
+    %li Viewed
+    %li Correct
+    %li Used
+    %li Score
+  .first_child_section
+    - @available_tags.each do |tag|
+      - level, leaf_tag = tag_level(tag)
+      - mcq_stat = current_user.fetch_user_mcq_stats(tag.id)
+      - unless mcq_stat.total == 0
+        - score_class = tag_level_row_style(level, leaf_tag, mcq_stat.score, mcq_stat.viewed)
+        -if level == 1
+          .second_child_section
+            = render 'mcq_tag_info', tag: tag, mcq_stat: mcq_stat, score_class: score_class
+        -elsif level == 2
+          .second_child_section
+            .third_child_section
+              = render 'mcq_tag_info', tag: tag, mcq_stat: mcq_stat, score_class: score_class
+        -else
+          = render 'mcq_tag_info', tag: tag, mcq_stat: mcq_stat, score_class: score_class
+
+:javascript
+  // Javascript for selecting all child tags when a parent tag is selected
+  $(function() {
+    var checkboxes = 'input[name="exercise[tag_ids][]"][type=checkbox]';
+
+    $(checkboxes).change(function() {
+      // When a checkbox is changed, enable all child tags
+      var ids = $(this).data('autocheck-ids');
+      var selected = this.checked;
+
+      if (selected)
+        $('.has-error.alert.alert-danger').remove()
+
+      // Return early if no child tags
+      if (ids.length < 1)
+        return;
+
+      ids = ids.split(',');
+      ids.forEach(function(id) {
+        // Find child checkbox
+        var checkbox = $(checkboxes + '[value='+id+']');
+
+        checkbox.prop('checked', selected);
+
+        // Trigger a change on the child to recursively check
+        checkbox.trigger('change');
+      });
+    });
+  });

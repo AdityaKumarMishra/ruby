@@ -1,0 +1,66 @@
+:javascript
+  $(document).ready(function () {
+    var product_versions_by_type = #{@product_version_hashes.to_json};
+    $('#product-js').on("change", function(){
+      var product_version = $(this).val();
+      populateSelect(product_version);
+    })
+
+    function populateSelect(product_version) {
+      $('#version-js').html('');
+      var versions;
+      if (product_version == 'GamsatReady') {
+        console.log("pppp");
+        versions = product_versions_by_type[0]['GamsatReady'];
+      }
+      if (product_version == 'UmatReady') {
+        versions = product_versions_by_type[1]['UmatReady'];
+      }
+      if (product_version == 'VceReady') {
+        versions = product_versions_by_type[2]['VceReady'];
+      }
+      if (product_version == 'HscReady') {
+        versions = product_versions_by_type[3]['HscReady'];
+      }
+
+      if (product_version == 'All') {
+        console.log("aaa")
+        versions = ["All"];
+        $('#version-js').attr('disabled', true);
+      }else
+      {
+        $('#version-js').attr('disabled', false);
+
+      }
+
+      versions.forEach(function(version){
+        $('#version-js').append('<option>' + version + '</option>')
+      });
+    };
+  });
+
+= simple_form_for(@event) do |f|
+  =# f.error_notification
+
+  .form-inputs
+    = f.input :title, label: 'Title', required: true
+    %p
+      %b Product Line
+
+    = f.select :product_line, options_for_select(@product_lines, selected: f.object.product_line), { }, {class: 'form-control', id: 'product-js'}
+    %br
+    %p
+      %b Product Versions
+
+    = f.select :product_version_id, options_for_select(@product_version_hashes[0]['GamsatReady'], selected: f.object.present? && f.object.product_version_id.present? && f.object.product_version_id!=0 ? ProductVersion.find(f.object.product_version_id).name : "All"), { }, {class: 'form-control', id: 'version-js', disabled: f.object.persisted? ? false : true}
+    %br
+    = f.input :event_start_date, label: "Start Date", as: :string, required: true, :input_html => { class: "datepicker val_check" }
+    .row
+      .col-md-3
+        = f.input :event_start_time, as: :time, label: 'Start Time', placeholder: 'Start Time', :default => {:hour => '9' , :minute => '00'}, :input_html => {}
+      .col-md-3
+        = f.input :event_end_time, as: :time, label: 'End Time', placeholder: 'End Time', :default => {:hour => '9' , :minute => '00'}, :input_html => {}
+    = f.input :description, as: :ckeditor, :input_html => { :ckeditor => { :height => 400 } }
+
+  .form-actions
+    = f.button :submit

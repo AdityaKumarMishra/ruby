@@ -1,0 +1,14 @@
+%table.table
+  %thead
+    %tr
+      %th Code
+      %th Type
+      %th Number of times clicked
+  %tbody
+    - promo_visits.each do |promo|
+      %tr
+        %td= link_to promo[:promo].token, promo[:promo]
+        %th= promo[:promo].generated_from_id.nil? ? 'Staff Created' : 'Mates Rates'
+        %th= promo[:count]
+
+%p Total: #{promo_visits.count}

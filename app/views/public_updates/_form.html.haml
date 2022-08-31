@@ -1,0 +1,7 @@
+= simple_form_for(@public_update) do |f|
+  = f.error_notification
+  - contact = @public_update.contact_number? ? @public_update.contact_number : '0475 390 660'
+  .form-inputs
+    = f.input :contact_number, input_html: {value: contact}
+  .form-actions
+    = f.button :submit, "Update"

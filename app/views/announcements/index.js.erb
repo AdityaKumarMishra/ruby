@@ -1,0 +1,4 @@
+<% js = escape_javascript(
+  render(partial: 'announcements/table', locals: { product_versions: @all_announcements })
+) %>
+$("#filterrific_results").html("<%= js %>");

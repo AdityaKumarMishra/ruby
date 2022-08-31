@@ -1,0 +1,16 @@
+= simple_form_for(@diagnostic_test_attempt, url: diagnostic_test_attempts_path) do |f|
+  =# f.error_notification
+
+  .form-inputs
+    = f.association :assessable, collection: policy_scope(DiagnosticTest), label: "Diagnostic Test"
+    = f.hidden_field :course_id, value: @course.try(:id)
+  .form-inputs
+    = f.input :question_style, as: :select, collection: Exercise.exercise_question_styles.map { |k, v| [k, v]  }, label: "Question Style", include_blank: false
+  .form-inputs
+    = f.label :timer_option_type, 'Timer Option'
+    %i.glyphicon.glyphicon-question-sign.question-sign{:title => "If you select Apply Time Limit to Individual Questions, a time limit will be set for each question. Once the allotted time is elapsed you will automatically be moved on to the next question, but you are still able to go back and answer previous question."}
+    = f.input :timer_option_type, as: :select, collection: [["Apply Time Limit to Entire Exam ", "entire_exam"], ["Apply Time Limit to Individual Questions", "individual_question"]], label: false, include_blank: false
+
+  .form-actions
+    = f.button :submit, "Create Diagnostic Test attempt", class: 'btn btn-default'
+  %br

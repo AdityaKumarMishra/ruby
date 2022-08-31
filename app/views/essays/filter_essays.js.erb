@@ -1,0 +1,2 @@
+<% js = escape_javascript(render('essays/partial/table', essays: @essays))%>
+$("#essay_filter").html("<%= js %>");

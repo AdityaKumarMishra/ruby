@@ -1,0 +1,22 @@
+%label.custom-control-label.switch{:for => "customSwitch1"}
+    -if @outofstock.present? && @outofstock.out_of_stock?
+        %input#customSwitch1.out_check_box{:checked => "checked", :type => "checkbox"}/
+    -else
+        %input#customSwitch1.out_check_box{:type => "checkbox"}/
+    %span.slider.round
+%span out of stock
+%br
+%br
+- text = @outofstock.present? && @outofstock.content.present? ? @outofstock.content : ""
+%input#out_of_stock_text.form-control{:type => "text", :value => text }
+:javascript
+    $(".out_check_box").on('click', function(){
+      var text = document.getElementById("out_of_stock_text").value;
+      var checked = $(this).prop('checked');
+        $.ajax({
+          type: 'POST',
+          url: '/shippings/update_out_of_stock',
+          data: {checked: checked, val: text}
+          }).done(function (response) {
+        });
+    });

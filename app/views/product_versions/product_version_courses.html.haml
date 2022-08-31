@@ -1,0 +1,41 @@
+#filterrific_results.filter_btm_space
+  -if @courses.present?
+    %p
+      Total Courses:
+      = @courses.count
+    =will_paginate @courses, renderer: BootstrapPagination::Rails
+    %table.table-hover.table.table-bordered#pv_table.pv_data_table
+      %thead
+        %tr
+          %th Course ID
+          %th Name
+          %th City
+          %th Product version
+          %th Enrolment end date
+          %th Expiry date
+          %th Total Enrolment
+          %th Unpaid Students
+          %th Enrolment Limit
+          %th Tutors Assigned?
+          - if !current_user.student?
+            %th
+
+
+      %tbody
+        - @courses.each do |course|
+          %tr
+            %td= course.id
+            %td= course.name
+            %td= course.city
+            %td
+              = course.product_version.name if course.product_version
+              = "(#{course.product_version.type})" if course.product_version
+            %td= course.enrolment_end_date.try(:strftime, '%d/%m/%Y')
+            %td= course.expiry_date.try(:strftime, '%d/%m/%Y')
+            %td= course.enroled_student_list.count
+            %td= course.enroled_unpaid_student_list.count
+            %td= course.class_size
+            %td= course.tutor_assigned?
+            - if !current_user.student?
+              %td= link_to 'Edit', edit_course_path(course), class: 'btn btn-info btn-sm', target: :_blank
+

@@ -1,0 +1,27 @@
+-if course_versions.any?
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Version number
+        %th Date added
+        %th Class size
+        %th expiry date
+        %th Enrolment end added
+        %th Students count
+        %th{:colspan => "3"} Actions
+    %tbody
+      - course_versions.each do |course_version|
+        %tr{'data-link': url_for(course_course_version_path(course,course_version))}
+          %td= course_version.version_number
+          %td= format_date_short course_version.date_added
+          %td= course_version.class_size
+          %td= format_date_short course_version.expiry_date
+          %td= format_date_short course_version.enrolment_end_added
+          %td= course_version.students_count
+          %td
+            -if course_version.users.include? current_user
+              =link_to 'Sign out', sign_out_from_course_path(course_version), class: 'btn btn-default btn-sm'
+            -else
+              =link_to 'Sign in', sign_on_course_path(course_version), class: 'btn btn-default btn-sm'
+          %td= link_to 'Edit', edit_course_course_version_path(course,course_version), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', course_course_version_path(course,course_version), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'

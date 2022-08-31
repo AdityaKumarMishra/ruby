@@ -1,0 +1,4 @@
+= simple_form_for @blog_category do |f|
+  = f.input :name
+  = f.input :blog_type, collection: BlogCategory.blog_types.keys, label: "Product Line", include_blank: 'Please Select Product Line'
+  = f.submit class: "btn btn-success"

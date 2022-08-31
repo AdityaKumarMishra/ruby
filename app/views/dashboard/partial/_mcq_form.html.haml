@@ -1,0 +1,21 @@
+= simple_form_for(@mcq_stem) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :subject_ids,
+                :as => :grouped_select,
+                :collection => @subjects,
+                :group_method => :last,
+                :input_html=> { class: 'multiselectuser', multiple: true},
+                :label => 'Subjects'
+    = f.input :tag_id,
+           :as => :grouped_select,
+           :collection => @tags,
+           :group_method => :last
+    -#= f.association :subjects, collection: @subjects
+    = f.association :courses, collection: @courses
+    = f.input :description, as: :ckeditor, :input_html => { :ckeditor => { :height => 400 } }
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,15 @@
+.header
+  .top_header
+    .head_title
+      %h2
+        Practice
+        = succeed "est" do
+          %span.tile_t T
+  .btm_header.padd
+    %a.calc.ins{"data-target" => "#instructions_modal", "data-toggle" => "modal", href: "#"}
+      %i.fa.fa-file-text{"aria-hidden" => "true"}>
+      Ins
+      %span> t
+      ructions
+.faq_head.width100
+  %h3.fqq_hdng Postscore: see which items are incorrect and return to them to see the solution

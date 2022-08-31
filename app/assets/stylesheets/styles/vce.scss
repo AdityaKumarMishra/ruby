@@ -1,0 +1,247 @@
+.vc_home_pag_bnner {
+    text-align: center;
+    background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/imgo.jpg') 0 0 no-repeat;
+    background-size: cover;
+    float: left;
+    margin-left: -15px;
+    margin-right: -15px;
+    min-height: 782px;
+    width: calc(100% + 30px);
+    margin-bottom: 14px;
+    padding-top: 192px;
+    overflow:hidden;
+}
+center.table_overflow.reltve.mg_top30 {
+    margin-top: 18px;
+}
+.nav-tabs > li > a.bdr_none_hover {
+    border: 1px solid transparent !important;
+}
+.new_banner_col {
+  width: 100%;
+  max-width: 100%;
+  display: inline-block;
+  margin: 0 0 50px;
+  text-shadow: 0 1px 1px $darkGrey;
+  p{
+    font-family: $museo;
+    font-weight: normal;
+    line-height: 1.1;
+    color: $white;
+    font-size: 18px;
+    padding: 0 60px;
+  }
+  h3 {
+    font-size: 60px;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    margin-top: 0;
+    font-family: $font-head;
+    font-weight: bold;
+    color: $white;
+  }
+  h5 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-weight: 100 !important;
+    margin-top: 6px;
+    color: $white;
+  }
+}
+
+.vc_home_pag_bnner .new_banner_col h3 span {
+  color: #462C9F;
+  font-family: $font-head;
+  font-weight: bold;
+}
+
+h1.different_headign span1 {
+    color: #462C9F;
+}
+
+#course-packages.vce_prpl_clr .whte_bg_trans .umat_content h2 {
+  letter-spacing: 5px;
+  font-size: 42px !important;
+  color: #462C9F;
+  text-transform: uppercase;
+  font-weight: 100 !important;
+  margin: 0 0 6px 0;
+}
+
+#course-packages.vce_prpl_clr .whte_bg_trans .umat_content h3 {
+  display: inline-block;
+  font-size: 14px;
+  padding: 12px 30px;
+  margin-left: 10px;
+  margin-bottom: 26px;
+  color: white;
+  /* height: 40px; */
+  background: #462c9f;
+  background-size: 100% 42px;
+  margin-left: 0px;
+}
+
+.categor_col {
+  width: 90%;
+  border-top: 2px solid #462C9F;
+  text-align: center;
+  color: #462C9F;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.categor_col .nav-tabs>li {
+  width: 50%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.vce_prpl_clr .categor_col .nav-tabs>li {
+  font-size: 20px;
+  a {
+    background-color: #fff;
+  }
+  i {
+    font-size: 30px;
+    vertical-align: -10%;
+    padding-right: 4px;
+  }
+}
+
+.nav-tabs>li>a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.categor_col .nav-tabs>li>a {
+  height: auto;
+  margin: 0;
+  border: 0;
+  padding: 17px 0 17px;
+  width: 100%;
+  color: #462C9F;
+  background: #dadada;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.vce_prpl_clr .categor_col .nav-tabs>li.active a  {
+  background-color: #dadada;
+  color: #462C9F;
+}
+
+.vce_prpl_clr a:hover {
+  color: #462C9F;
+}
+
+// Text styling of vce-about page
+.vce_prpl_clr {
+  .scho_prpl_color {
+    h1 {
+      color: $vce-color !important;
+      font-family: $font-head;
+      font-size: 40px;
+      text-align: center;
+    }
+  }
+  .description {
+    padding: 25px 0px 25px 0px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.5;
+  }
+}
+
+.umat_ready_page.course-packages .tbl_color_prpl .first_title_col .content.green_col_box {
+  background: rgba(70,44,159,0.4) !important;
+}
+.umat_ready_page.course-packages .tbl_color_prpl .second_title_col .content.green_col_box {
+  background: rgba(70,44,159,0.2) !important;
+}
+.purp-light{
+  background: rgba(70,44,159,0.2) !important;
+}
+.purp-strong{
+  background: rgba(70,44,159,0.4) !important;
+}
+.height76{
+  height: 76px;
+}
+.umat_ready_page.course-packages .tbl_color_prpl .min_hgt730 .content.green_col_box strong {
+  color: #462C9F !important;
+}
+.scho_blu_color .color-purple, .color-purple{
+  color: #462C9F !important;
+}
+.margin-top0{
+  margin-top: 0px !important;
+}
+.padding-top0{
+  padding-top: 0px !important;
+}
+ul.comris_table li.drk_purple {
+    background: #462C9F;
+    color: #fff;
+}
+ul.comris_table li.lgt_purple {
+    background: #C6B8F4;
+    color: #fff;
+}
+@media only screen and (max-width: 1000px) and (min-width: 268px){
+.min_hgt730.min_hg_959 {
+    min-height: 165px !important;
+  }
+}
+@media only screen and (max-width: 1000px) and (min-width: 268px){
+  .col-md-3.tbl_wdth {
+      width: 100% !important;
+  }
+}
+@media only screen and (max-width: 991px) and (min-width: 768px){
+  ul.comris_table li.li_width {
+      width: 32% !important;
+  }
+}
+@media only screen and (max-width: 767px) and (min-width: 260px){
+  ul.comris_table li.li_width {
+      width: 100% !important;
+  }
+}
+
+.vce_prpl_clr a.btn-gr,
+.course-enrol-button.btn.btn-gr.prpl,
+.btn-prpl {
+    background-color: #462C9F !important;
+    background-image: none !important;
+    color: #fff;
+}
+
+.vce_txt {
+  color: #462C9F !important;
+}
+
+
+.under_vce.freq_asked_quest {
+    color: #462C9F;
+    margin-top: 20px;
+    padding-left: 10px;
+  }
+
+
+.under_vce_heading {
+  color: #462C9F;
+  width: 109%;
+  margin-top: 10px;
+}
+.under_vce a h1 {
+  color: #462C9F;
+  text-decoration: underline;
+}
+
+.under_vce a{
+  color: #462c9f !important;
+  text-decoration: underline;
+}

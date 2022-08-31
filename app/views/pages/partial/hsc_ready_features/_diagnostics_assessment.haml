@@ -1,0 +1,11 @@
+.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-clipboard{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Diagnostics Assessment
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text 
+        %p.u-word-spacing Our 50 question test will assess your familiarity with fundamental concepts covered in the HSC. You will receive a performance report detailing your areas of strengths and weaknesses to help you move forward with your HSC prep in the most efficient way possible.

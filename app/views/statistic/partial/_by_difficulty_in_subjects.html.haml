@@ -1,0 +1,30 @@
+.panel.panel-info
+  .panel-heading
+    %h1.panel-title
+      %strong Listing by Subjects
+  .panel-body
+    -items.each do |item|
+      .col-md-5.col-md-offset-1
+        .panel.panel-info
+          .panel-heading
+            %h1.panel-title
+              Subjects for course:
+              %strong=item[:course]
+          .panel-body
+            %table.table.table-bordered.table-hover
+              -item[:subjects].each do |subject|
+                %tr
+                  %td
+                    %strong=subject[:name]
+                  %td
+                    %strong=I18n.t :easy
+                    %span.badge=subject[:easy]
+                  %td
+                    %strong=I18n.t :medium
+                    %span.badge=subject[:medium]
+                  %td
+                    %strong=I18n.t :hard
+                    %span.badge=subject[:hard]
+            =will_paginate item[:subjects], renderer: BootstrapPagination::Rails, :param_name => item[:course_pager]
+
+

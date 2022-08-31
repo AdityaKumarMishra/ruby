@@ -1,0 +1,19 @@
+On average,
+%a.text_blue{:href => "/umat-preparation-courses/student_testimonials#student_improved_score"}
+  - if @product_version.name == "UmatReady - Attendence (Essentials)"
+    Attendence (Essentials)
+  - elsif @product_version.name == "Attendence (Comprehensive + Private Tutoring)"
+    Attendance (Complete Care)
+  - else
+    = @product_version.name
+GradReady students improved their percentiles from
+= umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:percentile_from]
+to
+%a.text_blue{:href => "/umat-preparation-courses/student_testimonials#student_improved_score"}
+  = umat_improvment_scores[ ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:percentile_to]
+(Raw Score:
+= umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:from]
+to
+%a.text_blue{:href => "/umat-preparation-courses/student_testimonials#student_improved_score"}
+  = umat_improvment_scores[ ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:to]
+)

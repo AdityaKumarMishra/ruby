@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              ="Hi,"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Please see the details of a appointment that has been escalated by a student:
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = @appointment.content.html_safe if @appointment.content
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              Click
+              = link_to "here", tutor_schedules_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              to see appointment in the system
+          %tr
+            %td{style: "margin-top: 5px; float: left; line-height: 25px; font-size: 15px;"}
+              Student name:
+              = @appointment.student.first_name
+              = @appointment.student.last_name
+          %tr
+            %td{style: "margin-top: 5px; float: left; line-height: 25px; font-size: 15px;"}
+              Student Phone number:
+              = @appointment.student.phone_number
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+              Please reach out to the student as soon as possible to get back to the appointment. Thank you.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

@@ -1,0 +1,91 @@
+#transferCourseModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Please Choose Course
+      .modal-body
+        %p.text-info
+          %b
+            .form-group
+              = form_for_filterrific @filterrific do |f|
+                %p
+                  Product Line
+                  =f.select(:by_product_line, @filterrific.select_options[:by_product_line],{ include_blank: '- All -' }, class: 'form-control course_product_line')
+                %p
+                  Product Version
+                  =f.select(:with_pv, @filterrific.select_options[:with_pv],{ include_blank: '- All -' }, class: 'form-control pv_select')
+                %p
+                  City
+                  =f.select(:with_city, @filterrific.select_options[:with_city],{ include_blank: '- All -' }, class: 'form-control select_city')
+            .form-inputs
+              Course
+              = select_tag "course_id_#{@enrolment.id}", options_for_select(Course.active_courses.order(:name).pluck(:name, :id), disabled: student.courses.ids), { prompt: 'Please Select Course', class: 'form-control chosen-select'}
+            .form-actions.text-center.select_course
+              = link_to 'Tansfer', "#", id: "transfer",class: "submit-link btn btn-primary btn-success"
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+:javascript
+  $(document).ready(function(){
+    c_id = $('#course_id_#{@enrolment.id}').val();
+    $('.submit-link').attr('href', '/courses/'+c_id+'/enrolments/transfer_course/?user_id='+ #{student.id}+ "&enrolment_id=" + #{enrolment.id});
+
+    $('#course_id_#{@enrolment.id}').on('change', function(){
+      id = $('#course_id_#{@enrolment.id}').val();
+      $('.submit-link').attr('href', '/courses/'+id+'/enrolments/transfer_course/?user_id='+ #{student.id}+ "&enrolment_id=" + #{enrolment.id});
+    })
+  })
+
+  $("#transfer").click(function(e){
+    check_course(e)
+  });
+  setTimeout(function(){
+    $('.chosen-select').chosen();
+  }, 500);
+
+  function check_course(e){
+
+    c_id = $('#course_id_#{@enrolment.id}').val();
+    if(c_id == ""){
+      alert("Please Select Course")
+      e.preventDefault();
+      return false;
+    }
+  }
+
+  $(".course_product_line").on('change', function(){
+    product_line = $(this).val();
+    product_version = $(filterrific_with_pv).val();
+    city = $(filterrific_with_city).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line},
+    });
+  })
+
+  $(".pv_select").on('change', function(){
+    product_line = $(filterrific_by_product_line).val();
+    product_version = $(this).val();
+    city = $(filterrific_with_city).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line, product_version: product_version, city: city},
+    });
+  })
+
+  $(".select_city").on('change', function(){
+    product_line = $(filterrific_by_product_line).val();
+    product_version = $(filterrific_with_pv).val();
+    city = $(this).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line, product_version: product_version, city: city},
+    });
+  })

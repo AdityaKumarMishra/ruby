@@ -1,0 +1,89 @@
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'individual_question'
+  - filter_mcq_stems(@exercise).each_with_index do |mcq_stem, index|
+    %div{class: 'hidden', id: "question-allotted-time_#{mcq_stem.id}", value: "#{total_mcq_stem_time(@each_question_time, mcq_stem.id)}"}
+.resource_col.mbot21
+  %h4.fl Attempting exercise
+  .exam_list.side_exam_ques
+    %h3.text-left.sideLeftQues Questions
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      - filter_mcq_stems(@exercise).each_with_index do |mcq_stem, index|
+        %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == mcq_stem.id.to_s) : index == 0) }
+          %a{ "data-toggle": 'tab', role: 'tab', href: "\#m#{index}", 'aria-controls': "m#{index}", onclick: "stopRunnerTimerindividual(event, '#{mcq_stem.id}')" }
+            = mcq_stem.title
+            .mcq-stem-id.hidden= mcq_stem.id
+            .mcq-stem-question-id.hidden= mcq_stem.id
+.ques_exam_list
+  .tab-content.tab_content_width
+    .time_wrapper
+      .time_heading
+        -if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'entire_exam'
+          .question_timer
+            %i.fa.fa-clock-o
+            %b Time Remaining:
+            %span{id: "exam_total_time_remaining"}
+
+    - filter_mcq_stems(@exercise).each_with_index do |mcq_stem, index|
+      .tab-pane{ id: "m#{index}", role: 'tabpanel', class: ('active' if @selected_tab.present? ? (@selected_tab == mcq_stem.id.to_s) : index == 0)}
+        %div{class: 'hidden', id: 'mcq-stem-timer', 'exercise-id': @exercise.id, 'section-type': 'Exercise' }
+        .mcq-stem-question-id-active.hidden= mcq_stem.id
+        %h4.fnt-20= mcq_stem.title
+        -if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'individual_question'
+          .time_wrapper
+          .time_heading
+            .question_timer
+              %b Time Allotted:
+
+              %span=Time.at(total_mcq_stem_time(@each_question_time, mcq_stem.id)).utc.strftime("%H:%M:%S")
+              %br
+              %b Time Remaining:
+              %span{id: "question_time_remaining_#{mcq_stem.id}"}
+
+        .mcq_stem_description.ck_edtr_cstm_list
+          = mcq_stem.description.html_safe
+
+        - @exercise.mcq_attempts.includes(mcq:[:mcq_answers, :mcq_stem]).where(mcq_stem: mcq_stem).order(:mcq_id).each_with_index do |m_attempt, ind|
+          .quest-col{class: "question", id: "#{m_attempt.id}"}
+            %h4.pos_rel.fnt-20
+              %span.mcqNum= "#{ind + 1}."
+              = m_attempt.mcq.question.html_safe
+            = simple_fields_for "mcq_attempts[#{m_attempt.id}]", m_attempt do |e|
+              %ul.exer-list.ques_ans_list
+                - ans_ind = 0
+                = e.collection_radio_buttons(:mcq_answer_id, m_attempt.mcq.mcq_answers,:id, :answer, { boolean_style: :inline, item_wrapper_tag: false }) do |builder|
+                  - answer_text = builder.text.include?('<p>') ? builder.text : "<p>#{builder.text}</p>"
+                  %li.admin_custom_radio
+                    = builder.radio_button + list_exam_alphabet_style(ans_ind, answer_text.html_safe, "mcq_attempts_#{m_attempt.id}_mcq_answer_id_#{builder.object.id}").html_safe
+                    - ans_ind += 1
+        .text-center.full_width.mtop30.mbot10
+          - if index != 0
+            %button.btnPrevious.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Previous
+          - if index != filter_mcq_stems(@exercise).count - 1
+            %button.btnNext.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Next
+          - if index == filter_mcq_stems(@exercise).count - 1
+            = link_to 'Finish', 'javascript:void(0)', class: 'mg_rht0 default_btn hvr-shutter-in-horizontal return_font', id: "submit_mcq_attempt", onclick: "stopRunnerTimer()"
+
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'individual_question'
+  :javascript
+    var first_stem_id = "#{filter_mcq_stems(@exercise).first.id}"
+    var time = $("#question-allotted-time_"+ first_stem_id).attr('value');
+    showRemaningTimerIndividual(time, first_stem_id);
+
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'entire_exam'
+  :javascript
+    var sa = Cookies.get('current_exe_atmpt')
+    if(sa){
+      sa = JSON.parse(sa)
+      var time = sa['end'] - sa['start']
+    }else{
+      var time = '#{@exercise.overall_time * 60}'
+    }
+    showExamRemaningTimer(time);
+
+:javascript
+
+  $(document).ready(function() {
+    $('.btn_reset').addClass('zoom_active');
+    $(".faq_wrapper").toggleClass("hide_sidebar");
+  });
+
+  QuestionsFontResize();

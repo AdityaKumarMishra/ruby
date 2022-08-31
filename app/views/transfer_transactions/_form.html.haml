@@ -1,0 +1,10 @@
+= simple_form_for(@transfer_transaction) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :payment_confirmed
+    = f.input :amount
+    = f.input :paid
+    = f.input :banking_reference
+
+  .form-actions
+    = f.button :submit

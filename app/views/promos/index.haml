@@ -1,0 +1,78 @@
+%h1 Listing Discount Codes
+
+.well
+  %p
+    This week starting <strong>#{Time.zone.now.beginning_of_week.to_date.to_formatted_s(:human)}</strong>,
+    there are currently <strong>#{PromoVisit.visit_count_this_week}</strong> clicks on discount links.
+
+  %p
+    Over the last week starting <strong>#{(Time.zone.now.beginning_of_week - 1.week).to_date.to_formatted_s(:human)}</strong>,
+    there were <strong>#{PromoVisit.visit_count_previous_week}</strong> clicks on discount links.
+
+  #more-stats{style: 'display: none;'}
+    %hr
+
+    %h4 Current week
+    =render 'click_table', promo_visits: PromoVisit.visits_this_week
+
+
+    %h4 Previous week
+    =render 'click_table', promo_visits: PromoVisit.visits_previous_week
+
+  .text-center
+    %a#toggle-stats{href: '#'}
+      Toggle more statistics
+
+
+= link_to "Create Discount Code", new_promo_path, class: "btn btn-primary"
+%br
+%br
+
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+  .panel-body
+    .form-group
+      = form_for_filterrific @filterrific do |f|
+        %p.user-mgmt-filter-p1
+          Start Date
+          =f.text_field :with_start, autocomplete: :off, class: 'form-control datepicker'
+        %p.user-mgmt-filter-p2
+          End Date
+          =f.text_field :with_end, autocomplete: :off, class: 'form-control datepicker'
+        %br
+        %br
+        %p
+          =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+          = link_to "Analytics by Date Generated", promos_path(format: "xlsx"), class: 'btn btn-primary', id: 'promo-download'
+          = link_to "Analytics by Date Used",'javascript:void(0)',class: 'btn btn-primary', id: 'used-promo-btn'
+
+=render(partial: 'index_table', locals: { promos: @promos })
+
+:javascript
+  $('#toggle-stats').click(function(event) {
+    event.preventDefault();
+    $('#more-stats').toggle('fast');
+  });
+
+  $(document).ready(function() {
+    $("#filterrific_with_end").on("change",function(){
+        var start = $('#filterrific_with_start').val();
+        var end = $(this).val();
+        if (start > end){
+          alert('The end date cannot be earlier than start date. Please review your date selection.');
+          $('#filterrific_with_end').val('');
+        }
+        $("#used-promo-btn").attr("href", "/promos/used_promos.xlsx?"+$('#filterrific_filter').serialize())
+        $('#promo-download').attr("href", "/promos.xlsx?"+$('#filterrific_filter').serialize())
+    });
+
+    $("#filterrific_with_start").on("change",function(){
+      $("#used-promo-btn").attr("href", "/promos/used_promos.xlsx?"+$('#filterrific_filter').serialize());
+      $('#promo-download').attr("href", "/promos.xlsx?"+$('#filterrific_filter').serialize());
+    })
+    $("#used-promo-btn").attr("href", "/promos/used_promos.xlsx?"+$('#filterrific_filter').serialize());
+    $('#promo-download').attr("href", "/promos.xlsx?"+$('#filterrific_filter').serialize());
+
+  });

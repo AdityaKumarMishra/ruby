@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "Hello #{@name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "#{@post.name} has just been published. Please"
+              = link_to 'click here', @post, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              to read in more depth.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+              GradReady is an education technology company aimed at making learning more effective and engaging. GradReady (has helped over 8000 students) prepare for the GAMSAT® exam since 2010. Our students have (improved by an average of 24 percentile points) and (90%+ have achieved medical school admissions). To learn more about GradReady,
+              = link_to "click here", "https://www.gradready.com.au", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

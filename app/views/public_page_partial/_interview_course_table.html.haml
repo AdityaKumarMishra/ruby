@@ -1,0 +1,394 @@
+%section#interview_ready_course.pad50.middle_course_section
+  .text-center.container.mbot30
+    %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      GAMSAT
+      %sup ®
+      InterviewReady Preparation Courses
+  .pricing_section.pad40
+    .container.scrolling_table
+      .table_scroll.tbl_wrap
+        .row.m_zero.desk_row
+          .col-md-4.col-sm-4.col-xs-4.padd0.pckge_cntnt_col
+            .price_table_container
+              .price_table_heading.bg_transparent.new_empty_space
+              .price_table_body
+                .tbl_row_col.grey_bg_col
+                  .price_table_row.pkg_bg.new_padd_height39
+                    %a{href: "#"}
+                      %h4
+                        %strong ONLINE COMPONENT
+                  .price_table_row
+                    Videos
+                    .price_tbl_row_hover
+                      Exemplar Interview Response
+                      Videos by Experts.
+                  .price_table_row
+                    MMI Questions
+                    .price_tbl_row_hover Bank of MMI questions.
+                  .price_table_row
+                    Supplemental Resources
+                    .price_tbl_row_hover
+                      Supportive Document for GAMSAT
+                      %sup ®
+                      Interview Preparation.
+                .tbl_row_col.grey_bg_col
+                  .price_table_row.pkg_bg.new_padd_height39
+                    %a{href: "#"}
+                      %h4
+                        %strong LIVE COMPONENTS
+                  .price_table_row
+                    Realistic Mock MMI
+                    .price_tbl_row_hover In the 8 station mock MMI, you will be treated and assessed as you would in the real MMI.
+                  .price_table_row
+                    MMI Overview
+                    .price_tbl_row_hover Underlying principles behind the use of MMI.
+                  .price_table_row
+                    The "ideal" medical candidate and assessment criteria
+                    .price_tbl_row_hover Explore criteria assessors look for in the MMI and concept of the "ideal" medical candidate.
+                  .price_table_row
+                    10 common scenarios
+                    .price_tbl_row_hover Understanding of the general concepts and expectations with in the medical MMI.
+                  .price_table_row
+                    Critiques and discussions
+                    .price_tbl_row_hover Analyse peer performance from both the perspective of the interviewer and the student.
+                  .price_table_row
+                    In class booklet
+                    .price_tbl_row_hover Explains the background information about MMI interviews along with the 10 common scenarios.
+                  .price_table_row
+                    Tutor facilitated peer interviews
+                    .price_tbl_row_hover Our experienced tutors will guide you through the peer interview process, so that you put what you understand about the scenarios into practice.
+                  .price_table_row
+                    No Interview Offer Refund
+                    .price_tbl_row_hover Secure a spot in our Interview Ready Attendance courses before receiving an interview offer and be eligible for a full refund in the situation that you do not receive an interview offer.
+              / .price_table_body.first_pkg_visible.mg_top121
+              /   .tbl_row_col.grey_bg_col
+              /     .price_table_row.pkg_bg
+              /       %a{href: "#"}
+              /         %h4
+              /           %strong LIVE COMPONENTS
+              /     .price_table_row
+              /       Realistic Mock MMI
+              /       .price_tbl_row_hover In the 8 station mock MMI, you will be treated and assessed as you would in the real MMI.
+          -#.col-md-4.col-sm-4.col-xs-4.padd0.pckg_col
+            .price_table_container
+              .float-shadow.wdt_100
+                %h3
+                  .price_table_heading ONLINE ESSENTIALS
+                .price_table_body
+                  .tbl_row_col.grey_bg_col
+                    .price_table_row  
+                  .tbl_row_col.wht_bg_col
+                    .price_table_row
+                      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .price_table_row
+                      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .price_table_row
+                      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                  .tbl_row_col.grey_bg_col
+                    .price_table_row  
+                  .tbl_row_col.wht_bg_col
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                    .price_table_row  
+                  .tbl_row_col.wht_bg_col
+                    .pkg_cost
+                      %span
+                        = gamsat_product_info['interviewready-online-essentials'][:early_bird] == true ? "Early Bird" : "  "
+                      %span.fnt_size.marg_4
+                        %strong
+                          - ioe_price = gamsat_product_info['interviewready-online-essentials'][:price]
+                          = ioe_price.round.to_s if ioe_price.present?
+                      %span.fnt_size.small_size.ir_fntszie
+                        = "+ 10% GST = #{(ioe_price * 1.1 ).round}" if ioe_price.present?
+                      .clearfix
+                      %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("interviewready-online-essentials", "gamsat")} Secure your place
+
+          .col-md-4.col-sm-4.col-xs-4.padd0.pckg_col
+            .price_table_container
+              .scond_levl_hover
+                .float-shadow.wdt_100
+                  %h3
+                    .price_table_heading
+                      MMI COMPREHENSIVE
+                      / ATTENDANCE
+                      / <p>(ESSENTIALS)</p>
+                  .price_table_body
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row  
+                    .tbl_row_col.wht_bg_col
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row  
+                    .tbl_row_col.wht_bg_col
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                      .price_table_row
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                .price_table_body.second_level_col.online_second
+                  .tbl_row_col
+                    .pkg_cost
+                      %span
+                        = gamsat_product_info['interviewready-attendance-comprehensive'][:early_bird] == true ? "Early Bird" : "  "
+                      %span.fnt_size.marg_4
+                        %strong
+                          - iac_price = gamsat_product_info['interviewready-attendance-comprehensive'][:price]
+                          = iac_price.round.to_s
+                      %span.fnt_size.small_size.ir_fntszie
+                        = "+ 10% GST = #{(iac_price * 1.1 ).round}" if iac_price.present?
+                      .clearfix
+                      %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("interviewready-attendance-comprehensive", "gamsat")} Secure your place
+          .text-center.gst
+            %a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'What is GST')} * What is GST?
+
+
+
+        .row.mobile_row.m_zero
+          .col-xs-12
+            %ul.cstm_tab_lst.wdth100
+              %li.active
+                %label.cstm_label
+                  Online
+                  %input#int_online.inter_course{:checked => "checked", :name => "i_radio-group", :type => "radio"}/
+                  %span.checkmark
+
+              %li
+                %label.cstm_label
+                  Attendance
+                  %input#int_attendance.inter_course{:name => "i_radio-group", :type => "radio"}/
+                  %span.checkmark
+
+          .tbl_wrapper.wdth100
+            #inter_tbl.int_online
+              .row.mobile_row.m_zero
+                .col-xs-12
+                  .price_table_body.flex_css.just_cntnt
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row.mob_pkg_bg
+                        %a.diffr_anchor{:href => "#iol_prep", "data-toggle" => "collapse"}
+                          %strong ONLINE COMPONENT
+                          %i.fa.fa-plus{"aria-hidden" => "true"}
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.pkg_bg.wdth100
+                        #iol_prep.collapse
+                          .price_table_row
+                            %span.tbl_col1
+                              Videos
+                              .price_tbl_row_hover Exemplar Interview Response Videos by Experts.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1
+                              MMI Questions
+                              .price_tbl_row_hover Bank of MMI questions.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row
+                            %span.tbl_col1
+                              Supplemental Resources
+                              .price_tbl_row_hover
+                                Supportive Document for GAMSAT
+                                %sup ®
+                                Interview Preparation.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.mob_pkg_bg.wdth100
+
+                        .tbl_row_col.wht_bg_col.text-center
+                          .pkg_cost
+                            %span
+                              = gamsat_product_info['interviewready-online-essentials'][:early_bird] == true ? "Early Bird" : "  "
+                            %span.fnt_size.marg_4
+                              %strong
+                                - ioe_price = gamsat_product_info['interviewready-online-essentials'][:price]
+                                = ioe_price.to_s if ioe_price.present?
+                            %span.fnt_size.small_size.ir_fntszie
+                              = "+ 10% GST = #{(ioe_price * 1.1 ).round}" if ioe_price.present?
+                            .clearfix
+                            %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("interviewready-online-essentials", "gamsat")} Secure your place
+                            %span.fs13 InterviewReady Essential Online Course
+
+            #inter_tbl.int_attendance
+              .row.mobile_row.m_zero
+                .col-xs-12
+                  .price_table_body.flex_css.just_cntnt
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row.mob_pkg_bg
+                        %a.diffr_anchor{:href => "#iat_prep", "data-toggle" => "collapse"}
+                          %strong ONLINE COMPONENT
+                          %i.fa.fa-plus{"aria-hidden" => "true"}
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.pkg_bg.wdth100
+                        #iat_prep.collapse
+                          .price_table_row
+                            %span.tbl_col1
+                              Videos
+                              .price_tbl_row_hover Exemplar Interview Response Videos by Experts.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1
+                              MMI Questions
+                              .price_tbl_row_hover Bank of MMI questions.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row
+                            %span.tbl_col1
+                              Supplemental Resources
+                              .price_tbl_row_hover
+                                Supportive Document for GAMSAT
+                                %sup ®
+                                Interview Preparation.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row.mob_pkg_bg
+                        %a.diffr_anchor{:href => "#iat_live", "data-toggle" => "collapse"}
+                          %strong LIVE COMPONENTS
+                          %i.fa.fa-plus{"aria-hidden" => "true"}
+
+                      .price_table_body.flex_css.just_cntnt
+                        %a#interview_attendance.cstm_green_txt.add_mob_course{:href => "#comp_ai", "data-toggle" => "collapse"}
+                          %strong Upgrade to Interview Comprehensive Attendance Course
+                          %i.fa.fa-plus{"aria-hidden" => "true"}
+                        #comp_ai.collapse.wdth100
+
+                          .tbl_row_col.grey_bg_col
+                            .price_table_row.mob_pkg_bg
+                              %a.diffr_anchor
+                                %strong LIVE COMPONENTS
+                          .tbl_row_col.grey_bg_col.sec_sub_lvl
+                            .mobile_tbl_row.pkg_bg.wdth100
+                              .price_table_row
+                                %strong Includes everything from the Essential course plus:
+                              .price_table_row
+                                %span.tbl_col1
+                                  Realistic Mock MMI
+                                  .price_tbl_row_hover In the 8 station mock MMI, you will be treated and assessed as you would in the real MMI.
+                                %span.tbl_col2
+                                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .tbl_row_col.text-center
+                            .pkg_cost
+                              %span
+                                = gamsat_product_info['interviewready-attendance-comprehensive'][:early_bird] == true ? "Early Bird" : "  "
+                              %span.fnt_size.marg_4
+                                %strong
+                                  - iac_price = gamsat_product_info['interviewready-attendance-comprehensive'][:price]
+                                  = iac_price.to_s
+                              %span.fnt_size.small_size.ir_fntszie
+                                = "+ 10% GST = #{(iac_price * 1.1 ).round}" if iac_price.present?
+                              .clearfix
+                              %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("interviewready-attendance-comprehensive", "gamsat")} Secure your place
+                              %span.fs13 InterviewReady Comprehensive Attendance Course
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.pkg_bg.wdth100
+                        #iat_live.collapse
+                          .price_table_row
+                            %span.tbl_col1.wdth90
+                              MMI Overview
+                              .price_tbl_row_hover
+                                Underlying principles behind the use of MMI.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1.wdth90
+                              The "ideal" medical candidate and assessment criteria
+                              .price_tbl_row_hover Explore criteria assessors look for in the MMI and concept of the "ideal" medical candidate.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row
+                            %span.tbl_col1.wdth90
+                              10 common scenarios
+                              .price_tbl_row_hover
+                                Understanding of the general concepts and expectations with in the medical MMI.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1.wdth90
+                              Critiques and discussions
+                              .price_tbl_row_hover Analyse peer performance from both the perspective of the interviewer and the student.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row
+                            %span.tbl_col1.wdth90
+                              In class booklet
+                              .price_tbl_row_hover Explains the background information about MMI interviews along with the 10 common scenarios.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1.wdth90
+                              Tutor facilitated peer interviews
+                              .price_tbl_row_hover Our experienced tutors will guide you through the peer interview process, so that you put what you understand about the scenarios into practice.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                          .price_table_row.bg_white
+                            %span.tbl_col1.wdth90
+                              No Interview Offer Refund
+                              .price_tbl_row_hover Secure a spot in our Interview Ready Attendance courses before receiving an interview offer and be eligible for a full refund in the situation that you do not receive an interview offer.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    #price_inteview_essential
+                      .tbl_row_col.text-center
+                        .pkg_cost.online_frst_pkg.irc_sec
+                          %span
+                            = gamsat_product_info['interviewready-attendance-essentials'][:early_bird] == true ? "Early Bird" : "  "
+                          %span.fnt_size.marg_4
+                            %strong
+                              - iae_price = gamsat_product_info['interviewready-attendance-essentials'][:price]
+                              = iae_price.to_s
+                          %span.fnt_size.small_size.ir_fntszie
+                            = "+ 10% GST = #{(iae_price * 1.1 ).round}" if iae_price.present?
+                          .clearfix
+                          %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("interviewready-attendance-essentials", "gamsat")} Secure your place
+                          %span.fs13 InterviewReady Essential Attendance Course
+              .row.mobile_row.m_zero
+                .col-xs-12
+
+
+
+            .text-center.gst.mob_gst
+              %a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'What is GST')} * What is GST?
+
+
+:javascript
+
+  $(".diffr_anchor").click(function(){
+    $(this).find("i").toggleClass("fa-plus fa-minus");
+  });
+
+  $('#interview_attendance').click(function(){
+    $('#price_inteview_essential').toggleClass('hide');
+  })

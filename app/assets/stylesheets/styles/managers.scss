@@ -1,0 +1,77 @@
+// Place all the styles related to the managers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Sidebar Nav
+$sidebarNavBorderColor: #ddd;
+$sidebarNavLinkHeight: 30px;
+$sidebarNavHeaderBackgroundColor: #eee;
+
+.sidebar-nav {
+  border: 1px solid $sidebarNavBorderColor;
+  @include border-radius(4px);
+
+  li.nav-header {
+    margin-top: 0;
+    border-bottom: 1px solid $sidebarNavBorderColor;
+    background-color: $sidebarNavHeaderBackgroundColor;
+    padding: 3px 15px !important;
+
+    strong {
+      font-size:16px;
+    }
+
+    span > a > i {
+      color: $grGrey;
+      &:hover {
+      background-color: $sidebarNavHeaderBackgroundColor;
+      }
+    }
+  }
+
+  .collapsing_links {
+    li {
+      i.right {
+        margin-top: 8px;
+        margin-right: 20px;
+        color: $grGreyLight;
+      }
+      &:hover {
+        text-decoration: none;
+        background-color: $sidebarNavHeaderBackgroundColor;
+      }
+      a {
+        color: #08C;
+
+        &:hover {
+          text-decoration: none;
+          background-color: $sidebarNavHeaderBackgroundColor;
+        }
+      }
+    }
+  }
+
+  li {
+    line-height: $sidebarNavLinkHeight;
+    border-bottom: 1px solid $sidebarNavBorderColor;
+
+    .icon-chevron-right {
+      float: right;
+      margin-top: 8px;
+      margin-right: -10px;
+      color: $grGreyLight;
+    }
+  }
+
+  li > a {
+    padding: 3px 15px !important;
+  }
+
+  li:last-of-type > a {
+    border-bottom: none;
+  }
+}
+
+#manager-links > #manager-button {
+  float: left !important;
+}

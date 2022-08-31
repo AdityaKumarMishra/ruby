@@ -1,0 +1,39 @@
+%h1 Listing Tutor Availabilities
+
+%h3 Available Times
+
+- if @tutor_availabilities.any?
+  %p.text-info
+    %b
+      Total:
+      = @tutor_availabilities.count
+  %table.gr-table.gr-table-bordered.gr-table-green-hover
+    %thead
+      %tr
+        %th Date
+        %th Start time
+        %th End time
+        %th{colspan: 2} Actions
+
+
+    %tbody
+      - @tutor_availabilities.each do |t|
+        %tr
+          %td= format_date_short(t.start_time.to_date)
+          %td= format_time(t.start_time.time)
+          %td= format_time(t.end_time.time)
+          %td= link_to 'Edit', edit_tutor_availability_path(t), class: 'btn btn-info btn-sm'
+          %td= link_to 'Cancel', t, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+  = will_paginate @tutor_availabilities, renderer: BootstrapPagination::Rails
+
+- else
+  .alert.alert-warning No available sessions
+
+%br
+  = link_to 'Create New Availablilities', new_tutor_schedule_path, class: 'btn btn-primary'
+
+= render(partial: 'tutor_availabilities/booked_appointments', locals: { booked_appointments: current_user.tutor_profile.tutor_appointments.active })
+
+%br
+

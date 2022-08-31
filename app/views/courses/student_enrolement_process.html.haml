@@ -1,0 +1,39 @@
+%h1 Student Payment Setting
+%br
+%br
+.panel.panel-success
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    = form_for_filterrific @filterrific do |f|
+      .form-group
+        Product Line
+        =f.select(:by_product_line, @filterrific.select_options[:by_product_line],{ include_blank: '- All -' }, class: 'form-control course_product_line')
+      .form-group
+        Product Version
+        =f.select(:with_pv, @filterrific.select_options[:with_pv],{ include_blank: '- All -' }, class: 'form-control pv_select')
+      .form-group
+        City
+        =f.select(:with_city, @filterrific.select_options[:with_city],{ include_blank: '- All -' }, class: 'form-control')
+      .form-group
+        Keywords
+        =f.text_field(:with_name, class: 'filterrific-periodically-observed form-control', placeholder: 'Search for...')
+
+      .form-group
+        =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gradready green'
+        = link_to 'Download CSV', courses_path(@courses, format: "xlsx"), class: 'btn btn-primary'
+
+=render(partial: 'courses/partial/table_student_enrolement', locals: { courses: @courses })
+
+:javascript
+  $(".course_product_line").on('change', function(){
+    product_line = $(this).val();
+    $.ajax({
+      url: "/courses/filtered_product_versions",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line},
+    });
+  })

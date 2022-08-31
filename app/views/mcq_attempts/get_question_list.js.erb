@@ -1,0 +1,2 @@
+$('#ucat-mcq #accordionExample-'+'<%= params[:tag_id] %>').html('<%= escape_javascript(render partial: "/ucat/review_tab", locals: {tag_id: params[:tag_id]}) %>');
+setReviewLinks();

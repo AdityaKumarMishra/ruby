@@ -1,0 +1,11 @@
+%h1
+	Editing
+	= get_readable_text(@download_hit_counter.file)
+	Download Hit Counter
+= simple_form_for(@download_hit_counter) do |f|
+	.form-group
+		= f.input :download_count, disabled: true, label: "Download Count"
+	.form-group
+		= f.input :estimated_read_time, label: "Estimated Read Time"
+	.form-actions
+		= f.button :submit, "Update"

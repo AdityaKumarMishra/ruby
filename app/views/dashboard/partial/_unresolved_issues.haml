@@ -1,0 +1,146 @@
+- if current_user.student?
+  .faq_list_col
+    #filterrific_results
+      - if tickets.size == 0
+        %p
+          %strong No issues
+      - else
+        =will_paginate tickets, renderer: BootstrapPagination::Rails
+        -if request.variant.blank?
+          %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+            %thead
+              %tr
+                %th.wdth16 Date Asked
+                %th.wdth16 Last Updated
+                %th Title
+                %th Topic
+                %th.wdth13 Directed At
+                %th.wdth15 Last Answered
+            %tbody
+              - tickets.each do |ticket|
+                %tr{class: [('success' if ticket.status == "resolved"), ('danger' if ticket.status == "unresolved"), ('warning' if ticket.status == "follow_up_required")]}
+                  %td.mobile_mousehover_tool
+                    = link_to ticket.created_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M'), issue_path(ticket), target: :_blank
+                  %td
+                    = link_to ticket.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M'), issue_path(ticket), target: :_blank
+                  %td
+                    = link_to "#{ticket.title.present? ? ticket.title : "Support Ticket - #{ticket.id}"}", issue_path(ticket), target: :_blank
+                  %td
+                    - if ticket.tags.any?
+                      = link_to ticket.tags.first.name, issue_path(ticket), target: :_blank
+                  %td
+                    = link_to ticket.answerer.try(:first_name), issue_path(ticket), target: :_blank
+                  %td
+                    - if ticket.ticket_answers.present?
+                      = link_to ticket.ticket_answers.order(:created_at).last.user.try(:first_name), issue_path(ticket), target: :_blank
+                    - else
+                      = link_to "Awaiting Answer", issue_path(ticket), target: :_blank
+        -if request.variant == [:phone]
+          .mobile_table_border
+            %ul.tbl_head
+              %li.width_inc Title
+              %li.mobile_wdt_th.mobile_wdt_th93.rht16.mobile_mousehover_tool
+                Date Asked
+            - tickets.each do |ticket|
+              %ul.mobile_table_body.listing.tbl_head.exercise_bdr_none{class: [('success_mob' if ticket.status == "resolved"), ('danger_mob' if ticket.status == "unresolved"), ('warning_mob' if ticket.status == "follow_up_required")]}
+                %li.mobile_mousehover_tool.width_inc
+                  = truncate(ticket.title.present? ? ticket.title : "Support Ticket - #{ticket.id}", :length => 23)
+                  %ul.tool_tip.mob_tool_tip
+                    %li
+                      Title:
+                      %br
+                      = link_to "#{ticket.title.present? ? ticket.title : "Support Ticket - #{ticket.id}"}", issue_path(ticket), target: :_blank, class: "mob_smal_lnk"
+                    %li
+                      Topic:
+                      %br
+                      - if ticket.tags.any?
+                        = link_to ticket.tags.first.name, issue_path(ticket), target: :_blank, class: "mob_smal_lnk"
+                    %li
+                      Last Updated:
+                      %br
+                      = ticket.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M')
+                    %li
+                      Directed At:
+                      %br
+                      = ticket.answerer.try(:first_name)
+                    %li
+                      Last Answered:
+                      %br
+                      - if ticket.ticket_answers.present?
+                        = ticket.ticket_answers.order(:created_at).last.user.try(:first_name)
+                      - else
+                        = "Awaiting Answer"
+                %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th93.rht16
+                  = ticket.created_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M')
+
+  :javascript
+    $(".mobile_mousehover_tool").click(function(){
+      $(".mobile_mousehover_tool").removeClass("acitve");
+      $(this).addClass("acitve");
+      $(".overlay_show").addClass("show_tool_wrapper");
+    });
+- else
+
+  #filterrific_results.panel.panel-default.flt_left
+    .panel-body
+      - if tickets.size == 0
+        No issues
+      - else
+        =will_paginate tickets, renderer: BootstrapPagination::Rails
+      %table.gr-table.table.table-hover
+        %tr
+          %th Date Asked
+          %th Last Updated
+          %th Ticket Number
+          %th Title
+          %th Topic
+          %th Asked By
+          %th Directed At
+          %th Last Answered
+          - if current_user.admin? || current_user.superadmin?
+            %th Action
+        - tickets.each do |ticket|
+          %tr{class: [('success' if ticket.status == "resolved"), ('danger' if ticket.status == "unresolved"), ('warning' if ticket.status == "follow_up_required")]}
+            %td
+              = ticket.created_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M')
+            %td
+              = ticket.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M')
+            %td
+              = ticket.try(:id)
+            %td
+              = link_to "#{ticket.title.present? ? ticket.title : "Support Ticket - #{ticket.id}"}", issue_path(ticket), target: :_blank
+            %td
+              - if ticket.tags.any?
+                = ticket.tags.try(:first).try(:name)
+            %td
+              = ticket.asker_firstname
+            %td
+              = ticket.answerer.try(:full_name)
+            %td
+              - if ticket.ticket_answers.present?
+                = ticket.ticket_answers.order(:created_at).last.user.try(:first_name)
+              / - if ticket.ticket_answers.any?
+              /   = ticket.ticket_answers.order(:created_at).last.user.try(:full_name)
+              / - else
+              /   = ticket.resolver.try(:full_name)
+            - if current_user.admin? || current_user.superadmin?
+              %td
+                = link_to 'Destroy', ticket, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+      - if tickets.size == 0
+        No issues
+      - else
+        =will_paginate tickets, renderer: BootstrapPagination::Rails
+    = link_to 'Download', dashboard_unresolved_issues_path(format: 'xls'), class: 'btn btn-gradready green'
+
+:css
+  @media only screen and (min-width: 260px) and (max-width: 767px){
+    .tool_tip.mob_tool_tip{
+      top:-154px;
+    }
+    .tool_tip.mob_tool_tip:before{
+      top:auto;
+      bottom: -12px;
+      transform: rotate(180deg);
+    }
+  }
+

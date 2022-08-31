@@ -1,0 +1,16 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for(@student_class_session) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :start_time
+        = f.input :end_time
+        = f.input :frequency
+        - if params[:class_id]
+          = f.association :student_class, :selected => params[:class_id]
+        - else
+          = f.association :student_class
+
+      .form-actions
+        = f.button :submit

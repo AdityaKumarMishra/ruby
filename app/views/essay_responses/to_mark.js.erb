@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'essay_responses/partial/manager_table', locals: { responses: @responses, total_responses: @total_responses }))%>
+$("#filterrific_essay_response_results").html("<%= js %>");

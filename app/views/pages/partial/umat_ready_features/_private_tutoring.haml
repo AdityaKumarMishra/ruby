@@ -1,0 +1,13 @@
+#feature_tutoring.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-street-view{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        - if paid
+          5 x 1 hour private tutoring session <br> $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+        - else
+          5 x 1 hour private tutoring session
+      .text
+        %p.u-word-spacing
+          Be fully prepared for the UCAT by addressing your remaining weak points in one on one sessions.

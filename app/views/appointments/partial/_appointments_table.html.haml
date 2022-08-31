@@ -1,0 +1,85 @@
+-if appointments.any?
+
+  %span.reslut
+    Results :
+    %span.blck_color
+      = appointments.where(course_id: current_user.active_course.id).count
+  -if request.variant.blank?
+    %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+      %thead
+        %tr
+          %th Tutor
+          %th Subject
+          %th State
+          %th Suburb
+          %th Sessions Used
+          %th Actions
+      %tbody
+        - appointments.where(course_id: current_user.active_course.id).each do |appointment|
+          %tr
+            %td= appointment.tutor
+            %td= appointment.try(:tags).try(:first).try(:name)
+            %td= appointment.tutor.try(:state).try(:titleize)
+            %td= appointment.tutor.try(:suburb).try(:titleize)
+            %td= appointment.hours
+            %td= appointment_actions(appointment)
+
+  -if request.variant == [:phone]
+    .mobile_table_border
+      %ul.tbl_head
+        %li.width_inc Tutor
+        %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool Sessions Used
+
+      - appointments.each do |appointment|
+        %ul.mobile_table_body.listing.tbl_head.exercise_bdr_none
+          %li.mobile_mousehover_tool.width_inc
+            = appointment.tutor
+            %ul.tool_tip.mob_tool_tip
+              %li
+                Subject :
+                %br/
+                = appointment.try(:tags).first.name
+              %li
+                State :
+                %br/
+                = appointment.tutor.try(:state).try(:titleize)
+              %li
+                Suburb :
+                %br/
+                = appointment.tutor.try(:suburb).try(:titleize)
+          %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16
+            = appointment.hours
+  %br
+-else
+  .alert.alert-warning.nothing_found.margin_top
+    No current appointments
+
+#CancelModal.modal.new_modal_design.fade{role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title Cancel Appointment
+      .modal-body
+        %p You cannot cancel a booking with less than 7 days notice. Please contact either your tutor or student.services@gradready.com.au if this is an issue.
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Ok
+
+
+-if request.variant == [:phone]
+  :javascript
+    $('.btn_cancel').click(function(){
+      $('#CancelModal').modal('show');
+    })
+
+:css
+  @media only screen and (min-width: 260px) and (max-width: 767px){
+    .tool_tip.mob_tool_tip{
+      top:-112px;
+    }
+    .tool_tip.mob_tool_tip:before{
+      top:auto;
+      bottom: -12px;
+      transform: rotate(180deg);
+    }
+  }

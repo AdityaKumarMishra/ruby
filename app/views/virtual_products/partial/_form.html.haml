@@ -1,0 +1,30 @@
+.row#type-product-select
+  = simple_form_for(@product, :html => { :class => 'form-horizontal', multipart: true }) do |f|
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Editing Virtual Product
+      .panel-body
+        .row
+          .col-md-offset-1.col-md-10
+            = f.error_notification
+            .form-inputs
+              .row
+                .col-md-7
+                  = f.input :name
+                  = f.input :description
+                  = f.input :cost
+                  = f.input :currency, collection: Rails.application.config.currency_dictionary, include_blank: false
+                  = f.input :starting_date
+                  = f.input :stopping_date
+                  = f.input :expiration_date
+                  = f.association :product_type
+                  = f.input :quantity
+                  %b Add photos:
+                  = f.simple_fields_for :photos_upload do |photo|
+                    = photo.file_field :image, multiple: true
+                  = f.input :is_active
+      .panel-footer
+        .btn-group
+          = f.button :submit, 'Update Virtual Product', class: 'btn btn-success cl-white'
+          = link_to 'Back', virtual_products_path, class: 'btn btn-default'

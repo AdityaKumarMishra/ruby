@@ -1,0 +1,3 @@
+<% js = escape_javascript(render('essays/partial/form'))%>
+$(".essay_form").html("<%= js %>");
+$('.chosen-select').chosen();

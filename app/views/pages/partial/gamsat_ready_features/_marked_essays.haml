@@ -1,0 +1,11 @@
+#feature_MarkedEssays.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-align-right{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        10 Marked Essays
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text 
+        %p.u-word-spacing Get personal feedback on your essays within 72 working hours. Experienced essay markers will identify your specific weaknesses and teach you how to improve.

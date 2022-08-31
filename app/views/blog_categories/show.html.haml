@@ -1,0 +1,34 @@
+%h1
+  Category -
+  %em
+    = @blog_category.name
+
+  .pull-right
+    = link_to "Delete", @blog_category, method: :delete, data: {confirm: "Are You sure?"}, class: "btn btn-danger btn-sm"
+    = link_to "Edit", edit_blog_category_path(@blog_category), class: "btn btn-success btn-sm"
+
+%h2 Posts
+%table.table.table-bordered.table-hover
+  %tr
+    %th
+      Title
+    %th
+      Content
+    %th
+      Product Line
+    %th{colspan: 2}
+      Actions
+  - @posts.each do |post|
+    %tr{'data-link': url_for(post_path(post.id))}
+      %td
+        = post.name
+      %td
+        = truncate post.description, length: 160
+      %td
+        = post.blog_type
+      %td
+        = link_to "Edit", edit_post_path(post), class: "btn btn-success btn-sm"
+      %td
+        = link_to "Delete", post, method: :delete, data: {confirm: "Are You sure?"}, class: "btn btn-danger btn-sm"
+
+= will_paginate @posts, renderer: BootstrapPagination::Rails

@@ -1,0 +1,5 @@
+%select#user-state-filter.form-control
+  %option{ {value: user_emails_path(request.query_parameters.except(:by_state))}}= ''
+  - Address.states.each do |k, _v|
+    %option{ {value: user_emails_path(request.query_parameters.merge(by_state: k))}.merge(selected: params[:by_state] == k) }
+      = k

@@ -1,0 +1,22 @@
+%h4.terms_hdng NON-DISCLOSURE AGREEMENT AND GENERAL TERMS OF USE AND ATTRIBUTES FOR EXAMS DEVELOPED FOR THE UCAT PROGRAMME
+%p This exam is UCAT confidential. The exam is made available to you as an examinee, solely for the purpose of being assessed in this exam. You are expressly prohibited from disclosing, publishing, reproducing, or transmitting this exam, in whole or in part, in any form or by any means including visual, aural, verbal, written, electronic or mechanical means, for any purpose, without the prior express written permission of UCAT.
+%p Your personal data and test data will both be stored in the Pearson VUE and UCAT databases.
+%p All examination contents are the published and confidential and propriety materials of Pearson VUE.
+%p
+  Click the
+  %span.font_bold Next (N)
+  button to proceed.
+
+:javascript
+  $(document).ready(function(){
+    var prevBtn = '<a class="ftr_btn btn_bdr_lft" id="prev-instruction" href="javascript:">'+
+            '<i aria-hidden="true" class="fa fa-arrow-left"></i>'+
+            '<span>p</span>revious'+
+          '</a>'
+    $('#end-exam').prepend(prevBtn);
+  })
+
+  $('#prev-instruction').click(function(){
+    $('#prev-instruction').remove();
+    $('#main-content-exam').html('#{escape_javascript( render :partial => "/ucat/agreement")}')
+  })

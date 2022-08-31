@@ -1,0 +1,24 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th User
+      %th Title
+      %th Date published
+      %th Date start
+      %th Published
+      %th Date closed
+      - if ["Administrator","Manager"].include? current_user.role
+        %th{colspan: 2} Actions
+
+  %tbody
+    - @surveys.each do |surveys_survey|
+      %tr{'data-link': url_for(surveys_survey)}
+        %td= surveys_survey.users.map(&:full_name).join ' ,'
+        %td= surveys_survey.title
+        %td= format_date_short surveys_survey.date_published
+        %td= format_date_short surveys_survey.date_start
+        %td= surveys_survey.published
+        %td= format_date_short surveys_survey.date_closed
+        - if ["Administrator","Manager"].include? current_user.role
+          %td= link_to 'Edit', edit_surveys_survey_path(surveys_survey), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', surveys_survey, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'

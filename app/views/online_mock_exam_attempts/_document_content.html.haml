@@ -1,0 +1,90 @@
+- if doc.document_start_time > Time.zone.now && doc.document_end_time > Time.zone.now
+  %h4.mtop10.pull-left
+    = "#{doc.document_file_name}"
+  .time_wrapper
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Will Open in
+        %span.timer{id: "countdown_timer#{doc.id}"}
+  .clearfix
+  :javascript
+    $(function() {
+      var year = parseInt("#{doc.try(:start_date).try(:year)}");
+      var month = parseInt("#{doc.try(:start_date).try(:month)}");
+      var date = parseInt("#{doc.try(:start_date).try(:day)}");
+      var hour = parseInt("#{doc.try(:start_time).try(:hour)}");
+      var minutes = parseInt("#{doc.try(:start_time).try(:min)}");
+      var austDay = new Date(year, month-1, date, hour, minutes);
+      $("#countdown_timer#{doc.id}").countdown({
+        until:  $.countdown.UTCDate(+11, austDay),
+        format: 'HMS',
+        onExpiry : function(){
+          $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempts_path}",
+            dataType: 'script',
+            data: {document_id: "#{doc.id}"}
+          });
+        },
+        compact: true,
+        layout: '{hnn}{sep}{mnn}{sep}{snn}'
+      });
+    });
+
+-elsif doc.document_start_time <= Time.zone.now && doc.document_end_time >= Time.zone.now
+  %h4.mtop10.pull-left
+    = "#{doc.document_file_name}"
+  .time_wrapper
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Time Remaining
+        %span.timer{id: "countdown_timer#{doc.id}"}
+  .written_view_col
+    %iframe.embed-responsive-item.auto-hide-navbar#textbookGrad{src:"/pdfjs/web/viewer.html?file=#{doc.full_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+  .clearfix
+  :javascript
+    $(function() {
+      var year = parseInt("#{doc.try(:end_date).try(:year)}");
+      var month = parseInt("#{doc.try(:end_date).try(:month)}");
+      var date = parseInt("#{doc.try(:end_date).try(:day)}");
+      var hour = parseInt("#{doc.try(:end_time).try(:hour)}");
+      var minutes = parseInt("#{doc.try(:end_time).try(:min)}");
+      var austDay = new Date(year, month-1, date, hour, minutes);
+      $("#countdown_timer#{doc.id}").countdown({
+        until: $.countdown.UTCDate(+11, austDay),
+        format: 'HMS',
+        onExpiry : function(){
+          $.ajax({
+            type: "GET",
+            dataType: 'SCRIPT',
+            url: "#{refresh_document_online_mock_exam_attempts_path}",
+            data: {document_id: "#{doc.id}"}
+          });
+        },
+        compact: true,
+        layout: '{hnn}{sep}{mnn}{sep}{snn}'
+      });
+    });
+- else
+  %h4.mtop10.pull-left
+    = "#{doc.document_file_name}"
+  .time_wrapper
+    .time_heading
+      .question_timer
+        %b Closed
+  .clearfix
+
+:javascript
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+    if(reload_flag == true){
+      $("#redirect_msg").show();
+      setTimeout(function(){location.reload()},5000)
+    }
+  });

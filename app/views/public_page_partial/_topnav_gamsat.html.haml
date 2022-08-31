@@ -1,0 +1,285 @@
+.top_navi
+  .container-fluid
+    .row
+      .abs_logo
+        .tp.top_left
+          %ul
+            %li
+              %a{href: "/"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/header-logo.svg', alt: 'GradReady GAMSAT Preparation Courses'
+            %li.head_fb
+              %a{href: "https://www.facebook.com/GradReadyGAMSAT"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/fb.svg', alt: 'img'
+      .col-sm-12
+        .tp.top_right
+          %ul
+            %li.contact
+              %a{href: "/gamsat-preparation-courses"} Courses
+              %ul.contact_list
+                %li
+                  %p
+                    GAMSAT
+                    = succeed "COURSES" do
+                      %sup ®
+                  %ul
+                    = render 'partial/nav_courses', type: "gamsat"
+                %li.max_wdt_300
+                  %p
+                    GAMSAT
+                    = succeed "InterviewReady" do
+                      %sup ®
+                  %ul
+                    = render 'partial/nav_courses', type: "gamsat_interview"
+                %li
+                  %p
+                    Guides
+                  %ul
+                    %li
+                      %a{:href => "/gamsat-preparation-courses#comparison_table"} Compare Gradready
+                    %li
+                      %a{:href => "/gamsat-preparation-courses#gamsat_course_table"} Compare Courses
+                    %li
+                      %a.recommender_popup{:href => "javascript:void(0);"} Course Recommender
+                %li
+                  %p
+                    Important Dates
+                  %ul
+                    %li
+                      %a{:href => "/posts/gamsat-preparation-courses/free-gamsat-events"}
+                        Free GAMSAT
+                        = succeed "Events" do
+                          %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/attendance-comprehensive#gamsat-important-date"}
+                        GAMSAT
+                        = succeed "Course Dates" do
+                          %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/interview-attendance-comprehensive#gamsat-important-date"} InterviewReady Course Dates
+
+            %li.contact
+              %a{href: "javascript:void(0)"} STUDENT RESULTS
+              %ul.contact_list
+                %li
+                  %p STUDENT TESTIMONIALS
+                  %ul
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/student_testimonials"} STUDENT RESULTS
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/our_students"} SATISFACTION SURVEY
+
+            %li.contact
+              %a{href: "javascript:void(0)"} SCHOLARSHIP
+              %ul.contact_list
+                %li
+                  %p SCHOLARSHIP
+                  %ul
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/scholarship"} MILLENNIALS SCHOLARSHIP
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/principal_scholarship"} PRINCIPAL'S SCHOLARSHIP
+                %li
+                  %p
+                    FINANCIAL AID
+                  %ul
+                    %li
+                      %a{:href => "/gamsat-preparation-courses/access-program"} ACCESS PROGRAM
+                    %li
+                      %a{href: "/gamsat-preparation-courses/faq/enrolment-and-payment#contact_eighteen_id"} PAYING IN INSTALMENTS
+
+            %li.contact
+              %a{href: "javascript:void(0)"}
+                GAMSAT
+                %sup{style: 'margin-left: -3px'} ®
+                #{Date.today.year}
+              %ul.contact_list
+                %li
+                  %p
+                    GAMSAT
+                    = succeed "OVERVIEW" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/gamsat-2022"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        #{Date.today.year}
+                    %li
+                      %a{href: "/what-is-gamsat"}
+                        What is GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{href: "/gamsat-scores"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Results Guide
+                        #{Date.today.year}
+                %li
+                  %p
+                    MEDICAL SCHOOLS
+                  %ul
+                    %li
+                      %a{href: "/australian-medical-schools"}
+                        Australian Medical Schools Overview
+
+                    %li
+                      %a{href: "/medical-school-entry-requirements"}
+                        Medical School Entry Requirements
+
+                    %li
+                      %a{href: "/how-to-become-a-doctor"}
+                        Pathways to Medicine
+            %li.contact
+              %a{href: "javascript:void(0)"}
+                Free GAMSAT
+                %sup{style: 'margin-left: -3px'} ®
+              %ul.contact_list
+                %li
+                  %p
+                    GAMSAT
+                    = succeed "Tips" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/gamsat-preparation"}
+                        How to study for the GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{href: "/gamsat-section-1"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Section 1 Prep
+                    %li
+                      %a{href: "/gamsat-section-2"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Section 2 Prep
+                    %li
+                      %a{href: "/gamsat-section-3"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Section 3 Prep
+                    %li
+                      %a{href: "/gamsat-biology"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Biology
+                    %li
+                      %a{href: "/gamsat-chemistry"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Chemistry
+                    %li
+                      %a{href: "/gamsat-physics"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Physics
+                %li
+                  %p
+                    GAMSAT
+                    = succeed "Resources" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/free-gamsat-preparation-materials"}
+                        Free GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Resources
+                    %li
+                      %a{href: "/gamsat-preparation-courses/free-gamsat-trial"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Free Trial
+                    %li
+                      %a{href: "/gamsat-quote-generator"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Quote Generator
+                    %li
+                      %a{href: "/gamsat-free-practice"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Practice Questions
+                    %li
+                      %a{href: "/gamsat-example-essay"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Example Essays
+                    %li
+                      %a{href: "/gamsat-study-syllabus"}
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Study Syllabus
+                    %li
+                      %a{href: "/gamsat-podcast"}
+                        GradReady
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Podcast
+            %li.contact
+              %a{href: "javascript:void(0)"} Contact Us
+              %ul.contact_list
+                %li
+                  %p
+                    Questions?
+                  %ul
+                    %li
+                      %a{href: "/gamsat-preparation-courses/faq"} FAQ
+                    %li
+                      %a{href: "/blog/gamsat-preparation-courses"} BLOG
+                    %li
+                      %a{href: "/gamsat-preparation-courses/contact"} GET IN TOUCH
+                    %li
+                      %a{href: "/jobs/available_positions"} JOIN US 
+                %li
+                  %p
+                    About
+                  %ul
+                    %li
+                      %a{href: "/gamsat-preparation-courses/overview"} OVERVIEW
+                    %li
+                      %a{href: "/gamsat-preparation-courses/team"} TEAM
+                    %li
+                      %a{:href => "/updates"} RECENT UPDATES
+                    %li
+                      %a{href: "/gradready-partners"} GRADREADY PARTNERS
+
+            - if user_signed_in?
+              %li.contact
+                %a{href: "javascript:void(0)"}
+                  .fa.fa-cart-plus
+                - if current_user.student?
+                  %ul.contact_list
+                    %li
+                      %p CART
+                      %ul
+                        %li
+                          = link_to 'CART', user_ongoing_order_link if current_user.student?
+                        %li
+                          = link_to "PAST ORDERS", orders_path if current_user.student? && current_user.orders.where.not(status: 0).present?
+              %li.contact
+                %a{href: "javascript:void(0)"} Account
+                %ul.contact_list
+                  %li
+                    %p ACCOUNT
+                    %ul
+                      %li
+                        %a{href: '/dashboard/home'} DASHBOARD
+                      %li
+                        = link_to 'PROFILE', edit_user_registration_path
+                      %li
+                        = link_to "LOG OUT", destroy_user_session_path, :method => :delete
+            - else
+              %li
+                %a{href: "/login"} Login
+
+:javascript
+
+  $(".recommender_popup").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });
+
+:css
+  .top_right.tp ul.contact_list li {
+    max-width: 260px;
+  }

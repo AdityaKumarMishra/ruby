@@ -1,0 +1,201 @@
+.carousel-control {
+    position: absolute;
+    top: 40%;
+    left: 15px;
+    width: 40px !important;
+    height: 40px !important;
+    margin-top: -20px;
+    font-size: 60px;
+    font-weight: 100;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    background: #222;
+    border: 3px solid #fff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 23px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.carousel-control {
+    top: 47% !important;
+    font-size: 39px !important;
+}
+.carousel-control.right {
+    left: auto;
+    right: 15px !important;
+}
+.carousel-control.left {
+    left: 15px !important;
+}
+.cors_img {
+    width: 100%;
+    margin-top: 25px;
+}
+#public-courses #main-banner {
+    height: auto;
+    margin: 0 0 40px 0;
+    color: white;
+    text-align: center;
+}
+
+#public-courses #feature-descriptions .feature-description h3 {
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 10px;
+}
+
+#public-courses #feature-descriptions .feature-description p {
+    font-size: 14px;
+}
+
+#public-courses .feature-description {
+    columns: 2;
+    column-gap: 50px;
+}
+#public-courses .paid_features {
+    columns: 2;
+    column-gap: 50px;
+}
+
+a {
+  &.btn.btn-gr {
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #008b44;
+    background-image: -moz-linear-gradient(top, #009348, #00813f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009348), to(#00813f));
+    background-image: -webkit-linear-gradient(top, #009348, #00813f);
+    background-image: -o-linear-gradient(top, #009348, #00813f);
+    background-image: linear-gradient(to bottom, #009348, #00813f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF009348', endColorstr='#FF00813F', GradientType=0);
+    border-color: #00813f #00813f #00351a;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    font-weight: bold;
+  }
+}
+.custom_scrolbar.height_560 {
+  max-height: 700px;
+  height: 700px;
+}
+
+.custom_scrolbar.height_200 {
+  max-height: 200px;
+  height: 200px;
+}
+
+.custom_scrolbar.height_750 {
+  max-height: 750px;
+  height: 750px;
+}
+
+.custom_scrolbar {
+  max-height: 250px;
+  height: 220px;
+  overflow: hidden;
+  padding: 0;
+    width: 100%;
+  position: relative;
+}
+.scroll-wrapper > .scroll-content {
+  overflow: scroll;
+}
+ .scroll-wrapper > .scroll-content::-webkit-scrollbar {
+ height: 0;
+ width: 0;
+}
+.scroll-element {
+  display: none;
+}
+.scroll-element.scroll-x.scroll-scrollx_visible,  .scroll-element.scroll-y.scroll-scrolly_visible {
+  display: block;
+}
+.scroll-element .scroll-bar,  .scroll-element .scroll-arrow {
+  cursor: default;
+}
+.custom_scrolbar > .scroll-element,  .custom_scrolbar > .scroll-element div {
+  border: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  z-index: 10;
+}
+.custom_scrolbar > .scroll-element {
+  background-color: #ffffff;
+}
+.custom_scrolbar > .scroll-element div {
+  display: block;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.custom_scrolbar > .scroll-element .scroll-element_size {
+  background-color: #009348;
+}
+.custom_scrolbar > .scroll-element.scroll-x {
+  display: none;
+}
+.custom_scrolbar > .scroll-element.scroll-y {
+  height: 100%;
+  min-height: 100%;
+  padding: 0 9px 0 9px;
+  right: 0;
+  top: 0;
+  width: 12px;
+}
+.custom_scrolbar > .scroll-element .scroll-bar {
+  background-color: #009348;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+
+.custom_scrolbar.umat-scroll > .scroll-element .scroll-bar{
+  background-color: #007ecc;
+}
+.custom_scrolbar.umat-scroll > .scroll-element .scroll-element_size{
+  background-color: #007ecc;
+}
+
+.custom_scrolbar.hsc-scroll > .scroll-element .scroll-bar{
+  background-color: #be382a;
+}
+.custom_scrolbar.hsc-scroll > .scroll-element .scroll-element_size{
+  background-color: #be382a;
+}
+
+.custom_scrolbar.vce-scroll > .scroll-element .scroll-bar{
+  background-color: #462c9f;
+}
+.custom_scrolbar.vce-scroll > .scroll-element .scroll-element_size{
+  background-color: #462c9f;
+}
+
+
+/* scrollbar height/width & offset from container borders */
+
+.custom_scrolbar > .scroll-content.scroll-scrolly_visible {
+  left: -17px;
+  margin-left: 17px;
+}
+.custom_scrolbar > .scroll-element.scroll-y .scroll-bar {
+  left: 1px;
+  height: 15px !important;
+  width: 15px;
+  cursor: pointer
+}
+.custom_scrolbar > .scroll-element.scroll-y .scroll-element_outer {
+  top: 5px;
+  width: 15x;
+}
+.custom_scrolbar > .scroll-element.scroll-y .scroll-element_size {
+  left: 7px;
+  top: -10px;
+  width: 2px;
+}

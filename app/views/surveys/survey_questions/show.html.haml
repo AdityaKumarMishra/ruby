@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Survey:
+  = @surveys_survey_question.survey
+%p
+  %b Question:
+  = raw @surveys_survey_question.question
+
+.btn-group
+  = link_to 'Edit', edit_surveys_survey_question_path(@surveys_survey_question), class: 'btn btn-default'
+  = link_to 'Back', surveys_survey_questions_path, class: 'btn btn-default'

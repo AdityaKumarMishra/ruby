@@ -1,0 +1,41 @@
+= simple_form_for(@essay) do |f|
+  =# f.error_notification
+
+  - positions = Essay.ordered_positions(@product_line&.id || @essay.product_line_id || @product_lines.first.id)
+  - available_positions = ((1..positions.first.to_i).to_a + (positions.first.to_i..positions.last.to_i).to_a + (positions.last.to_i..(positions.last.to_i + 5)).to_a).uniq
+  - positions += [0]
+  - available_positions = available_positions - positions
+  - available_positions = (available_positions + [@essay.position]).uniq if @essay.position.present?
+  - selected_product_line_id = @product_line&.id || @essay.product_line_id
+
+  .form-inputs
+    = f.hidden_field :id, value: @essay.id
+    = f.input :title
+    = f.input :product_line_id, as: :select, collection: @product_lines.pluck(:name, :id).map{ |pl| [pl.first.upcase, pl.last] }, prompt: 'Please select product line', selected: selected_product_line_id
+    - if selected_product_line_id.present?
+      .position_div
+        = f.input :position, as: :select, collection: available_positions.sort, prompt: 'Please select position', selected: @essay.position
+    - else
+      .position_div{style: 'display:none;'}
+        = f.input :position, as: :select, collection: available_positions.sort, prompt: 'Please select position', selected: @essay.position
+    = f.input :question, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+
+  .form-actions
+    = f.association :tags, collection: policy_scope(Tag), input_html: { class: 'chosen-select tag-list', data: { placeholder: "Please Select Tag" } }
+
+  .form-actions
+    = f.button :submit, :class => "btn btn-primary"
+
+:javascript
+  $(document).ready(function(){
+    $('#essay_product_line_id').on('change', function(evt){
+      var productLineId = $(evt.target).val();
+      var essayId = $('#essay_id').val();
+
+      $.ajax({
+        type: 'post',
+        url: "/essays/update_product_line_positions",
+        data: { product_line_id: productLineId, essay_id: essayId }
+      });
+    });
+  });

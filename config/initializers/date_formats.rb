@@ -1,0 +1,1 @@
+Date::DATE_FORMATS[:human] = '%d %B, %Y'

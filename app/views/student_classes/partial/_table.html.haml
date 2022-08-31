@@ -1,0 +1,19 @@
+-if student_classes.any?
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Size
+        %th Subject
+        %th{colspan: 2} Actions
+
+    %tbody
+      - student_classes.each do |student_class|
+        %tr{'data-link': url_for(student_class)}
+          %td= student_class.name
+          %td= student_class.size
+          %td= link_to student_class.subject, subject_path(student_class.subject), class: 'btn btn-default btn-sm' if student_class.subject
+          %td= link_to 'Edit', edit_student_class_path(student_class), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', student_class, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+-else
+  %p No classes attached

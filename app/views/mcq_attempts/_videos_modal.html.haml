@@ -1,0 +1,19 @@
+#review-exercise-vid-modal.modal.fade.latest_pop{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title=type
+      .modal-body
+        -if no_textbook_access || no_video_access
+          - msg = no_textbook_access ? 'textbooks' : 'videos'
+          = render 'partial/purchase_addons_link', msg: msg
+        -else
+          - records = vods.present? ? vods : textbooks
+          - if records.present?
+            - records.first(3).each do |record|
+              .li.text-align-left
+                = link_to "#{record.title}", record, :target => "_blank"
+          -else
+            = "The relevant resources have not been made available to your course."

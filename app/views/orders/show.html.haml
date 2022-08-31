@@ -1,0 +1,630 @@
+- content_for :page_heading, 'Cart'
+- content_for :show_left_panel, true
+.faq_list.para_fs14.stap_from_field.step_form_wrap.text-center
+  -if @order.present? && (@order.ongoing? || @order.registered?) && @enrolment_items.present?
+    %ul.step_points.horizonatal
+      -unless @user.paid_courses.present?
+        %li.completed_step LOGIN / SIGNUP
+      - if (@user.paid_courses.present? && @user.has_free_trial_only?) || !@user.paid_courses.present? || !@user.address.present?
+        %li.completed_step CONTACT DETAILS
+      %li.completed_step COURSE DETAILS
+      %li.active_step PAYMENT
+
+  .payment_mob_space
+    -if @enrolment_items.present?
+      .resource_col.text-left
+        %h4.fl Account Details
+        .paymnt_row.bdrnone
+          .paymnt_box.wdt_33
+            %p
+              Name:
+              %span= @user.first_name
+          .paymnt_box.wdt_33
+            %p
+              Email Address:
+              %span= @user.email
+          .paymnt_box.wdt_33
+            %p
+              Phone No:
+              %span= @user.phone_number
+        .paymnt_row.mg_top0
+          .paymnt_box.wdt_full
+            %p
+              Address:
+              %span= @user.address.try(:one_line_address)
+
+    -if @courses.present? && @enrolment_items.present?
+      .resource_col.text-left
+        %h4.fl.mg Enrolments Details
+        - @courses.each do |course|
+          .paymnt_row.bdrnone
+            .paymnt_box.wdt_full
+              %p
+                Course:
+                %span= course.name
+
+          .paymnt_row.mg_top0.bdr_rgt0
+            .paymnt_box.wdt_33
+              %p
+                City:
+                %span= course.city
+            .paymnt_box.wdt_33
+              %p
+                Enrolment Closure Date:
+                %span= course.enrolment_end_date.to_date
+            .paymnt_box.wdt_33
+              %p
+                = link_to "Course Expiry Date:", root_url + course_faq_expiry(@course.product_version.type)
+                %span=course.expiry_date
+    .resource_col.text-left
+      %h4.fl.mg Payment Details
+      .paymnt_row
+        .paymnt_box
+          %p
+            Unique Reference Number For Purchase:
+            %span= @order.present? ? @order.reference_number : '-'
+        .paymnt_box
+          -if @order.present? && @order.paid?
+            = link_to 'Download', invoice_pdf_order_path(@order, format: :pdf), class: 'default_btn hvr-shutter-in-horizontal download_btn_order'
+          %p.ptag_inline_blk
+            Amount:
+            %span
+              = "$"
+              = @order.present? ? number_with_precision(@order.total_cost, precision: 2) : 0.00
+
+
+
+    / Purchase items added to order
+    .faq_list.para_fs14
+      .faq_list_col.table_3_col
+        .faq_list_col
+          -unless @order.try(:paid?)
+            -if request.variant.blank?
+              %table.table.mobile_data_table.table-bordered.table-hover.essay_table
+                %thead
+                  %tr
+                    %th No.
+                    %th Course / Feature Name
+                    %th Cost (GST Exclusive)
+                    %th GST
+                    %th Discounts
+                    %th Shipping Cost
+                    -if @order.present? && (@order.ongoing? || @order.registered?)
+                      %th Cancel Purchase
+
+                %tbody
+                  - if @order.present?
+                    - pis = @order.reload.purchase_items
+                    - pis = pis.where("purchase_description NOT LIKE 'Custom course for Free trail%'") if pis.count > 1
+                    - pis.each_with_index do |purchase, index|
+                      %tr{class: ("danger" if !purchase.purchasable.try(:valid_for_purchase?) )}
+                        %td.mobile_mousehover_tool= index + 1
+                        -if purchase.purchasable_type == 'Enrolment'
+                          %td= purchase.purchasable.course.try(:name)
+                        -else
+                          %td= purchase.purchase_description
+                        %td= number_to_currency (purchase.initial_cost)
+                        %td= number_to_currency (purchase.added_gst)
+                        %td
+                          .text-success
+                            - @order.recalculate_discounts!
+                            = "-#{number_to_currency(purchase.discount_applied)}"
+                        %td= number_to_currency (purchase.shipping_cost)
+                        -if (@order.ongoing? || @order.registered?)
+                          %td
+                            = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), purchase, data: { confirm: "Are you sure you want to cancel this purchase?" }, "data-placement" => "top", "data-toggle" => "tooltip", method: :delete
+                      -if @course.present? && @course.product_version.present? && @course.product_version.slug.include?("custom") && purchase.purchasable_type == 'Enrolment'
+                        - purchase.purchasable.feature_logs.where(description: 'custom purchase').each do |fl|
+                          %tr
+                            %td
+                            %td= fl.master_feature.custom_feature_name(fl.product_version_feature_price.qty, @course.product_version.try(:type))
+                            %td
+                              = "$#{number_with_precision(fl.product_version_feature_price.price, precision: 2)}"
+                            %td
+                              - without_gst_price = fl.product_version_feature_price.ten_percent_gst_amount - fl.product_version_feature_price.price
+                              = "#{number_with_precision(without_gst_price, precision: 2)}"
+                            %td
+                              .text-success
+                                = "-$0.00"
+                            %td
+                              - if fl.product_version_feature_price.master_feature.hardcopy?
+                                = "$#{current_user.textbook_shipping_cost}"
+                              - else
+                                $0.00
+                            %td
+                  - if (@order.present? && @order.purchase_items.count == 0) || params[:id].to_i == -1
+                    %tr
+                      %td{colspan: 7, class: 'text-center'} No Purchased Items
+
+
+            -if request.variant == [:phone]
+              .mobile_table_border
+                %ul.tbl_head.card_payment_sec
+                  %li.width_inc Course / Feature Name
+                  %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool.wdt101 Cost
+                  - if @order.present?
+                    - @order.reload.purchase_items.each_with_index do |purchase, index|
+                      %ul.mobile_table_body.listing.tbl_head.bdr_none
+                        %li.mobile_mousehover_tool.width_inc
+                          -if purchase.purchasable_type == 'Enrolment'
+                            %span.mobile_data_label_show= purchase.purchasable.course.try(:name)
+                            %span.heading_tool_tip
+                              %p= purchase.purchasable.course.try(:name)
+                          -else
+                            %span.mobile_data_label_show= purchase.purchase_description
+                            %span.heading_tool_tip
+                              %p= purchase.purchase_description
+                          %ul.tool_tip
+                            %li
+                              Cost (GST Exclusive):
+                              %br
+                              = number_to_currency (purchase.initial_cost)
+
+                            %li
+                              GST:
+                              %br
+                              = number_to_currency (purchase.added_gst)
+                            %li
+                              Discounts:
+                              %br
+                              - @order.recalculate_discounts!
+                              = "-#{number_to_currency(purchase.discount_applied)}"
+                            %li
+                              Shipping Cost:
+                              %br
+                              = number_to_currency (purchase.shipping_cost)
+                            %li
+                              Cancel Purchase:
+                              %br
+                              = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), purchase, data: { confirm: "Are you sure you want to cancel this purchase?" }, "data-placement" => "top", "data-toggle" => "tooltip", method: :delete
+                        %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16.wdt101
+                          = number_to_currency (purchase.initial_cost)
+
+                      -if @course.present? && @course.product_version.present? && @course.product_version.slug.include?("custom") && purchase.purchasable_type == 'Enrolment'
+                        - purchase.purchasable.feature_logs.where(description: 'custom purchase').each do |fl|
+                          %ul.mobile_table_body.listing.tbl_head.bdr_none
+                            %li.mobile_mousehover_tool
+                              %span.mobile_data_label_show= fl.master_feature.custom_feature_name(fl.product_version_feature_price.qty, @course.product_version.try(:type))
+                              %span.heading_tool_tip
+                                %p= fl.master_feature.custom_feature_name(fl.product_version_feature_price.qty, @course.product_version.try(:type))
+                              %ul.tool_tip
+                                %li
+                                  Cost (GST Exclusive):
+                                  %br
+                                  = "$#{number_with_precision(fl.product_version_feature_price.price, precision: 2)}"
+
+                                %li
+                                  GST:
+                                  %br
+                                  - without_gst_price = fl.product_version_feature_price.ten_percent_gst_amount - fl.product_version_feature_price.price
+                                  = "#{number_with_precision(without_gst_price, precision: 2)}"
+                                %li
+                                  Discounts:
+                                  %br
+                                  = "-$0.00"
+                                %li
+                                  Shipping Cost:
+                                  %br
+                                  - if fl.product_version_feature_price.master_feature.hardcopy?
+                                    = "$#{current_user.textbook_shipping_cost}"
+                                  - else
+                                    $0.00
+                                %li
+                                  Cancel Purchase:
+                                  %br
+                                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), purchase, data: { confirm: "Are you sure you want to cancel this purchase?" }, "data-placement" => "top", "data-toggle" => "tooltip", method: :delete
+
+            %table.table.table-bordered.cost_txt
+              %tbody
+                %tr
+                  %td Cost (GST Exclusive)
+                  %td.cost_td
+                    = @order.present? ? number_to_currency(@order.total_initial_cost) : '$0.00'
+                %tr
+                  %td GST
+                  %td.cost_td= @order.present? ? number_to_currency(@order.total_added_gst) : '$0.00'
+                %tr
+                  %td Discount
+                  %td.cost_td= @order.present? ? number_to_currency(@order.total_discount) : '$0.00'
+                %tr
+                  %td
+                    %b Sub Total
+                  %td.cost_td
+                    %b= @order.present? ? number_to_currency(@order.order_subtotal) : '$0.00'
+                %tr
+                  %td Shipping Cost
+                  %td.cost_td
+                    = @order.present? ? number_to_currency(@order.total_shipping_cost) : '$0.00'
+                %tr
+                  %td Payment Fees
+                  %td.cost_td
+                    = @order.present? ? number_to_currency(@order.total_method_fee) : '$0.00'
+                %tr
+                  %td
+                    %b Total Cost
+                  %td.cost_tds
+                    %b= @order.present? ? number_to_currency(@order.total_cost) : '$0.00'
+
+          -if @order.present? && @order.paid?
+            - if !@order.generated_promo.nil?
+              %table.table.table-bordered
+                %tbody
+                  %tr
+                    %td
+                      %b Discount link
+                    %td
+                      = link_to user_promo_link_url(@order.generated_promo.token), user_promo_link_url(@order.generated_promo.token), class: 'discount_link'
+
+
+          - if @order.present? && @order.total_cost!=0 && (@order.ongoing? || @order.registered?)
+            .empty_col
+              .epmty_box
+                = button_to 'Empty Cart', {controller: "orders", action: "empty_cart", id: @order.id}, data: { confirm: "Are you sure you want to empty the cart?" }, method: :post, class: 'default_btn hvr-shutter-in-horizontal', disabled: @order.reload.purchase_items.present? ? false :true
+              .promo_col
+                - @order.promos.each do |promo|
+                  = promo.token
+                  = link_to({ controller: :orders, action: :remove_promo, promo_code: promo.token }, { class: "pull-right", method: :delete }) do
+                    &times;
+
+                = form_tag add_promo_order_path(@order, pv_id: @course.product_version_id), class: "course_frm" do
+                  = text_field_tag :promo_code, nil, class: "form-control discount_input", placeholder: "Discount Code", disabled: @order.reload.purchase_items.present? ? false :true
+                  = submit_tag "Add Code", class: "default_btn add_btn hvr-shutter-in-horizontal no_confirm", disabled: @order.reload.purchase_items.present? ? false :true
+            - if @order.can_checkout?
+              .paymnt_col
+                %h2 Payment Methods
+                %ul.nav.cstm_navpill.nav-pills
+                  - if @course.present? && @course.paypal_only && DateTime.now.between?(@course.enrolment_end_date - @course.paypal_days.days , @course.enrolment_end_date)
+                    %li.active{style: 'width: 100% !important'}
+                      %a{"data-toggle" => "pill", href: "#credit"} Paypal or Credit Card
+                  - else
+                    %li.active
+                      %a{"data-toggle" => "pill", href: "#debit"} Bank Transfer
+                    %li
+                      %a{"data-toggle" => "pill", href: "#credit"} Paypal or Credit Card
+                - if @course.present? && @course.paypal_only  && DateTime.now.between?(@course.enrolment_end_date - @course.paypal_days.days , @course.enrolment_end_date) 
+                  .tab-content.cstm_tab_content
+                    #credit.tab-pane.fade.in.active
+                      .col-md-8.paymnt_method
+                        %h3 Enrolment Process:
+                        %p Note there is a 1.9% additional fee for using a card or PayPal account. To avoid such fees, use the Direct Debit option.
+                        %p Note that AMEX is not accepted by the Credit Card facility. However, you are able to pay via AMEX through PayPal, by clicking on the "PayPal" button below.
+                        #paypal-pay
+                          %form#checkout{:action => "#{@order.id}/paypal_complete", :method => "post"}
+                            #payment-form
+                            %input{:type => "submit", :value => "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}", class: 'btn btn-primary hide', id: 'paypal-submit-form-btn'}
+                            = hidden_field_tag :authenticity_token, form_authenticity_token
+                          %script{:src => "https://js.braintreegateway.com/js/braintree-2.24.0.min.js"}
+                        %p.error_paypal Payment may take a few seconds to process, please do not press back during processing
+                        %p
+                          %i= "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}"
+                        %h3 Wait Period for Online Access:
+                        %p None
+                        %p You will be redirected back to the GradReady site after payment, upon which you will have full access to the appropriate Online Content.
+                - else
+                  .tab-content.cstm_tab_content
+                    #debit.tab-pane.fade.in.active
+                      .col-md-8.paymnt_method
+                        %h3 Enrolment Process:
+                        %p
+                          Bank: Commonwealth Bank
+                        %p Account Name: GradReady Pty Ltd.
+                        %p BSB: 06 2692
+                        %p Account Number: 3590 8197
+                        %h3.red_txt Use the reference: #{@order.reference_number}
+                        %p
+                          Please tick the checkbox immediately below and press the Complete Purchase button once you have completed your transfer. Doing so will notify us to look for your transfer.
+                        .checkbox_col.custom-checkbox.mob_tick_icon.mbot15
+                          %input#cb1{type: "checkbox"}/
+                          %label{for: "cb1"}
+                            = "I have completed payment of #{number_to_currency(@order.total_cost)}"
+                        %h3 Wait Period for Online Access:
+                        %p Up to 1 week.
+                        %p Once your payment is confirmed by the GradReady Enrolment Department, you will receive a Welcome Email and access to the Online Content. Depending on your bank, the payment may take between 3-5 working days to arrive.
+                        %p
+                          For any questions regarding your Bank Transfer payment, please contact
+                          %a{:href => "mailto:accounts@gradready.com.au"} accounts@gradready.com.au
+                    #credit.tab-pane.fade
+                      .col-md-8.paymnt_method
+                        %h3 Enrolment Process:
+                        %p Note there is a 1.9% additional fee for using a card or PayPal account. To avoid such fees, use the Direct Debit option.
+                        %p Note that AMEX is not accepted by the Credit Card facility. However, you are able to pay via AMEX through PayPal, by clicking on the "PayPal" button below.
+                        #paypal-pay
+                          %form#checkout{:action => "#{@order.id}/paypal_complete", :method => "post"}
+                            #payment-form
+                            %input{:type => "submit", :value => "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}", class: 'btn btn-primary hide', id: 'paypal-submit-form-btn'}
+                            = hidden_field_tag :authenticity_token, form_authenticity_token
+                          %script{:src => "https://js.braintreegateway.com/js/braintree-2.24.0.min.js"}
+                        %p.error_paypal Payment may take a few seconds to process, please do not press back during processing
+                        %p
+                          %i= "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}"
+                        %h3 Wait Period for Online Access:
+                        %p None
+                        %p You will be redirected back to the GradReady site after payment, upon which you will have full access to the appropriate Online Content.
+                .checkbox_col.custom-checkbox.agree_terms_check
+                  =check_box_tag "check", "accept", false, id: "terms-condition-check", onclick: "calc();"
+                  %label{for: "terms-condition-check"}
+                    -if @course.present?
+                      I agree to
+                      = link_to "Terms and Conditions", root_url + product_terms_uri(@course.product_version.type)
+                      set forth by GradReady, including, but not limited to,
+                      = link_to "Course", root_url + course_faq_expiry(@course.product_version.type)
+                      and
+                      = link_to "Essay-Submission expiration dates", root_url + product_faq_expiry(@course.product_version.type)
+                      (if applicable), and the
+                      = link_to "GradReady Refund Policy",root_url + product_faq_uri(@course.product_version.type)
+            - else
+              %p You have items in your cart that are no longer available. You must remove those items before checking out.
+          -elsif @order.present? && @order.total_cost == 0 && (@order.ongoing? || @order.registered?) && @order.purchase_items.present?
+            .checkbox_col.custom-checkbox.agree_terms_check
+              =check_box_tag "check", "accept", false, id: "terms-condition-check"
+              %label{for: "terms-condition-check"}
+                -if @course.present?
+                  I agree to
+                  = link_to "Terms and Conditions", root_url + product_terms_uri(@course.product_version.type)
+                  set forth by GradReady, including, but not limited to,
+                  = link_to "Course", root_url + course_faq_expiry(@course.product_version.type)
+                  and
+                  = link_to "Essay-Submission expiration dates", root_url + product_faq_expiry(@course.product_version.type)
+                  (if applicable), and the
+                  = link_to "GradReady Refund Policy",root_url + product_faq_uri(@course.product_version.type)
+          -elsif  @order.present? && @order.total_cost != 0 && @order.pending? && @order.purchase_method == 'direct_deposit'
+            .cc_purchase_link.paypal_credit_lnk
+              = link_to 'Pay via Credit Card/PayPal', 'javascript:void(0)', id: 'pending_direct_deposit', class: 'default_btn hvr-shutter-in-horizontal'
+            .single_cc_purchase
+              .row.payment_card_wrapper.cc_purchase_block.paymnt_method
+                .col-md-12
+                  #paypal-pay.cc_purchase_container
+                    %h4.u-text-green Enrolment Process:
+                    %p
+                      Note there is a #{(@order.paypal_addon * 100).round(2).to_s}% additional fee for using a card or PayPal account. To avoid such fees, use the Direct Debit option.
+                    %p
+                      Note that AMEX is not accepted by the Credit Card facility. However, you are able to pay via AMEX through PayPal, by clicking on the "PayPal" button below.
+
+                    %br
+
+                    %form#checkout{:action => "#{@order.id}/paypal_complete", :method => "post", id: "payment_form_check"}
+                      #payment-form
+                      %br
+                      %p.do_not_refresh Payment may take a few seconds to process, please do not press back during processing
+                      %label.u-text-green
+                        %em= "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}"
+
+                      %input{:type => "submit", :value => "Pay #{number_to_currency(@order.total_cost + @order.total_cost * @order.paypal_addon)}", class: 'btn btn-primary hide', id: 'paypal-submit-form-btn'}
+                      = hidden_field_tag :authenticity_token, form_authenticity_token
+                    %script{:src => "https://js.braintreegateway.com/js/braintree-2.24.0.min.js"}
+                    %br
+                    %p.u-standard-title.u-text-green Wait Period for Online Access:
+                    %p
+                      None.
+                    %p
+                      You will be redirected back to the GradReady site after payment, upon which you will have full access to the appropriate Online Content.
+
+                    %label.tc
+                      .checkbox_col.custom-checkbox.agree_terms_check
+                        =check_box_tag "check", "accept", false, id: "terms-condition-check"
+                        %label{for: "terms-condition-check"}
+                          -if @course.present?
+                            I agree to
+                            = link_to "Terms and Conditions", root_url + product_terms_uri(@course.product_version.type)
+                            set forth by GradReady, including, but not limited to, Course and
+                    .text-center.paypal_credit_lnk
+                      %button#paypal-pay-btn.btn.default_btn.mgtop0.hvr-shutter-in-horizontal.payment_btn_toggle.no_confirm.disabled{type: 'button', title: 'Please tick the checkbox immediately then press the Complete Purchase '} Complete Purchase
+          -if @order.present? && (@order.ongoing? || @order.registered?)
+            .purchase_col
+              = link_to 'Edit Details', update_contact_user_path(@user), class: 'black_default_btn resp_btn hvr-shutter-in-horizontal' if @enrolment_items.present? && AdminControl.find_by(name: 'Signup view').try(:new_view)
+
+              = link_to("Complete Purchase",{ controller: "orders", action: "direct_complete", id: @order.id},{ method: :post, class: ' payment_btn_toggle default_btn hvr-shutter-in-horizontal mar_zero_agree', id: "bank-pay-btn", style: 'display: none', onclick: 'dd_loader();'})
+              - if @order.reload.purchase_items.present?
+                %button#paypal-pay-btn.btn.default_btn.mgtop0.hvr-shutter-in-horizontal.payment_btn_toggle.no_confirm.disabled.show_btn_agree{type: 'button', title: 'Please tick the checkbox immediately then press the Complete Purchase '} Complete Purchase
+
+  -if @user.present? && @user.address.present? && @user.address.country.try(:downcase) != "australia"
+    = render 'gst_checkout_modal'
+
+.loader_payment
+
+:javascript
+  $( document ).ready(function() {
+    $('#gstCheckoutModal').modal('show');
+  });
+
+-if @order.present? && @order.total_cost != 0 && @order.pending? && @order.purchase_method == 'direct_deposit'
+  - loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+  :javascript
+    var img = '#{loader_img}';
+    var clientToken = "#{@token}";
+    var braintree_activated = false;
+    var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...<br><b>Do not press Back or Refresh</b></div></div>"
+    if (!braintree_activated) {
+      braintree.setup(clientToken, "dropin", {
+        container: "payment-form",
+        onError: function (obj) {
+          $('.loader_payment').html('');
+        }
+      });
+      braintree_activated = true;
+    }
+
+
+    $("#terms-condition-check").on('click', function(){
+      if ($("#terms-condition-check").prop('checked')) {
+        $("#paypal-pay-btn").removeClass('disabled');
+      }else{
+        $("#paypal-pay-btn").addClass('disabled');
+      }
+    });
+
+    $('#paypal-pay-btn').click(function() {
+      if(!#{@order.can_be_purchased?}){
+        alert('Cannot process items with cost as “0”. Please remove such items before continuing.');
+        return false;
+      }
+      else{
+        if ($("#terms-condition-check").prop('checked')){
+          $('#paypal-submit-form-btn').click();
+          $('.loader_payment').html(loader);
+        }
+        else{
+          alert("Please agree to Terms and Conditions before proceeding.");
+        }
+      }
+    });
+
+-else
+  - loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+  :javascript
+
+    function calc()
+      {
+        if ($("#credit").hasClass('active')){
+          current_pos = "#credit"
+        }else{
+          current_pos = "#debit"
+        }
+        update_payment_state(current_pos);
+      }
+    // We generated a client token for you so you can test out this code
+    // immediately. In a production-ready integration, you will need to
+    // generate a client token on your server (see section below).
+
+    var img = '#{loader_img}';
+    var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...<br><b>Do not press Back or Refresh</b></div></div>"
+    var clientToken = "#{@token}";
+    var braintree_activated = false;
+
+
+    $(function(){
+      update_payment_state = function() {
+        paypal_enabled = function(state) {
+          if (state) {
+            $("#paypal-pay-btn").addClass('disabled')
+            if (!braintree_activated) {
+              braintree.setup(clientToken, "dropin", {
+                container: "payment-form",
+                onError: function (obj) {
+                  $('.loader_payment').html('');
+                }
+              });
+              braintree_activated = true;
+            }
+          } else {
+            $("#paypal-pay-btn").addClass('disabled')
+          }
+        }
+
+        bank_enabled = function(state) {
+          if (state) {
+            $("#bank-pay-btn").removeClass('disabled');
+          } else {
+            $("#bank-pay-btn").addClass('disabled');
+          }
+        }
+
+        if ($("#terms-condition-check").prop('checked')) {
+
+          if (current_pos == '#credit') {
+            paypal_enabled(true);
+            bank_enabled(false);
+            $("#paypal-pay-btn").show();
+            $("#bank-pay-btn").hide();
+            $("#paypal-pay-btn").removeClass('disabled');
+          }
+          if (current_pos == '#debit') {
+            paypal_enabled(false);
+            bank_enabled(true);
+            if($(".custom-checkbox #cb1").prop('checked')){
+              $("#paypal-pay-btn").hide();
+              $("#bank-pay-btn").show();
+            }
+          }
+          $('.free_discount_link').removeClass('disabled')
+        } else {
+
+          if (current_pos == '#credit') {
+            $("#paypal-pay-btn").show();
+            $("#bank-pay-btn").hide();
+            paypal_enabled(true);
+            bank_enabled(false);
+          }
+          if (current_pos == '#debit') {
+            $("#paypal-pay-btn").show();
+            $("#bank-pay-btn").hide();
+            paypal_enabled(false);
+            bank_enabled(true);
+          }
+
+          $('.free_discount_link').addClass('disabled')
+        }
+      }
+
+      $('#paypal-pay-btn').click(function() {
+        if(!#{@order.try(:can_be_purchased?)}){
+          alert('Cannot process items with cost as “0”. Please remove such items before continuing.');
+          return false;
+        }
+        else{
+          if ($("#terms-condition-check").prop('checked')){
+            if ($("#credit").hasClass('active')){
+              $('#paypal-submit-form-btn').click();
+              $('.loader_payment').html(loader);
+            }else{
+              if($(".custom-checkbox #cb1").prop('checked')){
+              }else{
+                alert('Please check the box next to "I have completed Payment" under Direct Debit to proceed.');
+              }
+            }
+          }else{
+            alert("Please agree to Terms and Conditions before proceeding.");
+          }
+        }
+      });
+
+      $(".cstm_navpill li a").click(function(){
+        current_pos = $(this).attr('href');
+        update_payment_state(current_pos);
+
+      });
+
+
+      $(".custom-checkbox #cb1").click(function(e) {
+        if($("#debit").hasClass('active')){
+          if ($("#terms-condition-check").prop('checked')) {
+            if($(".custom-checkbox #cb1").prop('checked')){
+              $("#paypal-pay-btn").hide();
+              $("#bank-pay-btn").show();
+            }else{
+              $("#paypal-pay-btn").show();
+              $("#bank-pay-btn").hide();
+            }
+          }else{
+            $("#paypal-pay-btn").show();
+            $("#bank-pay-btn").hide();
+          }
+        }else{
+          e.preventDefault();
+        }
+      });
+    });
+
+    function dd_loader(){
+      $('.loader_payment').html(loader);
+    }
+
+-if @course.present? && @course.paypal_only
+  :javascript
+    $(document).ready(function(){
+      current_pos = "#credit"
+      update_payment_state(current_pos);
+    })
+
+:javascript
+  $('#bank-pay-btn,#braintree-paypal-button,#make-purchase-btn').click(function(){
+    if(!#{@order.try(:can_be_purchased?)}){
+      alert('Cannot process items with cost as “0”. Please remove such items before continuing.');
+      return false;
+    }
+  })
+
+  $(document).ready(function(){
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(gon.orderData);
+  });

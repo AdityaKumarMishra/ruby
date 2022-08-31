@@ -1,0 +1,60 @@
+#filterrific_results
+  .row.col-sm-12
+    %p
+      = will_paginate users, renderer: BootstrapPagination::Rails
+      %div
+        = page_entries_info users
+      %br
+      %br
+    = form_for :email_users, url: mass_send_user_emails_path, html: {id: 'user-mass-email-form'} do |f|
+      .form-group
+        %p
+          %label
+            = check_box_tag :select_all, nil, false
+            Select all
+        .row.col-sm-12{style: "max-height: 320px; overflow-y: scroll; scrollbar: visible;"}
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th
+                -unless users_type == "blog"
+                  %th First Name
+                  %th Last Name
+                %th Email
+                -if users_type == "blog"
+                  %th Product Version
+                -unless users_type == "blog"
+                  - if users_type == "enquiry"
+                    %th Pnone No
+                  %th Role
+
+                - if users_type == "enrolled"
+                  %th{ colspan: '6' } Actions
+            %tbody
+              - part =  users_type == "enrolled" ? 'user_row' : "#{users_type}_user_row"
+              = render partial: part, collection: users, locals: { form_object: f }
+        .clearfix
+
+      - if !current_user.tutor?
+
+        .row
+          .form-group
+            = button_tag(type: 'submit', class: 'btn btn-success pull-right', id: 'send-emails-button', disabled: true) do
+              %i.fa.fa-paper-plane
+              Send
+            %button.btn.btn-danger.pull-right{"data-target" => "#massEmailAllModal", "data-toggle" => "modal", type: "button", id: 'send-all-emails-button'}
+              %i.fa.fa-paper-plane
+              Send All
+            = render 'send_all_modal', all_users: users
+            - if users_type == "enquiry" && users
+              = f.hidden_field :all_euser_ids, value: all_users.map(&:id)
+            -elsif users_type == "blog" && users
+              = f.hidden_field :all_blog_user_ids, value: all_users.map(&:id)
+            - elsif users_type == "enrolled" && users
+              = f.hidden_field :all_user_ids, value: all_users.map(&:id)
+          .form-group
+            %label Subject
+            = f.text_field :subject, class: "form-control"
+          .form-group
+            %label Content
+            = f.cktext_area :content, ckeditor: { height: 400 }

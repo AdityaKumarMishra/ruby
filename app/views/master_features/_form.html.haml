@@ -1,0 +1,15 @@
+= simple_form_for(@master_feature) do |f|
+  = f.error_notification
+
+  .form-inputs
+    =# f.input :name
+    = f.input :title
+    = f.input :url
+    = f.input :icon
+    = f.input :show_in_sidebar
+    = f.input :position
+    = f.input :types, collection: ['GamsatReady', 'UmatReady', 'VceReady', 'HscReady'], input_html: { class: 'chosen-select', multiple: true }
+    = f.input :default_state
+
+  .form-actions
+    = f.button :submit

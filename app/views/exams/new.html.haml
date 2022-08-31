@@ -1,0 +1,7 @@
+.row
+  .col-md-8.col-md-offset-1
+    %h1 New exam
+
+    = render 'form', object: @exam_sections
+
+    = link_to 'Back', exams_path

@@ -1,0 +1,20 @@
+.faq_list_col
+  %h2.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#second_faq", role: "button"}
+    %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+    How to use GetClarity
+  #second_faq.panel-collapse.collapse{"aria-labelledby" => "headingOne", role: "tabpanel"}
+    / .video_box
+    /   - if announcement.video.present?
+    /     %video{:controls => "", :width => "100%"}
+    /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '360'}
+    /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '720'}
+    /   - else
+    /     %video{:controls => "", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/online-sys-demo/Videos_Thumbnail.png', :width => "100%"}
+    /       %source{:src => "http://gradready-prod.s3.amazonaws.com/public/getclarity%20version%202.mp4", :type => "video/mp4"}
+    /       %source{"data-quality" => "hd", :src => "http://gradready-prod.s3.amazonaws.com/public/getclarity%20version%202.mp4", :type => "video/mp4"}
+
+    - if announcement.story.present?
+      %h4 Guideline
+      .ck-editor-list
+        = sanitize announcement.story
+

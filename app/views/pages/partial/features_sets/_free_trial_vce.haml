@@ -1,0 +1,73 @@
+.row
+  .main_oute2
+    %ul.nav.nav-tabs.tab_bl.n-tab
+      %li.active
+        %a.feture_btn.btn.btn-gr.btn-prpl Features
+    .tab-content.scroll_inhirt
+      #grad_testi2.tab-pane.active.width_535
+        .feature-icon-container-top.text-center
+          = link_to 'Learn About Recent Updates', recent_update_path, class: 'btn btn-gr learn_recen_up btn-prpl'
+        %br
+          %table
+            .feature-icon-container
+              %h3#feature_Upgrade
+                .vce_txt
+                  %strong
+                    Following Features are Available Immediately After Sign up:
+            .span12
+              %h4.feature_sub_heading.vce_txt
+                %span.text_line.vce_txt Preparation material
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  -unless @product_version.name.include? "English"
+                    .grid_single_item
+                      = render 'pages/partial/features_sets/features/diagnostics_assessment', paid: false, product_line: 'VCE', subject: 'comprehensive-private-tutoring'
+                    .grid_single_item
+                      = render 'pages/partial/features_sets/features/online_exams', paid: false, product_line: 'VCE', subject: 'comprehensive-private-tutoring'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/online_questions', paid: false, product_line: 'VCE'
+            .span12
+              %h4.feature_sub_heading.vce_txt
+                %span.text_line.vce_txt Learning Tools
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/strategy', paid: false,        product_line: 'VCE'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/quality_assurance_system', paid: false, product_line: 'VCE'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/cross_referencing_system', paid: false, product_line: 'VCE'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/course_videos', paid: true, price: 159, price_with_gst: 175, product_line: 'VCE'
+                  -if @product_version.name.include? "English"
+                    .grid_single_item
+                      = render 'pages/partial/features_sets/features/language_analysis', paid: false, product_line: 'VCE'
+                    .grid_single_item
+                      = render 'pages/partial/vce_ready_features/english_study_guide', paid: false, product_line: 'VCE'
+                    .grid_single_item
+                      = render 'pages/partial/features_sets/features/essay_writing_guide', product_line: 'VCE'
+                  -else
+                    .grid_single_item
+                      = render 'pages/partial/features_sets/features/math_study_guide', paid: false,  product_line: 'VCE'
+            %h3#feature_Upgrade
+              .blu_heading
+                %strong.vce_txt Not included in free trial:
+
+            .span12
+              %h4.feature_sub_heading
+                %span.text_line.vce_txt Targeted 1 on 1 tutor assistance
+            .grid_wall_wrapper
+              .feature-description.clearfix
+                .grid_single_item
+                  = render 'pages/partial/features_sets/features/get_clarity', paid: true, price: 250, price_with_gst: 275, product_line: 'VCE'
+            .span12
+              %h4.feature_sub_heading
+                %span.text_line.vce_txt Live component
+            .grid_wall_wrapper
+              .feature-description.clearfix
+                .grid_single_item
+                  = render 'pages/partial/features_sets/features/private_tutoring', paid: true, price: 495, price_with_gst: 545, hours: 5, product_line: 'VCE'
+                .grid_single_item
+                  = render 'pages/partial/features_sets/features/interactive_learning', paid: false, product_line: 'VCE'
+                .grid_single_item
+                  = render 'pages/partial/features_sets/features/attendance_tutorials', paid: true, price: 320, price_with_gst: 352,product_line: 'VCE'

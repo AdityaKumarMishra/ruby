@@ -1,0 +1,184 @@
+.col-md-12
+  .span12
+    = render 'pages/partial/features_sets/feature_head'
+  .features_section_wrapper
+    %h4 Preparation Material
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-clipboard{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/diagnostics_assessment', paid: true, product_line: 'GAMSAT', price: 39, price_with_gst: 43
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-copy{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/online_exams', paid: true, price: 317, price_with_gst: 349, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-question{"aria-hidden" => "true"}
+
+          = render 'pages/partial/features_sets/features/online_questions', paid: true, product_line: 'GAMSAT', price: 407, price_with_gst: 448
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-film{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/online_textbook', paid: true, price: 159, price_with_gst: 175, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/course_videos', paid: true, price: 159, price_with_gst: 175, product_line: 'GAMSAT'
+  .features_section_wrapper#learning_tools
+    %h4 Learning Tools
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-refresh{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/keep_you_going', paid: false, product_line: 'GAMSAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-refresh{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/quality_assurance_system', paid: false, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/study_timeline', paid: false, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/documents', paid: false, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-bullseye{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/strategy', paid: false, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-random{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/cross_referencing_system', paid: false, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/essay_writing_guide', product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/example_essays', product_line: 'GAMSAT'
+
+      / .col-lg-4.col-md-4.col-sm-6.col-xs-12
+      /   .features_content_section
+      /     .features_img_circle
+      /       %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+      /     = render 'pages/partial/features_sets/features/performance_profile', product_line: 'GAMSAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-mobile{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/mobile_friend'
+
+  .features_section_wrapper.border_bottom#live_components
+    %h4 Live component
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-calendar{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/weekly_sessions'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-users{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/study_buddy'
+
+  .features_section_wrapper#learning_tools
+    .text-center.container.mbot30
+      .text-center
+        %h2.feature_heading.mtop15.feature_heading1 Upgrade options after enrolment
+
+    %h4 Learning Tools
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/textbook_hard_copy', paid: true, price: 69, price_with_gst: 76
+
+  .features_section_wrapper#target_tutor
+    %h4 Targeted 1 on 1 tutor assistance
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-align-right{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/marked_essays', paid: true, price: 345, price_with_gst:380
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-comments{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/get_clarity', paid: true, price: 250, price_with_gst: 275, product_line: 'GAMSAT'
+  .features_section_wrapper#live_components
+    %h4 Live component
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-user{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/attendance_tutorials', paid: true, price: 788, price_with_gst: 867, product_line: 'GAMSAT'
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/mock_exam_day', paid: true, price: 229, price_with_gst: 252, product_line: 'GAMSAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-refresh{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/interactive_learning', product_line: 'GAMSAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-street-view{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/home_mock_exam_day', price: 179 , price_with_gst: 197
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-street-view{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/ol_interactive_tutorial', price: 543, price_with_gst: 597
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-calendar{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/weekend_tutorial', price: 359 , price_with_gst: 395, new_course_type: new_course_type
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/private_tutoring', paid: true, price: 495, price_with_gst: 545, hours: 6, product_line: 'GAMSAT', new_course_type: new_course_type

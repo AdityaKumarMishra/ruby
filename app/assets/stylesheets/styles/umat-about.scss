@@ -1,0 +1,19 @@
+.umat .btn-gr {
+    color: #fff;
+    background-color: #007ecc !important;
+    font-weight: bold;
+}
+
+.umat #public-page #team #team-selection ul li.active {
+    color: white;
+    position: relative;
+    background: #007ecc;
+}
+
+.umat #public-page #team #team-selection ul li.active:after {
+    border-color: rgba(213,0,0,0);
+    border-left-color: #007ecc;
+    top: 50%;
+    border-width: 14px;
+    margin-top: -14px;
+}

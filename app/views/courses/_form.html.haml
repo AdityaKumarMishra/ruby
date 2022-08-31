@@ -1,0 +1,313 @@
+= render 'courses/partial/course_video_guide'
+
+= simple_form_for(@course) do |f|
+  =# f.error_notification
+  .form-inputs
+    .div_field
+      = f.label :name, "* Name"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Be sure to following the naming convention.  If you don't know who this is ask the person who delegated the task.
+      = f.input :name, required: true, :input_html => {class: "val_check" }, label: false
+    .div_field
+      = f.label :class_size, "* Class size"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        This can be found in the manual if you are unsure.
+      = f.input :class_size, required: true, :input_html => {class: "val_check" }, label: false
+
+    .div_field
+      = f.label :city, required: true
+      / - city = @course[:id] ? @course[:city] : ""
+      / = f.select :city, options_for_select(available_cities,city ), {include_blank: 'Please select a City', required: true, label: true}, class: 'form-control'
+
+      -if @course.new_record?
+        = f.select :city, options_for_select(available_cities), {include_blank: 'Please select a City', required: true, label: true}, class: 'form-control'
+      -else
+        = f.select :city, options_for_select(available_cities, Course::cities[@course.city]), {include_blank: 'Please select a City', required: true, label: true}, class: 'form-control'
+    %br
+    .div_field
+      = f.label :enrolment_end_date, "* Enrolment end date"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        This will usually be 2 days before the first day of class. But please consult the appropriate manual or check in with your manager as need.
+      = f.input :enrolment_end_date, as: :string, required: true, :input_html => { class: "datepicker val_check", value: f.object.enrolment_end_date.try(:to_date) }, placeholder: "Please select a Date", label: false
+    .div_field
+      = f.label :remain_visible, "Course to remain visible to students after enrolment closure"
+      = f.check_box :remain_visible, as: :boolean
+    %br
+    .div_field.aactivate-paypal
+      = f.label :paypal_only, "Automatically Activate PayPal Only"
+      = f.check_box :paypal_only, as: :boolean , class: 'activate-paypal'
+      .div_info
+        Allows you to decline Bank Transfer option a certain number of day prior to course closure
+      %br
+    .div_field.paaypal-days
+      = f.input :paypal_days, as: :integer , class: 'paypal-days'
+      %br
+    .div_field
+      = f.label :expiry_date, "* Expiry date"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        This will be the date of the corresponding exam GAMSAT/ UCAT.
+      = f.input :expiry_date, as: :string, required: true, :input_html => { class: "datepicker val_check" }, placeholder: "Please select a Date", label: false
+    .clear
+    %br
+    .div_field
+      = f.label :product_line, label: 'Product Line'
+      -if @course.new_record?
+        = f.select :product_line, options_for_select(available_product_line), {include_blank: 'All', required: true, label: true}, class: 'form-control'
+      -else
+        = f.select :product_line, options_for_select(available_product_line, @course.product_version.product_line.try(:name).try(:titleize)), {include_blank: 'All', required: true, label: true}, class: 'form-control'
+    %br
+    .div_field
+      = f.label :product_version_id, label: 'Product Version'
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        This should match the title.
+      -if @course.new_record?
+        =f.select(:product_version_id, options_for_select(available_product_versions), { include_blank: '- All -' }, class: 'form-control pv_select')
+      - else
+        =f.select(:product_version_id, options_for_select(line_product_versions(@course.product_version.type), @course.product_version_id), { include_blank: '- All -' }, class: 'form-control pv_select')
+    .ft_box{style: "display:none;"}
+      %br
+      .div_field
+        - course = Course.check_alreday_link_course(@course)
+        - course_cls = course ?  'disabled' : ''
+        - hover_content = course ? "Cannot link multiple courses, please unlink current course" : ""
+        = f.label :link_with_homepage_ft, "Link with Product Line Free Trial", title: "#{hover_content}", data: {tooltip: true}
+        = f.check_box :link_with_homepage_ft, as: :boolean, disabled: "#{course_cls}", title: "#{hover_content}", data: {tooltip: true}
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only tick this box if you want to link this course to home page free trial box
+    %br
+
+    .div_field.course_trial
+      = f.hidden_field :trial_enabled, value: false
+      #trial-period-days-section{style: "display:none;"}
+        = f.label 'Free Trial Valid Period'
+        %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Specifies for how many days that a free trial enrolment is valid for - ie. after this many days, a free trial enrolment will be automatically unenrolled", style: 'margin: -2em; padding:2em;'}
+        = f.input :trial_period_days, label: false
+    .hr.h2.add_lesson
+      Add Lessons
+      .div_field.cstm_width
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link add_less'
+        .fa.fa-minus.icn_sze
+      .div_info.mgtop_5
+        You will need to add 8 lessons in total for the GAMSAT and UCAT Courses. 6 for the classes and 2 for the mock exam days. Then add dates and location.
+    = f.simple_fields_for :lessons, @lessons do |lesson|
+      .form-inline.form-group.lesson-form
+        -if f.object.lessons.present? && lesson.object.persisted?
+          = render 'courses/partial/lesson_fields', f: lesson
+        .links
+          = link_to_add_association 'Add', f, :lessons, partial: 'courses/partial/lesson_fields', class: "btn btn-primary btn-xs"
+
+  .div_field
+    = f.label :staff_profiles, label: "Essay Marker"
+    / = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+    / .fa.fa-minus.icn_sze
+    / .div_info
+    /   Put the CDC.
+    -if @course.new_record?
+      = f.association :staff_profiles, collection: policy_scope(StaffProfile), label_method: :staff, label: false, input_html: { class: 'chosen-select-course', required: true, data: { placeholder: "Click Here to Select Staff" }}
+    -else
+      = f.association :staff_profiles, collection: @course.staff_tutor_profiles, label_method: :staff, label: false, input_html: { class: 'chosen-select-course chosen-select-staff', required: true, data: { placeholder: "Click Here to Select Staff" }}
+      #transferDataToTutor{style: 'display: none'}
+        = f.check_box :transfer_data_to_tutor, as: :boolean
+        = f.label 'Transfer all students to new tutor'
+  %br
+  .div_field
+    %label Upload Timetable
+    = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+    .fa.fa-minus.icn_sze
+    .div_info
+      Upload course specific live class and mockexam timetable.
+    = f.simple_fields_for :textbooks, @textbooks do |t|
+
+      .form-inline.form-group.lesson-form
+        -if f.object.textbooks.present? && t.object.persisted?
+          = render 'courses/partial/textbook_fields', f: t
+
+        .links
+          = link_to_add_association 'Upload', f, :textbooks, partial: 'courses/partial/textbook_fields', class: "btn btn-primary btn-xs"
+  %br
+  .div_field
+    = f.label :visible_to_student
+    = f.check_box :visible_to_student, as: :boolean
+    = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+    .fa.fa-minus.icn_sze
+    .div_info
+      Only tick this box if you want the timetable to be visible to students.
+  %br
+  .div_field
+    = f.label :notify_student
+    = f.check_box :notify_student, as: :boolean
+    = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+    .fa.fa-minus.icn_sze
+    .div_info
+      Only tick this box if you want to send autoemail to students for updates made to the timetable.
+  %br
+
+  .remove
+    = f.input :_destroy, as: :hidden
+
+  .form-actions
+    = f.button :submit, id: "submit_button"
+
+
+:javascript
+  
+  $(document).ready(function() {
+    if($('.activate-paypal').is(':checked')){
+      $('.paaypal-days').show();
+    }
+    else{
+      $('.paaypal-days').hide();
+    }
+  });
+  $('.activate-paypal').change(function(){
+    if(this.checked){
+      $('.paaypal-days').show();
+    }
+    else{
+      $('.paaypal-days').hide();
+    }
+  });
+  
+  var selected_tutor = $('.chosen-select-staff').val();
+  $('input.default').val('000000');
+  $(function () {
+
+    $('#new_course').submit(function( e ){
+      var flag = "false";
+      $('.val_check').each(function(){
+        if ($(this).val()!=""){
+            flag="true"
+            return false
+        }else{
+            flag="false"
+            return false
+        }
+      })
+
+      if (flag=="true"){
+        getConfirmation(e);
+      }
+
+    });
+
+    function getConfirmation(e){
+       var retVal = confirm("Are you sure?");
+
+       if( retVal == true ){
+          return true;
+       }
+       else{
+          e.preventDefault();
+          return false;
+       }
+    }
+
+
+    $('.datepicker').datepicker({"format": "yyyy-mm-dd", "autoclose": true});
+    $('.datetimepicker').datetimepicker({format: 'HH:mm'});
+
+  });
+
+
+  set_trial_period();
+
+  function set_trial_period(trial_val){
+    if($('#course_product_version_id').val() != ''){
+      var product_version_id = trial_val || $('#course_product_version_id').val();
+      $.ajax({
+        url: "/courses/get_course_type",
+        type: "GET",
+        dataType: 'json',
+        data: {product_version_id: product_version_id},
+        success:function(result){
+          status = result.status
+          if (status == "show"){
+            $('#trial-period-days-section').show();
+            $("#course_trial_enabled").val(true);
+          }
+          if(status == "hide"){
+            $('#trial-period-days-section').hide();
+            $('#course_trial_period_days').val(0);
+            $("#course_trial_enabled").val(false);
+          }
+        }
+      });
+    }
+  }
+
+  $('#course_product_version_id').on('change', function(){
+    var product_version_id = $(this).val();
+    set_trial_period(product_version_id);
+  });
+
+
+  $('.help_link').click(function(){
+    $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+    $(this).closest('.div_field').find('.div_info').toggle();
+  });
+
+  $('.add_less').click(function(){
+    $('.mgtop_5').toggle();
+  });
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $("#course_product_line").on('change', function(){
+    product_line = $(this).val();
+    $.ajax({
+      url: "/courses/filtered_product_versions",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line},
+    });
+    $('#trial-period-days-section').hide();
+    $('#course_trial_period_days').val(0);
+  });
+
+  $('.chosen-select-staff').on('change', function(){
+    var changed_value = $(this).val();
+    $("#course_transfer_data_to_tutor").prop("checked", false);
+
+    if(changed_value != null && parseInt(changed_value) != parseInt(selected_tutor)){
+      $('#transferDataToTutor').show();
+    }else{
+      $('#transferDataToTutor').hide();
+    }
+  })
+
+  $('#course_product_version_id').on('change', function(){
+    var pv_type = $(this).find('option:selected').text().substr(0, 17);
+    if (pv_type == "GM 3.1 Free Trial"){
+      $('.ft_box').show();
+    }else{
+      $('.ft_box').hide();
+    }
+  });
+
+  $(document).ready(function() {
+    var course = "#{Course.check_alreday_link_course(@course)}"
+    console.log(course);
+    if (course == "false"){
+      $('#course_link_with_homepage_ft').removeAttr("disabled");
+      $("input[name='course[link_with_homepage_ft]']").removeAttr("disabled");;
+    }
+    var pv_type = $('#course_product_version_id').find('option:selected').text().substr(0, 17);
+    if (pv_type == "GM 3.1 Free Trial"){
+      $('.ft_box').show();
+    }
+    
+  });

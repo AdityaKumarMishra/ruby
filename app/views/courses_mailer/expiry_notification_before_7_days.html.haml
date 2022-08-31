@@ -1,0 +1,49 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "Hi #{@student_name},"
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                Thank you for preparing with GradReady.
+              -else
+                = "Thank you for using GradReady for your #{@product_line} exam studies. As part of our commitment to staying up to date with the latest in study techniques and content, we maintain a policy of expiring all old courses every year. As such, your course will be expiring on #{@expiry_date}."
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                A reminder that your online subscription will expire in 1 week.
+              -else
+                This means that after this date, you will be unable to access any online material including MCQs, textbooks and marked exams/essays.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                If you would like to extend your subscription, please see information
+                %a{href: 'https://gradready.com.au/gamsat-preparation-courses/faq/enrolment-and-payment#contact_eleven_id'}here.
+              -else
+                If you wish to continue using GradReady's products in the future, we would like to advise you that we maintain a 25% repeat customer discount policy.
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                We trust that you are now feeling much more confident than you did 3 months ago - remember, you are already ahead of the pack.
+              -else
+                We thank you once again for using GradReady and we hope that your studies have been successful.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

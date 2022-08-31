@@ -1,0 +1,68 @@
+.video_item {
+  min-height: 250px;
+  padding: 20px;
+}
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected {
+  font-weight: bold;
+  background: none;
+}
+.vjs-default-skin .vjs-playback-rate.vjs-menu-button .vjs-menu .vjs-menu-content {
+  width: 10em !important;
+  left: -5em !important;
+  list-style: none;
+  bottom: 15px;
+  height: 145px;
+  float: left;
+  padding-top: 25px;
+}
+.vjs-default-skin .vjs-menu-button ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0.3em 0 0.3em 0;
+  line-height: 1.4em;
+  font-size: 1.2em !important;
+  text-align: center;
+  text-transform: lowercase;
+  font-weight: bold;
+}
+.vjs-menu-content:before {
+  content: 'SPEED';
+  width: 100%;
+  height: 18px;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  top: 3px;
+  border-bottom: 1px solid #ccc;
+}
+
+.video-title a {
+  color: black!important;
+  font-weight: bold;
+  font-family: "museo-slab";
+}
+.vjs-default-skin .vjs-playback-rate .vjs-playback-rate-value {
+  font-size: 1em !important;
+  top: 5px !important;}
+.vjs-res-button .vjs-menu-content:before {content:'';}
+.m_btm10 { margin-bottom: 10px;}
+.min_ht {
+  min-height: 60px;
+}
+.pagination.vod_pagination{
+    float:left;
+    width:100%;
+}
+
+@media screen and (min-width:260px) and (max-width:767px){
+
+.video_item{width:100%;}
+.video_item .text-left{
+  width:100%;
+  text-align:center;
+  padding-top:10px;
+}
+.u-img-container .overlay{
+  top:50% !important;
+}
+}

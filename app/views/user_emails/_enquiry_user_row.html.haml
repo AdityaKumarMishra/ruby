@@ -1,0 +1,13 @@
+%tr
+  %td
+    = form_object.check_box :euser_ids, { multiple: true, class: 'user-id-checkbox' }, enquiry_user_row.id, false
+  %td
+    = enquiry_user_row.first_name.to_s + " " + enquiry_user_row.last_name.to_s
+  %td
+    = enquiry_user_row.email
+  %td
+    - if enquiry_user_row.phone_number
+      = enquiry_user_row.phone_number
+    -else
+      N/A
+  %td

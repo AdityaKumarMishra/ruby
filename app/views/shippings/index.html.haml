@@ -1,0 +1,28 @@
+- unless @shippings.blank?
+  %h3.page-header Shipping Charges
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Country Name
+        %th Shipping Price
+        %th{colspan:2} Actions
+      %tbody
+        - @shippings.each do |shipping|
+          %tr
+            %td
+              = shipping.country
+            %td
+              = '$ ' + shipping.shipping_amount.to_s
+            %td
+              = link_to 'Edit', edit_shipping_path(shipping), class: 'btn btn-info btn-sm'
+            %td
+              = link_to 'Delete', shipping, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+- else
+  .alert.alert-success There are no Shipping charges please add shipping charge.
+
+.form-actions
+  = link_to 'Add Shipping Price', new_shipping_path, class: 'btn btn-gradready green'
+  
+- if current_user.can_manage_admin
+  .toggle_switch#out_of_stock
+    = render 'out_of_stock'

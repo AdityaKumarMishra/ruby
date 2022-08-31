@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "User mass email" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Student Name</Data></Cell>
+        <Cell><Data ss:Type="String">Student Email</Data></Cell>
+        <Cell><Data ss:Type="String">Enrolled</Data></Cell>
+        <Cell><Data ss:Type="String">Features</Data></Cell>
+        <Cell><Data ss:Type="String">Product Line</Data></Cell>
+        <Cell><Data ss:Type="String">Product Ver</Data></Cell>
+        <Cell><Data ss:Type="String">Course</Data></Cell>
+        <Cell><Data ss:Type="String">Enrolments</Data></Cell>
+        <Cell><Data ss:Type="String">Number of days since payment</Data></Cell>
+        <Cell><Data ss:Type="String">State</Data></Cell>
+      </Row>
+      <% @users.each do |user| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%=  user.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= "#{user.first_name} #{user.last_name}" %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.enrolments.any?(&:paid?) ? 'Yes' : 'No' %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.master_features.uniq.collect(&:name).join(', ') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.product_versions.uniq.collect(&:type).join(', ') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.product_versions.uniq.collect(&:name).join(', ')%></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.courses.uniq.collect(&:name).join(', ') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.paid_enrolments.collect(&:paid_at).join(', ') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= (Time.zone.now.to_date - user.paid_enrolments.order(:paid_at).first.paid_at.to_date).to_i if user.paid_enrolments %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= user.address.try(:state) %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

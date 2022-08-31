@@ -1,0 +1,32 @@
+-# A local variable name "product_line" should be parsed into this view for it to work
+
+%p
+  This following document sets forth the Privacy Policy for GradReady Pty. Ltd. ("GradReady"),
+  %a{:href => "/"} www.gradready.com.au
+  %br
+  GradReady is committed to providing you with the best possible customer service experience. GradReady is bound by the Privacy Act 1988 (Crh), which sets out a number of principles concerning the privacy of individuals.
+  %br/
+  %br/
+
+%ul
+  %li
+    %h3 Use of Website
+    %p Contents are included in this Website solely for the personal use of Website users. You may not copy (other than a copy for personal use), modify, distribute, transmit, display, perform, reproduce, transfer, resell, or republish any of the Contents of this Website without the prior written consent of GradReady, which may be withheld in its sole discretion.
+  %li
+    %h3 Refund Policy
+  %li
+    %h3 Subscription Expiration
+    %p
+      = "All subscriptions, including UK " + product_line + " subscriptions, are valid until the date of the March " + product_line + " exam, after which the subscription and all associated features will expire. This is in line with the standard practice of many worldwide major test providers. If you wish to take our course again within 12 months, you will receive a 25% discount for all " + product_line + "Ready products (the discount does not apply to InterviewReady courses). Note that the discount will NOT be valid, if the initial course you had signed up for was Custom or Online Lite. To access this discount, please contact your local Operations Manager and provide proof of your intention to resit the exam - eg. Receipt/Exam Ticket in your name."
+  %li
+    %h3 No warranties
+    %p 
+      = "Online essays will expire on the date set in the title of each essay. If you submit an essay after the expiration date, the essay will not be marked. These expiration dates are put in place to prevent an overabundance of essay submission in the critical days leading up to the " + product_line
+  %li
+    %h3 Service Contact
+    %p GradReady welcomes your comments regarding this Terms and Conditions. If you have any questions about this Terms and Conditions and would like further information, please contact us by email at
+    %a{:href => 'mailto:info@gradready.com.au'} info@gradready.com.au.
+
+  %li
+    %h3 Paypal Issues
+    %p Upon investigation, some issues may be found to be on the side of PayPal. We request that you contact PayPal in your relevant country (e.g. PayPal Australia) to further investigate the issue so that it can be resolved.

@@ -1,0 +1,6 @@
+-if request.variant.blank?
+  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cart-icon.svg'), add_feature_cart_path(a), remote: true, data: {toggle: 'tooltip', placement: 'top', title: 'Add to Cart', class: 'add_to_cart'}
+-else
+  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cart-icon.svg'), add_feature_cart_path(a), remote: true, class: 'add_to_cart'
+  %span.heading_tool_tip.mrht37
+    %p Add to Cart

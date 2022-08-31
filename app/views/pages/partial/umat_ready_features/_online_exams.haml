@@ -1,0 +1,11 @@
+#feature_online_exams.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-copy{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        5 Online Exams
+        - if paid
+          %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing Our online test system mimics the style of the UCAT by putting you under real time pressure. The exam results will be automatically broken down according to the applicable topics (from a pool of 19 topics), giving you a precise overview of your strengths and weaknesses. In addition, your performance will be automatically compared to that of other GradReady students, and you will be given the resulting percentile in the applicable sections and overall. Other than our Mock Exam Days, this is as close as it gets to the actual UCAT.

@@ -1,0 +1,8 @@
+.nested_fields.check_box_align
+  - if @user.tutor? || @user.manager?
+    = f.input :private_tutor, as: :boolean
+
+  - if current_user.superadmin? || current_user.admin? ||current_user.manager?
+    = f.input :issue_ticket, as: :boolean, label: 'GC Tutor'
+  - else
+    = f.input :issue_ticket, as: :boolean, input_html: {disabled: true }, label: 'GC Tutor'

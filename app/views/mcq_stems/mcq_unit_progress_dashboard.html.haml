@@ -1,0 +1,207 @@
+= select_tag 'mcq_stem_view', options_for_select(mcq_stem_collection, selected: select_option_values(params[:action])), { class: 'form-control stem_dropdown' }
+%h1 MCQ Creation Statistics
+
+= render 'mcq_stems_filters'
+
+%br
+- if policy(McqStem).new?
+  %div.mcq-stem-btns{style: "display: flex;"}
+    = link_to 'Create Question', new_mcq_stem_path, class: 'btn btn-gradready green', style: "margin-right: 8px;"
+    / = link_to 'Review Questions', 'review_mcq_stems', class: 'btn btn-gradready green', target: :_blank, style: "margin-right: 8px;"
+    = link_to "Download", mcq_unit_progress_dashboard_mcq_stems_path(format: "xlsx", mcq_stem: @mcq_stems), class: 'btn btn-gradready green', id: 'promo-download', style: "margin-right: 8px;"
+    / = link_to 'MCQ Unit Creation Board', mcq_unit_progress_dashboard_mcq_stems_path, class: 'btn btn-gradready green', style: "margin-right: 8px;"
+    / = link_to 'MCQ Creation Statistics', mcq_creation_progress_statistics_mcq_stems_path, class: 'btn btn-gradready green', style: "margin-right: 8px;"
+    / = link_to 'Payment Data - Payroll', payment_data_path, class: 'btn btn-gradready green', style: "margin-right: 8px;" unless current_user.student?
+    / = link_to 'Payment Data - All', payment_data_all_path, class: 'btn btn-gradready green', style: "margin-right: 8px;" if current_user.manager? || current_user.admin? || current_user.superadmin?
+
+#table_content
+  =render(partial: 'mcq_stems/partial/mcq_unit_progress_table', locals: { mcq_stems: @mcq_stems, section_items: nil})
+
+:css
+  .stem_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }
+
+  #stem_table_wrapper th, #stem_table_wrapper td{
+    white-space: normal;
+  }
+  #stem_table_wrapper .work_status, .select_reviewer1, .select_reviewer2, .select_video_explainer, .update_video_reviewer {
+    width: 150px;
+  }
+
+:javascript
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $(function(){
+    $('.stem_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.work_status', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.work_status', function(event){
+    $('.work_status').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_work_status",
+      type: "POST",
+      data: {work_status: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Work Status')
+      $('.work_status').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Work Status')
+      $(event.target).val(oldVal)
+      $('.work_status').attr('disabled', false)
+    });
+  });
+
+  var oldPool = null;
+  var newPool = null;
+
+  $(document).on('focus click', '.mcq_stem_pool', function(event){
+    oldPool = $(event.target).val();
+  });
+
+  $(document).on('change', '.mcq_stem_pool', function(event){
+    $('.mcq_stem_pool').attr('disabled', true)
+    newPool = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_pool",
+      type: "POST",
+      data: {pool: newPool}
+    }).done(function (data) {
+      alert('Successfully Updated Pool')
+      $('.mcq_stem_pool').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Pool')
+      $(event.target).val(oldPool)
+      $('.mcq_stem_pool').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_reviewer1', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_reviewer1', function(event){
+    $('.select_reviewer1').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_reviewer1",
+      type: "POST",
+      data: {reviewer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Reviewer1')
+      $('.select_reviewer1').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Reviewer1')
+      $(event.target).val(oldVal)
+      $('.select_reviewer1').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_reviewer2', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_reviewer2', function(event){
+    $('.select_reviewer2').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_reviewer2",
+      type: "POST",
+      data: {reviewer2_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Reviewer2')
+      $('.select_reviewer2').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Reviewer2')
+      $(event.target).val(oldVal)
+      $('.select_reviewer2').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_video_explainer', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_video_explainer', function(event){
+    $('.select_video_explainer').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_video_explainer",
+      type: "POST",
+      data: {video_explainer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Video Explainer')
+      $('.select_video_explainer').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Video Explainer')
+      $(event.target).val(oldVal)
+      $('.select_video_explainer').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.update_video_reviewer', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.update_video_reviewer', function(event){
+    $('.update_video_reviewer').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_video_reviewer",
+      type: "POST",
+      data: {video_reviewer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Video Reviewer')
+      $('.update_video_reviewer').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Video Reviewer')
+      $(event.target).val(oldVal)
+      $('.update_video_reviewer').attr('disabled', false)
+    });
+  });
+
+  $(document).ready(function() {
+    $('#stem_table').DataTable({
+      "bPaginate": false,
+      "bFilter": false,
+      "bInfo": false,
+      "aoColumnDefs" : [
+        { orderable: false, targets: [7,8,9,10] } ]
+    });
+    $('tbody').append("<tr><td colspan='16' style='height:35px;'></td></tr>")
+  });

@@ -1,0 +1,11 @@
+#Diagnostics-Assessment.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-clipboard{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Diagnostics Assessment
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text 
+        %p.u-word-spacing Our 50 question test will assess your familiarity with fundamental concepts covered in the VCE. You will receive a performance report to help you guide your VCE study. Note that this is not a diagnostic test of your overall performance; the Online Questions or Online exams will better serve that purpose.

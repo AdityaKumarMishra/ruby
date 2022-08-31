@@ -1,0 +1,9 @@
+.nested-fields.lesson-fields
+  = f.input :date, as: :string, label: 'Date',  placeholder: 'Date', :input_html => { class: "datepicker"}
+  = f.input :location, label: 'Location', placeholder: 'Location'
+  = f.input :start_time, as: :time, label: 'Start Time', placeholder: 'Start Time', :default => {:hour => '9' , :minute => '00'}, :input_html => {}
+  = f.input :end_time, as: :time, label: 'End Time', placeholder: 'End Time', :default => {:hour => '17' , :minute => '30'}, :input_html => {}
+  = f.input :lesson_type, :label => "Type", collection: Lesson.lesson_types.map {|k, v| [k, k]}, selected: f.object.lesson_type, include_blank: 'Please select a Type'
+  %br
+  = f.input :item_covered, as: :text, input_html:{rows: 5, cols:72, class: "full-width-text"}, label: 'Item Covered', placeholder: 'Item Covered'
+  = link_to_remove_association "Remove", f, class: "btn btn-danger btn-xs"

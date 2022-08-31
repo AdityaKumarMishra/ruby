@@ -1,0 +1,7 @@
+﻿User-agent: *
+Disallow: /vce/*
+Disallow: /hsc/*
+Disallow: /hsc
+Disallow: /vce
+Disallow: /umat/*
+Disallow: /umat-preparation-courses/*

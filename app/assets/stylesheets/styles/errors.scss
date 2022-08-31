@@ -1,0 +1,63 @@
+// Place all the styles related to the errors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.error{
+  padding: 0 0 20px;
+  h1,h2 {
+    font-family: $museo;
+    font-color: $grGreyDark;
+    font-weight: bold;
+  }
+  h5, p {
+    font-family: $helvetica;
+    font-size: 13px;
+    font-color: $grGreyDark;
+  }
+  a:hover {
+    color: $gamsat-color;
+  }
+}
+
+.list-grstyled {
+ padding-left:0;
+ list-style:none;
+ font-family: $helvetica;
+ li a {
+   color: $grGreen;
+ }
+}
+
+.text-ginormous {
+  font-size: 145px;
+}
+
+.col-middle {
+  float:none;
+  display:table-cell;
+  margin: 0 auto;
+  vertical-align:middle
+}
+
+.error-bg {
+  background-color: #f4f4f4;
+}
+
+.error h5{
+  margin-bottom:0px;
+}
+
+.courses_list {
+  margin-top:20px;
+}
+
+.courses_list li {
+  font-size:13px;
+  margin-bottom: 5px;
+}
+
+/*===== Error message for mock_essay_feedbacks =======*/
+.has_error_mock .form-control {
+  border-color: #a94442;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}

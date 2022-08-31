@@ -1,0 +1,469 @@
+/* Note when modifying or improving this stylesheet:
+ * WARNING: Should always do a quick recursive search on these
+ * navigation class names before modifying them in case they'd
+ * have spillover effect on other front-end pages
+ *
+ * TO-DO: Remove unncessary !important declaration after cleaning up
+ * all front-end SCSS files
+ *
+ * The structure and declaration of classes follow closely to that of
+ * bootstrap such that the use of stylings is similar to how you would
+ * use bootstrap classes
+ * */
+
+$table-bg-green-hover: lighten($gamsat-color, 5%);
+$table-bg-blue-hover: $umat-color;
+$table-bg-purple-hover: $vce-color;
+$table-bg-red-hover: $hsc-color;
+
+.gr-table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 15px;
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: 8px;
+        line-height: 1.5;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+      }
+    }
+  }
+  // Bottom align for column headings
+  > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+  }
+  // Remove top border from thead by default
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+  // Account for multiple tbody instances
+  > tbody + tbody {
+    border-top: 2px solid #ddd;
+  }
+
+  // Nesting
+  .table {
+    background-color: $white;
+  }
+}
+
+.ttal {
+    margin-top: -7px;
+}
+.ttal td {
+    width: 55.6% !important;
+}
+.gr-table-green {
+  > tbody > tr {
+    a {
+      color: $gamsat-light !important;
+    }
+  }
+}
+
+.gr-table-green-striped {
+  > tbody > tr:hover {
+    background-color: $table-bg-green-hover;
+  }
+}
+
+.gr-table-blue-striped {
+  > tbody > tr:hover {
+    background-color: $table-bg-blue-hover;
+  }
+}
+.gr-table-purple-striped {
+  > tbody > tr:hover {
+    background-color: $table-bg-purple-hover;
+  }
+}
+.gr-table-red-striped {
+  > tbody > tr:hover {
+    background-color: $table-bg-red-hover;
+  }
+}
+
+.gr-table-bordered {
+  border: 1px solid #ddd;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border: 1px solid #ddd;
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 2px;
+    }
+  }
+}
+
+@mixin gr-table-hover-variant($link-color, $bg-color) {
+  > tbody > tr {
+    a {
+      color: $link-color !important;
+    }
+    a.btn {
+      color: $white !important;
+    }
+    &:hover {
+      background-color: $bg-color;
+      color: $white !important;
+      a {
+        color: $white !important;
+        &:hover,
+        &:focus {
+          color: $white !important;
+        }
+        // Regardless of visited or not, maintain color
+      }
+    }
+  }
+}
+
+.gr-table-green-hover {
+  @include gr-table-hover-variant($gamsat-light, $table-bg-green-hover);
+}
+.gr-table-blue-hover {
+  @include gr-table-hover-variant($umat-light, $table-bg-blue-hover);
+}
+.gr-table-purple-hover {
+  @include gr-table-hover-variant($vce-light, $table-bg-purple-hover);
+}
+.gr-table-red-hover {
+  @include gr-table-hover-variant($hsc-color, $table-bg-red-hover);
+}
+
+/* NOTE:
+ * This should done as part of cleaning up public pages (consolidating all 4 into one)
+ * Create GradReady specific course comparison table using table elements
+ * REMOVE #course-package stylings declaraton affecting all pages
+ * and other IDs stylings
+ *
+ * WARNING: Do recursive search on all course-package front end files
+ * before attempting to "disentangle" the codes, as it may lead to spillover effect
+ *
+ */
+
+
+// Base gradready comparison table for product versions
+.gr-comparison-table {
+  width: 90%;
+  font-size: 13px;
+  color: $black;
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        width: 20%;
+        line-height: 2;
+        vertical-align: top;
+        text-align: center;
+        ul, li {
+          list-style-type: none;
+        }
+      }
+    }
+  }
+
+  th, td {
+    border: 2.5px solid white;
+  }
+
+  > tfoot,
+  > thead {
+    color: $white;
+    td, th {
+      background-color: #3c3c3c; // dark grey background
+    }
+    td:nth-child(even), th:nth-child(even) {
+      background-color: #575757; // light grey
+    }
+    th {
+      padding: 6px;
+      font-weight: normal;
+      line-height: 1.2 !important;
+      a {
+        color: $white !important;
+        font-size: 18px;
+        font-weight: normal;
+      }
+    }
+    .title-text {
+      font-size: 17px;
+      font-weight: bold;
+    }
+  }
+
+  > tfoot {
+    td {
+      line-height: 1 !important;
+      padding: 20px 20px;
+    }
+  }
+
+  > tbody {
+    a {
+      color: $black !important;
+    }
+    a:after {
+      content: "»"
+    }
+  }
+}
+
+.gamsat-compare {
+  @include product-comparison-table(#e5f1ea, #b2d6c1, $gamsat-color);
+  // For GAMSAT nested row for '6 Online Exam'
+  // Break the default alternate odd/even rules
+  >tbody {
+    > tr:nth-child(3) {
+      td:first-child {
+        background: #e5f1ea;
+      }
+    }
+  }
+  > tbody:nth-child(odd) {
+    > tr:nth-child(3) {
+      td:first-child {
+        background: #dadada;
+      }
+    }
+  }
+}
+.umat-compare {
+  @include product-comparison-table(#dff3fa, #b0d9ed, $umat-color)
+}
+.vce-compare {
+  @include product-comparison-table(#dad4eb, #a295cf, $vce-color)
+}
+.hsc-compare {
+  @include product-comparison-table(#ebc3bf, #de9b94, $hsc-color)
+}
+
+// Display of title preparation provider comparison table
+.cmptr_comprr{
+  text-align: center;
+  width: 60%;
+  margin: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  .prepar_col{
+    color: #fff;
+    margin: 0;
+    font-size: 25px;
+    margin-bottom: 7px;
+    display: inline-block;
+    padding: 9px 40px 7px;
+    letter-spacing: 3px;
+  }
+
+  .umat_prepar_col h1 {
+    @extend .prepar_col;
+    background: #0073cc;
+  }
+  .vce_prepar_col h1 {
+    @extend .prepar_col;
+    background: $vce-color;
+  }
+  .hsc_prepar_col h1 {
+    @extend .prepar_col;
+    background: $hsc-color;
+  }
+  .gamsat_prepar_col h1 {
+    @extend .prepar_col;
+    background: $gamsat-color;
+    margin-top: 80px;
+  }
+
+  .gamsat_prepar_col h3.gamsat_prep_comp_table {
+    @extend .prepar_col;
+    background: $gamsat-color;
+    margin-top: 80px;
+  }
+}
+
+.cmptr_comprr .prepar_col, .cmptr_comprr .umat_prepar_col h3.vce_prep_comp_table, .cmptr_comprr .vce_prepar_col h3.vce_prep_comp_table, .cmptr_comprr .hsc_prepar_col h3.vce_prep_comp_table, .cmptr_comprr .gamsat_prepar_col h3.vce_prep_comp_table{
+  color: #fff;
+    margin: 0;
+    font-size: 25px;
+    margin-bottom: 7px;
+    display: inline-block;
+    padding: 9px 40px 7px;
+    letter-spacing: 3px;
+
+}
+
+.cmptr_comprr .vce_prepar_col h3.vce_prep_comp_table{    background: #462c9f;}
+#course-packages h3.vce_prep_comp_table{color: #fff;
+padding:9px 40px 7px;
+
+}
+
+.cmptr_comprr .prepar_col, .cmptr_comprr .umat_prepar_col h3.gamsat_prep_comp_table, .cmptr_comprr .vce_prepar_col h3.gamsat_prep_comp_table, .cmptr_comprr .hsc_prepar_col h3.gamsat_prep_comp_table, .cmptr_comprr .gamsat_prepar_col h3.gamsat_prep_comp_table{
+  color: #fff;
+  margin: 0;
+  font-size: 25px;
+  margin-bottom: 7px;
+  display: inline-block;
+  padding: 9px 40px 7px;
+  letter-spacing: 3px;
+}
+.cmptr_comprr .gamsat_prepar_col h3.gamsat_prep_comp_table{
+  background: #007833;
+  margin-top: 80px;
+}
+#course-packages h3.gamsat_prep_comp_table{
+  color: #fff;
+  padding:9px 40px 7px;
+}
+
+
+// Comparison table between GradReady and other provider
+.cmptr_compr{
+  padding-top:50px;
+
+  .description-heading {
+    font-size: 18px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000;
+    width: 100;
+    border-bottom: 3px solid #ddd;
+    padding-bottom: 10px;
+  }
+  ul.comris_table li.drk_blue {
+    background: #007ecc;
+    color: #fff;
+  }
+  ul.comris_table li.drk_green {
+    background: #008b44;
+    color: #fff;
+  }
+
+  ul.comris_table {
+    h4.txt_blue {
+      img {
+        height: 30px;
+      }
+    }
+  }
+
+  h5.compr_heading {
+    background: #000;
+    padding: 5px 0 5px 11px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: #fff;
+    text-align: left;
+    text-align: left;
+    font-weight: normal;
+    margin-bottom: 0;
+    padding: 11px 8px;
+    margin-top: 0;
+    width: 100%;
+  }
+  a{
+    color: black;
+  }
+  .comris_table{
+    padding-left: 0px;
+    margin-bottom: 0px;
+    ul{
+      margin-bottom: 0px;
+    }
+    li{
+      padding: 6px;
+      width:33%;
+      display: inline-block;
+      text-align: center;
+      &:first-child{
+        text-align: left;
+      }
+    }
+    li.lgt_grey {
+      background: #f2f2f2;
+    }
+    li.lgt_blue {
+      background: #66b8e0;
+      color: #fff;
+    }
+    li.lgt_green {
+      background: #90C694;
+      color: #fff;
+    }
+  }
+  h4{
+    font-weight: bold;
+  }
+}
+
+table.hsc_comparison_table {
+  @include provider-comparison-table($hsc-color, $light-red)
+}
+table.vce_comparison_table {
+  @include provider-comparison-table($vce-color, $light-purple)
+}
+table.umat_comparison_table {
+  @include provider-comparison-table($umat-color, $light-blue)
+}
+table.gamsat_comparison_table {
+  @include provider-comparison-table-gamsat($gamsat-color, $light-green)
+}
+
+table.infographic {
+  font-size: 14px;
+  width: 100%;
+  th {
+    text-align: center;
+  }
+  tr, td {
+    height: 33px;
+  }
+  td:first-child {
+    text-align: right;
+    padding-right: 10px;
+    width: 40%;
+  }
+  td {
+    text-align: left;
+  }
+
+  h2{
+    font-size:24px;
+  }
+}
+
+.scroll_div {
+  width: 100%;
+  float: left;
+  overflow-y: scroll;
+}
+
+table.dataTable.courses_data_table td.col_min_wdh {
+  min-width: 200px;
+}

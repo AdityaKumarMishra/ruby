@@ -1,0 +1,133 @@
+- title "UCAT Access Program | GradReady"
+- meta_description "GradReady's UCAT Access program is designed to provide industry leading tools and resources in the hands of every student."
+- meta_keywords "UCAT Preparation courses"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        UCAT
+        %sup ®
+        Access Program
+%section.pad50
+  .container
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"}
+      .text-center
+        %h2 Placing Industry Leading Tools and Resources in the Hands of Every Student
+      .col-md-6.encorag_box.encrgbox_none.mg_right35
+        %img{:alt => "About-team-img1", :src => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/mini_slider/access-pro-img1.png'}
+        .faq_list
+          .faq_list_col
+            %h3.faq_question
+              %i.fa.pull-right.fa-angle-down>
+              Background
+            #background_tab.panel-collapse.collapse
+              %p
+                We believe that EVERYONE should have access to the same top quality resources and tools. Our mission is to put our industry leading tools in the hands of every UCAT
+                %sup ®
+                student - so that everyone has the opportunity to use the system that
+                = link_to "improved student scores by at least 24 percentile points", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), class: ""
+                , irrespective of your personal circumstances.
+          .faq_list_col
+            %h3.faq_question
+              %i.fa.fa-angle-down.pull-right>
+              Eligibility criteria
+            #eligibility_tab.panel-collapse.collapse
+              %p 1. A commitment to apply the effort to put the tools and resources to good use.
+              %p 2. Personal circumstances leading to need for subsidy. Eg. major changes in personal circumstances, no/limited parental support, family socioeconomic status, unexpected financial hardship.
+      .col-md-6.encorag_box.encrgbox_none
+        %img{:alt => "About-team-img22", :src => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/mini_slider/access-pro-img2.png'}
+        .faq_list
+          .faq_list_col
+            %h3.faq_question
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Program details
+            #scholarship_tab.panel-collapse.collapse
+              %p Subsidies up to the full cost of the Online Essentials course are available. Subsidies for other courses also available according to circumstances.
+          .faq_list_col
+            %h3.faq_question
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              How to apply
+            #apply_tab.panel-collapse.collapse
+              %p Email access@gradready.com.au with the following information. Title the email in the following manner
+              %p
+                = 'Eg. "UCAT'
+                %sup ®
+                = '- 2018 Access Program - Janet Li”'
+              %p 1. What is the amount of subsidy that you wish to apply for
+              %p 2. Course to which you wish to apply the subsidy
+              %p 3. 50 to 100 words elaborating your personal circumstance as per Eligibility Criteria
+          .faq_list_col
+            %h3.faq_question
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Timeline
+            #timeline_tab.panel-collapse.collapse
+              %p Access Program is open all year around. We may have follow up questions for you and the decision for acceptance into the program will be made within 72 hours of our final clarification questions (if applicable).
+      .col-md-12.encorag_box.encorag_box_fr_mbl.histry_right
+        #overview_vert_slider.carousel.slide.vertical{"data-ride" => "carousel"}
+          / Wrapper for slides
+          .carousel-inner{role: "listbox"}
+            .item
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/mini_slider/access-pro-img1.png', alt: "history_img"
+            .item.active
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/mini_slider/access-pro-img2.png', alt: "history_img"
+          .faq_list
+            .faq_list_col
+              %h3.faq_question
+                %i.fa.pull-right.fa-angle-down>
+                Background
+              #mobile_background_tab.panel-collapse.collapse
+                %p
+                  We believe that EVERYONE should have access to the same top quality resources and tools. Our mission is to put our industry leading tools in the hands of every UCAT
+                  %sup ®
+                  student - so that everyone has the opportunity to use the system that
+                  = link_to "improved student scores by at least 24 percentile points", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), class: ""
+                  , irrespective of your personal circumstances.
+            .faq_list_col
+              %h3.faq_question
+                %i.fa.fa-angle-down.pull-right>
+                Eligibility criteria
+              #mobile_eligibility_tab.panel-collapse.collapse
+                %p 1. A commitment to apply the effort to put the tools and resources to good use.
+                %p 2. Personal circumstances leading to need for subsidy. Eg. major changes in personal circumstances, no/limited parental support, family socioeconomic status, unexpected financial hardship.
+            .faq_list_col
+              %h3.faq_question
+                %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+                Program details
+              #mobile_scholarship_tab.panel-collapse.collapse
+                %p Subsidies up to the full cost of the Online Essentials course are available. Subsidies for other courses also available according to circumstances.
+            .faq_list_col
+              %h3.faq_question
+                %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+                How to apply
+              #mobile_apply_tab.panel-collapse.collapse
+                %p Email access@gradready.com.au with the following information. Title the email in the following manner
+                %p
+                  = 'Eg. "UCAT'
+                  %sup ®
+                  = '- 2018 Access Program - Janet Li”'
+                  %p 1. What is the amount of subsidy that you wish to apply for
+                  %p 2. Course to which you wish to apply the subsidy
+                  %p 3. 50 to 100 words elaborating your personal circumstance as per Eligibility Criteria
+            .faq_list_col
+              %h3.faq_question
+                %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+                Timeline
+              #mobile_timeline_tab.panel-collapse.collapse
+                %p Access Program is open all year around. We may have follow up questions for you and the decision for acceptance into the program will be made within 72 hours of our final clarification questions (if applicable).
+
+
+:javascript
+  $(document).ready(function(){
+    $(".faq_list_col").click(function(){
+        $(this).find(".panel-collapse").slideToggle(500);
+        $(this).find(".pull-right").toggleClass("fa-angle-down fa-angle-up");
+    });
+  });
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

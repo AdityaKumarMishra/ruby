@@ -1,0 +1,46 @@
+.userdown-xls
+  - if users_type == "enquiry"
+    = link_to "Download Analytics", user_emails_path(format: "xlsx", type: 'enquiry_profile'), class: 'btn btn-primary'
+  -elsif users_type == "blog"
+    = link_to "Download Analytics", user_emails_path(format: "xlsx", type: 'blog_profile'), class: 'btn btn-primary'
+  - else
+    = link_to "Download Analytics", '#', class: 'dropdown-toggle btn btn-primary', "data-toggle" => "dropdown"
+    -if all_users && all_users.count > 800
+      %ul.dropdown-menu.drop-menu.user-xlsx-down
+        %li
+          = link_to "Feature Upgrade Details", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+        %li
+          =# link_to "MCQ stats", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+        %li
+          = link_to "Complete User Details", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+        %li
+          = link_to "Student Contact Details", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+        %li
+          = link_to "Student Profile & Course Details", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+        %li
+          = link_to "Student Survey Details", '#', {"data-target" => "#myModal", "data-toggle" => "modal"}
+
+      #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog{:role => "document"}
+          .modal-content
+            .modal-body
+              Unable to download more that 800 user. Please use filters to reduce numbers.
+              %br
+              %br
+              .text-center
+                %button{"data-dismiss" => "modal", :type => "button"} Close
+    -else
+      %ul.dropdown-menu.drop-menu.user-xlsx-down
+        %li
+          = link_to "Feature Upgrade Details", user_emails_path(format: "xlsx", type: 'feature_upgrades')
+        %li
+          =# link_to "MCQ stats", user_emails_path(format: "xlsx", type: 'mcq_stats')
+        %li
+          = link_to "Complete User Details", user_emails_path(format: "xlsx", type: 'student_profile', stu_cat: "#{params[:filterrific].present? ? params[:filterrific][:by_enroled] : ''}", down_role: "#{params[:filterrific].present? ? params[:filterrific][:with_role] : ''}")
+        %li
+          = link_to "Student Contact Details", user_emails_path(format: "xlsx", type: 'student_contact')
+        %li
+          = link_to "Student Profile & Course Details", user_emails_path(format: "xlsx", type: 'student_profile_course')
+
+        %li
+          = link_to "Student Survey Details", user_emails_path(format: "xlsx", type: 'student_survey')

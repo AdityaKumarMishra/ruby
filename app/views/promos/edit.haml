@@ -1,0 +1,13 @@
+%h1 Edit Discount Code
+
+= render partial: "form"
+%br
+%dl.dl-horizontal
+  %b Order Started:
+  = pluralize @promo.orders.count, "time"
+  %br
+  %b Order Completed:
+  = pluralize @promo.purchase_count, "time"
+  %br
+  %b Clicked discount link:
+  = pluralize @promo.visit_count, "time"

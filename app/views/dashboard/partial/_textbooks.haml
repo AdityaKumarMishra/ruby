@@ -1,0 +1,67 @@
+-if current_user.student?
+  .resource_col
+    %h4 Filter
+  .faq_list.para_fs14
+    .faq_list_col
+      .course_frm.filter_box_shadow
+        = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+          .form-group.custom_choose
+            %label Topic
+            =f.select(:with_tags, @filterrific.select_options[:by_tag], {include_blank: 'All'}, class: 'form-control chosen-select')
+          .form-group
+            %label Keyword
+            =f.text_field(:with_title, class: 'filterrific-periodically-observed form-control', placeholder: 'Search by Title')
+          .form-group
+            %label Sort by
+            =f.select(:sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Any' })
+          = f.hidden_field 'type', value: @type
+          = f.submit 'Filter', class: 'default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+          =link_to 'Reset Filter', reset_filterrific_url, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+      #filterrific_textbook_response_results
+        = render 'dashboard/partial/textbook_filter', textbooks: @textbooks, types: @types, type: @type
+
+- else
+  %h1 Textbooks
+  .panel.panel-info
+    .panel-heading
+      %h3.panel-title
+        Filter
+        =render_filterrific_spinner
+    .panel-body
+      .form-group
+        = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+          - if !current_user.student?
+            %p
+              Type
+              =f.select(:by_product_line, @filterrific.select_options[:by_product_line], {include_blank: 'All'}, class: 'form-control')
+          %p
+            Topic
+            =f.select(:with_tags, @filterrific.select_options[:by_tag], {include_blank: 'All'}, class: 'form-control chosen-select')
+          %p
+            Keyword
+            =f.text_field(:with_title, class: 'filterrific-periodically-observed form-control', placeholder: 'Search by Title')
+          %p
+            Sort by
+            =f.select(:sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Any' }, class: 'form-control')
+          %p
+            = f.hidden_field 'type', value: @type
+            = f.submit 'Filter', class: 'btn btn-gradready green filter_media'
+            =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green for_media'
+
+  #filterrific_textbook_response_results
+    = render 'dashboard/partial/textbook_filter', textbooks: @textbooks, types: @types, type: @type
+
+:javascript
+  $(function () {
+    $("#filterrific_by_product_line").on('change', function(){
+        product_line = $(this).val();
+        $.ajax({
+          url: "/dashboard/filtered_topics",
+          type: "GET",
+          dataType: 'script',
+          data: {type: $("#filterrific_by_product_line").val() },
+
+        });
+    })
+  });
+  $('.chosen-select').chosen();

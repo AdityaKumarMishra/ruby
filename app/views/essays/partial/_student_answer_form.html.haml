@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      %p= essay.question
+      = simple_form_for EssayResponse.new, :url => essay_collect_student_answer_path  do |f|
+        =f.input :response, :label => false
+        =f.input :time_submited, :as=> :string, :input_html=> {id: "timer"}, :label => false, :readonly=>true, default: Time.parse('00:00:00')
+        .btn-group
+          = f.button :submit, class: 'btn btn-primary'

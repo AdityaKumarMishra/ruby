@@ -1,0 +1,21 @@
+<%if @success == 'updated'%>
+  $('#notice').html('<div class="notification-dialog alert new_alert cngrts_popup alert-dismissible alrt_div " role="alert"><span class="chk_mark"><%= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/cngrt_icon.png'%></span><button class="close btn_top" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><span class="alert_msg cngrts_msg"><h4>Congratulations</h4><p>Job application was successfully updated.</p></span></div>');
+  $('#rejectApplicationModal').modal('hide');
+  $('#assessmentSentTime').modal('hide');
+<%elsif @success == 'failed'%>
+  $('#notice').html('<div class="notification-dialog alert new_alert cngrts_popup alert-dismissible alrt_div " role="alert"><span class="chk_mark"><%= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/wrong.png'%></span><button class="close btn_top" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><span class="alert_msg cngrts_msg"><h4 class="red_title">Error</h4><p>Job application was not updated successfully.</p></span></div>');
+  $('#rejectApplicationModal').modal('hide');
+  $('#assessmentSentTime').modal('hide');
+<%else%>
+  <% if params[:job_application][:status] == "3.3 Rejected" %>
+    <% js = escape_javascript(render(partial: 'job_applications/reject_modal', locals: { job_application_form: @job_application_form, job_application: @job_application})) %>
+    $('#rejected_popup').html("<%= js %>");
+    $('#rejectApplicationModal').modal('show');
+    $('#notice').html("");
+  <% elsif params[:job_application][:status] == "1.2 Sent Initial Assessment" %>
+    <% js = escape_javascript(render(partial: 'job_applications/assessment_modal', locals: { job_application_form: @job_application_form, job_application: @job_application})) %>
+    $('#assessment_popup').html("<%= js %>");
+    $('#assessmentSentTime').modal('show');
+    $('#notice').html("");
+  <% end %>
+<%end%>

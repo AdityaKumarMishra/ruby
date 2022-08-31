@@ -1,0 +1,121 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+      .head_timer
+        %h4#clock
+          %i.fa.fa-clock-o{"aria-hidden" => "true"}
+          %span.time
+            Time Remaining
+            %span 14:21
+        %h4#all_ques
+          %i.fa.fa-book{"aria-hidden" => "true"}
+          %span.number 1 of 44
+    .btm_header.padd
+      %a.calc{href: "javascript:",'data-toggle'=>"modal", 'data-target'=>"#calc-modal"}
+        %i.fa.fa-calculator{"aria-hidden" => "true"}
+        = succeed "alculator" do
+          %span C
+      %a.calc{href: "#"}
+        %i.fa.fa-flag-checkered{"aria-hidden" => "true"}
+        = succeed "lag" do
+          %span F
+  .para_contant.contant_scroll
+    %p The graph shows the number of cases of influenza and an unknown condition reported at a location in the Northern hemisphere during the year that the research paper 'The Benefits of Vitamin C' was released.
+    / %img.mrgbtm20{src: "images/que_img_3.png"}/
+    = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_img_3.png'
+    %p Place 'Yes' if the conclusion does follow. Place 'No' if the conclusion does not follow.
+    .drag_wrap
+      .drag_list_col
+        %ul.drag_list
+          %li The condition mostly follows a bout of influenza.
+          %li Younger children are more likely to be affected by the condition.
+          %li A record high sale of vitamin C pills was most likely reported in December.
+          %li The condition is prevented by raising the vitamin C intake amongst children.
+          %li Influenza and the condition have a strong relationship with the temperature and sunshine patterns.
+      .drag_box_col
+        %ul.drag_box
+          %li.droppable
+          %li.droppable
+          %li.droppable
+          %li.droppable
+          %li.droppable
+      .drag_ans_col
+        %ul.drag_ans
+          %li.draggable yes
+          %li.draggable no
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-step-forward{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question3"}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question5"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+:css
+  .dropbox{
+    height: 56px !important;
+    width: 99px !important;
+    border: 1px solid #000 !important;
+    background-color: #fff !important;
+    color: #000;
+    margin-bottom: 10px !important;
+    text-transform: capitalize;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+:javascript
+  $('#all_ques').click(function(){
+   $('.number').toggleClass('none');
+   });
+
+  $('#clock').click(function(){
+   $('.time').toggleClass('none');
+   });
+
+  $('.draggable').draggable({
+    revert: "invalid",
+    stack: ".draggable",
+    helper: 'clone'
+  });
+  $('.droppable').droppable({
+    accept: ".draggable",
+    drop: function(event, ui) {
+      var droppable = $(this);
+      var draggable = ui.draggable;
+      text = ui.draggable.text();
+      $(this).addClass('dropbox')
+      $(this).text(text);
+    }
+  });

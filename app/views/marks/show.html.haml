@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Value:
+  = @mark.value
+%p
+  %b Correct:
+  = @mark.correct
+%p
+  %b User:
+  = @mark.user
+%p
+  %b Essay response:
+  = @mark.essay_response
+%p
+  %b Mcq student answer:
+  = @mark.mcq_student_answer
+%p
+  %b Description:
+  = @mark.description
+
+= link_to 'Edit', edit_mark_path(@mark)
+\|
+= link_to 'Back', marks_path

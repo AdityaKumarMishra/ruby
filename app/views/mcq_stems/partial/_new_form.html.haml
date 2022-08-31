@@ -1,0 +1,228 @@
+- edit_stem = options.include?(:edit_stem) ? options[:edit_stem] : @mcq_stem
+
+.video_div
+  = render 'mcq_stems/partial/mcq_steam_video_guide'
+
+.form_div
+  = simple_form_for(edit_stem) do |f|
+    .form-inputs
+      -if options.include?(:edit_stem)
+        .div_field
+          = f.input :id, input_html: { value: @mcq_stem.id }, disabled: true, label: "MCQ Stem ID"
+      .div_field
+        = f.label :title, label: "Title"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Unless the MCQ is for an exam, please think of a creative title and don't put the Author's name in the title.
+        = f.input :title, label: false
+
+      - status, to_disable = disable_status?(@mcq_stem, params, options)
+      .div_field
+        = f.input :status, as: :select, required: true, label: "Published Status", collection: status_collection, selected: status, disabled: to_disable
+
+      .div_field
+        = f.input :pool, as: :select,required: true, collection: pool_collection, selected: options.include?(:edit_stem) ? @mcq_stem.pool : params[:mcq_stem].present? && params[:mcq_stem][:pool].present? ? params[:mcq_stem][:pool] : ''
+
+
+      .div_field
+        = f.input :difficulty, as: :select, collection: difficulty_collection, selected: options.include?(:edit_stem) ? @mcq_stem.difficulty : params[:mcq_stem].present? && params[:mcq_stem][:difficulty].present? ? params[:mcq_stem][:difficulty] : ''
+
+      .div_field
+        = f.label :tags, label: 'Question Topic (Tag)'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Select only one topic for the MCQ
+        = f.association :tags, collection: policy_scope(Tag).sort_by{|tag| tag.name.upcase}, include_blank: true, input_html: { class: 'chosen-select tag-list-v2' }, required: true, label: false, selected: options.include?(:edit_stem) ? @mcq_stem.tag_ids : params[:mcq_stem].present? && params[:mcq_stem][:tag_ids].present? ? params[:mcq_stem][:tag_ids].last : ''
+
+      .div_field
+        = f.input :skill_tag_id,as: :select, collection: skill_tags_collection, required: true, label: 'Skill Tag', input_html: {class: "chosen-select"}
+      .div_field
+        = f.label :similarity_score, label: 'Overall Score'
+        = f.input :similarity_score, as: :select, collection: score_collection, required: true, label: false
+      .div_field
+        = f.input :display_type, label: 'Display Type',as: :select, collection: display_type_collection, required: true, include_blank: "Select an Option"
+      .div_field
+        = f.input :last_editor_id, as: :hidden, input_html: { value: current_user.id }
+        - if options.include?(:edit_stem)
+          - stem_last_editor = User.find_by_id(edit_stem.last_editor_id)
+          - last_editor = stem_last_editor.nil? ? edit_stem.author : stem_last_editor
+          %p
+            %strong
+              Last Edited By:
+            = last_editor.try(:full_name)
+
+      .div_field
+        = f.label :description, label: 'Description'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Instruction 1 - Remember that if you're adding images please do NOT copy and paste the image.  Upload it via the upload button featured in the top line 10th from the right.
+          %br
+          Instruction 2 - This box is the stem and is to include the stimulus for the questions you will add below.
+        = f.input :description, as: :ckeditor, input_html: { ckeditor: { height: 400 } },label: false, required: true
+
+      .div_field
+        = f.input :work_status, as: :select,required: true, collection: work_status_collection, selected: options.include?(:edit_stem) ? @mcq_stem.work_status : options.first, input_html: {class: "chosen-select"}
+
+      .div_field
+        / - if current_user.tutor?
+        /   = f.input :author, as: :select, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? ([edit_stem.author.full_name, edit_stem.author.id]) : ([current_user.full_name, current_user.id]), input_html: { class: 'chosen-select avs'}, required: true, label: 'Author', disabled: true
+        /   = f.input :author_id, as: :hidden, input_html: { value: options.include?(:edit_stem) ? edit_stem.author.id : current_user.id }
+        / - else
+        - if @mcq_stem.id.present? && edit_stem.author.present? && edit_stem.author.id == current_user.id
+          .row
+            .col-md-10.col-lg-10
+              = f.association :author, as: :select, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? ([edit_stem.author.full_name, edit_stem.author.id]) : ([current_user.full_name, current_user.id]), input_html: { class: 'chosen-select avs'}, required: true, label: 'Author'
+            .col-md-2.col-lg-2
+              = link_to 'Log Hours', mcq_hours_path(@mcq_stem, logging_type: :author), class: 'btn btn-default log_hours_btn', target: :blank
+        - else
+          = f.association :author, as: :select, collection: User.where.not(role:0), selected: options.include?(:edit_stem) && edit_stem.author.present? ? ([edit_stem.author.full_name, edit_stem.author.id]) : ([current_user.full_name, current_user.id]), input_html: { class: 'chosen-select avs'}, required: true, label: 'Author'
+      .form-actions
+        / - if current_user.tutor?
+        /   = f.association :reviewer, label: 'Reviewer 1', collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? edit_stem.reviewer ? ([edit_stem.reviewer.full_name, edit_stem.reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}, disabled: true
+        /   = f.input :reviewer_id, as: :hidden, input_html: { value: options.include?(:edit_stem) ? edit_stem.reviewer ? edit_stem.reviewer.id : default_reviewer.id : default_reviewer.id }
+        / - else
+        - if @mcq_stem.id.present? && edit_stem.reviewer.present? && edit_stem.reviewer.id == current_user.id
+          .row
+            .col-md-10.col-lg-10
+              = f.association :reviewer, label: 'Reviewer 1', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.reviewer ? ([edit_stem.reviewer.full_name, edit_stem.reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]),required: false, input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+            .col-md-2.col-lg-2
+              = link_to 'Log Hours', mcq_hours_path(@mcq_stem, logging_type: :reviewer_1), class: 'btn btn-default log_hours_btn'
+        - else
+          = f.association :reviewer, label: 'Reviewer 1', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.reviewer ? ([edit_stem.reviewer.full_name, edit_stem.reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]),required: false, input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+
+      .form-actions
+        / - if current_user.tutor?
+        /   = f.association :reviewer2, label: 'Reviewer 2', collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? edit_stem.reviewer2 ? ([edit_stem.reviewer2.full_name, edit_stem.reviewer2.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}, disabled: true
+        /   = f.input :reviewer2_id, as: :hidden, input_html: { value: options.include?(:edit_stem) ? edit_stem.reviewer ? edit_stem.reviewer.id : default_reviewer.id : default_reviewer.id }
+        / - else
+        - if @mcq_stem.id.present? && edit_stem.reviewer2.present? && edit_stem.reviewer2.id == current_user.id
+          .row
+            .col-md-10.col-lg-10
+              = f.association :reviewer2, label: 'Reviewer 2', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.reviewer2 ? ([edit_stem.reviewer2.full_name, edit_stem.reviewer2.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+            .col-md-2.col-lg-2
+              = link_to 'Log Hours', mcq_hours_path(@mcq_stem, logging_type: :reviewer_2), class: 'btn btn-default log_hours_btn'
+        - else
+          = f.association :reviewer2, label: 'Reviewer 2', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.reviewer2 ? ([edit_stem.reviewer2.full_name, edit_stem.reviewer2.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+
+      .form-actions
+        - if @mcq_stem.id.present? && edit_stem.video_explainer.present? && edit_stem.video_explainer.id == current_user.id
+          .row
+            .col-md-10.col-lg-10
+              = f.association :video_explainer, label: 'Video Explainer', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.video_explainer ? ([edit_stem.video_explainer.full_name, edit_stem.video_explainer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+            .col-md-2.col-lg-2
+              = link_to 'Log Hours', mcq_hours_path(@mcq_stem, logging_type: :video_explainer), class: 'btn btn-default log_hours_btn'
+        - else
+          = f.association :video_explainer, label: 'Video Explainer', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.video_explainer ? ([edit_stem.video_explainer.full_name, edit_stem.video_explainer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+
+      .form-actions
+        - if @mcq_stem.id.present? && edit_stem.video_reviewer.present? && edit_stem.video_reviewer.id == current_user.id
+          .row
+            .col-md-10.col-lg-10
+              = f.association :video_reviewer, label: 'Video Explanation Reviewer', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.video_reviewer ? ([edit_stem.video_reviewer.full_name, edit_stem.video_reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+            .col-md-2.col-lg-2
+              = link_to 'Log Hours', mcq_hours_path(@mcq_stem, logging_type: :video_explanation_reviewer), class: 'btn btn-default log_hours_btn'
+        - else
+          = f.association :video_reviewer, label: 'Video Explanation Reviewer', collection: sorted_tutors, selected: options.include?(:edit_stem) ? edit_stem.video_reviewer ? ([edit_stem.video_reviewer.full_name, edit_stem.video_reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+
+
+      .div_field
+        %label.control-label.string.required{for: "mcq_stem_work_directory"}
+          %abbr{title: "required"}*
+          Work directory
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Please enter valid URL (Including https:// OR http://)
+        = f.input :work_directory, required: true, label: false
+        - if options.include?(:edit_stem) && @mcq_stem.work_directory.present?
+          %a.btn.btn-gradready.green.work_status_btn{href: "#{@mcq_stem.work_directory}", target: :_blank}
+            Work Directory
+
+    %h3 Mcqs
+    %hr
+    = f.simple_fields_for :mcqs, f.object.mcqs.order(:id) do |mcq|
+      =render 'mcq_fields',{f: mcq}
+    %p.links.add_mcq
+      =link_to_add_association 'Add Mcq', f, :mcqs, class: 'btn btn-default'
+
+    .form-actions.div_field.flt_left
+      = f.button :submit, id: 'mcq_submit'
+      .div_err
+        %b#err-msg{style: 'color:red;'}
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        = f.object.new_record? ? 'Have you selected a reviewer for your MCQ? If you are unsure who this is ask your CDC.' : 'If you are the reviewer make sure to tick the reviewed box.'
+
+:javascript
+  var mcqStemFromName = '#new_mcq_stem';
+  var mcqStem = $('#mcq_stem_id');
+  var mcqStemId;
+  if(mcqStem.length > 0){
+    mcqStemId = mcqStem.val();
+  }
+
+  if (mcqStemId != undefined) {
+    mcqStemFromName = '#edit_mcq_stem_' + mcqStemId;
+  }
+  $(document).ready(function() {
+    $(mcqStemFromName).validate({
+      errorElement: "div",
+      ignore: [],
+      rules: {
+        'mcq_stem[description]': {
+           required: function()
+            {
+             CKEDITOR.instances.mcq_stem_description.updateElement();
+            },
+          minlength: 1
+        },
+        'mcq_stem[work_status]': {
+          notUpdated: true
+        }
+      }
+    });
+  });
+
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+    CKEDITOR.on( 'instanceReady', function( evt ) {
+      if($(mcqStemFromName+' .ckeditor iframe').length == 0){
+        $(mcqStemFromName+' textarea.ckeditor').each(function(i, obj) {
+          if(!(CKEDITOR.instances[obj.id] == undefined)){
+            CKEDITOR.remove(obj.id);
+          }
+          CKEDITOR.replace(obj.id);
+        });
+      }
+    });
+  });
+  $('#mcq_submit').click(function(){
+    if($(mcqStemFromName).valid()){
+      $('#err-msg').text('');
+    }
+    else{
+      $('#err-msg').text('Please check the errors above');
+    }
+  })
+
+:css
+  .work_status_btn{
+    float: right;
+  }
+
+  div.error{
+    color: red;
+  }
+
+  .log_hours_btn {
+    float: right;
+    top: 25px;
+    position: relative;
+  }

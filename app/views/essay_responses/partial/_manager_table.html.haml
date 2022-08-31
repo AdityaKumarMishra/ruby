@@ -1,0 +1,142 @@
+-if ((responses) != nil and (responses.any?))
+  - if params[:filterrific][:by_staff].present?
+    %strong Total Marked:
+    %strong= responses.count
+    %br
+    %br
+  - if current_user.tutor?
+    = will_paginate responses, renderer: BootstrapPagination::Rails
+    %p
+
+      %table.table.table-bordered.table-hover#responses_table
+        %thead
+          %tr
+            %th Date Submitted
+            %th Date Marked
+            %th Student Name
+            %th Course Name
+            %th Submitted Tutor
+            %th Marked Tutor
+            %th Status
+            %th{colspan: 1} Actions
+
+        %tbody
+          = hidden_field_tag :total_response_ids, total_responses.ids
+          - responses.each do |e|
+            - expiry_date = e.expiry_date.in_time_zone("Australia/Melbourne") + 23.hours + 59.minutes
+            %tr.response_list_row
+              %td= e.time_submited.in_time_zone('Australia/Melbourne').strftime('%d %b %Y %H:%M') if e.time_submited.present?
+              %td= e.essay_tutor_response.created_at.in_time_zone('Australia/Melbourne').strftime('%d %b %Y %H:%M') if e.essay_tutor_response.present?
+              %td= e.user.full_name
+              %td= e.course.try(:name)
+              -if e.tutor.present?
+                %td= e.tutor.full_name
+              -else
+                %td= e.course.staff_profiles.first.staff.try(:full_name) if e.course.staff_profiles.present?
+              %td
+                =e.essay_tutor_response.staff_profile.staff.full_name if e.essay_tutor_response.present? && e.essay_tutor_response.staff_profile.present?
+              %td
+                -if EssayResponse.statuses[e.status] == 0 && expiry_date < Time.zone.now.in_time_zone("Australia/Melbourne")
+                  .label-warning.label
+                    Expired
+                -elsif EssayResponse.statuses[e.status] == 0
+                  .label-default.label
+                    unsubmitted
+                -elsif EssayResponse.statuses[e.status] == 1
+                  .label-danger.label
+                    = e.status
+                -elsif EssayResponse.statuses[e.status] == 3
+                  .label-warning.label
+                    = e.status
+                -else
+                  .label-success.label
+                    =e.status
+              %td
+                %ul.list-unstyled
+                  %li.inline= link_to 'See Essay', essay_response_path(e.id), class: 'btn btn-default btn-xs essay-actions'
+  - else
+    = will_paginate responses, renderer: BootstrapPagination::Rails
+    %p
+    = form_for :assign_essays, url: mass_update_tutor_essay_responses_path, html: {id: 'assign-essays-tutor'} do |f|
+      %label
+        = check_box_tag :essay_select_all, nil, false, essay_type: 'Essay'
+        Select all
+
+      %button.btn.btn-success{"data-target" => "#MassAssignTutorEssay", "data-toggle" => "modal", type: "button", id: 'mass_assign_tutor_essay', disabled: true} Assign Essays
+      %br
+      %br
+
+      %table.table.table-bordered.table-hover#responses_table
+        %thead
+          %tr
+            %th
+            %th Date Submitted
+            %th Date Marked
+            %th Student First Name
+            %th Student Last Name
+            %th Course Name/Online Mock Exam
+            %th Submitted Tutor
+            %th Marked Tutor
+            %th Status
+            %th{colspan: 1} Actions
+
+        %tbody
+          = hidden_field_tag :total_response_ids, total_responses.ids
+          - responses.each do |e|
+            - expiry_date = e.expiry_date.in_time_zone("Australia/Melbourne") + 23.hours + 59.minutes
+            %tr.response_list_row
+              %td
+                = f.check_box :responses_ids, { multiple: true, class: 'essay-id-checkbox' }, e.id, false
+              %td= e.time_submited.in_time_zone('Australia/Melbourne').strftime('%d %b %Y %H:%M') if e.time_submited.present?
+              %td= e.essay_tutor_response.created_at.in_time_zone('Australia/Melbourne').strftime('%d %b %Y %H:%M') if e.essay_tutor_response.present?
+              %td= e.user.first_name
+              %td= e.user.last_name
+              - if e.assessment_attempt.present?
+                %td= e.assessment_attempt.assessable.try(:title)
+              - else
+                %td= e.course.try(:name)
+              -if e.tutor.present?
+                %td= e.tutor.full_name
+              -else
+                %td= e.course.staff_profiles.first.staff.try(:full_name) if e.course.staff_profiles.present?
+              %td
+                =e.essay_tutor_response.staff_profile.staff.full_name if e.essay_tutor_response.present? && e.essay_tutor_response.staff_profile.present?
+              %td
+                -if EssayResponse.statuses[e.status] == 0 && expiry_date < Time.zone.now.in_time_zone("Australia/Melbourne")
+                  .label-warning.label
+                    Expired
+                -elsif EssayResponse.statuses[e.status] == 0
+                  .label-default.label
+                    unsubmitted
+                -elsif EssayResponse.statuses[e.status] == 1
+                  .label-danger.label
+                    = e.status
+                -elsif EssayResponse.statuses[e.status] == 3
+                  .label-warning.label
+                    = e.status
+                -else
+                  .label-success.label
+                    =e.status
+              %td
+                %ul.list-unstyled
+                  %li.inline= link_to 'See Essay', essay_response_path(e.id), class: 'btn btn-default btn-xs essay-actions'
+      = render 'essay_responses/partial/mass_assign_tutor'
+-else
+  .alert.alert-warning Nothing found
+
+:javascript
+  $(document).ready(function(){
+    if(Cookies.get('to_mark_essay') == "true"){
+      $('#essay_select_all').click();
+    }
+  });
+
+  $(document).ready(function() {
+      $('#responses_table').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "aoColumnDefs" : [
+          { orderable: false, targets: [0, 3, 4, 5, 6, 7] } ]
+      });
+  } );

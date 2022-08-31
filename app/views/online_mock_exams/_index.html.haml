@@ -1,0 +1,74 @@
+=will_paginate @online_mock_exams, renderer: BootstrapPagination::Rails
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th City
+      / %th Instruction
+      %th Attempted by (no. of student)
+      %th Published
+      - if current_user.admin? || current_user.superadmin?
+        %th{colspan: 5} Actions
+      - else
+        %th Actions
+
+  %tbody
+    - @online_mock_exams.each do |online_mock_exam|
+      -if online_mock_exam.per_city_exam_count <= 1
+        %tr
+          %td= online_mock_exam.title
+          %td= sanitize online_mock_exam.city
+          / %td= sanitize online_mock_exam.instruction
+          %td= online_mock_exam.assessment_attempts.completed.count
+          %td= online_mock_exam.published
+          %td= link_to 'Edit', edit_online_mock_exam_path(online_mock_exam), class: 'btn btn-info btn-sm', target: :_blank
+          - if current_user.admin? || current_user.superadmin?
+            -if online_mock_exam.assessment_attempts.size == 0
+              %td= link_to 'Destroy', online_mock_exam, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+            -else
+              %td{style: "width: 85px;"}
+            %td.userdown-xls
+              = link_to "Download Analytics", '#', class: 'dropdown-toggle btn btn-primary btn-sm', "data-toggle" => "dropdown"
+              %ul.dropdown-menu.drop-menu.user-xlsx-down
+                %li
+                  = link_to "Student Attempts and Statistics", online_mock_exams_path(format: "xlsx", id: online_mock_exam.id, type: 'student_statistics')
+                %li
+                  = link_to "MCQ Difficulty Data", online_mock_exams_path(format: "csv", id: online_mock_exam.id, type: 'mcq_statistics')
+%br
+%br
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th City
+      / %th Instruction
+      %th Attempted by (no. of student)
+      %th Published
+      - if current_user.admin? || current_user.superadmin?
+        %th{colspan: 5} Actions
+      - else
+        %th Actions
+
+  %tbody
+    - @online_mock_exams.each do |online_mock_exam|
+      -if online_mock_exam.per_city_exam_count > 1
+        %tr
+          %td= online_mock_exam.title
+          %td= sanitize online_mock_exam.city
+          / %td= sanitize online_mock_exam.instruction
+          %td= online_mock_exam.assessment_attempts.completed.count
+          %td= online_mock_exam.published
+          %td= link_to 'Edit', edit_online_mock_exam_path(online_mock_exam), class: 'btn btn-info btn-sm', target: :_blank
+          - if current_user.admin? || current_user.superadmin?
+            - if online_mock_exam.assessment_attempts.size == 0
+              %td= link_to 'Destroy', online_mock_exam, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+            - else
+              %td{style: "width: 85px;"}
+            %td.userdown-xls
+              = link_to "Download Analytics", '#', class: 'dropdown-toggle btn btn-primary btn-sm', "data-toggle" => "dropdown"
+              %ul.dropdown-menu.drop-menu.user-xlsx-down
+                %li
+                  = link_to "Student Attempts and Statistics", online_mock_exams_path(format: "xlsx", id: online_mock_exam.id, type: 'student_statistics')
+                %li
+                  = link_to "MCQ Difficulty Data", online_mock_exams_path(format: "csv", id: online_mock_exam.id, type: 'mcq_statistics')

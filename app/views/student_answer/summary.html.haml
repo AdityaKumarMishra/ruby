@@ -1,0 +1,72 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    .form-group
+      = form_for_filterrific @filterrific do |f|
+        %p
+          Tag
+          =f.select(:with_tag_id, @filterrific.select_options[:with_tag_id],{ include_blank: '- Any -' }, :class=>'form-control')
+        %p
+          Subject
+          =f.select(:with_subject,
+            @filterrific.select_options[:with_subject],
+            { include_blank: '- Any -' },
+            :class=>'form-control',
+            :as => :grouped_select,
+            :group_method => :last)
+        %p
+          Title
+          =f.text_field(:search_query, class: 'filterrific-periodically-observed form-control')
+        %p=link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default'
+
+- if @stem_students.present?
+  #filterrific_results
+    .panel.panel-primary
+      .panel-heading
+        %h1.panel-title
+          %strong Mcq Summary
+      .panel-body
+        %p.text-info
+          %b
+            Results:
+            = @stem_students.count
+      .table-responsive
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th No.
+              %th Title
+              %th Tag
+              %th Subject
+              %th Author
+              %th Difficulty
+          %tbody.mcq-font
+            - @stem_students.each_with_index do |ss, i|
+              %tr{'data-link': url_for(student_answer_mcq_stem_path(id: ss.id))}
+                %td= "#{i + 1}."
+                %td= ss.title
+                %td
+                  - if ss.tag.present?
+                    = ss.tag.name
+                  - else
+                    %i No mcq stem tag.
+                %td
+                  - if ss.subject.present?
+                    %ul.list-group
+                      - ss.subject.each do |s|
+                        %li.list-group-item= s.title
+                  - else
+                    %i No mcq stem subject.
+                %td
+                  - if ss.mcq_stem.author_id.present?
+                    = ss.mcq_stem.author_id.full_name
+                  - else
+                    %i There isn't any mcq stem author.
+                %td= difficulty_to_human ss.mcq_stem.difficulty
+        = will_paginate @stem_students, renderer: BootstrapPagination::Rails
+
+- else
+  %i There are not any mcq stems.

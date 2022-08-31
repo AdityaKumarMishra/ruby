@@ -1,0 +1,12 @@
+- if tags.any?
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Add Tag
+    %tbody
+      - tags.each do |tag|
+        %tr
+          %td= tag.name
+          -#%td= link_to "Add tag", append_tags_path(tag_id: tag.id, div: "#added-tags", attribute: 'essays::essay[tag_ids][]'), remote: true
+          %td= link_to "Add tag", append_tags_path(tag_id: tag.id, div: "#added-tags", attribute: 'essay[tag_ids][]'), remote: true, class: 'btn btn-success btn-sm'

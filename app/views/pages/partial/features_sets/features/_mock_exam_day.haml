@@ -1,0 +1,40 @@
+=image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+- if product_line == 'GAMSAT' && params[:id] != 'custom'
+  %h4 Mock Exam Day + Mock Exam Day Recap (2 core days)
+- else
+  %h4 Mock Exam Day + Mock Exam Day Recap
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+- else
+  %span (Built into our systems)
+
+- if product_line == 'UMAT'
+  %p
+    The closest thing to the actual UCAT
+    %sup®
+    = '-'
+    you will be put under time pressures ...
+  .show_full_content
+    The closest thing to the actual UCAT
+    %sup®
+    = '-'
+    you will be put under time pressures in a well-simulated test environment. Then our expert tutors will go through all of the MCQs with you the next day. In addition, your performance will be compared with that of other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.
+- elsif product_line == 'VCE'
+  %p The closest thing to the actual end of year examinations - you will be put through time pressures and a well-simulated test environment. Then our expert tutors will go through all the questions with you the next day. In addition, your performance will be compared with those by other GradReady students, and you'll be given a percentile in each of the topics, and overall.
+- elsif product_line == 'HSC'
+  %p
+    The closest thing to the actual HSC
+    %sup{ style: "margin-right: -5px;left: -6px;"} ®
+    = '-'
+    you will be put through time pressures and a well-simulated test environment. Then our expert tutors will go through all the MCQs with you the next day and give you personalised feedback on your essays within the week. In addition, your performance will be compared with those by other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.
+- elsif product_line == 'GAMSAT'
+  %p
+    The closest thing to the actual GAMSAT
+    %sup{style: 'margin-left: -5px;'}®
+    exam - you will be put ...
+  .show_full_content
+    Updated: New Digital Exam System & Updated MCQs. The closest thing to the actual GAMSAT
+    %sup ®
+    exam - you will be put under time pressure in a well-simulated test environment. Get video solutions for each question as well as personalised Section 2 Essay feedback within the week, followed by an online recap day with our tuition team. In addition, your performance will be compared with those by other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.
+    %br
+    Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.

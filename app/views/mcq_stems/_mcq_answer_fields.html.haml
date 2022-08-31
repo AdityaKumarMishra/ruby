@@ -1,0 +1,12 @@
+.nested-fields
+  = f.input :answer, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+  = f.input :correct
+  = f.input :id, :as => :hidden
+  = link_to_remove_association 'remove answer', f
+  
+:javascript
+  for (var i in CKEDITOR.instances) {
+    CKEDITOR.instances[i].on('change', function(){
+      this.updateElement();
+    });
+  }

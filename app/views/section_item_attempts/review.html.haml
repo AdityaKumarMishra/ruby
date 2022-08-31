@@ -1,0 +1,45 @@
+- if params[:online_mock_exam_attempt_id].present?
+  - content_for :page_heading, 'Online Mock Exam 2 Review'
+- elsif params[:online_mock_exam_attempt_temp_id].present?
+  - content_for :page_heading, 'Online Mock Exam 1 Review'
+- elsif params[:online_exam_attempt_id].present?
+  - content_for :page_heading, 'Online Exam Review'
+- else
+  - content_for :page_heading, 'Diagnostics Assessment Review'
+/ - content_for :page_heading, params[:online_exam_attempt_id].present? ? 'Online Exam Review' : 'Diagnostics Assessment Review'
+.dashbord_right
+  / -if @section_attempt.assessment_attempt.question_style.eql?(1)
+  /   = render 'single_question_review'
+  / -else
+  = render 'multiple_question_review'
+:javascript
+  $(document).ready(function(){
+    $('.rvl_mcq').click(function(){
+      var mcq_id = $(this).attr('data-id');
+      $(".wrong_"+mcq_id).addClass("wrong_answer");
+      $(".correct_"+mcq_id).addClass("correct_answer");
+      $(".correct_unanswered_"+mcq_id).addClass("correct_unanswered");
+      $("#corr_answer"+mcq_id).removeClass("disable");
+      $("#wrg_answer"+mcq_id).removeClass("disable");
+      $("#right_non_answered"+mcq_id).removeClass("disable");
+      $("#expl_"+mcq_id).toggleClass("disable");
+      $("#correct_ans_"+mcq_id).toggleClass("disable");
+      $(".mcq_per_"+mcq_id).removeClass("disable");
+      $(".que_stat_"+mcq_id).removeClass("disable");
+      $("#correc_answer"+mcq_id).removeClass("disable");
+      $("#incorrec_answer"+mcq_id).removeClass("disable");
+      $("#rt_non_answered"+mcq_id).removeClass("disable");
+      $("#correc_answer"+mcq_id).addClass("correc_answer");
+      $("#incorrec_answer"+mcq_id).addClass("wrg_answer");
+      $("#rt_non_answered"+mcq_id).addClass("correc_unanswered");
+    });
+
+    $('.reveal_btn').click(function(){
+      $(this).siblings('.ques_ans_list').find('li.admin_custom_radio').addClass('pad_right');
+    });
+  });
+:css
+  / .admin_custom_radio img{
+  /   max-width: 536px;
+  /   max-height: 100px;
+  / }

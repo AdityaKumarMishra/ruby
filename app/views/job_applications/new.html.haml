@@ -1,0 +1,15 @@
+- title "#{@job_application_form.title} | GradReady"
+- meta_description "Join us today to work with highly efficient and result oriented team."
+- meta_keywords "GradReady, Job"
+
+%section.talk_to_bg.home_faq
+  .container
+    .support_col.looking_corse.text-center.med_related_question
+      %h1 #{@job_application_form.title}
+
+= render 'form'
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

@@ -1,0 +1,17 @@
+.gamsat-placeholder
+.navbar.navbar-default.navbar-fixed-top.nav-down.other-products
+  .navbar-inner
+    .container
+      .navbar-header
+        %button.navbar-toggle{type: 'button'}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "#{root_path}"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready-logo-blue.png', height: '30px', width: '150px', style: 'top: 50px;', alt: "GradReady UCAT logo")
+        %ul.nav.navbar-nav.navbar-left.like-buttons
+          %li
+            .fb-like{"data-action" => "like", "data-href" => "https://www.facebook.com/GradReadyUMAT", "data-layout" => "button_count", "data-share" => "true", "data-show-faces" => "true"}
+      .navbar-collapse#OtherNavbar
+        =# render 'partial/select_current_course'
+        %ul.nav.navbar-nav.navbar-right
+          = render partial: 'partial/nav_common', locals: {type: 'umat-preparation-courses'}

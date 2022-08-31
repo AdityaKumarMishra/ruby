@@ -1,0 +1,18 @@
+-unless @blog_filterrific.nil?
+  = form_for_filterrific @blog_filterrific, url: user_emails_path do |f|
+    .form-group.user-mgmt-filter-p1
+      %label Date start
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Defined by the user's Created at date."}
+      =f.hidden_field(:filter_type, value: "blog")
+      =f.text_field(:with_start_blog, class: 'form-control datepicker')
+    .form-group.user-mgmt-filter-p2
+      %label Date end
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Defined by the user's Created at date."}
+      =f.text_field(:with_end_blog, class: 'form-control datepicker')
+    .form-group
+      %label Keyword
+      = f.text_field :with_name_blog, class: 'form-control', placeholder: 'Name/Email'
+    .form-group
+      %label Sort By
+      = f.select :sorted_by_blog, @blog_filterrific.select_options[:sorted_by_blog], { include_blank: 'Select Sorting Option' }, class: 'form-control'
+    = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'

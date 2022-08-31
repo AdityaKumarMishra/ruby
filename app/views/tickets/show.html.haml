@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @ticket.title
+%p
+  %b Question:
+  = @ticket.question
+%p
+  %b Asker:
+  = @ticket.asker
+%p
+  %b Answerer:
+  = @ticket.answerer
+%p
+  %b Public:
+  = @ticket.public
+%p
+  %b Answered at:
+  = @ticket.answered_at
+
+= link_to 'Edit', edit_ticket_path(@ticket)
+\|
+= link_to 'Back', tickets_path

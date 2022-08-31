@@ -1,0 +1,11 @@
+<%if @tag%>
+	<%html=""%>
+	<% html += "<option value='all'>All</option>" %>
+
+	<% @tag.children.each do |tag| %>
+		<% html += "<option value='#{tag.name}'>#{tag.name}</option>" %>
+	<%end%>
+	$("#content_tag_select").html("");
+	$("#content_tag_select").html("<%= html.html_safe %>");
+	$("#content_tag_select").removeClass('hidden');
+<%end%>	

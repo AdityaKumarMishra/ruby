@@ -1,0 +1,135 @@
+- if exam.omes_document_start_time > Time.zone.now && exam.omes_document_end_time > Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Will Open
+        %span.timer{id: "countdown_timer#{exam.id}"}
+
+  :javascript
+    var eyear#{exam.id} = parseInt("#{exam.try(:start_date).try(:year)}");
+    var emonth#{exam.id} = parseInt("#{exam.try(:start_date).try(:month)}");
+    var edate#{exam.id} = parseInt("#{exam.try(:start_date).try(:day)}");
+    var ehour#{exam.id} = parseInt("#{exam.try(:start_time).try(:hour)}");
+    var eminutes#{exam.id} = parseInt("#{exam.try(:start_time).try(:min)}");
+    var eaustDay#{exam.id} = new Date(eyear#{exam.id}, emonth#{exam.id}-1, edate#{exam.id}, ehour#{exam.id}, eminutes#{exam.id});
+    var ex#{exam.id} = setInterval(function() {
+      // Get today's date and time
+      var enow#{exam.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var edistance#{exam.id} = eaustDay#{exam.id} - enow#{exam.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var edays#{exam.id} = Math.floor(edistance#{exam.id} / (1000 * 60 * 60 * 24));
+      var ehours#{exam.id} = Math.floor((edistance#{exam.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var eminutes#{exam.id} = Math.floor((edistance#{exam.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var eseconds#{exam.id} = Math.floor((edistance#{exam.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{exam.id}").innerHTML = edays#{exam.id} + "d " + ehours#{exam.id} + "h "
+      + eminutes#{exam.id} + "m " + eseconds#{exam.id} + "s ";
+
+      // If the count down is over, write some text
+      if (edistance#{exam.id} < 0) {
+        clearInterval(ex#{exam.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{exam.id}",attempt_id: "#{online_mock_exam_attempt.id}"}
+          });
+      }
+    }, 1000);
+-elsif exam.omes_document_start_time <= Time.zone.now && exam.omes_document_end_time >= Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Time Remaining:
+        %span.timer{id: "countdown_timer#{exam.id}"}
+
+  :javascript
+    var esyear#{exam.id} = parseInt("#{exam.try(:end_date).try(:year)}");
+    var esmonth#{exam.id} = parseInt("#{exam.try(:end_date).try(:month)}");
+    var esdate#{exam.id} = parseInt("#{exam.try(:end_date).try(:day)}");
+    var eshour#{exam.id} = parseInt("#{exam.try(:end_time).try(:hour)}");
+    var esminutes#{exam.id} = parseInt("#{exam.try(:end_time).try(:min)}");
+    var esaustDay#{exam.id} = new Date(esyear#{exam.id}, esmonth#{exam.id}-1, esdate#{exam.id}, eshour#{exam.id}, esminutes#{exam.id});
+    var esx#{exam.id} = setInterval(function() {
+      // Get today's date and time
+      var enow#{exam.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var esdistance#{exam.id} = esaustDay#{exam.id} - enow#{exam.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var esdays#{exam.id} = Math.floor(esdistance#{exam.id} / (1000 * 60 * 60 * 24));
+      var eshours#{exam.id} = Math.floor((esdistance#{exam.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var esminutes#{exam.id} = Math.floor((esdistance#{exam.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var esseconds#{exam.id} = Math.floor((esdistance#{exam.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{exam.id}").innerHTML = esdays#{exam.id} + "d " + eshours#{exam.id} + "h "
+      + esminutes#{exam.id} + "m " + esseconds#{exam.id} + "s ";
+
+      // If the count down is over, write some text
+      if (esdistance#{exam.id} < 0) {
+        clearInterval(esx#{exam.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{exam.id}"}
+          });
+      }
+    }, 1000);
+  .online_exam{id: "sub_exam#{exam.id}"}
+    - if online_mock_exam_attempt.present? && online_mock_exam_attempt.section_attempts.present?
+      -  online_mock_exam_attempt.section_attempts.includes(:section).select{|a| a.section.sectionable_id == exam.online_exam_id}.sort_by{|s_a| s_a.section.position}.each_with_index do |sa, index|
+        .resource_col.mbot21{class: "#{index == 0 ? 'martopbot10' : ''}"}
+          %h4.fl= sa.section.title
+        .statics_static_table
+          %ul
+            %li
+              %span Duration (Minutes) :
+              = sa.section.duration
+            / %li
+            /   %span Percentile :
+            /   -if sa.completed_at.present?
+            /     - sa.calculate_percentile
+            /   -if !sa.percentile.nil?
+            /     -if !sa.percentile.nan?
+            /       = sa.percentile.round(1) if sa.percentile.present?
+            /     -else
+            /       N/A
+            /   -else
+            /     N/A
+            -if sa.completed_at.nil?
+              %li{style: 'padding-bottom: 5px; padding-top: 5px;'}
+                %span Actions :
+                -if sa.completed_at.nil?
+                  - start_path = online_mock_exam_attempt_temp_section_attempt_section_item_attempts_path(online_mock_exam_attempt, sa)
+                  = link_to 'Start', start_path, class: 'default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+            -else
+              %li
+                %span Actions :
+- else
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Closed
+        %span.timer{id: "countdown_timer#{exam.id}"}
+
+:javascript
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+    if(reload_flag == true){
+      $("#redirect_msg").show();
+      setTimeout(function(){location.reload()},5000)
+    }
+  });
+

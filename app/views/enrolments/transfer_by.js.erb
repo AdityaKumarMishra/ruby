@@ -1,0 +1,3 @@
+<% js = escape_javascript(render('enrolments/transfer_course_modal', enrolment: @enrolment, student: @student))%>
+$("#Transfer-Cousrse-Partail").html("<%= js %>");
+$('#transferCourseModal').modal('show');

@@ -1,0 +1,169 @@
+.hsc_home_pag_bnner {
+    background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/imgo.jpg') 0 0 no-repeat;
+    background-size: cover;
+    float: left;
+    margin: auto -15px;
+    min-height: 782px;
+    width: calc(100% + 30px);
+    margin-bottom: 14px;
+    padding-top: 192px;
+    h3 {
+      font-family: $font-head;
+      font-size: $font-head-size;
+      font-weight: bold;
+      text-align: center;
+      span {
+        color: $hsc_color;
+      }
+    }
+    p {
+      text-align: center;
+    }
+}
+
+.hsc_rd_clr h1.different_headign span1 {
+  color: #be382a;
+}
+
+
+#hsc-packages {
+  text-align: center;
+  margin-top: 50px;
+  float: left;
+  width: 100%;
+  .hsc_rd_clr .whte_bg_trans .hsc_content h3 {
+    display: inline-block;
+    font-size: 14px;
+    padding: 12px 30px;
+    margin-left: 10px;
+    margin-bottom: 26px;
+    color: white;
+    height: 40px;
+    background: asset-url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/banner-bg-red.png') !important;
+    background-size: cover !important;
+    margin-left: 0px;
+  }
+}
+
+#hsc-packages.hsc_rd_clr .whte_bg_trans .hsc_content {
+  h2 {
+    font-family: $font-head;
+    letter-spacing: 5px;
+    font-size: 42px !important;
+    color: $hsc-color;
+    text-transform: uppercase;
+    font-weight: 100 !important;
+    margin: 0 0 6px 0;
+    span {
+      color: #000;
+    }
+  }
+  p {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+.hsc_rd_clr .categor_col .nav-tabs>li {
+  &.active a {
+    background-color: #fff;
+  }
+  i {
+    font-size: 30px;
+    vertical-align: -10%;
+    padding-right: 4px;
+  }
+}
+.hsc_rd_clr .nav-tabs > li.active > a, .hsc_rd_clr .nav-tabs > li.active > a:hover, .hsc_rd_clr .nav-tabs > li.active > a:focus {
+    color: #be382a;
+    background-color: #fff;
+    border: 0px solid #ddd !important;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+.hsc_rd_clr .categor_col {
+    width: 90%;
+    border-top: 2px solid #be382a;
+    text-align: center;
+    color: #be382a;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.hsc_rd_clr .umat_ready_page.course-packages .tbl_color_prpl .first_title_col .min_hgt730 .content.green_col_box {
+    background: rgba(190,56,42,0.4) !important;
+}
+
+.hsc_rd_clr .umat_ready_page.course-packages .tbl_color_prpl .second_title_col .min_hgt730 .content.green_col_box {
+    background: rgba(190,56,42,0.2) !important;
+}
+.red-strong {
+    background: rgba(190,56,42,0.4) !important;
+}
+.red-light {
+    background: rgba(190,56,42,0.2) !important;
+}
+.height120{
+  height: 120px;
+}
+ul.comris_table li.drk_red {
+    background: #be382a;
+    color: #fff;
+}
+ul.comris_table li.lgt_red {
+    background: #eba99e;
+    color: #fff;
+}
+.text-align-center{
+  text-align: center !important;
+}
+.hsc_color {
+    color: #be382a !important;
+}
+
+.hsc_txt {
+  color: #be382a !important;
+}
+.hsc_bacground {
+  background: #be382a !important;
+}
+
+#public-page .suggest-a-package a {
+    color: white;
+}
+.hsc_rd_clr .categor_col .nav-tabs>li>a {
+    height: auto;
+    margin: 0;
+    border: 0;
+    padding: 17px 0 17px;
+    width: 100%;
+    color: #be382a;
+    background: #dadada;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 21px;
+}
+
+.under_hsc_heading {
+  color: #be3720;
+  width: 109%;
+  margin-top: 10px;
+}
+
+.under_hsc a {
+  color: #be3720 !important;
+  text-decoration: underline;
+}
+
+.under_hsc.freq_asked_quest {
+  color: #be3720;
+  margin-top: 20px;
+  padding-left: 10px;
+}
+
+.scho_blu_color .red,.red{
+  color:#be3720 !important;
+}

@@ -1,0 +1,109 @@
+#filterrific_results
+  = page_entries_info users
+  %table.gr-table.gr-table-bordered.table-hover
+    %thead
+      %tr
+        %th Date of Order
+        %th Student Name
+        %th Status
+        %th Phone Number
+        %th Email Address
+        %th Address
+        %th Date Sent
+        %th Temporary Access Granted
+        %th Priority
+        %th Tracking Number
+
+    %tbody
+      -users.each do |user|
+        -textbook_delivery = user.try(:textbook_deliveries).last if user.try(:textbook_deliveries).present?
+        - temporary_access = textbook_delivery.present? ? textbook_delivery.temporary_access_granted : false
+        - priority = textbook_delivery.present? ? textbook_delivery.priority : false
+        - status = textbook_delivery.present? ? TextbookDelivery.statuses[textbook_delivery.status] : ""
+        %tr
+          %td= user.current_hardcopy_enrolment.try(:paid_at).strftime("%B %d, %Y") if user.try(:current_hardcopy_enrolment).try(:paid_at).present?
+          / %td= user.full_name
+          %td= link_to "#{user.full_name}", edit_user_path(user)
+          %td= select_tag(:option, options_for_select(TextbookDelivery.statuses, status), class: "form-control textbook_del select_textbook_status", "data-user_id" => user.try(:id), "data-column" => "status")
+          %td= user.try(:phone_number)
+          %td= user.try(:email)
+          %td= user.try(:address).try(:one_line_address)
+          %td= textbook_delivery.try(:date_sent).in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y') if textbook_delivery.present? && textbook_delivery.date_sent.present?
+          %td= check_box_tag "temporary_access",  "" , temporary_access, class: "textbook_del", "data-user_id" => user.try(:id), "data-column" => "temporary_access_granted"
+          %td= check_box_tag "priority", "", priority, class: "textbook_del", "data-user_id" => user.try(:id), "data-column" => "priority"
+          %td= textbook_delivery.try(:tracking_number) if textbook_delivery.present?
+  %br
+  =will_paginate @users, renderer: BootstrapPagination::Rails
+
+= render 'textbook_delivery_modal'
+
+:javascript
+  $(document).ready(function(){
+    var selectTags = $("select.textbook_del");
+    selectTags.find('option[value=""]').attr('disabled', true);
+    selectTags.each(function( i ) {
+      if(selectTags[i].value == ''){
+        $(selectTags[i]).css('color', '#ddd');
+        $(selectTags[i]).find('option:not(:disabled)').css('color', '#555555')
+      }
+    })
+  })
+
+  $("#delivery_srch").keyup(function(){
+    if ($("#delivery_srch").val().length > 2){
+      console.log("hitting")
+      $.ajax({
+        url: "/textbook_deliveries",
+        type: "GET",
+        dataType: 'script',
+        data: {search: $("#delivery_srch").val()},
+      });
+    }
+    else{
+      $.ajax({
+        url: "/textbook_deliveries",
+        type: "GET",
+        dataType: 'script',
+        data: {search: ""},
+      });
+    }
+  })
+
+  $(".text_book_status_filters").on('change', function(){
+    $.ajax({
+        url: "/textbook_deliveries",
+        type: "GET",
+        dataType: 'script',
+        data: {textbook_status: $(this).val()},
+      });
+  })
+
+  $(".temporary_access_filter").on('change', function(){
+    $.ajax({
+        url: "/textbook_deliveries",
+        type: "GET",
+        dataType: 'script',
+        data: {temporary_access: $(this).val()},
+      });
+  })
+
+  $(".textbook_del").on('change', function(){
+    var column = $(this).data('column')
+    var user_id = $(this).data('user_id')
+    var value = column == "status" ? $(this).val() : $(this).prop("checked")
+    $(this).css('color','#555555')
+    if(column == "status" && value == 3){
+      $(".textbook_user_id").val(user_id)
+      $("#modal-textbook_delivery").modal('show');
+    }
+    else{
+      var dataToSubmit = $("form#filterrific_filter").serialize();
+      dataToSubmit += "&column="+column+"&user_id="+user_id+"&value="+value;
+      $.ajax({
+        url: "/textbook_deliveries",
+        type: "GET",
+        dataType: 'script',
+        data: dataToSubmit,
+      });
+    }
+  })

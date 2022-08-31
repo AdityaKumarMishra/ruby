@@ -1,0 +1,47 @@
+- if flash.present?
+
+  - if flash[:notice].present?
+    %div{class: "alert new_alert cngrts_popup" }
+      %button.close.alrt_close{"aria-label" => "Close", "data-dismiss" => "alert", type: "button"}
+        %span{"aria-hidden" => "true"} ×
+      %span.chk_mark
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/cngrt_icon.png'
+      %span.alert_msg.cngrts_msg
+        %h4 Congratulations
+        %p
+          = flash[:notice]
+
+  - if flash[:error].present?
+    %div{class: "alert new_alert wrong_det"}
+      %button.close.alrt_close{"aria-label" => "Close", "data-dismiss" => "alert", type: "button"}
+        %span{"aria-hidden" => "true"} ×
+      %span.dynamic_err_alert
+        %span.chk_mark
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/wrong.png'
+        %span.alert_msg.cngrts_msg
+          %p.error_msg
+            = flash[:error]
+
+  - if flash.alert
+    = render 'dashboard/partial/alert_modal'
+    %br
+  - flash.clear
+  = render 'issue_forum/submit_ticket_modal', :@policy_fail => "policy_fail", options: {}
+  / -if flash[:alert]=="Oops! There seems to be something wrong. Please send through an issue ticket using the button below."
+  /   .btn.btn-gradready.green{'data-toggle' => 'modal', class: "new-ticket", 'data-target'=> '#ticket-modal'} Send Ticket
+  /   =# render 'issue_forum/submit_ticket_modal', :@policy_fail => "policy_fail", options: {}
+
+:javascript
+  $(document).ready(function () {
+    $('#alert_modal').modal('show');
+  });
+
+  $('.tkt_btn').click(function(){
+    $('#ticket-modal').modal('show');
+  })
+
+  $("#alert_modal").on('hidden.bs.modal', function (event) {
+    if ($('#ticket-modal:visible').length) {
+      $('body').addClass('modal-open');
+    }
+  });

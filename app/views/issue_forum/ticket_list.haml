@@ -1,0 +1,13 @@
+
+- if current_user && current_user.student?
+  - content_for :page_heading, 'GetClarity'
+  .dashbord_right
+    .resource_col.mob_resorce
+      %a.black_default_btn.hvr-shutter-in-horizontal.fr{href: url_for(:back)} Back
+      = render 'issue_forum/ticket_list', tickets: @tickets
+
+
+- else
+  %h2=@title
+  = render 'issue_forum/back_button'
+  = render 'issue_forum/ticket_list', tickets: @tickets

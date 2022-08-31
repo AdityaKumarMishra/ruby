@@ -1,0 +1,40 @@
+= f.fields_for :product_version_feature_prices, f.object.persisted? ? f.object.product_version_feature_prices.where(is_additional: false) : true do |feat|
+  .row
+    .col-md-12.master_feature
+      .add_master_feature_block
+        %h3 Select master feature
+        -if feat.object.persisted?
+          = feat.input :is_default, collection: [true, false], selected: feat.object.is_default
+        -else
+          = feat.input :is_default, collection: [true, false], selected: @old_product_version.get_master_feature_default(@master_features[feat.index.to_i].try(:id))
+
+        - data = @master_features.pluck(:name, :id)
+        - data.map! { |s| [master_feature_humanize_name(s[0]), s[1]]}
+        - master_feature = @master_features[feat.index.to_i]
+        -if feat.object.persisted?
+          = feat.input :master_feature_id, collection: @master_features.pluck(:name, :id), input_html: {class: 'master-fetaure-drop-list'}
+        -else
+          = feat.input :master_feature_id, collection: data, selected: master_feature.try(:id), input_html: {class: 'master-fetaure-drop-list'}
+
+        .form-group
+          %label Price
+          -if feat.object.persisted?
+            = feat.number_field :price, class: "form-control"
+          -else
+            = feat.number_field :price, value: @old_product_version.get_master_feature_price(master_feature.try(:id)), class: "form-control"
+
+        - unless master_feature.live_exam? || master_feature.get_clarity? || master_feature.hardcopy? || master_feature.document_feature? || master_feature.attendance?
+          %div.form-group.master-qty
+            %label Quantity
+            = feat.number_field :qty, {class: 'form-control'}
+          %div.form-group.masterAccessFeature
+            = feat.input :access_limit
+
+        -if feat.object.persisted?
+          = feat.association :tags, input_html: { class: 'chosen-select tag-list' }
+        -else
+          = feat.association :tags, selected: "#{feat.object.selected_feature_tag(@product_line, course_type)}",input_html: { class: 'chosen-select tag-list' }
+        = feat.link_to_remove "remove", class: 'pull-right'
+
+:javascript
+  $('.chosen-select').chosen();

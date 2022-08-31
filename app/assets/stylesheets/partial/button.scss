@@ -1,0 +1,135 @@
+// GradReady Buttons 
+.btn-gradready {
+  color: #fff;
+  font-weight: bold;
+}
+.btn.btn-gradready.red {
+  @extend .btn-gradready;
+  background-color: $hsc-color;
+  color: $white !important;
+}
+.btn.btn-gradready.purple {
+  @extend .btn-gradready;
+  background-color: $vce-color;
+  color: $white !important;
+}
+.btn-gradready.green {
+  @extend .btn-gradready;
+  background-color: $gamsat-color;
+}
+.btn-gradready.blue {
+  @extend .btn-gradready;
+  background-color: $umat-color;
+}
+
+// Alternate GradReady product line buttons
+.btn-gr-light-green {
+  @include gr-button-variant($white, $gamsat-light);
+}
+.btn-gr-lighter-green {
+  @include gr-button-variant($white, $gamsat-lighter);
+}
+.btn-gr-light-blue {
+  @include gr-button-variant($white, $umat-light);
+}
+.btn-gr-lighter-blue {
+  @include gr-button-variant($white, $umat-lighter);
+}
+.btn-gr-light-purple {
+  @include gr-button-variant($white, $vce-light);
+}
+.btn-gr-lighter-purple {
+  @include gr-button-variant($white, $vce-lighter);
+}
+.btn-gr-light-red {
+  @include gr-button-variant($white, $hsc-light);
+}
+.btn-gr-lighter-red {
+  @include gr-button-variant($white, $hsc-lighter);
+}
+
+// Base styles for 3D-style button
+.btn-gr-block-green {
+  @include gr-block-button-variant($gamsat-color, 200px, 100px);
+}
+.btn-gr-block-blue {
+  @include gr-block-button-variant($umat-color, 200px, 100px);
+}
+.btn-gr-block-purple {
+  @include gr-block-button-variant($vce-color, 200px, 100px);
+}
+.btn-gr-block-red {
+  @include gr-block-button-variant($hsc-color, 200px, 100px);
+}
+
+
+.btn-large-grey {
+  border:1px solid #CCCCCC;
+  -webkit-box-shadow: #FEFFFF 0px 1px 1px ;
+  -moz-box-shadow: #FEFFFF 0px 1px 1px ;
+  box-shadow: #FEFFFF 0px 1px 1px ;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size:17px;
+  width: 100%;
+  height: 45px;
+  font-family: $font-subhead;
+  padding: 10px 10px 10px 10px;
+  text-decoration:none;
+  display:inline-block;
+  color: $black;
+  margin-bottom: 1em;
+
+  background-color: #F7F5F6;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#F7F5F6), to(#DDDDDD));
+
+  background-image: -webkit-linear-gradient(top, #F7F5F6, #DDDDDD);
+
+  background-image: -moz-linear-gradient(top, #F7F5F6, #DDDDDD);
+  background-image: -ms-linear-gradient(top, #F7F5F6, #DDDDDD);
+  background-image: -o-linear-gradient(top, #F7F5F6, #DDDDDD);
+  background-image: linear-gradient(to bottom, #F7F5F6, #DDDDDD);
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F5F6, endColorstr=#DDDDDD);
+  &:hover {
+   border:1px solid #ADADAD;
+   background-color: #E0E0E0; 
+   background-image: -webkit-gradient(linear, left top, left bottom, from(#E0E0E0), to(#BDBBBC));
+   background-image: -webkit-linear-gradient(top, #E0E0E0, #BDBBBC);
+   background-image: -moz-linear-gradient(top, #E0E0E0, #BDBBBC);
+   background-image: -ms-linear-gradient(top, #E0E0E0, #BDBBBC);
+   background-image: -o-linear-gradient(top, #E0E0E0, #BDBBBC);
+   background-image: linear-gradient(to bottom, #E0E0E0, #BDBBBC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E0E0E0, endColorstr=#BDBBBC);
+  }
+}
+
+.btn-mega {
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  font-size: 25px;
+  float:left;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 20px;
+  line-height: 170px;
+  &.red {
+    background-color: $hsc-color;
+  }
+  &.purple {
+    background-color: $vce-color;
+  }
+  &.green {
+    background-color: $gamsat-color;
+  }
+  &.blue{
+    background-color: $umat-color;
+  }
+}
+
+// Customise bootstrap buttons
+select.btn-mini {
+    height: auto;
+    line-height: 14px;
+    padding-right: 16px;
+}

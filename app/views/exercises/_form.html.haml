@@ -1,0 +1,121 @@
+.div{id: "confirm_procced"}
+.faq_list_col
+  = simple_form_for(@exercise, validate: true) do |f|
+    .new_excercise
+      %h4 New Exercise
+      .course_frm.mcq_exe
+        - if f.error :base
+          - error_msg = (f.error :tags).present? ? "Please select exercise topic(s) from the list below to create an exercise." : (f.error :base)
+          .has-error.alert.alert-danger= error_msg
+        .form-group
+          = f.hidden_field :course_id, value: @course.try(:id)
+          = f.input :name, label: 'Exercise Name', class: 'form-control input_excercise', required: true
+          .form-group
+            = f.input :timer_option, collection: Exercise.timer_options.map { |k, v| [k, v]  }, selected: f.object['timer_option'], required: true
+          #overall-time
+            .form-group
+              = f.input :overall_time, label: "Overall Time (in minutes)", required: true
+            .form-group
+              %label
+                Timer Option
+                %i.glyphicon.glyphicon-question-sign.question-sign{:title => "If you select Apply Time Limit to Individual Questions, a time limit will be set for each question. Once the allotted time is elapsed you will automatically be moved on to the next question, but you are still able to go back and answer previous question."}
+              = f.input :timer_option_type, as: :select, collection: [["Apply Time Limit to Entire Exam ", "entire_exam"], ["Apply Time Limit to Individual Questions", "individual_question"]], label: false, required: true
+          .form-group
+            = f.input :difficulty, as: :select, collection: get_difficulties, label: "Question Difficulty Level", include_blank: 'Please select Difficulty', required: true
+          .form-group
+            = f.input :question_style, as: :select, collection: Exercise.exercise_question_styles.map { |k, v| [k, v]  },selected: 1, label: "Question Style", required: true
+          .form-group
+            #err_msg
+            = f.input :amount, label: "Number of Questions in Exercise", :input_html => {class: "amt_fld"}, required: true
+
+            - if params[:type].present?
+              = hidden_field_tag :type, params[:type], :id => "type_id"
+
+            .text-center.mtop30.mbot10
+              - if !cookies[:current_sa].blank? || !cookies[:current_exe_atmpt].blank?
+                %a.default_btn.hvr-shutter-in-horizontal.submit_exercise_ddd{href: 'javascript:void(0)', onclick: 'dd_loader();', disabled: true} Create Exercise
+              - else
+                %a.default_btn.hvr-shutter-in-horizontal.submit_exercise{href: 'javascript:void(0)', onclick: 'dd_loader();', disabled: true} Create Exercise
+              = link_to 'Review Exercises', exercises_path, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal', target: :_blank
+    .new_excercise
+      %h4 Exercise Topics
+      %ul.indicator.excercise_indictor
+        %li
+          %i.fa.fa-frown-o{"aria-hidden" => "true"}
+          50%
+        %li
+          %i.fa.fa-frown-o{"aria-hidden" => "true"}
+          50% - 69.99%
+        %li
+          %i.fa.fa-smile-o{"aria-hidden" => "true"}
+          70% - 100%
+    = render 'mcq_stats'
+
+:javascript
+  $(document).ready(function () {
+    $(".amt_fld").keyup(function(){
+      $("#err_msg").empty();
+      if (($(this).val()) > 60)
+      {
+        $("#err_msg").append("Can't choose more than 60 questions").css("color","#a94442");
+      }
+    });
+
+    $('form').validate();
+
+    check_timer_options();
+    $("#exercise_timer_option").on('change', function(){
+      check_timer_options();
+    });
+    function check_timer_options(){
+      if($("#exercise_timer_option").val() == 'overall_timer'){
+        $("#overall-time").show()
+      } else
+      {
+        $("#overall-time").hide()
+      }
+    }
+  });
+
+  $(".submit_exercise").click(function(){
+    if ($("input[type='checkbox']:checked").length > 0)
+      $('form').submit();
+    else{
+      if ($('.has-error.alert.alert-danger').length > 0){
+        $('.has-error.alert.alert-danger').text('Please select exercise topic(s) from the list below to create an exercise.')
+      } else {
+        $('.course_frm').prepend("<div class='has-error alert alert-danger'>Please select exercise topic(s) from the list below to create an exercise.</div>")
+      }
+    }
+  });
+
+  $(".submit_exercise_ddd").click(function(e){
+    get_exercise_Confirmation(e)
+  });
+
+  function get_exercise_Confirmation(e){
+    var c_data;
+    if(Cookies.get('current_sa') != undefined)
+      c_data = Cookies.get('current_sa')
+    else
+      c_data = Cookies.get('current_exe_atmpt')
+    c_data = JSON.parse(c_data)
+    var name = c_data['name']
+    var exercise = document.getElementById("exercise_name").value
+    var retVal = confirm("You are trying to create a new “"+ exercise +"”, would you like to cancel the paused "+ name +"? Please click Ok if you would like to create new attempt or press Cancel if you would like to continue.");
+    if( retVal == true ){
+      if ($("input[type='checkbox']:checked").length > 0)
+        $('form').submit();
+      else{
+        if ($('.has-error.alert.alert-danger').length > 0){
+          $('.has-error.alert.alert-danger').text('Please select exercise topic(s) from the list below to create an exercise.')
+        } else {
+          $('.course_frm').prepend("<div class='has-error alert alert-danger'>Please select exercise topic(s) from the list below to create an exercise.</div>")
+        }
+      }
+    }
+    else{
+      e.preventDefault();
+      return false;
+    }
+  }

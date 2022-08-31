@@ -1,0 +1,35 @@
+.interviewready-display#interview_courses
+  .container.no_padding
+    .row
+      .col-sm-12
+        %h2.text-center
+          INTERVIEW
+          %span.word-ready READY
+          COURSES
+    %br
+- product_versions = ['interviewready-online-essentials', 'interviewready-attendance-essentials', 'interviewready-attendance-comprehensive']
+%center.table_overflow.reltve.cstm_course_table
+  %table.gr-comparison-table.gamsat-compare
+    %thead
+      %tr
+        %th
+          %a{href: dynamic_gamsat_product_version_uri(product_versions[0])} ONLINE
+          %p (Essentials)
+        %th
+          %a{href: dynamic_gamsat_product_version_uri(product_versions[1])} ATTENDANCE
+          %p (Essentials)
+        %th
+          %a{href: dynamic_gamsat_product_version_uri(product_versions[2])} ATTENDANCE
+          %p (Comprehensive)
+    %tbody
+      %tr
+        - (0..2).each do |n|
+          = render 'pages/partial/product_version_table/interview_online_component',product_version: product_versions[n]
+    %tbody
+      = render 'pages/partial/product_version_table/interview_live_component', product_versions: product_versions
+
+    %tfoot
+      %tr
+        - (0..2).each do |n|
+          %td
+            = render 'pages/partial/product_version_table/pricing', product_price: gamsat_product_info[product_versions[n]][:price] , early_bird: true, product_version: product_versions[n], product_line: "gamsat", subject: ""

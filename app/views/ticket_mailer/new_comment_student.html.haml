@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              ="Hi #{@first_name  rescue ''},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = @tutor.first_name rescue ""
+              just commented on your question:
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              = sanitize @comment.content
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              Click
+              =link_to 'here', issue_url(@question), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              to view.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

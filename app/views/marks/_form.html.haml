@@ -1,0 +1,13 @@
+= simple_form_for(@mark) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :value
+    = f.input :correct
+    = f.association :user
+    = f.association :essay_response
+    = f.association :mcq_student_answer
+    = f.input :description
+
+  .form-actions
+    = f.button :submit

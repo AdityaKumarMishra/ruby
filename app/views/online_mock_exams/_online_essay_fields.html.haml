@@ -1,0 +1,25 @@
+.nested-fields.lesson-fields
+  .form-group
+    = f.input :tutor_id, collection: policy_scope(StaffProfile), label_method: :staff, label: false, input_html: { class: 'chosen-select-course', required: true, data: { placeholder: "Click Here to Select Staff" }}
+  .form-group
+    = f.input :published, label: false
+    = f.label :published, label: "* Make Essay Visible to Student"  
+  .form-group
+    =f.label :start_date, "Start Date"
+    =f.input :start_date, label: false, class: "form-control"
+  .form-group
+    =f.label :start_time, "Start Time"
+    =f.input :start_time, label: false, class: "form-control"
+  .form-group
+    =f.label :end_date, "End Date"
+    =f.input :end_date, label: false, class: "form-control"
+  .form-group
+    = f.label :end_time, "End Time"
+    =f.input :end_time, label: false, class: "form-control"
+
+
+:css
+  .date {
+    font-size: 14px;
+    line-height: 14px;
+  }

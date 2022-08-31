@@ -1,0 +1,29 @@
+// For star ratings
+.rating {
+  float: right;
+}
+.icon-green {
+  color: #00923e;
+}
+.icon-grey {
+  color: $grGreyLightest;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #00923e;
+}
+.i-round {
+  display: inline-block;
+  padding: 40px 45px;
+  border-radius: 100px;
+  font-size: 20px;
+  line-height: 20px;
+}
+.i-round-white {
+  @extend .i-round;
+  color: $white;
+}
+.i-title {
+  position: absolute;
+  left: 40%;
+  top: 20%;
+}
+

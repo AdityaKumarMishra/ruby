@@ -1,0 +1,7 @@
+%h1 Listing class session
+
+=render :partial => 'student_class_sessions/partial/table', :locals => {:student_class_sessions => @student_class_sessions}
+
+%br
+
+= link_to 'New Student class session', new_student_class_session_path, class: 'btn btn-primary'

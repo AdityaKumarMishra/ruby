@@ -1,0 +1,4 @@
+%h1 Listing Course Versions
+= render :partial => 'course_versions/partial/table', :locals => {:course_versions=>@course_versions, :course => @course}
+%br
+= link_to 'Back', courses_path,class: 'btn btn-default'

@@ -1,0 +1,4 @@
+<% js = escape_javascript(render(partial: 'essay_responses/partial/tutor_table', locals: { essay_responses: @essay_responses, responses: @responses }))%>
+<% js1 = escape_javascript(render(partial: 'essay_responses/partial/csv_download_link', locals: { params: params }))%>
+$("#filterrific_essay_tutor_response_results").html("<%= js %>");
+$("#csv_link").html("<%= js1 %>");

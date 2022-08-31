@@ -1,0 +1,23 @@
+
+%h1 Editing user
+%span.login_span
+  - if @user.student? && (current_user.admin? || current_user.superadmin?)
+    / = link_to 'Login', view_as_path(@user), class: 'btn btn-info'
+
+= render 'form'
+- if (current_user.admin? || current_user.superadmin? || current_user.manager? || current_user.tutor?) && @user.student?
+  .row
+    %h1 User's Interaction Log
+    %span.add_interaction_btn
+      %a.btn.btn-success{'data-toggle' => 'modal', class: "new_ticket", 'data-target'=> '#UserTicketModal'} + Ticket
+      = link_to "+ Add Interaction", new_interaction_log_path(user_id: @user.id), remote: true, class: "btn btn-success"
+  = render partial: "users/user_interaction_log", locals: { records: @user.tickets + Ticket.where(email: @user.email, asker_id: nil) +  @user.interaction_logs }
+= render 'user_ticket_modal', locals: {asker_id: @user.id}
+#log-modal
+
+
+/ = link_to 'Manage Enrolments', user_enrolments_path(@user)
+/ \|
+/ = link_to 'View', @user
+/ \|
+/ = link_to 'Back', user_emails_path

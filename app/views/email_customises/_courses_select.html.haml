@@ -1,0 +1,21 @@
+= label :course, "Courses"
+= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+.fa.fa-minus.icn_sze
+.div_info
+	Select the Courses you want this email to fire for
+- if @courses.present?
+	= select("email_customise", "course_ids", @courses.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Courses', disabled: '', include_blank: false, selected: @custom_email.present? ? @custom_email.course_ids : []},{class: 'chosen-select', :multiple=>true})
+- else
+	= select("email_customise", "course_ids", @courses.collect {|p| [ p.name, p.id ] }, {prompt: 'No course found under selected product versions.', disabled: '', include_blank: false},{class: 'chosen-select', :multiple=>true})
+
+:javascript
+	$(document).ready(function(){
+		$('.chosen-select').chosen({
+	        allow_single_deselect: true,
+	        no_results_text: 'No results matched',
+	        placeholder_text_multiple: 'Click here',
+	        //inherit_select_classes: true,
+	        width: '100%'
+	    });
+	})
+  	

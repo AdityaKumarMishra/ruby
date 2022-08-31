@@ -1,0 +1,61 @@
+#filterrific_results
+  =will_paginate @all_announcements, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Announcements
+        %th Product Line
+        %th Feature Name
+        %th Status
+        %th Last Updated
+        %th
+        - if current_user.admin? || current_user.superadmin?
+          %th
+
+    %tbody
+      - @all_announcements.where(name: "Homepage").each do |announcement|
+        %tr{:class => announcement.category}
+          %td= announcement.name
+          %td= announcement.product_line.try(:name).try(:upcase)
+          %td=announcement.find_feature
+          %td Active
+          %td= announcement.updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+          %td= link_to 'Edit', edit_announcement_path(announcement, :category => announcement.category), class: 'btn btn-info btn-sm'
+          - if current_user.admin? || current_user.superadmin?
+            %td= link_to 'Delete', announcement, :method => :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+      - @all_announcements.where.not(name: "Homepage").each do |announcement|
+        - if  announcement.class.name == "Announcement"
+          %tr{:class => announcement.category}
+            %td= announcement.name
+            %td= announcement.product_line.try(:name).try(:upcase)
+            %td=announcement.find_feature
+            %td Active
+            %td= announcement.updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+            %td= link_to 'Edit', edit_announcement_path(announcement, :category => announcement.category), class: 'btn btn-info btn-sm'
+            - if current_user.admin? || current_user.superadmin?
+              %td= link_to 'Delete', announcement, :method => :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+        - else
+          %tr
+            %td= announcement['value']
+            %td Pending
+            %td Not available
+            %td= announcement['category']
+            %td
+            %td= link_to 'Create', new_announcement_path(:name => announcement), class: 'btn btn-success btn-sm'
+    %table.table-hover.table.table-bordered#pv_table1.pv_data_table.announc_table
+      %tbody
+        - @all_pending_announcements.each do |announcement|
+          %tr
+            %td= announcement['value']
+            %td Pending
+            %td Not available
+            %td= announcement['category']
+            %td= link_to 'Create', new_announcement_path(:name => announcement), class: 'btn btn-success btn-sm'
+:javascript
+
+  $('#pv_table').DataTable({
+    "order": [],
+    "bPaginate": false,
+    "aoColumnDefs" : [
+      { orderable: false, targets: [1,2] } ]
+  });

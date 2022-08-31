@@ -1,0 +1,126 @@
+- title "VCE Preparation Courses | Frequently Asked Questions"
+.container.default-main-container
+  .row
+    .span12
+      %h1.under_vce.freq_asked_quest Frequently Asked Questions
+      .faq_wrapper
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['und_vce'])
+            %h3
+              .under_vce_heading
+                Understanding VCE
+                %sup{ style: "margin-right: -5px;"} ®
+                Exam
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('und_vce'))+'#what-is-vce'}
+                  What is the VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                =link_to 'How is my ATAR calculated?', faq_topic_path(:vce , FaqTopic.vce.for_code('und_vce'))+'#how-is-my-atar'
+              %li
+                =link_to 'How important are internal ranks?', faq_topic_path(:vce , FaqTopic.vce.for_code('und_vce'))+'#what-is-an-atar'
+            .under_vce
+              %a.link_pos_rltv{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('und_vce'))}
+                See all VCE
+                %sup.faq_sup ®
+                &nbsp;
+                questions
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['preparation'])
+            %h3
+              .under_vce_heading
+                Understanding the value of Preparation
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('preparation'))+'#why-should-i-enrol'}
+                  Why should I enrol in a preparation course for the VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('preparation'))+'#how-early-should-i'}
+                  How early should I sign up to a VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  preparation course?
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('preparation'))+'#how-much-preparation'}
+                  How much preparation do I have to do for the VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+            .under_vce
+              %a.link_pos_rltv{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('preparation'))}
+                See all VCE
+                %sup.faq_sup ®
+                &nbsp;
+                Preparation questions
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['vceready'])
+            %h3
+              .under_vce_heading
+                About GradReady
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('vceready'))+'#how-is-the-vce-ready'}
+                  How is the VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  Ready course different from other VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  preparation courses?
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('vceready'))+'#does-vce-ready-cover'}
+                  Does VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  Ready cover everything that is tested in the VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                %a{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('vceready'))+'#do-i-need-any'}
+                  Do I need any preparation material in addition to those provided by VCE
+                  %sup{ style: "margin-right: -5px;"} ®
+                  Ready?
+            .under_vce
+              %a.link_pos_rltv{:href => faq_topic_path(:vce , FaqTopic.vce.for_code('vceready'))}
+                See all VCE
+                %sup.faq_sup ®
+                &nbsp;
+                Ready questions
+
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['enrolment'])
+            %h3
+              .under_vce_heading Enrolment, Payment and Refund policy
+          .faq_list
+            %ul
+              %li
+                =link_to 'How do I enrol into a GradReady course?', faq_topic_path(:vce , FaqTopic.vce.for_code('enrolment'))+'#how-do-i-enrol'
+              %li
+                =link_to 'Is there a group discount available?', faq_topic_path(:vce , FaqTopic.vce.for_code('enrolment'))+'#is-there-a-group'
+              %li
+                =link_to 'Can discounts be combined?', faq_topic_path(:vce , FaqTopic.vce.for_code('enrolment'))+'#Can-discounts-be'
+            .under_vce
+              =link_to 'See all Enrolment and Payment Queries', faq_topic_path(:vce , FaqTopic.vce.for_code('enrolment'))
+        .clear
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['university-admissions'])
+            %h3
+              .under_vce_heading
+                University Admissions
+          .faq_list
+            %ul
+              %li
+                =link_to 'When do I need to start University application process?', faq_topic_path(:vce , FaqTopic.vce.for_code('university-admissions'))+'#when-do-i-need'
+              %li
+                =link_to 'What ATAR score do I need to get into the course I want?', faq_topic_path(:vce , FaqTopic.vce.for_code('university-admissions'))+'#what-atar-score'
+              %li
+                =link_to 'If I receive an offer, can I defer for a year?', faq_topic_path(:vce , FaqTopic.vce.for_code('university-admissions'))+'#if-i-receive'
+            .under_vce
+              =link_to 'See all undergraduate medical school questions', faq_topic_path(:vce , FaqTopic.vce.for_code('university-admissions'))+'#what-is-the-VCE '

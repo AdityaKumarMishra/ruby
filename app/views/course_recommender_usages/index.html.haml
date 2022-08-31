@@ -1,0 +1,102 @@
+%h1 Course Recommender Usage Tracking
+.row
+  .usage_rate_section
+    .col-md-4
+      = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/skip.png')
+      %span.trackin_steps
+        SKIPPED
+        %br
+        .text_green.counting_text
+          = @skip_count
+    .col-md-4
+      = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/incomplete.png')
+      %span.trackin_steps
+        INCOMPLETED
+        %br
+        .text_green.counting_text
+          = @incomplete_count
+    .col-md-4
+      = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/complete.png')
+      %span.trackin_steps
+        COMPLETED
+        %br
+        .text_green.counting_text= @completed
+    .usage_rate
+      USAGE RATE:
+      %span.text_green
+        = @usage_rate > 0 ? (@usage_rate * 100).round(2) : 0
+        = "%"
+%p.recom_text  Number of recommendations
+%table.table.table-bordered.tracking_table.table-hover
+  %thead
+    %tr
+      %th.prod_wdth PRODUCT LINE
+      %th
+        ONLINE
+        %span (Essentials)
+      %th
+        ONLINE
+        %span (Comprehensive)
+      %th
+        ATTENDENCE
+        %span (Essentials)
+      %th
+        ATTENDENCE
+        %span (Comprehensive)
+      %th
+        ATTENDENCE
+        %span (Complete Care)
+      %th CUSTOM
+
+  %tbody
+    %tr
+      %td.side_heading GAMSAT
+      %td= @recommended[:gamsat][0] || 0
+      %td= @recommended[:gamsat][1] || 0
+      %td= @recommended[:gamsat][2] || 0
+      %td= @recommended[:gamsat][3] || 0
+      %td= @recommended[:gamsat][4] || 0
+      %td= @recommended[:gamsat][5] || 0
+    %tr
+      %td.side_heading UMAT
+      %td= @recommended[:umat][0] || 0
+      %td= @recommended[:umat][1] || 0
+      %td= @recommended[:umat][2] || 0
+      %td= @recommended[:umat][3] || 0
+      %td= @recommended[:umat][4] || 0
+      %td= @recommended[:umat][5] || 0
+    %tr
+      %td.side_heading HSC (English)
+      %td= @recommended[:hsc_eng][0] || 0
+      %td= @recommended[:hsc_eng][1] || 0
+      %td= @recommended[:hsc_eng][2] || 0
+      %td= @recommended[:hsc_eng][3] || 0
+      %td= @recommended[:hsc_eng][4] || 0
+      %td= @recommended[:hsc_eng][5] || 0
+    %tr
+      %td.side_heading HSC (Math)
+      %td= @recommended[:hsc_math][0] || 0
+      %td= @recommended[:hsc_math][1] || 0
+      %td= @recommended[:hsc_math][2] || 0
+      %td= @recommended[:hsc_math][3] || 0
+      %td= @recommended[:hsc_math][4] || 0
+      %td= @recommended[:hsc_math][5] || 0
+    %tr
+      %td.side_heading VCE (English)
+      %td= @recommended[:vce_eng][0] || 0
+      %td= @recommended[:vce_eng][1] || 0
+      %td= @recommended[:vce_eng][2] || 0
+      %td= @recommended[:vce_eng][3] || 0
+      %td= @recommended[:vce_eng][4] || 0
+      %td= @recommended[:vce_eng][5] || 0
+    %tr
+      %td.side_heading VCE (Math)
+      %td= @recommended[:vce_math][0] || 0
+      %td= @recommended[:vce_math][1] || 0
+      %td= @recommended[:vce_math][2] || 0
+      %td= @recommended[:vce_math][3] || 0
+      %td= @recommended[:vce_math][4] || 0
+      %td= @recommended[:vce_math][5] || 0
+  %br
+
+

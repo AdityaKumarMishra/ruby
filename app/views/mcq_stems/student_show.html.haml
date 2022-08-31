@@ -1,0 +1,17 @@
+.container
+  .row
+    .panel.panel-primary
+      .panel-heading
+        %h1.panel-title
+          %strong= @mcq_stem.title
+      .panel-body
+        = @mcq_stem.description.html_safe
+        %h4 MCQs
+        %ol
+          - @mcq_stem.mcqs.each do |mcq|
+            %li
+              = mcq.question.html_safe
+              - mcq.mcq_answers.each do |a|
+                = a.answer.html_safe
+      .panel-footer
+        = link_to 'Back', mcq_stems_path, class: 'btn btn-default'

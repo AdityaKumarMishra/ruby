@@ -1,0 +1,1398 @@
+- title "GAMSAT Scores #{Date.today.year} - The Definitive Guide"
+- meta_description "The hard work may be over but your GAMSAT Results are never easy to decipher. Learn more about how GAMSAT Scoring works, when GAMSAT results are released, and what constitutes a GAMSAT good score. Check the past GAMSAT Score cutoffs for universities around Australia and plan the next step in your medical career."
+- meta_keywords "gamsat scores, gamsat results"
+%section.talk_to_bg.home_faq.dashboard_bg
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container.public_container
+    .support_col.looking_corse.text-center.gradready_question.head_sec
+      %h1
+        GAMSAT Results 2022: The Definitive Guide
+%section.faq_wrapper.faq_details
+  .row
+    .container.public_container
+      .download-counter-badge
+        %p.download_read= show_estimated_read_time
+        %span|
+        %i.fa.fa-user{'aria-hidden': "true"}
+        %p.download_read= show_download_hit_count
+      .preparation_col.head_aftr_none
+        %p
+          You’ve put in the hard yards preparing for the GAMSAT
+          %sup ®
+          exam, going over all the foundational content, worked on your exam and problem solving technique and practised, practised, practised. Finally, after all that effort, you sit the exam and you get your GAMSAT
+          %sup ®
+          results back and you think - What on earth do they mean? Is my GAMSAT
+          %sup ®
+          Score good enough?
+        %ol
+          %li
+            %a{href: '#gamsat_score'}
+              GAMSAT
+              %sup ®
+              Scores Explained: Raw Scores, Percentiles, Overall Score
+          %li
+            %a{href: '#how_calculated'}
+              How are GAMSAT
+              %sup ®
+              Results Calculated?
+          %li
+            %a{href: "#gamsat_results"}
+              When are GAMSAT
+              %sup ®
+              results released?
+          %li
+            %a{href: '#good_score'}
+              What is a good GAMSAT
+              %sup ®
+              score?
+          %li
+            %a{href: "#cut_off"}
+              GAMSAT
+              %sup ®
+              Score Cutoffs - Australian Graduate Medical Schools
+          %li
+            %a{href: "#medical_School"} Medical School Applications and Entry Requirements
+          %li
+            %a{href: "#improving_score"}
+              Improving your GAMSAT
+              %sup ®
+              score - Free Resources
+      .preparation_col.head_aftr_none
+        %h2#gamsat_score
+          GAMSAT Scores Explained: Raw Scores, Percentiles, Overall Scores
+        %p
+          It’s very easy to get confused with all the terminology used when discussing GAMSAT
+          %sup ®
+          marks, so here’s a handy breakdown.
+        %p
+          Your
+          %b
+            %i
+              raw score
+          is the absolute number of questions you got correct in each section - these are not released to anyone and it’s a common mistake for students to try and calculate this during the exam itself (Don’t do it - You’ll just be wasting your time!). Instead, you will receive a
+          %b
+            %i
+              GAMSAT
+              %sup ®
+              score
+          for each section when results are released as well as a
+          %b
+            %i
+              percentile graph.
+          You can think of the
+          %b
+            %i
+              GAMSAT
+              %sup ®
+              score
+          as a scaled version of your
+          %b
+            %i
+              raw score
+          that takes into account the performance of other students as well as the difficulty of the particular sitting you took. As it would be virtually impossible or impractical to write a precisely equivalent examination each year, your results are scaled to allow for comparison across different exam sittings. This is to ensure fairness across different sittings of the exam. You may hear other students talking about how one sitting was particularly difficult and another was seemingly easier - although this may be true, this will not affect the scores received precisely because they will be scaled against each other. This
+          %b
+            %i
+              GAMSAT
+              %sup ®
+              score
+          for each section is calculated using Item Response Theory (ITR), which is explained below (
+          %a{href: '#how_calculated'}
+            %strong
+              How are GAMSAT
+              %sup ®
+              Results Calculated?
+          ).  The
+          %b
+            %i
+              percentile graph
+          that is released with your scores depicts how your
+          %b
+            %i
+              GAMSAT
+              %sup ®
+              scores
+          relate to the performance of the cohort who took the same sitting as you, and this graph can fluctuate between sittings - This is explained further
+          %a{href: '#what_is_percent_curve'}
+            %strong in the section below.
+          .aus_map
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/GAMSAT+Statement+of+Results.png', alt: "GAMSAT Results"
+          %p
+            So, when you get your GAMSAT
+            %sup ®
+            results back, you will be presented with an array of numbers: A score for each individual section and an overall score that is calculated from each of these.
+
+          %p
+            Now these scores you receive may not be quite what you are expecting. It may be that you are certain that you got essentially every question in the test itself correct, but having received your GAMSAT
+            %sup ®
+            results, they are not nearly as high as you expected - It’s important to remember that these are not your raw scores but your scaled GAMSAT
+            %sup ®
+            scores. It may be that a large proportion of applicants did very well and so to ensure that the scores are nicely distributed, they will be scaled up and down. These scores are expressed on a scale of 0 to 100 but the calculations conducted by ACER means that these scores are not evenly spread out between 0 and 100 - This is where the
+            %a{href: '#percent_curve'}
+              %strong
+                percentile curve
+            becomes useful for correlating GAMSAT
+            %sup ®
+            results to percentiles. Percentiles are not used in your application, however they are a great way for you to interpret your score as they will give you a sense of comparatively how well you did on the day.
+          %p
+            A useful summary of the differences between these different concepts is provided in the table below:
+          %h3
+            GAMSAT Scores, Raw Scores & Percentiles Explained:
+          %p
+            .tbl_responsive.fl_none.mtop50
+              %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                %thead
+                  %th
+                  %th.text-center Description
+                %tbody
+                  %tr
+                    %td
+                      %b
+                        Raw Scores
+                    %td
+                      The number (or percentage) of questions you got correct in each section - This is not released or provided by ACER, and it’s a common pitfall for students to waste time in the GAMSAT
+                      %sup ®
+                      exam trying to calculate this.
+                  %tr
+                    %td
+                      %b
+                        GAMSAT scores
+                    %td
+                      A scaled version of your raw scores that takes into account the performance of other students as well as the difficulty of the particular sitting you took - This is calculated using techniques based on
+                      %a{href: '#item_response_theory', style: 'color: #00853e; font-size: inherit; font-weight: inherit;'}
+                        Item Response Theory.
+                  %tr
+                    %td
+                      %b
+                        Percentiles
+                    %td
+                      You’ll receive a
+                      %a{href: '#what_is_percent_curve', style: 'color: #00853e; font-size: inherit; font-weight: inherit;'}
+                        percentile graph
+                      with your results that allows you to take your scaled scores and rank them compared to everyone else who sat that session of the GAMSAT® exam.
+          %h3
+            What do your GAMSAT Results mean?
+
+          %p
+            Your GAMSAT
+            %sup ®
+            scores are what Universities will use to rank your application, and will ultimately help decide if you have a place in their
+            %a{href: 'https://gradready.com.au/medical-school-entry-requirements', target: :_blank}
+              %strong
+                Graduate Entry Medicine Course
+            = '- Universities'
+            %b
+              will not
+            use your raw scores or percentile ranking.
+
+          %p
+            For the majority of medical schools, a score of at least 50 in all 3 sections is required. Most medical schools will simply use the overall GAMSAT
+            %sup ®
+            score (
+            %a{href: '#how_calculated'}
+              %strong
+                as calculated by ACER
+            ) as part of the admissions criteria, but some will use the individual section scores. Some universities apply a different weighting to ACER and take the simple average of all 3 sections, whilst the University of Sydney is unique in that they do not use an overall score but rather rank students by each section of the GAMSAT® exam. For further details,
+            %a{href: '#school_cutoffs'}
+              %strong
+                read this section below.
+          %h3.mtop30.mbot20
+            Why can your GAMSAT Score vary between sittings ?
+          %p
+            The key reason why ACER manipulates and scales your GAMSAT
+            %sup ®
+            score is to ensure that results remain comparable across different sittings by compensating for factors such as cohort performance and exam difficulty. However, this very scaling can of course lead to variation in your results between different sittings.
+          %p
+            A number of variables are involved in calculating your GAMSAT® score and because of this, it is possible that your score may vary across different sittings. Let us use a hypothetical example. Let us say that in each of two tests you scored the exact same number of correct answers. But in the second test your scaled scores and your percentile are different. The variables that could affect this are as follows :
+          .diffr_country
+            %ul.cstm_list_style.mg_top0.mbot10
+              %li If the rest of the cohort performed better in the second test, your scaled score and percentile would be lower. The inverse would be true if the cohort performed worse.
+              %li If the test was deemed easier for calculation purposes you would have a lower score and percentile, whilst again the inverse would be true if the test were deemed harder.
+          %p
+            Overall, the IRT
+            %a{href: "https://en.wikipedia.org/wiki/Item_response_theory", target: "_blank"}
+              %strong (Item Response Theory)
+            that
+            %a{href: "https://gamsat.acer.org/", target: "_blank"}
+              %strong ACER
+            applies to your GAMSAT
+            %sup ®
+            results is designed to account for these two factors and ultimately provide a comparable score for Universities to use. This manipulation can cause variation in your results across sittings - Even if you feel that you’ve performed the same as last time, your scores may be better due to an increased difficulty or poorer cohort performance across the most recent GAMSAT
+            %sup ®
+            exam.
+      .preparation_col.head_aftr_none
+        %h2#how_calculated
+          How are GAMSAT Results Calculated?
+        %p
+          The overall GAMSAT score is a weighted average of the three section scores. The following weightings are given to each section in determining your overall score:
+        .highlight_box.mbot40
+          %h3.mtop_zero.mbot0
+            GAMSAT
+            %sup ®
+            Results Formula
+          %ul.list_box.mbot20
+            %li Overall Score = (1 x Section I + 1 x Section II + 2 x Section III) / 4
+            %li.text-center.small_txt
+              %span
+                *This formula means that your Overall GAMSAT
+                %sup ®
+                score is 50% Science and 50% Non-science. Note that the
+                %a.green{href: "http://mdhs-study.unimelb.edu.au/degrees/doctor-of-medicine/overview", target: "_blank"}
+                  University of Melbourne
+                ,
+                %a.green{href: "https://future-students.uq.edu.au/study/program/Doctor-of-Medicine-5578", target: "_blank"}
+                  University of Queensland
+                and
+                %a.green{href: "https://www.notredame.edu.au/programs/sydney/school-of-medicine/postgraduate/doctor-of-medicine", target: "_blank"}
+                  UNDF/UNDS
+                weight all three sections equally (i.e. unweighted GAMSAT score)
+            %li Overall Score = (1 x Section I + 1 x Section II + 1 x  Section III) / 3
+        %p
+          Most medical schools will simply use the overall GAMSAT
+          %sup ®
+          score (
+          %a{href: '#how_calculated'}
+            %strong
+              as calculated by ACER
+          ) as part of the admissions criteria, but some will use the individual section scores. Some universities apply a different weighting to ACER and take the simple average of all 3 sections, as listed in the above box. The University of Sydney is unique in that they do not use an overall score but rather rank students by each section of the GAMSAT
+          %sup ®
+          exam. For further details,
+          %a{href: '#school_cutoffs'}
+            %b
+              read this section below.
+        %h3#item_response_theory
+          What is Item Response Theory?
+        %p
+          As noted above, your GAMSAT
+          %sup ®
+          scores will not be a facsimile of the questions that you got right on the day in that they do not directly correspond to the amount of questions you answered correctly.
+        %p
+          Whilst the specifics of how scores are calculated are reasonably inscrutable and the process is intentionally opaque on behalf of
+          %a.green{href: "https://gamsat.acer.org/", target: "_blank"}
+            %strong ACER,
+          we can make some general insights into how they are calculated. The results are based on what is called Item Response Theory (IRT).
+        .highlight_box.mbot40
+          %p.mtop_zero
+            %a.green{href: "https://en.wikipedia.org/wiki/Item_response_theory", target: "_blank"}
+              %strong Item Response Theory (IRT) :
+            %span.span_font14
+              Simply put, a form of statistical manipulation intended to take into account factors such as:
+          .diffr_country
+            %ul.cstm_list_style.mg_top0.mbot10
+              %li Cohort Capability
+              %li Exam Difficulty (This measure is usually assessed by ACER for each individual section)
+        %p.mtop20
+          The marks are adjusted so that an equivalent performance in any given GAMSAT
+          %sup ®
+          exam will score within an appropriate tolerance margin.
+        %p For example:
+        %ol.ordr_list.mbot30
+          %li A particular student may score 70% correct answers in the first half of the year.
+          %li Then with an identical quality of performance they may score 90% correct in the second half of the year because it is an easier paper.
+          %li
+            These would be manipulated so that they both earned a GAMSAT
+            %sup ®
+            score within perhaps 10% or less to ensure that the test is still considered valid and equivalent from year to year.
+          %li
+            This in turn allows universities to accurately compare GAMSAT
+            %sup ®
+            results from across different sittings, and therefore different candidates, regardless of when they sat the GAMSAT
+            %sup ®
+            exam.
+          %li For this reason, it is the section and overall scores that Universities will consider, not the percentile ranking.
+        %p
+          A simple way of thinking about this is that if one sitting is particularly difficult, it will not be harder to score higher, but rather, a lower raw mark in the more difficult sitting will be synonymous with a higher raw mark in an easier sitting.
+        %p
+          For more background on Item Response Theory (IRT), click
+          %a.green{href: "https://en.wikipedia.org/wiki/Item_response_theory", target: "_blank"}
+            %strong here.
+
+      .preparation_col.head_aftr_none
+        %h2#gamsat_results
+          When are GAMSAT results released?
+        %p.mtop_zero
+          The GAMSAT
+          %sup ®
+          Exam will take place on two separate occasions in 2022.
+        %h3.mtop30.mbot20
+          2022 GAMSAT
+          %sup ®
+          Exam Dates
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %th
+              %th
+                March GAMSAT
+                %sup ®
+                exam
+              %th
+                September GAMSAT
+                %sup ®
+                exam
+            %tbody
+              %tr
+                %td
+                  %h6
+                    %strong Test Date
+                %td
+                  %h6 18 – 23 March 2022
+
+                %td
+                  %h6 5 – 9 September 2022
+              %tr
+                %td
+                  %h6
+                    %strong Registration Opens
+                %td
+                  %h6 Early November 2021
+                %td
+                  %h6 Mid May 2022
+              %tr
+                %td
+                  %h6
+                    %strong Registration Closes
+                %td
+                  %h6
+                    Monday 31 January 2022
+                    %br
+                    10 AM GMT
+                    %br
+                    9 PM AEDT
+                %td
+                  %h6
+                    Friday 22 July 2022
+                    %br
+                    1 PM BST
+                    %br
+                    10 PM AEST
+              %tr
+                %td
+                  %h6
+                    %strong Late Registration Closure
+                %td
+                  %h6
+                    Wednesday 9 February 2022
+                    %br
+                    10 AM GMT
+                    %br
+                    9 PM AEDT
+                %td
+                  %h6
+                    Friday 29 July 2022
+                    %br
+                    1 PM BST
+                    %br
+                    10 PM AEST
+              %tr
+                %td
+                  %h6
+                    %strong Refund/Deferral Request Closure
+                %td
+                  %h6
+                    Wednesday 9 February 2022
+                    %br
+                    10 AM GMT
+                    %br
+                    9 PM AEDT
+                %td
+                  %h6
+                    Friday 29 July 2022
+                    %br
+                    1 PM BST
+                    %br
+                    10 PM AEST
+              %tr
+                %td
+                  %h6
+                    %strong Cost
+                %td
+                  %h6 AUD $515
+                %td
+                  %h6 AUD $515
+          %p
+            To learn more about sitting the GAMSAT
+            %sup ®
+            Exam in #{Date.today.year}, visit our guide to everything you need to know for the GAMSAT
+            %sup ®
+            2022:
+            %a.green{href: "/gamsat-2022", target: "_blank"}
+              %strong
+                GAMSAT
+                %sup ®
+                Preparation 2022
+          %p
+            GAMSAT
+            %sup ®
+            Exam results are generally released within 2 months of the sitting. The past dates have been compiled in the table below.
+        %h3.mtop30.mbot20
+          Past GAMSAT Results Release Dates
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data.text-center
+            %thead
+              %th Year
+              %th
+                March GAMSAT
+                %sup ®
+                exam
+              %th
+                September GAMSAT
+                %sup ®
+                exam
+            %tbody
+              %tr
+                %td
+                  %h6 2022
+                %td
+                  %h6 May 18, 2022
+                %td
+                  %h6 TBC
+              %tr
+                %td
+                  %h6 2021
+                %td
+                  %h6 May 18, 2021
+                %td
+                  %h6 November 15 2021
+              %tr
+                %td
+                  %h6 2020
+                %td
+                  %h6 July 2, 2020 (May Sitting)
+                %td
+                  %h6 November 16, 2020
+              %tr
+                %td
+                  %h6 2019
+                %td
+                  %h6 May 10, 2019
+                %td
+                  %h6 November 8, 2019
+              %tr
+                %td
+                  %h6 2018
+                %td
+                  %h6 May 18, 2018
+                %td
+                  %h6 November 8, 2018
+              %tr
+                %td
+                  %h6 2017
+                %td
+                  %h6 May 18, 2017
+                %td
+                  %h6 November 10, 2017
+              %tr
+                %td
+                  %h6 2016
+                %td
+                  %h6 May 12, 2016
+                %td
+                  %h6 November 10, 2016
+              %tr
+                %td
+                  %h6 2015
+                %td
+                  %h6 May 11, 2015
+                %td
+                  %h6 November 12, 2015
+              %tr
+                %td
+                  %h6 2014
+                %td
+                  %h6 May 16, 2014
+                %td
+                  %h6 November 18, 2014
+              %tr
+                %td
+                  %h6 2013
+                %td
+                  %h6 May 17, 2013
+                %td
+                  %h6 November 19, 2013
+              %tr
+                %td
+                  %h6 2012
+                %td
+                  %h6 May 18, 2012
+                %td
+                  %h6 November 22, 2012
+
+          %p
+            Naturally, once you have the GAMSAT
+            %sup ®
+            Exam out of the way, your thoughts will shift to your impending results - The fruits of all your labours and what will ultimately decide what you do over the coming twelve months and beyond.
+          %p
+            Because GAMSAT
+            %sup ®
+            scores are individual, and in the interests of protecting individual privacies,
+            %a{href: "https://gamsat.acer.org/", target: "_blank"}
+              %strong ACER
+            will contact you personally when results come out. You can expect to receive an email through the address that you registered with when you applied to sit the GAMSAT
+            %sup ®
+            exam. This email will contain instructions and a personalised link to access your results online.
+          %p.mbot0 When you follow your instructions, you will be taken to your personalised scorecard that will display your individual section marks as well as your overall calculated score.
+        .aus_map
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/GAMSAT+Statement+of+Results.png', alt: "GAMSAT Results"
+        %p
+          In case of any updates or changes, it’s best to consult the
+          %a{href: "https://gamsat.acer.org/", target: "_blank"}
+            %strong
+              ACER Website
+          for up-to-date information.
+      .preparation_col.head_aftr_none
+        %h2#good_score
+          What is a good GAMSAT score?
+        %p.mtop_zero
+          What determines a ‘good’ GAMSAT
+          %sup ®
+          score is relative to the university course that you want to get into as well as your specific cohort, but it is possible to give examples. For the March 2022 GAMSAT
+          %sup ®
+          Exam, the average score was 59.
+        %h3.mtop30.mbot20
+          March 2022 GAMSAT Exam - Average, Good and High Scores
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data.text-center
+            %thead
+              %th Overall Score
+              %th Percentile
+              %th Result
+            %tbody
+              %tr
+                %td
+                  %h6 59
+                %td
+                  %h6
+                    50
+                    %sup th
+                %td
+                  %h6 Average
+              %tr
+                %td
+                  %h6 65
+                %td
+                  %h6
+                    75
+                    %sup th
+                %td
+                  %h6 Generally Good*
+              %tr
+                %td
+                  %h6 75
+                %td
+                  %h6
+                    98
+                    %sup th
+                %td
+                  %h6 Very High
+          %span
+            %small *As always, whether or not a score is considered ‘good enough’ depends on the cutoffs for the particular Medical Schools you intend to apply to. Make sure to consult the relevant institution websites for further details.
+          %p
+            It is important to first note that more than 95% of candidates will receive an overall GAMSAT
+            %sup ®
+            score between 40 and 80. Using the March 2022 sitting as an example, an average GAMSAT
+            %sup ®
+            score was 59 - this was the 50th percentile, meaning that 50% of students scored below this and 50% of students scored above this. A score of 65 places the student in around the 75% percentile. This means that around 75% of students scored below this score whilst 25% students scored above this score. A very high score of 75 would place the student in around the 98th percentile, meaning that 98% of students scored below this and only 2% of students scored above this score. But to re-emphasise, the correlation between the percentiles and the overall score vary with each sitting, and the cut-offs for each university also vary with each year.
+
+          %p
+            It’s important to note as well that the specific scores related to certain percentiles will fluctuate from year to year between different GAMSAT
+            %sup ®
+            Exam sittings. What defines a good GAMSAT
+            %sup ®
+            Score will ultimately depend on factors such as your GPA and the medical institution you intend to apply to. You can find further information of past cutoffs in the section below,
+            %a{href: '#school_cutoffs'}
+              %strong GAMSAT® Score Cutoffs
+            , as well as further details on our
+            %a{href: 'https://gradready.com.au/medical-school-entry-requirements', target: :_blank}
+              Guide to Graduate Medical School Entry Requirements in Australia.
+            Nevertheless, it’s always best to check with the relevant medical school for further details.
+
+      .preparation_col.head_aftr_none
+        %h3#what_is_percent_curve.mtop30.mbot0
+          What is the GAMSAT Percentile Curve?
+        %p
+          The essential purpose of the curve is to establish comparatively how well each individual performed on a particular sitting of the GAMSAT
+          %sup ®
+      .preparation_col.head_aftr_none
+        %h3#percent_curve.mtop_zero.mbot20
+          March 2022 GAMSAT Exam Percentile Curve
+        .aus_map
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/percentile-curve-gamsat-2022-march.png', alt: "GAMSAT Percentile Curve"
+        %p The process for determining the percentile curve is determined is as follows:
+        %ol.ordr_list.mbot20
+          %li Once the ‘raw’ overall scores are calculated and scaled, they are spread out so that the person who scored the highest mark is at 100 and the person who scored the lowest mark is at 1.
+          %li These are the highest and lowest “percentiles” respectively. This means that the former scored higher than 99.99% of all other applicants, with the inverse true for the latter.
+          %li To fit the raw marks onto the percentile curve, the average and median scores are calculated and the raw scores then equally spread around that point.
+        %p
+          What this means is that the majority of people (&gt;95%) will rank somewhere around the middle of the curve, the 50
+          %sup th
+          percentile, with increasingly fewer the farther you go in each direction. This has implications for your marks. In the lower third of the curve three marks might be the difference between the 20
+          %sup th
+          percentile and the 40
+          %sup th
+          percentile. So too in the top third. However in the middle third, three marks might be the difference between the 50
+          %sup th
+          percentile and the 55
+          %sup th
+          \.
+        %p
+          This is most easily visualised with an example of the curve as
+          %a{href: "#percent_curve"}
+            %strong seen above.
+          You can also review the
+          %a{href: "#dist_curve"}
+            %strong score distribution curve below.
+        %p
+          One of the best things about GradReady’s
+          %a{href: "/gamsat-preparation-courses/attendance-comprehensive#reviews_col_tabbing", target: "_blank"}
+            %strong
+              Online GAMSAT
+              %sup ®
+              Practice Exams
+          and live Mock Exam day are that they actually provide you with an Overall Percentile Score as well as individual breakdowns for each Section. Your performance is analysed and compared to thousands of other
+          %a{href: "/", target: "_blank"}
+            %strong GradReady
+          Students past and present, letting you know how you stack up.
+        %p
+          You can try out our industry-leading online LMS for yourself with our GAMSAT Free Trial which includes access to 50 MCQs and a Diagnostic Exam along with a wealth of other free GAMSAT resources.
+        .boxed
+          Get Access to:
+          %ul{:style => "list-style-type:none;padding: 13px 0px;"}
+            %li 50 Free MCQs
+            %li Week-By-Week Study Guide
+            %li Complete Session 3 Topic List
+            %li Recorded Webinars
+          .free_gamsat_icon
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/free_trial.png', class: "icon30"
+          .button_right_section
+            %a.free_trial_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/free-gamsat-trial"} GAMSAT Free Trial
+        %br
+        %br
+        %h3#dist_curve.mtop10
+          March #{Date.today.year} GAMSAT Score Distribution Curve
+        .aus_map
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/graph_img5.jpg', alt: "GAMSAT Distribution Curve"
+        %h3
+          Do I need 65+ on the GAMSAT to get into medicine?
+        %p
+          Naturally, medical schools cannot accept every applicant, so it is a safe bet that you should be aiming to be better than average. This means that you want to be better than the 50th percentile. For the March #{Date.today.year} GAMSAT
+          %sup ®
+          Exam, this roughly equates to a GAMSAT
+          %sup ®
+          score of 59. Even better would be to aim for the top 25% of applicants. A score of roughly 65 will put you in the 75th percentile. A score of 75 will place you around the 98th percentile and in an extremely competitive position.
+        %p
+          You might often hear that a good score on the GAMSAT
+          %sup ®
+          is over 65, but it’s important to note that this really depends on what university course you want to get into and the cutoffs themselves fluctuate from year to year. As such, it’s not really accurate to say that there is a universal GAMSAT
+          %sup ®
+          Score that can be deemed to be ‘good enough’ to get into any medical school of your choosing and the magical figure of 65 can be a little misleading.
+        %p
+          It is important to note the difference between minimum cut off scores and competitive cut off scores. Minimum cut off scores refer to the minimum score that the university has set for you to be considered as an interview candidate. In most cases, the genuine cut off is 50. On the other hand, the competitive cut off scores is the score that gets spoken about. This is the score that many consider necessary to secure yourself an interview as it is very competitive - you might hear this as a score over 65 or a score over 70. However, this does not mean that you cannot get in with a score of less than 65 as what defines a good GAMSAT
+          %sup ®
+          result will ultimately depend on factors such as your GPA, your interview score, the medical institution you intend to apply to, the place you’re willing to accept (e.g.
+          %a{href: 'https://gradready.com.au/medical-school-entry-requirements#place_type_at_australian', target: :_blank}
+            %strong CSP vs BMP
+          ), and any additional bonuses such as having lived rurally. You can find further information of past cutoffs in the section below,
+          %a{href: '#school_cutoffs'}
+            %strong
+              GAMSAT
+              %sup ®
+              Score Cutoffs
+          , as well as further details on our
+          %a{href: 'https://gradready.com.au/medical-school-entry-requirements', target: :_blank}
+            %strong Guide to Graduate Medical School Entry Requirements in Australia.
+          Nevertheless, it’s always best to check with the relevant medical school for further details.
+        %h3
+          What is the highest possible GAMSAT
+          %sup ®
+          score?
+        %p
+          Naturally, the theoretical top overall score is 100, however only the top 0.1% of students will score over 80. If you hear fellow students stating that they scored an almost impossibly high score of 98 or 100, in most cases they are referring to a rounded percentile score rather than the overall score. Nevertheless, there are always a few students each sitting who score 100 in a particular section.
+
+      .preparation_col.head_aftr_none
+        %h2#cut_off
+          GAMSAT Score Cutoffs - Is my GAMSAT Score Good Enough?
+        %p.mtop_zero
+          As of 2022, there are currently 13 Medical Schools that provide a Graduate Entry Medical Program, 12 of which require the GAMSAT
+          %sup ®
+          exam (or
+          %a{href: "https://students-residents.aamc.org/applying-medical-school/taking-mcat-exam/", target: "_blank"}
+            %strong MCAT®
+          Exam for international students). To get a list of these schools and learn more about admissions requirements, visit our overview of the Medical School Applications:
+          %a{href: "/medical-school-entry-requirements", target: "_blank"}
+            %strong Australian Medical Schools - Graduate Entry Medicine.
+        %h3#school_cutoffs.mtop30.mbot20
+          GAMSAT Cutoffs - Australian Graduate Entry Medical Schools
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data.custom_pad
+            %thead
+              %tr
+                %th.width11
+                %th.text-center
+                  Available Places in 2022
+                %th.text-center
+                  GAMSAT
+                  %sup ®
+                  Cutoffs
+            %tbody
+              %tr
+                %td
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132
+                          CSP
+                          %sup 1
+                        %td.width132
+                          BMP
+                          %sup 2
+                        %td.width132 Full-Fee
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 2013
+                        %td 2014
+                        %td 2015
+                        %td 2016
+                        %td 2017
+                        %td 2018
+                        %td 2019
+                        %td 2020
+                        %td 2021
+                        %td 2022
+              %tr
+                %td
+                  %a.green{href: "http://medicalschool.anu.edu.au/study/degrees/mchd", target: "_blank"} ANU
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 64
+                        %td.width132 26
+                        %td.width132
+                          20
+                          %sup> 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 60
+                        %td 56
+                        %td 60
+                        %td 62
+                        %td 60
+                        %td 66
+                        %td 65
+                        %td 63
+                        %td 66
+                        %td 67
+              %tr
+                %td
+                  %a.green{href: "https://www.notredame.edu.au/programs/sydney/school-of-medicine/postgraduate/doctor-of-medicine", target: "_blank"} UNDS
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 43
+                        %td.width132 17
+                        %td.width132
+                          60
+                          %sup> 6
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 54
+                        %td 53
+                        %td 53
+                        %td 53
+                        %td 60
+                        %td 59
+                        %td 56
+                        %td 58
+                        %td 62
+                        %td 63
+              %tr
+                %td
+                  %a.green{href: "http://sydney.edu.au/medicine/study/md/", target: "_blank"} USYD
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 210
+                        %td.width132 90
+                        %td.width132
+                          70
+                          %sup> 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 67
+                        %td 67
+                        %td 68
+                        %td 69
+                        %td 67
+                        %td 69
+                        %td 68
+                        %td 69
+                        %td 66
+                        %td 72
+              %tr
+                %td
+                  %a.green{href: "https://coursefinder.uow.edu.au/information/index.html?course=doctor-of-medicine", target: "_blank"} UOW
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 50
+                        %td.width132 17
+                        %td.width132
+                          17
+                          %sup> 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 56
+                        %td 57
+                        %td 54
+                        %td 57
+                        %td 54
+                        %td 64
+                        %td 59
+                        %td 60
+                        %td 55
+                        %td 60
+              %tr
+                %td
+                  %a.green{href: "https://degrees.griffith.edu.au/Program/5099#placement", target: "_blank"} Griffith
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132
+                          140
+                          %sup> 7
+                        %td.width132
+                          56
+                          %sup> 7
+                        %td.width132
+                          35
+                          %sup> 3
+
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 64
+                        %td 64
+                        %td 57
+                        %td 58
+                        %td 60
+                        %td 61
+                        %td 66
+                        %td 61
+                        %td 66
+                        %td 67
+              %tr
+                %td
+                  %a.green{href: "https://future-students.uq.edu.au/study/program/Doctor-of-Medicine-5578", target: "_blank"} UQ
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132
+                          100
+                          %sup> #
+                        %td.width132 40
+                        %td.width132
+                          190
+                          %sup> 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 66
+                        %td 66
+                        %td 68
+                        %td 66
+                        %td 70
+                        %td 73
+                        %td 71
+                        %td.width_100
+                          63
+                          %sup> 5
+                        %td 64
+                        %td 65
+              / %tr
+              /   %td
+              /     %a.green{href: "https://future-students.uq.edu.au/apply/doctor-of-medicine/special-entry-programs", target: "_blank"}
+              /       UQ-Rural
+              /       %sup 5
+
+              /   %td
+              /     %table.table.cstm_tbl.inner_tbl.table-condensed
+              /       %tbody
+              /         %tr
+              /           %td.width132 -
+              /           %td.width132 -
+              /           %td.width132 -
+              /   %td
+              /     %table.table.cstm_tbl.inner_tbl.table-condensed
+              /       %tbody
+              /         %tr
+              /           %td 64
+              /           %td 61
+              /           %td 61
+              /           %td 64
+              /           %td 68
+              /           %td 68
+              /           %td 68
+              /           %td.width_100
+              /             60
+              /             %sup>6
+              %tr
+                %td
+                  %a.green{href: "http://www.flinders.edu.au/medicine/courses/medical-course/medical-course-home.cfm", target: "_blank"}
+                    Flinders
+                    %sup> 10
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 75
+                        %td.width132 -
+                        %td.width132 -
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 61
+                        %td 60
+                        %td 58
+                        %td 60
+                        %td 60
+                        %td 59
+                        %td 62
+                        %td 65
+                        %td 64
+                        %td 63
+              %tr
+                %td
+                  %a.green{href: "http://www.deakin.edu.au/course/doctor-medicine", target: "_blank"}
+                    Deakin
+                    %sup ^
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 88
+                        %td.width132 35
+                        %td.width132
+                          15
+                          %sup> 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 55
+                        %td 58
+                        %td 57
+                        %td 59
+                        %td 59
+                        %td 63
+                        %td 59
+                        %td 58
+                        %td 58
+                        %td 64
+              %tr
+                %td
+                  %a.green{href: "https://mdhs-study.unimelb.edu.au/degrees/doctor-of-medicine/overview", target: "_blank"} UniMelb
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 171
+                        %td.width132 69
+                        %td.width132
+                          105
+                          %sup> 4
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 59
+                        %td 59
+                        %td 60
+                        %td 63
+                        %td 63
+                        %td 66
+                        %td 65
+                        %td 63
+                        %td 66
+                        %td 67
+              %tr
+                %td
+                  %a.green{href: "https://www.notredame.edu.au/programs/fremantle/school-of-medicine/postgraduate/doctor-of-medicine", target: "_blank"} UNDF
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 71
+                        %td.width132 29
+                        %td.width132 0
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 51
+                        %td 52
+                        %td 55
+                        %td 55
+                        %td 55
+                        %td 58
+                        %td 55
+                        %td 61
+                        %td 61
+                        %td 61
+              %tr
+                %td
+                  %a.green{href: "http://www.meddent.uwa.edu.au/future-students/postgraduate/apply-professional/domestic-std-path/md", target: "_blank"}
+                    UWA
+                    %sup> 9
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width132 46
+                        %td.width132 17
+                        %td.width132
+                          10
+                          %sup 3
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td 58
+                        %td 58
+                        %td 58
+                        %td 58
+                        %td 58
+                        %td 62
+                        %td 67
+                        %td 65
+                        %td 69
+                        %td 69
+              %tr
+                %td
+                  %a.green{href: "https://www.mq.edu.au/about/about-the-university/faculties-and-departments/faculty-of-medicine-and-health-sciences/macquarie-md", target: "_blank"} MQ
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.wdth137 0
+                        %td
+                          60
+                          %sup> 8
+                %td
+                  %table.table.cstm_tbl.inner_tbl.table-condensed
+                    %tbody
+                      %tr
+                        %td.width_100 -
+                        %td.width_100 -
+                        %td.width_100 -
+                        %td.width_100 -
+                        %td.width_100 -
+                        %td.width_100 -
+                        %td.width_100 62
+                        %td.width_100 63
+                        %td.width_100 64
+                        %td.width_100 63
+        %span
+          %small
+            Note: Although some universities release official GAMSAT
+            %sup ®
+            average and minimum scores for each year, the majority do not. As such, this data is based on a combination of officially available information and information collated from forums such as PagingDr. Unless indicated otherwise, the scores below relate to CSP places and exclude rural and sub-quota places.
+        %ul.pad_lt.pad_rt.padd_top.padd_bot.cstm_tbl_list
+          %li
+            %span
+              %small
+                %sup> 1
+                CSP -  Commonwealth Supported Place
+          %li
+            %span
+              %small
+                %sup> 2
+                BMP -  Bonded Medical Place. Click
+                %a{href: "http://www.health.gov.au/bmpscheme", target: "_blank"}
+                  %strong here
+                to learn more.
+          %li
+            %span
+              %small
+                %sup> 3
+                These full-fee places are allocated to International students only and are not applicable for domestic students
+          %li
+            %span
+              %small
+                %sup> 4
+                For the University of Melbourne, these full fee places include both international and domestic applicants. Unless otherwise labelled, the full-fee column refers to full-fee places for domestic students. These places are also available for Guaranteed Entry Students.
+          %li
+            %span
+              %small
+                %sup> 5
+                In 2019, UQ introduced the MMI as part of their admissions process which may help explain the drop in cutoff scores. Prior to this, the GAMSAT
+                %sup ®
+                Score was the only criteria UQ used to rank students for medical offers.
+          %li
+            %span
+              %small
+                %sup> 6
+                At UNDS, up to 10 of the full-fee places are open to International applicants.
+          %li
+            %span
+              %small
+                %sup> 7
+                At Griffith, the total CSP and BMP places also include reserved places for 80 students from their Medical Science Pathway
+          %li
+            %span
+              %small
+                %sup> 8
+                MQ report 20 of these 60 FFP places are for International students
+          %li
+            %span
+              %small
+                %sup> 9
+                Approx 30% places are available for rural students, and up to 10% for Indigenous students
+          %li
+            %span
+              %small
+                %sup> 10
+                Up to 75 Commonwealth supported places are available - This includes CSP and BMPs. Note that up to 75% of places available are reserved for Flinders University Graduates. For 2020 entry, 55% of places went to Flinders University Graduates. The types of places at Flinders University are complex and it is recommended students carefully read the Flinders University Medical Admissions Guide.
+          %li
+            %span
+              %small
+                %sup> ^
+                Scores provided for Deakin University may include bonuses. For the 2020 cutoff scores, the score of 58 includes an 8% bonus. The cutoff score without any bonuses was 64.
+          %li
+            %span
+              %small
+                %sup> #
+                UQ also provides 140 places for its provisional cohort which refers to an undergraduate pathway at UQ where students are guaranteed a place in postgraduate medicine as long as they complete their bachelor’s degree at UQ and achieve certain academic requirements. 40 of these places are BMP.
+
+        %p.flt_lft
+          It’s important to note that your GAMSAT
+          %sup ®
+          Score only makes up one component of your application, and there are various other factors that need to be considered. For more information, you can refer to our guide on the different Admissions Criteria and Weightings for graduate entry medical schools around Australia:
+          %a{href: "/medical-school-entry-requirements", target: "_blank"}
+            %strong Australian Medical Schools: Entry Requirements.
+        %p
+          Note that before 2019, final medical school offers for the
+          %a{href: "https://future-students.uq.edu.au/study/program/Doctor-of-Medicine-5578", target: "_blank"}
+            %strong University of Queensland
+          were made based on GAMSAT
+          %sup ®
+          scores alone (with a cut-off hurdle for GPA Scores). However from 2019 onwards, the University of Queensland has introduced MMIs and GPAs as part of their selection process. In fact, we can see this change reflected in the drop in GAMSAT
+          %sup ®
+          Cutoff Scores in the table above.
+        %p
+          For students who applied in 2020 for 2021 commencement, the
+          %a{href: "https://www.sydney.edu.au/courses/courses/pc/doctor-of-medicine0.html", target: "_blank"}
+            %strong University of Sydney
+          did not conduct interviews. Offers for places were made based on GAMSAT
+          %sup ®
+          Scores alone, with a SJT, Interview, or GPA used as a tiebreaker where necessary.
+          %b
+            These changes have now been carried over for 2022 commencement -
+          For the majority of students, interviews will not be conducted for 2022 entry.
+        %p
+          USyd will rank students
+          %b
+            by each section of the GAMSAT
+            %sup ®
+            exam.
+          This means that USyd will not look at overall or average scores in the ranking of applicants. It’s important to note as well that the exact method used to combine and rank students has not been provided. Students must still meet a minimum score of 50 in each section (except for Aboriginal and Torres Strait Islander applicants). For the GPA, standard applicants will be required to have a minimum of 5, and rural applicants a minimum of 4.5. USyd have now released a
+          %a{href: "https://www.sydney.edu.au/medicine-health/study-medicine-and-health/postgraduate-courses/doctor-of-medicine.html", target: "_blank"}
+            %strong 2022 Admissions Guide
+          and you can find a summary of the changes on our guide here:
+          %a{href: "https://gradready.com.au/medical-school-entry-requirements", target: "_blank"}
+            %strong Australian Medical Admissions Guide.
+
+
+        %p As always, it’s best to get in contact with the relevant medical institutions for further details - The above table is meant to serve as a guide and does not replace the personal responsibility of each applicant to obtain up-to-date and objective information from medical institutions regarding their medical school applications.
+      .preparation_col.head_aftr_none
+        %h2#medical_School Medical School Applications and Entry Requirements
+        %p.mtop_zero
+          Your GAMSAT
+          %sup ®
+          results are valid for 2 years, and if you’re planning on applying in the near future, you can use the following results:
+        %h3.mtop30.mbot20
+          Currency of GAMSAT Results
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %tr
+                %th.text-center Application Details
+                %th.text-center Valid Results
+            %tbody
+              %tr.text-center
+                %td Apply 2022 for 2023 Commencement
+                %td
+                  March GAMSAT
+                  %sup ®
+                  \: 2021, 2022
+                  %br
+                    September GAMSAT
+                    %sup ®
+                    \: 2020, 2021
+              %tr.text-center
+                %td Apply 2023 for 2024 Commencement
+                %td
+                  March GAMSAT
+                  %sup ®
+                  \: 2022, 2023
+                  %br
+                    September GAMSAT
+                    %sup ®
+                    \: 2021, 2022
+              %tr.text-center
+                %td Apply 2024 for 2025 Commencement
+                %td
+                  March GAMSAT
+                  %sup ®
+                  \: 2023, 2024
+                  %br
+                    September GAMSAT
+                    %sup ®
+                    \: 2022, 2023
+        %p
+          Note that the above information is specific to Australian universities and the details may differ, particularly for students based in the UK.
+        %p
+          To learn more about sitting the GAMSAT
+          %sup ®
+          exam in 2022, visit our guide to
+          %a{href: "/gamsat-2022", target: "_blank"}
+            %strong
+              GAMSAT
+              %sup ®
+              Preparation 2022
+        %p
+          To learn more about applying for Graduate Entry Medical Schools in Australia and the different admissions criteria and weightings, visit our guide:
+          %a{href: "/medical-school-entry-requirements", target: "_blank"}
+            %strong Australian Medical Schools - Entry Requirements.
+      .preparation_col.head_aftr_none
+        %h2#improving_score
+          Improving your GAMSAT Score - Free Resources
+        %p.mtop_zero
+          Now that you understand what your GAMSAT
+          %sup ®
+          Scores mean, it’s time to set a target and start preparing. The below free resources might be helpful:
+        %ol.ordr_list
+          %li
+            %h5
+              %a{href: "/what-is-gamsat", target: "_blank"}>
+                What is the GAMSAT
+                %sup ®
+                ?
+            %p.mtop_zero
+              Everything you need to know about the GAMSAT
+              %sup ®
+              Exam from structure and overview to which universities require the GAMSAT
+              %sup ®
+          %li
+            %h5
+              %a{href: "/gamsat-preparation", target: "_blank"}
+                How to study for the GAMSAT
+                %sup ®
+                Exam
+            %p.mtop_zero
+              A breakdown of how to approach study effectively and how to set up a GAMSAT
+              %sup ®
+              study schedule.
+          %li
+            %h5
+              %a{href: "/gamsat-section-1", target: "_blank"}
+                How to prepare for GAMSAT
+                %sup ®
+                Section 1
+            %p.mtop_zero
+              An overview of what to expect in Section 1 of the GAMSAT
+              %sup ®
+              Exam and how to prepare.
+          %li
+            %h5
+              %a{href: "/gamsat-section-2", target: "_blank"}
+                How to prepare for GAMSAT
+                %sup ®
+                Section 2
+            %p.mtop_zero
+              An overview of what to expect in Section 2 of the GAMSAT
+              %sup ®
+              Exam, how to prepare and how to perfect your essay technique.
+          %li
+            %h5
+              %a{href: "/gamsat-section-3", target: "_blank"}
+                How to prepare for GAMSAT
+                %sup ®
+                Section 3
+            %p.mtop_zero
+              An overview of what to expect in Section 3 of the GAMSAT
+              %sup ®
+              Exam and how to prepare for each of the topics - Biology, Chemistry, &amp; Physics.
+          %li
+            %h5
+              %a{href: "https://bmcmededuc.biomedcentral.com/articles/10.1186/s12909-015-0316-3", target: "_blank"}
+                GAMSAT
+                %sup ®
+                \- 10 Year Retrospective Review
+            %p.mtop_zero
+              If you’re curious, read through this 10 year review of the GAMSAT
+              %sup ®
+              Exam with a detailed analysis of candidate results in 2014.
+          .boxed
+            Get Access to:
+            %ul{:style => "list-style-type:none;padding: 13px 0px 0px;"}
+              %li 50 Free MCQs
+              %li Week-By-Week Study Guide
+              %li Complete Session 3 Topic List
+              %li Recorded Webinars
+            .free_gamsat_icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/free_trial.png', class: "icon30"
+            .button_right_section
+              %a.free_trial_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/free-gamsat-trial"} GAMSAT Free Trial
+
+
+:javascript
+  // Select all links with hashes
+  $('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top-74
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+
+        });
+      }
+    }
+  });

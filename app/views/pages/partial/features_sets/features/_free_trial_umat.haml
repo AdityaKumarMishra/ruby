@@ -1,0 +1,70 @@
+.row
+  .main_oute2
+    %ul.nav.nav-tabs.tab_bl.n-tab
+      %li.active
+        %a.feture_btn.btn.btn-gr.blue Features
+    .tab-content.scroll_inhirt
+      #grad_testi2.tab-pane.active.width_535
+        .feature-icon-container-top.text-center
+          = link_to 'Learn About Recent Updates', recent_update_path, class: 'btn btn-gr learn_recen_up blue'
+        %br
+          %table
+            .feature-icon-container
+              %h3#feature_Upgrade
+                .blu_heading
+                  %strong
+                    Following Features are Available Immediately After Sign up:
+            .span12
+              %h4.feature_sub_heading.text_blue
+                %span.text_line Preparation material
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/diagnostics_assessment', paid: false, product_line: 'UMAT', subject: 'umat'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/online_exams', paid: false, product_line: 'UMAT', subject: 'umat'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/online_questions', paid: false, product_line: 'UMAT'
+            .span12
+              %h4.feature_sub_heading.text_blue
+                %span.text_line Learning Tools
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/quality_assurance_system', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/online_textbook', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/documents', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/study_timeline', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/cross_referencing_system', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/strategy', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/course_videos', paid: false, product_line: 'UMAT'
+
+              %h3#feature_Upgrade
+                .blu_heading
+                  %strong.text_blue Not included in free trial:
+              .span12
+                %h4.feature_sub_heading.text_blue
+                  %span.text_line Targeted 1 on 1 tutor assistance
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/get_clarity', paid: false, product_line: 'UMAT'
+              .span12
+                %h4.feature_sub_heading.text_blue
+                  %span.text_line Live component
+              .grid_wall_wrapper
+                .feature-description.clearfix
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/attendance_tutorials', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/mock_exam_day', paid: false, product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/interactive_learning', product_line: 'UMAT'
+                  .grid_single_item
+                    = render 'pages/partial/features_sets/features/private_tutoring', paid: false, hours: 5,product_line: 'UMAT'

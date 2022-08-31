@@ -1,0 +1,66 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "httpequiv": "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Welcome #{sanitize @student.first_name},"
+          %tr
+            %td{style: " margin-top: 22px; float: left; line-height: 24px;font-size: 15px;"}
+              My name is Joy, and I am one of the Student Success staff at GradReady. I would like to personally welcome you to the course and hope you will enjoy your GradReady trial.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              Over 1000 students each year choose GradReady. In addition,
+              = link_to "7 years in a row,", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              the average GradReady
+              = link_to "student improved", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              their score by
+              = link_to "at least 20+ percentile points", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              after taking a GradReady course.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              If you have any questions about any of our courses, please feel free to explore one of the options below or contact me through the
+              = link_to "Contact Us", gamsat_preparation_courses_contact_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              page. Submitting a ticket through the Contact Us page will ensure that your query never gets lost.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              Remember, for every friend you refer, your friend and you will
+              = link_to "receive 10% and 5% percent off", faq_topic_url(type: 'gamsat', topic: 'enrolment-and-payment', anchor: 'refer_a_friend'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              respectively and
+              = link_to "installment payment", faq_topic_url(type: 'gamsat', topic: 'enrolment-and-payment', anchor: 'Instalments'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              plans are available.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              We look forward to you being one of our many
+              = link_to "success stories.", gamsat_preparation_courses_student_testimonials_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              If you're ready to start improving your GAMSAT results, please click 
+              = link_to "here", "https://#{ENV['MAILER_HOST']}/gamsat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;" 
+              to explore your course options and their relative prices.
+
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              GradReady is a technology company that helps over 1,000 students each year through Adaptive Learning technologies - we make learning more engaging and efficient. Established in 2010 by medical students at the University of Melbourne, we have grown to operate in 5 cities nationwide.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+              Throughout the course of this year, we will be bringing even more advanced products to GAMSAT ® , UCAT ®. For more information please see:
+              has been posted onto
+              = link_to "GradReady.com.au", "https://www.gradready.com.au", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

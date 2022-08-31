@@ -1,0 +1,41 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Hi #{@student.first_name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Share your unique discount link #{link_to user_promo_link_url(@order.generated_promo.token), user_promo_link_url(@order.generated_promo.token), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} with your mates and
+              %b
+                receive a 5% refund on your purchased course for EVERY purchase made using your link
+              (so if 4 friends enrol using your link, you will get 20% off).
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Your friends using your link will also get 10% off their purchase, so it’s a win-win!
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px;font-size: 15px;"}
+              For more information, please see our
+              %a{href: "http://gradready.com.au/faq", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} FAQ.
+          %tr
+            %td{style: "margin-top: 10px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              Your unique discount link: #{@order.generated_promo.token}
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

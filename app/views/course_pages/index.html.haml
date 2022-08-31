@@ -1,0 +1,13 @@
+%h1 GAMSAT Preparation Courses Page
+%h4 Page Selection
+%p.mtop10.mbot20
+	- @course_pages.each do |cp|
+		.btn.btn-gradready.green
+			-if cp.active_page == true
+				%i.fa.fa-check-circle-o{"aria-hidden" => "true"}
+			=link_to "#{cp.name}", course_page_path(cp) , style:"all:unset;" ,method: :put
+%hr
+%h4 Course Selection
+%p.mtop10
+	.btn.btn-gradready.green
+		=link_to "Last Minute Preparation Page Courses" , last_min_courses_path	, style:"all:unset;"

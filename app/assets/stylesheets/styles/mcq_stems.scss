@@ -1,0 +1,18 @@
+// Place all the styles related to the McqSets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.mcq-info .label-default{
+  display: inline-block;
+}
+#stem_table th:after {
+  content: "";
+}
+.brdr_lf_nn{ border-left: none !important; }
+.brdr_rt_nn{ border-right: none !important; }
+table#stem_table.dataTable thead > tr > th {
+    padding-right: 15px;
+}
+
+.form_div{
+  float: left;
+}

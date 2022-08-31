@@ -1,0 +1,220 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %title= title
+    %meta{name: 'description', content: meta_description}
+    %meta{name: 'keywords', content: meta_keywords}
+
+    / Google Tag Manager
+    :javascript
+      logged_user = "#{current_user.present? ? current_user.id : nil}";
+      dataLayer = [{'userID': logged_user}];
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+      {'gtm.start': new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M9MF8XK');
+    / End Google Tag Manager
+
+    = stylesheet_link_tag "public_pages/banner", media: 'all'
+    = stylesheet_link_tag 'public_page', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'public_page', 'data-turbolinks-track' => true
+    = javascript_include_tag 'jquery.validate', 'data-turbolinks-track' => true
+
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", rel: "stylesheet"}/
+    = sentry_tag
+    -unless(request.fullpath == "/gamsat-preparation-courses" || request.fullpath == "/umat-preparation-courses" || request.fullpath == "/hsc" || request.fullpath == "/vce")
+      - if request.fullpath == "/"
+        = tag :link, href: 'https://gradready.com.au', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/our_students" || request.fullpath == "/umat-preparation-courses/our_students"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/our_students', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/student_testimonials" ||request.fullpath == "/umat-preparation-courses/student_testimonials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/student_testimonials', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/scholarship" || request.fullpath == "/umat-preparation-courses/scholarship"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/scholarship', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/access-program" || request.fullpath == "/umat-preparation-courses/access-program"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/access-program', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/overview" || request.fullpath == "/umat-preparation-courses/about"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/overview', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/free_resources" || request.fullpath == "/umat-preparation-courses/free_resources"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/free-resources', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/contact" || request.fullpath == "/umat-preparation-courses/contact"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/contact', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/custom"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/online-essentials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/online-comprehensive"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/attendance-essentials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/attendance-complete-care"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      -elsif request.fullpath == "/gamsat-preparation-courses/gamsat-starter"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/custom"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/online-comprehensive"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/online-essentials"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/attendance-essentials"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/attendance-complete-care"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      -elsif request.fullpath == "/umat-preparation-courses/ucat-starter"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      -elsif request.fullpath == "/updates?tab=GAMSAT" || request.fullpath == "updates?tab=UCAT"
+        = tag :link, href: 'https://gradready.com.au/updates', rel: 'canonical'
+
+  - if map_path_to_prodline(request.env['PATH_INFO']) == "umat-preparation-courses" || map_path_to_prodline(request.env['PATH_INFO']) == "ucat"
+    - product_line_type = "ucat"
+  -else
+    - product_line_type = "gamsat"
+
+  = favicon_link_tag '/images/favicon-'+ product_line_type +'.png',type: 'image/png'
+  = csrf_meta_tags
+  %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
+  = yield(:head)
+  = render partial: 'layouts/structured_data'
+  %body{class: ("umat_body" if product_line_type == "ucat") || ("hide_social_pages" if controller_name == "sessions" && action_name == "new")}
+    / Google Tag Manager (noscript)
+    %noscript
+      %iframe{:height => "0", :src => "https://www.googletagmanager.com/ns.html?id=GTM-M9MF8XK", :style => "display:none;visibility:hidden", :width => "0"}
+    / End Google Tag Manager (noscript)
+    - if request.env['PATH_INFO'] == "/umat-preparation-courses" || request.env['PATH_INFO'] == "/gamsat-preparation-courses"
+      .overlay_page
+    = render_public_mob_bar request.env['PATH_INFO'], product_line_type
+    = render partial: 'toastr_rails/flash'
+
+    .page_wrapper
+      .mobile_top_header
+        - if current_product_line == "umat"
+          %a.mob_logo{href: "/"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_gradready_logo.png', alt: 'GradReady UCAT Preparation Course', class: 'mobile_header_logo'
+        - elsif params["action"] == "main"
+          %a.mob_logo{href: "/"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/header-logo.svg', alt: 'GradReady GAMSAT and UCAT Preparation Courses', class: 'mobile_header_logo'
+        - elsif current_product_line == "gamsat"
+          %a.mob_logo{href: "/"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/header-logo.svg', alt: 'GradReady GAMSAT Preparation Courses', class: 'mobile_header_logo'
+        %a.mobile_menu_icon{href: "javascript:void(0)"} Menu
+
+      / desktop view top nav bar for umat and gamsat after login
+      -unless content_for?(:show_left_panel)
+        = render_public_nav_bar request.env['PATH_INFO'], product_line_type
+
+      = content_for?(:content) ? yield(:content) : yield
+    = render partial: 'layouts/public_footer', locals: {product_line_type: product_line_type}
+    / exit popup modal
+    - if (user_signed_in? && current_user.student?) || current_user.nil?
+      - check_product_for_exit_popup product_line_type
+      - if !@exit_popup.nil?
+        = render partial: 'pages/partial/exit_modal', locals: {product_line: product_line_type}
+
+    :javascript
+      (function() {
+      window._pa = window._pa || {};
+      // _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+      // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+      // _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+      var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+      pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/58de315735eaeda9ef000072.js";
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+      })();
+
+    - if (controller_name == "pages" && action_name == "main") && @exit_popup.present?
+      :javascript
+        $(document).ready(function(){
+          var popup_freq = "#{@exit_popup.popup_frequency}"
+          var cookie_name = "#{@exit_popup.cookie_name}"
+          var c_cokie = Cookies.get(cookie_name);
+
+          if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            if (c_cokie == undefined){
+              Cookies.set(cookie_name, 0)
+            }
+            var c_cokie_mob = Cookies.get(cookie_name)
+            if (c_cokie_mob < popup_freq){
+              setTimeout(function() {
+                $('#exitModal').modal('show');
+              }, 10000);
+            }
+          }
+
+          if (c_cokie == undefined){
+            Cookies.set(cookie_name, 0)
+          }
+          $("html").mouseleave(function(){
+            var chk_cookie = Cookies.get(cookie_name);
+            if (chk_cookie < popup_freq){
+              $('#exitModal').modal('show');
+            }
+          });
+
+        });
+
+    - elsif current_product_line == "umat" && @exit_popup.present?
+      :javascript
+        $(document).ready(function(){
+          var umat_popup_freq = "#{@exit_popup.popup_frequency}"
+          var umat_cookie_name = "#{@exit_popup.cookie_name}"
+          var umat_cokie = Cookies.get(umat_cookie_name);
+
+          if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            if (umat_cokie == undefined){
+              Cookies.set(umat_cookie_name, 0);
+            }
+            var umat_cokie_mob = Cookies.get(umat_cookie_name)
+            if (umat_cokie_mob < umat_popup_freq){
+              setTimeout(function() {
+                $('#exitModal').modal('show');
+              }, 10000);
+            }
+          }
+
+          if (umat_cokie == undefined){
+            Cookies.set(umat_cookie_name, 0);
+          }
+          $("html").mouseleave(function(){
+            var umat_chk_cookie = Cookies.get(umat_cookie_name);
+            if (umat_chk_cookie < umat_popup_freq){
+              $('#exitModal').modal('show');
+            }
+          });
+
+        });
+
+    - elsif current_product_line == "gamsat" && @exit_popup.present?
+      :javascript
+        $(document).ready(function(){
+          var gamsat_popup_freq = "#{@exit_popup.popup_frequency}"
+          var gamsat_cookie_name = "#{@exit_popup.cookie_name}"
+          var gamsat_cokie = Cookies.get(gamsat_cookie_name);
+
+          if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            if (gamsat_cokie == undefined){
+              Cookies.set(gamsat_cookie_name, 0);
+            }
+            var gamsat_cokie_mob = Cookies.get(gamsat_cookie_name)
+            if (gamsat_cokie_mob < gamsat_popup_freq){
+              setTimeout(function() {
+                $('#exitModal').modal('show');
+              }, 10000);
+            }
+          }
+
+          if (gamsat_cokie == undefined){
+            Cookies.set(gamsat_cookie_name, 0);
+          }
+
+          $("html").mouseleave(function(){
+            var gamsat_chk_cookie = Cookies.get(gamsat_cookie_name);
+            if (gamsat_chk_cookie < gamsat_popup_freq){
+              $('#exitModal').modal('show');
+            }
+          });
+
+        });

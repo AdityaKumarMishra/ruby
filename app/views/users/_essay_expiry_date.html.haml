@@ -1,0 +1,4 @@
+-if expiry_date.present?
+  = expiry_date.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+-else
+  = ""

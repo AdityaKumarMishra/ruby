@@ -1,0 +1,65 @@
+-current_sel = FreeStudyBuddy.where(active: true)
+-title = 2
+-if current_sel.count == 1  && current_sel.first.present? && current_sel.first.title == "GAMSAT Free Trial"
+  -title = 0
+-elsif current_sel.count == 1
+  -title = 1
+-else
+  -title = 2
+%h1 Change Default Homepage Promo
+
+=select_tag 'study_buddy_view', options_for_select([["GAMSAT Free Trial", 0], ["Study Buddy", 1], ["Free Study Guide", 2]], title), { class: 'form-control ap_select', autocomplete: "off" }
+%br
+%h2 Edit Text of Display
+%p.mtop10.mbot20
+  .btn.btn-gradready.green
+    = link_to '&nbsp;Free Study Buddy'.html_safe, edit_free_study_buddy_path(@free_stud_buddy) , style:"all:unset;", onClick: 'goToURL();'
+:javascript
+  $(".ap_select").on('change',function confirmChange() {
+    promo = $(".ap_select").val();
+    if (confirm("Are you sure? You will change the default promotion on the website home page.") == true) {
+      if (promo == '0') {
+        free_gamsat_trial();
+      } else if (promo == '1') {
+        free_study_buddy();
+      } else {
+        free_study_guide();
+      }
+    }
+  });
+
+  function goToURL() {
+    location.href = "#{free_study_buddy_path(@free_stud_buddy)}";
+  };
+
+  function free_gamsat_trial() {
+    $.ajax ({
+      type: 'PATCH',
+      url: '/free_study_buddies/1',
+      data: {
+        active: true,
+        study_buddy: false
+      }
+    }).done(function (response) {});
+  };
+
+  function free_study_buddy() {
+    $.ajax ({
+      type: 'PATCH',
+      url: '/free_study_buddies/1',
+      data: {
+        active: true,
+        study_buddy: true
+      }
+    }).done(function (response) {});
+  };
+
+  function free_study_guide() {
+    $.ajax ({
+      type: 'PATCH',
+      url: '/free_study_buddies/1',
+      data: {
+        active: false
+      }
+    }).done(function (response) {});
+  };

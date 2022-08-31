@@ -1,0 +1,40 @@
+/* Note when modifying or improving this stylesheet:
+ * WARNING: Should always do a quick recursive search on these
+ * navigation class names before modifying them in case they'd
+ * have spillover effect on other front-end pages
+ *
+ * TO-DO: Remove unncessary !important declaration after cleaning up
+ * all front-end SCSS files
+ *
+ * The structure and declaration of classes follow closely to that of
+ * bootstrap such that the use of stylings is similar to how you would
+ * use bootstrap classes
+ * */
+
+$panel-bg: rgba(0, 120, 51, 0.8);
+
+.gr-panel {
+  color: $white;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: $panel-bg;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+}
+.gr-panel-heading{
+  text-align: center;
+  font-size: 20px;
+  position: relative;
+}
+
+.announce-badge{
+  background-color:red !important;
+  padding: 4px 7px;
+  margin: -25px 0 0 -6px;
+}
+
+.announce-anchor{
+  color: #fff !important;
+  text-decoration: none !important;
+}

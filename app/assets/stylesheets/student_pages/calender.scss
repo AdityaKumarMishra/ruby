@@ -1,0 +1,419 @@
+.event_detail_col {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  float: left;
+  margin-bottom: 10px;
+  padding: 0;
+  width: 100%;
+}
+.event_date_col {
+  color: #ddd;
+  float: left;
+  margin: 3px;
+  vertical-align: middle;
+  width: 15%;
+  text-align: center;
+  background: #fff;
+  span {
+    font-size: 38px;
+    display: block;
+    margin-top: -25px;
+  }
+}
+.date {
+  font-size: 63px;
+  font-weight: 400;
+  position: relative;
+  top: -6px;
+}
+.event_desc_col {
+  width: 82%;
+  float: right;
+  padding-top: 10px;
+  padding-left: 0;
+  p {
+    font-size: 16px;
+    color: #111;
+    margin-bottom: 11px;
+  }
+}
+.cal-border {
+  border: 1px solid #FF9C00 !important;
+  padding: 5px 10px !important;
+}
+.header_select {
+  float: left;
+  margin-left: 176px;
+  margin-top: 14px;
+  width: 15%;
+  select {
+    width: 100%;
+    background: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    box-shadow: 0 2px 3px #ddd;
+  }
+}
+.event_date_col.no_cal_date {
+  width: 66px;
+  min-height: 58px;
+}
+.event_desc_col.no_update_description {
+  text-align: center;
+  padding-top: 18px;
+  width: 100%;
+  padding-bottom: 18px;
+  font-size: 18px;
+}
+.width_14 {
+  width: 14%;
+}
+#send-all-emails-button {
+  margin-right: 15px;
+}
+#tutors_table {
+  >thead {
+    >tr {
+      >th {
+        &::after {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+.div_no_data {
+  float: left;
+}
+div.zabuto_calendar {
+  margin: 0;
+  padding: 0;
+  .table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    th {
+      padding: 4px 2px;
+      text-align: center;
+    }
+    td {
+      padding: 4px 2px;
+      text-align: center;
+    }
+    tr {
+      th {
+        background-color: #ffffff;
+      }
+      td {
+        background-color: #ffffff;
+        div.day-number {
+          margin: 0;
+          padding-top: 7px;
+          padding-bottom: 7px;
+        }
+      }
+      &:last-child {
+        border-bottom: 1px solid #dddddd;
+      }
+      td.event {
+        div.day-number {
+          background-color: #fff0c3;
+        }
+      }
+      td.week-clickable {
+        cursor: pointer;
+      }
+      td.event-clickable {
+        cursor: pointer;
+      }
+    }
+    tr.calendar-month-header {
+      background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/calender_header_img.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 120px;
+      position: relative;
+      th {
+        background-color: transparent;
+        vertical-align: middle;
+        padding-top: 12px;
+        padding-bottom: 4px;
+        span {
+          cursor: pointer;
+          display: inline-block;
+          padding-bottom: 10px;
+          color: #fff;
+          font-size: 22px;
+        }
+        &:nth-child(2) {
+          span {
+            cursor: pointer;
+            display: inline-block;
+            padding-bottom: 10px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-transform: uppercase;
+            padding: 12px 20px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    tr.calendar-week-header {
+      th {
+        background: #00883a;
+        background: #008e3c;
+        background: -moz-linear-gradient(top, #008e3c 0%, #008036 100%);
+        background: -webkit-linear-gradient(top, #008e3c 0%,#008036 100%);
+        background: linear-gradient(to bottom, #008e3c 0%,#008036 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008e3c', endColorstr='#008036',GradientType=0 );
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+  }
+  .table-bordered {
+    tr.calendar-month-header {
+      th {
+        border-left: 0;
+        border-right: 0;
+        &:first-child {
+          border-left: 1px solid #dddddd;
+        }
+      }
+    }
+  }
+  div.calendar-month-navigation {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+  }
+  tr.calendar-week-header {
+    th {
+      width: 14%;
+      position: relative;
+      padding: 0;
+      background: #f7f7f7;
+      border: 2px solid #fff;
+      font-size: 16px;
+      font-weight: 100;
+      line-height: 47px;
+      color: #111;
+    }
+  }
+  tr.calendar-week {
+    td {
+      width: 14%;
+      position: relative;
+      padding: 0;
+      background: #f7f7f7;
+      border: 2px solid #fff;
+      font-size: 16px;
+      font-weight: 100;
+      line-height: 47px;
+      color: #111;
+      cursor: pointer;
+    }
+  }
+  ul.legend {
+    li.event {
+      background-color: #fff0c3;
+    }
+    display: inline-block;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    >span {
+      padding-left: 2px;
+    }
+    li {
+      display: inline-block;
+      height: 11px;
+      width: 11px;
+      margin-left: 5px;
+      &:last-child {
+        margin-right: 5px;
+      }
+    }
+    div.zabuto_calendar {
+      ul.legend {
+        li {
+          &:first-child {
+            margin-left: 7px;
+          }
+        }
+      }
+    }
+  }
+  .badge-today {
+    background-color: #357ebd;
+    color: #ffffff;
+    text-shadow: none;
+  }
+  div.legend {
+    span.badge-today {
+      background-color: #357ebd;
+      color: #ffffff;
+      text-shadow: none;
+    }
+    span.badge-event {
+      background-color: #ff9b08;
+      color: #ffffff;
+      text-shadow: none;
+    }
+    margin-top: 5px;
+    text-align: right;
+    span {
+      color: #999999;
+      font-size: 10px;
+      font-weight: normal;
+    }
+    span.legend-text {
+      &:after {
+        content: ' ';
+      }
+    }
+    span.legend-block {
+      &:after {
+        content: ' ';
+      }
+    }
+    span.legend-list {
+      &:after {
+        content: ' ';
+      }
+    }
+    span.legend-spacer {
+      padding-left: 25px;
+      &:after {
+        content: ' ';
+      }
+    }
+    span.badge {
+      font-size: 0.9em;
+      border-radius: 5px 5px 5px 5px;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-top: 2px;
+      padding-bottom: 3px;
+    }
+  }
+  .badge-event {
+    background-color: #ff9b08;
+    color: #ffffff;
+    text-shadow: none;
+    font-size: 0.95em;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+  }
+}
+.disable {
+  display: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td {
+  padding: 0;
+}
+th {
+  padding: 0;
+}
+.bold_date {
+  font-weight: bold;
+  color: #fff;
+  background: #464646;
+  background: -moz-linear-gradient(top, #464646 0%, #323232 100%);
+  background: -webkit-linear-gradient(top, #464646 0%, #323232 100%);
+  background: linear-gradient(to bottom, #464646 0%, #323232 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464646', endColorstr='#323232', GradientType=0 );
+  color: #fff;
+}
+.zabuto_calendar {
+  .table {
+    tr.calendar-week {
+      td {
+        div.events {
+          span.badge {
+            width: 31%;
+            height: 62%;
+            font-size: 12px;
+            line-height: 26px;
+            cursor: pointer;
+            background-color: #FFFF99;
+            color: black;
+            border: black 1px solid;
+            border-radius: 62px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            right: 6px;
+          }
+        }
+        i.day-number {
+          display: block;
+          font-weight: 400;
+          font-style: normal;
+          margin: 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 979px) {
+  div.zabuto_calendar {
+    .table {
+      th {
+        padding: 2px 1px;
+      }
+      td {
+        padding: 2px 1px;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 260px) and (max-width:1030px) {
+  div.zabuto_calendar {
+    tr.calendar-week-header {
+      th {
+        font-size: 12px;
+        line-height: 40px;
+      }
+    }
+    tr.calendar-week {
+      td {
+        font-size: 12px;
+        line-height: 40px;
+      }
+    }
+  }
+  .event_date_col {
+    margin: 0;
+    width: 100%;
+    span {
+      font-size: 30px;
+      margin-top: 0;
+      float: left;
+      margin-left: 10px;
+    }
+  }
+  .date {
+    font-size: 30px;
+    top: 0;
+    float: left;
+  }
+  .event_desc_col {
+    width: 100%;
+    padding: 10px;
+    p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+  }
+}

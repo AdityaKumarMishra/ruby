@@ -1,0 +1,538 @@
+- title "What is UCAT (University Clinical Aptitude Test)?"
+- meta_description "An overview of the UCAT (University Clinical Aptitude Test) with everything you need to know from the Exam Structure and Exam Day Schedule to how to prepare for one of the most important exams of your career."
+- meta_keywords "what is the ucat, what is ucat"
+
+%section.talk_to_bg.home_faq.dashboard_bg
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container.public_container
+    .support_col.looking_corse.text-center.gradready_question
+      %h1
+        What is UCAT
+        %br
+        (University Clinical Aptitude Test)
+%section.faq_wrapper.faq_details
+  .row
+    .container.public_container
+      .download-counter-badge
+        %p.download_read= show_estimated_read_time rescue nil
+        %span|
+        %i.fa.fa-user{'aria-hidden': "true"}
+        %p.download_read= show_download_hit_count rescue nil
+      .preparation_col
+        %p
+          The University Clinical Aptitude Test or UCAT
+          %sup®
+          is a standardised computer-based test used as a criteria by many Australian universities for entry into undergraduate medical, dental and clinical science programmes. The two-hour long exam is delivered at Pearson VUE test centres and assesses a range of abilities and behaviours that these programs have identified as important towards practicing medicine and dentistry. It should be noted that the UCAT
+          %sup ®
+          exam is just one cog in the various components of a medical school application which typically includes academic qualifications and an interview process.
+        %p
+          The ultimate rationale for the UCAT
+          %sup®
+          exam is to assist in identifying the best applicants out of the already extremely competitive cohort of medical or dental school candidates. For candidates applying for 2022 entry, the testing cycle will be run between July 1 and August 11,  2021.
+        %ol
+          %li
+            %a{href: "#ucat_exam_struct"}
+              UCAT
+              %sup ®
+              Exam Structure
+          %li
+            %a{href: "#ucat_score"}
+              Understanding UCAT
+              %sup ®
+              Scores
+          %li
+            %a{href: "#pre_ucat_exam"}
+              Preparing for the UCAT
+              %sup ®
+              Exam
+          %li
+            %a{href: "#req_ucat_exam"}
+              Which Universities require the UCAT
+              %sup ®
+              exam?
+
+      .preparation_col.head_aftr_none.mg_bottm100
+        %h2#ucat_exam_struct
+          UCAT Exam Structure
+        .text-center
+          = render :partial => "ucat_exam_structure"
+        %p
+          The UCAT
+          %sup ®
+          exam is a two-hour computer based exam comprising 233 multiple choice questions (MCQs), with 10% unscored ‘trial questions’ that do not contribute towards the final score. These questions are divided into five subtests which are each designed to assess different skills. These five subtests follow in a specific order and are described in further detail in the table below:
+
+        %h3 UCAT Exam Overview
+        .tbl_responsive.mtop20.mbot20
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %th.text-center Section
+              %th.text-center Description
+              %th.text-center Time Allocated* (mins)
+              %th.text-center Questions
+            %tbody
+              %tr
+                %td Verbal Reasoning
+                %td Assesses the ability to critically evaluate information presented in a written form.
+                %td.text-center 21 minutes
+                %td.text-center 11 passages and 44 questions
+              %tr
+                %td Decision Making
+                %td Assesses the ability to make sound decisions and judgements using complex information.
+                %td.text-center 31 minutes
+                %td.text-center 29 questions
+              %tr
+                %td Quantitative Reasoning
+                %td Assesses the ability to critically evaluate information presented in a numerical form.
+                %td.text-center 24 minutes
+                %td.text-center 9 sets and 36 questions
+              %tr
+                %td Abstract Reasoning
+                %td Assesses the use of convergent and divergent thinking to infer relationships from information.
+                %td.text-center 13 minutes
+                %td.text-center 11 sets and 55 questions
+              %tr
+                %td Situational Judgement
+                %td Measures the capacity to understand real world situations and to identify critical factors and appropriate behaviour in dealing with them.
+                %td.text-center 26 minutes
+                %td.text-center 21 scenarios and 69 questions
+              %tr
+                %td{colspan: 4}
+                  %sup*
+                  Before each subtest there is 1 minute of instructions - As such the total time is 120 minutes or 2 hours.
+        %p
+          Each of the five subtests are scored on a scale from 300 to 900.
+        %p
+          The first four subtests are considered cognitive subtests whereas Situational Judgement is often separated as a non-cognitive subtest. As such, the first four scores are often added up to give a final score out of 3600 with the score of the situational judgement test being left separate for universities to determine whether or not they will allow the score to contribute towards their application process. For further information head to our comprehensive guide on
+          %a{href: "/ucat-structure", target: :_blank}
+            %strong
+              UCAT
+              %sup ®
+              Structure
+
+      .preparation_col.head_aftr_none.mg_bottm100
+        %h2#ucat_score
+          Understanding UCAT Scores
+        %p.mtop_zero
+          The UCAT
+          %sup ®
+          exam is scored based on the number of correct answers with no negative marking for incorrect answers. In other words, your performance on one question won’t affect the marking of any other question. With each of the four cognitive subtests having different amounts of sets and questions, the raw marks are converted to a scaled score ranging from 300-900.
+        %p
+          The total score is composed of the sum of each of the individual scale scores which creates a total scale score ranging from 1200 to 3600.
+
+        %h3 UCAT Scores Breakdown
+        .tbl_responsive.mtop20.mbot20
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %th.text-center Cognitive Subtest
+              %th.text-center Questions
+              %th.text-center Scale Score Range
+              %th Marking
+            %tbody
+              %tr
+                %td.text-center Verbal Reasoning
+                %td.text-center 44
+                %td.text-center 300 - 900
+                %td Questions are worth 1 mark each.
+              %tr
+                %td.text-center Decision Making
+                %td.text-center 29
+                %td.text-center 300 - 900
+                %td
+                  Questions with one correct answer are worth 1 mark.
+                  %br
+                  Questions with multiple statements are worth 2 marks.  One mark is awarded to partially correct responses on the multiple-statement questions.
+              %tr
+                %td.text-center Quantitative Reasoning
+                %td.text-center 36
+                %td.text-center 300 - 900
+                %td Questions are worth 1 mark each.
+              %tr
+                %td.text-center Abstract Reasoning
+                %td.text-center 55
+                %td.text-center 300 - 900
+                %td Questions are worth 1 mark each.
+              %tr
+                %td.text-center{style: "font-weight: bold;"} Total Score
+                %td.text-center -
+                %td.text-center 1200 - 3600
+                %td
+              %tr
+                %td.text-center Situational Judgement
+                %td.text-center 69
+                %td.text-center 300 - 900
+                %td Full marks are awarded for a question if your response matches the correct answer. Partial marks are awarded if your response is close to the correct answer.
+        %p
+          Upon sitting the exam, results are emailed to you within 24 hours with instructions on how to find your score report via your Pearson VUE online account. These results are only valid for one year (i.e. 2021 UCAT
+          %sup ®
+          exam results are only valid for 2021 applications/entry into university in 2022). Note that there is no need to provide your results to the universities you are applying to as the UCAT
+          %sup®
+          ANZ Consortium will communicate your test results to universities by early September.
+        %p
+          What constitutes a competitive UCAT
+          %sup ®
+          score depends on a variety of factors such as the difficulty of the test in any given year, which universities you’re planning to apply for, as well as other admissions factors like your academic scores and interview performance.
+        %p
+          The average total score (50th percentile) in 2020 was 2520, which provides a fair approximation of what the average candidate would score. Broadly speaking, a competitive UCAT
+          %sup ®
+          percentile is the 90th percentile, which essentially means you’ve placed in the top 10% of applicants. In the 2020 testing cycle, this equated to a score of 2920. As the Situational Judgement Test scores are counted separately from the cognitive subtests, the mean Situational Judgement Test score was 592 in 2020.
+
+      .preparation_col.head_aftr_none.mg_bottm100
+        %h2#pre_ucat_exam
+          Preparing for the UCAT Exam
+        %p.mtop_zero
+          There’s no doubt that the UCAT
+          %sup ®
+          is a challenging exam, designed to differentiate the already competitive pool of medical and dental school applicants. However, one of the main reasons that students find the UCAT
+          %sup ®
+          exam difficult is not always the questions themselves, but rather the sheer number of questions - 233 questions in 2 hours, or to put it another way, a question every 31 seconds!
+
+        %p
+          Many students fail to finish the exam at all due to the intense time pressure, needing to complete 2 MCQs every minute. In addition to a high level of concentration and strong cognitive skills, the UCAT
+          %sup ®
+          exam requires exceptional time-management to do well.
+
+        %p
+          As such, preparation is key and preparing for the UCAT
+          %sup ®
+          exam  requires consistent practice over time and a targeted approach towards identifying strengths and weaknesses. Preparation can be broken down into a few key steps:
+
+          %ol
+            %li{style: "font-size: 18px"}
+              %h4
+                Understanding the UCAT
+                %sup ®
+                exam
+              %p
+                In order to properly prepare for the UCAT
+                %sup ®
+                exam, it is important to first understand its importance in the medical school applications process. For many universities, the UCAT
+                %sup ®
+                score carries as much weight in your application as your ATAR. To put this into perspective, the total sum of Year 12 examinations and the intense hours of study behind these scores has as much importance as the score from the 2 hour long UCAT
+                %sup ®
+                exam. Even with a phenomenal ATAR or even a star performance at the interview, a poor UCAT
+                %sup ®
+                score could potentially outweigh these achievements.
+            %li{style: "font-size: 18px"}
+              %h4
+                Nail down Test-Taking Strategies
+              %p
+                The UCAT
+                %sup ®
+                is quite a nuanced exam with specific question types and various levels of difficulty between each question type. Thus, it is important to understand the different formats of each section as well as the unique strategies and shortcuts you can use to select the correct answer and save yourself time. It’s important to acknowledge as well that students will often have varying strengths and weaknesses and it’s important to work out early which sections are going to play to your strengths, and which sections will require the most improvement.
+            %li{style: "font-size: 18px"}
+              %h4
+                Practicing with a wide variety questions
+              %p
+                Whilst the UCAT
+                %sup ®
+                consortium provides
+                %a{href: "https://www.ucat.edu.au/ucat-anz/practice-tests/", target: :_blank}
+                  %strong
+                    a small pool of questions and tests
+                , their explanations are often short and poorly explained. Practice is essential towards working faster and increasing your accuracy for the UCAT
+                %sup ®
+                exam. GradReady’s MCQ bank provides students with the opportunity to assess themselves and evaluate their weaknesses with our detailed explanations and test-accurate question types.
+            %li{style: "font-size: 18px"}
+              %h4 Attempting full mock exams
+              %p
+                After practice, the next step is to undergo time-pressured exam simulations that evaluate a proper UCAT
+                %sup ®
+                score. These mock exams allow you to assess your readiness to sit the exam under accurate conditions. This will also help to hone your exam-taking techniques such as using shortcuts, the calculator function as well as applying time-management skills.
+            %li{style: "font-size: 18px"}
+              %h4 Reviewing mistakes and improving weaknesses
+              %p
+                Finally, after every practice and mock exam, it is essential to look back on what can be improved. Our detailed worked solutions provide students with the ability to quickly identify their mistakes and help reduce the chances of making the same error in the future
+        %p
+          For further tips and advice on how best to prepare for the UCAT
+          %sup ®
+          exam, refer to our comprehensive guide here:
+          %a{href: "ucat-preparation", target: :_blank}
+            %strong
+              UCAT
+              %sup ®
+              Exam Preparation Guide
+
+      .preparation_col.head_aftr_none.mg_bottm100
+        %h2#req_ucat_exam
+          Which Universities require the UCAT exam?
+        %p.mtop_zero
+          The
+          %a{href: "https://www.ucat.edu.au/", target: :_blank}
+            %strong
+              Australia and New Zealand UCAT Consortium universities
+          require a UCAT
+          %sup ®
+          score as part of their admissions process for various medical, dental, and health science pathways. Note that the results of the UCAT
+          %sup ®
+          exam are only valid for 1 year - They don’t carry over to the next year.
+        %p
+          In other words, a UCAT
+          %sup ®
+          score in 2021 can only be used to apply for courses commencing in 2022.
+        %p
+          Whilst the majority of medical schools require a UCAT
+          %sup ®
+          score as a compulsory criteria there are some exceptions. Students should always check whether or not their desired programme requires UCAT
+          %sup ®
+          scores before they register for the UCAT
+          %sup ®
+          exam.
+        %p
+          Below is a list of courses that currently require the UCAT
+          %sup ®
+          exam as part of their selection criteria in the 2022 admissions cycle.
+
+        %h3 UCAT Universities - Australia & New Zealand
+        .tbl_responsive.mtop20.mbot20
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %th.text-center Schools
+              %th.text-center Programmes/Courses
+              %th.text-center Application Dates
+            %tbody
+              %tr
+                %td The University of Adelaide
+                %td
+                  %span.bdr_bottm Medicine
+                  %span.bdr_bottm Dental Surgery
+                  %span Oral Health
+                %td
+                  %p SATAC applications open for 2022 on 2 August 2021.
+
+                  %p Applications will close 30 September 2021.
+              %tr
+                %td Central Queensland University
+                %td
+                  Medical Science (Regional Medical Pathway provisional entry to UQ)
+                %td
+                  %p QTAC opens from early August 2021.
+                  %p Applications close 30 September 2021.
+              %tr
+                %td Charles Sturt University
+                %td
+                  %span.bdr_bottm Dental Science
+                  %span Medicine
+                %td
+                  Applications via UAC open August and close 30 September.
+              %tr
+                %td
+                  Curtin University
+                %td
+                  Medicine
+                %td
+                  %p Applications via TISC open: 31 May 2021.
+                  %p Applications close: 30 September 2021.
+              %tr
+                %td
+                  Flinders University
+                %td
+                  Clinical Sciences / Medicine
+                %td
+                  %p SATAC applications open for 2022 on 2 August 2021.
+                  %p Applications will close 30 September 2021.
+              %tr
+                %td
+                  Griffith University
+                %td
+                  Dental Health Science
+                %td
+                  %p Applications are made via UAC, QTAC or directly to Griffith.
+                  %p Application deadline: September 23, 2021.
+              %tr
+                %td
+                  La Trobe University
+                %td
+                  Dental Science
+                %td
+                  Applications are via UAC or VTAC for multiple courses or directly via La Trobe for one course.
+              %tr
+                %td
+                  Monash University
+                %td
+                  Medicine
+                %td
+                  %p Applications via VTAC open on 2 August, 2021.
+                  %p Applications via VTAC close 30 September, 2021
+              %tr
+                %td
+                  The University of Newcastle / University of New England
+                %td
+                  Joint Medical Program (JMP)
+                %td
+                  Applications via UAC close 30 September, 2021
+              %tr
+                %td
+                  The University of New South Wales
+                %td
+                  Medicine
+                %td
+                  Medicine Application Portal Deadline and UAC Applications close on 30 September 2021.
+              %tr
+                %td
+                  The University of Queensland
+                %td
+                  %span.bdr_bottm Medicine (provisional entry pathway)
+                  %span Dental Science
+                %td
+                  %p QTAC opens from early August 2021.
+                  %p Applications close 30 September 2021.
+              %tr
+                %td
+                  University of Tasmania
+                %td
+                  Medicine
+                %td
+                  %p Applications open: 4 August 2021.
+                  %p Applications close 30 September 2021.
+              %tr
+                %td
+                  The University of Western Australia
+                %td
+                  %span.bdr_bottm Medicine
+                  %span Dental Medicine
+                %td
+                  %p Applications via TISC open: 31 May 2021.
+                  %p Applications close: 30 September 2021.
+              %tr
+                %td
+                  Western Sydney University
+                %td
+                  Medicine (Joint Medical Program)
+                %td
+                  %p Applications via UAC open 1 August.
+                  %p Applications via UAC close on 30 September.
+              %tr
+                %td
+                  The University of Auckland
+                %td
+                  Medicine
+                %td
+                  Applications close on 1 October 2021 (domestic applicants and international first year applicants)
+              %tr
+                %td
+                  University of Otago
+                %td
+                  %span.bdr_bottm Medicine
+                  %span Dentistry
+                %td
+                  %span.bdr_bottm
+                    Closes on 1 May 2021 (Alternative category) and 15 September 2021 (HSFY and Graduate categories).
+                  %span
+                    Closes on 15 September 2021.
+
+      .preparation_col.head_aftr_none.mg_bottm100
+        %h2
+          UCAT Preparation Materials
+        %p.mtop_zero
+          Now that you’ve got some background on the UCAT
+          %sup ®
+          Exam, visit some of our other free resources to learn more:
+        %ol.ordr_list
+          %li
+            %h5
+              %a{href: "/ucat-structure", target: :_blank}
+                UCAT
+                %sup ®
+                Structure
+            %p.mtop_zero
+              A breakdown of the UCAT
+              %sup ®
+              Exam, the different sections and what to expect for each one.
+          %li
+            %h5
+              %a{href: "/ucat-preparation", target: :_blank}
+                How to study for the UCAT
+                %sup ®
+                Exam
+            %p.mtop_zero
+              Everything you need to know on how to study for the UCAT
+              %sup ®
+              Exam, including tips for each of the five sections.
+          %li
+            %h5
+              %a{href: "/ucat-students-guide", target: :_blank}
+                UCAT
+                %sup ®
+                Students Guide
+            %p.mtop_zero
+              A comprehensive breakdown for students to get them started on their UCAT
+              %sup ®
+              preparation.
+          %li
+            %h5
+              %a{href: "/ucat-parents-guide", target: :_blank}
+                UCAT
+                %sup ®
+                Parents Guide
+            %p.mtop_zero
+              A comprehensive guide about what parents and guardians need to know about the UCAT
+              %sup ®
+              including breakdown of test, test timeline and finances.
+
+:javascript
+  // Select all links with hashes
+  $('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top-74
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+
+        });
+      }
+    }
+  });
+
+:css
+  .preparation_col ol li a, .preparation_col ul li a{
+    font-size: 14px;
+    color: #007ecc;
+    line-height: 25px;
+    font-weight: 600;
+  }
+  .preparation_col ol li h3 a {
+    font-size: 18px;
+    color: #007ecc;
+  }
+  .preparation_col h3 {
+    font-size: 18px;
+    color: #007ecc;
+    margin-top: 0px;
+  }
+  .cstm_tbl thead {
+    background: #007ecc;
+    color: #fff;
+  }
+  .download-counter-badge .fa {
+    color: #007ecc !important;
+    padding: 5px 5px !important;
+    font-size: 17px !important;
+  }
+  .preparation_col p a {
+    font-size: 14px;
+    color: #007ecc;
+  }
+  .tbl_responsive span {
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+  }

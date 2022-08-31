@@ -1,0 +1,13 @@
+.nested-tag
+  %p
+    #tag-field
+      = check_box_tag(attribute, tag.id, checked: true)
+      = tag.name
+
+:javascript
+  $(document).ready( function () {
+    $("input[type=checkbox]").on('change', function() {
+        $(this).closest("#tag-field").hide();
+    });
+  });
+

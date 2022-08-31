@@ -1,0 +1,9 @@
+= f.error_notification
+.form-inputs
+  = f.input :line_one, label: "Street Address"
+  = f.input :suburb
+  = f.input :city
+  = f.input :post_code
+  = f.input :state, as: :select, collection: area_names_for_select,prompt: "Please Select a State"
+  / Commented this code becuase of new requirement in GRAD-1961
+  =# f.input :country, as: :select, collection: Address.countries.keys.map {|c| [c.titleize,c]}, prompt: "Please Select a Country"

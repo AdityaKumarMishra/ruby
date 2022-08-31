@@ -1,0 +1,44 @@
+- if @stem_students.present?
+  #filterrific_results
+    .panel.panel-primary
+      .panel-heading
+        %h1.panel-title
+          %strong Mcq Summary
+      .panel-body
+        -# %p.text-info
+        -#   %b
+        -#     Results:
+        -#     = @stem_students.mcq_stems.count
+      .table-responsive
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th No.
+              %th Title
+              %th Tag
+              %th Subject
+              %th Author
+              %th Difficulty
+          %tbody.mcq-font
+            - @stem_students.each_with_index do |ss, i|
+              %tr{'data-link': url_for(student_answer_mcq_stem_path(id: ss.id))}
+                %td= "#{i + 1}."
+                %td.col-md-2= ss.mcq_stem.title
+                %td= ss.mcq_stem.tag.name
+                %td.col-md-4
+                  - if ss.mcq_stem.subjects.present?
+                    %ul.list-group
+                      - ss.mcq_stem.subjects.each do |s|
+                        %li.list-group-item= s.title
+                  - else
+                    %i No mcq stem subjects.
+                %td
+                  - if ss.mcq_stem.author_id.present?
+                    = ss.mcq_stem.author_id.full_name
+                  - else
+                    %i There isn't any mcq stem author.
+                %td.col-md-2= difficulty_to_human ss.mcq_stem.difficulty
+        -# = will_paginate ms, renderer: BootstrapPagination::Rails
+
+- else
+  %i There are not any mcq stems.

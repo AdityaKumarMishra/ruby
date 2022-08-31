@@ -1,0 +1,40 @@
+%h1 Listing users
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+  .panel-body
+    .form-group
+      = form_for_filterrific @filterrific do |f|
+        %p.user-mgmt-filter-p1
+          Date Start
+          =f.text_field :with_start, class: 'form-control datepicker'
+        %p.user-mgmt-filter-p2
+          Date End
+          =f.text_field :with_end, class: 'form-control datepicker'
+        %p
+          Sort By
+          = f.select :sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Sort By' }, class: 'form-control'
+        %p
+          Roles
+          = f.select :with_role, @filterrific.select_options[:with_role], { include_blank: 'All Roles' }, class: 'form-control'
+        %p
+          Keyword
+          = f.text_field :with_name, class: 'form-control', placeholder: 'Name/email'
+        %p
+          = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+    #filterrific_download_xls
+      = render 'users/download_analytics', all_users: @all_users, all_enquiry_users: @all_enquiry_users
+
+= render :partial => 'users/list', locals: { users: @users, all_users: @all_users }
+
+= simple_form_for(User.new, url: user_invitation_path,  html: {class: 'form-inline'}) do |f|
+  .form-inputs
+    = f.input :email, placeholder: 'Email', label:false
+    = f.input :role, as: :select, collection: User.roles.keys
+    = f.button :submit, 'Invite User'
+
+%br
+
+= button_to "Sign Up New User", new_user_path, method: :get, class: "btn btn-default"
+

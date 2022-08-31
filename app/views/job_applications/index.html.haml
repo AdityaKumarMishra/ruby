@@ -1,0 +1,12 @@
+%h1 Listing #{@job_application_form.title} Applications
+
+= render 'form_filters'
+
+= render partial: 'job_applications/list', locals: { job_applications: @job_applications }
+
+= link_to 'Download Excel Summary', job_application_form_job_applications_path(@job_application_form, format: "xls"), class: 'btn btn-primary'
+= link_to 'Download All Attachments', download_all_job_application_form_job_applications_path(@job_application_form), class: 'btn btn-primary'
+%br
+%br
+= link_to 'Back', job_application_forms_path, class: 'btn btn-default'
+%br

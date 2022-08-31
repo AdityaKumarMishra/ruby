@@ -1,0 +1,19 @@
+<% if @ap_type == "all_session" %>
+  <% js = escape_javascript(render('dashboard/partial/count_tutor_appointments', appointments: @appointments, tutors: @tutors, appointment_hours: @appointment_hours))%>
+  $("#tutor-apt-table").html("<%= js %>");
+<% elsif @ap_type == "private_tutor" %>
+  <% js = escape_javascript(render('dashboard/partial/count_student_appointments', appointments: @appointments, tutors: @tutors, appointment_hours: @appointment_hours))%>
+  $("#tutor-apt-table").html("<%= js %>");
+<% elsif @ap_type == "unbooked_session" %>
+  <% js = escape_javascript(render('dashboard/partial/count_unbooked_student_appointments', appointments: @appointments, tutors: @tutors, appointment_hours: @appointment_hours))%>
+  $("#tutor-apt-table").html("<%= js %>");
+<% end %>
+
+
+$(function () {
+  $('.tutor-datepicker').datepicker({
+    "format": "yyyy-mm-dd",
+    "autoclose": true,
+    orientation: 'bottom'});
+});
+

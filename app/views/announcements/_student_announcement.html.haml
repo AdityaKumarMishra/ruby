@@ -1,0 +1,117 @@
+#contact_first_id.faq_list_col
+  %h2.faq_question#announce{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#first_faq", role: "button"}
+    %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}>
+    - if announcement.display_name.present?
+      = announcement.display_name
+    - else
+      = title
+  #first_faq.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+    - h_text = ""
+    -if user_announcement.present? && !user_announcement.viewed && announcement.highlighted_text.present?
+      - description = HTMLEntities.new.decode(announcement.description).gsub(/[\r\n\t]+/,'')
+      - hlighted_text = HTMLEntities.new.decode(announcement.highlighted_text).gsub(/<br>+/,'<br />')
+      - announcement_array = description.split(hlighted_text)
+      - announcement_text = "<div class='text_highlight'>#{hlighted_text}</div>"
+      - announcement_array.each_with_index do |element, index|
+        - h_text += element
+        - h_text += announcement_text if index < announcement_array.size - 1
+      - last_index = description.rindex(hlighted_text)
+      - h_text += announcement_text if last_index and description.length == last_index + hlighted_text.length
+    -else
+      - h_text = announcement.description
+    .ck-editor-list
+      = h_text.html_safe
+
+- if current_user.paid_enrolments.present?
+  - paid_enrol = current_user.paid_enrolments.order('paid_at DESC').first
+  - paid_at = paid_enrol.paid_at.present? ? paid_enrol.paid_at : paid_enrol.created_at
+-if current_user.paid_enrolments.present? && (current_user.last_sign_in_at < paid_at)
+  -if !user_announcement.viewed && current_user.sign_in_count == 1
+    :javascript
+      $('#first_faq').collapse('show');
+      $(".faq_list h2").find("i").removeClass("fa-angle-down");
+      $(".faq_list h2").find("i").addClass("fa-angle-up");
+      $('.show_all_faq').text('Hide All');
+  -else
+    :javascript
+      $('#first_faq').collapse('hide');
+      $(".faq_list h2").find("i").addClass("fa-angle-down");
+      $(".faq_list h2").find("i").removeClass("fa-angle-up");
+      $('.show_all_faq').text('Show All');
+-elsif user_announcement.present? && !user_announcement.viewed
+  :javascript
+    var id = "#{user_announcement.id}";
+    $('#first_faq').on('show.bs.collapse', function () {
+      $.ajax({
+        type: 'get',
+        url: '/dashboard/hide_announcement',
+        data: {id: id},
+      }).done(function (response) {
+        if(response == true){
+          $('.announce-badges').addClass('hide');
+        }
+      });
+    })
+  -if current_user.sign_in_count == 1
+    :javascript
+      $('#first_faq').collapse('show');
+      $(".faq_list h2").find("i").removeClass("fa-angle-down");
+      $(".faq_list h2").find("i").addClass("fa-angle-up");
+      $('.show_all_faq').text('Hide All');
+
+-else
+  :javascript
+    $('#first_faq').collapse('hide');
+    $(".faq_list h2").find("i").addClass("fa-angle-down");
+    $(".faq_list h2").find("i").removeClass("fa-angle-up");
+    $('.show_all_faq').text('Show All');
+-if !user_announcement.viewed
+  :javascript
+    $('.admin_m_menu_hide li').on('click', function () {
+      $.ajax({
+          type: 'get',
+          url: '/dashboard/hide_announcement',
+          data: {id: id},
+        }).done(function (response) {
+          if(response == true){
+            $('.announce-badges').addClass('hide');
+          }
+        });
+    });
+
+
+:javascript
+
+  var id = "#{user_announcement.id}";
+  $( document ).ready(function() {
+    $('#first_faq').collapse('show');
+    $(".faq_list h2").find("i").removeClass("fa-angle-down");
+    $(".faq_list h2").find("i").addClass("fa-angle-up");
+    $(".faq_list h2").click(function() {
+      $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+      $(this).parent().toggleClass("faq_show");
+    });
+
+  });
+:css
+
+  .ck-editor-list ol {
+    margin: 0 0 8px 43px;
+    float: left;
+    width: 100%;
+  }
+  .ck-editor-list a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #007833 !important;
+  }
+  .ck-editor-list ul li a {
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #007833 !important;
+  }
+  .ck-editor-list ol li a {
+    font-size: 14px !important;
+    font-weight: 600;
+    color: #007833 !important;
+  }

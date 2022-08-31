@@ -1,0 +1,18 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Start time
+      %th End time
+      %th Frequency
+      %th Student class
+      %th{colspan: 2} Actions
+
+  %tbody
+    - student_class_sessions.each do |student_class_session|
+      %tr{'data-link': url_for(student_class_session)}
+        %td= student_class_session.start_time
+        %td= student_class_session.end_time
+        %td= student_class_session.frequency
+        %td= student_class_session.student_class
+        %td= link_to 'Edit', edit_student_class_session_path(student_class_session), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', student_class_session, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'

@@ -1,0 +1,107 @@
+.col-md-12
+  .span12
+    = render 'pages/partial/features_sets/feature_head'
+  .features_section_wrapper
+    %h4 Preparation Material
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-question{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/online_questions', paid: true, product_line: 'UMAT', price: 145, price_with_gst: 160
+  .features_section_wrapper
+    %h4 Learning Tools
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-refresh{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/quality_assurance_system', paid: false, product_line: 'UMAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/documents', paid: false, product_line: 'UMAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-bullseye{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/cross_referencing_system', paid: false, product_line: 'UMAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/course_videos', paid: true, product_line: 'UMAT', price: 85, price_with_gst: 94
+  .features_section_wrapper
+    .text-center.container.mbot30
+      .text-center
+        %h2.feature_heading.mtop15.feature_heading1 Not included in free trial
+  .features_section_wrapper
+    %h4 Preparation Material
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-copy{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/online_exams', paid: true, product_line: 'UMAT', subject: 'umat', price: 125, price_with_gst: 138
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-clipboard{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/diagnostics_assessment', paid: true, product_line: 'UMAT', subject: 'umat', price: 35, price_with_gst: 39
+  .features_section_wrapper
+    %h4 Learning Tools
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/online_textbook', paid: true, product_line: 'UMAT', price: 95, price_with_gst: 105
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/study_timeline', paid: false, product_line: 'UMAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-random{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/strategy', paid: false, product_line: 'UMAT'
+  .features_section_wrapper
+    %h4 Targeted 1 on 1 tutor assistance
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-comments{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/get_clarity', paid: true, product_line: 'UMAT', price: 195, price_with_gst: 215
+
+  .features_section_wrapper
+    %h4 Live component
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-user{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/attendance_tutorials', paid: true, product_line: 'UMAT', price: 455, price_with_gst: 501
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/mock_exam_day', paid: true, product_line: 'UMAT', price: 125, price_with_gst: 138
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-refresh{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/interactive_learning', product_line: 'UMAT'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-street-view{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/private_tutoring', paid: true, hours: 5,product_line: 'UMAT', price: 495, price_with_gst: 545, new_course_type: new_course_type

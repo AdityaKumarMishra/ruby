@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'user_emails/delivery_table', locals: {users: @users})) %>
+$("#delivery_tbl").html("<%= js %>")

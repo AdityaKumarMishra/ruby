@@ -1,0 +1,13 @@
+%h1 Listing Contents
+
+- if @comm_content.present?
+  .site_content
+    %b GradReady Contact Number:
+    = @comm_content.contact_number
+    %br
+    %b Mock Exam Overdue Date:
+    = @comm_content.mock_exam_overdue
+  %br
+  = link_to 'Edit Content', edit_common_content_path(@comm_content), class: 'btn btn-gradready green'
+- else
+  = link_to 'New Content', new_common_content_path, class: 'btn btn-gradready green'

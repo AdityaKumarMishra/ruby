@@ -1,0 +1,13 @@
+#confirmTag.modal.latest_pop.fade{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Confirm Topic
+      .modal-body
+        %p
+          Please ensure that you have selected the correct topic for your question. Doing so will ensure that you receive a more prompt reply.
+      .modal-footer
+        %button.btn.default_btn.resp_btn.hvr-shutter-in-horizontal.close_confirm_tag.btn_danger{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-default.default_btn.resp_btn.hvr-shutter-in-horizontal.submit_ticket_confirm_tag
+          Confirm

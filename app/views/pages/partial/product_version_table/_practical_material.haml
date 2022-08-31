@@ -1,0 +1,79 @@
+// Rowspan 2 for GAMSAT only as it MAY have extra row for practical material component (e.g 6 Online Exams)
+%td{rowspan: (2 if product_line == 'gamsat' && !extra)}
+
+  - if product_line == 'gamsat'
+    .component-title.under_line
+      %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'reviews_col_tabbing')}
+        PREPARATION MATERIAL
+  - elsif product_line == 'umat'
+    .component-title.under_line
+      %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'preparation_material')}
+        PRACTICAL MATERIAL
+  -else
+    .component-title PRACTICAL MATERIAL
+
+  - unless (product_line == 'vce' || 'hsc') && subject == "english"
+    %li
+      =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+      - if product_line == 'gamsat' || product_line == 'umat'
+        Diagnostics Test
+      -else
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_Diagnostics')}
+
+  - if product_line == 'gamsat'
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+      / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+      4000+ MCQs & Tracking System
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+      / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_online_exams')}
+      8 Online Exams (Online or Paper)
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+      Advanced Auto Reporting System
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+      1200+ Page Textbook
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+      22+ Hours of Videos
+  - elsif product_line == 'umat'
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_umat.png", width: '15', height: 'auto'
+      / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+      1500 MCQs + Tracking System
+    %li
+      =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_umat.png", width: '15', height: 'auto'
+      / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_online_exams')}
+      5 Online Exams
+  - elsif product_line == 'hsc'
+    - if subject == 'math'
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+          1000+ Questions + Tracking System
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_online_exams')}
+          5 Online Exams
+    - elsif subject == 'english'
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+          100+ Practice Essay Topics + Tracking System
+  - elsif product_line == 'vce'
+    - if subject == 'math'
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+          1000+ Questions + Tracking System
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_online_exams')}
+          2 Online Exams
+    - elsif subject == 'english'
+      %li
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        %a{:href => dynamic_product_version_uri(product_version, product_line, subject, '1500-MCQs-(and-growing)+Tracking-System')}
+          100+ Practice Essay Topics + Tracking System

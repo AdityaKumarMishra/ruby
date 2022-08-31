@@ -1,0 +1,174 @@
+/* jQuery Countdown styles 2.0.0. */
+.is-countdown {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  width: 42%;
+  display: inline-block;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.ol_mock_exam_doc_container .is-countdown {
+  border: none !important;
+  background-color: transparent !important;
+  width: auto !important;
+  display: inline-block;
+  padding: 0px;
+  font-size: inherit !important;
+}
+
+
+.is-countdown {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  width: 42%;
+  display: inline-block;
+  padding: 10px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.countdown-rtl {
+  direction: rtl;
+}
+.countdown-holding {
+  span {
+    color: #888;
+  }
+}
+.countdown-row {
+  clear: both;
+  width: 100%;
+  padding: 0px 2px;
+  text-align: center;
+}
+.countdown-show1 {
+  .countdown-section {
+    width: 98%;
+  }
+}
+.countdown-show2 {
+  .countdown-section {
+    width: 48%;
+  }
+}
+.countdown-show3 {
+  .countdown-section {
+    width: 32.5%;
+  }
+}
+.countdown-show4 {
+  .countdown-section {
+    width: 24.5%;
+  }
+}
+.countdown-show5 {
+  .countdown-section {
+    width: 19.5%;
+  }
+}
+.countdown-show6 {
+  .countdown-section {
+    width: 16.25%;
+  }
+}
+.countdown-show7 {
+  .countdown-section {
+    width: 14%;
+  }
+}
+.countdown-section {
+  display: block;
+  float: left;
+  font-size: 75%;
+  text-align: center;
+}
+.countdown-amount {
+  font-size: 200%;
+}
+.countdown-period {
+  display: block;
+}
+.countdown-descr {
+  display: block;
+  width: 100%;
+}
+.home_faq.count-timer {
+  padding: 20px 0 26px;
+}
+.home_faq.count-timer.bg_grey_count {
+  background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/preparation_bg.png');
+
+  &:after {
+    display: none;
+  }
+  p {
+    color: #111;
+    margin-bottom: 20px;
+  }
+  .is-countdown {
+    background-image: -ms-linear-gradient(top, #00903d 0%, #007d35 100%);
+    background-image: -moz-linear-gradient(top, #00903d 0%, #007d35 100%);
+    background-image: -o-linear-gradient(top, #00903d 0%, #007d35 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00903d), color-stop(100, #007d35));
+    background-image: -webkit-linear-gradient(top, #00903d 0%, #007d35 100%);
+    background-image: linear-gradient(to bottom, #00903d 0%, #007d35 100%);
+  }
+  .countdown-amount {
+    color: #fff;
+  }
+  .countdown-period {
+    color: #fff;
+  }
+}
+.umat_body {
+  .home_faq {
+    .countdown-amount {
+      color: #007ecc;
+    }
+    .countdown-period {
+      color: #007ecc;
+    }
+  }
+}
+.countdown_timer_col {
+  position: relative;
+  z-index: 99;
+  p {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .countdown-section {
+    border-right: 1px solid #ccc;
+    &:last-child {
+      border-right: 0px;
+    }
+  }
+  .countdown-amount {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #007833;
+  }
+  .countdown-period {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #007833;
+  }
+}
+.home_faq.pad40 {
+  padding: 46px 0px 36px;
+}
+@media only screen and (min-width: 310px) and (max-width: 767px) {
+  .is-countdown {
+    width: 100%;
+  }
+}

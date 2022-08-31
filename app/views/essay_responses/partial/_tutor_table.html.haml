@@ -1,0 +1,14 @@
+=will_paginate responses, renderer: BootstrapPagination::Rails
+%table.table.table-bordered.table-hover#tutor_essay_table
+  %thead
+    %tr
+      %th Tutor Name
+      %th Tutor Marked Essays count
+
+  %tbody
+    - responses.each_with_index do |response, i|
+      %tr
+        %td= response.staff.full_name
+        %td
+          - essay_responses.each_with_index do |essay_response, i|
+            =essay_response[1].count if essay_response[0] == response

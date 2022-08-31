@@ -1,0 +1,99 @@
+- edit_stem = options.include?(:edit_stem) ? options[:edit_stem] : @mcq_stem
+
+.video_div
+  = render 'mcq_stems/partial/mcq_steam_video_guide'
+
+.form_div
+  = simple_form_for(edit_stem) do |f|
+    =# f.error_notification
+    .form-inputs
+      .div_field
+        = f.label :title, label: "Title"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Unless the MCQ is for an exam, please think of a creative title and don't put the Author's name in the title.
+        = f.input :title, label: false
+      .div_field
+        = f.input :published, label: false
+        = f.label :published, label: "Published"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only tick Publish if you are reviewing the question and it is ready to be displayed to students.
+      .div_field
+        = f.input :examinable, label: false
+        = f.label :examinable, label: 'Put MCQ in Exam Pool?'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only tick this box if you are making an online exam and want to include this MCQ stem and the questions it contains.
+      = f.input :difficulty, as: :select, collection: difficulty_collection, selected: options.include?(:edit_stem) ? @mcq_stem.fetch_difficulity : ''
+
+      .div_field
+        = f.label :tags, label: 'Question Topic (Tag)'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Select only one topic for the MCQ
+        = f.association :tags, collection: policy_scope(Tag).sort_by{|tag| tag.name.upcase}, include_blank: true, input_html: { class: 'chosen-select tag-list-v2' }, required: true, label: false
+
+      - if current_user.tutor?
+        = f.input :author, as: :select, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? ([edit_stem.author.full_name, edit_stem.author.id]) : ([current_user.full_name, current_user.id]), input_html: { class: 'chosen-select avs'}, required: true, label: 'Author', disabled: true
+        = f.input :author_id, as: :hidden, input_html: { value: options.include?(:edit_stem) ? edit_stem.author.id : current_user.id }
+      - else
+        = f.input :author, as: :select, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? ([edit_stem.author.full_name, edit_stem.author.id]) : ([current_user.full_name, current_user.id]), input_html: { class: 'chosen-select avs'}, required: true, label: 'Author'
+
+
+      = f.input :last_editor_id, as: :hidden, input_html: { value: current_user.id }
+      - if options.include?(:edit_stem)
+        - stem_last_editor = User.find_by_id(edit_stem.last_editor_id)
+        - last_editor = stem_last_editor.nil? ? edit_stem.author : stem_last_editor
+        %p
+          %strong
+            Last Edited By:
+          = last_editor.full_name
+
+      .div_field
+        = f.label :description, label: 'Description'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Instruction 1 - Remember that if you're adding images please do NOT copy and paste the image.  Upload it via the upload button featured in the top line 10th from the right.
+          %br
+          Instruction 2 - This box is the stem and is to include the stimulus for the questions you will add below.
+        = f.input :description, as: :ckeditor, input_html: { ckeditor: { height: 400 } },label: false
+
+    .form-actions
+      - default_reviewer = User.find_by(email: "tt@gradready.com.au")
+      - if current_user.tutor?
+        = f.association :reviewer, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? edit_stem.reviewer ? ([edit_stem.reviewer.full_name, edit_stem.reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}, disabled: true
+        = f.input :reviewer_id, as: :hidden, input_html: { value: options.include?(:edit_stem) ? edit_stem.reviewer ? edit_stem.reviewer.id : default_reviewer.id : default_reviewer.id }
+      - else
+        = f.association :reviewer, collection: User.where.not(role:0), selected: options.include?(:edit_stem) ? edit_stem.reviewer ? ([edit_stem.reviewer.full_name, edit_stem.reviewer.id]) : ([default_reviewer.full_name, default_reviewer.id]) :([default_reviewer.full_name, default_reviewer.id]), input_html: { class: 'chosen-select answerer_list dynamic_answerers'}
+
+    .form-inputs
+      = f.input :reviewed, input_html: { checked: true }
+
+    %h3 Mcqs
+    %hr
+    = f.simple_fields_for :mcqs, f.object.mcqs.order(:id) do |mcq|
+      =render 'mcq_fields',{f: mcq}
+    %p.links.add_mcq
+      =link_to_add_association 'Add Mcq', f, :mcqs, class: 'btn btn-default'
+
+    .form-actions.div_field.flt_left
+      = f.button :submit
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        = f.object.new_record? ? 'Have you selected a reviewer for your MCQ? If you are unsure who this is ask your CDC.' : 'If you are the reviewer make sure to tick the reviewed box.'
+
+:javascript
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+
+  });

@@ -1,0 +1,97 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    %ul.gr-nav.gr-nav-pills
+      %li.default_range.active
+        %a{"data-toggle" => "tab", href: "#default"} Default Range
+      %li.custom_range
+        %a{"data-toggle" => "tab", href: "#custom"} Custom Range
+    .clearfix
+    %br
+    .tab-content
+      #default.tab-pane.fade.in.active
+        .form-group
+          %p
+            Pay Period
+            =select_tag(:with_pay_period, options_for_select(Appointment.pay_periods, @selected_date), class: 'form-control pay_period_filter')
+          %br
+          %p
+          = link_to "Download csv",dashboard_count_tutor_appointments_path(format: "xls"), class: 'btn btn-primary csv_btn'
+      #custom.tab-pane.fade.in
+        .form-group
+          %p
+            Date start
+            =text_field_tag(:with_start, params[:from_filter], class: 'start_date form-control tutor-datepicker', as: 'datepicker')
+        .form-group
+          %p
+            Date end
+            =text_field_tag(:with_end, params[:to_filter], class: 'end_date form-control tutor-datepicker', as: 'datepicker')
+          %br
+          %p
+          = link_to "Download csv",dashboard_count_tutor_appointments_path(format: "xls", selection: "Private Tutoring sessions conducted via pay period"), class: 'btn btn-primary custom'
+.div#tutor-pt-table
+  = render(partial: 'dashboard/tutor_periods_table', locals: { appointments: @appointments, tutors: @tutors, appointment_hours: @appointment_hours } )
+
+:javascript
+
+  $(function () {
+    $(".pay_period_filter").on('change', function(){
+      var selected = $(".pay_period_filter").val();
+      var pay_period_date = selected.split(' - ');
+      var from_filter = pay_period_date[0];
+      var to_filter = pay_period_date[1];
+      var selection =  $(".ap_select").val();
+      $.ajax({
+        url: "/dashboard/count_tutor_appointments",
+        type: "GET",
+        dataType: 'script',
+        data: {from_filter: from_filter, to_filter: to_filter, selection: selection, pay_period : selected, type: 'pay_period' },
+      });
+    })
+  });
+
+  $('.custom').on('click', function(){
+    get_tutor_data();
+  });
+
+  $('.start_date, .end_date ').change(function(event){
+    get_tutor_data();
+  })
+
+  function get_tutor_data(){
+   var from_filter =  $(".start_date").val();
+    var to_filter =  $(".end_date").val();
+    var selected = $(".pay_period_filter").val();
+    var selection =  $(".ap_select").val();
+
+    var aa = $(".custom")
+    var _href = aa.attr("href");
+    aa.attr("href", "/dashboard/count_tutor_appointments?pay_period=" + selected + "&from_filter=" + from_filter + "&to_filter=" + to_filter  + "&selection=" + selection + "&format=" + "xls");
+    if((from_filter != "") || (to_filter != "")){
+      $.ajax({
+        url: "/dashboard/count_tutor_appointments",
+        type: "GET",
+        dataType: 'script',
+        data: {from_filter: from_filter, to_filter: to_filter, selection: selection, pay_period : selected, type: "custom"},
+      });
+    }
+  }
+
+  $(document).ready(function(){
+    download_sheet_data();
+  });
+
+  function download_sheet_data() {
+    var selected = $(".pay_period_filter").val();
+    var pay_period_date = selected.split(' - ');
+    var from_filter = pay_period_date[0];;
+    var to_filter = pay_period_date[1];;
+    var selection =  $(".ap_select").val();
+    var aa = $(".csv_btn")
+    var _href = aa.attr("href");
+    aa.attr("href", "/dashboard/count_tutor_appointments?pay_period=" + selected + "&pay_period_date=" + pay_period_date + "&from_filter=" + from_filter + "&to_filter=" + to_filter  + "&selection=" + selection + "&format=" + "xls");
+  }
+

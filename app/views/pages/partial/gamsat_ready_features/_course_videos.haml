@@ -1,0 +1,24 @@
+#Course-Videos.feature-icon-container.col-md-6
+  .feature-icon.pull-left
+    %i.fa.fa-film{"aria-hidden" => "true"}
+  .feature-content.pull-right
+    %h4
+      Course Videos
+      / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+      / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+    - if paid
+      %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+    %p
+      %strong
+        %i Humanities - 5 hours
+    %p
+      %strong
+        %i Physics - 6 hours
+    %p
+      %strong
+        %i Biology - 7 hours
+    %p
+      %strong
+        %i Chemistry - 7 hours
+    .text
+      %p.u-word-spacing The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the GAMSAT and serve as an excellent starting point for your GAMSAT preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.

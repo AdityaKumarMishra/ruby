@@ -1,0 +1,26 @@
+= render 'ticket_mailer/new_question', question: @question,
+
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      ="Question from student #{@question.asker_firstname} #{@question.asker_lastname}"
+    %p
+      ="Hi #{@question.answerer.first_name},"
+    %p
+      The following is the question from
+      =@question.asker_firstname
+    %p
+      =@question.title
+    %p
+      =sanitize @question.question
+      %br/
+    %p
+      Click
+      =link_to 'here', issue_url(@question)
+      to response.
+
+    %p Kind regards,
+    %p GradReady Student Success Team

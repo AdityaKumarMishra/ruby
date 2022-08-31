@@ -1,0 +1,10 @@
+#5x1-hour-private-tutoring-session.feature-icon-container.col-md-6
+  .feature-icon.pull-left
+    %i.fa.fa-street-view{"aria-hidden" => "true"}
+  .feature-content.pull-right
+    %h4
+      5 x 1 hour private tutoring session
+    - if paid
+      %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+    .text 
+      %p.u-word-spacing Be fully prepared for the GAMSAT by addressing your remaining weak points in one on one sessions.

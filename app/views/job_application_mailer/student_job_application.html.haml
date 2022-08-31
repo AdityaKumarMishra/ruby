@@ -1,0 +1,128 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 750px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              %ul.student_app_list
+                %li
+                  .label_name
+                    %strong Name:
+                  .fld_name
+                    = @job_application.name
+                %li
+                  .label_name
+                    %strong Status:
+                  .fld_name
+                    = @job_application.status || 'N/A'
+                %li
+                  %strong.label_name Email:
+                  .fld_name
+                    = @job_application.email
+                %li
+                  .label_name
+                    %strong Address:
+                  .fld_name
+                    = render 'addresses/address_inc_line_one', address: @job_application.address
+                %li
+                  .label_name
+                    %strong Cover Letter:
+                  .fld_name
+                    = render 'job_applications/attachment_link', attachment: @job_application.cover_letter
+                %li
+                  .label_name
+                    %strong Resume:
+                  .fld_name
+                    = render 'job_applications/attachment_link', attachment: @job_application.resume
+                %li
+                  .label_name
+                    %strong Submission Date:
+                  .fld_name
+                    = @job_application.created_at.to_date.strftime("%B %d, %Y")
+                %li
+                  .label_name
+                    %strong Hours Available:
+                  .fld_name
+                    = @job_application.hours_available
+                %li
+                  .label_name
+                    %strong Domestic /International:
+                  .fld_name
+                    - unless @job_application.domestic.nil?
+                      = @job_application.domestic ? 'Domestic' : 'International'
+                %li
+                  .label_name
+                    %strong Degree:
+                  .fld_name
+                    = @job_application.degree_type
+                %li
+                  .label_name
+                    %strong Expected Graduation Date:
+                  .fld_name
+                    = @job_application.graduation
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              Notes:
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              = @job_application.notes || 'N/A'
+          - @job_application.application_answers.includes(:application_question).each do |q|
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+                - if q.application_question
+                  %p
+                    %b Question:
+                    = simple_format(q.application_question.content)
+                  %p
+                    %b Answer:
+                    - q.parse_answer.each do |content|
+                      %p= simple_format(content)
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Recruitment Team
+
+
+
+:css
+  .student_app_list{
+    list-style:none;
+    border:1px solid #000;
+    padding-left:0;
+    float:left;
+    width:100%;
+    }
+    .student_app_list li{
+    float:left;
+    width:100%;
+
+    border-bottom:1px solid #000;
+    }
+    .student_app_list li:last-child{
+    border-bottom:0;
+    }
+    .label_name{
+    width:30%;
+    float:left;
+    padding-left:5px;
+    }
+
+    .fld_name{
+    width:55%;
+    float:left;
+    padding-left:5px;
+    border-left:1px solid #000;
+    }

@@ -1,0 +1,105 @@
+- if essay.omes_document_start_time > Time.zone.now && essay.omes_document_end_time > Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Will Open
+        %span.timer{id: "countdown_timer#{essay.id}"}
+  :javascript
+    var esyear#{essay.id} = parseInt("#{essay.try(:start_date).try(:year)}");
+    var esmonth#{essay.id} = parseInt("#{essay.try(:start_date).try(:month)}");
+    var esdate#{essay.id} = parseInt("#{essay.try(:start_date).try(:day)}");
+    var eshour#{essay.id} = parseInt("#{essay.try(:start_time).try(:hour)}");
+    var esminutes#{essay.id} = parseInt("#{essay.try(:start_time).try(:min)}");
+    var esaustDay#{essay.id} = new Date(esyear#{essay.id}, esmonth#{essay.id}-1, esdate#{essay.id}, eshour#{essay.id}, esminutes#{essay.id});
+    var esx#{essay.id} = setInterval(function() {
+      // Get today's date and time
+      var esnow#{essay.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var esdistance#{essay.id} = esaustDay#{essay.id} - esnow#{essay.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var esdays#{essay.id} = Math.floor(esdistance#{essay.id} / (1000 * 60 * 60 * 24));
+      var eshours#{essay.id} = Math.floor((esdistance#{essay.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var esminutes#{essay.id} = Math.floor((esdistance#{essay.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var esseconds#{essay.id} = Math.floor((esdistance#{essay.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{essay.id}").innerHTML = esdays#{essay.id} + "d " + eshours#{essay.id} + "h "
+      + esminutes#{essay.id} + "m " + esseconds#{essay.id} + "s ";
+
+      // If the count down is over, write some text
+      if (esdistance#{essay.id} < 0) {
+        clearInterval(esx#{essay.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempts_path}",
+            dataType: 'script',
+            data: {document_id: "#{essay.id}",attempt_id: "#{@online_mock_exam_attempt.id}"}
+          });
+      }
+    }, 1000);
+-elsif essay.omes_document_start_time <= Time.zone.now && essay.omes_document_end_time >= Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Time Remaining:
+        %span.timer{id: "countdown_timer#{essay.id}"}
+        
+  :javascript
+    var essyear = parseInt("#{essay.try(:end_date).try(:year)}");
+    var essmonth = parseInt("#{essay.try(:end_date).try(:month)}");
+    var essdate = parseInt("#{essay.try(:end_date).try(:day)}");
+    var esshour = parseInt("#{essay.try(:end_time).try(:hour)}");
+    var essminutes = parseInt("#{essay.try(:end_time).try(:min)}");
+    var essaustDay = new Date(essyear, essmonth-1, essdate, esshour, essminutes);
+    var essx = setInterval(function() {
+      // Get today's date and time
+      var esnow = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var essdistance = essaustDay - esnow;
+
+      // Time calculations for days, hours, minutes and seconds
+      var essdays = Math.floor(essdistance / (1000 * 60 * 60 * 24));
+      var esshours = Math.floor((essdistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var essminutes = Math.floor((essdistance % (1000 * 60 * 60)) / (1000 * 60));
+      var essseconds = Math.floor((essdistance % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{essay.id}").innerHTML = essdays + "d " + esshours + "h "
+      + essminutes + "m " + essseconds + "s ";
+
+      // If the count down is over, write some text
+      if (essdistance < 0) {
+        clearInterval(essx);
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempts_path}",
+            dataType: 'script',
+            data: {document_id: "#{essay.id}"}
+          });
+      }
+    }, 1000);
+  .essay{id: "sub_section#{essay.id}"}
+    = render 'essay_responses/partial/table'
+- else
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Closed
+        %span.timer{id: "countdown_timer#{essay.id}"}
+
+:javascript
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+    if(reload_flag == true){
+      $("#redirect_msg").show();
+      setTimeout(function(){location.reload()},5000)
+    }
+  });

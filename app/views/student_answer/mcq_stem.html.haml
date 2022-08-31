@@ -1,0 +1,18 @@
+.container
+  .row
+    .panel.panel-primary
+      .panel-heading
+        %h1.panel-title
+          %strong= @stem_student.title
+      .panel-body
+        .col-md-10.col-md-offset-1
+          %table.table.table-bordered.table-hover
+            %tr
+              %td
+                %h5
+                  %strong Description
+              %td
+                %h4= @stem_student.description.html_safe
+          =render 'student_answer/mcq'
+      .panel-footer
+        = link_to 'Back', student_answer_summary_path, class: 'btn btn-default'

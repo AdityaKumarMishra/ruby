@@ -1,0 +1,60 @@
+%h4 Diagnostics Assessment
+- if paid
+  -if product_line == 'GAMSAT'
+    %span Individual value of item (Included in Online Exams): $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+  -else
+    %span Individual value of item : $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+- if product_line == 'UMAT'
+  %p
+    Use the 50 question test to assess your familiarity of the fundamental concepts covered in the UCAT
+    %sup®
+    = '....'
+    .show_full_content
+      Use the 50 question test to assess your familiarity of the fundamental concepts covered in the &emsp; UCAT
+      %sup®
+      = '.'
+      Your performance will be automatically reported across the 3 subject areas and 19 subtopics. Use this information not only to guide the focus of your studies but also to compare your performance with other GradReady students. Note that this is not a diagnostics of your performance in the UCAT
+      %sup®
+      ; the MCQs or Online Exams would better serve that purpose.
+- elsif product_line == 'GAMSAT'
+  %p
+    Use the 60 question test to assess your familiarity of the fundamental concepts covered in the GAMSAT
+    %sup ®
+    exam...
+    .show_full_content
+      Use the 60 question test to assess your familiarity of the fundamental concepts covered in the GAMSAT
+      %sup ®
+      exam.
+      Your performance will be automatically reported across the 4 subject areas and 26 subtopics. Use this information not only to guide the focus of your studies but also to compare your performance with 1000s of other GradReady students. Note that this is not diagnostic of your performance in the GAMSAT
+      %sup®
+      exam; the multiple choice questions or Online Exams would better serve that purpose.
+- elsif product_line == 'VCE'
+  .text
+    - if subject == "comprehensive-private-tutoring" || subject == "online-comprehensive" || subject == "online-essentials" || subject == "attendance-essentials" || subject == "attendance-comprehensive"
+      %p.u-word-spacing
+        Our diagnostics test will assess your familiarity with fundamental concepts covered in the VCE
+        %sup{ style: "margin-right: -9px;left: -6px;"} ®
+        = '.'
+        You will receive a performance report to help you guide your VCE
+        %sup{ style: "margin-right: -6px;left: -5px;"} ®
+        study. Use this information not only to guide the focus of your studies but also to compare your performance with other GradReady students. Note that this is not a diagnostic test of your overall performance; the Online Questions or Online exams will better serve that purpose.
+    - else
+      %p.u-word-spacing
+        Our the 50 question test will assess your familiarity with fundamental concepts covered in the VCE
+        %sup{ style: "margin-right: -9px;left: -6px;"} ®
+        = '.'
+        You will receive a performance report to help you guide your VCE
+        %sup{ style: "margin-right: -20px;left: -9px;"} ®
+        study. Use this information not only to guide the focus of your studies but also to compare your performance with other GradReady students. Note that this is not a diagnostic test of your overall performance; the Online Questions or Online exams will better serve that purpose.
+- elsif product_line == 'HSC'
+  .text
+    %p.u-word-spacing
+      Our 50 question test will assess your familiarity with fundamental concepts covered in the HSC
+      %sup{ style: "margin-right: -9px;left: -8px;"} ®
+      = '.'
+      You will receive a performance report to help you guide your HSC
+      %sup{ style: "margin-right: -9px;left: -6px;"} ®
+      study. Use this information not only to guide the focus of your studies but also to compare your performance with other GradReady students. Note that this is not a diagnostic test of your overall performance; the Online Questions or Online exams will better serve that purpose.

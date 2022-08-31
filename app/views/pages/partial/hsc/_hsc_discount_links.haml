@@ -1,0 +1,21 @@
+.discount
+  .content.border_zero
+    #a_link_clr
+      %h4
+        = link_to '10% discount', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#is-there-a-group', class: 'u-text-red'
+        if you enrol in groups of 3 or more
+        %span
+          = link_to 'Learn more >', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#can-discounts-be', class: 'u-red-link u-standard-text'
+      %h4
+        %span.u-text-red Invite a friend to enrol in a course and when they join you will both get money off your purchases
+        %span
+          = link_to 'Learn more >', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#can-discounts-be', class: 'u-red-link u-standard-text'
+      .notice-links
+        =link_to 'Online Material Expiry Date', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#for-how-long-is', :class => 'u-red-link'
+        |
+        =link_to 'Post to outside Australia', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#how-much-does-postage', :class => 'u-red-link'
+        |
+        =link_to 'Refund Policy', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#what-is-the-refund', :class => 'u-red-link'
+%br
+%br
+%br

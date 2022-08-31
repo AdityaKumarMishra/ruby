@@ -1,0 +1,30 @@
+%h1 Listing exam_sections
+
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Title
+        %th Dificultyrating
+        %th Mcqs
+        %th{colspan: 2} Actions
+
+    %tbody
+      - @exam_sections.each do |exam_section|
+        %tr{'data-link': url_for(exam_section)}
+          %td= exam_section.title
+          %td= exam_section.dificultyRating
+          %td
+            - if exam_section.mcqs.present?
+              %ul
+                - exam_section.mcqs.each do |mcq|
+                  %li= truncate(strip_tags(mcq.question), length: 100, omission: '...')
+            - else
+              There are no Mcqs.
+
+          %td= link_to 'Edit', edit_exam_section_path(exam_section), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', exam_section, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Exam section', new_exam_section_path, class: 'btn btn-info'

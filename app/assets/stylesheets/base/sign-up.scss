@@ -1,0 +1,809 @@
+// colors
+$dark-grey: #808080;
+$light-grey-for-controls: #cfcfcf;
+$grey-for-borders: #b4b8bb;
+$light-grey-bg: #f1f1f1;
+$light-green-bg: #e5f1ea;
+
+.su {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px 5%;
+  word-wrap: break-word;
+  font-family: Calibri, Arial, sans-serif;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__step-header {
+    position: relative;
+    height: 100%;
+    margin-right: 5px;
+    padding: 15px;
+    padding-left: 35px;
+
+    border: 1px solid $grey-for-borders;
+    border-radius: 4px;
+    background-color: $light-grey-bg;
+    color: $dark-grey;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__step-header:last-child {
+    margin-right: 0;
+  }
+
+  &__step-header--active {
+    flex-grow: 1;
+    color: $gamsat-color;
+    background-color: white;
+  }
+
+  &__step-header::before {
+    content: '1';
+
+    position: absolute;
+    top: 20px;
+    left: 10px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+    background-color: $dark-grey;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    line-height: 18px
+  }
+
+  &__step-header--active::before {
+    background-color: $gamsat-color;
+  }
+
+  &__step-header:nth-child(2)::before {
+    content: '2';
+  }
+
+  &__step-header:nth-child(3)::before {
+    content: '3';
+  }
+
+  &__step-name {
+    margin-bottom: 5px;
+    font-size: 0;
+    font-weight: bold;
+  }
+
+  &__step-header--active &__step-name {
+    font-size: 20px;
+  }
+
+  &__step-tip {
+    font-size: 0;
+  }
+
+  &__sign-up {
+    width: 100%;
+  }
+
+  &__select-block {
+    position: relative;
+    display: inline-block;
+    width: 49%;
+    margin-right: 2%;
+  }
+
+  &__select-block select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  &__select-block:last-child {
+    margin-right: 0;
+  }
+
+  &__input-block {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__input-block::before,
+  &__select-block::before {
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: 11px;
+
+    width: 15px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__input-block:nth-child(1)::before,
+  &__input-block:nth-child(5)::before,
+  &__input-block:nth-child(6)::before {
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-user.png');
+  }
+
+  &__input-block:nth-child(2)::before,
+  &__input-block:nth-child(3)::before {
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-pwd.png');
+  }
+
+  &__input-block:nth-child(4)::before {
+    top: 18px;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-mail.png');
+  }
+
+  &__input-block:nth-child(7)::before {
+    top: 16px;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-phone.png');
+  }
+
+  &__input-block:nth-child(8)::before,
+  &__input-block:nth-child(9)::before,
+  &__input-block:nth-child(10)::before,
+  &__select-block::before {
+    top: 15px;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-location.png');
+  }
+
+  &__input-block:last-child::before {
+    width: 0;
+    height: 0;
+  }
+
+  &__submit-block {
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  &__validation {
+    padding-left: 5px;
+    padding: 0;
+    color: red;
+    font-size: 14px;
+    transition: padding 0.3s;
+  }
+
+  &__validation--on {
+    padding: 5px;
+    padding-bottom: 0;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    padding-top: 15px;
+    border: 1px solid $grey-for-borders;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__input-valid {
+    border-color: $gamsat-color;
+    box-shadow: 0 0 5px $gamsat-color;
+  }
+
+  &__input-invalid {
+    border: 1px solid $hsc-color;
+    box-shadow: 0 0 5px $hsc-color;
+  }
+
+  &__input:focus {
+    border: 1px solid $dark-grey;
+    box-shadow: 0 0 5px $dark-grey;
+  }
+
+  &__input--sign-up {
+    padding-left: 35px;
+  }
+
+  &__btn {
+    padding: 13px 30px;
+
+    border: none;
+    border-radius: 4px;
+    background-color: $gamsat-color;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  &__btn:hover {
+    background-color: $gamsat-color;
+    color: white;
+  }
+
+  &__sign-up &__btn {
+    text-transform: uppercase;
+  }
+
+  &__payment &__btn {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-transform: none;
+  }
+
+  &__payment &__btn--bank {
+    width: 70%;
+    padding: 10px;
+    bottom: -80px;
+    color: white !important;
+    text-decoration: none !important;
+  }
+
+  &__payment {
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 70px;
+  }
+
+  &__payment-agreement,
+  &__payment-discount {
+    padding: 0 3px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+  &__payment-discount form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 0;
+  }
+
+  &__payment-discount input {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 32px;
+    padding: 4px 8px;
+    border: 1px solid $grey-for-borders;
+    font-size: 16px;
+    outline: none;
+  }
+
+  &__payment-discount input[type='text'] {
+    width: 190px;
+    border-right: none;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: white;
+  }
+
+  &__payment-discount input[type='submit'] {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-weight: bold;
+    background-color: #fbfbfb;
+    color: black;
+  }
+
+  &__discount-applied span,
+  &__discount-applied button {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__discount-applied button {
+    padding: 8px;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/cr-close.svg');
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 0;
+  }
+
+  &__discount-error {
+    font-size: 14px;
+    color: red;
+  }
+
+  &__payment-agreement input[type='checkbox'] {
+    display: none;
+  }
+
+  &__payment-agreement input[type='checkbox'] + label {
+    display: block;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__payment-agreement input[type='checkbox'] + label::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-checkbox-light.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__payment-agreement input[type='checkbox']:checked + label::before {
+    background-color: $gamsat-color;
+  }
+
+  &__payment-agreement input[type='checkbox']:checked + label::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-check.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: all 0.1s ease-in-out;
+  }
+
+  &__payment-method--disabled::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  &__payment-info,
+  &__payment-details {
+    margin-bottom: 15px;
+  }
+
+  &__payment-info,
+  &__payment-details,
+  &__payment-method {
+    box-sizing: border-box;
+    padding: 15px;
+    padding-top: 10px;
+    border: 1px solid $grey-for-borders;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+  &__payment-details {
+    background-color: $light-green-bg;
+  }
+
+  &__payment-info p,
+  &__payment-details p,
+  &__payment-bank p {
+    margin: 0;
+    margin-bottom: 15px;
+  }
+
+  &__payment-details span,
+  &__payment-bank span {
+    font-weight: bold;
+  }
+
+  &__payment-bank h4 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  &__payment-method {
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  &__payment h3 {
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: $gamsat-color;
+  }
+
+  &__payment-transfer p {
+    margin: 0;
+  }
+
+  &__payment-transfer input[type='radio'] {
+    display: none;
+  }
+
+  &__payment-transfer input[type='radio'] + label {
+    display: block;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__payment-transfer input[type='radio'] + label::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid $light-grey-for-controls;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__payment-transfer input[type='radio']:checked + label::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    background-color: $gamsat-color;
+    border-radius: 50%;
+    transition: all 0.1s ease-in-out;
+  }
+
+  &__payment-green-text {
+    color: $gamsat-color;
+  }
+
+  &__payment-wait-info {
+    display: block;
+    font-weight: normal !important;
+  }
+
+  &__payment-online-note {
+    margin-top: 15px;
+  }
+
+  &__payment-paypal-info {
+    margin: 15px 0;
+  }
+
+  &__payment-paypal-info span {
+    font-weight: bold;
+  }
+
+  &__receipt {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  &__receipt h3 {
+    margin: 30px 0;
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+
+  &__receipt-img {
+    height: 70px;
+    margin-bottom: 30px;
+    font-size: 0;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/success.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  &__receipt-message {
+    margin: 0;
+    margin-bottom: 35px;
+  }
+
+  &__receipt h4 {
+    margin: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  &__receipt-details {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  &__error-message {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    padding: 50px 10px;
+
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: red;
+    border: 1px solid red;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    white-space: pre-wrap;
+    animation: fadeInFromNone 0.3s ease-in;
+  }
+}
+
+@media (min-width: $desktop) {
+  .su {
+    max-width: 70%;
+    padding: 20px;
+
+    &__header {
+      height: auto;
+      margin-bottom: 25px;
+    }
+
+    &__step-header {
+      flex-grow: 1;
+      padding: 10px;
+      padding-left: 48px;
+      padding-right: 30px;
+    }
+
+    &__step-header::before {
+      top: 15px;
+      left: 13px;
+      width: 24px;
+      height: 24px;
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    &__step-name,
+    &__step-header--active &__step-name {
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    &__step-tip,
+    &__step-header--active &__step-tip {
+      font-size: 18px;
+    }
+
+    &__sign-up {
+      width: 80%;
+      max-width: 450px;
+    }
+
+    &__input-block {
+      margin-bottom: 20px;
+    }
+
+    &__submit-block {
+      margin-top: 35px;
+    }
+
+    &__input-block::before,
+    &__select-block::before {
+      top: 13px;
+      left: 15px;
+      width: 19px;
+    }
+
+    &__validation {
+      padding-left: 10px;
+    }
+
+    &__validation--on {
+      padding: 10px;
+      padding-bottom: 0;
+    }
+
+    &__input {
+      font-size: 20px;
+      padding-left: 15px;
+    }
+
+    &__input--sign-up {
+      padding-left: 61px;
+    }
+
+    &__sign-up &__btn {
+      padding: 17px 60px;
+    }
+
+    &__payment &__btn {
+      bottom: -70px;
+    }
+
+    &__payment &__btn--bank {
+      width: auto;
+      padding: 13px 30px;
+      bottom: -90px;
+    }
+
+    &__btn:hover {
+      background-color: lighten($gamsat-color, 5%);
+    }
+
+    &__payment {
+      margin-bottom: 100px;
+    }
+
+    &__payment-top {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    &__payment-agreement,
+    &__payment-discount {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    &__discount-list {
+      width: 50%;
+    }
+
+    &__payment-discount form {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    &__payment-discount input {
+      padding: 8px 12px;
+      height: 44px;
+      font-size: 20px;
+    }
+
+    &__payment-discount input[type='text'] {
+      width: 350px;
+    }
+
+    &__discount-error {
+      font-size: 16px;
+    }
+
+    &__payment-agreement input[type='checkbox'] + label:hover::before {
+      background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icon-checkbox-dark.svg');
+    }
+
+    &__payment-agreement input[type='checkbox'] + label::before {
+      top: 5px;
+    }
+
+    &__payment-agreement input[type='checkbox']:checked + label::after {
+      top: 6px;
+    }
+
+    &__payment-info,
+    &__payment-details,
+    &__payment-method {
+      padding: 25px;
+      padding-top: 20px;
+      font-size: 20px;
+    }
+
+    &__payment-info,
+    &__payment-details {
+      width: 49%;
+      margin-bottom: 0;
+    }
+
+    &__payment-info {
+      margin-right: 2%;
+    }
+
+    &__payment h3 {
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    &__payment-info p,
+    &__payment-details p,
+    &__payment-bank p {
+      margin-bottom: 20px;
+    }
+
+    &__payment-bank h4 {
+      margin-bottom: 15px;
+    }
+
+    &__payment-transfer p {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &__payment-transfer p:first-child {
+      margin-right: 60px;
+    }
+
+    &__payment-transfer input[type='radio'] + label {
+      padding-left: 40px;
+    }
+
+    &__payment-transfer input[type='radio'] + label::before {
+      top: 2px;
+      left: 0;
+      width: 24px;
+      height: 24px;
+    }
+
+    &__payment-transfer input[type='radio']:checked + label::after {
+      top: 5px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+    }
+
+    &__payment-transfer input[type='radio'] + label:hover::before {
+      border-color: $dark-grey;
+    }
+
+    &__payment-transfer input[type='radio'] + label:hover::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 4px;
+      width: 16px;
+      height: 16px;
+      background-color: lighten($gamsat-color, 10%);
+      border-radius: 50%;
+    }
+
+    &__payment-paypal-info {
+      margin: 25px 0;
+    }
+
+    &__receipt {
+      max-width: 80%;
+      font-size: 20px;
+    }
+
+    &__receipt h3 {
+      margin: 40px 0;
+      font-size: 48px;
+    }
+
+    &__receipt-img {
+      height: 104px;
+      margin-bottom: 40px;
+    }
+
+    &__receipt-message {
+      margin-bottom: 50px;
+    }
+
+    &__receipt h4 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    &__receipt-details {
+      margin-bottom: 10px;
+    }
+
+    &__error-message {
+      padding: 100px 10px;
+      font-size: 20px;
+    }
+  }
+}

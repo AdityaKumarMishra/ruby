@@ -1,0 +1,92 @@
+- content_for :page_heading, 'Exam'
+.dashbord_right
+  -# Alphanumeric sort e.g. must make order: Unit 1, Unit 2, Unit 11 rather than Unit 1, Unit 11, Unit 2
+  - if @section_attempt.assessment_attempt.assessable.class == OnlineExam
+    - submit_path = complete_online_exam_attempt_section_attempt_section_item_attempts_path(@attemptable, @section_attempt)
+  -elsif @section_attempt.assessment_attempt.assessable.class == DiagnosticTest
+    - submit_path = complete_diagnostic_test_attempt_section_attempt_section_item_attempts_path(@attemptable, @section_attempt)
+  -elsif @section_attempt.assessment_attempt.assessable.class == OnlineMockExam
+    - if @section_attempt.assessment_attempt.assessable.per_city_exam_count > 1
+      - submit_path = complete_online_mock_exam_attempt_section_attempt_section_item_attempts_path(@attemptable, @section_attempt)
+    - else
+      - submit_path = complete_online_mock_exam_attempt_temp_section_attempt_section_item_attempts_path(@attemptable, @section_attempt)
+    / - submit_path = complete_online_mock_exam_attempt_section_attempt_section_item_attempts_path(@attemptable, @section_attempt)
+  = form_tag submit_path, id: 'sa-form', method: :put do
+    = render 'single_question_view'
+  %br
+  .loader_div
+  - loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+
+:javascript
+  var img = '#{loader_img}';
+  var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...</div></div>";
+
+  $(window).bind('beforeunload', function() {
+    if ($(".finish").attr('id') == "true")
+      {
+        $("#sa-form").submit();
+      }
+  });
+
+  $('a').not('#sa-form a, #sidebar-tab a').click(function(e) {
+    getConfirmation(e);
+  });
+
+
+  function getConfirmation(e){
+    var is_finish = 'false'
+    var c_data;
+    if(Cookies.get('current_sa') != undefined)
+      c_data = Cookies.get('current_sa')
+    else
+      c_data = Cookies.get('current_exe_atmpt')
+    c_data = JSON.parse(c_data)
+    var name = c_data['name']
+
+    var retVal = confirm("You are trying to navigate out of “"+ name +"”.Please click Ok if you would like to pause the current session or press Cancel if you would like to continue.");
+     if( retVal == true){
+      if(!is_finish){
+        pauseExam();
+      }
+      return true;
+     }
+     else{
+        e.preventDefault();
+        return false;
+     }
+  }
+
+  $("#submit_item_attempt").click(function(){
+    var has_unanswered_questions = false
+    $('.exam_list a').css('color', '#6b6b6b');
+    $( ".answers" ).each(function( index, element ) {
+      if($(element).find("input:radio:checked").length < 1){
+        has_unanswered_questions = true
+        unanswered_stem_id= $(this).parent().parent().find(".mcq_stem_description").attr('id');
+        list_item_id = $('#' + unanswered_stem_id);
+        list_item_id.css("color", "red");
+      }
+    });
+
+    if(has_unanswered_questions == true){
+      var status = confirm("There are some questions which are unanswered, please confirm if you would like to submit your exam.");
+      if(status == false){
+        return false;
+      }
+      else{
+        $("#sa-form").submit();
+        $("#submit_item_attempt").attr('disabled', true);
+        $('.loader_div').html(loader);
+      }
+    }else
+      var status = confirm("Please confirm your submission");
+        if(status == false){
+          return false;
+        }
+        else{
+          $("#sa-form").submit();
+          $("#submit_item_attempt").attr('disabled', true);
+          $('.loader_div').html(loader);
+        }
+    });
+  CalculateMcqStemTime()

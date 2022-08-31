@@ -1,0 +1,11 @@
+#feature_Diagnostics.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-clipboard{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4 Diagnostics Assessment
+      - if paid
+        %h4
+          $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing Use the 50 question test to test your familiarity of the fundamental concepts covered in the UCAT. Your performance will be automatically reported across the 3 subject areas and 19 subtopics. Use this information not only to guide the focus of your studies but also to compare your performance with other GradReady students. Note that this is not a diagnostics of your performance in the UCAT; the MCQs or Online Exams would better serve that purpose.

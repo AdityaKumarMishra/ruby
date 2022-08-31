@@ -1,0 +1,38 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+  .panel-body
+    .form-group
+      / %label Search
+      / = text_field_tag "Search", "",placeholder: "Search Name or Email Address", class: 'form-control', id: "delivery_srch"
+
+      / %label Status
+      / = select_tag(:option, options_for_select(TextbookDelivery.statuses, params[:option]), class: "form-control text_book_status_filters", include_blank: "Select status")
+
+      / %label Temporary Access
+      / = select_tag(:temporary_access, options_for_select([["Yes", true],["No", false]], params[:temporary_access]), class: "form-control temporary_access_filter", include_blank: "Select temporary access")
+    .form-group
+      = form_for_filterrific @enrolled_filterrific do |f|
+        .form-group
+          %label Search
+          = f.text_field :with_name, class: 'form-control', placeholder: 'Search Name or Email'
+        .form-group
+          %label Status
+          = f.select :option, @enrolled_filterrific.select_options[:option], { include_blank: 'Select status' }, class: 'form-control'
+        .form-group
+          %label Temporary Access
+          = f.select :temporary_access, @enrolled_filterrific.select_options[:temporary_access], { include_blank: 'Select temporary access' }, class: 'form-control'
+        .form-group
+          %label Sort By
+          = f.select :sorted_by, @enrolled_filterrific.select_options[:sorted_by], { include_blank: 'Sort By' }, class: 'form-control'
+        .form-group
+          %label Order Start Date
+          = f.text_field(:with_start, class: 'form-control datepicker', autocomplete: 'off')
+        .form-group
+          %label Order End Date
+          = f.text_field(:with_end, class: 'form-control datepicker', autocomplete: 'off')
+
+        = render_filterrific_spinner
+
+        = link_to 'Reset filters', reset_filterrific_url, class: 'text-right btn btn-gr-light-green'

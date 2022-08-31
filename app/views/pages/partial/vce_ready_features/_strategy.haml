@@ -1,0 +1,14 @@
+-# this view take in a local var 'product_line' when rendered
+
+#strategy-feature.col-md-6
+  .feature-icon-container
+    .clearfix
+      .feature-icon.pull-left
+        %i.fa.fa-bullseye{"aria-hidden" => "true"}
+      .feature-content.pull-right
+        %h4
+          = @product_line
+          Strategy
+        .text
+          %p.u-word-spacing
+            = "Perform your best by understanding what it takes to excel in the" + @product_line + ". We have developed a comprehensive guide covering several key areas such as subject selection, ATAR score calculation, how to prepare for it and how to deal."

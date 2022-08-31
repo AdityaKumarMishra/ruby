@@ -1,0 +1,9 @@
+%h1 Listing All Applications
+
+= render 'form_filters'
+
+= render partial: 'job_applications/list', locals: { job_applications: @job_applications }
+
+%br
+= link_to 'Back', job_application_forms_path, class: 'btn btn-default'
+%br

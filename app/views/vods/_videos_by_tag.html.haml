@@ -1,0 +1,54 @@
+- if current_user && (current_user.student?)
+  = will_paginate vods_by_tag, renderer: BootstrapPagination::Rails, :params => { :tag_id => tag.id }
+  .video_section_wrap
+    %ul
+      - vods_by_tag.each_with_index do |vod, index|
+        %li{id: "selected_#{vod.id}"}
+          - alt_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/blank_img.png'
+          - if vod.performance_stats.where(user: current_user).count > 0
+            %a.text-center{href: vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank}
+              = image_tag vod.generate_thumbnail_url, onerror:"this.onerror=null;this.src= '#{alt_img.split('"')[1]}';"
+              .overlay.text-align-center WATCHED
+          -else
+            %a{href: vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank}
+              = image_tag vod.generate_thumbnail_url, onerror:"this.onerror=null;this.src= '#{alt_img.split('"')[1]}';"
+
+          %span.video_cont_pad
+            %h3
+              = link_to vod.title, vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank
+            %p= vod.description
+
+
+- else
+  - vods_by_tag.each_with_index do |vod, index|
+    - alt_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/blank_img.png'
+    .col-xs-6.col-md-4.video_item.text-center{id: "selected_#{vod.id}"}
+      - if vod.watcheds.where(user: current_user).count > 0
+        %a.u-img-container.text-align-center{href: vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank}
+          = image_tag vod.generate_thumbnail_url, onerror:"this.onerror=null;this.src= '#{alt_img.split('"')[1]}';"
+          .overlay.text-align-center WATCHED
+      - else
+        %a{href: vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank}
+          = image_tag vod.generate_thumbnail_url, onerror:"this.onerror=null;this.src= '#{alt_img.split('"')[1]}';"
+      %br/
+      .li.video-title.m_btm10.text-left.min_ht
+        = link_to vod.title, vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), target: :_blank
+        - if vod.watcheds.where(user: current_user).count > 0
+          %small (watched)
+      .li.m_btm10.text-left= vod.description
+      - if !current_user.student?
+        .li.m_btm10.text-left= vod.date_published
+      - if current_user && (current_user.superadmin? || current_user.admin? || current_user.manager? ||current_user.tutor? )
+        -# TODO: use policy
+        .li.text-left
+          = link_to 'Edit', edit_vod_path(vod), class: 'btn btn-gradready green btn-xs'
+          - if current_user.admin? || current_user.superadmin?
+            = link_to 'Destroy', vod_path(vod, tab: tag.name.split.drop(1).join(' '), page: params[:page], tag_id: params[:tag_id]), class: 'btn btn-gradready green btn-xs',
+                                    method: :delete,
+                                    data: { confirm: 'Are you sure?' }
+            = link_to 'Download', download_vod_path(vod), class: 'btn btn-gradready green btn-xs'
+    - if (index+1)%3==0
+      .clearfix
+
+  .paginate_center
+    = will_paginate vods_by_tag, renderer: BootstrapPagination::Rails, :params => { :tag_id => tag.id }, class: "vod_pagination paginton_padd"

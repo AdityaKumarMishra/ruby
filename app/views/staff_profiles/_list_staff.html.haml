@@ -1,0 +1,13 @@
+.nested-staff
+  %p
+    #staff-field
+      = check_box_tag(attribute, staff.id, checked: true)
+      = staff.staff.full_name
+
+:javascript
+  $(document).ready( function () {
+    $("input[type=checkbox]").on('change', function() {
+        $(this).closest("#staff-field").hide();
+    });
+  });
+

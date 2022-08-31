@@ -1,0 +1,25 @@
+%h1 Listing Study Buddies
+%br
+%br
+.panel.panel-success
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =#render_filterrific_spinner
+  .panel-body
+    = form_for_filterrific @filterrific do |f|
+      .col-md-6
+        .form-group
+          Date Submitted From
+          = f.text_field(:with_start, class: 'form-control datepicker',placeholder: 'Choose date')
+      .col-md-6
+        .form-group
+          Date Submitted To
+          = f.text_field(:with_end, class: 'form-control datepicker',placeholder: 'Choose date')
+      .col-md-12
+        .form-group
+          =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gradready green'
+          = link_to 'Download', study_buddies_path(@study_buddies, format: "xlsx"), class: 'btn btn-primary'
+
+#filterrific_results
+  =render(partial: 'study_buddies/table', locals: { study_buddies: @study_buddies })

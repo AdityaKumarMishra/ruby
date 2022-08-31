@@ -1,0 +1,32 @@
+-# local var 'product_line' was passed into this view when rendered
+
+#course-package-details
+  %p.u-word-spacing
+    This package contains the absolute essentials needed to succeed in the
+    = @product_line
+    %sup ®
+    exam.
+
+  %p.u-word-spacing
+    Although considered the bare minimum by GradReady standards, this
+    = @product_line
+    %sup{ style: "margin-right: -5px;"} ®
+    exam prep course is comparable to the flagship courses provided by numerous other
+    = @product_line
+    %sup ®
+    exam preparation course providers. The Online package contains a comprehensive set of review material for the
+    = @product_line
+    %sup ®
+    exam in both text and video form. In addition, you will be able to develop your understanding of concepts by working through our
+    = @product_line
+    %sup ®
+    = 'exam -style MCQs. For details, please refer to the points below.'
+
+
+  %p.u-word-spacing All online materials are available immediately after purchase.
+  - if @product_line == "GAMSAT" && !gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'gamsat_improved_percentile'
+  -elsif @product_line == "UMAT" && !umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'umat_improved_percentile'

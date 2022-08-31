@@ -1,0 +1,22 @@
+= simple_form_for(@comm_content) do |f|
+  .mrgin-top
+    .form-inputs
+      %label GradReady Contact Number 1
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Updating this field will update the first line under 'Phone' in the public page footer + in the Call Us for Course Information on the Get In Touch page"}
+      = f.input :contact_number, label: false
+    .form-group
+      %label GradReady Contact Number 2
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Updating this field will update the second line under 'Phone' in the public page footer + in the Call Us for Course Information on the Get In Touch page"}
+      = f.input :contact_number2, label: false
+    .form-actions
+      = f.button :submit, "Update Content"
+
+:css
+  .mrgin-top{
+    margin-top: 10px;
+  }
+
+:javascript
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });

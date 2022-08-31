@@ -1,0 +1,95 @@
+- if @blog == "umat"
+  %link{:href => "https://gradready.com.au/blog/umat-preparation-courses", :rel => "canonical"}
+  - if params[:category]
+    - title "UCAT Prep Courses | #{params[:category].titleize}"
+    - meta_description blog_description(params[:category], @blog.upcase)
+  - else
+    - title "Everything About UCAT preparation and Medicine"
+    - meta_description "Our experienced tutors write about topics ranging from the UCAT exam, to medicine, and study tips and tricks."
+  - meta_keywords "UCAT, UCAT Prep, UCAT Preparation, UCAT Preparation Course, UCAT Course, UCAT Exam, UCAT Help, UCAT Australia, UCAT Online, UCAT, UCAT Prep, UCAT Preparation, UCAT Preparation Course, UCAT Course, UCAT Exam, UCAT Help, UCAT Australia, UCAT Online"
+- elsif @blog == "gamsat"
+  %link{:href => "https://gradready.com.au/blog/gamsat-preparation-courses", :rel => "canonical"}
+  - if params[:category]
+    - title "GAMSAT Prep Courses | #{params[:category].titleize}"
+    - meta_description blog_description(params[:category], @blog.upcase)
+  - else
+    - title "GAMSAT and Medical School Blog | GradReady GAMSAT Preparation"
+    - meta_description "Visit our GAMSAT blog today with over 150 articles from our experienced GAMSAT Tutors who write about topics ranging from life as a medical student, GAMSAT study tips and tricks, preparing for a MMI, and putting together your medical application."
+  - meta_keywords "gamsat blog"
+- elsif @blog == "hsc"
+  - title "HSC Prep Blog | How to prepare for the HSC | HSC Courses"
+  - meta_keywords "HSC prep, HSC prep course, HSC preparation, HSC preparation course, HSC preparation tips, HSC math methods, HSC english, HSC exams, HSC tutor"
+- elsif @blog == "vce"
+  - title "VCE Prep Blog | How to prepare for the VCE | VCE Courses"
+  - meta_keywords "VCE prep, VCE prep course, VCE preparation, VCE preparation course, vce preparation tips, VCE math methods, VCE english, VCE exams, VCE tutor"
+#typed.notification_bar.blg_notification_mrgn
+  %p
+    = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+- if @posts.present?
+  #myCarousel.carousel.slide.blog_slider.blg_mrgn_tp{"data-ride" => "carousel"}
+    / Indicators
+    %ol.carousel-indicators
+      - @posts.each_with_index do |post, index|
+        %li{"data-slide-to" => "#{index}", "data-target" => "#myCarousel", class: "#{ "active" if index == 0 }"}
+
+    / Wrapper for slides
+    .carousel-inner
+      - @posts.each_with_index do |post, index|
+        .item{class: "#{ "active" if index == 0 }"}
+          .blog_slider_wrapper
+            .blog_cars_img_sec
+              - if post.image.url(:medium) == "/images/medium/missing.png"
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_slider_no_image.jpg'
+              - else
+                -if post.alt_text.present?
+                  = image_tag post.image.url(:thumb), alt: "#{@post.try(:alt_text)}"
+                -else
+                  = image_tag post.image.url(:thumb)
+
+          .carousel-caption
+            %h2= post.name
+            %p.recent_post_dte
+              by
+              = succeed "" do
+                %span.blog_by= "#{post.author}, #{post.created_at.strftime("%d %B, %Y")}"
+            %p.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1400"}= raw post_lead(post)
+            %a.default_btn.hvr-shutter-in-horizontal{href: "#{posts_by_product_line_path(id: post.friendly_id, type: post.product_line_type)}"} Read More
+    .blog_cara_next_prv
+      %a.left.carousel-control{"data-slide" => "prev", href: "#myCarousel"}
+      %a.right.carousel-control{"data-slide" => "next", href: "#myCarousel"}
+.blog_cl.ptop_zero
+  .container
+    %h1.post_head.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+      - heading_name = @blog == "umat" ? "UCAT" : @blog.upcase if @blog.present?
+      = "#{heading_name} Prep & Medicine Blogs"
+    .row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12
+        -if @posts.present?
+          = render 'posts/post'
+          .row.text-center
+            %div{"aria-label" => "Page navigation example"}
+              %ul.pagination.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+                - if @blog == "gamsat" || @blog == "umat"
+                  - blog_param = "#{@blog}-preparation-courses"
+                -else
+                  - blog_param = "#{@blog}"
+                .paginate_center
+                  = will_paginate @posts, previous_label: "«", next_label: "»", renderer: BootstrapPagination::Rails, :params => { "blog"=> blog_param }
+        - elsif !params[:q].nil?
+          .no_post
+            %p
+              %b= "Your Search - '#{params[:q]}' did not match any blog post."
+            %p Suggestions:
+            %p 1. Ensure words are spelled correctly.
+            %p 2. Try using synonyms or related searches.
+
+      .col-lg-4.col-md-4.col-sm-4.col-xs-12.blog_rght_cl
+        - if current_user && (current_user.superadmin? || current_user.admin? || current_user.manager?)
+          = link_to 'New Post', new_post_path, class: "default_btn hvr-shutter-in-horizontal"
+          = link_to 'Blog Categories', blog_categories_path, class: "default_btn hvr-shutter-in-horizontal"
+        = render partial: "public_page_partial/blog_left_column", locals: { blog_type: params[:blog] }
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

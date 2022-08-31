@@ -1,0 +1,11 @@
+#feature_MCQs.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-question-circle{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4 MCQs + Tracking System
+      - if paid
+        %h4
+          $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking and topic targeting. The MCQs are categorised into 19 subtopics - our advanced MCQ system not only tracks your performance in each subtopic, it also allows you to create sets of MCQs based on subtopics of your choosing – meaning you can focus on what you need to. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may reattempt the MCQs. Explanations are provided for all MCQs.

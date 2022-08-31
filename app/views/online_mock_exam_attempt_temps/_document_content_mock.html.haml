@@ -1,0 +1,106 @@
+- if doc.omes_document_start_time > Time.zone.now && doc.omes_document_end_time > Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Will Open
+        %span.timer{id: "countdown_timer#{doc.id}"}
+
+  :javascript
+    var dyear#{doc.id} = parseInt("#{doc.try(:start_date).try(:year)}");
+    var dmonth#{doc.id} = parseInt("#{doc.try(:start_date).try(:month)}");
+    var ddate#{doc.id} = parseInt("#{doc.try(:start_date).try(:day)}");
+    var dhour#{doc.id} = parseInt("#{doc.try(:start_time).try(:hour)}");
+    var dminutes#{doc.id} = parseInt("#{doc.try(:start_time).try(:min)}");
+    var daustDay#{doc.id} = new Date(dyear#{doc.id}, dmonth#{doc.id}-1, ddate#{doc.id}, dhour#{doc.id}, dminutes#{doc.id});
+    var dx#{doc.id} = setInterval(function() {
+      // Get today's date and time
+      var dnow#{doc.id}= new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var ddistance#{doc.id} = daustDay#{doc.id} - dnow#{doc.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var ddays#{doc.id} = Math.floor(ddistance#{doc.id} / (1000 * 60 * 60 * 24));
+      var dhours#{doc.id} = Math.floor((ddistance#{doc.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var dminutes#{doc.id} = Math.floor((ddistance#{doc.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var dseconds#{doc.id} = Math.floor((ddistance#{doc.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{doc.id}").innerHTML = ddays#{doc.id} + "d " + dhours#{doc.id} + "h "
+      + dminutes#{doc.id} + "m " + dseconds#{doc.id} + "s ";
+
+      // If the count down is over, write some text
+      if (ddistance#{doc.id} < 0) {
+        clearInterval(dx#{doc.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{doc.id}"}
+          });
+      }
+    }, 1000);
+-elsif doc.omes_document_start_time <= Time.zone.now && doc.omes_document_end_time >= Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Time Remaining:
+        %span.timer{id: "countdown_timer#{doc.id}"}
+
+  :javascript
+    var dsyear#{doc.id} = parseInt("#{doc.try(:end_date).try(:year)}");
+    var dsmonth#{doc.id} = parseInt("#{doc.try(:end_date).try(:month)}");
+    var dsdate#{doc.id} = parseInt("#{doc.try(:end_date).try(:day)}");
+    var dshour#{doc.id} = parseInt("#{doc.try(:end_time).try(:hour)}");
+    var dsminutes#{doc.id} = parseInt("#{doc.try(:end_time).try(:min)}");
+    var dsaustDay#{doc.id} = new Date(dsyear#{doc.id}, dsmonth#{doc.id}-1, dsdate#{doc.id}, dshour#{doc.id}, dsminutes#{doc.id});
+    var dsx#{doc.id} = setInterval(function() {
+      // Get today's date and time
+      var dnow#{doc.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var dsdistance#{doc.id} = dsaustDay#{doc.id} - dnow#{doc.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var dsdays#{doc.id} = Math.floor(dsdistance#{doc.id} / (1000 * 60 * 60 * 24));
+      var dshours#{doc.id} = Math.floor((dsdistance#{doc.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var dsminutes#{doc.id} = Math.floor((dsdistance#{doc.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var dsseconds#{doc.id} = Math.floor((dsdistance#{doc.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{doc.id}").innerHTML = dsdays#{doc.id} + "d " + dshours#{doc.id} + "h "
+      + dsminutes#{doc.id} + "m " + dsseconds#{doc.id} + "s ";
+
+      // If the count down is over, write some text
+      if (dsdistance#{doc.id} < 0) {
+        clearInterval(dsx#{doc.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{doc.id}"}
+          });
+      }
+    }, 1000);
+  .written_view_col
+    %iframe.embed-responsive-item.auto-hide-navbar#textbookGrad{src:"/pdfjs/web/viewer.html?file=#{doc.full_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+- else
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Closed
+        %span.timer{id: "countdown_timer#{doc.id}"}
+
+:javascript
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+    if(reload_flag == true){
+      $("#redirect_msg").show();
+      setTimeout(function(){location.reload()},5000)
+    }
+  });

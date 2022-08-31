@@ -1,0 +1,31 @@
+- title "GAMSAT Preparation Course - Courses"
+-#%h1 Dashboard
+-#.panel.panel-primary
+-#  .panel-heading
+-#    %h3.panel-title
+-#      Courses
+-#      %span.badge=@courses.count if @courses.any?
+-#  .panel-body
+-#    = render :partial => 'dashboard/partial/course_version', :collection => @courses
+-#.panel.panel-primary
+-#  .panel-heading
+-#    %h3.panel-title
+-#      Surveys
+-#      %span.badge=@surveys.count if @surveys.any?
+-#  .panel-body
+-#    = render :partial => 'dashboard/partial/survey', :collection => @surveys
+-#.panel.panel-primary
+-#  .panel-heading
+-#    %h3.panel-title
+-#      Essays
+-#      %span.badge=@essays.count if @essays.any?
+-#  .panel-body
+-#    = render :partial => 'dashboard/partial/essay', :collection => @essays
+-#= purchase_form Product.active_products
+
+%h1 Dashboard
+.panel.panel-primary
+  .panel-heading
+    %h3.panel-title Courses
+    .panel-body
+      = render :partial => 'dashboard/partial/course_version', :collection => @courses

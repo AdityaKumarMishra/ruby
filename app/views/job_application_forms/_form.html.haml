@@ -1,0 +1,35 @@
+= simple_form_for(@job_application_form) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = hidden_field_tag :job_id, params[:job_id] if params[:job_id].present?
+    = f.input :title
+    = f.input :description
+    .des_div
+      = f.simple_fields_for :job_description do |job_description|
+        - unless @job_application_form.empty_attachment
+          = link_to "#{job_description.object.document_file_name}", job_description.object.document.url(:original, false), class: "doc_link_right"
+        = job_description.input :document, as: :file, label: 'Include Attachment (doc/docx or pdf format)'
+
+    = f.input :open, label: 'Open for application?', as: :radio_buttons
+
+    = f.simple_fields_for :application_questions do |q|
+      = render 'job_application_forms/application_question_fields', f: q
+
+  .links.creation-button
+    %br= link_to_add_association 'Create Text Question', f, :application_questions, class: 'btn btn-primary add_index', wrap_object: Proc.new { |q| q.answer_type = ApplicationQuestion.answer_types[:text]; q }
+    %br= link_to_add_association 'Create Dropdown Question', f, :application_questions, class: 'btn btn-primary add_index', wrap_object: Proc.new { |q| q.answer_type = ApplicationQuestion.answer_types[:dropdown]; q }
+
+
+  %br
+
+  .form-actions
+    = f.button :submit
+
+:javascript
+  $( ".add_index").click(function() {
+    setTimeout(function(){
+      getvisibleindex();
+    }, 50);
+  });
+

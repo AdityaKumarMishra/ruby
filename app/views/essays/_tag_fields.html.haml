@@ -1,0 +1,7 @@
+.nested-fields
+  = f.input :name, required: true
+  = f.input :description, required: true
+  = f.input :parent_id, collection: Tag.all, as: :select, label_method: :name
+
+  .remove-link
+    = link_to_remove_association "Remove Tag", f

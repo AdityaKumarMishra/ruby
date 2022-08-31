@@ -1,0 +1,2 @@
+<% js = escape_javascript(render('dashboard/partial/mcq_counter', difficulties: @difficulties))%>
+$("#mcq_counter").html("<%= js %>");

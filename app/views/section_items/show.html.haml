@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Mcq stem:
+  = @section_item.mcq_stem.try(:title)
+%p
+  %b Mcq:
+  = @section_item.mcq
+
+= link_to 'Edit', edit_polymorphic_path([@parent_resource, @section,@section_item]), class: 'btn btn-default'
+\|
+= link_to 'Back', polymorphic_path([@parent_resource, @section, SectionItem]), class: 'btn btn-default'

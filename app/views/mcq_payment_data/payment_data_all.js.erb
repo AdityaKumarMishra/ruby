@@ -1,0 +1,4 @@
+<% js = escape_javascript(render(partial: 'mcq_payment_data/partial/download_xls', locals: { total_size: @total_size })) %>
+$('#download_xls_btn').html("<%= js %>");
+<% js = escape_javascript(render(partial: 'mcq_payment_data/partial/logged_hours', locals: { date_range: false }))%>
+$("#tutor-apt-table").html("<%= js %>");

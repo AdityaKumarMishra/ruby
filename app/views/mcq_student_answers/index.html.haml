@@ -1,0 +1,24 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Listing mcq student answers
+      .panel-body
+      .table-responsive
+        %table.gr-table.gr-table-bordered.gr-table-green-hover
+          %thead
+            %tr
+              %th Student
+              %th Mcq answer
+              %th Time taken
+          %tbody
+            - @mcq_student_answers.each do |msa|
+              %tr{'data-link': url_for(mcq_student_answer_path(msa.id))}
+                %td= msa.user.full_name
+                %td= msa.mcq_answer.answer
+                %td= msa.time_taken
+                %td= link_to 'Edit', edit_mcq_student_answer_path(msa.id), class: 'btn btn-info btn-sm'
+                %td= link_to 'Destroy', mcq_student_answer_path(msa.id), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+      .panel-footer
+        = link_to 'New Mcq student answer', new_mcq_student_answer_path, class: 'btn btn-success cl-white'

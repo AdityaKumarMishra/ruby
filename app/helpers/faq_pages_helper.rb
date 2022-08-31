@@ -1,0 +1,2 @@
+module FaqPagesHelper
+end

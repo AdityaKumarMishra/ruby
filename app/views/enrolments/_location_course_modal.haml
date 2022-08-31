@@ -1,0 +1,23 @@
+#locationCourseModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Purchase Course
+      .modal-body
+        %p
+          You are about to enrol into a course not in your location. We highly recommend that you enrol into a course in your State for effective management of any Live Components. Are you sure you want to continue?
+      .modal-footer
+        - couse_path = @course.product_version.fetch_show_path
+        = link_to 'Reselect', couse_path, class: 'btn default_btn resp_btn hvr-shutter-in-horizontal reselect_btn'
+
+        - if params[:pvfp_ids].present?
+          = form_for :custom_pvfps, url: course_enrolments_custom_enrol_path(@course.id), method: :get do |f|
+            - params[:pvfp_ids].each do |pvfp|
+              = f.hidden_field :pvfp_ids, multiple: true, value: pvfp
+            = hidden_field_tag 'allow_purchase', true
+            = f.submit 'Continue', class: 'btn default_btn resp_btn hvr-shutter-in-horizontal btn_danger'
+        - else
+          = link_to 'Continue', course_enrolments_enrol_path(course_id: @course.id, allow_purchase: true), class: 'btn default_btn resp_btn hvr-shutter-in-horizontal btn_danger'
+:javascript
+  $('#locationCourseModal').modal('show');

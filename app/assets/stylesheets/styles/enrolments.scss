@@ -1,0 +1,25 @@
+// Place all the styles related to the Enrolments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+dl.dl-lg dt {
+  //font-size: 14px;
+}
+
+dl.dl-lg dd {
+  margin-bottom: 8px;
+  //font-size: 16px;
+}
+.submit-link {
+  font-size: 15px;
+}
+.select_course {
+  margin-top:20px;
+}
+
+.table .btn.remove-score-exam{
+  width: auto;
+  margin-left: 10px;
+  padding: 3px 4px;
+  font-size: 13px;
+}

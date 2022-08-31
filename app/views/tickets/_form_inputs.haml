@@ -1,0 +1,97 @@
+-# Contains an options hash with two optional keys
+-# :content is optional, and corresponds to an ActiveRecord record that this question is going to be asked about
+-# :tag is optional, and is a tag that we pre-populate the tags array with for the new ticket
+
+- options ||= {}
+
+=# f.error_notification
+
+.form-inputs.tag-select
+  - ticket_id = options[:edit_ticket][:id] if options[:edit_ticket].present?
+  - if options[:edit_ticket].present? && options[:edit_ticket][:title].nil?
+    = f.input :title, required: true, input_html: {value: "Support Ticket - #{options[:edit_ticket][:id]}"}
+  - else
+    = f.input :title, required: true
+  -# If we're not logged in, ask for an email address
+  - if current_user.nil?
+    = f.input :email, as: :email, required: true, class: "ticket_email"
+    = f.input :phone_number, as: :tel, required: true, class: "ticket_phone"
+    = f.input :first_name, required: true, class: "ticket_first_name"
+    = f.input :last_name, required: true, class: "ticket_last_name"
+    = f.input :public, as: :hidden, input_html: {value: true}
+  - else
+    = f.association :asker, as: :hidden, collection: [current_user] #, input_html: {value: current_user.id}
+    = f.input :public, as: :hidden, input_html: {value: false}
+
+  -# Question input, with extra button
+  -#= f.label :username
+  -#%a{href: "javascript:void('Link')", type: 'button', class:'btn btn-default', style: 'display: block; width: 50%'}
+  -#  %span{class:'glyphicon glyphicon-paperclip', 'aria-hidden' => 'true'}
+  -#  Add Attachment
+  -#= f.input_field :question, as: :ckeditor, input_html: { ckeditor: { height: 400 }}, required: true
+  -#= f.error :username, id: 'user_name_error'
+
+  = f.input :question, input_html: { class:"ticket_question", id: "que_ckedit"}, required: true
+  = f.input :comment, input_html: {class: "ticket_comment disable", id: "cmmnt_ckedit"}
+  = hidden_field_tag :transfer_ticket, false
+
+  - selected = f.object.tags.empty? ? [options.try(:[], :tag).try(:id)] : f.object.tags.map(&:id)
+
+  -# The form is either for a specific piece of content (video etc.), so content is set,
+  -# or it's for a general question, where we display a tag selector
+  - if @given_type.present?
+    = f.hidden_field :given_type, value: @given_type
+    = f.hidden_field :given_id, value: @given_id
+
+  - if @content
+    = f.input :questionable_id, as: :hidden, input_html: { value: @content.try(:id)}
+    = f.input :questionable_type, as: :hidden, input_html: { value: @content.class.name}
+    - answerers = User.answerers_for_content(@content)
+    - if !answerers.empty?
+      = f.association :answerer, collection: answerers, required: true
+
+    -#= f.association :tags, collection: policy_scope(Tag), selected: selected, include_blank: true, input_html: { class: 'chosen-select tag-list', value: options[:content].tags }, required: true, readonly: true
+  - else
+    %label.control-label
+      %abbr *
+      Topic
+
+    - f.object.tags.each do |tag|
+      = f.hidden_field 'tag_ids][', value: tag.id
+
+    = select_tag "ticket[tag_ids][]", options_for_select(Tag.public_tags.order(:name).map{|t| [t.name, t.id]}), id: "answer_tag_id", class: "form-control"
+    -# Only make the answers list dynamic if there's no content
+    %br
+    = f.association :answerer, collection: [], input_html: { class: "tag-answerer form-control", data: { selector: '#answer_tag_id' } }
+%br
+
+:javascript
+
+  $(document).ready(function(){
+    update_tutors();
+    ids = ['que_ckedit', 'cmmnt_ckedit']
+    ids.forEach(function( id ) {
+      var instance = CKEDITOR.instances[id];
+      if(instance)
+      {
+          CKEDITOR.remove(id);
+      }
+      if(!instance){
+        CKEDITOR.replace(id);
+      }
+    });
+  });
+
+  $("#answer_tag_id").on('change', function(){
+    update_tutors();
+  })
+
+  function update_tutors() {
+    tag_id = $("#answer_tag_id").val();
+    $.ajax({
+      url: "/tags/get_tag_tutors",
+      type: "GET",
+      dataType: 'script',
+      data: {tag_id: tag_id},
+    });
+  }

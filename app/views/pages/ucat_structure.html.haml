@@ -1,0 +1,445 @@
+- title "UCAT Structure"
+- meta_description "The UCAT Exam is composed of five subtests that follow in a specific order: Verbal Reasoning, Decision Making, Quantitative Reasoning, Abstract Reasoning and finally Situational Judgement. Each of the five subtests are scored on a scale from 300 to 900 and the scores combined to provide a final score."
+- meta_keywords "ucat structure"
+
+%section.talk_to_bg.home_faq.dashboard_bg
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container.public_container
+    .support_col.looking_corse.text-center.gradready_question
+      %h1
+        UCAT Exam Structure
+%section.faq_wrapper.faq_details
+  .row
+    .container.public_container
+      .download-counter-badge
+        %p.download_read= show_estimated_read_time rescue nil
+        %span|
+        %i.fa.fa-user{'aria-hidden': "true"}
+        %p.download_read= show_download_hit_count rescue nil
+      .preparation_col
+        %p
+          The UCAT
+          %sup ®
+          is a two hour, standardised computer-based test that is used as a criteria by many Australian universities for entry into undergraduate medical, dental and clinical science degree programmes. The exam is composed of 233 multiple choice questions, designed to identify skills that are important towards the practice of medicine and dentistry. These questions are broken up into five subtests which each assess a different aptitude.
+        %p
+          These five subtests follow in a specific order: Verbal Reasoning, Decision Making, Quantitative Reasoning, Abstract Reasoning and finally Situational Judgement. This page will explain the structure of each of the five subtests as well as the types of questions found within each respective subtest.
+        %p
+          For further details on the UCAT
+          %sup ®
+          exam in general, refer to our guide:
+          %a{href: "/what-is-ucat", target: :_blank}
+            %strong
+              What is the UCAT
+              %sup ®
+              exam?
+        %ol
+          %li
+            %a{href: "#ucatExamStructure"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Exam Structure
+          %li
+            %a{href: "#ucatVerbalReasoning"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Verbal Reasoning
+          %li
+            %a{href: "#UCATDecisionMaking"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Decision Making
+          %li
+            %a{href: "#UCATQuantitativeReasoning"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Quantitative Reasoning
+          %li
+            %a{href: "#UCATAbstractReasoning"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Abstract Reasoning
+          %li
+            %a{href: "#UCATSituationalJudgement"}
+              UCAT
+              = succeed " : " do
+                %sup ®
+              Situational Judgement
+
+      .preparation_col.head_aftr_none
+        %h2#ucatExamStructure
+          UCAT Exam Structure Overview
+        .text-center
+          = render :partial => "ucat_exam_structure"
+        %p
+          Below is a  summary of the UCAT
+          %sup ®
+          exam format including the amount of questions and time dedicated to each subtest. For further details, visit the official
+          %a{href: "https://www.ucat.edu.au/ucat-anz/test-format/", target: :_blank}
+            %strong
+              UCAT
+              %sup ®
+              exam website.
+
+        .tbl_responsive.mtop20.mbot20
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %tr
+                %th.text-center Section
+                %th.text-center Description
+                %th.text-center Time Allocated* (mins)
+                %th.text-center Questions
+            %tbody
+              %tr
+                %td.text-center Verbal Reasoning
+                %td.text-center Assesses the ability to critically evaluate information presented in a written form.
+                %td.text-center 21 minutes
+                %td.text-center 11 passages and 44 questions
+              %tr
+                %td.text-center Decision Making
+                %td.text-center Assesses the ability to make sound decisions and judgements using complex information.
+                %td.text-center 31 minutes
+                %td.text-center 29 questions
+              %tr
+                %td.text-center Quantitative Reasoning
+                %td.text-center Assesses the ability to critically evaluate information presented in a numerical form.
+                %td.text-center 24 minutes
+                %td.text-center 9 sets and 36 questions
+              %tr
+                %td.text-center Abstract Reasoning
+                %td.text-center Assesses the use of convergent and divergent thinking to infer relationships from information.
+                %td.text-center 13 minutes
+                %td.text-center 11 sets and 55 questions
+              %tr
+                %td.text-center Situational Judgement
+                %td.text-center Measures the capacity to understand real world situations and to identify critical factors and appropriate behaviour in dealing with them.
+                %td.text-center 26 minutes
+                %td.text-center 21 scenarios and 69 questions
+              %tr
+                %td{colspan: 4}
+                  %sup*
+                  Before each subtest there is 1 minute of instructions - As such the total time is 120 minutes or 2 hours.
+        %p.mtop20
+          Each of the five subtests are scored on a scale from 300 to 900.
+        %p
+          The first four subtests are considered cognitive subtests whereas Situational Judgement is often separated as a non-cognitive subtest. As such, the first four scores are often added up to give a final score out of 3600 with the score of the situational judgement test being left separate for universities to determine whether or not they will allow the score to contribute towards their application process.
+        %p
+          Note as well that throughout the exam around 10% of the exam questions are unscored
+          %i ‘trial questions’
+          that don’t count towards the final score.
+
+      .preparation_col.head_aftr_none
+        %h2#ucatVerbalReasoning
+          UCAT: Verbal Reasoning
+        %ul.section_listing
+          %li
+            %span.time_est_col
+              Number of Questions: 44 MCQs
+              %br
+              Time allocated: 21 minutes of test time with 1 minute of instructions
+              %br
+              Format: 11 passages, each followed by 4 questions each
+
+        %p
+          The UCAT
+          %sup ®
+          Verbal Reasoning subtest is designed to assess
+          %i
+            ‘the ability to critically evaluate information presented in a written form’.
+          It is essentially a comprehension-like subtest during which you will be presented with passages and be required to draw conclusions based on the given information. Whilst the topics of the passages can vary immensely, you will not be expected to use any previous knowledge to answer the questions.
+        %p
+          There are some standard question types used for this subtest:
+        %ol
+          %li
+            Evaluating whether a given statement is
+            %b True
+            ,
+            %b False
+            or
+            %b Can’t Tell
+            based on the information provided in the passage.
+          %li
+            Choosing the best option to finish an incomplete statement, based on the information provided in the text.
+          %li
+            Comprehension style questions which may ask you to choose the best option of the four regarding information from the text.
+
+      .preparation_col.head_aftr_none
+        %h2#UCATDecisionMaking
+          UCAT: Decision Making
+        %ul.section_listing
+          %li
+            %span.time_est_col
+              Number of Questions: 29 Questions
+              %br
+              Time allocated: 31 minutes of test time with 1 minute of instructions
+              %br
+              Format: 29 individual questions that do not share passages or information
+        %p
+          The UCAT
+          %sup ®
+          Decision Making subtest is designed to assess
+          %i
+            ‘the ability to make sound decisions and judgements using complex information.’
+          Often these questions will be accompanied with texts or graphics that may be used to assist with answering the question - The UCAT
+          %sup ®
+          calculator may be used within this section. The Decision Making subtest has many different and diverse question types.
+
+        %h4 Decision Making Subtest Question Types:
+        %ol
+          %li
+            %b Syllogisms:
+            Generate conclusions from a paragraph of factual information
+          %li
+            %b Logic Puzzles:
+            Deduce a series of logical arguments from the information to reach a conclusion
+          %li
+            %b Strongest Argument:
+            Evaluate the strength of arguments for/against an issue
+          %li
+            %b Inference:
+            Interpret presented information to determine which conclusion(s) are correct from a presented set of text passages, charts or graphs
+          %li
+            %b Venn Diagram:
+            Construct & interpret Venn diagrams to solve a problem
+          %li
+            %b Probabilistic Reasoning:
+            Determine probabilities based on statistical information
+
+      .preparation_col.head_aftr_none
+        %h2#UCATQuantitativeReasoning
+          UCAT: Quantitative Reasoning
+        %ul.section_listing
+          %li
+            %span.time_est_col
+              Number of Questions: 36 Questions
+              %br
+              Time allocated: 24 minutes of test time with 1 minute of instructions
+              %br
+              Format: 36 questions that stand alone, separate from one another. Note however that some questions may be based on the same data without requiring answers from previous questions.
+        %p
+          Quantitative reasoning is designed to assess your ability to
+          %i
+            ‘critically evaluate information presented in a numerical form’.
+          Whilst it is essentially a maths exam, the quantitative reasoning subtest is extremely time-pressured and tests your ability to complete quick and accurate calculations rather than interpret and analyse complex mathematical concepts. There are a wide variety of questions which can include topics such as averages, percentages, interpretations of graphs, conversions, proportions/ratios, and tax tables.
+
+        %h4 Quantitative Reasoning Subtest Question Types:
+        %p
+          Each individual question is a multiple choice question (MCQ) with 5 options, A to E. As mentioned, the types of questions can vary and include:
+        %ol
+          %li Averages
+          %li Percentages
+          %li Table/Graph interpretation
+          %li Median/Mode
+          %li Speed/Distance/Time
+          %li Conversion Tables
+          %li Pie charts/Visual tables
+          %li Proportion/Ratios
+          %li Tax Tables
+
+      .preparation_col.head_aftr_none
+        %h2#UCATAbstractReasoning
+          UCAT: Abstract Reasoning
+        %ul.section_listing
+          %li
+            %span.time_est_col
+              Number of Questions: 55 Questions
+              %br
+              Time allocated: 13 minutes of test time with 1 minute of instructions
+              %br
+              Format: Most prompts will be followed by 4-6 questions, however, there may also be stand alone questions with 1 question for a prompt.
+        %p
+          Abstract reasoning is designed to
+          %i
+            ‘assess your ability to identify patterns amongst abstract shapes where irrelevant and distracting material may lead to incorrect conclusions.’
+          The test therefore measures your ability to adapt to the information provided, critically evaluate and generate hypotheses, and requires you to query your judgements as you go along. For the most part, this will involve a series of questions looking for patterns within a series of shapes or sets and then answering questions based on these patterns.
+
+        %h4 Abstract Reasoning Subtest Question Types:
+        %p
+          Each individual question will be a multiple choice question (MCQ) with 5 options labelled A to E. As mentioned, the types of questions can vary and include:
+        %ol
+          %li
+            %b Set A / Set B / Neither:
+            You will be presented with two sets of shapes labelled
+            %i ‘Set A’
+            and
+            %i ‘Set B’.
+            You will be given a test shape and asked to decide whether the test shape belongs to Set A, Set B, or Neither.
+          %li
+            %b Linear patterns:
+            You will be presented with a series of shapes. You will be asked to select the next shape in the series.
+          %li
+            %b Analogous patterns:
+            You will be presented with a statement, involving a group of shapes. You will be asked to determine which shape completes the statement.
+          %li
+            %b Multiple Choice:
+            You will be presented with two sets of shapes labelled
+            %i ‘Set A’
+            and
+            %i ‘Set B’.
+            You will be asked to select which of the four response options belongs to Set A or Set B.
+
+      .preparation_col.head_aftr_none
+        %h2#UCATSituationalJudgement
+          UCAT: Situational Judgement
+        %ul.section_listing
+          %li
+            %span.time_est_col
+              Number of Questions: 66 Questions
+              %br
+              Time allocated: 29 minutes of test time with 1 minute of instructions
+              %br
+              Format: Although this section appears time-pressured, students often find that it is the least time-pressured subtest as the questions are short and each question stem will have multiple related questions.
+        %p
+          The Situational Judgement subtest measures the
+          %i
+            ‘capacity to understand real world situations and to identify critical factors and appropriate behaviour in dealing with them’.
+          It is important to note that this section is asking for what you
+          %b should
+          do rather than what you
+          %b would
+          do in that situation. Unlike certain psychometric or personality based tests, there are in fact correct answers that align with clinical/non-clinical ethics.
+
+        %h4 Situational Judgement Subtest Question Types:
+        %p
+          Each individual question will be a multiple choice question (MCQ) with 5 options labelled A to E. As mentioned, the types of questions can vary and include:
+        %ol
+          %li
+            %b Appropriateness:
+            Based on a given scenario, students will need to select how appropriate a certain action is:
+            %ul
+              %li Very appropriate
+              %li Appropriate but not ideal
+              %li Inappropriate but not awful
+              %li Very inappropriate
+          %li
+            %b Importance:
+            Based on a given scenario, students will need to select how important a certain consideration is towards an individual’s subsequent actions:
+            %ul
+              %li Very important
+              %li Important
+              %li Of minor importance
+              %li Not important at all
+
+      .preparation_col.head_aftr_none
+        %h2#furtherGamsatTips
+          Further Resources & Preparation Materials
+        %ol.ordr_list
+          %li
+            %h5
+              %a{href: "/what-is-ucat", target: :_blank}
+                What is the UCAT
+                %sup ®
+                exam?
+            %p.mtop_zero
+              An introduction to the UCAT
+              %sup ®
+              exam including which universities require the UCAT
+              %sup ®
+          %li
+            %h5
+              %a{href: "/ucat-preparation", target: :_blank}
+                How to study for the UCAT
+                %sup ®
+                Exam
+            %p.mtop_zero
+              Everything you need to know on how to study for the UCAT
+              %sup ®
+              Exam, including tips for each of the five sections.
+          %li
+            %h5
+              %a{href: "/ucat-students-guide", target: :_blank}
+                UCAT
+                %sup ®
+                Students Guide
+            %p.mtop_zero
+              A comprehensive breakdown for students to get them started on their UCAT
+              %sup ®
+              preparation.
+          %li
+            %h5
+              %a{href: "/ucat-parents-guide", target: :_blank}
+                UCAT
+                %sup ®
+                Parents Guide
+            %p.mtop_zero
+              A comprehensive guide about what parents and guardians need to know about the UCAT
+              %sup ®
+              including breakdown of test, test timeline and finances.
+
+:javascript
+  // Select all links with hashes
+  $('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top-74
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+
+        });
+      }
+    }
+  });
+
+:css
+  .preparation_col ol li a, .preparation_col ul li a{
+    font-size: 14px;
+    color: #007ecc;
+    line-height: 25px;
+    font-weight: 600;
+  }
+  .preparation_col ol li h3 a {
+    font-size: 18px;
+    color: #007ecc;
+  }
+  .preparation_col h3 {
+    font-size: 18px;
+    color: #007ecc;
+    margin-top: 0px;
+  }
+  .cstm_tbl thead {
+    background: #007ecc;
+    color: #fff;
+  }
+  .download-counter-badge .fa {
+    color: #007ecc !important;
+    padding: 5px 5px !important;
+    font-size: 17px !important;
+  }
+  .preparation_col p a {
+    font-size: 14px;
+    color: #007ecc;
+  }
+  .tbl_responsive span {
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+  }
+  .preparation_col ul.section_listing li span.time_est_col {
+    color: #111;
+    font-size: 14px;
+    font-style: italic;
+    display: inline-block;
+  }

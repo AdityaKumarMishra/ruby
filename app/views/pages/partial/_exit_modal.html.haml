@@ -1,0 +1,56 @@
+#exitModal.modal.fade{role: "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      .modal-header
+        %button.close.btn_close{"data-dismiss" => "modal", type: "button"} ×
+        .text-center.some{ :style => "padding: 0px 100px;" }
+          %h2= @exit_popup.display_name
+      .modal-body
+        %p= @exit_popup.message.html_safe
+
+        = link_to @exit_popup.btn_text, @exit_popup.btn_url, class: 'default_btn hvr-shutter-in-horizontal btn_link', target: "_blank"
+        .clear
+        .mbot_10
+
+- if controller_name == "pages" && action_name == "main"
+  :javascript
+    $(document).ready(function(){
+      var popup_freq = "#{@exit_popup.popup_frequency}"
+      var cookie_name = "#{@exit_popup.cookie_name}"
+      $('.btn_close').click(function(){
+        var check_cookie = Cookies.get(cookie_name)
+        if (check_cookie < popup_freq){
+          var new_cockie = parseInt(check_cookie) + 1
+          Cookies.set(cookie_name, new_cockie);
+        }
+      });
+    });
+
+- elsif product_line == 'umat'
+  :javascript
+    $(document).ready(function(){
+      var popup_freq = "#{@exit_popup.popup_frequency}"
+      var umat_cookie_name = "#{@exit_popup.cookie_name}"
+      $('.btn_close').click(function(){
+        var umat_check_cookie = Cookies.get(umat_cookie_name)
+        if (umat_check_cookie < popup_freq){
+          var new_cockie = parseInt(umat_check_cookie) + 1
+          Cookies.set(umat_cookie_name, new_cockie);
+        }
+      });
+    });
+
+-elsif product_line == "gamsat"
+  :javascript
+    $(document).ready(function(){
+      var popup_freq = "#{@exit_popup.popup_frequency}"
+      var gamsat_cookie_name = "#{@exit_popup.cookie_name}"
+      $('.btn_close').click(function(){
+        var gamsat_check_cookie = Cookies.get(gamsat_cookie_name)
+        if (gamsat_check_cookie < popup_freq){
+          var new_cockie = parseInt(gamsat_check_cookie) + 1
+          Cookies.set(gamsat_cookie_name, new_cockie);
+        }
+      });
+    });

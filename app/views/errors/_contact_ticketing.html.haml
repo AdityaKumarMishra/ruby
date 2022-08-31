@@ -1,0 +1,9 @@
+%p Send a message to the support team.
+
+-if @error_type == '404'
+  %a.default_btn.mtop30.mbot30.hvr-shutter-in-horizontal.contact_support{href: "javascript:void(0)"} Send Ticket
+-else
+  .btn.btn-gradready.green{'data-toggle' => 'modal', class: "new-ticket", 'data-target'=> '#ticket-modal'} Send Ticket
+
+
+  = render 'issue_forum/submit_ticket_modal', options: {}

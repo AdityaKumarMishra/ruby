@@ -1,0 +1,14 @@
+#massEmailAllModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Send Email To All
+      .modal-body
+        %p
+          = "Click to Yes to send emails to #{all_users.count} users."
+
+      .modal-footer
+        %button.btn.btn-default.btn-danger{"data-dismiss" => "modal", :type => "button"} Close
+        = button_tag(type: 'submit', class: 'btn btn-success pull-right', id: 'send-all-emails-button', name: 'send_all', value: 'send_all') do
+          Yes

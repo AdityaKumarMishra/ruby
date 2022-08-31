@@ -1,0 +1,59 @@
+%h1 Listing Essays Ready To Mark
+= form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' } do |f|
+  .row
+    .col-md-4
+      Date Submitted From
+      =f.text_field(:submitted_start_date, class: 'form-control datepicker',placeholder: 'Choose date')
+    .col-md-4
+      Date Submitted To
+      =f.text_field(:submitted_with_end, class: 'form-control datepicker',placeholder: 'Choose date')
+  .row
+    .col-md-4
+      Date Marked From
+      =f.text_field(:with_start, class: 'form-control datepicker from_filter',placeholder: 'Choose date')
+    .col-md-4
+      Date Mark To
+      =f.text_field(:with_end, class: 'form-control datepicker to_filter',placeholder: 'Choose date')
+    .col-md-4
+      Pay Period
+      =select_tag(:with_pay_period, options_for_select(marked_essays_pay_period, params[:with_pay_period]), class: 'form-control pay_period_filter', include_blank: "- All Time -")
+      / =select_tag(:with_pay_period, options_for_select(EssayResponse.pay_periods), class: 'form-control pay_period_filter', include_blank: "- All Time -")
+  %p
+    Student First/Last Name
+    =f.text_field(:search_query_student, class: 'filterrific-periodically-observed form-control', placeholder: 'Search for...')
+  %p
+    Submitted Tutor (who the essay was submitted to)
+    =f.select(:to_submitter, @filterrific.select_options[:staff],{ include_blank: '- Any -' }, class: 'form-control chosen-select')
+  %p
+    Marked Tutor (who actually marked the essay)
+    =f.select(:by_staff, @filterrific.select_options[:staff],{ include_blank: '- Any -' }, class: 'form-control chosen-select')
+  %p
+    Status
+    =f.select(:with_status, @filterrific.select_options[:status],{ include_blank: '- Any -' }, class: 'form-control')
+  %p
+    Course Status
+    = f.select(:course_status, @filterrific.select_options[:course_status],{}, class: 'form-control')
+    
+  %br
+  .row
+    .col-md-6
+      = f.submit 'Filter', class: 'btn btn-gr-light-green'
+      = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+
+%h3 Essays Responses
+#filterrific_essay_response_results
+  = render partial:'essay_responses/partial/manager_table', :locals => {responses: @responses, total_responses: @total_responses}
+
+= link_to 'Back', essays_path , class: 'btn btn-default'
+
+:javascript
+  $(document).ready(function(){
+    $(".pay_period_filter").on("change", function(){
+      var selected = $(".pay_period_filter").val();
+      var pay_period_date = selected.split(' - ');
+      $(".from_filter").val(pay_period_date[0])
+      $(".to_filter").val(pay_period_date[1])
+      $('.from_filter').trigger('change');
+      $(".to_filter").trigger('change');
+    });
+  });

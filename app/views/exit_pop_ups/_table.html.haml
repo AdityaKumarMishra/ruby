@@ -1,0 +1,27 @@
+#filterrific_results
+  =#will_paginate @exit_popups, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Display Name
+        %th Category
+        %th Cookie Name
+        %th Popup Frequency
+        %th Show to user
+        %th Button Text
+        %th
+        - if current_user.admin? || current_user.superadmin?
+          %th
+
+    %tbody
+      - @exit_popups.each do |exit_popup|
+        %tr
+          %td= exit_popup.display_name
+          %td= exit_popup.category
+          %td= exit_popup.cookie_name
+          %td= exit_popup.popup_frequency
+          %td= exit_popup.visible_to_user
+          %td= exit_popup.btn_text
+          %td= link_to 'Edit', edit_exit_pop_up_path(exit_popup), class: 'btn btn-info btn-sm'
+          - if current_user.admin? || current_user.superadmin?
+            %td= link_to 'Delete', exit_pop_up_path(exit_popup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm'

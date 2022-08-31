@@ -1,0 +1,23 @@
+%h1 To review
+
+- if @mcq_stems.present?
+  %table.table-hover.table.table-bordered.table-responsive
+    %thead
+      %tr
+        %th McqStem Id
+        %th Title
+        %th Author
+        %th Reviewer
+
+    %tbody
+      - @mcq_stems.each do |m|
+        %tr{'data-link': url_for(m)}
+          %td= m.id
+          %td= m.title
+          %td= m.author.full_name rescue nil
+          %td= m.reviewer.full_name if m.reviewer.present?
+- else
+  %i You have no McqStems to review
+
+%br
+= link_to 'Back', mcq_stems_path, class: 'btn btn-default'

@@ -1,0 +1,19 @@
+%h1 Listing textbooks
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th{colspan: 2} Actions
+
+  %tbody
+    -# Alphanumeric sort - word then number
+    - @textbooks.sort_by{|s| s.title.to_s.scan(/\d+/).map{|s| s.to_i}}.each do |textbook|
+      %tr{'data-link': url_for(textbook)}
+        %td= textbook.title
+        %td= link_to 'Edit', edit_textbook_path(textbook), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', textbook, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Textbook', new_textbook_path, class: 'btn btn-primary'

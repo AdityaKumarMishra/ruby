@@ -1,0 +1,30 @@
+#MassDeleteModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "MassDeleteLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Warning!!!
+      -if users.present?
+        .modal-body
+          You are deleting
+          = users.count
+          users. Deleting data action cannot be reversed. Please click Yes if you are 100% sure else click No.
+        .modal-footer
+          %button.btn.btn-default.btn-danger.align-top-btn{"data-dismiss" => "modal", :type => "button"} No
+          = form_tag('/users/destroy_all', method: :delete, class: 'align-top-btn') do |f|
+            = hidden_field_tag "user_ids", users.pluck(:id)
+            = button_tag(type: 'submit', class: 'btn btn-success pull-right') do
+              Yes
+      -else
+        -if user.student?
+          .modal-body
+            You are deleting 1 user. Deleting data action cannot be reversed. Please click Yes if you are 100% sure else click No.
+          .modal-footer
+            %button.btn.btn-default.btn-danger.align-top-btn{"data-dismiss" => "modal", :type => "button"} No
+            = link_to 'Yes', user_path(user), method: :delete,  class: 'btn btn-default btn-success'
+        -else
+          .modal-body
+            Deleting data action cannot be reversed. It is recommended to transfer data of the user before deleting.
+          .modal-footer
+            = link_to 'Delete without Transfer', user_path(user), method: :delete,  class: 'btn btn-default btn-danger'
+            = link_to 'Transfer Data(Recommended)', transfer_data_user_path(user), class: 'btn btn-default btn-success'

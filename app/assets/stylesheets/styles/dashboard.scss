@@ -1,0 +1,234 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.text-black {
+  color: #000000;
+}
+.dashboard-container {
+  padding-top: 60px;
+  @mixin dash-item-col($type-color) {
+    h2 {
+      color: $type-color;
+      height: 80px;
+      text-align: center;
+    }
+    a {
+      color: $white;
+      background-color: $type-color;
+      border-color: darken($type-color, 10%);
+      width: 100%;
+    }
+    p {
+      height: 110px;
+      text-align: center;
+    }
+  }
+  .green_opicity {
+    @include dash-item-col($grGreen);
+  }
+  .blue_col {
+    @include dash-item-col($umat-color);
+  }
+  .perpal_col {
+    @include dash-item-col($vce-color);
+  }
+  .red_col {
+    @include dash-item-col($hsc-color);
+  }
+}
+.dashboard-calendar-header {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 19px;
+  color: #006d00;
+}
+.dashboard-panel {
+  border: 0px !important
+}
+.dashboard-header {
+  border: 0 1;
+  font-size: 19px;
+  color: #006d00 !important;
+  background-color: #ffffff !important;
+}
+
+.dashboard-title {
+  font-size: 23px;
+  color: #006d00;
+  text-align: center;
+}
+
+.resources{
+  padding: 10px 0;
+  font-size: 1.1em;
+}
+
+.bold_date{
+  font-weight: bold;
+  background: #91c8a8 none repeat scroll 0 0;
+  color: #fff;
+}
+
+
+.event_detail_col{
+ background: #eee none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    float: left;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 100%;
+}
+.event_date_col {
+  background: #91c8a8 none repeat scroll 0 0;
+  color: #fff;
+  float: left;
+  margin: 3px;
+  min-height: 126px;
+  padding-top: 37px;
+  vertical-align: middle;
+  width: 76px;
+}
+.date {
+  font-size: 33px;
+  line-height:33px;
+
+}
+.event_date_col span{
+    font-size: 18px;
+    line-height: 15px;
+    display: block;
+}
+.event_desc_col{width:87%; float:right;padding-top: 10px ;padding-left: 0;}
+.event_desc_col p{font-size:12px; color:#111}
+.cal-border{border: 1px solid #FF9C00 !important; padding: 5px 10px !important;}
+
+.header_select{
+  float: left;
+  margin-left: 176px;
+  margin-top: 14px;
+  width: 15%;
+}
+.header_select select{
+  width: 100%;
+  background: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-size: 13px;
+  box-shadow: 0 2px 3px #ddd;
+}
+
+.event_date_col.no_cal_date{
+  width: 66px;
+  min-height: 58px;
+}
+
+.event_desc_col.no_update_description{
+      text-align: center;
+    padding-top: 18px;
+}
+.width_14 {
+  width: 14%;
+}
+#send-all-emails-button{
+  margin-right: 15px;
+}
+
+#tutors_table > thead > tr > th::after{display: none !important;}
+
+.div_no_data{
+  float: left;
+}
+
+.panel-default.flt_left{
+  width:100%;
+  float: left;
+}
+.attachment-email{
+  margin-top: 12px;
+}
+.attachment-email img{
+  margin-top: 12px;
+}
+.attachment-email .btn-danger{
+  height: 27px;
+  padding: 2px 12px;
+}
+
+/*==========out of stock====================*/
+.toggle_switch {
+  padding:30px 0px;
+}
+.toggle_switch .switch {
+position: relative;
+display: inline-block;
+width: 64px;
+height:25px;
+margin: 0 18px;
+}
+
+.toggle_switch span {
+    color: #4a4f55;
+    text-transform: capitalize;
+    top: 2px;
+    position: relative;
+    font-family: "museo-slab";
+    font-size: 12px;
+    font-weight: bold !important;
+    color: #2b2b2b !important;
+    padding: 10px 15px;
+}
+
+.toggle_switch .switch input {
+opacity: 0;
+width: 0;
+height: 0;
+margin: 0!important;
+}
+
+.toggle_switch .slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.toggle_switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 17.7px;
+    width: 17.5px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+background-color: #008000;
+}
+
+input:focus+.slider {
+box-shadow: 0 0 0px #fff;
+}
+
+input:checked+.slider:before {
+-webkit-transform: translateX(37px);
+-ms-transform: translateX(37px);
+transform: translateX(37px);
+}
+
+.toggle_switch .slider.round {
+border-radius: 34px;
+}
+
+.toggle_switch .slider.round:before {
+border-radius: 50%;
+}
+  
+/*=======out of stock end=======================*/

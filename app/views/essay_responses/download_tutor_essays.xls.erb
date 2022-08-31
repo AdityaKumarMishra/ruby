@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <% if @status == "Marked" %>
+    <Worksheet ss:Name= "Essasy To Mark" >
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">Tutor Name</Data></Cell>
+          <Cell><Data ss:Type="String">Essays Marked count</Data></Cell>
+        </Row>
+        <% if @staff_profiles %>
+          <% @staff_profiles.uniq.each do |sp| %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= sp.staff.full_name %></Data></Cell>
+              <% count = @responses.where(staff_profile_id: sp.id).count %>
+              <% count = count + @marked_dates.count %>
+              <Cell><Data ss:Type="Number"><%=count%></Data></Cell>
+            </Row>
+          <% end %>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% else %>
+    <Worksheet ss:Name= "Essasy To Mark" >
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <% sps = @staff_profiles.uniq.map {|sp| [sp.staff.full_name, sp.id]}.sort %>
+          <% sps.each do |sp| %>
+            <Cell><Data ss:Type="String"><%=sp.first%></Data></Cell>
+          <% end %>
+        </Row>
+        <% if @staff_profiles %>
+          <% csv_data = grouped_by_week_by_sp_id(@responses, sps).sort.to_h %>
+          <% csv_data.each do |week, sp_and_counts| %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= week %></Data></Cell>
+              <% sps.each do |_sp_name, sp_id| %>
+                <Cell><Data ss:Type="Number"><%=sp_and_counts[sp_id.to_s].to_i%></Data></Cell>
+              <% end %>
+            </Row>
+          <% end %>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>

@@ -1,0 +1,64 @@
+#course-packages.vce_prpl_clr
+  .whte_bg_trans
+    - if defined? popup
+      .close-btn-vce.pull-right
+        X
+    .container.no_padding
+      .umat_content
+        %h2
+          VCE
+          %sup{ style: "margin-right: -23px;left: -20px;"} ®
+          %span Ready COURSES
+        %p
+          Comprehensive and Personalised VCE
+          %sup{ style: "margin-right: -4px;"} ®
+          prep courses
+        %h3.description-tag-text
+          All our
+          %b
+            %i Attendance
+          courses are capped at the maximum number of 10 students!
+      %span.grn_clr.mbottom.imgg-mang.purple_color
+        =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_vce.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+        Enhanced
+        =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/str_vce.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+        New
+
+  %center
+    .categor_col.mtop_zero.margin-bt-30
+      %ul.nav.nav-tabs
+        %li.active{:active => "true", :heading => "English", "ng-class" => "{active: active, disabled: disabled}"}
+          %a.u-purple-link.bdr_none_hover{"data-toggle" => "tab", :href => "#tab1", "ng-click" => "select()", "tab-heading-transclude" => ""}
+            %i.fa.fa-pencil.subject{"aria-hidden" => "true"}
+            English
+        %li.math_bg{:heading => "Mathematical Methods (CAS)", "ng-class" => "{active: active, disabled: disabled}"}
+          %a.u-purple-link{"data-toggle" => "tab", :href => "#tab2", "ng-click" => "select()", "tab-heading-transclude" => ""}
+            %i.fa.fa-calculator.subject{"aria-hidden" => "true"}
+            Mathematical Methods (CAS)
+    .tab-content
+      #tab1.tab-pane.active
+        = render 'pages/partial/product_version_table/table', product_line: 'vce', product_info: @vce_product_info, early_bird: false, subject: 'english'
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.vce
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  = link_to 'CREATE YOUR OWN COURSE', vce_ready_path(id: 'english-custom'), class: 'u-white-link'
+            = render 'pages/partial/vce/vce_discount_links'
+
+      / Math Product Versions
+      #tab2.tab-pane.math-tab
+        = render 'pages/partial/product_version_table/table', product_line: 'vce', product_info: @vce_product_info, early_bird: true, subject: 'math'
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.vce
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  %a.u-white-link{:href => dynamic_product_version_uri('custom', 'VCE', 'math')} CREATE YOUR OWN COURSE
+            = render 'pages/partial/vce/vce_discount_links'

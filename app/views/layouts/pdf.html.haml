@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Export As PDF
+    %meta{:charset => "utf-8"}/
+    = wicked_pdf_stylesheet_link_tag "pdf", media: 'all'
+  %body
+    .container.print
+      = yield
+

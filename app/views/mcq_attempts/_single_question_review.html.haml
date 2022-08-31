@@ -1,0 +1,173 @@
+.resource_col.mbot21
+  %h4.fl Review exercise
+  .exam_list.side_exam_ques
+    %h3.text-left.sideLeftQues Questions
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      - filter_mcq_stems(@exercise, @question).each_with_index do |mcq_stem, index|
+        - @exercise.mcq_attempts.includes(mcq: [:mcq_stem]).where(mcq_stem: mcq_stem).order(:mcq_id).each_with_index do |m_attempt, ind|
+          - if (m_attempt.mcq_answer.present? && !(m_attempt.mcq_answer.correct))
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == m_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-times.red_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind +1} #{mcq_stem.title}"
+          - elsif (m_attempt.mcq_answer.present? && m_attempt.mcq_answer.correct)
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == m_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-check.green_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind +1} #{mcq_stem.title}"
+          - elsif m_attempt.mcq_answer.blank?
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == m_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-minus.blk_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind +1} #{mcq_stem.title}"
+
+.ques_exam_list
+  .tab-content.tab_content_width
+    - filter_mcq_stems(@exercise, @question).each_with_index do |mcq_stem, index|
+      - @m_attm = @exercise.mcq_attempts.includes(:mcq_answer, mcq: [:mcq_stem, :mcq_answers]).where(mcq_stem: mcq_stem).count
+      - @exercise.mcq_attempts.includes(:mcq_answer, mcq: [:mcq_stem, :mcq_answers]).where(mcq_stem: mcq_stem).order(:mcq_id).each_with_index do |m_attempt, ind|
+        .tab-pane{ id: "m#{index}_#{ind}", role: 'tabpanel', class: ('active' if @selected_tab.present? ? (@selected_tab == m_attempt.mcq) : (index == 0 && ind == 0)) }
+          .full_wdt_timer_col
+            = link_to 'Return MCQ to MCQ pool', return_to_mcq_exercise_path(id: @exercise.id, mcq_stem_id: mcq_stem.id), method: :delete, remote: true, class: 'btn btn-danger', id: "m_attempt_to_pool_#{mcq_stem.id}", title: 'Clicking this button will remove the MCQ from this set of exercise and return the MCQ to the pool of MCQs so that you may reattempt the question later on.'
+            .question_timer
+              %i.fa.fa-clock-o
+              %b Time Taken (M) :
+              = @exercise.mcq_stem_attempt_time(mcq_stem.id)
+          %h4.fnt-20= mcq_stem.title
+          %h4.mr_btm.fnt-20
+            %span.tags_txt Tags:
+            - tags = mcq_stem.mcq_tags
+            - tags.each do |tag|
+              - if tag != nil
+                %span.tags_name= tag.name
+          .mcq_stem_description.mcq_review_description.ck_edtr_cstm_list
+            = mcq_stem.description.html_safe
+          - if m_attempt.mcq.published
+            .quest-col.question
+              .faq_list.para_fs14.mar5
+                .faq_list_col
+                  .textbook_tabbing_links.written_view_btn.marzero
+                    %ul
+                      - if m_attempt.mcq.tag.present?
+                        - @vods = Vod.by_tags(m_attempt.mcq.tags) unless m_attempt.mcq.tags.include? nil
+                        - if @vods.present?
+                          %li
+                            = link_to "Show Relevant Videos", exercise_review_videos_exercise_exercie_review_path(@exercise.id, m_attempt.id), {remote: true}
+                        - @textbooks = Textbook.by_tags(m_attempt.mcq.tags) unless m_attempt.mcq.tags.include? nil
+                        - if @textbooks.present?
+                          %li
+                            = link_to "Show Relevant Textbooks", exercise_review_textbooks_exercise_exercie_review_path(@exercise.id, m_attempt.id), {remote: true}
+
+                      - @content = m_attempt.mcq
+                      - @given = @exercise
+                      %li
+                        = link_to "Give Feedback", give_feedback_exercise_exercie_review_path(@given, @content), {remote: true}
+                      %li
+                        = render 'issue_forum/query_button', given: @exercise, content: m_attempt.mcq
+              .statics_static_table.mtop10
+                %ul
+                  - if m_attempt.mcq.tag.present?
+                    %li.bdr_btm_none
+                      %span Tags :
+                      = m_attempt.mcq.tag.try(:name)
+                  %li
+                    %span Difficulty Level :
+                    = difficulty_to_human m_attempt.mcq.try(:difficulty)
+              %h4.pos_rel.fnt-20
+                %span.mcqNum= "#{ind + 1}."
+                = sanitize m_attempt.mcq.question
+
+              %ul.exer-list.ques_ans_list
+                .disable{class: "correct_incr que_stat_#{m_attempt.mcq.id}"}
+                  - if (m_attempt.mcq_answer.present? && !(m_attempt.mcq_answer.correct))
+                    %h5.incrt-ans Incorrect
+                  - elsif (m_attempt.mcq_answer.present? && m_attempt.mcq_answer.correct)
+                    %h5.crt-ans Correct
+                  - elsif m_attempt.mcq_answer.blank?
+                    %h5.natmp-ans Not Attempted
+
+                - m_attempt.mcq.mcq_answers.each_with_index do |answer_option, index|
+                  -if m_attempt.mcq_answer && answer_option.correct?
+                    %li.admin_custom_radio{class: "correct_#{m_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{m_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.correct
+                          %span.answer_status{id: "corr_answer#{m_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-check{'aria-hidden'=>'true'}
+                            .itf-query-button-fix
+                          %span{id: "correc_answer#{m_attempt.mcq.id}", class: "disable"}
+                  -elsif (answer_option == m_attempt.mcq_answer && !answer_option.correct?)
+                    %li.admin_custom_radio{class: "wrong_#{m_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{m_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.incorrect
+                          %span.answer_status{id: "wrg_answer#{m_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-times{'aria-hidden' =>'true'}
+                            .itf-query-button-fix
+                          %span{id: "incorrec_answer#{m_attempt.mcq.id}", class: "disable"}
+                  -elsif (!m_attempt.mcq_answer && answer_option.correct?)
+                    %li.admin_custom_radio{class: "correct_unanswered_#{m_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{m_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.correct
+                          %span.answer_status{id: "right_non_answered#{m_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-check{'aria-hidden'=>'true'}
+                            .itf-query-button-fix
+                          %span{id: "rt_non_answered#{m_attempt.mcq.id}", class: "disable"}
+                  -else
+                    %li.admin_custom_radio
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{m_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+              .reveal_btn
+                %a{:type => "click", class: "rvl_exer green_expired_btn status_btn", 'data-id' => "#{m_attempt.mcq.id}"} Reveal
+              %br
+              %br
+              .correct_ans_div{class: "disable", id: "correct_ans_#{m_attempt.mcq.id}"}
+                .statics_static_table
+                  %ul
+                    %li.single_correct_ans
+                      %span Answer :
+                      - m_attempt.mcq.mcq_answers.each_with_index do |mcq_ans, index|
+                        = list_alphabet_style[index].split(".")[0] if mcq_ans.correct?
+              .explaination{class: "disable", id: "expl_#{m_attempt.mcq.id}"}
+                %h4.fnt-20 Explanation
+                = m_attempt.mcq.explanation.html_safe
+                -mcq_video = m_attempt.mcq.mcq_video
+                =render '/section_item_attempts/partial/explain_video', mcq_video: mcq_video
+          .text-center.full_width.mtop30.mbot10
+            =link_to 'Return to Exercises', exercises_path, class: 'mg_rht0 default_btn hvr-shutter-in-horizontal return_font mrgn-bottom'
+            - if index != 0 || ind != 0
+              %button.btnPrevious.black_default_btn.hvr-shutter-in-horizontal.mrgn-bottom{ type: 'button' } Previous
+            - if index != filter_mcq_stems(@exercise).count - 1
+              - if @m_attm - 1 == ind
+                =link_to 'Next', mcq_exam_question_rating_exercise_exercie_review_path(@exercise.id, m_attempt.id), remote: true, class: 'btnNextOnly black_default_btn hvr-shutter-in-horizontal'
+              - else
+                %button.btnNext.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Next
+              / %button.btnNext.black_default_btn.hvr-shutter-in-horizontal.mrgn-bottom{ type: 'button' } Next
+            - if index == filter_mcq_stems(@exercise).count - 1
+              -if mcq_stem.mcqs.count - 1 > ind
+                - if @m_attm - 1 == ind
+                  =link_to 'Next', mcq_exam_question_rating_exercise_exercie_review_path(@exercise.id, m_attempt.id), remote: true, class: 'btnNextOnly black_default_btn hvr-shutter-in-horizontal'
+                -else
+                  %button.btnNext.black_default_btn.hvr-shutter-in-horizontal.mrgn-bottom{ type: 'button' } Next
+              -else
+                =nil
+    .div{id: "mod_mcq_attempt"}
+    .div{id: "mod_section_question_rating"}
+ 

@@ -1,0 +1,87 @@
+- if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+  %div{class: 'hidden', id: 'question-allotted-time', value: "#{@question_time}"}
+.resource_col.mbot21
+  %h4.fl.mtop20= @section_attempt.section.title
+  .exam_list.side_exam_ques
+    %h3.text-left.sideLeftQues Questions
+    %ul.nav.nav-tabs{ role: 'tablist'}
+      - @sorted_mcq_stems.each_with_index do |mcq_stem, index|
+        %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == mcq_stem.id.to_s) : index == 0) }
+          %a{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}", 'aria-controls': "m#{index}", onclick: "stopRunnerTimer(event)", id: "#{mcq_stem.id}" }
+            = mcq_stem.title
+            .mcq-stem-id.hidden= mcq_stem.id
+            .mcq-stem-question-id.hidden= mcq_stem.id
+
+.ques_exam_list
+  .tab-content.tab_content_width
+    .time_wrapper
+      .time_heading
+        - if @section_attempt.assessment_attempt.timer_option_type == 'entire_exam'
+          .question_timer
+            %i.fa.fa-clock-o
+            %b Time Remaining:
+            %span{id: "exam_total_time_remaining"}
+
+    - @sorted_mcq_stems.each_with_index do |mcq_stem, index|
+      .tab-pane{ id: "m#{index}", role: 'tabpanel', class: ('active' if @selected_tab.present? ? (@selected_tab == mcq_stem.id.to_s) : index == 0)}
+        %div{class: 'hidden', id: 'mcq-stem-timer', 'exercise-id': @section_attempt.id, 'section-type': 'SectionAttempt' }
+        .mcq-stem-question-id-active.hidden= mcq_stem.id
+        %h4.fnt-20= mcq_stem.title
+        - if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+          .time_wrapper
+          .time_heading
+            .question_timer
+              %b Time Allotted(M):
+              %span=Time.at(@question_time).utc.strftime("%M:%S")
+              %br
+              %b Time Remaining:
+              %span{id: "question_time_remaining_#{mcq_stem.id}"}
+        .mcq_stem_description.ck_edtr_cstm_list{id: "#{mcq_stem.id}"}
+          = mcq_stem.description.html_safe
+        .div.finish{id: "#{@section_attempt.assessment_attempt.is_finish}"}
+        - @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |s_attempt, ind|
+          .quest-col{class: "question", id: "#{s_attempt.id}"}
+            %h4.pos_rel.fnt-20
+              %span.mcqNum= "#{ind + 1}."
+              = s_attempt.mcq.question.html_safe
+
+            = simple_fields_for "section_item_attempts[#{s_attempt.id}]", s_attempt do |e|
+              %ul.exer-list.ques_ans_list
+                - ans_ind = 0
+                = e.collection_radio_buttons(:mcq_answer_id, s_attempt.mcq.mcq_answers, :id, :answer,  { boolean_style: :inline, item_wrapper_tag: false }) do |builder|
+                  - answer_text = builder.text.include?('<p>') ? builder.text : "<p>#{builder.text}</p>"
+                  %li.admin_custom_radio
+                    = builder.radio_button + list_exam_alphabet_style(ans_ind, answer_text.html_safe, "section_item_attempts_#{s_attempt.id}_mcq_answer_id_#{builder.object.id}").html_safe
+                    - ans_ind += 1
+        .text-center.full_width.mtop30.mbot10
+          - if index != 0
+            %button.btnPrevious.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Previous
+          - if index != @sorted_mcq_stems.count - 1
+            %button.btnNext.black_default_btn.hvr-shutter-in-horizontal{ type: 'button', class: "#{params[:online_exam_attempt_id].present? ? 'only_exam_attempt' : ''}"} Next
+          - if index == @sorted_mcq_stems.count - 1
+            = link_to 'Complete', "javascript:void(0)", class: 'mg_rht0 default_btn hvr-shutter-in-horizontal return_font', id: "submit_item_attempt", onclick: "stopRunnerTimer()"
+
+- if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+  :javascript
+    var time = $("#question-allotted-time").attr('value');
+    showRemaningTimer(time, '#{@sorted_mcq_stems.first.id}');
+
+- if @section_attempt.assessment_attempt.timer_option_type == 'entire_exam'
+  :javascript
+    var sa = Cookies.get('current_sa')
+    if(sa){
+      sa = JSON.parse(sa)
+      var time = sa['end'] - sa['time_elapsed']
+    }else{
+      var time = '#{@section_attempt.section.duration * 60}'
+    }
+    showExamRemaningTimer(time);
+
+:javascript
+
+  $(document).ready(function() {
+    $('.btn_reset').addClass('zoom_active');
+    $(".faq_wrapper").toggleClass("hide_sidebar");
+  });
+
+  QuestionsFontResize();

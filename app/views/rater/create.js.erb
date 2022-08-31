@@ -1,0 +1,8 @@
+<% if @low_score %>
+  $("#rating_score").html("<%=escape_javascript(render('rater/rating_description_modal', rate: @rate))%>");
+  $('#rating-modal').modal({
+    backdrop: 'static',
+    keyboard: true,
+    show: true
+  });
+<% end %>

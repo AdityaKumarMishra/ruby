@@ -1,0 +1,36 @@
+%p
+  If you would like to participate in private tutoring this season, please contact the course coordinator by
+  %a{href: '/?tutor_gc=true', class: 'btn btn-default btn-success', id: 'email_back_btn'}
+    submitting a ticket
+
+%h3 Booked Appointments
+
+- if booked_appointments.any?
+  %p.text-info
+    %b
+      Total:
+      = booked_appointments.count
+  %table.gr-table.gr-table-bordered.gr-table-green-hover
+    %thead
+      %tr
+        %th Student
+        %th Location
+        %th Booked
+        %th Complete
+        %th{colspan: 2} Actions
+
+    %tbody
+      - booked_appointments.group_by(&:student).each do |student, a|
+        - time_done = a.map(&:hours).sum
+        - time_left = a.size - time_done
+        %tr
+          %td= student
+          %td= appointment_locations(a)
+          %td= time_left
+          %td= time_done
+          %td
+            = link_to 'Log session', edit_appointment_path(a.first, a_ids: a.select{|f| f.hours == 0}.pluck(:id)), class: "btn btn-info btn-sm #{'disabled' if time_left <= 0}"
+- else
+  .alert.alert-warning No booked appointments
+
+%br

@@ -1,0 +1,42 @@
+:javascript
+  $(document).ready(function () {
+    faq_val = $('#faq_type').val()
+    $('.faq_entry').hide();
+    $('.faq_'+faq_val).show();
+    $('#faq_type').on( "change", function(){
+      var selected = $(this).val();
+      $('.faq_entry').hide();
+      $('.faq_'+selected).show();
+    });
+  });
+
+%h1= "FAQ Pages"
+
+.col-lg-4.col-md-4.col-sm-12
+  %select{:class => 'form-control', :id => 'faq_type'}
+    - @product_lines.each do |line|
+      %option{:value => line}
+        = line.upcase
+  %br
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Faq topic
+      %th Content
+      - if current_user.admin? || current_user.superadmin?
+        %th Actions
+
+  %tbody
+    - index = 0
+    - @array_hash_of_topics.each do |hash|
+      - hash.each do |type, topics|
+        - topics.each do |faq_page|
+          %tr{class: "faq_#{type} faq_entry", 'data-link': url_for([type.to_sym, :admin, faq_page])}
+            %td= faq_page.faq_topic
+            %td= link_to 'Edit', [:edit, type.to_sym, :admin, faq_page], class: 'btn btn-info btn-sm'
+            - if current_user.admin? || current_user.superadmin?
+              -if faq_page.content.size == 0
+                %td= link_to 'Destroy', [type.to_sym, :admin, faq_page], :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+        - index += 1
+

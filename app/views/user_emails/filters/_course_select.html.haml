@@ -1,0 +1,5 @@
+%select#user-course-filter.form-control
+  %option{ {value: user_emails_path(request.query_parameters.except(:not_enroled, :by_course))}}= ''
+  - courses.each do |course|
+    %option{ {value: user_emails_path(request.query_parameters.except(:not_enroled).merge(by_course: course.id))}.merge(selected: params[:by_course] == course.id.to_s) }
+      = "#{course.name} (##{course.id})"

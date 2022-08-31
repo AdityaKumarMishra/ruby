@@ -1,0 +1,99 @@
+#faqStdDirect.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "faqStdDirect", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content{style: "height: 300px;"}
+      .modal-header
+        %button.close.btn_close{"data-dismiss" => "modal", type: "button"} ×
+        .text-center.h2_clss
+          %h2 Would you like to consult our FAQs first?
+      .modal-footer.mtop_20
+        .text-center.btn_wrap_mdl
+          %button.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init#std-faq-yes-btn.mrgn_left{"data-dismiss" => "modal", :type => "button"}
+            Yes
+          %span.fnt_size Please take me to the FAQs
+        .text-center.btn_wrap_mdl
+          %button.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init#std-faq-no-btn.red_btn{"data-dismiss" => "modal", :type => "button"}
+            No
+          %span.fnt_size I'd like to contact support
+:css
+  .mrgn_left{
+    margin-left: 20px;
+  }
+  .fnt_size{
+    font-size: 16px;
+    color: #5c5c5c;
+  }
+  .btn_wrap_mdl{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+  .btn_wrap_mdl button{
+    margin-right: 10px;
+  }
+  .btn_wrap_mdl .red_btn{
+    color: #fff;
+    background-image: linear-gradient(to bottom, #f80101 0%, #f80101 100%) !important;
+  }
+  .btn_wrap_mdl .red_btn:before{
+    background-image: linear-gradient(to bottom, #f80101 0%, #f80101 100%) !important;
+  }
+  #faqStdDirect .modal-header{
+    padding: 15px 15px 0 15px;
+    border-bottom: 0;
+  }
+  #faqStdDirect .modal-body{
+    text-align: center;
+  }
+  #faqStdDirect .modal-header h2{
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  #faqStdDirect .modal-header .close {
+    margin-top: -29px;
+    margin-right: -29px;
+  }
+  #faqStdDirect .mtop_20{
+    margin-top: 20px;
+  }
+  #faqStdDirect .modal-dialog{
+    position: relative;
+    top: 23%;
+  }
+  .h2_clss:before {
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 10px;
+    top: 70%;
+    margin-top: 0;
+    background-image: url(https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/points.svg);
+    background-repeat: no-repeat;
+    left: 0px;
+  }
+
+  .h2_clss:after {
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 10px;
+    top: 70%;
+    margin-top: 0;
+    background-image: url(https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/points.svg);
+    background-repeat: no-repeat;
+    right: 0px;
+  }
+
+  .h2_clss{
+    position: relative;
+    margin-bottom: 20px;
+    width: auto;
+  }
+
+  .h2_clss h2 {
+    margin: 0;
+    display: inline-block;
+    color: #111;
+    font-weight: 100;
+    font-size: 24px;
+    
+  }

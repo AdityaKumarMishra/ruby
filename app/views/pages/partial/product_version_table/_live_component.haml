@@ -1,0 +1,113 @@
+-# INTERACTIVE LIVE TEACHING COMPONENTS
+
+// Handle live components handling for UMAT and GAMSAT
+// where title exists as a row
+- if product_line == 'gamsat' || product_line == 'umat'
+  %tr.dark_full_raw_green
+    %td.live_comp_green{colspan: 5}
+      .component-title LIVE COMPONENTS
+
+  %tr
+    %td
+      - if product_line == 'gamsat'
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Weekly Support Sessions
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Study Buddy Matching
+    %td
+      - if product_line == 'gamsat'
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Weekly Support Sessions
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Study Buddy Matching
+
+    - (2..3).each do |n|
+      - if product_info[product_versions[n]][:live_component]
+        %td
+          %li
+            =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+            Weekly Support Sessions
+          %li
+            =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+            Study Buddy Matching
+          %li
+            =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+            / %a.content_none{:href => dynamic_product_version_uri(product_versions[n], product_line, subject, 'feature_teaching')}
+            Live Classes (6 core days)
+          %li
+            =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+            Mock Exam + Recap (2 core days)
+          %li
+            =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+            Mock Exam Percentile Reporting
+          %li
+            =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+            Online Interactive Tutorial (8 optional days)
+          %li
+            =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+            Weekend Tutorial (2 optional days)
+          %li
+            =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+            Home Mock Exam Day (1 optional day)
+
+    %td
+      - if product_line == 'gamsat'
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Weekly Support Sessions
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Study Buddy Matching
+        %li
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          / %a.content_none{:href => dynamic_product_version_uri(product_versions[n], product_line, subject, 'feature_teaching')}
+          Live Classes (6 core days)
+        %li
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          Mock Exam + Recap (2 core days)
+        %li
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          Mock Exam Percentile Reporting
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Online Interactive Tutorial (8 optional days)
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Weekend Tutorial (2 optional days)
+        %li
+          =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+          Home Mock Exam Day (1 optional day)
+        %li
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          Diagnostics Results Discussion
+        %li
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          6 Private Tutoring sessions
+
+- elsif product_line == 'vce' || product_line == 'hsc'
+  %tr
+    - (0..4).each do |n|
+      - if product_info[product_versions[n]][:live_component]
+        %td
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          %a.content_none.component-title{:href => dynamic_product_version_uri(product_versions[n], product_line, subject, 'feature_teaching')}
+            INTERACTIVE LIVE TEACHING
+          %li
+            %a.content_none{:href => dynamic_product_version_uri(product_versions[n], product_line, subject, 'feature-attendance_tutorials')}
+              1.5 hours a week (10 weeks)
+      - else
+        %td{rowspan: 2}
+  %tr
+    - (0..4).each do |n|
+      - if product_info[product_versions[n]][:live_component]
+        - if product_info[product_versions[n]][:extra_live_component]
+          %td
+            %li
+              %a{:href => dynamic_product_version_uri(product_versions[n], product_line, subject, 'feature_tutoring')}
+                5 x 1 Hour Private Tutoring Sessions
+        - else
+          %td

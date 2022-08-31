@@ -1,0 +1,53 @@
+.hsc_rd_clr .scho_blu_color.red h1 {
+    color: #BE382A !important;
+}
+
+.hsc_rd_clr .fl_mar h3 {
+    color: #BE382A;
+}
+
+.hsc_rd_clr .umat_prepar_col h1 {
+    background: #BE382A;
+}
+
+.cmptr_compr .comris_table li:first-child {
+    text-align: center !important;
+}
+
+.hsc_rd_clr a, .hsc_rd_clr .ftr_txt {
+    color: #BE382A;
+}
+
+.btn-rd {
+    background-color: #BE382A;
+    font-weight: bold;
+    color: #fff !important;
+}
+
+.margin-top20{
+    margin-top: 20px;
+}
+
+.hsc_rd_clr #public-page #team #team-selection ul li.active {
+    color: white;
+    position: relative;
+    background: #BE382A;
+}
+.hsc_rd_clr #public-page #team #team-selection ul li.active:after {
+    border-color: rgba(213,0,0,0);
+    border-left-color: #BE382A;
+    top: 50%;
+    border-width: 14px;
+    margin-top: -14px;
+}
+.team-page .hsc #team-selection ul .active:after {
+  border-left-color: #be382a;
+}
+
+.team-page .umat #team-selection ul .active:after {
+  border-left-color: #007ecc;
+}
+
+.team-page .vce #team-selection ul .active:after {
+  border-left-color: #462c9f;
+}

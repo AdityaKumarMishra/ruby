@@ -1,0 +1,146 @@
+- if current_user.student?
+  - if f.object.assessment_attempt.present?
+    - section = f.object.online_mock_section_timer.first
+    - url = ""
+    -if f.object.assessment_attempt.assessable.per_city_exam_count > 1
+      - url = "http://"+request.headers["HTTP_HOST"]+"/online_mock_exam_attempts"
+    - else
+      - url = "http://"+request.headers["HTTP_HOST"]+"/online_mock_exam_attempt_temps"
+    .time_wrapper{:style => "position: inherit"}
+      .time_heading
+        .question_timer
+          %i.fa.fa-clock-o
+          %b Time Remaining
+          %span.timer{id: "countdown_timer#{section.id}"}
+    :javascript
+      var year = parseInt("#{section.try(:end_date).try(:year)}");
+      var month = parseInt("#{section.try(:end_date).try(:month)}");
+      var date = parseInt("#{section.try(:end_date).try(:day)}");
+      var hour = parseInt("#{section.try(:end_time).try(:hour)}");
+      var minutes = parseInt("#{section.try(:end_time).try(:min)}");
+      var austDay = new Date(year, month-1, date, hour, minutes);
+      var x = setInterval(function() {
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = austDay - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Output the result in an element with id="demo"
+        document.getElementById("countdown_timer#{section.id}").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+        // If the count down is over, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown_timer#{section.id}").innerHTML = "EXPIRED";
+          add_hidden_field();
+          $.ajax({
+            url: "#{essay_response_path(essay_id: @essay.slug)}",
+            type: 'patch',
+            dataType: 'script',
+            data: $('form.edit_essay_response').serialize(),
+            success: function(data) {}
+          })
+          window.location.replace("#{url}");
+        }
+      }, 1000);
+      function add_hidden_field(){
+        $('<input>').attr({
+          type: 'hidden',
+          id: 'is_time_up',
+          name: 'is_time_up',
+          value: 'true'
+        }).appendTo('form.edit_essay_response');
+      }
+      $('form.edit_essay_response').submit(function(e){
+        e.preventDefault();
+        dd_loader();
+        add_hidden_field();
+        e.currentTarget.submit();
+      })
+
+  .faq_list_col
+    %h2.faq_question.response_headng{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#essay_announcement", role: "button"}
+      %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}
+      = "Essay: #{@essay.title}"
+      %span.sub_headng= "Submission Deadline: #{@essay_response.expiry_date.in_time_zone("Australia/Queensland")}"
+    #essay_announcement.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+      %h4 Description:
+      = sanitize @essay.question
+
+  .faq_list_col.editor_box
+    %p
+      %strong Submission:
+    = f.input :response, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+  .text-center.full_width.mtop30.mbot10
+    - if f.object.assessment_attempt.present?
+      = f.button :submit, 'Save and Submit', class: 'mg_rht0 default_btn hvr-shutter-in-horizontal', data: { confirm: 'Are you sure? This cannot be undone.' }
+    - else
+      = f.button :submit, 'Save Draft', class: 'mg_rht0 default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+    = link_to 'Back', essay_responses_path(id: @essay.slug), class: 'black_default_btn hvr-shutter-in-horizontal', data: {confirm: 'This will erase all your current progress, are you sure?' }
+- else
+  .panel.panel-warning
+    .panel-heading
+      .panel-title
+        %h3
+          %strong= "Essay: #{@essay.title}"
+        / - if current_user.moderator? || current_user.tutor?
+        /   %h2
+        /   = @user.full_name
+        /   's Essay Response
+        %h5= "Submission Deadline: #{@essay_response.expiry_date.in_time_zone("Australia/Queensland")}"
+    .panel-body.line-40
+      = f.error_notification
+      %strong Description:
+      = sanitize @essay.question
+      %strong Submission:
+      .form-inputs= f.input :response, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+      .form-inputs= f.input :elapsed_time, as: :hidden, class: "elapsed_time"
+      = f.hidden_field :initial_time, value: Time.now
+
+    .panel-footer
+      .form-actions
+        .btn-group
+          = f.button :submit, 'Save Draft', class: 'btn btn-success'
+          = link_to 'Back', essay_responses_path(id: @essay.slug), class: 'btn btn-default', data: {confirm: 'This will erase all your current progress, are you sure?' }
+        .right
+          %span Time:
+          %span#countdown.btn.btn-success
+
+:javascript
+  $('#countdown').stopwatch({startTime: #{@essay_response.elapsed_time}}).bind('tick.stopwatch').stopwatch('start');
+
+
+  for (var i in CKEDITOR.instances) {
+        CKEDITOR.instances[i].on('change', function() {
+
+          for ( instance in CKEDITOR.instances ) {
+              CKEDITOR.instances[instance].updateElement();
+          }
+          $.ajax({
+              url: "#{essay_response_path(essay_id: @essay.slug)}",
+              type: 'patch',
+              dataType: 'script',
+              data: $('form.edit_essay_response').serialize(),
+              success: function(data) {}
+          });
+
+        });
+    }
+
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+  });
+
+
+-#Note backend for timer being updated is all there, just set whatever the countdown is to the hidden field elapsed_time

@@ -1,0 +1,36 @@
+%p
+  %b Name:
+  = @tutor.full_name
+%p
+  %b Username:
+  = @tutor.username
+%p
+  %b Email:
+  = @tutor.email
+-if @tutor.phone_number.present?
+  %p
+    %b Contact Number:
+    = @tutor.phone_number
+%p
+  %b Total Appointments:
+  - appointment = @appointment.includes(:tutor_availability).where(status: 0)
+  = appointment.count
+
+%strong Students
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Timestamp of log
+      %th Student Name
+      %th Hours Logged
+      %th View Student Button
+
+
+  %tbody
+    - @appointment_hours.each do |ap|
+      %tr
+        %td= ap.finish_date.present? ? ("#{ap.finish_date.strftime("%d/%m/%Y")} #{ap.created_at.strftime("%H:%M")}") : '-'
+        %td= ap.appointment.student.full_name
+        %td= ap.hours
+        %td= link_to 'View', url_for(ap.appointment.student), class: 'btn btn-success btn-sm'

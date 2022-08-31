@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Courses Summary") do |sheet|
+  date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+  def data_array(course)
+    data_array = []
+    data_array.push(course.id)
+    data_array.push(course.name)
+    data_array.push(course.city)
+    if course.product_version.present?
+      data_array.push(course.product_version.name + ',' + course.product_version.type)
+    else
+      data_array.push("None")
+    end
+    data_array.push(course.enrolment_end_date.to_date)
+    data_array.push(course.expiry_date.to_date)
+    data_array.push(course.enroled_student_list.count)
+    data_array.push(course.enroled_unpaid_student_list.count)
+    data_array.push(course.class_size)
+    data_array.push(course.waitlist_users.count)
+    data_array.push(course.tutor_assigned?)
+    data_array.push(course.essay_exp_start_date)
+  end
+
+  sheet.add_row ["Course ID", "Course Name", "City",  "Product Version", "Enrolment end date",  "Expiry date",  "Paid Students", "Unpaid Students" , "Class size", "Waitlist Number" , "Tutors Assigned", "Essay Expiry Start Date"], :style => [date_format]
+
+  @all_courses.each do |course|
+    sheet.add_row data_array(course)
+  end
+end

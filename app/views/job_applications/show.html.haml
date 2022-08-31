@@ -1,0 +1,138 @@
+%p#notice
+#assessment_popup
+#rejected_popup
+%h1 #{@job_application_form.title} Application
+%div
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Status
+        %th Name
+        %th Phone number
+        %th Email
+        %th Address
+        %th Cover Letter
+        %th Resume
+
+    %tbody
+      %tr
+        %td= select_tag "job_application[status]", options_for_select(JobApplication.statuses.keys, @job_application.status), "data-remote"=> "true", "data-url"=>job_application_form_job_application_path(@job_application_form.friendly_id.parameterize, @job_application), "data-method"=> "PATCH", class: 'form-control application_select'
+        %td= @job_application.name
+        %td= @job_application.phone_number
+        %td= @job_application.email
+        %td= render 'addresses/address_inc_line_one', address: @job_application.address
+        %td= render 'job_applications/attachment_link', attachment: @job_application.cover_letter
+        %td= render 'job_applications/attachment_link', attachment: @job_application.resume
+
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Submission Date
+        %th Hours<br>Available
+        %th Domestic /<br>International
+        %th Degree
+        %th Expected<br>Graduation Date
+        %th Full Time <br> Work Experience
+        %th GR Score
+        %th ATAR/OP
+        %th WAM
+        %th Other Test Scrore
+
+    %tbody
+      %tr
+        %td= format_date_long(@job_application.created_at.to_date)
+        %td= @job_application.hours_available
+        - if @job_application.domestic.nil?
+          %td
+        - else
+          %td= @job_application.domestic ? 'Domestic' : 'International'
+        %td= @job_application[:degree_type]
+        %td= @job_application.graduation
+        %td= @job_application.full_time_exp
+        %td= @job_application.gr_score
+        %td= @job_application.atar
+        %td= @job_application.wam
+        %td= @job_application.other_test_score
+
+  %p
+    %b Notes:
+  .edit_notes.hide
+    = simple_form_for([@job_application_form, @job_application], html: { class: 'job_form'}) do |f|
+      = f.input :notes, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+      = f.input :gr_score, label: "GR Score:"
+      = f.hidden_field :job_application_form_id, value: @job_application_form.id
+      = f.submit "Add", class: "btn btn-default"
+  .note_view
+    = @job_application.notes.present? ? @job_application.notes.html_safe : 'N/A'
+  = link_to 'Add Note', 'javascript:void(0)', class: 'add_note'
+  %br
+  %br
+
+  - @job_application.application_answers.includes(:application_question).each do |q|
+    - if q.application_question
+      %p.mbot_15
+        %b Question:
+        .add_space
+          = simple_format(q.application_question.content)
+      %p.mtop_15.mbot_15
+        %b Answer:
+        .add_space
+          - q.parse_answer.each do |content|
+            %p= simple_format(content)
+      %br
+
+  %p
+    %b Additional Documents
+    %ul
+      - @job_application.application_attachments.each do |attachment|
+        %li= render 'job_applications/attachment_link', attachment: attachment
+  %br
+  %br
+
+  = link_to 'Download Attachments', download_job_application_form_job_application_path(@job_application_form, @job_application), class: 'btn btn-primary'
+  %br
+  %br
+  = link_to 'Back', job_application_form_job_applications_path, class: 'btn btn-default'
+  %br
+
+:javascript
+  $(document).ready(function(){
+    var selectTags = $("select.application_select");
+    selectTags.each(function( i ) {
+      if(selectTags[i].value == '0.0 Not Reviewed'){
+        $(selectTags[i]).css('color', '#ddd');
+        $(selectTags[i]).find('option:not(:disabled)').css('color', '#555555')
+      }else{
+        $(selectTags[i]).css('color', '#555555');
+      }
+    })
+  })
+
+  $('.application_select').on('change', function(){
+    var selectTags = $("select.application_select");
+    selectTags.each(function( i ) {
+      if(selectTags[i].value == '0.0 Not Reviewed'){
+        $(selectTags[i]).css('color', '#ddd');
+        $(selectTags[i]).find('option:not(:disabled)').css('color', '#555555')
+      }else{
+        $(selectTags[i]).css('color', '#555555');
+      }
+    })
+  })
+
+  $(".add_note").click(function() {
+    $(".note_view").addClass("hide");
+    $(".add_note").addClass("hide");
+    $(".edit_notes").removeClass("hide");
+  });
+
+:css
+  .add_space p {
+    margin-top: 10px !important;
+  }
+  .mtop_15{
+    margin-top: 15px !important;
+  }
+  .mbot_15{
+    margin-bottom: 15px !important;
+  }

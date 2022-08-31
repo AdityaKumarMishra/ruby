@@ -1,0 +1,45 @@
+%h1 Transfer Data
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Feature Name
+      %th Transfer To
+
+      %th Action
+
+  %tbody
+    %tr
+      %td All Data (Except Essays)
+      -if @user.data_transferred
+        %td Transferred
+        %td
+      -else
+        = form_tag transfer_user_path(@user), method: :post do |f|
+          = hidden_field_tag 'type', 'all_data'
+          %td
+            = select_tag 'staffs', options_for_select(@staffs.map{|s|[s.full_name, s.id]}), include_blank: true, class: 'form-control select2_transfer', style: "width: 100%"
+          %td
+            = button_tag(type: 'submit', class: 'btn btn-default') do
+              Transfer
+    -unless@no_essay && !@user.essay_transferred
+      %tr
+        %td Essays
+        -if @user.essay_transferred
+          %td Transferred
+          %td
+        -else
+          = form_tag transfer_user_path(@user), method: :post do |f|
+            = hidden_field_tag 'type', 'essay_data'
+            %td
+              = select_tag 'staffs', options_for_select(@staffs.map{|s|[s.full_name, s.id]}), include_blank: true, class: 'form-control select2_transfer', style: "width: 100%"
+            %td
+              = button_tag(type: 'submit', class: 'btn btn-default') do
+                Transfer
+-if @user.data_transferred && (@user.essay_transferred || @no_essay)
+  .text_center
+    %td= link_to 'Delete User', user_path(@user), method: :delete,  data: {confirm: "Are you sure!"}, class: 'btn btn-default'
+
+:javascript
+  $(".select2_transfer").select2({
+    placeholder: "Please select staff"
+  });

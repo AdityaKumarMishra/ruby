@@ -1,0 +1,8 @@
+<% price = number_to_currency(@pvfp.price) %>
+<% if @pvfp.master_feature.private_tutoring? %>
+  $("#PricePTGst").text("<%=price%>");
+  $('#AddToCartPTDropDown').html('<%= escape_javascript(render 'feature_logs/add_feat_to_cart', a: @pvfp) %>');
+<% else %>
+  $("#PriceESGst").text("<%=price%>");
+  $('#AddToCartESDropDown').html('<%= escape_javascript(render 'feature_logs/add_feat_to_cart', a: @pvfp) %>');
+<% end %>

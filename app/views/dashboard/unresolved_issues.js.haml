@@ -1,0 +1,2 @@
+- js = escape_javascript(render(partial: 'dashboard/partial/unresolved_issues', locals: { tickets: @tickets}))
+$("#filterrific_results").replaceWith("#{js}");

@@ -1,0 +1,31 @@
+
+%p
+  %b Title:
+  = @diagnostic_test.title
+%p
+  %b Instruction:
+  = @diagnostic_test.instruction
+
+%p
+  %b Published
+  = @diagnostic_test.published
+
+%p
+  %b Finished when Time ends
+  = @diagnostic_test.is_finish
+%p
+  %b Tags
+  - @diagnostic_test.tags.each do |tag|
+    %span.label.label-default=tag.name
+
+%p
+  %b Sections
+  - @diagnostic_test.sections.each do |s|
+    = s
+
+
+= link_to 'Manage Section', diagnostic_test_sections_path(@diagnostic_test)
+\|
+= link_to 'Edit', edit_diagnostic_test_path(@diagnostic_test)
+\|
+= link_to 'Back', diagnostic_tests_path

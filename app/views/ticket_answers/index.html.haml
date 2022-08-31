@@ -1,0 +1,27 @@
+%h1 Listing ticket_answers
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Content
+      %th Ticket
+      %th User
+      %th Public
+      %th Helpfulness
+      %th{colspan: 2} Actions
+
+  %tbody
+    - @ticket_answers.each do |ticket_answer|
+      %tr{'data-link': ticket_ticket_answer_path(ticket_answer.ticket, ticket_answer)}
+        %td= ticket_answer.content
+        %td= ticket_answer.ticket.title
+        %td= "#{ticket_answer.user.first_name} #{ticket_answer.user.last_name}"
+        %td= ticket_answer.public
+        %td= ticket_answer.helpfulness
+        %td= link_to 'Edit', edit_ticket_ticket_answer_path(ticket_answer.ticket, ticket_answer), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', ticket_ticket_answer_path(ticket_answer.ticket, ticket_answer), method: :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+- if @ticket_answers.present?
+  = link_to 'New Ticket answer', new_ticket_ticket_answer_path(@ticket_answers.first.ticket), class: 'btn btn-success'

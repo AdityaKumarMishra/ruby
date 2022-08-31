@@ -1,0 +1,48 @@
+.row
+  %table.gr-table.table
+    %tr
+      %th Type
+      %th Date Asked
+      %th Last Updated
+      %th Title
+      %th Topic/Details
+      %th Answered By
+      -if request.path.include?("edit")
+        %th Actions
+    - records = records.sort_by(&:updated_at).reverse!
+    - records.each do |record| 
+      - if record.class == InteractionLog
+        %tr{class: [('blue_tr' if record.interaction_type == "Phone"), ('pink_tr' if record.interaction_type == "Email"), ('orange_tr' if record.interaction_type == "In-person")]}
+          %td
+            = record.interaction_type
+          %td
+            = record.opened_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y') if record.opened_at.present?
+          %td
+            = record.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y') if record.updated_at.present?
+          %td
+            = record.title
+          %td
+            = record.details.html_safe
+          %td
+            = record.answerer.try(:full_name)
+          -if request.path.include?("edit")
+            %td
+              = link_to "Edit", edit_interaction_log_path(record), remote: true, class: "btn btn-info btn-sm"
+      - else
+        %tr{class: [('success' if record.status == "resolved"), ('danger' if record.status == "unresolved"), ('warning' if record.status == "follow_up_required")]}
+          %td
+            = "GetClarity"
+          %td
+            = record.created_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y')
+          %td
+            = record.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y')
+          %td
+            = link_to "#{record.title.present? ? record.title : "Support Ticket - #{record.id}"}", issue_path(record), target: :_blank
+          %td
+            - if record.tags.any?
+              = record.tags.first.name
+          %td
+            = record.answerer.try(:full_name)
+          -if request.path.include?("edit")
+            %td
+              = link_to "View", issue_path(record), class: "btn btn-success btn-sm", target: :_blank

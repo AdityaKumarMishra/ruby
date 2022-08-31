@@ -1,0 +1,48 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Listing marks
+      .panel-body
+      - if @marks.present?
+        .table-responsive
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th Student
+                %th Value
+                %th Description
+                %th Correct
+                %th Mcq Student Answer
+                %th Essay Response
+                %th Marked at
+            %tbody
+              - @marks.each do |m|
+                %tr
+                  - if m.mcq_student_answer.present?
+                    %td= m.mcq_student_answer.user.full_name
+                    %td= m.value
+                    %td= m.description
+                    %td= true_check(m.correct)
+                    %td= m.mcq_student_answer.title
+                    %td \-
+                    %td= m.created_at
+                  - elsif m.essay_response.present?
+                    %td= m.essay_response.user.full_name
+                    %td= m.value
+                    %td= m.description
+                    %td= true_check(m.correct)
+                    %td \-
+                    %td= m.essay_response
+                    %td= m.created_at
+      - else
+        .mg-left There are not any marks.
+      .panel-footer
+        .btn-group
+          %button.btn.btn-success.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+            New Mark
+            %span.caret
+          %ul.dropdown-menu
+            %li= link_to 'for Essay Response', mark_essay_response_path
+            %li= link_to 'for Mcq Student Answer', mark_mcq_student_answer_path

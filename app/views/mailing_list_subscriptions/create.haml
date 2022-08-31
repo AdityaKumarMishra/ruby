@@ -1,0 +1,12 @@
+.row
+  .col-sm-12.text-center
+    %h1 You have successfully been subscribed to our mailing list
+
+    %p
+      Your email address was
+      = params[:email]
+
+    %p
+      You are subscribed to our
+      = @mailing_list.name
+      list.

@@ -1,0 +1,144 @@
+#GradNavbar > ul > li {
+  a {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    color: #000 !important;
+    font-size: 14px;
+    padding: 14px 12px;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  height: 50px;
+  &:hover {
+    border-bottom: solid #00853E 4px;
+  }
+}
+ul.like-buttons{
+  list-style: none;
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 50px;
+  height: 40%;
+}
+
+#OtherNavbar > ul > li {
+  a {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    color: #000 !important;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 14px 7px 14px 7px;
+    background-color: transparent;
+  }
+  height: 50px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.nav-placeholder {
+  background: #F0F0F0;
+  height: 60px;
+  width: 100%;
+}
+
+.btn-primary:visited {
+  color: #FFF;
+}
+
+.navbar {
+  background-color: rgba(255,255,255,1);
+  border: 0;
+  .dropdown-menu{
+    background: #fff;
+    max-height: 436px;
+    overflow: auto;
+    border-top: 1px solid $gray-lighter;
+    a {
+      width: 100%;
+      display: inline-block;
+      padding: 14px 14px !important;
+      &:hover {
+        text-decoration: underline !important;
+      }
+      &:last-child {
+        padding-bottom: 14px !important;
+      }
+    }
+    &.courses-dropdown a {
+      font-size: 11px !important;
+    }
+  }
+
+  &.other-products {
+    box-shadow: 0 0 7px 0 rgba(50, 50, 50, 0.2);
+    box-sizing: border-box;
+
+
+    .navbar-brand {
+      padding: 10px 5px;
+    }
+  }
+}
+.navbar-brand { padding: 14px 14px; }
+#OtherNavbar > ul > li.border_trial {
+  margin-top: 8px;
+  margin-left: 9px;
+}
+#OtherNavbar > ul > li.border_trial a {
+  border:1px solid #000;
+  border-radius:3px;
+  padding: 5px 7px;
+}
+#OtherNavbar > ul > li.border_trial:hover { text-decoration: none; }
+
+#GradNavbar > ul > li.border_trial a.trial_brdr {
+  border:1px solid #000;
+  border-radius:3px;
+  padding: 5px 7px;
+  margin-top: 8px;
+  margin-left: 9px;
+}
+#GradNavbar .main_menu li.border_trial a:hover:after{
+  border:0;
+}
+.no_float { float: none; }
+
+.navbar-nav > li > .dropdown-menu { overflow:visible; }
+
+.dropdown-submenu { position:relative; }
+
+.dropdown-submenu>.dropdown-menu {
+  min-width: 406px;
+  top:0;left:100%;
+  margin-top:-6px;
+  margin-left:-1px;
+  -webkit-border-radius:0 6px 6px 6px;
+  -moz-border-radius:0 6px 6px 6px;
+  border-radius:0 6px 6px 6px;
+}
+
+.dropdown-submenu>a:after {
+  display:block;content:" ";
+  float:right;
+  width:0;height:0;
+  border-color:transparent;
+  border-style:solid;
+  border-width:5px 0 5px 5px;
+  border-left-color:#cccccc;
+  margin-top:5px;
+  margin-right:-10px;
+}
+
+.navbar .dropdown-menu.inner_menu a {
+  padding: 5px 13px!important;
+  font-size:15px;
+}
+
+.dropdown-menu.menu_height {
+  max-height: 600px;
+}
+.navbar .dropdown-menu.menu_height a {
+  padding: 10px 14px !important;
+}

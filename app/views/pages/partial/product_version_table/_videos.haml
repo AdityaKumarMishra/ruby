@@ -1,0 +1,41 @@
+-# Handle render logic of video components for each product line
+
+.component-title.under_line
+  =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+  %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_Course')}
+    VIDEOS
+
+- if product_line == 'gamsat'
+  %li Humanities (5 hrs)
+  %li Physics (3 hrs)
+  %li Biology (7 hrs)
+  %li Chemistry (7 hrs)
+
+- elsif product_line == 'umat'
+  %li Logical Reasoning (4 hrs)
+  %li Understanding People (1.5 hrs)
+  %li Non-verbal Reasoning (3 hrs)
+
+- elsif product_line == 'vce'
+  - if subject == 'english'
+    %li Essay Writing (0.5 hours)
+    %li Text-based Analysis (3 hours)
+    %li Using Language to Persuade (0.5 hours)
+
+  - elsif subject == 'math'
+    %li Functions & Graph (4 hours)
+    %li Algebra (5.5 hours)
+    %li Calculus (4 hours)
+    %li Probability (1.5 hours)
+    %li Trigonometry  (3 hours)
+    %li Geometric Applications of Differentiation  (3 hours)
+
+
+- elsif product_line == 'hsc'
+  - if subject == 'english'
+    %li Essay Writing (0.5 hours)
+    %li Text-based Analysis (3 hours)
+    %li Area of Study: Discovery (0.5 hours)
+
+  - elsif subject == 'math'
+    %li 9 topics mirroring the HSC Math Extension 1 Curriculum (20 hours)

@@ -1,0 +1,7 @@
+%h4#example.blur
+  = "Theme: #{random_theme}"
+%ol
+  -random_quote.each do |quote|
+    %li
+      = quote.quote
+      %i= quote.author

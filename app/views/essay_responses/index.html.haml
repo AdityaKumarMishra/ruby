@@ -1,0 +1,22 @@
+- content_for :page_heading, 'Essays Response'
+.dashbord_right
+  .resource_col
+    %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+  .faq_list.para_fs14
+    -if current_course.present? && current_course.product_version.type == 'UmatReady'
+      .alert.alert-success{:role => "alert"}
+        %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        .text-black
+          Essays is not a part of Ucat courses.
+          %br/
+
+    - if current_user && (current_user.student?)
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'Essays Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/essay_video", announcement: @announcement
+  .faq_list.para_fs14
+    .faq_list_col
+      %h4.mbot25 Listing Essays
+      = render 'essay_responses/partial/table'

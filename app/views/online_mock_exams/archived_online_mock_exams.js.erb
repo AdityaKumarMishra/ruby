@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'online_mock_exams/index', locals: { online_mock_exams: @online_mock_exams }))%>
+$("#filterrific_results").html("<%= js %>");

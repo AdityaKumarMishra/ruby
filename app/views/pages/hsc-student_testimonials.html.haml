@@ -1,0 +1,333 @@
+- title "HSC Preparation Courses | Student Results and Testimonials"
+- meta_description "Students use our HSC preparation courses to enhance their exam study. If you want a career in medicine or want to be a doctor, we offer both online and live classes and tutors in Sydney, Melbourne, Brisbane, Perth, Adelaide and Canberra."
+- content_for :head do
+  %meta{name: 'og:image', content: image_url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/info/2016_graph.jpg')}
+
+.container.default-main-container
+  .row
+    .span12
+      / .breadcrumb
+      / %ul
+      / %li
+      / %a{:href => "#"}> Home
+      / \   ›
+      / %li Recent Updates
+      .inner_mid
+        %h1.red GradReady Testimonials
+        %p.center_txt
+          Our HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          courses are brand new so we do not have any student testimonials to display here yet. For your information we have included the testimonials received for our GAMSAT
+          %sup{ style: "margin-right: -4px;"} ®
+          Preparation courses which have helped 1000s of students to improve their percentile scores by at least 24 percentile points
+        %ul.nav.nav-tabs.tab_bl.hsc_tab{:role => "tablist"}
+          %li#gamsat_active.red{class: [('active' if !params[:type].present?)]}
+            %a.font_sty.tab_width.back{"data-toggle" => "tab", :href => "#grad_testi", :role => "tab"}
+              .hsc_white GRAD
+              .gam_blck.ready_left_mar READY
+              .gam_bl_normal Testimonials
+        .tab-content
+          #grad_testi.tab-pane.width_535{class: [('active' if !params[:type].present?)]}
+            .white_bg.pad_0.outer-brder
+              .std_test
+                %ul.prod_main_slider1
+                  #student_carousel.carousel.slide
+                    .carousel-inner
+                      .item.gam_item{class: [('active' if !params[:type].present?)]}
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+                      .item
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+                      .item
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+                    %a.carousel-control.left.testi_caro_leftvi#previous{"data-slide" => "prev", :href => "#student_carousel"} ‹
+                    %a.carousel-control.right.testi_caro_rightvi#next_video{"data-slide" => "next", :href => "#student_carousel"} ›
+                / <a class="testi_next_btn" href="#"></a>
+              .clear
+              .lower-otr
+              .lower-cont
+                .white_bg.pad_0.outer-brder
+                  .std_test
+                    %ul.prod_main_slider1
+                      #owl-demo.owl-carousel
+                        .item
+                          .martin-ist
+                            %p
+                              An ideal balance of professionalism and intimacy demonstrated by the renowned tutors of GradReady enabled me to consolidate the necessary ingredients needed to excel on the day of GAMSAT
+                              %sup{ style: "margin-right: -4px;"} ®
+                              = '.'
+                            %b.writer_name - Sam D
+                        .item
+                          .martin-ist
+                            %p The 1-on-1 focus for the science section was very beneficial. Especially for someone, like myself, who has never done Physics before. That is where the GradReady course differentiates itself from other courses.
+                            %b.writer_name - Anonymous
+                        .item
+                          .martin-ist
+                            %p I was absolutely floored with the results!! Improving from 64 to 85... the marked essays were fantastic... thank you for your support during and after the course!
+                            %b.writer_name - Steven S
+                        .item
+                          .martin-ist
+                            %p
+                              GradReady helped me a lot with my
+                              GAMSAT
+                              %sup{ style: "margin-right: -4px;"} ®
+                              score. I received 50 my first time, but after the course I got an overall score of 69. I found the chemistry tutorial particularly helpful. It clarified several ambiguous points from my previous study.
+                            %b.writer_name - Yuan W
+                        .item
+                          .martin-ist
+                            %p
+                              I feel more confident after taking the GAMSAT
+                              %sup{ style: "margin-right: -4px;"} ®
+                              Ready course, and I’ve been recommending the course to my friends.
+                            %b.writer_name - Martin B
+                        .item
+                          .martin-ist
+                            %p
+                            Did pretty well with GAMSAT
+                            %sup{ style: "margin-right: -4px;"} ®
+                            = '.'
+                            In fact, with no prior background with philosophy, not having English as my first language, and having no knowledge whatsoever about chemistry and physics! Thanks to your course materials, it has helped me through it!
+                            %b.writer_name - David J
+                        .item
+                          .martin-ist
+                            %p It allowed me to get back up to speed with the science section after 6 years of being graduated. It allowed me to focus my time on the humanities which was my weak area. The essays ended up being my strongest section. The tutors need to take their hat off for the work they did on marking my essays. I would have failed if not for them.
+                            %b.writer_name - Carl B
+                        .item
+                          .martin-ist
+                            %p The customisable MCQs helped me really hone my abilities to rapidly answer questions in particular area, such as physics and biology.
+                            %b.writer_name - Martin B
+                        .item
+                          .martin-ist
+                            %p I found the course very helpful, both through the provision of some great material and an extra motivator to focus my studies. My overall score increased from 61 to 76. Specifically I found the feedback on the content and structure of my writing was instrumental.
+                            %b.writer_name - Suzannah C
+                        .item
+                          .martin-ist
+                            %p The Humanities section was absolutely fantastic! The guidance through essay writing steps and reading passages was very comforting.
+                            %b.writer_name - Trung N
+                        .item
+                          .martin-ist
+                            %p
+                              In my opinion, the best aspect of this course were the opportunities it provided to interact with both the teachers and students in discussing exam knowledge and questions. This kept me motivated to study and encouraged me to continuously find better approaches to tackling GAMSAT
+                              %sup{ style: "margin-right: -4px;"} ®
+                              questions.
+                            %b.writer_name - Tehan A
+                        .item
+                          .martin-ist
+                            %p Everything was very well done! The workshop was well facilitated and provided a good opportunity to practice scenarios in front / with others. The Mock MMI Day was fantastic - I would recommend this to ANYONE who has been successful in obtaining an interview of med school. It was absolutely worth the money. Thank you!
+                            %b.writer_name - Amelie I
+                        .item
+                          .martin-ist
+                            %p The workshop gave helpful tips and allowed us to learn from the ideas, demeanours and mistakes of our peers. The mock interviews were realistic so they were very valuable for building confidence in the interview environment.
+                            %b.writer_name - Lara M
+                        .item
+                          .martin-ist
+                            %p The fishbowl scenarios helped with developing the confidence needed to express oneself in a public and exposed setting, which made the subsequent one-on-one in the actual MMI a lot more comfortable.
+                            %b.writer_name - Raymond D
+                        .item
+                          .martin-ist
+                            %p The InterviewReady course helped tremendously with my preparation. I think the best thing was that we didn't know beforehand what scenarios were prepared for us, and that allowed for a great deal of spontaneity when answering questions.
+                            %b.writer_name - Nathaniel H
+                        .item
+                          .martin-ist
+                            %p The recreation of the interviews was almost exactly like the actual interview! The course taught us how to develop the perspective of the interviewer so that we could refine our answers.
+                            %b.writer_name - Adrianna P
+                        .item
+                          .martin-ist
+                            %p The whole Mock Day was a great experience which allowed personal reflection on my performance, putting into perspective what I could improve on and what I did well. The fishbowl was a good experience, particularly for people like me who are more quiet.
+                            %b.writer_name - Vince C
+                        .item
+                          .martin-ist
+                            %p The mock MMI was certainly one of the highlights of the programs that provided me with the confidence that I needed to tackle my actual MMI, with minimal levels of stress and anxiety as I already knew what to expect.
+                            %b.writer_name - Peter C
+          #interview_testi.tab-pane.width_535{class: [('active' if params[:type].present?)]}
+            .white_bg.pad_0.outer-brder
+              .std_test
+                %ul.prod_main_slider1
+                  #student_carousel11.carousel.slide
+                    .carousel-inner
+                      .item.left.int_item{class: [('active' if params[:type].present?)]}
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/Carl%20Barker%20(InterviewReady).mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/Carl%20Barker%20(InterviewReady).mp4", :type => "video/mp4"}
+                      .item.next.left
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/Vincenzo%20Crocitti%20(InterviewReady).mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/Vincenzo%20Crocitti%20(InterviewReady).mp4", :type => "video/mp4"}
+                      .item
+                        %li
+                          %video.sublime{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "HSCReady", :width => "100%"}
+                            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/SM - InterviewReady.mp4", :type => "video/mp4"}
+                              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/SM%20-%20InterviewReady.mp4", :type => "video/mp4"}
+                    %a.carousel-control.left.testi_caro_leftvi#interview_previous{"data-slide" => "prev", :href => "#student_carousel11"} ‹
+                    %a.carousel-control.right.testi_caro_rightvi#interview_next{"data-slide" => "next", :href => "#student_carousel11"} ›
+
+              .clear
+              .lower-otr
+              .lower-cont
+                .white_bg.pad_0.outer-brder
+                  .std_test
+                    %ul.prod_main_slider1
+                      #owl-demo1.owl-carousel
+                        .item
+                          .martin-ist
+                            %p Everything was very well done! The workshop was well facilitated and provided a good opportunity to practice scenarios in front / with others. The Mock MMI Day was fantastic - I would recommend this to ANYONE who has been successful in obtaining an interview of med school. It was absolutely worth the money. Thank you!
+                            %b.writer_name - Amelie I
+                        .item
+                          .martin-ist
+                            %p The workshop gave helpful tips and allowed us to learn from the ideas, demeanours and mistakes of our peers. The mock interviews were realistic so they were very valuable for building confidence in the interview environment.
+                            %b.writer_name — Lara M
+                        .item
+                          .martin-ist
+                            %p The fishbowl scenarios helped with developing the confidence needed to express oneself in a public and exposed setting, which made the subsequent one-on-one in the actual MMI a lot more comfortable.
+                            %b.writer_name -Raymond D
+                        .item
+                          .martin-ist
+                            %p The InterviewReady course helped tremendously with my preparation. I think the best thing was that we didn't know beforehand what scenarios were prepared for us, and that allowed for a great deal of spontaneity when answering questions.
+                            %b.writer_name - Nathaniel H
+                        .item
+                          .martin-ist
+                            %p The recreation of the interviews was almost exactly like the actual interview! The course taught us how to develop the perspective of the interviewer so that we could refine our answers.
+                            %b.writer_name — Adrianna P
+                        .item
+                          .martin-ist
+                            %p The whole Mock Day was a great experience which allowed personal reflection on my performance, putting into perspective what I could improve on and what I did well. The fishbowl was a good experience, particularly for people like me who are more quiet.
+                            %b.writer_name — Vince C
+                        .item
+                          .martin-ist
+                            %p The mock MMI was certainly one of the highlights of the programs that provided me with the confidence that I needed to tackle my actual MMI, with minimal levels of stress and anxiety as I already knew what to expect.
+                            %b.writer_name — Peter C
+                        .item
+                          .martin-ist
+                            %p The course really prepared me for the interview, some of the questions were word for word. It was a really useful experience as it let me reflect on the questions beforehand so I could answer them with much more poise.
+                            %span - Jasmine B
+  .row#student_improved_score
+    .span12
+      .inner_mid
+        %h5 How Our Students Perform
+        %ul.nav.nav-tabs.stats_tab{:role => "tablist"}
+          %li.active.red
+            %a.u-black-link{"data-toggle" => "tab", :href => "#2016Statistics", :role => "tab"} 2016 Statistics
+          %li.red
+            %a.u-black-link{"data-toggle" => "tab", :href => "#2015Statistics", :role => "tab"} 2015 Statistics
+          %li.red
+            %a.u-black-link{"data-toggle" => "tab", :href => "#2014Statistics", :role => "tab"} 2014 Statistics
+        %h4
+          %span.hsc_txt The Stats
+        .tab-content
+          #2016Statistics.tab-pane.active
+            = render 'pages/partial/testimonial_past_stats_hsc', percentilepoint:'24', year: '2016', score1: '63.8', percentile1: '79th', score2: '59.1', score3: '64.2', percentile2: '54th', percentile3: '80th', sd1: '6.6', sd2: '5.0', sd3: '6.6', year: 2016
+          #2015Statistics.tab-pane
+            = render 'pages/partial/testimonial_past_stats_hsc', percentilepoint:'24', year: '2015', score1: '63.1', percentile1: '75th', score2: '59.3', score3: '64.3', percentile2: '55th', percentile3: '80th', sd1: '6.4', sd2: '4.9', sd3: '5.4', year: 2015
+          #2014Statistics.tab-pane
+            = render 'pages/partial/testimonial_past_stats_hsc', percentilepoint:'24', year: '2014', score1: '65.4', percentile1: '87th', score2: '60.6', score3: '67.8', percentile2: '68th', percentile3: '92nd', sd1: '6.1', sd2: '3.7', sd3: '4.1', year: 2014
+
+:javascript
+  $("#next_video").click(function(){
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+
+  });
+  $("#previous").click(function(){
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+
+  });
+
+  $("#interview_active").click(function(){
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+
+  });
+  $("#interview_next").click(function(){
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+
+  });
+  $("#interview_previous").click(function(){
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+
+  });
+
+
+  $("#interview_active").click(function(){
+    $("#interview_testi").addClass("active");
+    $(".int_item").addClass("active");
+  });
+
+  $("#gamsat_active").click(function(){
+    $("#grad_testi").addClass("active");
+    $(".gam_item").addClass("active");
+    var tot_video = document.getElementsByTagName('video');
+    var len = tot_video.length;
+    for (var i = 0; i < len; i++) {
+    tot_video[i].pause();
+    }
+  });
+  var nav_type = "#{params[:type]}"
+
+  if(nav_type == 'interviewready'){
+    initialize_owl($('#owl-demo1'));
+  }else{
+    initialize_owl($('#owl-demo'));
+  }
+
+  $('a[href="#grad_testi"]').on('shown.bs.tab', function () {
+    initialize_owl($('#owl-demo'));
+  });
+
+  $('a[href="#interview_testi"]').on('shown.bs.tab', function () {
+    initialize_owl($('#owl-demo1'));
+  });
+
+  function initialize_owl(el) {
+    el.owlCarousel({
+      margin: 3,
+      loop: true,
+      autoplay: true,
+      autoPlayTimeout: 1000,
+      nav: true,
+      dots: true,
+      slideSpeed : 100,
+      responsive: {
+        0: {
+          items: 1,
+          nav: true
+        },
+        600: {
+          items: 1,
+          nav: false
+        },
+        1000: {
+          items: 3,
+          nav: true,
+          loop: false
+        }
+      }
+    });
+  }

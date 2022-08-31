@@ -1,0 +1,5 @@
+.container
+  .row
+    = simple_form_for(@essay_response, url: essay_response_path(essay_id: @essay.slug)) do |f|
+      = render 'essay_responses/partial/form', f: f
+

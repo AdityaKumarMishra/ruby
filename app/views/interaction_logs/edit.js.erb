@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: 'interaction_log_modal', locals: { interaction_log: @interaction_log })
+) %>
+$("#log-modal").html("<%= js %>");
+$('#interaction-modal').modal('show');

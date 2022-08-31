@@ -1,0 +1,5 @@
+= render "section_items/index"
+
+= link_to 'New Section item', new_polymorphic_path([@parent_resource, @section, SectionItem]), class: 'btn btn-default'
+\|
+= link_to 'Back', polymorphic_path([@parent_resource, Section]), class: 'btn btn-default'

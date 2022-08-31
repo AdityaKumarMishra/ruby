@@ -1,0 +1,17 @@
+= simple_form_for([@student, @enrolment]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.label 'Course', style: 'margin-top: 20px;'
+    = f.select('course_id', @courses.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Course', disabled: '', include_blank: false, selected: @course.present? ? [@course.id] : []}, { class: 'chosen-select' })
+    = f.input :paypal_payment
+    = f.input :paypal_token
+    = f.input :paid_at,required: true
+    = f.input :promo
+    = f.input :subtotal,required: true
+    = f.input :gst, required: true
+    = f.input :paypal_fee
+    = f.input :banktrans
+
+  .form-actions
+    =f.button :submit

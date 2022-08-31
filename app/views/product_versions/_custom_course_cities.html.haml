@@ -1,0 +1,49 @@
+.course_frm.hide_box
+  %p.sub_heading_txt Please choose your City and Course from the drop down selections below.
+  .col-lg-3.col-md-3
+    .form-group
+      %label{for: "city"} City
+      %select#public_page_city
+        - cities.each do |city|
+          - if first_city == city
+            %option{selected: "selected"}= city
+          -else
+            %option= city
+
+  .col-lg-6.col-md-6
+    .form-group
+      %label{for: "course"} Course
+      %select#public_page_course
+        - courses.each do |course|
+          -if selected_course == course
+            %option{selected: "selected", value: "#{course.id}"}= course.name
+          -else
+            %option{value: "#{course.id}"}= course.name
+  .col-lg-3.col-md-3
+    .form-group
+      %label{for: "enrollment"} Enrollment Closure Date
+      %span.enrlmnt_date= selected_course.try(:enrolment_end_date).strftime("%d %b %Y")
+
+:javascript
+  var pv_id = '#{product_version.id}'
+  $('#public_page_city').on('change',function(){
+    var city = $(this).val();
+    $.ajax({
+      url: "/courses/public_course_cities",
+      method: "GET",
+      data: { product_id: pv_id, city: city, type: 'custom' },
+      success: function(data){
+      }
+    });
+  });
+
+  $('#public_page_course').on('change',function(){
+    var course_id = $(this).val();
+    $.ajax({
+      url: "/courses/public_course_cities",
+      method: "GET",
+      data: { product_id: pv_id, course_id: course_id, type: 'custom' },
+      success: function(data){
+      }
+    });
+  });

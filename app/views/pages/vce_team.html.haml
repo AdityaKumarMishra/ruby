@@ -1,0 +1,88 @@
+- title "Team"
+.team-page
+  .container.vce
+    .row
+      .container
+        %center
+          %h1 Meet the Team
+        .row
+          = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/shadow-top.png', class: 'img-responsive', alt: 'Shadow Top')
+          #team-selection.team-bar
+            %h4 The GR Team
+            %ul
+              %li.active{"data-category" => "melbourne"} Melbourne
+
+          #team-images.team-prof-images
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Cassandra-Knight-grull",
+              tutor_name: "Cassandra",
+              tutor_image: "cassandra_knight.jpg",
+              course: "English - VE VCE English (Melbourne)" do
+              Having recently graduated from a Bachelor of Arts in the Dean's Scholar's Program at Monash University, Cassandra is now completing her Honours research in South African history.
+              She spent the last two years studying and working in South Africa, and has more than four years of tutoring experience at primary, high school and university level.
+              She is especially interested in African military history, politics and competitive sports.
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Chris-Girardi",
+              tutor_name: "Chris",
+              tutor_image: "chris_girardi.jpg",
+              course: "English - VE VCE English (Melbourne)" do
+              Chris is a Bachelor of Commerce Student studying at the University of Melbourne. Having graduated high school with an ATAR or 97.95,
+              he has a firm understanding of the requirements of the VCE - particularly the English curriculum, and loves helping students achieve the best possible results in their studies.
+              In his spare time, Chris is actively involved in the community, engaging with programs for World Vision, Oxfam and The Smith Family.
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Sukrit-Sabhlok",
+              tutor_name: "Sukrit",
+              tutor_image: "sukrit_sabhlok.jpg",
+              course: "English - VE VCE English (Melbourne)" do
+              Sukrit is currently completing a Master of Arts in political science at Monash University, and holds a Bachelor of Arts
+              (Honours)/Bachelor of Laws from Melbourne University and a Graduate Diploma of Legal Practice from the College of Law.
+              He received an ENTER of 99.65, with a perfect score of 50 in Legal Studies and 47 for English.
+              Sukrit has work experience as a freelance writer and paralegal. In his free time, Sukrit enjoys karaoke and playing tennis.
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Michelle-Yu",
+              tutor_name: "Michelle",
+              tutor_image: "michelle_yu.jpg",
+              course: "English - VE VCE English (Melbourne)" do
+              Michelle is currently pursuing a Bachelor of Arts and Law at Monash University. In her Arts degree she is majoring in Sociology and French.
+              Since finishing high school in 2013, she has had years of experience teaching English to students across all year levels, with a personal interest in tutoring VCE English.
+              Her other interests include reading, films, and life drawing.
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Lindsay_Liu",
+              tutor_name: "Lindsay",
+              tutor_image: "lindsay_liu.jpg",
+              course: "Math Tutor (Melbourne)" do
+              Lindsay has extensive tutoring experience in VCE Mathematical Methods, having created many resources and notes that have provided her students with valuable exercises
+              to apply their learned knowledge to. Her patience and flexibility in teaching and communication brings out the best in her students.
+              She graduated with an ATAR of 99+, loves the colour yellow and enjoys playing netball!
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Henry_Cui",
+              tutor_name: "Henry",
+              tutor_image: "henry_cui.jpg",
+              course: "Math Tutor (Melbourne)" do
+              Currently a Bachelor of Science student at University of Melbourne. Graduated in 2014 (atar: 97.20);
+              has been tutoring for two years with tons of experience with students from year 10 to 12.
+              Places emphasis on creating a good relationship with students, being both a friend and teacher.
+              Able to get through to any student in a fast and effective manner, focusing on what is important (ie. SAC materials and exams).
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "Alex_Graham",
+              tutor_name: "Alex",
+              tutor_image: "alex_graham.jpg",
+              course: "Math Tutor (Melbourne)" do
+              Alex is currently studying Mechatronics engineering at Monash University as of 2016.
+              He has a very strong and passionate math background, which he says originates from having a down-to-earth and engaging teacher who gains respect from his students.
+              Alex is very competitive and is always looking for a challenge and chance to better himself at whatever he does.
+
+            = tutor_profile data_category: "melbourne",
+              tutor_id: "tiantian_fang",
+              tutor_name: "Tiantian",
+              tutor_image: "tiantian_fang.jpg",
+              course: "Math Methods Tutor (Melbourne)" do
+              Tiantian is a Law and Engineering student at Monash. Having studied both math methods and specialist mathematics,
+              she understands what it takes to keep life balanced through the final years while studying smart to achieve that top store.
+              She loves a good challenge and enjoys playing a variety of sports including handball and badminton.

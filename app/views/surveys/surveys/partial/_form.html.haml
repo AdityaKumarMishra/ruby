@@ -1,0 +1,16 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for(@surveys_survey) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.association :users
+        = f.input :title
+        = f.input :date_start
+        = f.input :published
+        = f.input :date_closed
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+
+

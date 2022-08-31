@@ -1,0 +1,87 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+      .head_timer
+        %h4#clock
+          %i.fa.fa-clock-o{"aria-hidden" => "true"}
+          %span.time
+            Time Remaining
+            %span 14:21
+        %h4#all_ques
+          %i.fa.fa-book{"aria-hidden" => "true"}
+          %span.number 1 of 44
+    .btm_header.padd
+      %a.calc{href: "javascript:",'data-toggle'=>"modal", 'data-target'=>"#calc-modal"}
+        %i.fa.fa-calculator{"aria-hidden" => "true"}
+        = succeed "alculator" do
+          %span C
+      %a.calc{href: "#"}
+        %i.fa.fa-flag-checkered{"aria-hidden" => "true"}
+        = succeed "lag" do
+          %span F
+  .para_contant
+    / %img.mrgtb20{src: "images/que_img.png"}/
+    = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_img.png'
+    %p Which shape will make the last equation true?
+    %ul.radio_ans_list
+      %li
+        .radio_wrap
+          %input#a.answer{name: "answer", type: "radio"}/
+          %label#a_text{for: "a"} Circle
+      %li
+        .radio_wrap
+          %input#b.answer{name: "answer", type: "radio"}/
+          %label#b_text{for: "b"} Rectangle
+      %li
+        .radio_wrap
+          %input#c.answer{checked: "checked", name: "answer", type: "radio"}/
+          %label#c_text{for: "c"} Square
+      %li
+        .radio_wrap
+          %input#d.answer{name: "answer", type: "radio"}/
+          %label#d_text{for: "d"} Triangle
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-step-forward{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question5"}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question7"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png"
+      .modal-body
+        %p.mrgbtm20
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png"
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+
+:javascript
+  $('#all_ques').click(function(){
+    $('.number').toggleClass('none');
+  });
+
+  $('#clock').click(function(){
+    $('.time').toggleClass('none');
+  });

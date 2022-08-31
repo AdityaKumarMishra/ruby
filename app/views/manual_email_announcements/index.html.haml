@@ -1,0 +1,53 @@
+%h1 Manual Email Announcement Templates
+= link_to 'New Manual Email', new_manual_email_announcement_path, class: 'btn btn-primary u-white-link'
+%br
+%br
+#filterrific_results
+  =#will_paginate @custom_email, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Email Subject
+        %th Product Version
+        %th Courses
+        %th Master Features
+        %th Attachments
+        %th
+        - if current_user.admin? || current_user.superadmin?
+          %th
+          %th
+          %th
+
+    %tbody
+      - @manual_email_announcements.each do |email|
+        %tr
+          %td= email.subject
+          %td
+            %ul
+              - email.product_versions.each do |pv|
+                %li{style: "list-style: inside;"}= pv.name
+          %td
+            %ul
+              - email.courses.each do |course|
+                %li{style: "list-style: inside;"}= course.name
+          %td
+            %ul
+              - email.master_features.each do |feature|
+                %li{style: "list-style: inside;"}= feature.name.titleize.camelize :lower
+          %td
+            -if email.first_docuemnt.file?
+              = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), email.first_docuemnt.url
+            %br
+            %br
+            -if email.second_docuemnt.file?
+              = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), email.second_docuemnt.url
+            %br
+            %br
+            -if email.third_docuemnt.file?
+              = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), email.third_docuemnt.url
+
+          %td= link_to 'Edit', edit_manual_email_announcement_path(email), class: 'btn btn-info btn-sm'
+          - if current_user.admin? || current_user.superadmin?
+            %td= link_to 'Delete', manual_email_announcement_path(email), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+            %td= link_to 'Duplicate', "/manual_email_announcements/duplicate?id=#{email.id}", class: 'btn btn-info btn-sm'
+            %td= link_to 'Fire Manually ', "/manual_email_announcements/manually_fire_emails?id=#{email.id}", class: 'btn btn-success btn-sm'

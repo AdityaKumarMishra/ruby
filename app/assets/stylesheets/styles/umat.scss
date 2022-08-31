@@ -1,0 +1,403 @@
+.home_pag_bnner{
+  position: relative;
+  float: left;
+  min-height: 550px;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: 31px;
+  width: calc(100% + 35px);
+  padding-top: 192px;
+  text-align: center;
+  display: block;
+  &.umat {
+    background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/hero_img.jpg");
+    background-size: cover;
+  }
+  &.gamsat{
+    background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready_home_banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  &.vce,
+  &.hsc {
+    background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/imgo.jpg') 0 0 no-repeat;
+    background-size: cover;
+  }
+  .new_banner_col{
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    margin: 0 0 50px;
+    h3{
+      font-size: 60px;
+      font-weight: bold;
+      font-family: $font-head;
+      letter-spacing: 3px;
+      span{
+        color: #007ecc;
+      }
+    }
+    p{
+      font-size: 23px;
+      font-family: $museo;
+      font-weight: normal;
+      line-height: 1.1;
+    }
+    h5{
+      font-size: 32px;
+      margin-bottom: 25px;
+      font-weight: 100;
+      margin-top: 6px;
+    }
+  }
+  .banner-bottom{
+    position: absolute;
+    bottom: 0px;
+    left: 30%;
+    width: 40%;
+    color: #fff;
+    background-color: rgba(1, 136, 202, 0.8);
+    opacity: 0.8;
+    padding: 10px 20px 20px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    h5{
+      font-size: 30px;
+      color: #fff;
+      font-family: $font-head;
+      bottom: 0px;
+    }
+    p{
+      font-size: 14px;
+    }
+    a{
+      color: white;
+    }
+  }
+}
+
+#newsfeed{
+  padding: 100px 0;
+  position: relative;
+  top: 50px;
+
+  img{
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .feed{
+    padding: 20px;
+    font-family: Helvetica;
+    background-color: #ececec;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    h4{
+      font-size: 24px;
+    }
+    .news{
+      overflow-y: scroll;
+      max-height: 216px;
+      font-size: 11px;
+
+      p{
+        font-size: 11px;
+      }
+      h5{
+        font-size: 14px;
+        color: #0188ca;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+#course-packages{
+  text-align: center;
+  margin-top: 50px;
+  float: left;
+  width: 100%;
+  .whte_bg_trans .umat_content h2 {
+    font-family: $font-head;
+    letter-spacing: 5px;
+    font-size: 42px !important;
+    color: #0188ca;
+    text-transform: uppercase;
+    font-weight: 100 !important;
+    span{
+      color: black;
+    }
+  }
+  .whte_bg_trans .umat_content p {
+    font-size: 18px;
+    color: #000;
+    width: 50%;
+    margin-left: 25%;
+    font-weight: 700;
+  }
+  .whte_bg_trans .umat_content h3 {
+    display: inline-block;
+    font-size: 20px;
+    padding: 12px 30px;
+    margin-left: 10px;
+    margin-bottom: 26px;
+    color: white;
+    background-color: #007ecc;
+    margin-left: 0px;
+    text-transform: uppercase;
+    width: 100%;
+    line-height: 24px;
+
+  }
+  .col-md-3.tbl_wdth {
+    width: 20%;
+  }
+  .col-md-3.ml12 {
+    margin-left: 0;
+    padding: 0;
+    border-left: 2px solid #fff;
+    margin-right: 0;
+  }
+  #course-packages .course-packages .package-description .title {
+    color: white;
+    height: 60px;
+    line-height: 60px;
+    background: #3c3c3c;
+  }
+}
+
+#course-packages .course-packages .package-description .title span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+#course-packages .course-packages .package-description .title span{
+  a{
+    position: relative;
+    top:20px;
+    span{
+      position:relative;
+    }
+  }
+}
+#course-packages{
+  .link_color {
+    color: white;
+  }
+  .package-description .title {
+    color: white;
+    height: 60px;
+  }
+  .col-md-3.ml12.first_title_col .package-description .content-container {
+    border: 0;
+    background: #dadada;
+  }
+  .col-md-3.ml12.second_title_col .package-description .content-container {
+    border: 0;
+    background: #e5e5e5;
+  }
+  .col-md-3.ml12.first_title_col .package-description .title {
+      background: #3c3c3c;
+  }
+  .col-md-3.ml12.second_title_col .package-description .title {
+    background: #575757;
+  }
+  .package-description .title .main {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 18px;
+    padding-top: 12px;
+  }
+  .package-description .title span {
+    width: 100%;
+    float: left;
+    font-size: 12px;
+  }
+  .content.green_col_box {
+    color: #000;
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    padding: 13px 17px;
+    background: #b0d9ed;
+    border-bottom: 2px solid #fff;
+
+    .green_txt_scope {
+      margin-top: 0.5em;
+    }
+
+    >span{
+      display: block;
+      width: 100%;
+    }
+  }
+  .col-md-3.ml12.second_title_col .green_col_box {
+    background: rgba(175,216,234,0.4);
+  }
+  .min_hgt730 {
+    min-height: 1076px;
+  }
+  .min_hgt730 .content.green_col_box strong {
+    color: #0188ca;
+    display: block;
+    line-height: 20px;
+  }
+  .min_hgt730 a {
+    color: #000;
+    font-size: 13px;
+  }
+  .min_hgt730 .content.green_col_box {
+    color: #000;
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    padding: 13px 17px;
+    background: #b0d9ed;
+    border-bottom: 2px solid #fff;
+  }
+  .green_col_box.min-hegt {
+    min-height: 260px;
+  }
+  .min_hgt730 .content.green_col_box {
+    color: #000;
+    float: left;
+    width: 100%;
+    font-size: 13px;
+    padding: 13px 17px;
+    background: #b0d9ed;
+    border-bottom: 2px solid #fff;
+  }
+  .col-md-3.ml12.first_title_col .package-description .package-pricing {
+    border: 0;
+    background: #3c3c3c;
+    color: #fff;
+  }
+  .min_hgt730 .content.green_col_box.grey_blnk_img.hei62 {
+    min-height: 62px;
+  }
+  .min_hgt730 .content.green_col_box strong {
+    line-height: normal;
+    color: #0188ca;
+  }
+  .min_hgt730 .content.green_col_box.grey_blnk_img {
+    background: none;
+    padding-top: 23px;
+  }
+  .col-md-3.ml12.second_title_col .package-description .package-pricing {
+    border: 0 ;
+    background: #575757;
+    color: #fff;
+  }
+  .package-pricing{
+    padding: 20px;
+
+    .price {
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 25px;
+    }
+  }
+}
+
+.package-description{
+  text-align: center;
+  margin-top:20px;
+  margin-bottom:40px;
+
+  .description-tag-text {
+    font-weight: bolder;
+    background-color: #007ecc;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 13px;
+    padding: 5px 30px;
+    margin-bottom: 26px;
+    color: black;
+    background-size: 70% 120%;
+    line-height: 24px;
+    a{
+      color: white;
+    }
+    &.vce{
+      background: #462c9f;
+    }
+    &.hsc{
+      background: #be382a;
+    }
+  }
+  #a_link_clr{
+    h4{
+      span{
+        color: #007ecc;
+      }
+    }
+  }
+  .notice-links{
+    a{
+      color: black;
+    }
+  }
+}
+
+.btn-gr {
+  color: #fff;
+  background-color: #007ecc;
+}
+.btn-gr:hover {
+  color: #fff !important;
+  background-color: #229ffe;
+}
+a.lnk_blue {
+  color: #0188ca !important;
+  text-decoration: none;
+}
+.border-bottom-0{
+  border-bottom: 0px !important;
+}
+a:hover{
+  background-color: rgba(255,255,255,0);
+}
+.txt_green {
+  color: #007ecc;
+}
+
+.course-description-container.umat .course-description.suggest-a-package{
+  text-align: center;
+  margin: 40px 0px 40px;
+  .content{
+    font-size: 13px;
+    margin: 20px;
+  }
+  .btn{
+    color: white;
+  }
+}
+.get_umat {
+  font-size: 50px;
+  font-weight: 500;
+}
+.home-page-banner.umat {
+  padding-top: 85px;
+  min-height: 460px;
+}
+.umat_compare_logo {
+  margin-top: 9px;
+  margin-bottom: 3px;
+}
+.home-page-banner.umat .banner-content p {line-height: 38px;}

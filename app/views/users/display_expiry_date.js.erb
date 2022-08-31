@@ -1,0 +1,3 @@
+<% js = escape_javascript(render(partial: 'essay_expiry_date',locals: {expiry_date: @expiry_date})) %>
+$(".expry_date").html("<%= js %>")
+$('.expry_date').show();

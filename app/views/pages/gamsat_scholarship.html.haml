@@ -1,0 +1,694 @@
+- title "GAMSAT Millennials Scholarships | GradReady"
+- meta_description "GradReady's GAMSAT Millennials Scholarship program is designed to provide a helping hand to resourceful, dedicated, and motivated students."
+- meta_keywords "gamsat scholarship"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        GradReady Millennials Scholarship for GAMSAT
+        %sup ®
+        Courses
+%section.pad50
+  .container
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"}
+      .text-center
+        %h2 Encouraging Resourcefulness, Ingenuity and Initiative
+      .col-md-6.encorag_box.encrgbox_none.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_1.png'
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#background_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down>
+              Background
+            #background_tab.panel-collapse.collapse
+              %p GradReady was founded on the belief that "there has to be a better way". We saw the opportunity to make learning more effective and efficient through doing something new and different. It is this change-for-better attitude that we would like to encourage in all applicants of the GradReady Millennials Scholarship.
+              %p We would like to help build a culture where people are encouraged to look for novel solutions, to think outside the box and to leverage and build upon the amazing tools of this new information age.
+              %p One of the main challenges we will face in the coming decades is the provision of adequate healthcare to the aging population in the developed world and the expanding population in the developing world. As a prospective medical student and future clinician, you will be leading the efforts to address this challenge - through pioneering new tools and methods.
+              %p GradReady Millennials Scholarship is set up to help you to take the first step in becoming a part of the solution.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#eligibility_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right>
+              Eligibility criteria
+            #eligibility_tab.panel-collapse.collapse
+              %p Prospective medical students.
+      .col-md-6.encorag_box.encrgbox_none
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_2.png'
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#scholarship_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Scholarship details
+            #scholarship_tab.panel-collapse.collapse
+              %p Full fee paid for a GradReady Attendance (Comprehensive) Course + $500 cash
+              %p If you have already signed up for a GradReady Attendance (Comprehensive) Course and are awarded the scholarship, your payment will be refunded.
+              %p 5 scholarships available Australia wide.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#apply_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              How to apply
+            #apply_tab.panel-collapse.collapse
+              %p 1. Compose a 600 - 800 word essay outlining how you have demonstrated one or more of the following 3 qualities - resourcefulness, ingenuity and initiative - through achieving positive results for yourself or for the people and wider community around you. Also explain how your experiences will help you in your future endeavours and achieving your aspirations.
+              %p 2. Update your CV.
+              %p 3. Email the essay and CV, in a single PDF Document, to millennials@gradready.com.au
+              %p Title both the email and the document in the following manner
+              %p
+                Eg. "GAMSAT
+                %sup ®
+                exam - #{Date.today.year} Millennials Application - John Jackson"
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#timeline_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Timeline
+            #timeline_tab.panel-collapse.collapse
+              %p #{Date.today.year} Applications are now open.
+              %p Applications will close Sunday 30 October at 11:59 PM AEDT. No late applications will be accepted.
+              %p Interviews will be held between 4th November - 21st November, 2022.
+              %p Recipients will be notified by 1st December.
+
+      .col-md-12.encorag_box.encorag_box_fr_mbl.histry_right
+        #overview_vert_slider.carousel.slide.vertical{"data-ride" => "carousel"}
+          / Wrapper for slides
+          .carousel-inner{role: "listbox"}
+            .item
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_1.png', alt: "history_img"
+            .item.active
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_2.png', alt: "history_img"
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_background_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down>
+              Background
+            #mobile_background_tab.panel-collapse.collapse
+              %p GradReady was founded on the belief that "there has to be a better way". We saw the opportunity to make learning more effective and efficient through doing something new and different. It is this change-for-better attitude that we would like to encourage in all applicants of the GradReady Millennials Scholarship.
+              %p We would like to help build a culture where people are encouraged to look for novel solutions, to think outside the box and to leverage and build upon the amazing tools of this new information age.
+              %p One of the main challenges we will face in the coming decades is the provision of adequate healthcare to the aging population in the developed world and the expanding population in the developing world. As a prospective medical student and future clinician, you will be leading the efforts to address this challenge - through pioneering new tools and methods.
+              %p GradReady Millennials Scholarship is set up to help you to take the first step in becoming a part of the solution.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_eligibility_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right>
+              Eligibility criteria
+            #mobile_eligibility_tab.panel-collapse.collapse
+              %p Prospective medical students.
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_scholarship_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Scholarship details
+            #mobile_scholarship_tab.panel-collapse.collapse
+              %p Full fee paid for a GradReady Attendance (Comprehensive) Course + $500 cash
+              %p If you have already signed up for a GradReady Attendance (Comprehensive) Course and are awarded the scholarship, your payment will be refunded.
+              %p 5 scholarships available Australia wide.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_apply_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              How to apply
+            #mobile_apply_tab.panel-collapse.collapse
+              %p 1. Compose a 600 - 800 word essay outlining how you have demonstrated one or more of the following 3 qualities - resourcefulness, ingenuity and initiative - through achieving positive results for yourself or for the people and wider community around you. Also explain how your experiences will help you in your future endeavours and achieving your aspirations.
+              %p 2. Update your CV.
+              %p 3. Email the essay and CV, in a single PDF Document, to millennials@gradready.com.au
+              %p Title both the email and the document in the following manner
+              %p
+                Eg. "GAMSAT
+                %sup ®
+                exam - 2022 Millennials Application - John Jackson"
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_timeline_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Timeline
+            #mobile_timeline_tab.panel-collapse.collapse
+              %p 2022 Applications are now open.
+              %p Applications will close Sunday 30 October at 11:59 PM AEDT. No late applications will be accepted.
+              %p Interviews will be held between 4th November - 21st November, 2022.
+              %p Recipients will be notified by 1st December.
+              %p To read the personal stories of our past recipients, please see below for past Millennials Scholarship winners.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2021 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Alem Abidullah Chowdhury and Homa Kheirkhah for being two of our recipients this year. There were many quality candidates in 2021 - Alem and Homa are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        /= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/Alem%2BAbidullah%2BChowdhury%2B2.jpg', :style=> "height: 513px; object-fit: cover; max-width: 400px;"
+        %div{:style=> "height: 513px;"}
+        %h5 Alem Abidullah Chowdhury
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #akash_qualities_tab.panel-collapse.collapse
+              %p In reflection, my strongest qualities have been my generosity and my congeniality. I try to use both my material resources and time for the betterment of my community, whether that is through making donations or volunteering. Having the ability to connect with new people and build diverse relationships has made my life fundamentally richer and more textured and allowed me to learn about and develop empathy for the multitude of lived experiences.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #akash_drive_tab.panel-collapse.collapse
+              %p My commitment to the development of the human project is a big motivator in my life. In recent times it has become more popular to become more nihilistic, misanthropic or just apathetic about humanity’s existence, but I remain committed to building a better Anthropocene. I am not naïve enough to believe that improvement of the lives we lead are innate and inevitable and recognise this will take deliberate and thoughtful action within our collective frameworks.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #akash_achieve_tab.panel-collapse.collapse
+              %p I hope to develop a variety of clinical and practical skills so that I can be a multidisciplinary practitioner. In 20 years, I am looking forward to engaging in global health issues and be involved in both the implementation of evidence-based strategies and the development of these empirical approaches. I am also deeply cognisant this will require building greater cultural competence and understanding how to integrate health strategies into existing structures and institutions that exist in a community.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #akash_jouney_tab.panel-collapse.collapse
+              %p
+                Up until this point, I have researched the exam’s schedule, its structure and have explored some resources in preparation for the test. I have spoken to peers, both who have and have not been successful in their GAMSAT
+                %sup ®
+                attempts, to develop perspectives about what is required to do well in the test. My next steps include diving further into GAMSAT
+                %sup ®
+                preparation materials, including those generously provided by GradReady, and working collaboratively with like-minded peers in trying to build skills for GAMSAT
+                %sup ®
+                success.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/Homa+1.jpg', :style=> "height: 513px; object-fit: cover;"
+        %h5 Homa Kheirkhah
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#demonstared_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #demonstared_tab.panel-collapse.collapse
+              %p I have always strived to reflect on my values and qualities to improve myself as I believe that if I am the best version of myself, I can help people around me achieve the same outcomes for themselves. I have always valued and demonstrated empathy, I believe that most people just need someone to be there and to listen to them without judgment, criticism and without trying to give them unwanted advice. Another quality that I have learnt to demonstrate as I became older and wiser is being true to myself. I believe that if I am true to myself, I cannot wrong other people. Our attitudes and behaviours towards others reflect our relationship with ourselves, so be true to yourself and you’ll be good to others. I learnt true kindness and compassion from my mum, and I have always displayed both qualities towards other humans. I have always felt better when I have treated people who were unkind to me with kindness and you can always notice their behaviours changing and they become less rude/aggressive, especially while working as a nurse. Being from Afghanistan and having gone through the war, losing a parent and other family members had sunken me into playing the victim. Once I dragged myself out of that mentality, I become more resourceful and displayed initiative daily to get my life back on track. My past will help me build a better future, I am exactly where I need to be in life, right at this moment, this is me and that’s my greatest power because no one can be me.
+
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #ruby_drive_tab.panel-collapse.collapse
+              %p I think the main reason I stay driven and committed to my goals is that I know I can be anything I want to be. As a doctor, I will have limitless opportunities to serve humanity no matter where I am in the world. Since working with WA Country Health, I have realised the vastness of rural WA and the great necessity for more health professionals.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #ruby_achive_tab.panel-collapse.collapse
+              %p In the next 10 years I will have achieved my dream of becoming a cardiologist and travelling across rural WA to work in relevant hospitals and practices. Then 10 years after that, I will be travelling the world, where doctors are most needed. I would like to go back to my birthplace and serve the people. I have always felt like I owe that to Afghanistan.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #ruby_journey_tab.panel-collapse.collapse
+              %p
+                I have always worked part time or full time while studying so it has been very challenging to study for GAMSAT
+                %sup ®.
+                Life gets in the way, but I have always kept studying to work on my areas of weakness. I had spoken to several medical students, and they had advised me to apply for the courses available, but I was never able to afford the courses while paying my living expenses and saving money for the exam itself. I am confident that I will achieve a much better score than my first attempt in 2017, with the GradReady scholarship.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2020 GradReady Millenial Scholarship Recipient
+      %p.sub_heading_txt We would like to congratulate Nayma Bilal and Sakshi Thakur for being two of our recipients this year. There were many quality candidates in 2020- Nayma and Sakshi are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/Melb- Sakshi Thakur New1.jpg'
+        %h5 Sakshi Thakur
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #akash_qualities_tab.panel-collapse.collapse
+              %p Empathy, Integrity, Resilience, Curiosity & Kindness. These are 5 qualities I consciously try to consistently work on and demonstrate throughout all areas of my life, because I’ve learnt how important they are for me through all the highs and lows that come with experiencing life.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #akash_drive_tab.panel-collapse.collapse
+              %p My privileges and hope.My grandparents were refugees and survivors of the 1947 war between India and Pakistan. They started from scratch, and worked incredibly hard to ensure all their siblings and children had an education and food on the table. My parents did the same for us. They started from scratch as they migrated to Kuwait, Oman and then Australia with no family or friends, very little savings, just so that my brother and I could have a better education and quality of life than they did. I only have the privilege of writing this right now, because of the sacrifices made by the generations before me - it’s something I never take for granted. Being aware and grateful for the privileges that I’m given, drives me to make sure I make the most of the opportunities presented to me.Hope is an airy fairy concept that drives me. The world can sometimes feel like a dark place full of never-ending challenges from inequity, a pandemic, poverty, unemployment and what feels like unfair events in life. What drives me through those really challenging moments is the little moments of kindness, joy and serendipity. When a stranger shouts you a coffee without expecting anything in return, when a baby smiles so big that you can’t help but smile back even when you’re going through so much pain and when a stranger changes your life through one conversation in the best kind of way. Hope for a better world with so much light through being grateful for these little moments, drives me through the dark days.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #akash_achieve_tab.panel-collapse.collapse
+              %p In 20 years time I want to have played a part in closing the inequitable gap that comes with access to healthcare in developing communities, more specifically in women’s health. It’s a big complex problem, so how I get there is still one I’m figuring out, but I will figure it out hopefully before 20 years from today. My grandfather always said - if there’s a will, there’s a way, and it’s something that has always motivated me on my moonshot thinking missions.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #akash_jouney_tab.panel-collapse.collapse
+              %p
+                My Gamsat journey has been an adventure. Some days I get really insecure, doubt my intellect, my ability to do well enough to get into a university or even be a good doctor. On those days, I remind myself that how I choose to get through this journey of uncertainty and self-doubt is the test on the kind of doctor I will be, and that really brings perspective and motivation to get through this.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/NaymaBilalNew.jpg'
+        %h5 Nayma Bilal
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#demonstared_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #demonstared_tab.panel-collapse.collapse
+              %p Throughout my life, I have consistently demonstrated initiative, resourcefulness, ingenuity, leadership and passion among many other qualities, which have enabled me to accomplish my goals and allow me to progress through tribulations.During high school, I have initiated activities and contributed to the implementation of numerous changes to the school. The school I attended placed an immense focus solely on academics and poured great finances and resources into higher-grade subjects, often at the cost of creative-based subjects and extra-curricular activities. Having observed this limitation and understanding the need for the provision of more diverse range of programs, I began lobbying for a change throughout the school. In 2015, in conjunction with the high school art teacher, I petitioned to the school principal and administrative leaders to provide Creative Arts at the HSC level and implement more extra-curricular activities. Upon being successful, I was able to begin the student photography club and creative arts club. To uphold the programs, I resourcefully gathered fellow dedicated students and organised fundraisers throughout the entire school in order to provide funds to ensure the continuity of the programs. The clubs provided me with a mammoth of leadership and team management skills beneficial for my future career as a potential leading doctor, an opportunity for creative students to express themselves and a chance for students to get together, meet like-minded individuals and form strong relationships. The programs not only benefitted the current students of the time, but was an initiative that was beneficial to future students alike and consequently contributed to the increased positive reputation of the school amongst the wider community, as parents understood this was a school where their children were given the chance to thrive both academically and creatively.Driven by a strong desire to care for others and improve their health, I have engaged in a magnitude of volunteering activities for the community.  With a major passion for mental health and female health advocacy, I have volunteered both privately and with organisations such as Share the Dignity and Red Cross Australia to provide aid to vulnerable members of the community. In addition to health advocacy, my role with Share the Dignity requires the collection and distribution of donated sanity products and working with a range of charities in supplying them to women and girls in need, providing me with practical skills applicable to my desired career in gynaecology and an opportunity to help end period poverty in Australia. Being a certified mental health first-aid provider, I attempt to assist those around me as much as possible, especially in matters regarding mental health. As a Tele-Chat volunteer for Red Cross Australia, I engage in weekly calls to vulnerable members of the community suffering from mental health issues to check-up on their current status and provide verbal and emotional support.Furthermore, as a culturally and linguistically diverse (CALD) individual, I have been striving to bridge the cultural and generational gap between migrant parents and modern Australian-born and/or raised children. Whilst actively listening to the increasing problems and concerns of both parents and children, closely consulting with my mother and health care professionals to gather professional knowledge and parenting advice in an effort to formulate solutions to the aforementioned concerns. My background in Medical Science and proficiency and fluency in English and Bengali have proved beneficial in successfully improving effective communication between parents and children, and educating the community at large in regards to the raising concerns of social media and its correlation to mental health and suicide in all age groups, especially the youth.Moreover, I have been working closely with an organisation named Swim Sisters to provide female-only swim times in local swimming pools to encourage otherwise shy females to engage in swimming and educate the community on the importance of maintaining physical health. All of my experiences provide immense support in being a more open-minded, compassionate and experienced health-care worker as well as expanding my skill-set for my future endeavours in improving the health care system of developing countries.
+
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #ruby_drive_tab.panel-collapse.collapse
+              %p I am driven by a strong desire to care for others and improve the health of the general community. I believe that my personal battles with female health issues and the lived experience of mental health have significantly motivated me to the causes of female health and mental health advocacy.I am prompted by the passion to fulfill gaps in society especially where I feel my knowledge, skills and experience provide immense benefit.  Having experience in developing countries and raised in rural Australia, I have witnessed the large extent of health inequity and malpractices in underdeveloped areas. This propelled me to strive in enhancing proper patient care education of health professionals in developing countries in an effort to improve global health.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #ruby_achive_tab.panel-collapse.collapse
+              %p Within the coming decade, I hope to be a fully registered surgeon with specialities in obstetrics and gynaecology as well as cardiothoracic surgery. With the significant prevalence of congenital abnormalities and infant mortality in Australia, I would like to conduct research into the prevention and treatment of the intrauterine and menstrual disorders through holistic approaches.I would like to use my expertise in making a meaningful impact in the medical health support in CALD communities and the advancement of health care equity, in addition to increase awareness within the said communities of the contributing factors and severity of mental issues.In the 10 years following, I am eager to join the Royal Flying Doctors Services, then Medecins San Frontieres (Doctors Without Borders). With the skills I attain and the assistance of supporting organisations, I aim to enhance global health and improve medical education of developing countries through training and educating medical practitioners in said countries about proper patient care and handling and mental health in an effort to bring about enhanced medical care and equity.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #ruby_journey_tab.panel-collapse.collapse
+              %p
+                Since the commencement of my bachelor’s degree, I have been researching GAMSAT
+                %sup ®
+                examination timelines and have briefly attempted practice questions. With the march examination being my first attempt at sitting the test, I have been gathering resources and watching preparation videos. And have consulted previous successful applicants in regards to assistance and clarification of inquiries.  The December Attendance Course will be my proper preparation for the exam!
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2019 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Joshua Everingham and Rebecca Solomon for being two of our recipients this year. There were many quality candidates in 2019 - Joshua and Rebecca are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/Rebecca_Solomon_2019.jpg'
+        %h5 Rebecca Solomon
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #akash_qualities_tab.panel-collapse.collapse
+              %p Sometimes I wish I hadn’t had to consistently display resilience and courage but I’m sure it’s shaped a large part of who I am and my story so far. More than anything else though, as I look back on my life to date, I see that my work and decisions revolved around compassion based servitude and generosity. In the midst of all of my endeavours I am told I exude enthusiasm, curiosity and openness. It makes sense to me because I have always had a genuine deep love of people from all walks of life and a fairly insatiable desire to understand and learn from them and perhaps to contribute to their lives too.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #akash_drive_tab.panel-collapse.collapse
+              %p I think I’m predominantly driven by hope – for humans and the planet. Time and again I’ve witnessed and been inspired by the remarkable capacity of some humans to endure hardship and continue in the face of adversity, finding joy along the way. Subconsciously, I guess I emulate that and live in light of it. I want to see people flourishing and full of hope.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #akash_achieve_tab.panel-collapse.collapse
+              %p It’s difficult to say where I’ll be in twenty years, or indeed what any of us will be doing. My hope is that I’ll be making a meaningful impact in the area of Indigenous health and wellbeing, working alongside others in the pursuit of equality and justice - but whatever my capacity is, I will continue living and working in a way that seeks to honour and uphold the humanity and dignity of people struggling with ill health and disadvantage.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #akash_jouney_tab.panel-collapse.collapse
+              %p
+                Truth be told, I have been pretty intimated by the cost and the process of the GAMSAT
+                %sup®
+                and I had let that hold me back until recently. It has taken a while to work up the courage to give it a go and I plan to make the absolute most of the journey, whatever the outcome.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/Joshua_Everingham_2019.jpg'
+        %h5 Joshua Everingham
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#demonstared_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #demonstared_tab.panel-collapse.collapse
+              %p Qualities I would you say that I have consistently demonstrated in my life are integrity, empathy, compassion, resilience and determination.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #ruby_drive_tab.panel-collapse.collapse
+              %p I am driven by my strong desire to care for people and if given the opportunity contribute to improving their health. I am driven by a thirst for knowledge. I will jump at any chance to better myself as a person and expand my knowledge base. I am driven by my family who show unconditional support and belief in me. Through their support and belief, I have been able to achieve more in my life than I ever thought possible.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #ruby_achive_tab.panel-collapse.collapse
+              %p Within the next 20 years I have a number of goals I would like to achieve. I hope to gain entry into a medical school and complete my medical doctorate. I would like to specialise in emergency medicine and conduct an internship with the prestigious HEMS. I would like to conduct research into areas of emergency and prehospital medicine that would benefit future clinicians. I would like to be able to assist in training emergency and prehospital clinicians in less advantaged countries. I would do this by donating my time and resources assisting in the development of new programs for underfunded hospitals and ambulance services. Ultimately, I want to be able to deliver the best medical care possible to all people across the world and leave a positive impression on their lives
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #ruby_journey_tab.panel-collapse.collapse
+              %p
+                The March sitting for the GAMSAT
+                %sup ®
+                will be my first time attempting this formidable exam. I have been researching and preparing for the GAMSAT
+                %sup ®
+                since I started my bachelor’s degree. I completed my degree this year and have been utilising many different resources to develop my knowledge for the exam. But no matter how many chapters I read or videos I watch I still feel unprepared. I believe with the help of the GradReady program I will be able to put my best foot forward and be fully prepared to conquer the GAMSAT
+                %sup ®
+                in 2020.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2018 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Valentina Haddad and Jerusha Mather for being two of our recipients this year. There were many quality candidates in 2018 - Valentina and Jerusha are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/valentina-haddad.jpg'
+        %h5 Valentina Haddad
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #akash_qualities_tab.panel-collapse.collapse
+              %p Throughout my life I believe I have demonstrated some key qualities both during times of hardship &amp; in more relaxed times. These qualities are resilience, compassion, adaptability, compartmentalization, high work ethic &amp; a strong desire to see people happy.Throughout my early life up until 4 years ago I lived in Iraq, being in Iraq is always different for different people but being a Christian in a somewhat hostile community brought its own problems. Many people in Iraq were lovely people and a pleasure to know but a small few upon finding out about my faith issued threats of violence upon my family. This caused my family to move around more than most and if I wasn’t resilient and adaptable then I probably wouldn’t have come out of the situation as I have now still having faith in the future. This could also draw strongly on my ability to compartmentalize as I don’t let my past negatively affect my desires for the future.
+              %p After my family fled from Iraq into Jordan due to the threat from ISIS we spent 2 years awaiting notification from one of the many countries that we issued a refugee application with. During this time, I became involved with a volunteer group in Jordan as I saw all the pain and suffering around me and I wanted to help anyway I possibly could. I was involved with explaining prescriptions to people as often they were given in English or a limited form of Arabic which many couldn’t properly understand. I did this as I wanted to see other refugees be happy and receive the best treatment possible. Additionally, one of the times which I was able to best show all the qualities listed above was during my time in Jordan when I also volunteered in a child care program. Seeing the children there who had lost the innocence of childhood was so painful to see, often as they had lost all they had held dear and sometimes witnessed death at such a young age. I compartmentalized my own problems at the time and did my absolute best to bring joy back into the life of those young children.
+              %p When I got to Australia my life was back on track but many years being lost due to being a refugee. I was confident that I could adapt to this new culture here in Australia and continue towards my ambitions of becoming a doctor which could help bring happiness and minimize the pain which others feel. I believe that my life has been led by an amalgamation of my key qualities and without all of them working simultaneously I wouldn’t be the person I am today who still strives to become a doctor.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #akash_drive_tab.panel-collapse.collapse
+              %p I believe a major driving force behind me is both my faith as well as an incredibly strong desire to help other people experience the happiest life they can.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #akash_achieve_tab.panel-collapse.collapse
+              %p In 20 years I hope to have successfully completed my medical doctorate. From there I am open to many possibilities, but I hope to be either a haematologist or a general practitioner. I hope to have helped many people and to have seen my work have a meaningful impact on the lives of many around me.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #akash_jouney_tab.panel-collapse.collapse
+              %p
+                My GAMSAT
+                %sup ®
+                journey so far is quite short, I have spent time looking into the GAMSAT
+                %sup ®
+                and the more I look  into it the less prepared I have felt. Due to this I decided to only attempt the GAMSAT
+                %sup ®
+                once I feel that I am adequately prepared for it which is why I am so excited for the GradReady program as I believe it is the best way for someone like me to come to the GAMSAT
+                %sup ®
+                fully prepared for all it has in store.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/jerusha-mather.jpg'
+        %h5 Jerusha Mather
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#demonstared_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #demonstared_tab.panel-collapse.collapse
+              %p I am a strong-willed and compassionate person. I love having deep and meaningful conversations with others. I am also a deep thinker and a wisdom seeker.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #ruby_drive_tab.panel-collapse.collapse
+              %p I think the primary thing that drives me is my passion for the neurosciences and to utilise my knowledge to make a difference in someone’s life.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #ruby_achive_tab.panel-collapse.collapse
+              %p I hope to eventually get into medicine and become a doctor. I also hope to continue my research especially in the area of neural plasticity and brain stimulation.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #ruby_journey_tab.panel-collapse.collapse
+              %p
+                Unfortunately, I attempted the GAMSAT
+                %sup ®
+                twice. And, it did not go so well. Due to my handwriting and vision difficulties, I am finding sections 1 and 3 quite challenging. However, I have been openly advocating for alternative entry pathways for prospective medical students with disability.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2017 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Ashleigh Morris for being one of our recipients this year. There were many quality candidates in 2017 - Ashleigh stood out for the commendable personal qualities demonstrated throughout her life, and for the positive impact she was able to make on people around her. Out of all the recipients, she has been kind enough to allow her story to be shared - we hope that her journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-3
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/ashleigh_morris.jpg'
+        %h5 Ashleigh Morris
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #qualities_tab.panel-collapse.collapse
+              %p Some of the key qualities I’ve demonstrated are resilience, communication skills, compassion, empathy, leadership, adaptability and problem-solving abilities.
+              %p I have consistently displayed resilience in many aspects of my life. I have faced a great deal of adversity which has challenged me in many ways, however I have always been able to overcome any obstacles and make the best of all tough and challenging situations with my optimistic nature and dedication. I became a young single mother in my final year of high school and was still able to achieve high academic results and became one the youngest people ever to be accepted into the Bachelor's degree of Paramedic Science at Flinders University.
+              %p The experiences I have had in my personal life and my career have helped me to relate to a diverse variety of people with ease. I find it easy to empathise with people and communicate effectively with people of all diversities and backgrounds. I believe that genuinely understanding people without judgement is integral to building rapport and creating meaningful relationships with patients. Thus, communication is a key quality that I entail and demonstrate in all aspects of life, and one that I endeavour to demonstrate in my future medical career.
+              %p My compassion and empathy towards people is a quality that stands out and is foundational to my personality. Having taken on many caring roles in my personal life and in my career, has lead me to become more kind, caring and considerate of others’ needs. I always make it a priority to treat everyone equally and with the dignity they deserve.
+              %p Through my undergraduate university degree, I displayed my leadership abilities by volunteering as a Firefighter with the Country Fire Service, and as an Ambulance Responder with SA Ambulance Service. I also mentored students of varying year levels in primary/secondary schools, and began mentoring first year Paramedic students in my final year of university. In my roles in the emergency services I refined my adaptability, as I was often faced with challenging situations and unreliable environments that I had to adapt to efficiently. I had to adapt to the teams of people I worked with, some of which I didn’t know particularly well. Building relationships with team members was integral to performing at a high standard, and thus it was important to display and apply a high level of adaptability in my roles.
+              %p Lastly, I am a natural problem-solver. I have a very analytical and lateral way of thinking about situations and problems, and as such I am consistently ‘thinking outside the box’ when ascertaining the best solution to a problem. In the time that I was involved with SA Ambulance Service, I would have to treat patients in the prehospital environment effectively and efficiently with very little resources. This meant that I had to brainstorm solutions and implement suitable treatment pathways quickly and under pressure.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #drive_tab.panel-collapse.collapse
+              %p There are many things that drive my passion for medicine, however, I am predominantly driven by my desire to help the community and contribute to the field of medicine. Having grown up in rural South Australia, I understand the issues many Australians living in rural regions experience, and as such I am driven by my own experiences to make a difference in rural medicine. My background in Paramedicine also motivated my interest in researching and making alterations to prehospital practice, particularly aeromedical rescue and retrievalist operations. Having worked and volunteered for the state ambulance service has given me sound knowledge of the importance of prehospital care and how this results in better patient outcomes.
+              %p In addition, my personal experiences with adversity drive me to take a more holistic approach to medicine, taking into account the psychosocial dynamics of healthcare. I genuinely endeavour to make a difference in the lives of everyday people by providing them with the best possible patient care.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #achieve_tab.panel-collapse.collapse
+              %p In the next 20 years, I hope to have successfully completed my Medical Doctorate, as well as specialist training. I want to specialise in the field of psychiatry and work collaboratively in rural indigenous communities. I would also like to spend a proportion of my career working in aeromedical rescue and retrieval, with the intent of making a difference in prehospital care.
+              %p In addition, I hope to have completed revolutionary research in the field of rural and indigenous health that subsequently, has a substantial impact on future rural medical practice.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #jouney_tab.panel-collapse.collapse
+              %p
+                In early 2016 I completed the GAMSAT
+                %sup ®
+                test, only falling a few points short of a ‘passing’ score. After studying for months beforehand, I was devastated to say the least. However, I was motivated to put in the effort to attempt the test again and ultimately improve my score. I kept reminding myself that ‘without failure - there is no success’, and I refused to give up on my dream of pursuing Medicine. I will be attempting the GAMSAT
+                %sup ®
+                again in March 2018, and I know I will achieve a more desirable score this time (with the help of Gradready tutoring!). I am extremely grateful to be receiving the Gradready Millennials scholarship, as this will be immensely beneficial in helping me achieve a better score. When I attain my preferred score, I will be applying for a Flinders University rural/regional program in 2019.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      .text-center
+        %h2 2016 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Akash Patel and Ruby Rose Simms-Cumbers for being two of our recipients this year. There were many quality candidates in 2016 - Akash and Ruby Rose are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/akash_patel.png'
+        %h5 Akash Patel
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #akash_qualities_tab.panel-collapse.collapse
+              %p From an early age I've had many different interests. Growing up in Alice Springs, sport became a huge part of my life, and cricket was eventually the sport that took over all the others. After moving to boarding school in Adelaide to pursue cricket further, I was lucky enough to find myself representing South Australia in the national Future's League competition in my first year of University. Since then, I've had to balance cricket commitments with university, as well as working as a resident assistant and Indigenous mentor at a secondary school. All the while working towards my aspirations to help people in areas of poverty and disaster. Through a passion for all of these interests paired with perseverance and discipline, I've been able to succeed in each of these pursuits, and these qualities are what I hope will bring me similar success in studying medicine.
+              %p Having a passion for Indigenous education from my experiences in Alice Springs, working as an Indigenous student mentor in Adelaide has been an incredibly rewarding experience. Yet in my eyes there were drastic improvements that could be made to my School's current program. This year I was lucky enough to win a fellowship from the school in order to rewrite the Indigenous education program with the hope to increase the wellbeing of students and achieve greater success in closing the gap in educational outcomes.
+              %p During 2015 I found myself in Nepal during the devastating earthquake that shook the country to its knees. Within this tragic situation I realised why I'd always been drawn to a career in medicine. I found myself completely helpless to help all those in need in any significant way. The experience of seeing doctors being able to help all those who'd been devastated in the wake of the tragedy opened my eyes to the fact that in matters of life and death, being a doctor is one of the most meaningful ways to help people when they need it most.
+              %p From my different experiences around the world, I've learnt that we are all extremely lucky to live in a country like Australia. We have opportunities here that are a privilege, and I feel as though it is up to us to help those in need that find themselves in situations of disadvantage; whether that be abroad or on our own doorstep. My passion for helping others, and discipline and perseverance to constantly pursue success, are qualities that I hope will lead me to be successful in making the most of these opportunities, and help those who need it most through a career in medicine.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #akash_drive_tab.panel-collapse.collapse
+              %p An innate desire to push myself to achieve my full potential and not waste any opportunities, has driven me to strive for success in everything I do. Being from a refugee family that arrived in Australia in the 1970s, my family's sheer hard work allowed them, and eventually myself, to have opportunities that are an absolute privilege, not a right, such as studying at university and pursuing what interests me with freedom. My grandparents' unbelievable hard work inspires me to push myself every day to make the most of these opportunities that I have been lucky enough to be given.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_achieve_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #akash_achieve_tab.panel-collapse.collapse
+              %p In 20 years I hope to be established as a registered specialist in emergency medicine or a general surgeon. I hope that I'd have helped those patients in rural and remote areas of Australia and impoverished areas of the world. I aspire to work for Doctors without Borders in disaster zones and areas of extreme poverty, and in the healthcare of refugees, who desperately need greater support. Having seen first-hand the discrepancies between major centres and the rural communities of Australia from a healthcare perspective, I also aspire to become a leader in reducing this inequality through working in these areas and ensuring they are not forgotten by the rest of the medical community.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#akash_jouney_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #akash_jouney_tab.panel-collapse.collapse
+              %p
+                2017 will be my first attempt at the GAMSAT
+                %sup ®
+                exam. I began studying with Gradready in late July of this year. I've learnt an immense amount so far, and from here on in I need to stay on task and keep working on improving my weaknesses, to feel as if come March 2017 I've given it all I've got, and hopefully that will be enough to allow me to pursue tuition at the medical school of my choice.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/ruby.png'
+        %h5 Ruby Rose Simms-Cumbers
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#demonstared_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #demonstared_tab.panel-collapse.collapse
+              %p My drive and determination to continue to learn and expand my knowledge in a range of areas has always been present in my life. From the time before I went to school I was already asking my parents to put me in classes! I had an innate gift and love for art which drove me to bargain for extra art lessons whenever I could. I learnt to read before I started school and books always offered me an amazing escape from the real world as a child. I always seemed to be reading.
+              %p When I started school I developed another passion which had been brewing, the love of maths and science. I found maths fun and would do equations as a pastime. When in year 5 at school, my teacher gave me the opportunity to do some year 6 work, I revelled in this and ended up jumping a year. The following year my dad unexpectedly passed away in traumatic circumstances and left me unable to complete year 7 and year 8. When I started back at school in year 9 I was nearly 2 years behind my classmates. However, I caught up within a few months and then excelled academically by receiving an offer to be part of the GATE (Gifted And Talented Education) Academic Extension program. I was also part of the GATE Visual Arts program and went to school every Saturday to do art. However, I still suffered from debilitating conditions and given a relapse during year 12 I was unable to attend school but completed my studies at home and still graduated (but without an ATAR score).
+              %p I started a fine arts degree that I got into through portfolio pathway, however, I soon began to miss maths and science. I never understood society dictating that one must choose either art or science. I am now completing my psychology degree as it provides a good mix, however, I am very interested to expand on the biological aspect of mental illness and its connection with co-morbid physical conditions. I believe we should never stop learning. And most importantly, never lose the love of learning.
+              %p I have always been a good leader and public speaker. I hold my dad responsible for this as he was heavily involved in politics and would take me to rallies and political party meetings as a child. He was a full blown hippy from the 60s! I have this deep commitment to social justice installed in me from an early age and have expanded this to being an executive committee member for the University of Western Australia People for Animal Welfare club and debating captain in high school. I competed in speaking competitions in high school such as the UN Youth Voice and managed the inter-school debate competitions. I am a life long vegetarian despite coming from a farming family and believe in the ethical and health reasons behind a plant-based diet. In the future I want to be a leader and advocate for the promotion of child/adolescent mental health and be able to address the shortage of resources and government funding in this area. In particular, to increase access to services in rural areas.
+              %p I am a very independent person. Coming from a rural family background, a strong work ethic has been drilled into me from an early age and I have been working in some capacity since I was 14. This year at 19 I moved out and fully support myself financially by working 25 hrs a week in a professional job while studying full time. When I worry about the difficulty of medicine I tell myself that if I am able to do this I can probably handle the work required of medical school and future registrar training. Despite this, I constantly want to improve my qualities as perfection is nonexistent and it is so important to continue to grow as a person.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What drives you?
+            #ruby_drive_tab.panel-collapse.collapse
+              %p I currently work as a Behavioural Therapist (BT) with autistic children and have learnt so much through this experience. The work is very challenging but is so worth it to see the improvement in family and child functioning. The decision to apply for medicine is something many people I know are surprised at. I am on a definite pathway to becoming a psychologist and my fellow BTs are mostly provisional psychologists already. However, I feel drawn to medicine. I want to be able to look at and investigate physical illness as well as mental illness and be able to provide biological treatment as well as psychotherapy. I have so many varied interests in the area of health that I believe being a psychologist may not provide the full scope that I'm looking for. I do however believe that psychology is a very valued profession and I would be proud to call myself a psychologist if medicine does not work out.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #ruby_achive_tab.panel-collapse.collapse
+              %p In 20 years I hope to have completed all my subspecialty training in Child/Adolescent Psychiatry and Consult-Liaison Psychiatry or the Dual Fellowship program in Paediatrics and Child/Adolescent Psychiatry with particular expertise in child/adolescent psychosomatic medicine and neuropsychiatry. I want to be at the interface of mind-brain-body. There are not enough child psychiatrists out there and I hope to be one of the first to sub-specialise in the link between child mental health and diseases such as chronic fatigue syndrome (CFS), irritable bowl syndrome (IBS), autoimmune disfunction and neurological disease.
+              %p I hope my passion for both the arts and sciences will come together to provide a complete holistic approach in the treatment of my patients. I hope to never lose sight of how important every single detail is in working with children and young people. I hope that one day I might make a research discovery that will create a positive difference and to share my knowledge through teaching. I also hope to achieve one of life's most difficult but rewarding challenges; having a family of my own.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#ruby_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #ruby_journey_tab.panel-collapse.collapse
+              %p
+                I sat the GAMSAT
+                %sup ®
+                exam for the first time in March this year. I was happy to pass in my overall score but I did get slightly under 50 for SIII which is no surprise since I hadn't studied chem/bio/physics since year 10. I am certain that with some structured teaching in these areas and some support to refine the humanities sections I will get a score that will hopefully get me an interview next year. I would never have been able to afford a course like this and am so grateful for this opportunity.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+      .text-center
+        %h2 2015 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Anne Peters and Fares Al-Sawari for being two of our recipients this year. There were many quality candidates in 2015 - Anne and Fares are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/anne_peters.png'
+        %h5 Anne Peters
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#anne_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #anne_qualities_tab.panel-collapse.collapse
+              %p My childhood was consumed by a passion for dance. This reached a pinnacle at age 14 when I took the initiative to move away from home to study ballet in Sydney fulltime. During this time I completed my academic years 9 and 10 via correspondence however upon completion of year 10, I was required to choose between ballet and academics. Knowing that I would always be able to return to study and that a dancing career would not offer the same luxuries, I chose ballet. I was determined to achieve my aspiration of gaining fulltime employment with a ballet company within the next few years. Following several setbacks and moments that truly tested my desire and resilience, I achieved my goal and was accepted to join the Queensland Ballet Company. Like most of my successes in life, I predominantly attribute this success to tenacity and perseverance; two qualities I believe I have consistently demonstrated throughout my life and qualities I believe will allow me to be successful in future endeavours.
+              %p In 2011, after a successful 4­years fulltime employment with the Queensland Ballet Company, I fractured my spine and suffered from other associated complications forcing my retirement. Having immersed myself in the world of dance since age 3, I was unsure as to what my next career direction should be. Determined to not let this injury define me, I contacted universities and TAFE, attended meetings with academic advisors and course coordinators, attended mature age entry workshops and information seminars, and sat several exams that eventually resulted in me completing the Adult Tertiary Preparation course at TAFE. Due to the initiative I demonstrated during this crossroads, I am now nearing the end of my undergraduate degree and about to embark on a journey that I am sure will once again test my resilience, tenacity and perseverance­ my journey to medicine.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#anne_drive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+              What drives you?
+            #anne_drive_tab.panel-collapse.collapse
+              %p I have lived a very exciting and full life that has provided me with more opportunities and experiences than most people my age. I have travelled the world and achieved many of my dreams but have also experienced times of hardship, sickness and non­successes. I have learnt that sickness is horribly scary, and as a patient you completely and whole­heartedly entrust your health with your doctor. Because of these experiences I have grown to believe that becoming a doctor is a vocation that if carried out with empathy and selflessness, can allow you to have a meaningful and positive impact on the lives of others, a vocation I believe would be immensely rewarding. It is this gratification that I feel is driving me to be successful in my future aspirations of being a doctor.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#anne_achive_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #anne_achive_tab.panel-collapse.collapse
+              %p In 20 years time I hope to have achieved my registration as a medical specialist. I hope to have positively impacted the lives of many patients and their families and I hope to have accomplished this by adopting a more holistic approach than is commonly utilised by current medical practitioners. Further to this, coming from a regional town in New South Wales, I have experienced the divide in accessibility to specialist medical care between rural and metropolitan areas and as such, hope to contribute to bridging this gap in years to come.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#anne_journey_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #anne_journey_tab.panel-collapse.collapse
+              %p
+                I have sat the GAMSAT
+                %sup ®
+                exam once before and although I achieved a mark higher than I had anticipated, it was still not high enough for me to progress through to the interview stage of the application process. I walked out of the exam, not so much daunted by the process, but more eager to begin studying for the next exam, as I believed furthering my essay writing skills and increasing my knowledge of chemistry could improve my score.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/fares.png'
+        %h5 Fares Al-Sawari
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#fares_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #fares_qualities_tab.panel-collapse.collapse
+              %p Key attributes, abilities and personal strengths in leadership that I have consistently demonstrated throughout my life are integral as a medical student and as a future doctor leading a medical team. Having seen the genuine interest of doctors in their cases and motivation, highlighted to me the privilege of being involved in such a rewarding and stimulating profession. I am confident that my enthusiasm, extremely high work ethic, and thirst for knowledge are needed to succeed in this fulfilling vocation.
+              %p The healthcare patients receive today is built on years of clinical research. As a result, I am currently lead author in four research papers; in addition, several other small side projects. I have successfully presented my different areas of clinical research as oral and poster presentations at various conferences around Australia. I trust my experiences and research capabilities will provide an important basis to facilitate my learning during medical vocation but also during my medical career.
+              %p I started a fine arts degree that I got into through portfolio pathway, however, I soon began to miss maths and science. I never understood society dictating that one must choose either art or science. I am now completing my psychology degree as it provides a good mix, however, I am very interested to expand on the biological aspect of mental illness and its connection with co-morbid physical conditions. I believe we should never stop learning. And most importantly, never lose the love of learning.
+              %p The Australian Indigenous Mentoring Experience (AIME) program is an inspiring new program proven to connect indigenous students with post year 12 opportunities, including further education and employment. As an active member and a mentor, my involvement and experience has been highly satisfying and rewarding. This experience has cemented the need and development of focused leadership, communication skills and cultural understanding. I strongly believe that work done in the spirit of service yields the greatest outcomes and even greater is giving back to the community through acts of voluntary service. My involvement in the AIME program enabled me to give back to the community by assisting in building a generation of future leaders who strive to create a culture where for every step you take forward in life, you throw your hand back and bring someone with you.
+              %p The Junior Youth Spiritual Empowerment Program (JYSEP) is another program that has enabled me to utilize my leadership skills while serving the Australian community. My involvement in the JYSEP assists young youth (between 12‐18 years of age) in developing their spiritual qualities (virtues), intellectual capabilities and capacities for service to society. The participants in this program come to see that they can become positive agents of change in the world.
+              %p I have always taken a great interest and initiative in students learning and education. In turn, I have tutored and assisted students in key subject areas including; pharmacotherapeutics, pharmacology and physiology. This has been a pivotal experience in developing my leadership skills and more importantly, supporting students to follow their dreams and achieve their future goals. I look forward to one day being able to assist future clinicians in their medical aspirations.
+              %p Having spent a significant amount of my childhood in rural area (River Lands in South Australia) with my grandparents, I have seen the shortage of health professionals, especially in more remote indigenous communities nearby. I also feel that modern medicine should attempt to bridge the gap between indigenous and non‐indigenous Australians in terms of health conditions such as type 2 diabetes, chronic otitis media, rheumatic heart disease and lower life expectancy discrepancies. This has been further cemented through my involvement in the AIME program. I look forward to developing and providing the skills necessary to work within these areas and provide the services that are currently in short supply.
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#fares_drives_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What drives you?
+            #fares_drives_tab.panel-collapse.collapse
+              %p There would be multiple things in life that drive me, however if I was to list a couple of key drivers they would definitely include: ensuring patients health and well‐being, serving my community, teaching, helping others pursue their dreams, getting through hurdles that life has thrown at me, knowledge, and success.
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#fares_achive_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #fares_achive_tab.panel-collapse.collapse
+              %p To have built a self‐sustainable educational hub for those who are disadvantage, and who are unable to afford an education. This educational facility will support students to follow their dreams and achieve their future goals. Most importantly, to have chased my dream and completed my medical training in the field of cardiology.
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#fares_journey_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Describe your "GAMSAT
+              %sup ®
+              Exam Journey" so far.
+            #fares_journey_tab.panel-collapse.collapse
+              %p
+                I have sat the GAMSAT
+                %sup ®
+                exam before and although passed, did not progress to the interview stage for my first preference medical school. I am confident that the Millennial Scholarship will assist my preparation for the 2016 GAMSAT
+                %sup ®
+                exam to successfully gaining admission into my desired university.
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+      .text-center
+        %h2 2014 GradReady Millennials Scholarship Recipients
+      %p.sub_heading_txt We would like to congratulate Constanza Ferreyra Bas and Bethany Ball for being two of our recipients this year. There were many quality candidates in 2014 - Bethany and Constanza are two of the candidates who stood out for their commendable personal qualities, which were demonstrated throughout their lives, and for the positive impact they were able to make on people around them. They have been kind enough to allow their stories to be shared - we hope that their journey will inspire you to do your best in making a positive impact in your community and beyond.
+      .col-md-6.encorag_box.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/bethany.png'
+        %h5 Bethany Ball
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#bethany_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #bethany_qualities_tab.panel-collapse.collapse
+              %p I critically think about situations that I come across, which allows me to understand the reasons behind them and brainstorm ideas on how to improve the way in which things could be done next time. I have a creative side and thrive on coming up with new ideas. I've inherited my parents' generosity, kindness and mathematical brain, which has me naturally learning towards community service and finding problems to fix.
+              %p I have applied these qualities through leadership roles in work, sport and volunteering. Currently, I am involved in the establishment of a research facility within a retirement village, focussing on healthy ageing initiatives, including Dementia prevention. This facility not only contributes essential research data toward dementia prevention, but by through its location within a retirement village we are also bridging the gap between research outcomes and clinical practice in the ageing community. As this is a new research centre, we are doing the best we can to establish funding. We need to exercise our resourcefulness constantly to get what we need done, especially amidst our current $1.5 million dementia prevention clinical trial.
+              %p I show initiative in all aspects of my life. I am a big believer in team-work and love team sport. My sport of choice for the past 5 years has been roller derby. l was lucky enough to progress to Team Australia try outs last year. Currently, I am founding a Roller Hockey league in Sydney and have organised a large group of skaters, coaches, the venue hire and training sessions. I saw the need for Roller Hockey in Sydney so I used my skills to help begin the budding of the sport in my town. Whilst a member of my Roller Derby league I questioned why we did not have an established first-aid committee for such a dangerous high contact sport and such a large group of skaters, sitting just under 100 people skating. I am now head of first-aid for the league and have established policy and protocol surrounding injuries, guided a group of twenty first-aid officers and facilitated their training and ongoing safety development through workshops where visitors are invited to present.
+              %p I am constantly open to developing new qualities and continuously gaining insight and knowledge from new experiences. I am looking forward to the world of medicine combined with research where I will never stop learning and never stop being fascinated and humbled by the human body and mind.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#bethany_drives_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What drives you?
+            #bethany_drives_tab.panel-collapse.collapse
+              %p I feel fulfilled when I see gaps in processes or problems that need fixing and then successfully getting them fixed. I enjoy possessing skills that can fix problems. I enjoy contributing to projects, organisations and the community. I love to be inspired, as this is when l have the most energy. People inspire me - everyone has a story and develops into their own complicated self. The human body is a complicated array of processes that can go wrong, I love that I will never know everything in medicine and science and that I will constantly be learning and building on my knowledge.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#bethany_achieve_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #bethany_achieve_tab.panel-collapse.collapse
+              %p Currently, there is a lack of holistic care in medicine and a lack of translation from research outcomes to medical practice. Using my initiative, resourcefulness and ingenuity I am hoping to become a doctor and open a brain health clinic where patients will be treated and can connect with specialists in every field. I hope to help bridge many gaps in medicine through my own multi-functional clinic. Although the focus will be on the brain, this encompasses many fields such as nutrition, exercise, mental health, paediatrics, neonatal care, ageing, naturopathy, surgery and research - I want to encourage a collaborative approach to medicine and research. I also hope to use my qualifications and skills to contribute to disadvantaged communities, nationally and internationally, and use my leadership skills to guide and teach.
+      .col-md-6.encorag_box
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/constanza.png'
+        %h5 Constanza Ferreyra Bas
+        .faq_list
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#constanza_qualities_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What qualities would you say you have consistently demonstrated throughout your life?
+            #constanza_qualities_tab.panel-collapse.collapse
+              %p Up until now I have lived life based on the qualities that are most important to me, as they allowed me to get through the hardships of life. These qualities include resourcefulness, initiative, ingenuity and passion. Having a high regard for these qualities made me aware of the help my parents needed to conquer the economic hardship that we faced ten years ago when we arrived in Australia. After really understanding what the first few years of living in Australia were going to involve, I took action by being proactive in mainly minimising the financial burden I was to my parents. I then began to look for ways to help my parents financially. I sold caramel slices at the local football games (a great success) and l capitalised on this by selling hand-made jewellery along with the slices. I offered every dollar I made to my parents. Although my parents were always reluctant to take the money, it did help to pay for my school expenses (excursions, buying textbooks, uniforms, calculators and the yearly school photos)
+              %p Although a nice gesture, $60 wasn't going to rip us out of poverty and seat us comfortably in a mansion. I felt I could do more. Learning English, although easy for me, was frustrating and spirit breaking for my parents. Seeing me progress in language gave my parents the inspiration to look for something more than just back breaking labour. Once I was fluent in English I was ready to pass on my knowledge to help them improve. I clearly wasn't an English teacher but I found a way to help improve their English. Firstly, I simply encouraged the family to speak English at home. And secondly, I wrote English exams for them to sit every month, designed using templates of year 7-8 school English tests.
+              %p I started a fine arts degree that I got into through portfolio pathway, however, I soon began to miss maths and science. I never understood society dictating that one must choose either art or science. I am now completing my psychology degree as it provides a good mix, however, I am very interested to expand on the biological aspect of mental illness and its connection with co-morbid physical conditions. I believe we should never stop learning. And most importantly, never lose the love of learning.
+              %p My father is now applying for his Honours in Psychology and my mother is in a professional position in rural Australia.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#constanza_drives_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What drives you?
+            #constanza_drives_tab.panel-collapse.collapse
+              %p I firmly believe that the last ten years have defined who I am today. Having experienced the hardships of moving to a foreign country and working towards where I am today, I have learned that with passion and perseverance one can always find the light at the end of the tunnel. I lived life based on these principles and this allows me to continue to follow my dreams, regardless of the obstacles along the way.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#constanza_achieve_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              What do you hope to achieve in 20 years?
+            #constanza_achieve_tab.panel-collapse.collapse
+              %p I hope to experience another twenty beautiful years of life, full of hope, learning, love and happiness. I would first like to travel the world and experience life amongst different cultures. I hope to finally be able to speak Portuguese within the next ten years (which I've always wanted), but most importantly, I hope to have achieved full registration as a doctor and be heading towards a career in paediatrics. Towards the end of the twenty years I hope to have a beautiful family of five.
+
+
+
+:javascript
+  $(document).ready(function(){
+    $(".faq_question").click(function(){
+        $(this).find(".pull-right").toggleClass("fa-angle-down fa-angle-up");
+    });
+  });
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

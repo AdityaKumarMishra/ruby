@@ -1,0 +1,154 @@
+.graph_label {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+.legend_col {
+  display: inline-block;
+  width: auto;
+  padding-left: 17px;
+  font-size: 15px;
+  color: #111;
+  position: relative;
+  font-family: 'Open Sans', sans-serif;
+  margin-right: 13px;
+  &:before {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    content: '';
+    left: 0;
+    border-radius: 100%;
+    top: 4px;
+  }
+}
+.highcharts-button-box {
+  width: 91px;
+  height: 41px;
+  fill: #00903d;
+  transform: translateX(-17px);
+}
+.legend_col.overall_legend {
+  &:before {
+    background: rgb(0,122,51);
+    background: -moz-linear-gradient(left, rgba(0,122,51,1) 50%, rgba(228,0,16,1) 50%);
+    background: -webkit-linear-gradient(left, rgba(0,122,51,1) 50%,rgba(228,0,16,1) 50%);
+    background: linear-gradient(to right, rgba(0,122,51,1) 50%,rgba(228,0,16,1) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007a33', endColorstr='#e40010',GradientType=1 );
+  }
+}
+.legend_col.average_legend {
+  &:before {
+    background: #cecece;
+  }
+}
+@media only screen and (min-width: 280px) and (max-width: 750px) {
+  .js-ellipse {
+    width: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .js-ellipse.show_title {
+    width: auto;
+    white-space: normal;
+    position: absolute;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px 5px;
+    box-shadow: 0 0px 10px rgba(0,0,0,.5);
+    font-size: 13px;
+    z-index: 9;
+    white-space: inherit;
+  }
+}
+.recommended_top_col{width:100%; float:left; margin-bottom:80px;}
+.recommended_pro_col{
+    width:377px;
+    position:relative;
+    min-height:140px;
+    float:left;
+    margin-right:10px;
+    margin-bottom: 10px;
+}
+.recommended_pro_col.red_bg{
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/red_bg.jpg");
+  background-repeat: no-repeat;
+  }
+.recommended_pro_col.orange_bg{
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/orange_bg.jpg");
+  background-repeat: no-repeat;}
+
+.recommended_pro_col.yellow_bg{
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/yellow_bg.jpg");
+  background-repeat: no-repeat;
+}
+.recommended_pro_col h3{
+ font-size: 110px;
+  margin: 0;
+  font-weight: 600;
+  line-height: 85px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: -11px;
+}
+.recommended_pro_col h3 span{font-size:80px;}
+.smily_icon{
+  position: absolute;
+  right: 17px;
+  text-align: center;
+  font-size: 12px;
+  top: 19px;
+}
+.smily_icon span{width: 100%;
+  float: left;
+  color: #fff;
+  font-size: 15px;
+  margin-top: 5px;}
+p.topic_heading{width:100%; float:left; font-size:13px; font-size:600; margin:0px;  margin-bottom: 20px; padding:0px 0px 0px 20px;}
+p.topic_heading.red_heading{     color: #e40027;
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/red_small_icon.png");
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+.tag_line {
+  width: 100%;
+  float: left;
+  background: #ef1c2c;
+  margin-top: -7px;
+  padding: 2px 7px;
+}
+.orange_bg .tag_line {background: #e46512;}
+.yellow_bg .tag_line {background: #eaaf40;}
+.tag_line span{
+  color: #fff;
+}
+p.topic_heading.orange_heading{     color: #c17840;
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/orange_small_icon.png");
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+
+p.topic_heading.yellow_heading{     color: #c17840;
+  background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/yellow_small_icon.png");
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+
+.recommended_pro_col.yellow_bg .smily_icon span{ color:#967e0e}
+
+.tooltip-inner {
+  background-color: #fff;
+  color: #ef1c2c;
+  border: 1px solid #ef1c2c;
+  border-radius: 3px;
+
+}
+
+.tooltip.top .tooltip-arrow{
+    bottom:0;
+    left:50%;
+    margin-left:-5px;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-top:5px solid #ef1c2c;
+}

@@ -1,0 +1,19 @@
+= simple_form_for(@tutor_availability) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :start_time, as: :date, label: 'Start Date'
+    = f.input :start_time, as: :time, minute_step: 5, ignore_date: true, label: 'Start Time'
+    #end-date
+      = f.input :end_time, as: :date, label: 'Finish Date'
+    = f.input :end_time, as: :time, minute_step: 5, ignore_date: true, label: 'Finish Time'
+    = f.input :location
+
+  .form-actions
+    = f.button :submit
+
+:javascript
+  $(document).ready( function hideEndDate() {{
+      $("#end-date").hide();
+    }
+  });

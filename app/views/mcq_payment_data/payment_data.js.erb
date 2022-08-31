@@ -1,0 +1,9 @@
+<% js = escape_javascript(render(partial: 'mcq_payment_data/partial/download_xls', locals: { total_size: @total_size })) %>
+$('#download_xls_btn').html("<%= js %>");
+
+<% if params[:selection] == 'By MCQ' %>
+  <% js = escape_javascript(render(partial: 'mcq_payment_data/partial/logged_hours', locals: { date_range: true }))%>
+<% else %>
+  <% js = escape_javascript(render(partial: 'mcq_payment_data/partial/logged_hours_by_staff'))%>
+<% end %>
+$("#tutor-apt-table").html("<%= js %>");

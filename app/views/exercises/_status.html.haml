@@ -1,0 +1,51 @@
+- if !cookies[:current_exe_atmpt].blank? && !current_user.nil?
+  - cea_data = JSON.parse(cookies[:current_exe_atmpt])
+  - if cea_data['end'] - cea_data['start'] > 0
+    - cea = Exercise.where(id: cea_data['id']).first
+    -if cea.present?
+      .exercise-attempt-countdown.time_cart
+        %span.timer_icon
+          .img_left
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/arrow_left.png'
+          .img_right{style: 'display: none;'}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/arrow_right.png'
+        .mcqa-title= cea.name
+        - atmp = (cea_data['start'] / cea_data['end'].to_f) * 100
+        %p
+          Time Remaining:
+          %b
+            %span.sa-remaining= ((cea_data['end'] - cea_data['start']) / 60.to_f).ceil.to_i.to_s
+            mins
+        .progress
+          .progress-bar.progress-bar-striped.active{style: "width: #{atmp.to_i}%", 'aria-valuenow': atmp.to_i, 'aria-valuemin': '0', 'aria-valuemax': '100', role: 'progressbar', class: "#{(cea_data['end'] - cea_data['start']) < 5*60 ? 'progress-bar-warning' : ''}"}
+            %span.sr-only= atmp.to_i.to_s + '% Complete'
+        - unless request.fullpath.include?(cea_data['url'])
+          = link_to 'Go To Attempt', cea_data['url'] + "?mcq_stem=#{cea_data['mcq_stem']}", class: 'btn btn-success', onclick: 'dd_loader();'
+        - else
+          %br
+          = link_to (cea_data['paused'] == true ? 'Resume' : 'Pause'), "#", class: "btn #{cea_data['paused'] == true ? 'btn-danger' : 'btn-success'}", id: 'exercise-pause', data: { 'pause' => cea_data['paused'] }, onclick: 'dd_loader();'
+          - unless cea.is_finish
+            .tbl_head.cart_checkbox
+              %input#exercise-checkbox-end{type: 'checkbox'}
+              %label.sa-checkbox-end{for: 'exercise-checkbox-end'} Finish when time ends
+
+:javascript
+  $("#exercise-pause").click(function(){
+    pauseExcercise()
+    var timer_text1 = $(this).text();
+    timer_state(timer_text1);
+  });
+
+  $(".timer_icon").click(function(){
+    $('.exercise-attempt-countdown').toggleClass('time_cart_icon');
+    $('.img_right').toggle();
+    $('.img_left').toggle();
+
+  });
+
+-unless controller_name == "section_item_attempts" && action_name == "index"
+  :javascript
+    $(document).ready(function(){
+      var timer_text1 = $("#exercise-pause").text();
+      timer_state(timer_text1);
+    })

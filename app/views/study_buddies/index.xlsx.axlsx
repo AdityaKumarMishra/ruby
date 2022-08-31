@@ -1,0 +1,26 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Study Buddy") do |sheet|
+  date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+  def data_array(buddy)
+    data_array = []
+    data_array.push(format_date_long buddy.created_at)
+    data_array.push(buddy.name)
+    data_array.push(buddy.email)
+    data_array.push(buddy.phone_number)
+    data_array.push(buddy.grad_student == true ? "Yes" : "No")
+    data_array.push(buddy.university.name)
+    data_array.push(buddy.degree.name)
+    data_array.push(buddy.city.titleize)  rescue nil
+    data_array.push(buddy.city_area.titleize) rescue nil
+    data_array.push(buddy.suburb)
+    data_array.push(buddy.focus_area.titleize) rescue nil
+    data_array.push(buddy.focus_study)
+    data_array.push(buddy.buddy_type.titleize) rescue nil
+    data_array.push(buddy.other_info)
+  end
+
+  sheet.add_row ["Timestamp", "Name", "Email Address", "Phone number", "Are you currently a GradReady student?", "University", "Degree", "City", "City area (your approximate location in your city)", "Suburb/further location details", "Which area of are you focusing on?", "If you selected 'Other' for the previous question, please briefly describe what you are focusing your study on", "Would you prefer an online or in-person Study Buddy?", "Any other information you want to provide?"]
+  @all_buddies.each do |buddy|
+    sheet.add_row data_array(buddy)
+  end
+end

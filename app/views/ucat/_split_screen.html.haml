@@ -1,0 +1,14 @@
+.que_wrap
+  .que_contant
+    = mcq_stem.description.html_safe
+  .que_ans{ class: "question", id: "#{m_attempt.id}"}
+    %h2= m_attempt.mcq.question.html_safe
+    %ul.radio_ans_list
+      - ans_ind = 0
+      = simple_fields_for "mcq_attempts[#{m_attempt.id}]", m_attempt do |e|
+        = e.collection_radio_buttons(:mcq_answer_id, m_attempt.mcq.mcq_answers,:id, :answer, { boolean_style: :inline, item_wrapper_tag: false }) do |builder|
+          - answer_text = builder.text.gsub("\n", "").include?('<p>') ? builder.text.gsub("\n", "") : "<p align='justify'>#{builder.text.gsub("\n", "")}</p>"
+          %li
+            .radio_wrap
+              = builder.radio_button(class: "answer") + list_exam_alphabet_style_ucat(ans_ind, answer_text.html_safe, "mcq_attempts_#{m_attempt.id}_mcq_answer_id_#{builder.object.id}").html_safe
+              - ans_ind += 1

@@ -1,0 +1,11 @@
+<% if @master_features.present? %>
+  <% options = "" %>
+  <% @master_features.each do |p| %>
+    <% options += "<option value=#{p.id}> #{p.name} </option>" %>
+  <% end %>
+  <% options = options.html_safe %>
+  $("#announcement-master-feature").removeClass('hide');
+  $("#announcement_master_feature_id").html('<%= options %>');
+<% else %>
+  $("#announcement-master-feature").addClass('hide');
+<% end %>

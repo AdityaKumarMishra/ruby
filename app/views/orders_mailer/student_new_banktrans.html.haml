@@ -1,0 +1,99 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 810px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          -if @student.present?
+            %tr
+              %td{style: "font-weight: 700;"}
+                = "Dear #{@student.first_name} #{@student.last_name},"
+            %tr
+              %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+                = "Thank you for purchasing from Gradready."
+            %tr
+              %td{style: "font-weight: 700; margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+                Please ensure you have made a direct deposit
+            %tr
+              %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+                using the banking reference <b> #{@reference_number} </b>
+            %tr
+              %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+                for the amount of <b> #{number_to_currency @amount} </b>
+            %tr
+              %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+                Online material will be made available to you once your payment is confirmed by the GradReady Enrolment Department. Depending on your bank, the payment may take between 3-5 working days to arrive.
+
+            %tr
+              %td{style: "font-weight: 700; margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+                Invoice
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+                %table{class:'table'}
+                  %theader
+                    %tr
+                      %td Item
+                      %td Description
+                      %td Amount
+                      %td GST
+                      %td Method Fee (if present)
+                      %td Discount
+                      %td Total
+                  %tbody
+                    -@purchase_items.each do |item|
+
+                      %tr
+                        %td= "#{item.purchasable_type}"
+                        %td= "#{item.purchase_description}"
+                        %td= "#{number_to_currency(item.initial_cost).to_s}"
+                        %td= "#{number_to_currency(item.added_gst).to_s}"
+                        - if item.method_fee.present?
+                          %td= "#{number_to_currency(item.method_fee).to_s}"
+                        -else
+                          %td N/A
+                        %td= "#{number_to_currency(item.discount_applied).to_s}"
+                        %td= "#{number_to_currency(item.total_item_cost ).to_s}"
+                  %tfoot
+                    %td Total Amount:
+                    %td
+                    %td= "#{number_to_currency(@order.total_initial_cost).to_s}"
+                    %td= "#{number_to_currency(@order.total_added_gst).to_s}"
+                    %td= "#{number_to_currency(@order.total_method_fee).to_s}"
+                    %td= "#{number_to_currency(@order.total_discount).to_s}"
+                    %td
+                      %b= "#{number_to_currency(@order.total_cost).to_s}"
+
+
+          %tr
+            %td{style: "font-weight: 700; margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              Bank Details
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Bank:
+              %b Commonwealth Bank
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Account Name:
+              %b GradReady Pty Ltd.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Account Number:
+              %b 3519 6353
+          %tr
+            %td{style: "font-weight: 700; margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              Using the reference: #{@order.reference_number}
+
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

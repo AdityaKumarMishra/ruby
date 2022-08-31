@@ -1,0 +1,398 @@
+- title "UCAT Tutors, Staff, and Content Developers | GradReady"
+- meta_description "Meet our awesome staff members, UCAT tutors, and content developers! Find out about their areas of study and previous experience!"
+- meta_keywords "UCAT Tutors, UCAT Tutor"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        UCAT
+        %sup ®
+        Courses Tutor Team
+.blog_hdr_bnr
+  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_team_bnr_img.svg'
+%section
+  .row.team_gray_bg.middle_course_section
+    .container
+      .col-lg-12.text-center
+        %ul#filters.clearfix.cstm_filter.team_listnav
+          %li
+            %a.filter.active{"data-filter" => ".melbourne, .sydney, .brisbane, .adelaide, .perth", href: "javascript:void(0)"} All
+          %li
+            %a.filter{"data-filter" => ".melbourne", href: "javascript:void(0)"} Melbourne
+          %li
+            %a.filter{"data-filter" => ".sydney", href: "javascript:void(0)"} Sydney
+          %li
+            %a.filter{"data-filter" => ".brisbane", href: "javascript:void(0)"} Brisbane
+          %li
+            %a.filter{"data-filter" => ".adelaide", href: "javascript:void(0)"} Adelaide
+          %li
+            %a.filter{"data-filter" => ".perth", href: "javascript:void(0)"} Perth
+        #portfoliolist
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Sachin-Muthu",
+                  tutor_name: "Sachin",
+                  tutor_image: "sachin.png",
+                  course: "Logical Reasoning (Melbourne)" do
+                  Sachin is currently a student at Monash University doing undergraduate medicine with honors.
+                  Sachin completed the UCAT
+                  %sup ®
+                  in 2012 getting an over all score in the 96th percentile with a raw score of 70.
+                  In his spare time he enjoys playing basketball and cricket as well as teaching.
+              .item-content
+                %h4.text-center Sachin
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Gowsikan-Nageswaran",
+                  tutor_name: "Gowsikan",
+                  tutor_image: "gowsikan.jpg",
+                  course: "Logical Reasoning (Melbourne)" do
+                  Gowsikan completed his UCAT
+                  %sup ®
+                  in 2013 attaining a section 3 score in the top 1% of the cohort.
+                  He is currently in the Bachelor of Medicine/Surgery (Honours) course at Monash University.
+                  Gowsikan has over 2 years of experience in teaching a variety of subjects to high school students, namely Mathematics and section 3 UCAT.
+                  He enjoys playing futsal and watching TV shows in his spare time.
+              .item-content
+                %h4.text-center Gowsikan
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "David-Chan",
+                  tutor_name: "David",
+                  tutor_image: "david_chan.jpg",
+                  course: "Logical Reasoning (Sydney)" do
+                  David is currently studying Medicine at the University of New South Wales. He graduated from Sydney Boys High School and sat the UCAT
+                  %sup ®
+                  in 2011.
+                  David has tutored at the HSC level, and previously spent two years coordinating Student Development and Volunteering Programs for the University.
+                  He enjoys coffee, cricket, and is an avid dog lover!
+              .item-content
+                %h4.text-center David
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Trinston-Lee",
+                  tutor_name: "Trinston",
+                  tutor_image: "trinston.png",
+                  course: "Understanding People (Melbourne)" do
+                  Trinston is currently an undergraduate student studying medicine in Monash University after graduating from John Monash Science School.
+                  He has experience in teaching the UCAT
+                  %sup ®
+                  on a background of his 100th percentile in the 2013 UCAT
+                  %sup ®
+                  , and has also previously done interview coaching for Monash's MMI format.
+                  Other interests include a passion for science and engineering while in his free time, he'll probably be halfway up a mountain, or sitting by a campfire with friends in the middle of nowhere.
+              .item-content
+                %h4.text-center Trinston
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Michael--Phan",
+                  tutor_name: "Michael",
+                  tutor_image: "michael_phan.png",
+                  course: "Logical Reasoning (Melbourne)" do
+                  Michael is currently a medical student studying at Monash University. He scored in the 99th percentile for the UCAT
+                  %sup ®
+                  , and has 3 years experience as a tutor.
+                  His interests include playing badminton and reading.
+              .item-content
+                %h4.text-center Michael
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Amy-Shah",
+                  tutor_name: "Amy",
+                  tutor_image: "amy_shah.jpg",
+                  course: "Understanding People (Sydney)" do
+                  I graduated from Baulkham Hills High School in NSW with an ATAR of 99.70 and UCAT
+                  %sup ®
+                  score of 95.
+                  Since then I have tutored both high school and primary school students in a variety of school and UCAT
+                  %sup ®
+                  subjects. I am currently studying Medicine at WSU.
+                  It's always a great feeling when I can help others learn and come closer to achieving their goals!
+              .item-content
+                %h4.text-center Amy
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "David-Chen",
+                  tutor_name: "David",
+                  tutor_image: "david_chen.jpg",
+                  course: "Logical Reasoning (Melbourne)" do
+                  David is currently a medical student at Monash University. He completed his year 12 studies in 2014 and has tutored students in chemistry,
+                  physics and mathematics for the HSC. David achieved an overall UCAT
+                  %sup ®
+                  score of 98 with scores of 71 and 73 in section 1 and 3 respectively.
+                  In his spare time, he enjoys playing tennis and soccer, listening to music, and socialising with friends.
+              .item-content
+                %h4.text-center David
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Sandy-Wong",
+                  tutor_name: "Sandy",
+                  tutor_image: "sandy_wong.jpg",
+                  course: "Understanding People (Sydney)" do
+                  Sandy is currently completing her Bachelor of Medical Studies/Doctor of Medicine at University of New South Wales.
+                  Prior to this, she was the recipient of multiple tertiary scholarships and was awarded the Australian Student prize for being one of the top 500 hundred graduating students nationwide.
+                  Sandy has now been teaching and tutoring students for over a year now in all subjects and is passionate about helping students achieve their dreams.
+              .item-content
+                %h4.text-center Sandy
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Kynan-Ngai",
+                  tutor_name: "Kynan",
+                  tutor_image: "kynanngai.jpg",
+                  course: "Logical reasoning (Sydney)" do
+                  Kynan is completing his Bachelor of Medical Science, and has been accepted into the Lateral Entry stream into Medicine at the University of New South Wales.
+                  He scored in the 99th percentile for the UCAT
+                  %sup ®
+                  with a score of 76 in Section 1, 64 in Section 2 and 65 in Section 3. Kynan has tutored students in Mathematics Extension I.
+                  In his spare time, he enjoys reading, TV shows and long walks.
+              .item-content
+                %h4.text-center Kynan
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Abira-Riaz",
+                  tutor_name: "Abira",
+                  tutor_image: "abira_riaz.jpg",
+                  course: "Logical Reasoning (Sydney)" do
+                  Abira is a Medical Science student at UNSW that has been accepted into the lateral entry program for Medicine.
+                  In the UCAT
+                  %sup ®
+                  she scored in the 97th% percentile with a raw score of 69 in Sections 1 and 2. In her spare time, Abira enjoys drawing, baking,
+                  online shopping and learning languages.
+              .item-content
+                %h4.text-center Abira
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "Miriam-Bennamoun",
+                  tutor_name: "Miriam",
+                  tutor_image: "miriam.png",
+                  course: "Logical Reasoning (Perth)" do
+                  Miriam is currently in her undergraduate degree studying biomedical science at the University of Western Australia.
+                  She has had experience teaching in a variety of different settings- from tutoring high school students in science subjects to teaching basic Arabic to young children.
+                  Miriam enjoys reading and practices karate in her spare time.
+              .item-content
+                %h4.text-center Miriam
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Serena-Chong",
+                  tutor_name: "Serena",
+                  tutor_image: "serena_chong.png",
+                  course: "Logical Reasoning (Sydney)" do
+                  Serena is currently a student at the University of New South Wales doing Bachelor of Medical Studies/Bachelor of Science (Medicine) Honours/ Doctor of Medicine (BMed/Bsc(Med)Hons MD).
+                  She enjoys tutoring and is employed by the University to tutor first and second year medical students both one to one and in practical classes. In her free time, she often reads extensively.
+                  Serena completed her UCAT
+                  %sup ®
+                  in 2012 and was placed in the top 1% for Section I.
+              .item-content
+                %h4.text-center Serena
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Coralie-Millet",
+                  tutor_name: "Coralie",
+                  tutor_image: "coralie_millet.jpg",
+                  course: "Logical Reasoning (Melbourne)" do
+                  Coralie is a Microbiology BSc 1st class Honours and PhD graduate (Cardiff University, UK).
+                  She is passionate about promoting scientific learning and has demonstrated and tutored over 10 undergraduate science subjects, as well as supervised several research students.
+                  Coralie published 18 papers in peer-reviewed journals and scored in the top 1% of the GAMSAT
+                  %sup ®
+                  overall- with scores in the top 0.1% for section I,
+                  top 0.5% for section III and top 10% for section II.
+              .item-content
+                %h4.text-center Coralie
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "Billie-Hsieh",
+                  tutor_name: "Billie",
+                  tutor_image: "billie_hsieh.jpg",
+                  course: "Logical Reasoning (Brisbane)" do
+                  Billie has more than 5 years of experience teaching and tutoring in a wide range of settings, from one-on-one to group to classroom.
+                  She has taught a variety of subjects from biology to English, in addition to test preparation sessions.
+                  As a current University of Queensland medical student, she holds an undergraduate degree in biology and economics with honours.
+                  Billie enjoys reading, swimming, dancing and ceramics-making.
+              .item-content
+                %h4.text-center Billie
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Miriam-Asar",
+                  tutor_name: "Miriam",
+                  tutor_image: "miriam_asar.jpg",
+                  course: "Understanding People (Sydney)" do
+                  Miriam is a student at the University of Sydney, undertaking a combined Bachelor of Laws and Bachelor of Arts, majoring in Government and International Relations.
+                  She has been tutoring primary and secondary students since 2011 in various roles and subjects.
+              .item-content
+                %h4.text-center Miriam
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "Mathew-Thomas",
+                  tutor_name: "Mathew",
+                  tutor_image: "mathew_thomas.png",
+                  course: "Understanding People (Perth)" do
+                  Mathew is currently in his Bachelor of Science degree majoring in Biomedical Science at the University of Western Australia (UWA).
+                  He achieved a tertiary entrance ranking in the top 0.3%, an overall UCAT
+                  %sup ®
+                  ranking in the top 3% and has secured an assured seat for post-graduate medicine to be commenced in 2018 at UWA.
+                  He has two years of experience tutoring mathematics and chemistry for highschool students. Mathew also enjoys playing the piano, watching TV and playing basketball.
+              .item-content
+                %h4.text-center Mathew
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Sarah-Rea",
+                  tutor_name: "Sarah",
+                  tutor_image: "sarah_rea.jpg",
+                  course: "Non-verbal Reasoning (Sydney)" do
+                  Sarah is a medical student at the University of New South Wales. She has 3 years of UCAT
+                  %sup ®
+                  tutoring experience particularly in the third section.
+                  Sarah achieved 99th percentile overall and Scored 88 in section 3 of the UCAT. She also tutors the HSC through to year 12 in Maths, English and Science.
+                  In her spare time she loves to keep active and explore the world.
+              .item-content
+                %h4.text-center Sarah
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "Nathan-Hanegbi",
+                  tutor_name: "Nathan",
+                  tutor_image: "nathan_hanegbi.jpg",
+                  course: "Non-verbal Reasoning (Melbourne)" do
+                  Nathan is a Bachelor of Medicine, Bachelor of Surgery (MBBS) student at Monash University.
+                  Having completed the UCAT
+                  %sup ®
+                  in 2013, he has been teaching UCAT
+                  %sup ®
+                  skills to students from 2014 onwards.
+                  Aside from UCAT
+                  %sup ®
+                  , Nathan gives regular tutorials to younger medical students, as well as lectures in preparation for exams.
+                  Nathan has an interest in surgery and hopes to gain surgical experience as his course progresses.
+              .item-content
+                %h4.text-center Nathan
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "Karina-Schotte",
+                  tutor_name: "Karina",
+                  tutor_image: "karina_schotte.jpg",
+                  course: "Non-verbal Reasoning (Brisbane)" do
+                  Karina is a Bachelor of Science student at the University of Queensland, and commenced her medical degree in 2016 at the same university. She has almost two years experience as a tutor in tertiary-level chemistry. In her spare time, she enjoys reading and playing the piano. Karina placed in the top 1% in the UCAT.
+              .item-content
+                %h4.text-center Karina
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "Joo-Kwon",
+                  tutor_name: "Joo",
+                  tutor_image: "jookwon.jpg",
+                  course: "Non-verbal Reasoning (Brisbane)" do
+                  Joo is currently a science student at the University of Queensland with a provisional entry to medicine.
+                  He received overall UCAT
+                  %sup ®
+                  score in the 95th percentile, with 99th percentile score for section 3.
+                  He has experience in tutoring high school students in chemistry, mathematics and biology. In his spare time he enjoys playing sports, reading books and socialising with people.
+              .item-content
+                %h4.text-center Joo
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "Crystal-Li",
+                  tutor_name: "Crystal",
+                  tutor_image: "crystal_li.jpg",
+                  course: "Non-verbal Reasoning (Sydney)" do
+                  Crystal is currently a Medical Science Honours student at UNSW working with vancomycin.
+                  Next year, she will begin a Doctor of Medicine at UNSW under the Graduate Entry Program.
+                  She is currently an anatomy demonstrator at UNSW and scored in the 99th percentile in UCAT
+                  %sup ®
+                  2014.
+              .item-content
+                %h4.text-center Crystal
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "thomas_eckert",
+                  tutor_name: "Tom",
+                  tutor_image: "thomas_eckert.jpg",
+                  course: "Understanding People (Adelaide)" do
+                  Tom is a medical student currently studying at the University of Adelaide. He scored a perfect score in English and the 90th percentile of the UCAT.
+                  He enjoys skiing, good books and good food
+              .item-content
+                %h4.text-center Tom
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "sam_shaju",
+                  tutor_name: "Sam",
+                  tutor_image: "sam_shaju.jpg",
+                  course: "Non Verbal Reasoning (Brisbane)" do
+                  Sam is a first year medical science student at the University of Queensland and is also part of the Doctor of Medicine Provisional Entry program.
+                  He scored 96th percentile overall, with raw scores of 69 in Section 1, 60 in Section 2, and 67 in Section 3.
+                  He has also had past experience in tutoring high school students in Biology, Chemistry and Physics.
+                  In his spare time, Sam enjoys reading, playing the piano and seeking the finest chicken burritos Brisbane has to offer.
+              .item-content
+                %h4.text-center Sam
+
+:javascript
+  $(document).ready(function() {
+
+    $(function () {
+      var filterList = {
+        init: function () {
+
+          $('#portfoliolist').mixItUp({
+            selectors: {
+              target: '.portfolio',
+              filter: '.filter'
+            },
+            load: {
+              filter: '.melbourne, .sydney, .brisbane, .adelaide, .perth'
+            }
+          });
+        }
+      };
+
+      filterList.init();
+    });
+  });
+
+

@@ -1,0 +1,4 @@
+<% js = escape_javascript(
+  render(partial: 'users/course_addons', locals: { pvfps: @pvpfs, enrolment: @enrolment, course_type: @course_type, order: @order })
+) %>
+$("#course_new_addons").html("<%= js %>");

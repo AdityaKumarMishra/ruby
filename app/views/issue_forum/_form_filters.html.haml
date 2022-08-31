@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-heading{style: 'overflow: auto'}
+    = form_for_filterrific @filterrific do |f|
+      .pull-left.form-inline
+        .form-group
+          = f.select :sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Sort By' }, class: 'form-control'
+        -#.form_group
+        -#  = f.select :with_state, @filterrific.select_options[:with_state], { include_blank: 'All States' }, class: 'form-control'
+        = render_filterrific_spinner
+
+      / .pull-right
+      /   = link_to 'Reset filters', reset_filterrific_url, class: 'text-right btn btn-default'

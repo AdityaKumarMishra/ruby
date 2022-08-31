@@ -1,0 +1,150 @@
+- product_info = send(product_line+"_product_info")
+- price_label = subject ? "price_#{subject}".to_sym : :price
+%ul.modal_tablist.first_col
+  %li.light_green
+    %a{href: "https://gradready.com.au#{dynamic_product_version_uri(product_versions[2], product_line, subject)}"}
+      %span.right_txt_col
+        %b
+          = "$ #{product_info[product_versions[2]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        %p (Essentials)
+  %li.dark_green
+    %a{href: "https://gradready.com.au#{dynamic_product_version_uri(product_versions[3], product_line, subject)}"}
+      %span.right_txt_col
+        %b
+          = "$ #{product_info[product_versions[3]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        %p (Comprehensive)
+  %li.grey
+    %a{href: "https://gradready.com.au#{dynamic_product_version_uri(product_versions[0], product_line, subject)}"}
+      %span.right_txt_col
+        %b
+          = "$ #{product_info[product_versions[0]][price_label]}"
+      %span.left_bot_col
+        %b
+          ONLINE
+        %p (Essentials)
+  %li.yellow_green
+    %a{href: "https://gradready.com.au#{dynamic_product_version_uri(product_versions[1], product_line, subject)}"}
+      %span.right_txt_col
+        %b
+          = "$ #{product_info[product_versions[1]][price_label]}"
+      %span.left_bot_col
+        %b
+          ONLINE
+        %p (Comprehensive)
+%ul.modal_tablist.second_col
+  %li.light_green
+    %a{href: "https://gradready.com.au#{dynamic_product_version_uri(product_versions[4], product_line, subject)}"}
+      %span.right_txt_col
+        %b
+          = "$ #{product_info[product_versions[4]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        -if (product_line == 'gamsat' || product_line == 'umat')
+          %p (Complete Care)
+        -else
+          %p (Comprehensive + Private Tutoring)  
+:css
+  .modal_tablist{
+    list-style:none;
+    float:left;
+    width:100%;
+    padding-left:0;
+  }
+
+  .modal_tablist.first_col{
+        width: 63%;
+  }
+  .modal_tablist.first_col li{
+    width: 46.3%;
+  }
+  .modal_tablist.second_col{
+      width: 30%;
+  }
+
+  .modal_tablist.first_col li:nth-child(2n){
+  margin-right:0;
+  }
+
+
+
+  .modal_tablist.second_col li{
+    width:100%;
+    min-height: 270px;
+  }
+
+  .modal_tablist li{
+    float: left;
+    width: 50%;
+    border-right: 4px solid #fff;
+    border-bottom: 4px solid #fff;
+    min-height: 135px;
+    padding: 5px;
+    position: relative;
+  }
+  .modal_tablist li span.right_txt_col{
+    position:absolute;
+    top: 10px;
+    right: 5px;
+  }
+  .modal_tablist li span.left_bot_col{
+    position:absolute; bottom: 0px;
+    left:5px;
+  }
+
+  .light_green{
+    background:#3CB371;
+  }
+
+  .dark_green{
+    background:#8FBC8F;
+  }
+
+  .grey{
+    background:#dddddd;
+  }
+
+  .yellow_green{
+    background:#9ACD32;
+  }
+
+  .modal_tablist li a {
+    display: block;
+    min-height: 135px;
+  }
+  .modal_tablist.second_col li a{
+    display: block;
+    min-height: 284px;
+  }
+
+  .modal_tablist li:hover > .tooltip_hover{display:block}
+
+  .tooltip_hover{
+    width: 370px;
+    height: auto;
+    position: absolute;
+    background: #ddd;
+    display: none;
+    border-radius: 4px;
+    top: -130px;
+    left: -50%;
+    z-index: 9;
+  }
+  .tooltip_hover:before{
+    width: 0;
+    height: 0;
+    content: '';
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #ddd transparent transparent transparent;
+    bottom: -10px;
+    position: absolute;
+    left: 50%;
+    margin: -5px 0 0 -5px;
+  }

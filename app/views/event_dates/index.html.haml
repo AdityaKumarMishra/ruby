@@ -1,0 +1,52 @@
+%h1 Events
+
+/ %p Filter announcement by:
+/ %select{:class => 'form-control', :id => 'filter-js'}
+/   %option{:value => 'features'}Features
+/   %option{:value => 'product lines'}Product Lines
+/   %option{:value => 'product versions'}Product Versions
+/   %option{:value => 'others'} Others
+
+= link_to 'Create Event', new_event_date_path, class: 'btn btn-primary u-white-link'
+%br
+%br
+.filter_btm_space
+  =will_paginate @all_events, renderer: BootstrapPagination::Rails
+  -if @all_events.present?
+    %table.gr-table.gr-table-bordered.gr-table-green-hover
+      %thead
+        %tr
+          %th Title
+          %th Status
+          %th Date
+          %th Start Time
+          %th Last Updated
+          %th Product Line
+          %th Product Version
+          %th Description
+          %th{colspan: 2} Actions
+      %tbody
+        - @all_events.each do |event|
+          - if  event.class.name == "EventDate"
+            %tr{:class => event.title}
+              %td= event.title
+              %td Active
+              %td= event.event_start_date
+              %td= event.event_start_time.strftime("%I:%M%p")
+              %td= event.updated_at.in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y %k:%M')
+              %td= event.product_line
+              %td= ProductVersion.find(event.product_version_id).name if event.product_version_id.present? && event.product_version_id!=0
+              %td= raw(event.description)
+              %td= link_to 'Edit', edit_event_date_path(event), class: 'btn btn-info btn-sm'
+              %td= link_to 'Delete', event, :method => :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+          - else
+            %tr
+              %td Not available
+              %td Pending
+              %td Not available
+              %td Not available
+              %td Not available
+              %td Not available
+              %td Not available
+              %td Not available
+              %td= link_to 'Create', new_event_date_path(:name => event), class: 'btn btn-success btn-sm'

@@ -1,0 +1,53 @@
+-# This view handles the logic of rendering dashboard panel (of general admin tasks) for an tutor user
+%p.gr-nav-header
+  Administration
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(essay_responses_path))}
+    = link_to essay_responses_to_mark_path do
+      %i.fa.fa-pencil
+      Essay Marking
+
+/ %ul.gr-nav.gr-nav-pills.gr-nav-stacked
+/   %li{class: ("active" if is_same_route?(dashboard_mock_exam_essays_path))}
+/     = link_to dashboard_mock_exam_essays_path do
+/       %i.fa.fa-pencil
+/       Mock Exam Essays
+/   / %li{class: ("active" if is_same_route?(tags_path))}
+/   /   =# link_to tags_path do
+/   /     %i.fa.fa-tags
+/   /     Tags
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(dashboard_online_mock_exam_essays_path))}
+    = link_to dashboard_online_mock_exam_essays_path do
+      %i.fa.fa-pencil
+      Online Mock Exam Essays
+
+= render 'dashboard/partial/shared_left_panel'
+%p.gr-nav-header
+  Content Management (Public Pages)
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+
+  %li{class: ("active" if is_same_route?(job_application_forms_path))}
+    = link_to job_application_forms_path do
+      %i.fa.fa-plus-circle
+      Job Applications (M)
+%br
+%p.gr-nav-header
+  Student Interaction
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(dashboard_unresolved_issues_path))}
+    = link_to dashboard_unresolved_issues_path  do
+      .fa.fa-question-circle
+      GetClarity
+%br
+%p.gr-nav-header
+  Student Management
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(user_emails_path))}
+    = link_to user_emails_path do
+      %i.fa.fa-users
+      User Management
+  %li{class: ("active" if is_same_route?(dashboard_count_tutor_appointments_path))}
+    = link_to dashboard_count_tutor_appointments_path  do
+      .fa.fa-plus-circle
+      Private Tutoring Appointments (M)

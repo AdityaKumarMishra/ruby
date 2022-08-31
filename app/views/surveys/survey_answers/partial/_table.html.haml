@@ -1,0 +1,17 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th User
+      %th Survey question
+      %th Answer
+      %th Rating
+      %th Actions
+
+  %tbody
+    - surveys_survey_answers.each do |surveys_survey_answer|
+      %tr{'data-link': url_for(surveys_survey_answer)}
+        %td= surveys_survey_answer.user
+        %td= raw surveys_survey_answer.survey_question
+        %td= raw surveys_survey_answer.answer
+        %td= surveys_survey_answer.rating
+        %td= link_to 'Destroy', surveys_survey_answer, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'

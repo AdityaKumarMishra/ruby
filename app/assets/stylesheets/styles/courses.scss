@@ -1,0 +1,113 @@
+// Place all the styles related to the Courses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.lesson-fields{
+  label {
+    display: block;
+  }
+}
+#course_product_version_id_chosen a {
+  height: 34px;
+  padding-top: 4px;
+  background: none;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555555;
+}
+#course_product_version_id_chosen .chosen-single div b {
+  background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/chosen-sprite.png') no-repeat 0 6px;
+}
+#table_id th::after { display: none};
+#table_id_filter { display: none};
+#table_id_length {display: none};
+#table_id_info {display: none}
+.gr-table-bordered > thead > tr > th.action_edit { border-right: 0;}
+.gr-table-bordered > thead > tr > th.action_destroy { border-left: 0;}
+#table_id_wrapper .gr-table{
+  width:100% !important;
+  max-width:100% !important;
+}
+table.dataTable.courses_data_table thead > tr > th
+{
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-top: 9px;
+  padding-bottom: 7px;
+ vertical-align:bottom;
+}
+table.dataTable.courses_data_table td {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  vertical-align:top;
+}
+#enrol_table th::after { display: none};
+#enrol_table_info { display: none};
+table.table-bordered.dataTable#enrol_table {border-collapse: collapse !important;}
+table.dataTable#enrol_table thead > tr > th {padding-right: 15px;}
+.filter_btm_space .pagination { margin-top: 0;}
+
+.course-package-access {
+  width: 33%;
+  float: left;
+  margin-top: 15px;
+  min-height: 52px;
+}
+
+#public-courses #course-dates-container .course-dates-table-container .custom-course-package-access{
+  margin: 10px auto;
+  width: 95%;
+}
+
+.course-package-access p {
+  width: 100% !important;
+  float: left;
+  padding-right: 41px !important;
+  box-sizing: border-box;
+}
+
+.feature_rght{
+  float: right;
+  width:auto;
+}
+input.btn.btn-gr {
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #008b44;
+  background-image: -moz-linear-gradient(top, #009348, #00813f);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009348), to(#00813f));
+  background-image: -webkit-linear-gradient(top, #009348, #00813f);
+  background-image: -o-linear-gradient(top, #009348, #00813f);
+  background-image: linear-gradient(to bottom, #009348, #00813f);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF009348', endColorstr='#FF00813F', GradientType=0);
+  border-color: #00813f #00813f #00351a;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  font-weight: bold;
+}
+
+input.btn.btn-gr.blue {
+  background-color: #007ecc !important;
+  background-image: none;
+}
+.remove_btn{
+  position: absolute;
+  margin-left: 70%;
+  margin-top: -40px;
+
+}
+.file_field {
+  margin-bottom: 20px;
+}
+.file_field_wdth input {
+  width: 90px;
+}
+.txtbook_titl {
+  position: absolute;
+  width: 55%;
+  margin-left: 110px;
+  margin-top: -40px;
+}

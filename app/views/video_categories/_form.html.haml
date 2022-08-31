@@ -1,0 +1,9 @@
+= simple_form_for(@video_category) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.association :subject
+
+  .form-actions
+    = f.button :submit

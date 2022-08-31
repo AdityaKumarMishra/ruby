@@ -1,0 +1,9 @@
+<%html=""%>
+<% html += "<option value='All'>All</option>" %>
+
+<% @options.each do |tutor| %>
+	<% html += "<option value='#{tutor.id}'>#{tutor.full_name}</option>" %>
+<%end%>
+$(".tutor_select").html("");
+$(".tutor_select").html("<%= html.html_safe %>");
+$(".tutor_select").trigger("chosen:updated");

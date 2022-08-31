@@ -1,0 +1,25 @@
+:javascript
+  $(document).ready(function () {
+    $('#faq_page_faq_topic_id').on( "change", function(){
+      var topic_id = $( "#faq_page_faq_topic_id option:selected" ).val();
+      $.ajax({
+        type: "GET",
+        data: {topic_id: topic_id, type:"#{@faq_type}"},
+        url: "#{faq_page_url_by_topic_path}",
+        complete: function(data){
+          if(data){
+            window.location = data.responseText;
+          }
+        }
+      })
+    });
+  });
+= simple_form_for([@faq_type.to_sym, :admin, @faq_page]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :faq_topic, :collection =>  @faq_topic
+    = f.input :content, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 500 } }
+
+  .form-actions
+    = f.button :submit

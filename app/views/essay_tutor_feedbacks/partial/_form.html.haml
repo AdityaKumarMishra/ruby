@@ -1,0 +1,49 @@
+- if current_user && (current_user.student?)
+  %h4.fl
+    Tutor feedback
+  = f.error_notification
+  .statics_static_table.online_exam.mg_top20
+    %ul
+      %li
+        %span
+          Tutor :
+        = @essay_response.essay_tutor_response.staff_profile.staff.full_name
+      %li
+        %span
+          Rating :
+        Give a rating out of 100
+        = f.input :rating, :as => :select, :collection => (1..100), label: false
+      %li
+        %span.feedbck
+          Feedback:
+        = f.input :response, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+  .create_tutor_feedbck.mtop30.mbot10
+    = f.button :submit, class: "default_btn mrgn-bottom hvr-shutter-in-horizontal"
+    = link_to 'Back', essay_response_path(@essay_response), class: 'black_default_btn resp_btn mrgn-bottom hvr-shutter-in-horizontal'
+
+-else
+  .panel.panel-warning
+    .panel-heading
+      .panel-title
+        %h3
+          %strong= "Tutor feedback"
+    .panel-body.line-40
+      = f.error_notification
+      %strong Tutor:
+      = @essay_response.essay_tutor_response.staff_profile.staff.full_name
+      %br
+      %strong Give a rating out of 100
+      = f.input :rating, :as => :select, :collection => (1..100)
+      %strong Feedback:
+      .form-inputs= f.input :response, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+
+    .form-actions
+      = f.button :submit, :class => "btn btn-primary"
+
+    .panel-footer
+      .form-actions
+        .btn-group
+          -#= f.button :submit, 'Save', class: 'btn btn-success'
+          = link_to 'Back', essay_response_path(@essay_response), class: 'btn btn-default'
+
+

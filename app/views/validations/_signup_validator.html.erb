@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	$(document).ready(function () {
+  $("#new_user").validate({
+    rules: {
+      "user[email]": {required: true, email: true, remote:"/users/check_email"},
+      "user[password]": {required: true, minlength: 8},
+      "user[password_confirmation]": {required: true, equalTo: "#user_password"}
+    },
+    messages: {
+      "user[email]": {
+        required: "Email is required",
+        email: "Please enter a valid email address",
+        remote: "Email is already taken"
+      },
+      "user[password]": {
+        required: "Password is required"
+      },
+      "user[password_confirmation]": {
+        required: "Password confirmation is required",
+        equalTo: "Please enter the same value password again"
+      }
+    },
+    errorPlacement: function(error, element) {
+      if (element.attr("type") == "radio") {
+        error.insertBefore(element);
+      } else if (element.attr("type") == "checkbox") {
+        element = error.insertAfter(element.closest("label").closest(".check_boxes").find("label").first());
+      } else {
+        error.insertAfter(element).css('color','white').css('padding-top', '10px');
+      }
+    }
+  });
+
+
+  function check_form(){
+    if ($("#new_user").valid()) {
+      $('#new_user_submit').prop('disabled', false);
+      $('#new_user_submit').attr('class', 'submit btn btn-lg btn-success')
+    } else {
+      $('#new_user_submit').attr('class', 'submit btn btn-lg')
+      $('#new_user_submit').prop('disabled', 'disabled');
+    }
+  }
+
+});
+</script>

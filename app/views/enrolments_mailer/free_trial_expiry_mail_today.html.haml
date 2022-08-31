@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "httpequiv": "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Hi #{sanitize @student.first_name},"
+          %tr
+            %td{style: " margin-top: 22px; float: left; line-height: 24px;font-size: 15px;"}
+              We hope that you are enjoying your trial.
+          %tr
+            %td{style: " margin-top: 22px; float: left; line-height: 24px;font-size: 15px;"}
+              If you are finding our course useful but your personal circumstances makes it difficult for you to afford our course, you are welcome to apply for financial aid through our 
+              = link_to "Access Program. ", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;" 
+              The program is aimed at giving a helping hand to those in need and is open to a range of circumstance. 
+          %tr
+            %td{style: " margin-top: 22px; float: left; line-height: 24px;font-size: 15px;"}
+              Thousands of students each year choose GradReady. In addition, 
+              = link_to "8 years in a row", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              , the average GradReady 
+              = link_to "student improved", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              their score by 
+              = link_to "at least 20+ percentile", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              points after taking a GradReady course.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              We look forward to you being one of our many
+              = link_to "success stories.", gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score'), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

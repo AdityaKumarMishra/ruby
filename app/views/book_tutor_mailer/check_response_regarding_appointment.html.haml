@@ -1,0 +1,60 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              ="Hi #{@appointment.student.first_name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              We just wanted to check in to see if you have received a response regarding a appointment you had booked recently.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Please see the details below:
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Subject:
+              = @subject
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Tutor:
+              = @appointment.tutor.full_name
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              Click
+              = link_to "here", dashboard_book_tutor_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              [to see booked appointment in the system].
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              If you are yet to receive a response, please feel free to escalate the issue.
+          %tr
+            %td{style: "margin-top: 5px; float: left; line-height: 25px; font-size: 15px;"}
+              By pressing the red Escalate Issue button below, you will send a notification email to the escalation manager. You will also receive a confirmation email.
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              = link_to "Escalate Issue", escalate_appointment_issue_appointment_url(@appointment), remote: true, style: "background: red; border: 1px solid red; border-radius: 5px; color: #ffffff; display: inline-block; padding: 9px 19px; text-align: center; text-decoration: none;font-size: 17px;"
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              If you prefer to elaborate on the escalation, please submit a ticket through the
+              = link_to "Contact Us", gamsat_preparation_courses_contact_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              Remember to select the “Escalations of Issues” tag.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+              We'll will get back to you shortly once the appointment has been escalated.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

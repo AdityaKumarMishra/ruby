@@ -1,0 +1,68 @@
+.panel.panel-warning
+
+  .panel-heading
+    .panel-title
+      %h3
+        %strong= "Essay: #{@essay.title}"
+  .panel-body.line-40
+    %strong Description:
+    = sanitize @essay.question
+  - if current_user.student?
+    - user_response = @essay.essay_responses.where(user: current_user).first
+    .panel-footer
+      - if user_response.present?
+
+        = link_to 'View Essay', essay_response_path(@essay, user_response), class: 'btn btn-default'
+  - else
+    .panel-body.line-40
+      %p= "Unmarked Responses: #{@unmarked_responses.count.to_s}"
+      %p= "Unanswered Responses: #{@unanswered_responses.count.to_s}"
+
+    %table.table.table-bordered.table-hover#table_id
+      %thead
+        %tr
+          %th Student Name
+          %th Date Submitted
+          %th Marked Date
+          %th Status
+          %th Assigned Tutor
+          %th Graded
+          %th{colspan: 2} Actions
+
+      =will_paginate @resp, renderer: BootstrapPagination::Rails
+      %tbody
+        - @resp.each do |response|
+          %tr
+            %td= response.user.full_name
+            %td= response.time_submited.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+            - date_marked = response.status == "unmarked"? '' : response.essay_tutor_response.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if response.essay_tutor_response.present?
+            %td= date_marked
+            - status = response.status == "unmarked"? "To Mark": "Marked"
+            %td= status
+            -if response.tutor.present?
+              %td= response.tutor.full_name
+            -else
+              %td Angie Miles
+            %td= response.essay_tutor_response.rating if response.essay_tutor_response.present?
+            %td=link_to 'View', essay_response_path(response.id), class: 'btn btn-info btn-sm', target: "_blank"
+            -if response.status == "unmarked" && !(current_user.student? || current_user.tutor?)
+              %td= link_to 'Assign', assign_tutor_essay_response_path(id: response.id), remote: true, class: 'btn btn-danger btn-sm'
+            -else
+              %td
+
+    .panel-footer
+      = link_to 'Back', essays_path, class: 'btn btn-default'
+#AssignTutorToEssay
+
+:javascript
+
+  $(document).ready(function() {
+      $('#table_id').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "aaSorting": [[ 3, "desc" ]],
+        "aoColumnDefs" : [
+          { orderable: false, targets: [0,5, 6, 7] } ]
+      });
+  } );

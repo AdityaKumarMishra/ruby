@@ -1,0 +1,17 @@
+.panel.panel-info
+  .panel-heading
+    %h1.panel-title
+      %strong Listing by difficult Level
+  .panel-body
+    %table.table.table-bordered.table-hover.col-md-2.col-md-offset-1
+      %thead
+        %tr
+          %th Level
+          %th.text-center Quantity
+      %tbody
+        - levels.each do |level|
+          %tr
+            %td
+              %h5= I18n.t level[:code]
+            %td.text-center
+              %span.badge= level[:count]

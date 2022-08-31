@@ -1,0 +1,215 @@
+
+   
+    <!-- <link rel='stylesheet' href='./css/main.css' /> -->
+    <style type="text/css">
+ 
+
+
+#calculator {
+  max-width:250px;
+  background-color:#0000EE;
+  border:2px outset #0000EE;
+  border-radius: 7px;
+}
+
+#memoryNegativeError {
+  margin-top:30px;
+  margin-bottom:-64px;
+  margin-left:16px;
+  width:7px !important;
+  padding-top:2px;
+  padding-left:10px;
+  font-size:13px;
+  font-family: 'Orbitron', sans-serif;
+  color:#000000;
+  background-color:#fff;
+  cursor:default;
+  border:1px inset #505050;
+  border-right:0 solid #C0C0C0;
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+  line-height:75%;
+}
+
+#display {
+  display:inline-block;
+  max-width:180px;
+  margin-top:30px;
+  color:#000000;
+  background-color:#fff;
+  cursor:default;
+  font-size:25px;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom:10px;
+  margin-left:39px;
+  padding-top:0px;
+  padding-left:0px;
+  padding-right:2px;
+  border:1px inset #505050;
+  border-left:0 solid #C0C0C0;
+  border-top-left-radius:0;
+  border-bottom-left-radius:0;
+}
+
+
+#brand {
+  font-weight:bold;
+  font-size:1.3em;
+  text-align:right;
+}
+
+#bottomLine {
+  border-bottom:1px outset #0000EE;
+  width:245px;
+  margin-left:-15px;
+}
+
+#buttons {
+  margin-top:45px;
+  border:1px inset #0000EE;
+  padding-left:11px;
+  height:280px;
+}
+
+#buttons button {
+  margin-left:1px;
+  margin-top:10px;
+  width:50px;
+  outline:none !important;
+}
+
+.btn-default {
+  color:darkblue;
+  font-weight:bold;
+  border:2px outset #000000;
+}
+
+.btn-danger {
+  border:2px outset #FF0000;
+}
+
+#equalsKey {
+  padding-bottom:50px;
+}
+
+#equalsKey:focus {
+  border:2px solid #000000;
+}
+
+.moveUp {
+  margin-top:-33px !important;
+}
+
+.moveUp2 {
+  margin-top:-58px !important;
+}
+
+.btn-danger:focus {
+  background-color:#d9534f;
+  border:1px solid black;
+}
+
+.btn-default:focus {
+  background-color:#FFFFFF;
+  border:1px solid black;
+  color:darkblue;
+}
+
+.btn-default:hover, .btndefault:active {
+  color:darkblue;
+}
+
+#onButton {
+  padding-left:5px;
+
+}
+
+#MRCButton {
+  padding-left:8px;
+}
+
+.upsideDown {
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform:rotate(180deg);
+}
+
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
+.gray {
+  color:#999999 !important;
+}
+
+
+.dl-horizontal dt {
+  text-align:left;
+}
+
+.emphasize {
+  font-size:1.2em;
+  font-weight:bold;
+}
+
+.calc-header{
+    background: #006DAA;
+    padding: 10px;
+  }
+
+    </style>
+      <div class="calc-header">
+        <button type="button" class="close" data-dismiss="modal" style="color: #fff; opacity: 0.8;">&times;</button>
+        <span class="modal-title" style="color: #fff; opacity: 0.8;  font-size: 18px;">Calculator</span>
+         <div class='' id='calculator'>
+            
+
+           <span class='form-control text-center' id='memoryNegativeError'>
+             <span id='memoryIndicator' class='gray'>M</span>
+             <br>
+             <span class='gray' id='negativeIndicator'>&mdash;</span>
+             <br>
+             <span class='gray' id='errorIndicator'>E</span>
+           </span><!--.memoryNegativeError-->
+
+           <input type='text' class='form-control text-right' autofocus disabled id='display' placeholder='0.0000000'>
+           <p class='text-justify' id='name' style="color: #fff;margin-left: 14px;"><small>TEXAS INSTRUMENTS</small><span id='brand'>&nbsp;&nbsp;TI-108SC</span></p>
+           <br>
+
+           <div id='buttons'>
+             <button class='btn btn-danger'>+/-</button>
+             <button class='btn btn-danger'>&radic;</button>
+             <button class='btn btn-danger'>%</button>
+             <button class='btn btn-danger'>&divide;</button>
+
+             <button class='btn btn-danger' id='MRCButton'>MRC</button>
+             <button class='btn btn-danger'>M-</button>
+             <button class='btn btn-danger'>M+</button>
+             <button class='btn btn-danger'>&times;</button>
+
+             <button class='btn btn-default'>7</button>
+             <button class='btn btn-default'>8</button>
+             <button class='btn btn-default'>9</button>
+             <button class='btn btn-danger'>-</button>
+
+             <button class='btn btn-default'>4</button>
+             <button class='btn btn-default'>5</button>
+             <button class='btn btn-default'>6</button>
+             <button class='btn btn-danger'>+</button>
+
+             <button class='btn btn-default moveUp'>1</button>
+             <button class='btn btn-default moveUp'>2</button>
+             <button class='btn btn-default moveUp'>3</button>
+             <button class='btn btn-danger' id='equalsKey'>=</button>
+
+             <button class='btn btn-danger moveUp2' id='onButton'>ON/C</button>
+             <button class='btn btn-default text-center moveUp2'>0</button>
+             <button class='btn btn-default text-center moveUp2'>.</button>
+           </div><!--buttons-->
+           <img src='./images/TI_Logo.png' alt id='logo'>
+         </div><!--#calculator-->
+       </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js'></script>
+    <script src='/assets/calculator.js'></script>

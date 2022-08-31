@@ -1,0 +1,20 @@
+.container
+  %h1.text-center Select Question Category
+  = simple_form_for :student_answer, url: student_answer_new_path, method: :post, html:  { class: 'text-center' } do |f|
+    -#=f.hidden_field :tags, wrapper_html: {id: 'tagField'}
+    %ul#myTags
+    =f.input :difficulty, collection: [:easy, :medium, :hard], include_blank: false
+    =f.button :submit, "Start MCQ", class: 'btn btn-default', style: 'width: 100%'
+  %h1 Available tags:
+
+  %ul.list-inline
+    - @tags.each do |tag|
+      %li= tag.name
+
+:javascript
+  var tags = #{raw @tags_array};
+  $("#myTags").tagit({
+        singleField: true,
+        availableTags: tags,
+        autocomplete: {delay: 0, minLength: 2}
+  });

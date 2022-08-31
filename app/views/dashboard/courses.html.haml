@@ -1,0 +1,5 @@
+- if current_user && (current_user.student?)
+  - if !@announcement.nil?
+    = render 'announcements/student_announcement', announcement: @announcement, title: 'Book Tutor Announcements', user_announcement: @user_announcement
+
+= render 'dashboard/partial/courses'

@@ -1,0 +1,21 @@
+%p#notice= notice
+%p
+  %b Repeatability:
+  = @tutor_schedule.repeatability
+%p
+  %b Start:
+  = format_date_short(@tutor_schedule.start_time.to_date)
+  \-
+  = format_time(@tutor_schedule.start_time.time)
+%p
+  %b End:
+  = format_date_short(@tutor_schedule.end_time.to_date)
+  \-
+  = format_time(@tutor_schedule.end_time.time)
+%p
+  %b Location:
+  = @tutor_schedule.location
+
+= link_to 'Edit', edit_tutor_schedule_path(@tutor_schedule)
+\|
+= link_to 'Back', dashboard_count_tutor_appointments_path(selection: 'Log Hours')

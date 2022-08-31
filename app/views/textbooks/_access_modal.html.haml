@@ -1,0 +1,40 @@
+#textbook-access-modal.modal.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Select User
+      .modal-body
+        %p.text-info
+          .form-inputs
+            = select_tag 'user_ids', options_for_select(User.student.map { |u| [u.full_name, u.id] }), class: 'form-control chosen-select user_selection', include_blank: "All", multiple: true
+          .form-actions.access_btn_div
+            %a.submit_user.btn.btn-success.btn-sm Submit
+
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+
+:javascript
+
+  $(function(){
+    $('.chosen-select').chosen({
+        allow_single_deselect: true,
+        no_results_text: 'No results matched',
+        placeholder_text_multiple: 'Click here',
+        width: '100%'
+    });
+  });
+
+
+  $(".submit_user").click(function(){
+    tid = "#{@textbook.id}";
+    uid = $(".user_selection").val();
+    $("#textbook-access-modal").modal("hide");
+    $.ajax({
+      url: "/textbooks/"+ tid + "/update_print_access",
+      type: "GET",
+      dataType: 'script',
+      data: {user_id: uid},
+    });
+  });

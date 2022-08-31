@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'dashboard/partial/textbook_filter', locals: { responses: @responses }))%>
+$("#filterrific_textbook_response_results").html("<%= js %>");

@@ -1,0 +1,162 @@
+.faq_list.para_fs14.steps_col
+  .faq_list_col
+    .course_frm.filter_box_shadow.stap_from_field
+      = simple_form_for(resource, as: resource_name, url: edit_user_registration_path, html: { method: :put }) do |f|
+        = f.error_notification
+
+        = render 'users/user_photo'
+        .form-group.wdt49
+          = f.label 'Email', required: true
+          = f.input :email, label: false, autofocus: true, required: true
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %p
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .form-group.wdt49.fr
+          = f.label 'Current password', required: true, class: 'fl_hint'
+          %i.fa.fa-question-circle.hint_popover
+            %span.custom_desk_popover
+              We need your current password to confirm your changes
+          = f.input :current_password, label: false, required: true
+        .form-group.wdt49
+          = f.label :password, class: 'fl_hint'
+          %i.fa.fa-question-circle.hint_popover
+            %span.custom_desk_popover
+              Leave it blank if you don't want to change it
+          = f.input :password, autocomplete: "off", label: false, required: false
+        .form-group.wdt49.fr
+          = f.input :password_confirmation, required: false
+        - if f.object.address.persisted? || !@user.student? || f.object.address.new_record?
+          .form-group.wdt49
+            = f.label :first_name, label: f.object.last_name.present? ? 'First Name' : 'Name', required: true
+            = f.input :first_name, required: true, label: false
+          -if f.object.last_name.present?
+            .form-group.wdt49{class: ("fr" if f.object.last_name.present?)}
+              = f.label :last_name, label: 'Last Name', required: true
+              = f.input :last_name, label: false, required: true
+          .form-group{class: ("wdt49 fr" if !f.object.last_name.present?)}
+            = f.label :phone_number, label: 'Phone number', required: true
+            = f.input :phone_number, required: true, label: false
+        .resource_col.mbot20
+          %h4 Contact Information
+        = f.simple_fields_for :address_attributes, f.object.address do |a|
+          = a.hidden_field :id
+          .form-group.wdt49
+            = a.label :line_one, label: 'Address line 1', required: true
+            = a.input :line_one, label: false, as: :text, required: true
+          .form-group.wdt49.fr
+            = a.label :line_two, label: 'Address line 2'
+            = a.input :line_two, label: false, as: :text
+          .form-group.wdt49
+            = a.label :suburb, required: true
+            = a.input :suburb, label: false, required: true
+          .form-group.wdt49.fr
+            = a.label :post_code, label: 'Postcode', required: true
+            = a.input :post_code, label: false, required: true
+          .form-group.wdt49
+            = a.label :state, required: true
+            = a.input :state, collection: state_for_select, label: false, include_blank: 'Please Select State', selected: a.object.present? ? a.object.state : false, input_html: {class: 'form-control'}
+          .form-group.wdt49.fr
+            = a.label :country, required: true, label: 'Country/Region'
+            = a.input :country, collection: country_for_select, label: false, include_blank: 'Please Select Country', selected: a.object.present? ? a.object.country : false, input_html: {class: 'form-control'}
+        - if f.object.questionnaire.present? && f.object.questionnaire.persisted? || f.object.questionnaire.nil? || f.object.questionnaire.new_record?
+          .resource_col.mbot20
+            %h4 Your Background
+          = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+            .form-group
+              = q.hidden_field :id
+              = q.label :student_level, label: 'Are you a university or high school student?', required: true
+              = q.input :student_level, required: true, as: :select, collection: student_collection, label: false, prompt: "Select..."
+            #user_questionnaire_university_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .form-group
+                  .col-sm-6
+                    = q.label :university_id, required: true
+                    = q.input :university_id, required: true, label: false, as: :select, collection: University.all, prompt: 'Select University...'
+                    = q.label :degree_id, required: true
+                    = q.input :degree_id, required: true, label: false, as: :select, collection: Degree.all, prompt: 'Select Course...'
+                    = q.label :year, label: 'Commencement Year', required: true
+                    = q.input :year, required: true, label: false
+                  .col-sm-6
+                    = q.label :umat_high_school, label: 'Did you sit the UCAT in high school?', required: true
+                    = q.input :umat_high_school, required: true, as: :radio_buttons, label: false, input_html: {class: 'radio_lbl'}
+                    = q.label :umat_uni, label: 'Are you going to sit/have you sat the UCAT again while at uni?', required: true
+                    = q.input :umat_uni, required: true, as: :radio_buttons, label: false, input_html: {class: 'radio_lbl'}
+            #user_questionnaire_highschool_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .form-group
+                  .col-sm-6
+                    = q.label :current_highschool, label: 'Current High School', required: true
+                    = q.input :current_highschool, label: false, required: true
+                    = q.label :target_uni_course, label: 'Target University Course', required: true
+                    = q.input :target_uni_course, label: false, required: true
+
+                  .col-sm-6
+                    = q.label :highschool_year_level, label: 'Year Level', required: true
+                    = q.input :highschool_year_level, required: true, label: false, as: :radio_buttons, collection: year_level_collection, prompt: 'Select Year Level...'
+            #user_questionnaire_other_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .form-group
+                  .col-sm-6
+                    = q.label :designation, required: true, label: 'Profession/Job/Training'
+                    = q.input :designation, required: true, label: false
+
+                    = q.label :learning_institution, required: true, label: 'Previous University/Learning Institution'
+                    = q.input :learning_institution, required: true, label: false
+
+                    = q.label :year_of_most_recent_completed_qualification, required: true, label: 'Year of Most Recently Completed Qualification'
+                    = q.input :year_of_most_recent_completed_qualification, required: true, label: false
+
+            = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire do |q|
+              -if last_source_collection.flatten.include? f.object.questionnaire.try(:last_source)
+                -last_source_selected=f.object.questionnaire.try(:last_source)
+                -last_source_val=""
+                -last_source_cls='hidden'
+              -else
+                -last_source_selected='other'
+                -last_source_val= f.object.questionnaire.try(:last_source)
+                -last_source_cls=''
+
+              -if f.object.questionnaire.present?
+                -if f.object.questionnaire.try(:source).include? "other"
+                  -source_val=f.object.questionnaire.try(:source).reject(&:empty?).split("other").last[0]
+                  -source_cls=''
+                -else
+                  -source_val=""
+                  -source_cls='hidden'
+              -else
+                -source_val=""
+                -source_cls='hidden'
+
+              .form-group
+                = q.input :student_region, required: true, as: :radio_buttons, collection: student_region_collection, prompt: 'Select Region...', label: 'Are you a domestic or international student?'
+
+                = q.label :source, label: 'How did you hear about GradReady? Please select all that apply.', required: true
+                = q.input :source, required: true, as: :check_boxes, collection: source_collection, label: false
+
+                = text_field_tag 'source',"#{source_val}", class:"hidden_source full_wdt_input #{source_cls} form-control", placeholder: "Please enter ..."
+                %p.other_source
+              .form-group
+                = q.label :last_source, label: 'Where did you LAST see/hear about us before signing up?', required: true
+                = q.input :last_source, required: true, as: :select, collection: last_source_collection, selected:"#{last_source_selected}", label: false, prompt_text: 'Please select...'
+              .form-group
+                = text_field_tag 'last_source',"#{last_source_val}", class:"hidden_last_source #{last_source_cls} form-control", placeholder: "Please enter ..."
+                %p.other_last_source
+
+            = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire do |q|
+              -if language_collection.flatten.include? f.object.questionnaire.try(:language_spoken)
+                .form-group
+                  = q.label :language_spoken, label: 'Language Spoken at Home Other than English', required: true
+                  = q.input :language_spoken, required: true, as: :select, collection: language_collection, selected: "#{f.object.questionnaire.try(:language_spoken)}", label: false, prompt: 'Please select a language'
+                .form-group
+                  = text_field_tag 'language_spoken',"", class:"hidden_language hidden form-control", placeholder: "Please enter a language"
+                  %p.no_language_spoken
+              -else
+                .form-group
+                  = q.label :language_spoken, label: 'Language Spoken at Home Other than English'
+                  = q.input :language_spoken, required: true, as: :select, collection: language_collection, selected: "other", label: false, prompt: 'Please select a language'
+                .form-group
+                  = text_field_tag 'language_spoken', f.object.questionnaire.try(:language_spoken), class:"hidden_language form-control", placeholder: "Please enter a language"
+                  %p.no_language_spoken
+
+        .text-center.full_width
+          = f.button :submit, "Update", class: 'default_btn resp_btn hvr-shutter-in-horizontal'

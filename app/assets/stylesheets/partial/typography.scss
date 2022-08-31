@@ -1,0 +1,16 @@
+// Text with banner
+.ribbon-banner {
+  display: inline-block;
+  padding: 15px 30px;
+  margin-bottom: 15px;
+  color: white;
+  line-height: 24px;
+}
+
+.ribbon-banner-hsc {
+  @extend .ribbon-banner;
+  background: #be382a;
+  color: #fff;
+}
+
+

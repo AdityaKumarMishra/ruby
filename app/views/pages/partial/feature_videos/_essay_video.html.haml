@@ -1,0 +1,17 @@
+%h2.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#how_to_essay", role: "button"}
+  %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+  How to use Essays
+#how_to_essay.panel-collapse.collapse{"aria-labelledby" => "headingOne", role: "tabpanel"}
+  / .video_box
+  /   - if announcement.video.present?
+  /     %video.video-js.vjs-default-skin{:controls => "", :width => "100%"}
+  /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '360'}
+  /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '720'}
+  /   - else
+  /     %video.video-js.vjs-default-skin{:controls => "", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/online-sys-demo/Essays_Thumbnail.png', :width => "100%"}
+  /       %source{:src => "http://gradready-prod.s3.amazonaws.com/public/How%20to%20Access%20and%20Use%20the%20Essays%20Feature%20-%20GradReady%20GAMSAT.mp4", :type => "video/mp4"}
+  /       %source{"data-quality" => "hd", :src => "http://gradready-prod.s3.amazonaws.com/public/How%20to%20Access%20and%20Use%20the%20Essays%20Feature%20-%20GradReady%20GAMSAT.mp4", :type => "video/mp4"}
+  - if announcement.story.present?
+    %h4 Guideline
+    .ck-editor-list
+      = sanitize announcement.story

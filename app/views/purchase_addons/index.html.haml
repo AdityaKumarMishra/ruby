@@ -1,0 +1,40 @@
+%h1 Listing purchase_addons
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Paid at
+      %th Date activated
+      %th Date deactivated
+      %th Features
+      %th Subtotal
+      %th Gst
+      %th Paypal fee
+      %th Paypal payment
+      %th Paypal token
+      %th Banktrans
+      %th Paypal
+      %th Bank
+      %th{colspan: 2} Actions
+
+  %tbody
+    - @purchase_addons.each do |purchase_addon|
+      %tr{'data-link': url_for(purchase_addon)}
+        %td= purchase_addon.paid_at
+        %td= purchase_addon.date_activated
+        %td= purchase_addon.date_deactivated
+        %td= purchase_addon.features
+        %td= purchase_addon.subtotal
+        %td= purchase_addon.gst
+        %td= purchase_addon.paypal_fee
+        %td= purchase_addon.paypal_payment
+        %td= purchase_addon.paypal_token
+        %td= purchase_addon.banktrans
+        %td= purchase_addon.paypal
+        %td= purchase_addon.bank
+        %td= link_to 'Edit', edit_purchase_addon_path(purchase_addon), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', purchase_addon, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Purchase addon', new_purchase_addon_path, class: 'btn btn-gradready green'

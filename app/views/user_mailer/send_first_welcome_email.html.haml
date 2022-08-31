@@ -1,0 +1,49 @@
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Welcome #{@user.first_name},"
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              Welcome to GradReady! Thanks for creating an account, you can now browse our courses and make purchases, simply by logging in:
+              = link_to 'here', new_user_session_url, style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              We strive to offer the best targeted learning solutions through our comprehensive courses:
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              %a{href: "https://gradready.com.au/gamsat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} GAMSAT Prep GradReady
+              The most comprehensive and personalized GAMSAT preparation courses in Australia. GradReady students improve their score by at least 20 percentile points on average.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              %a{href: "https://www.gradready.com.au/umat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} UCAT Prep GradReady
+              Take advantage of our unique combination of personalized online learning solutions with our attendance courses to best prepare for UCAT.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              Our priority is to make sure that the course lives up to everything we have promised and more. If you have any questions about anything at all, please do not hesitate to get in touch.
+              %a{href: "https://gradready.com.au/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} Contact Us
+          %tr
+            %td{style: "text-align: center;"}
+              %a{href: "https://gradready.com.au/dashboard/home", style: "background: #009348; border: 1px solid #00813f; border-radius: 5px; color: #ffffff; font-size: 15px; display: inline-block; padding: 10px 27px; text-align: center; text-decoration: none;"} Get Started
+          %tr
+            %td{style: "margin-top: 14px;margin-bottom: 72px; float: left; line-height: 25px;font-size: 15px;"}
+              Throughout the course of this year, we will be bringing even more advanced products to GAMSAT ® , UCAT ®. For more information please see:
+              %a{href: "https://gradready.com.au/", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} https://gradready.com.au/
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

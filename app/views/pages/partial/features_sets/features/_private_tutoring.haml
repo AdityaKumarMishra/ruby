@@ -1,0 +1,74 @@
+- new_course_type = ProductVersion.course_types[@product_version.course_type]
+- if hours == 1
+  - if paid
+    %h4
+      1 hour private tutoring session
+    %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+  - else
+    %h4
+      1 hour private tutoring session
+    %span (Built into our systems)
+
+- else
+  - if paid
+    %h4
+      - if new_course_type == 8
+        #{hours} x 1 hour private tutoring sessions
+      - else
+        #{hours} x 1 hour private tutoring sessions
+    %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+  - else
+    %h4
+      - if new_course_type == 8
+        Diagnostics Results Discussion + #{hours} x 1 hour private tutoring sessions
+      - else
+        #{hours} x 1 hour private tutoring sessions
+    %span (Built into our systems)
+- if product_line == 'UMAT'
+  %p
+    Be fully prepared for the UCAT
+    %sup®
+    by addressing your ...
+  .show_full_content
+    Be fully prepared for the UCAT
+    %sup®
+    by addressing your remaining weak points in one on one sessions.
+- elsif product_line == 'VCE'
+  .text
+    %p.u-word-spacing
+    Fully prepare for your VCE
+    %sup{ style: "margin-right: -8px;left: -6px;"} ®
+    exams through addressing your remaining weak points in one on one sessions with an experienced VCE
+    %sup{ style: "margin-right: -5px;"} ®
+    Ready tutor.
+- elsif product_line == 'HSC'
+  .text
+    %p.u-word-spacing
+      Fully prepare for your HSC
+      %sup{ style: "margin-right: -12px;left: -11px;"} ®
+      exams through addressing your remaining weak points in one on one sessions with an experienced HSC
+      %sup{ style: "margin-right: -5px;"} ®
+      Ready tutor.
+- elsif product_line == 'GAMSAT'
+  - if new_course_type == 8
+    %p
+      Be fully prepared for the GAMSAT
+      %sup ®
+      exam by addressing your ...
+    .show_full_content
+      Be fully prepared for the GAMSAT
+      %sup ®
+      exam by addressing your remaining weak points in one on one sessions.
+  - else
+    %p
+      Be fully prepared for the GAMSAT
+      %sup ®
+      exam by addressing your ...
+    .show_full_content
+      Be fully prepared for the GAMSAT
+      %sup ®
+      exam by addressing your remaining weak points in one on one sessions.
+
+
+
+    

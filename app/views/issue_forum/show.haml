@@ -1,0 +1,379 @@
+= render 'issue_forum/submit_ticket_modal', options: {edit_ticket: @question}
+- if current_user && current_user.student?
+  - content_for :page_heading, 'GetClarity'
+  .dashbord_right
+    .resource_col
+      %a.black_default_btn.hvr-shutter-in-horizontal.fr{href: url_for(:back)} Back
+    .comment_section_col.ticketing-col-margin
+      .parent_comment_col
+        %h3= @question.title.present? ? @question.title : "Support Ticket - #{@question.id}"
+        %span.comment_date
+          Asked on:
+          %strong  #{@question.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+        .comment_mesg_col
+          %p= @question.question.html_safe
+          .text-center.mtop30.mbot10
+            - unless @question.questionable_id.nil?
+              -if @question.questionable_type.eql?('Mcq') && current_user.student?
+                = link_to 'Go to Content', fetch_redirect_path(@question), class: "default_btn hvr-shutter-in-horizontal"
+
+              -elsif @question.questionable.nil?
+                = link_to 'Go to Content', issue_path(@question, content: "no"), class: "default_btn hvr-shutter-in-horizontal"
+
+              -elsif @question.questionable_type.eql?('Mcq')
+                = link_to 'Go to Content', mcq_stem_path(id: @question.questionable.mcq_stem, mcq_id: @question.questionable_id), class: "default_btn hvr-shutter-in-horizontal"
+
+              -else
+                %a.default_btn.hvr-shutter-in-horizontal{href: (url_for(@question.questionable) rescue url_for(@question.questionable.ticket_content_url))}
+                  Go to Content
+              -#= link_to 'Original Content', @question.questionable
+            - if !current_user.nil? && (@question.asker == current_user || (User.roles[current_user[:role]] >= User.roles[:admin] || User.roles[current_user[:role]] == User.roles[:tutor]))
+
+              -if @question.feedback == "No"
+                %a.default_btn.hvr-shutter-in-horizontal{'data-toggle' => 'modal',
+                'data-target'=> '#ticket-modal'}
+                  Edit
+        - if @question.ticket_answers.size == 0
+          %h3.answer-heading Answers
+          .parent_comment_col.child_comment.no-margin-left
+            - if @question.ticket_answers.size == 0
+              .comment_mesg_col.no-pading
+                %p There are no answers to this question yet.
+      .parent_comment_col.child_comment.no-margin-left
+        %h3.answer-heading Answers
+      - @question.ticket_answers.sort_by(&:helpfulness).reverse.each_with_index do |answer, i|
+        -# The first answer is highlighted, which is the most helpful
+
+
+        .comment_section_col
+          .parent_comment_col.btm_wht_space
+            / %h3 #{answer.user.first_name}
+            %span.comment_date
+              #{answer.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+              %br
+              #{answer.user.try(:first_name)}
+            .comment_mesg_col
+              - if i == 0
+                %p
+                  %i.glyphicon.glyphicon-star.star
+                  Best answer
+            %span.comment_date
+              #{answer.helpfulness} found this useful
+              - unless !current_user.nil? && answer.votes.where(user_id: current_user.id).any?
+                = link_to '+ 1', find_helpful_ticket_ticket_answer_path(ticket_id: @question.id, id: answer.id), {class: 'btn btn-default btn-xs'}
+                = render 'issue_forum/submit_answer_modal', options: {edit_answer: answer}
+            .comment_mesg_col
+              = answer.content.html_safe
+            %span.reply_message
+              %a.submit-ticket{'data-toggle' => 'modal', 'data-target' => "#comment_#{answer.id}"}
+                %i.fa.fa-reply
+                Reply
+              = render 'issue_forum/submit_comment_modal', options: {answer: answer}
+            -# Edit button:
+            -# If we have permission, allow them to edit it
+            - if !current_user.nil? && (User.roles[current_user[:role]] > User.roles[:student] || answer.user == current_user)
+              %a.submit-ticket{'data-toggle' => 'modal','data-target'=> "#edit-answer_#{answer.id}"}
+                %i.fa.fa-pencil
+                Edit
+
+            - if answer.comments.size > 1
+              - answer.comments.reverse.each do |comment|
+                - unless comment.new_record?
+                  .parent_comment_col.child_comment
+                    %h3
+                    -if comment.user.present?
+                      -if comment.user.username.present?
+                        #{comment.user.username}
+                      -else
+                        #{comment.user.first_name}
+                    %span.comment_date #{comment.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+                    .comment_mesg_col
+                      = comment.content.html_safe
+
+- else
+
+  = render 'issue_forum/back_button'
+
+
+  -# MAIN QUESTION
+  .panel.panel-default.itf-show
+    .panel-heading
+      .row
+        .col-sm-12
+          %h3.title
+            = @question.title.present? ? @question.title : "Support Ticket - #{@question.id}"
+          %br
+          - if @question.status == "resolved" && !current_user.nil?
+            %p
+              %i.glyphicon.glyphicon-ok.tick
+              This issue has been resolved.
+          .author
+            - if current_user.present?
+              - if @question.asker.present?
+                - if current_user.tutor?
+                  = link_to 'Interactions', tutor_interaction_logs_user_path(@question.asker), class: 'btn btn-success btn-sm btn_white'
+                - else
+                  = link_to @question.asker_full_name, edit_user_path(@question.asker.id), class: 'btn btn-primary btn-sm btn_white'
+                = link_to 'Login', view_as_path(@question.asker), class: 'btn btn-primary btn-sm btn_white'
+              - else
+                %strong= @question.first_name
+              Asked on:
+              %strong #{@question.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+              %br
+              Last updated at:
+              %strong #{@question.updated_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+              %br
+                Email: #{@question.asker_email} | Phone: #{@question.asker_phonenumber}
+          - if @question.feedback == "Yes" && !current_user.nil?
+            .feed_back_heading
+              %p
+                Attention: This is a quality assurance ticket, please direct the student to the GetClarity System if the student's comment is a result of not understanding the question properly.
+    .panel-body
+      %p.body
+      = @question.question.html_safe
+    - if !current_user.nil?
+      .panel-footer
+        - unless @question.questionable_id.nil?
+          -if @question.questionable_type.eql?('Mcq') && current_user.student?
+            = link_to 'Go to Content', fetch_redirect_path(@question), class: 'btn btn-primary'
+
+          -elsif @question.questionable.nil?
+            = link_to 'Go to Content', issue_path(@question, content: "no"), class: 'btn btn-primary'
+
+          -elsif @question.questionable_type.eql?('Mcq')
+            = link_to 'Go to Content', mcq_stem_path(id: @question.questionable.mcq_stem, mcq_id: @question.questionable_id), class: 'btn btn-primary'
+
+          -else
+            %a.btn.btn-primary{href: (url_for(@question.questionable) rescue url_for(@question.questionable.ticket_content_url))}
+              Go to Content
+          -#= link_to 'Original Content', @question.questionable
+        - if !current_user.nil? && (@question.asker == current_user || (User.roles[current_user[:role]] >= User.roles[:admin] || User.roles[current_user[:role]] == User.roles[:tutor]))
+
+          -if @question.feedback == "No"
+            %a.btn.btn-primary.submit-ticket{'data-toggle' => 'modal',
+              'data-target'=> '#ticket-modal'}
+              Edit
+
+        -# If they're a manager, they can make public or private
+        - if !current_user.nil? && User.roles[current_user[:role]] >= User.roles[:tutor]
+          - if @question.public?
+            = link_to make_private_ticket_path(@question), class: "btn btn-primary", method: :post do
+              Make Private
+          - else
+            = link_to make_public_ticket_path(@question), class: "btn btn-primary", method: :post do
+              Make Public
+          - if @question.status == "resolved"
+            = link_to ticket_path(@question, ticket: {status: "unresolved", resolver_id: nil}), class: "btn btn-warning", method: :patch do
+              %i.fa.fa-times
+              Mark as unresolved
+          - else
+            = link_to ticket_path(@question, ticket: {status: "resolved", resolver_id: current_user.id}), class: "btn btn-success", method: :patch do
+              %i.fa.fa-check
+              Mark as resolved
+          - if @question.status == "follow_up_required"
+            = link_to "javascript:void(0)", class: "btn btn-warning", method: :patch do
+              %i.fa.fa-times
+              Marked as follow up required
+          - else
+            = link_to ticket_path(@question, ticket: {status: "follow_up_required", resolver_id: nil}), class: "btn btn-success", method: :patch do
+              %i.fa.fa-check
+              Mark as follow up required
+          %a.btn.btn-primary.transfer-ticket-btn{'data-toggle' => 'modal',
+            'data-target'=> '#ticket-modal'}
+            Transfer Ticket
+
+        -# If they're not a student, they can enable reminder
+        - if !current_user.nil? && User.roles[current_user[:role]] != User.roles[:student] && !@question.resolved?
+          = link_to (@question.remind? ? "Disable Email Reminder" : "Enable Email Reminder"), toggle_reminder_ticket_path(@question), method: :post, class: 'btn btn-primary'
+          %br
+            = check_box_tag 'complaint', @question.complaint? ? false : true, false, checked: @question.complaint
+            = label_tag :complaint, 'Mark as Improvement Needed'
+            %i.fa.fa-question-circle{ style: 'cursor: pointer;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Please tick if the underlying cause of this ticket is a deficiency from our part (it may be operational, software, content etc) and is worth flagging to be reviewed' } }
+
+            = check_box_tag 'mark_for_resolved', @question.mark_for_resolved? ? false : true, false, checked: @question.mark_for_resolved
+            = label_tag :mark_for_resolved, 'Mark as resolved in 7 days'
+
+  -# ANSWERS
+  - if @question.comments.present?
+    .row
+      .col-sm-11.col-sm-offset-1
+        %h4 Comments
+        - @question.comments.reverse.each do |comment|
+          - unless comment.new_record?
+            .panel.panel-default.itf-comment
+              .panel-body
+                = comment.content.html_safe
+              .panel-footer
+                %span.span_left #{comment.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+                - if comment.user
+                  Asked by
+                  -if comment.user.username.present?
+                    %strong= comment.user.username
+                  -else
+                    %strong= comment.user.first_name
+                -elsif comment.enquiry_user
+                  Asked by
+                  %strong= comment.enquiry_user.first_name
+
+  %h2.tkt_ans_tag Answers
+
+  - if @question.ticket_answers.size == 0
+    - if !current_user.present?
+      %a.btn.btn-primary.submit-ticket.tkt_cmnt_btn{class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => "#comment_#{@question.id}"}
+        Comment
+      = render 'issue_forum/submit_comment_modal', options: {answer: @question}
+    .panel.panel-default
+      .panel-body
+        There are no answers to this question yet.
+  - @question.ticket_answers.sort_by(&:helpfulness).reverse.each_with_index do |answer, i|
+    -# The first answer is highlighted, which is the most helpful
+    .panel.panel-default.itf-show{:class => "#{i == 0 ? 'best' : ''}"}
+      .panel-heading
+        .row
+          .col-sm-8
+            %h3.title
+              Tutor Answer
+            %br
+            - if i == 0
+              %p
+                %i.glyphicon.glyphicon-star.star
+                Best answer
+
+            .useful
+              %strong
+                #{answer.helpfulness}
+              found this useful
+
+              -# Find Helpful button
+              -# If they are the owner, let them pick the best answer
+              - unless !current_user.nil? && answer.votes.where(user_id: current_user.id).any?
+                = link_to '+ 1', find_helpful_ticket_ticket_answer_path(ticket_id: @question.id, id: answer.id), {class: 'btn btn-default btn-xs'}
+                -#= form_for([@question, answer], url: find_helpful_ticket_ticket_answer_path(@question, answer), method: 'post', html: {style: 'display: inline;'})  do |f|
+                -#  = f.submit 'Find Helpful', class: 'btn btn-default'
+                = render 'issue_forum/submit_answer_modal', options: {edit_answer: answer}
+
+            .author
+              on
+              %strong #{answer.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+              %br
+              %strong #{answer.try(:user).try(:first_name)}
+
+      .panel-body
+        %p.body
+          = answer.content.html_safe
+      .panel-footer
+        -# Comment button
+        -# Let anyone comment
+        %a.btn.btn-primary.submit-ticket{class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => "#comment_#{answer.id}"}
+          Reply
+        = render 'issue_forum/submit_comment_modal', options: {answer: answer}
+        -# Edit button:
+        -# If we have permission, allow them to edit it
+        - if !current_user.nil? && (User.roles[current_user[:role]] > User.roles[:student] || answer.user == current_user)
+          %a.btn.btn-default.submit-ticket{'data-toggle' => 'modal',
+        'data-target'=> "#edit-answer_#{answer.id}"}
+            Edit
+
+    -# COMMENTS
+
+    - if answer.comments.size > 1
+      .row
+        .col-sm-11.col-sm-offset-1
+          %h4 Comments
+          - answer.comments.reverse.each do |comment|
+            - unless comment.new_record?
+              .panel.panel-default.itf-comment
+                .panel-body
+                  = comment.content.html_safe
+                .panel-footer
+                  %span.span_left #{comment.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+                  - if comment.user
+                    Asked by
+                    -if comment.user.username.present?
+                      %strong= comment.user.username
+                    -else
+                      %strong= comment.user.first_name
+                  -elsif comment.enquiry_user
+                    Asked by
+                    %strong= comment.enquiry_user.first_name
+
+  -# This makes only staff able to create answers
+  - if !current_user.nil? && User.roles[current_user[:role]] > User.roles[:student]
+    %a.btn.btn-primary.submit-ticket{'data-toggle' => 'modal',
+        'data-target'=> '#answer-modal',
+        'style' => 'margin-bottom: 10px'}
+      New Answer
+    = render 'submit_answer_modal'
+
+:javascript
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $( document ).ready(function() {
+    $('#ticket-modal').on('hidden.bs.modal', function () {
+      $("#ticket_title").attr('disabled', false);
+      $("#edit_ticket_#{params[:id]}").find('.modal-title').text("New Ticket");
+      $("#edit_ticket_#{params[:id]}").find('.submit-ticket').text("Create Ticket");
+    })
+
+    $('.submit-ticket').on('click', function () {
+      $(".ticket_question").attr('disabled', false);
+      $(".ticket_question").removeClass('disable');
+      $(".ticket_comment").attr('disabled', true);
+      $(".ticket_comment").hide();
+      $("#transfer_ticket").val("false");
+      $("#tranfer-edit-ticket").removeClass('transfer-Created-ticket');
+      $("#tranfer-edit-ticket").addClass('edit-Created-ticket');
+      $("#tranfer-edit-ticket-btn").text('Edit Ticket');
+    })
+
+    $(".transfer-ticket-btn").click(function(){
+      update_tags();
+      $(".ticket_question").attr('disabled', true);
+      $(".ticket_question").addClass('disable');
+      $(".ticket_comment").attr('disabled', false);
+      $(".ticket_comment").show();
+      $("#transfer_ticket").val("true");
+      $("#ticket_title").attr('disabled', true);
+      $("#edit_ticket_#{params[:id]}").find('.modal-title').text("Transfer Ticket");
+      $("#edit_ticket_#{params[:id]}").find('.submit-ticket').text("Transfer Ticket");
+      $("#tranfer-edit-ticket").removeClass('edit-Created-ticket');
+      $("#tranfer-edit-ticket").addClass('transfer-Created-ticket');
+      $("#tranfer-edit-ticket-btn").text('Transfer Ticket');
+    });
+  });
+
+
+  function update_tags() {
+    $.ajax({
+      url: "/tags/ticket_transfer_tags",
+      type: "GET",
+      dataType: 'script',
+    });
+  }
+
+  $('#complaint').change(function(){
+    complaint_value = $(this).val();
+    var id = "#{@question.id}";
+    console.log(id)
+    console.log(complaint_value)
+      $.ajax({
+        type: 'post',
+        url: '/tickets/'+id+'/mark_complaint',
+        data: {complaint: complaint_value},
+      }).done(function (response) {
+    });
+  })
+
+  $('#mark_for_resolved').change(function(){
+    mark_for_resolved = $(this).val();
+    var id = "#{@question.id}";
+      $.ajax({
+        type: 'post',
+        url: '/tickets/'+id+'/mark_for_resolved',
+        data: {mark_for_resolved: mark_for_resolved},
+      }).done(function (response) {
+    });
+  })

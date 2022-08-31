@@ -1,0 +1,24 @@
+#videoHeading.card-header{:role => "tab"}
+%h5.mb-0.full_wdt
+  .gr-panel.gr-panel-heading
+    %a.announce-anchor{"aria-controls" => "collapseVideo", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapseVideo"}
+      Guideline on How to add New Tutor Availabilities
+      %span.cstm-brder
+      %i.fa.fa-angle-left.video-arrow{"aria-hidden" => "true"}
+
+#collapseVideo.collapse.in{"aria-labelledby" => "videoHeading", :role => "tabpanel"}
+  .full_wdt.collapse_video_panel
+    %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'online-sys-demo/Videos_Thumbnail.png', :title => "GAMSATReady", :width => "100%", height: "307px"}
+      %source{:src => "http://gradready-prod.s3.amazonaws.com/public/Book%20Tutor%20Video.mp4", :type => "video/mp4"}
+      %source{"data-quality" => "hd", :src => "http://gradready-prod.s3.amazonaws.com/public/Book%20Tutor%20Video.mp4", :type => "video/mp4"}
+
+:javascript
+  $('#collapseVideo').on('show.bs.collapse', function () {
+    $('.video-arrow').removeClass('fa-angle-right');
+    $('.video-arrow').addClass('fa-angle-left');
+  });
+
+  $('#collapseVideo').on('hide.bs.collapse', function () {
+    $('.video-arrow').removeClass('fa-angle-left');
+    $('.video-arrow').addClass('fa-angle-right')
+  });

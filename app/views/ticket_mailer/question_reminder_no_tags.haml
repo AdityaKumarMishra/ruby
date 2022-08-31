@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+  %body
+    %p
+      Dear #{@question.asker_firstname}, we received your question at
+      #{@question.created_at.in_time_zone('Melbourne').strftime('%I:%M %P on %B %-d')},
+      #{@answerer.first_name} will be getting back to you shortly.
+    %p
+      You can view you question at: #{link_to issue_url(@question), issue_url(@question)}
+    %p
+      Kind regards,
+      %br
+      GradReady Student Success Team

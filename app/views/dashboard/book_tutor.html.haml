@@ -1,0 +1,61 @@
+- content_for :page_heading, 'Book Tutor Announcements'
+.dashbord_right
+  .resource_col
+    %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+  .faq_list.para_fs14
+    - if current_user && (current_user.student?)
+      - if !@announcement.nil?
+        .faq_list_col#contact_first_id
+          = render 'announcements/student_announcement', announcement: @announcement, title: 'Mcq Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/book_tutor_video", announcement: @announcement
+    .faq_list_col.table_3_col
+      .new_excercise
+        %h4 Book Tutor
+        - if @time_left > 0
+          %h4.mbot25.avl_appomnt= "Hours available to book: #{@time_left}"
+        - else
+          %h4.mbot25.avl_appomnt Please purchase additional private tutor time to book further appointments
+      .faq_list_col
+
+        .course_frm.filter_box_shadow
+          = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+            .form-group
+              %label{for: "subject"} Subject
+              =f.select(:with_tag, @filterrific.select_options[:subject_tags], { include_blank: 'Please Select Subject' }, class: 'form-control tutor_change', required: true)
+            .form-group
+              %label{for: "state"} State
+              =f.select(:with_location, state_names_for_select.sort, { include_blank: 'Please Select State' }, class: 'form-control tutor_change')
+            .text-center.mtop30.mbot10
+              = f.submit 'Filter', class: 'mg_rht0 default_btn hvr-shutter-in-horizontal'
+              = link_to 'Reset filters', reset_filterrific_url, class: 'mg_rht0 black_default_btn hvr-shutter-in-horizontal'
+
+        = will_paginate @time_slots, renderer: BootstrapPagination::Rails
+
+      .faq_list_col
+        .appointment_div
+          %h4.mbot25 Available Appointments
+          =render(partial: 'dashboard/partial/book_tutor', locals: { availabilities: @time_slots } )
+
+      - if current_user.student?
+        .faq_list_col
+          .appointment_div.pad_top
+            %h4.mbot25.book_appnmnt Booked Appointments
+            =render(partial: 'appointments/partial/appointments_table', locals: { appointments: @booked_appointments } )
+
+:javascript
+  $(document).ready(function(){
+    filter_tutor();
+  });
+  $(".tutor_change").on('change', function(){
+    filter_tutor();
+  });
+
+  function filter_tutor() {
+    $.ajax({
+      url: "/dashboard/filtered_tutors",
+      type: "GET",
+      dataType: 'script',
+      data: {location: $("#filterrific_with_location").val(), subject_tag: $("#filterrific_with_tag").val() },
+    });
+  };

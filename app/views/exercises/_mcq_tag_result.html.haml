@@ -1,0 +1,21 @@
+%ul.tbl_head.listing{class: "#{score_class}"}
+  %li.mobile_mousehover_tool.width_inc
+    %input#test1.first_main_tree{:type => "checkbox"}/
+    %label{for: "exercise_tag_ids_#{tag.id}"}= tag.name
+    %span.heading_tool_tip
+      %p= tag.name
+    %ul.tool_tip
+      %li="Correct : #{result['correct']}"
+      %li="Incorrect : #{result['incorrect']}"
+      %li="Not Attempted : #{result['not_attempted']}"
+      %li="Total : #{result['total']}"
+      %li="Time Taken (Min) : #{result['total_time']}"
+      %li="Time taken per question (Min): #{result['time_per_question']}"
+  %li.mobile_wdt_th.rht56= result['correct']
+  %li.mobile_wdt_th.rht15= result['incorrect']
+  %li.wdth6= result['correct']
+  %li.wdth6= result['incorrect']
+  %li.wdth6= result['not_attempted']
+  %li.wdth6= result['total']
+  %li= result['total_time']
+  %li= result['time_per_question']

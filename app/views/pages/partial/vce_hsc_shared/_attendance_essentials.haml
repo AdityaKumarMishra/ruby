@@ -1,0 +1,10 @@
+#course-package-details
+  %p.u-word-spacing We created this package for you to obtain the full benefits of an Attendance course at a more affordable price.
+  %p.u-word-spacing We left out some of the most labour intensive parts of the course in this package, and passed on the savings to you. However, you still have access to the necessary content to prepare yourself for our Attendance course and to practise.
+  %p.u-word-spacing All online materials are immediately available for access after purchase.
+  - if @product_line == "GAMSAT" && !gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'gamsat_improved_percentile'
+  -elsif @product_line == "UMAT" && !umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'umat_improved_percentile'

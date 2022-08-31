@@ -1,0 +1,89 @@
+!!!
+%html{:lang => "en"}
+  %head
+    = Gon::Base.render_data
+    %title= title
+    %meta{name: 'description', content: meta_description}
+    %meta{name: 'keywords', content: meta_keywords}
+    / Google Tag Manager
+    :javascript
+      logged_user = "#{current_user.present? ? current_user.id : nil}";
+      dataLayer = [{'userID': logged_user}];
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+      {'gtm.start': new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M9MF8XK');
+    / End Google Tag Manager
+    = stylesheet_link_tag 'student_page', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'student_page', 'data-turbolinks-track' => true
+    = javascript_include_tag 'jquery.validate', 'data-turbolinks-track' => true
+    = javascript_include_tag Ckeditor.cdn_url
+    = javascript_include_tag 'https://polyfill.io/v3/polyfill.min.js?features=es6'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML.js', id: "MathJax-scrip"
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", rel: "stylesheet"}/
+    = sentry_tag
+  - if map_path_to_prodline(request.env['PATH_INFO']) == "umat-preparation-courses" || map_path_to_prodline(request.env['PATH_INFO']) == "umat"
+    - product_line_type = "umat"
+  -else
+    - product_line_type = "gamsat"
+
+  = favicon_link_tag '/images/favicon-'+ product_line_type +'.png',type: 'image/png'
+  = csrf_meta_tags
+  %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+  = yield(:head)
+  = render partial: 'layouts/structured_data'
+
+  %body{class: ("umat_body" if product_line_type == "umat")}
+    - if request.env['PATH_INFO'] == "/umat-preparation-courses" || request.env['PATH_INFO'] == "/gamsat-preparation-courses"
+      .overlay_page
+    = render_public_mob_bar request.env['PATH_INFO'], product_line_type
+    = render partial: 'toastr_rails/flash'
+
+    .page_wrapper
+      .mobile_top_header
+        - if current_product_line == "umat"
+          %a.mob_logo{href: "/"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_gradready_logo.png', alt: 'img', class: 'mobile_header_logo'
+        - else
+          %a.mob_logo{href: "/"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/header-logo.svg', alt: 'img', class: 'mobile_header_logo'
+        %a.mobile_menu_icon{href: "javascript:void(0)"} Menu
+      / desktop view top nav bar for umat and gamsat after login
+      = render_public_nav_bar request.env['PATH_INFO'], product_line_type
+      -unless content_for?(:show_dashboard_bg)
+        %section.talk_to_bg.home_faq.dashboard_bg
+          .container
+            .support_col.looking_corse.text-center.gradready_question
+              %h1
+                = yield(:page_heading)
+
+      %section.faq_wrapper.admin_page.faq_details
+        .row
+          .container
+            -unless content_for?(:show_left_panel)
+              = render 'dashboard/partial/left_panel'
+            = content_for?(:content) ? yield(:content) : yield
+    = render partial: 'layouts/public_footer', locals: {product_line_type: product_line_type}
+
+    = render partial: 'section_item_attempts/partial/status'
+    .dynamic_time_rem
+      = render partial: 'exercises/status'
+.loader_onclick
+  #loading
+    .loader_col
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+      loading...
+      %br
+        %b
+          Do not press Back or Refresh
+
+:javascript
+  function dd_loader(){
+    $( window ).bind('beforeunload', function(){
+      $('.loader_onclick').show();
+    });
+  }

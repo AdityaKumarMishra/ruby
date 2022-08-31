@@ -1,0 +1,11 @@
+.feature-icon-container.col-md-6{:id => "vce-attendance_tutorials"}
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Attendance Tutorials
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through questions with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.

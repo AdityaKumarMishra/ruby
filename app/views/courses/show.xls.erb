@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Course Summary" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">First Name</Data></Cell>
+        <Cell><Data ss:Type="String">Last Name</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Registered at</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+
+      </Row>
+      <% @course.enrolments.each do |enrolment| %>
+        <% if enrolment.user %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= enrolment.user.first_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= enrolment.user.last_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= enrolment.user.email %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= enrolment.user.phone_number %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= enrolment.user.created_at %></Data></Cell>
+            <% if enrolment.trial && enrolment.user.upgraded_user? %>
+              <Cell><Data ss:Type="String">Upgraded</Data></Cell>
+            <% elsif enrolment.trial && enrolment.trial_expired? %>
+              <Cell><Data ss:Type="String">Expired</Data></Cell>
+            <% elsif enrolment.trial %>
+              <Cell><Data ss:Type="String">Active</Data></Cell>
+            <% else %>
+              <Cell><Data ss:Type="String">None</Data></Cell>
+            <% end %>
+          </Row>
+        <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

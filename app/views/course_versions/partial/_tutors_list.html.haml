@@ -1,0 +1,17 @@
+-if course_version.tutors_with_subjects.present?
+  %h3 Listing tutors
+  .table-responsive
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th Name
+          %th Email
+          %th Subject
+
+      %tbody
+        - course_version.tutors_with_subjects.each do |item|
+          %tr{'data-link': url_for(subject_path(item[:subject]))}
+            %td= item[:tutor_name]
+            %td= item[:tutor_email]
+            %td= item[:subject]
+  %br

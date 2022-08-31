@@ -1,0 +1,53 @@
+- title "Free Resources | UCAT Preparation Courses"
+- meta_description "Gain exclusive access to our free UCAT resources, including sample questions, practice tests, and study tips and tricks from experienced tutors!"
+- meta_keywords "UCAT Resources, UCAT Blogs"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        Free Resources Available Under UCAT
+        %sup ®
+        Courses
+.full_width.pad50
+  .text-center.container
+    .free_res_content
+      %p.aos-item.sub_heading_txt{"data-aos" => "fade-up", "data-aos-duration" => "1300"} We're all about providing you with as much information as possible, to ensure you are fully prepared for your studies! The GradReady team have worked tirelessly to create some awesome free resources for you to download and enjoy. Several all-nighters and a few cans of energy drinks later, we are proud to present our brand-new free resources page! Here you will find everything from eBooks and blogs, to study plans and free trials. We intend to keep updating this page with more cool goodies, so make sure you check back often!
+%section
+  .row.free_resource_list.gray_list.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+    .container
+      .col-lg-12
+        .col-lg-3.col-md-4.col-sm-4.col-xs-12.free_resource_img
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_get_advice_img.png', class: 'img-responsive'
+        .col-lg-9.col-md-8.col-sm-8.col-xs-12
+          %h2 Get Advice
+          %p Would you like advice on planning your studies? How about your medical school application process? You can contact us and ask us anything you want - all free of charge. We have a dedicated team of tutors and GradReady support staff standing by, who will be able to answer all of your questions. We are here to help throughout the year, so don't hesitate to ask!
+          %a.default_btn.hvr-shutter-in-horizontal{href: "/umat-preparation-courses/contact"} Get advice
+  .row.free_resource_list.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+    .container
+      .col-lg-12
+        .col-lg-3.col-md-4.col-sm-4.col-xs-12.free_resource_img
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_study_plan_img.png', class: 'img-responsive'
+        .col-lg-9.col-md-8.col-sm-8.col-xs-12
+          %h2 Study Plan
+          %p We've created a study plan to help you stay organised and focused during your exam preparation. Many people underestimate the difficulty and the importance of writing a good study plan - it requires understanding concepts behind education, pedagogical theories, and the intricacies of each subject area - so you can efficiently combine topics that complement each other and build the foundation for the next challenge. We've involved our most knowledgeable tutors from each section to put together this plan for you. Whether you have 2 or 3 months left to prepare for your exam, we have designed a study plan that works with your time frame. You are able to download the Study Plan under the Documents tab when you sign up for the Free Study Guide.
+          %a.default_btn.hvr-shutter-in-horizontal{href: "/#free_study_guide"} Download
+  .row.free_resource_list.gray_list.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1500"}
+    .container
+      .col-lg-12
+        .col-lg-3.col-md-4.col-sm-4.col-xs-12.free_resource_img
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_blogs_img.png', class: 'img-responsive'
+        .col-lg-9.col-md-8.col-sm-8.col-xs-12
+          %h2 Blog
+          %p
+            Every week we invite tutors, students (including those that are currently studying medicine), subject matter experts, and distinguished guests to write a short blog. We post these blogs on our website, and they provide a fascinating insight into many different topics and areas. Wonder what life as a first-year medical student is like? Want to know how one of our tutors scored in the 99th percentile on his UCAT
+            %sup ®
+            exam? Check out our blogs!
+          %a.default_btn.hvr-shutter-in-horizontal{href: "/blog/umat-preparation-courses"} View
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

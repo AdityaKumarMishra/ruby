@@ -1,0 +1,77 @@
+- if @ucat_course
+  = form_tag update_answer_exercise_mcq_attempts_path(@exercise), id: 'mcqa-form', method: :put  do
+    = render '/ucat/ucat_instructions'
+- else
+  - content_for :page_heading, 'Mcq Attempts'
+  .dashbord_right
+    - if @exercise.present? && @mcq_attempts.present?
+      - if @exercise.amount > @mcq_attempts.count || @exercise.amount < @mcq_attempts.count
+        .alert.alert-danger
+          = "We have #{@mcq_attempts.count} questions that matches your selected topic and difficulty level."
+    - if @exercise.present?
+      = form_tag update_answer_exercise_mcq_attempts_path(@exercise), id: 'mcqa-form', method: :put  do
+        -if @exercise.question_style.eql?(1)
+          = render 'single_question_view'
+        -else
+          = render 'multiple_question_view'
+      %br
+:css
+  .tab-content > .tab-pane {
+    display: none;
+  }
+
+  .tab-content > .active {
+    display: block;
+  }
+
+:javascript
+  $('a').not('#mcqa-form a, #sidebar-tab a').click(function(e) {
+    getConfirmation(e);
+  });
+
+
+  function getConfirmation(e){
+    var c_data;
+    if(Cookies.get('current_sa') != undefined)
+      c_data = Cookies.get('current_sa')
+    else
+      c_data = Cookies.get('current_exe_atmpt')
+    if (c_data != undefined){
+      c_data = JSON.parse(c_data)
+      var name = c_data['name']
+      var retVal = confirm("You are trying to navigate out of “"+ name +"”.Please click Ok if you would like to pause the current session or press Cancel if you would like to continue.");
+       if( retVal == true ){
+        pauseExcercise();
+        return true;
+       }
+       else{
+          e.preventDefault();
+          return false;
+       }
+    }
+  }
+
+  $("#submit_mcq_attempt").click(function(){
+    var has_unanswered_questions = false
+    $( ".answers" ).each(function( index, element ) {
+      if($(element).find("input:radio:checked").length > 0){
+      }else{
+        has_unanswered_questions = true
+      }
+    });
+
+    if(has_unanswered_questions == true){
+      var status = confirm("There are unfinished questions. Do you want to proceed ?");
+      if(status == false){
+        return false;
+      }
+      else{
+        $("#mcqa-form").submit();
+      }
+    }else
+    {
+      $("#mcqa-form").submit();
+    }
+  });
+  CalculateMcqStemTime()
+  CalculateMcqStemTimeSingle()

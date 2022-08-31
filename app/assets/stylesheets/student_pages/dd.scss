@@ -1,0 +1,209 @@
+/************* use sprite *****************/
+.ddcommon {
+  position: relative;
+  display: -moz-inline-stack;
+  outline: none;
+  width: 100% !important;
+  zoom: 1;
+  display: inline-block;
+  *display: inline;
+  cursor: default;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+}
+.dd {
+  .ddTitle {
+    background-image: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/select_down_arrow.svg");
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    background-color:  #fff;
+    border: 1px solid #ddd;
+    padding: 0;
+    border-radius: 0px;
+    background-size: 14px;
+  }
+  .ddChild {
+    width: 100%;
+    z-index:99999 !important;
+    li {
+      padding: 5px 5px 5px 41px;
+      background-color: #fff;
+      border-bottom: 0;
+      position: relative;
+      min-height: 39px;
+      &:hover {
+        background: #00883a;
+        background: #008e3c;
+        background: -moz-linear-gradient(top, #008e3c 0%, #008036 100%);
+        background: -webkit-linear-gradient(top, #008e3c 0%,#008036 100%);
+        background: linear-gradient(to bottom, #008e3c 0%,#008036 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008e3c', endColorstr='#008036',GradientType=0 );
+        color: #fff;
+      }
+    }
+  }
+}
+.smallIcons {
+  .ddTitleText {
+    position: relative;
+    font: normal normal normal 14px/1 FontAwesome;
+    padding: 12px 0 12px 40px;
+    width: 100%;
+    display: inline-block;
+  }
+}
+.ddTitleText {
+  .ddlabel {
+    font-family: "open sans";
+    overflow-x: hidden;
+    font-weight: 500;
+    color: #111;
+    font-size: 16px;
+  }
+  &:before {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 30px;
+    height: 38px;
+    font: normal normal normal 16px/1 FontAwesome;
+    padding: 0px 0;
+    line-height: 38px;
+  }
+}
+.ddChild {
+  li {
+    &:before {
+      position: absolute;
+      left: 10px;
+      top: 0;
+      width: 30px;
+      height: 38px;
+      font: normal normal normal 16px/1 FontAwesome;
+      padding: 0px 0;
+      line-height: 38px;
+    }
+  }
+  li.announcement_icon {
+    &:before {
+      content: "\f0a2";
+    }
+  }
+  li.calendar_icon {
+    &:before {
+      content: "\f274";
+    }
+  }
+  li.diag_assessment_icon {
+    &:before {
+      content: "\f02b";
+    }
+  }
+  li.mcq_icon {
+    &:before {
+      content: "\f055";
+    }
+  }
+  li.video_icon {
+    &:before {
+      content: "\f03d";
+    }
+  }
+  li.written_res_icon {
+    &:before {
+      content: "\f02d";
+    }
+  }
+  li.my_essay_icon {
+    &:before {
+      content: "\f040";
+    }
+  }
+  li.exam_icon {
+    &:before {
+      content: "\f15b";
+    }
+  }
+  li.getclarity_icon {
+    &:before {
+      content: "\f06e";
+    }
+  }
+  li.book_tutor_icon {
+    &:before {
+      content: "\f271";
+    }
+  }
+  li.mock_exam_icon {
+    &:before {
+      content: "\f15b";
+    }
+  }
+  li.feature_icon {
+    &:before {
+      content: "\f07a";
+    }
+  }
+}
+.ddTitleText.announcement_icon {
+  &:before {
+    content: "\f0a2";
+  }
+}
+.ddTitleText.calendar_icon {
+  &:before {
+    content: "\f274";
+  }
+}
+.ddTitleText.diag_assessment_icon {
+  &:before {
+    content: "\f02b";
+  }
+}
+.ddTitleText.mcq_icon {
+  &:before {
+    content: "\f055";
+  }
+}
+.ddTitleText.video_icon {
+  &:before {
+    content: "\f03d";
+  }
+}
+.ddTitleText.written_res_icon {
+  &:before {
+    content: "\f02d";
+  }
+}
+.ddTitleText.my_essay_icon {
+  &:before {
+    content: "\f040";
+  }
+}
+.ddTitleText.exam_icon {
+  &:before {
+    content: "\f15b";
+  }
+}
+.ddTitleText.getclarity_icon {
+  &:before {
+    content: "\f06e";
+  }
+}
+.ddTitleText.book_tutor_icon {
+  &:before {
+    content: "\f271";
+  }
+}
+.ddTitleText.mock_exam_icon {
+  &:before {
+    content: "\f15b";
+  }
+}
+.ddTitleText.feature_icon {
+  &:before {
+    content: "\f07a";
+  }
+}

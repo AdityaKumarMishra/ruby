@@ -1,0 +1,22 @@
+.panel.panel-default
+  .panel-heading
+    =course_version.title
+    %span.label.label-default=link_to "Show course", course_course_version_path(course_version.course, course_version)
+    .panel-body
+      %p
+        %b Description:
+        =course_version.description
+      %p
+        %b Date added:
+        =format_date_long course_version.date_added
+      %p
+        %b Class size:
+        =course_version.class_size
+      %p
+        %b Students count:
+        =course_version.students_count
+      %p
+        %b expiry date:
+        =format_date_long course_version.expiry_date
+
+      = render :partial => 'dashboard/partial/course_sessions', :locals => {:course_version => course_version}

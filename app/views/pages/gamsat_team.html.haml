@@ -1,0 +1,750 @@
+- title "GAMSAT Tutors, Staff, and Content Developers | GradReady"
+- meta_description "Meet our awesome staff members, GAMSAT tutors, and content developers! From current medical students to PhD candidates, find out about their areas of study and previous experience!"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        GAMSAT
+        %sup ®
+        Courses Tutor Team
+.blog_hdr_bnr
+  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_team_bnr_img.svg'
+%section
+  .row.team_gray_bg.middle_course_section
+    .container
+      .col-lg-12.text-center
+        %ul#filters.clearfix.cstm_filter.team_listnav
+          %li
+            %a.filter.active{"data-filter" => ".melbourne, .sydney, .brisbane, .adelaide, .perth, .development-leads", href: "javascript:void(0)"} All
+          %li
+            %a.filter{"data-filter" => ".melbourne", href: "javascript:void(0)"} Melbourne
+          %li
+            %a.filter{"data-filter" => ".sydney", href: "javascript:void(0)"} Sydney
+          %li
+            %a.filter{"data-filter" => ".brisbane", href: "javascript:void(0)"} Brisbane
+          %li
+            %a.filter{"data-filter" => ".adelaide", href: "javascript:void(0)"} Adelaide
+          %li
+            %a.filter{"data-filter" => ".perth", href: "javascript:void(0)"} Perth
+          %li
+            %a.filter{"data-filter" => ".development-leads", href: "javascript:void(0)"} Academic Leads
+          %li
+            %a.filter{"data-filter" => ".essay-markers", href: "javascript:void(0)"} Essay Markers
+        #portfoliolist
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "jonathan_dunk",
+                  tutor_name: "Jonathan",
+                  tutor_image: "jonathan_dunk.jpg",
+                  course: "Humanities (Sydney)" do
+                  Jonathan Dunk is the Kenneth Reed Scholar at the University of Sydney, where he teaches Literature and Critical Theory. He is a widely published scholar and creative writer, has been shortlisted for the Overland Victoria University prize, and awarded the A.D. Hope prize.
+              .item-content
+                %h4.text-center Jonathan
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "peitong_li",
+                  tutor_name: "Peitong",
+                  tutor_image: "peitong_li.jpg",
+                  course: "Operations Manager / Chemistry (Melbourne)" do
+                  Peitong is currently a medical student at the University of Melbourne, and has been part of the GradReady team since 2016. He studied chemistry during his undergraduate degree, and has taught high school, university and GAMSAT students alike. Drawing from his extensive tutoring experience, Peitong strives to ensure all students at GradReady have the best chance of acing the GAMSAT in his current role as an operations manager. Peitong has scored in the top 1% for sections II and III of the GAMSAT.
+              .item-content
+                %h4.text-center Peitong
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "claire_baxter",
+                  tutor_name: "Claire",
+                  tutor_image: "claire_baxter.jpg",
+                  course: "Lead Biology Tutor (Adelaide)" do
+                  I am a current medical student at Flinders University. I have been working with Gradready since 2016 as a biology tutor. In my spare time I run, box and spend time with my labradoodle Archie.
+              .item-content
+                %h4.text-center Claire
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "eleanor_everist",
+                  tutor_name: "Eleanor",
+                  tutor_image: "eleanor_everist.jpg",
+                  course: "Humanities Tutor (Melbourne)" do
+                  Eleanor holds a Bachelor of Arts (Hons) from the University of Melbourne, which she completed in 2015. She has been tutoring at VCE level since 2011. She is a passionate reader and writer, and loves working with students to improve their knowledge of and skills in the Humanities.
+              .item-content
+                %h4.text-center Eleanor
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "elliot_dolan_evans",
+                  tutor_name: "Elliot",
+                  tutor_image: "elliot_dolan_evans.jpg",
+                  course: "Lead Humanities Tutor (Melbourne)" do
+                  Elliot Dolan-Evans is a PhD student in political economy and feminist studies, a non-practicing medical practitioner, and a law graduate, awaiting admission in the Supreme Court of Victoria. Elliot was awarded an MBBS at Griffith University and hasy completed his internship at the Prince Charles Hospital. Throughout medical school and his early practice, Elliot has been strongly involved in the medical community. During medical school he pioneered and founded the award-winning Surgical Interest Association (www.surgia.org), helped establish the national student surgical body, the Australasian Students’ Surgical Association, represented his fellow medical students in roles with the Griffith medical society and in the university, and was also involved in work with the Australian Medical Students Association. Elliot published six research papers during his time in medical school, in neuroscience, medical/surgical/dental education, and thyroid cancer. Throughout medical school Elliot also held down numerous casual employments, as well as volunteering positions in refugee and asylum seeker health and legal representation. He still volunteers his time with the Australian Lawyers for Human Rights, the Refugee and Immigration Legal Service, the Asylum Seeker Resource Centre, and the Salvation Army.
+              .item-content
+                %h4.text-center Elliot
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "lee_graham",
+                  tutor_name: "Lee",
+                  tutor_image: "lee_graham.jpg",
+                  course: "Lead Physics Tutor (Melbourne)" do
+                  Lee is a current medical student at the University of Melbourne, and has completed a Bachelor of Science (Physics) at Melbourne and a Masters of Medical Physics at RMIT. He has tutored maths and physics at a high school and university level for several years. Lee scored in the top 0.1% for the GAMSAT overall and in SIII.
+              .item-content
+                %h4.text-center Lee
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "katherine_lee",
+                  tutor_name: "Katherine",
+                  tutor_image: "katherine-lee.jpg",
+                  course: "Chemistry (Brisbane)" do
+                  I'm currently in my final year as a PhD candidate with the School of Medicine. Teaching is my passion and I've been with GradReady since 2016 and have taught students from various backgrounds and different age groups both private and in a lecture setting. My philodphy in learning, "love what you learn!"
+              .item-content
+                %h4.text-center Katherine
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "alex_woolley",
+                  tutor_name: "Alex",
+                  tutor_image: "alexander_woolley.jpg",
+                  course: "Biology (Sydney)" do
+                  Having completed a Bachelor of Science with Honours, Alex is now completing an MD at the University of Sydney. He has been tutoring for over four years, ranging from high school biology, chemistry and physics to university level biomedical sciences and Gamsat. He scored in the top 1% for section 3 and hopes to help you improve in both knowledge and exam technique.
+              .item-content
+                %h4.text-center Alex
+
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "david_wilkins",
+                  tutor_name: "David",
+                  tutor_image: "david_wilkins.jpg",
+                  course: "Biology (Sydney)" do
+                  David is a current MD student at the University of Sydney. He previously worked as a scientist and holds a PhD in molecular genetics from UNSW. David has been teaching at the undergraduate and postgraduate level for a decade, and remains active in teaching and research while studying medicine.
+              .item-content
+                %h4.text-center David
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "charlie_tran",
+                  tutor_name: "Charlie",
+                  tutor_image: "charlie_tran.jpg",
+                  course: "Chemistry (Brisbane)" do
+                  Charlie is currently a tutor at GradReady. He has a storied history in teaching for undergraduate Science courses and as a tutor for GradReady.
+              .item-content
+                %h4.text-center Charlie
+          .portfolio.development-leads{"data-cat" => "development-leads"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "development-leads",
+                  tutor_id: "stewart-saunders",
+                  tutor_name: "Dr. Stewart",
+                  tutor_image: "stew.jpg",
+                  course: "Humanities Tutor (Melbourne)" do
+                  Stewart has lectured and tutored in philosophy at UWA, Edith Cowan University, Monash University, Australian National University and the University of Sydney.
+                  He holds a PhD in philosophy from ANU and is currently enrolled in his third year of medicine at the University of Melbourne.
+              .item-content
+                %h4.text-center Dr. Stewart
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "ivonne_guevara",
+                  tutor_name: "Ivonne",
+                  tutor_image: "ivonne_guevara.jpg",
+                  course: "Physics (Brisbane)" do
+                  A PhD graduate in Physics from Griffith University, Ivonne also holds a MSc and a Bachelor in Physics from the National University of Colombia. She has taught undergraduate and honours courses in Physics and Maths, and carries over 14 years experience as a secondary and tertiary level private tutor of Maths, Physics and Programming. She is passionate about sharing her knowledge to provide her students with confidence and independence. Ivonne works as a lecturer and researcher in quantum physics and on her spare time she enjoys swimming, practising yoga, reading Latin-American literature and watching old American movies.
+              .item-content
+                %h4.text-center Ivonne
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "peter_cui",
+                  tutor_name: "Peter",
+                  tutor_image: "peter_cui.jpg",
+                  course: "Physics (Melbourne)" do
+                  Peter is a final year Doctor of Medicine (MD) student at the University of Melbourne. He is passionate about research and teaching, particularly in Physics and Artificial Intelligence systems. He has extensive experience in lecturing in the sciences, particularly in Physics. His other interests include snowboarding, traveling and chess. Peter scored in the top 1% for Section III of the GAMSAT.
+              .item-content
+                %h4.text-center Peter
+          .portfolio.development-leads{"data-cat" => "development-leads"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "development-leads",
+                  tutor_id: "damian",
+                  tutor_name: "Dr. Damian",
+                  tutor_image: "damian.png",
+                  course: "Humanities Tutor (Adelaide)" do
+                  Damian graduated top of his class with a Bachelor of Medical Biotechnology with Honours from the University of South Australia before completing a PhD in Molecular Biology
+                  at the University of Adelaide. He subsequently spent six years working for the University of Copenhagen, Denmark,
+                  first as a post-doctoral scientist and then as the recipient of a prestigious Marie Curie Fellowship.
+                  Damian has published over a dozen papers in international journals, presented his research at numerous international conferences,
+                  and was selected to represent the Australian Society of Plant and Animal Scientists at the 2013 Hope Meeting in Tokyo, Japan;
+                  a mentoring workshop with seven Nobel Laureates. Damian previously worked for 18 months as an English language instructor in Tokyo,
+                  and has tutored and given lectures in the fields of biology and biochemistry at the Universities of Adelaide and Copenhagen.
+                  He is currently completing the first year of his MD at Flinders University. Damian took the GAMSAT exam in 2013 and scored in the top 3% for Section I,
+                  the top 2% for Section II, and the top 1% for Section III.
+              .item-content
+                %h4.text-center Dr. Damian
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "shihab_siddiquee",
+                  tutor_name: "Shihab",
+                  tutor_image: "shihab_siddiquee.jpg",
+                  course: "Physics (Adelaide)" do
+                  Shihab is a medical student at Flinders University. He has six years experience tutoring a wide variety of topics at secondary and tertiary level. Shihab is passionate about innovative pedagogies to improve learning and hopes to inspire his students to pursue health careers.
+              .item-content
+                %h4.text-center Shihab
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "simon",
+                  tutor_name: "Simon",
+                  tutor_image: "simon.jpg",
+                  course: "Physics (Adelaide)" do
+                  Simon recently completed a PhD in Physics. As a member of the Pierre Auger Collaboration, he investigated the atomic mass composition of very high energy cosmic rays. Simon has two years of experience tutoring physics and mathematics subjects at high school and university levels in various formats. In his spare time, he enjoys sport and gaming.
+              .item-content
+                %h4.text-center Simon
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "angus_grant",
+                  tutor_name: "Angus",
+                  tutor_image: "angus_grant.jpg",
+                  course: "Physics (Melbourne)" do
+                  Angus is a BSc graduate from Melbourne University, with a major in Pharmacology. He has interests in many fields, including humanities and the life sciences, but, having scored in the top 0.1% in section III of the GAMSAT, focuses mainly on tutoring Physics. His other interests include painting, making music, poetry and AFL football.
+              .item-content
+                %h4.text-center Angus
+          .portfolio.brisbane.essay-markers{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "suneha",
+                  tutor_name: "Suneha",
+                  tutor_image: "suneha_lal.jpg",
+                  course: "Humanities (Brisbane)" do
+                  Having recently graduated from her Bachelor of Science/Arts degrees, Suneha is a new University of Queensland alumnus. Suneha is intensely passionate about literature and literary criticism, and she has gained over five years' experience as a tutor of English and creative writing. In her free time, you may catch Suneha sketching the hours away as a freelance digital illustrator, or taking her Staffy on unplanned adventures across Queensland. Suneha scored in the top 1% for Sections I and II of the GAMSAT.
+              .item-content
+                %h4.text-center Suneha
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "dimitris_lazos",
+                  tutor_name: "Dimitri",
+                  tutor_image: "jimtt_dimitris_lazos.jpg",
+                  course: "Physics (Sydney)" do
+                  Dimitri holds a PhD and 3 Engineering Degrees and works as an academic in UNSW and a professional tutor since 2011. Dimitri has helped over 200 private students of all levels improve their understanding in Physics, Biology, Chemistry and Mathematics and has been running university and GAMSAT courses since 2013. Additionally, Dimitri has extensive experience in helping students with exam and time management skills that are essential for GAMSAT success.
+              .item-content
+                %h4.text-center Dimitri
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "jayden",
+                  tutor_name: "Jayden",
+                  tutor_image: "jayden.jpg",
+                  course: "Physics (Sydney)" do
+                  Jayden holds a Masters of Professional Engineering (Structural) and a Bachelor of Science (Advanced) from the University of Sydney with Honours in Microbiology. He also majored in Physics prior to his Honours year, and has taught physics and mathematics at a high school level. Jayden scored in the top 1% for Section III of the GAMSAT, and has been teaching at GradReady since 2014
+              .item-content
+                %h4.text-center Jayden
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "nick",
+                  tutor_name: "Nick",
+                  tutor_image: "nick.jpg",
+                  course: "Biology (Adelaide)" do
+                  Nick completed a Bachelor of Arts degree in Spanish in the United States. Throughout his degree he worked as an Undergraduate Assistant teaching classes, tutoring students, and developing course curriculum. Throughout university he also studied various Physics, Biology, and Calculus courses developing an interest in the sciences and he scored in the top 1% in section 3 of the GAMSAT. Nick currently works at the Women's and Children's Hospital as a Pharmacy Assistant and in his free time enjoys sport, exercise, and coffee.
+              .item-content
+                %h4.text-center Nick
+          .portfolio.brisbane.essay-markers{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "hannah",
+                  tutor_name: "Hannah",
+                  tutor_image: "hannah_laycock.jpg",
+                  course: "Humanities/Biology (Brisbane)" do
+                  Hannah has a Bachelor of Science in Biology, half a Bachelor of Paramedic Practice and is in the processof obtaining her Doctor of Medicine. She has taught English, Maths, Biology, First Aid and Health subjects to students of all ages. In her spare time, Hannah is a chronic volunteer, and has been involved in community service, leadership development and youth mentoring programs. She is the 2018 President of the Supporting Women In Medicine Society at UQ. Originally from Sydney, she moved to sunny Brisbane in 2016, and has been longing for a decent winter ever since.
+              .item-content
+                %h4.text-center Hannah
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "aaron__bhat",
+                  tutor_name: "Aaron",
+                  tutor_image: "aaron_bhat.jpg",
+                  course: "Physics (Melbourne)" do
+                  Hi! My name is Aaron and I am an MD student. I enjoy teaching for the opportunities it gives to interact with like-minded people, while also getting to help people achieve their goals, and engage with really interesting content.
+              .item-content
+                %h4.text-center Aaron
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "chelsea_aitken",
+                  tutor_name: "Chelsea",
+                  tutor_image: "chelsea_aitken.jpg",
+                  course: "Biology (Brisbane)" do
+                  Chelsea is a biology tutor in Brisbane with GradReady. She recently completed a Bachelor of Science at UNSW, majoring in Molecular and Cell Biology. Chelsea is currently in the process of obtaining her Doctor of Medicine at the University of Queensland.
+              .item-content
+                %h4.text-center Chelsea
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "robert_ellis",
+                  tutor_name: "Robert",
+                  tutor_image: "robert_ellis.jpg",
+                  course: "Humanities and Physics Tutor (Brisbane)" do
+                  Robert graduated from UQ with a Bachelor of Science in Biomedical Science in 2013, and a Bachelor of Health Sciences with Honours Class I in 2014.
+                  He commenced in the MD program at UQ in 2015, and in 2016 began concurrently studying a Master of Philosophy in the fields of nephrology and urology.
+                  Robert has taught both undergraduate and postgraduate courses in pathology, physiotherapy, anatomy and nutrition/dietetics at UQ.
+                  He has worked with GradReady since late 2014, predominantly specializing in biology and physics tutoring. He scored in the top 4% for all sections of the GAMSAT.
+              .item-content
+                %h4.text-center Robert
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "rebecca_jury",
+                  tutor_name: "Rebecca",
+                  tutor_image: "rebecca_jury.jpg",
+                  course: "Humanities (Adelaide)" do
+                  Rebecca has completed a Bachelor of Health Science (Hons) from the University of Adelaide and is currently in her second year of study in the Flinders University Doctor of Medicine program. This is also her second year of tutoring humanities with GradReady and she enjoys monologuing about Ancient Greece, Shakespeare, and why you shouldn't write about WWII in Section II.
+              .item-content
+                %h4.text-center Rebecca
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "amy_li",
+                  tutor_name: "Amy",
+                  tutor_image: "amy_li.jpg",
+                  course: "Biology (Brisbane)" do
+                  Amy graduated with a High Distinction B. Medical Science from the University of New South Wales, with First Class Honours. Currently, she is an MD student at the University of Queensland, balancing this with her passion for St John volunteering, badminton, and involvement in a medical, and surgical society. In addition, Amy enjoys teaching, exemplified by over 6 years of dedication to students ranging from year 3 to university, focusing on English, maths, biology, chemistry.
+              .item-content
+                %h4.text-center Amy
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "lewis_tran",
+                  tutor_name: "Lewis",
+                  tutor_image: "lewis_tran.jpg",
+                  course: "Biology (Sydney)" do
+                  Lewis is currently a medical student at the University of Sydney. He recently graduated from the University of New South Wales with a Bachelor of Medical Science, majoring in Human Pathology. He has been providing tuition services in biology for over 3 years. With a focus on class engagement and learning through humour, every class is guaranteed to be exciting and memorable. Lewis scored in the top 5% of candidates in his first attempt, and top 1% in his second attempt at the GAMSAT. His hobbies include dance, music and gaming.
+              .item-content
+                %h4.text-center Lewis
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "kellie",
+                  tutor_name: "Kellie",
+                  tutor_image: "kellie.jpg",
+                  course: "Humanities (Brisbane)" do
+                  Kellie is a tutor in the QUT school of Advertising Marketing and Public Relations, and is currently completing a Master's of Philosophy in Marketing Research. So far she has also completed a Master of Business, majoring in Public Relations, and a Bachelor of Arts from the University of Queensland, majoring in Political Science, and minoring in English Literature. She is passionate about teaching, and is proud to be working with the next generation of medical professionals to improve their reasoning and communication skills.
+              .item-content
+                %h4.text-center Kellie
+          .portfolio.brisbane.essay-markers{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "humaira_saeed",
+                  tutor_name: "Humaira ",
+                  tutor_image: "humaira_saeed.jpg",
+                  course: "Essay marker (Brisbane)" do
+                  Humaira is a graduate of the University of Queensland. A literature lover and writer at heart, she works as a journalist and tutors English Literature.
+              .item-content
+                %h4.text-center Humaira
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "cancho",
+                  tutor_name: "Cancho",
+                  tutor_image: "cancho.jpg",
+                  course: "Biology/Chemistry (Melbourne)" do
+                  Cancho has been part of the GradReady team since 2014 as a Section III tutor and essay marker. He is currently a medical student at the University of Melbourne. Outside the classroom he enjoys Spotify and all things sport.
+              .item-content
+                %h4.text-center Cancho
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "james_owens",
+                  tutor_name: "James",
+                  tutor_image: "james_owen.jpg",
+                  course: "Physics (Melbourne)" do
+                  I am currently an MD student at the University of Melbourne, and an experienced tutor in Physics with GradReady. Prior to studying medicine, I graduated with Honours in Physics and a University Medal, and have spent the better part of a decade tutoring up-and-coming physicists and Medicine hopefuls. I have been with GradReady for three years, and am a regular face on the summer Live Tutorial circuit, leading the Physics classes.
+              .item-content
+                %h4.text-center James
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "bibiana_huggins",
+                  tutor_name: "Bibiana",
+                  tutor_image: "bibiana_huggins.jpg",
+                  course: "Humanities Tutor/Essay Marker (Melbourne)" do
+                  Bibiana is in the third year of her PhD in Anthropology at the University of Melbourne.
+                  After majoring in Spanish and Anthropology during undergrad, she now combines her love of all things Latin America with her current ethnographic research of Panama.
+                  In addition to this, Bibiana currently tutors undergraduate subjects at Melbourne University,
+                  co-convenes the postgrad group Ethnoforum, and spends her free time obsessing over her pet rabbit.
+              .item-content
+                %h4.text-center Bibiana
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "alister_jones",
+                  tutor_name: "Alister",
+                  tutor_image: "alister_jones.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  A teacher by trade who is currently working as a teacher in Berlin.
+              .item-content
+                %h4.text-center Alister
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "robert_callan",
+                  tutor_name: "Robert",
+                  tutor_image: "robert_callan.jpg",
+                  course: "Biology (Perth)" do
+                  Robert is an MD student at UWA and completed a Bachelor of Science and Arts at Sydney University in 2009.  He scored in the 96th percentile for the GAMSAT and has been tutoring biology for the past year.  Spare time is something he only dreams about now that he is studying medicine and has a 4-year-old daughter, but he does enjoy cooking, helping his 4-year old push boundaries, and believing he still has a chance of playing in the NBA one day.
+              .item-content
+                %h4.text-center Robert
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "natalia_evertsz",
+                  tutor_name: "Natalia",
+                  tutor_image: "natalia_evertsz.jpg",
+                  course: "Humanities (Melbourne)" do
+                  Natalia is a B.A. graduate (major French, minor Creative Writing) from Melbourne University, and has also recently completed a B.Sc. (Immunology). In addition to tutoring for the GAMSAT, she tutors essay writing and biomedicine for the University of Melbourne colleges. Natalia is a published author and writes feature articles for a selection of national magazines. She is currently completing an MD at Melbourne University.
+              .item-content
+                %h4.text-center Natalia
+          .portfolio.sydney.essay-markers{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "pauline_clark",
+                  tutor_name: "Pauline",
+                  tutor_image: "pauline_clark.jpg",
+                  course: "Humanities (Sydney)" do
+                  Pauline is a Law/Arts graduate from the University of Western Australia (LLB, BA, English Major). During her double degree, she received the UWA Pynt and Partners Award for the highest achieving student in Contemporary Australian Literature (ENGL2243). Her passion for the Arts also led her to receive an opportunity from the Australian Publishers Association where she contributed to the operations of a publishing house including editing across literary genres.
+                  Pauline’s career paths have crossed law, federal and state government, tech and publishing. Following her relocation to New South Wales, she has contributed her skills to organisations including Apple Pty Ltd and NAB. Pauline has held leadership positions including Advisory Board Member for the McCusker Centre for Citizenship.
+                  At GradReady Pty Ltd her roles have included lecturing, tutoring, operations and assessing interviews.
+                  Pauline is a vivacious individual and a life-long learner. Her passions in life include: writing, café-book stores, wellbeing, good company and watching documentaries.
+              .item-content
+                %h4.text-center Pauline
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "yashar_moussakhani",
+                  tutor_name: "Yashar",
+                  tutor_image: "yashar_moussakhani.jpg",
+                  course: "Chemistry (Melbourne)" do
+                  Yashar holds a Bachelor of Biomedical Science with Honours from Monash University down in Clayton, majoring in Physiology. He has privately tutored GAMSAT for 2 years and university level Chemistry for 3 years. Yashar scored 91 in Section III of the GAMSAT (top 1%).
+              .item-content
+                %h4.text-center Yashar
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "aisha_ismail",
+                  tutor_name: "Aisha",
+                  tutor_image: "aisha_ismail.jpg",
+                  course: "Humanities (Melbourne)" do
+                  Aisha is a lawyer and researcher based in Melbourne. Aisha holds a Bachelor of Laws with First Class Honours and a Bachelor of International Relations. She has practiced law in Australia and overseas and currently engages in academic research and works in the not for profit sector. Aisha is an experienced tutor, having tutored in law and humanities for over five years. Aisha brings a unique perspective to GAMSAT humanities tutoring, ensuring that students are able to develop essays that are well-structured, persuassive and engaging.
+              .item-content
+                %h4.text-center Aisha
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "liam_ram",
+                  tutor_name: "Liam",
+                  tutor_image: "liam.jpg",
+                  course: "Chemistry (Adelaide)" do
+                  Hi! I'm Liam and I am one of the current tutors at GradReady! I am a current MD student at Flinders University and have an undergraduate in Medical Science. I enjoy tennis, running, music and writing and have maintained all of these throughout medical school. I have an interest in Child and Adolescent Health and hope to pursue a career in these in the future.
+              .item-content
+                %h4.text-center Liam
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "felipe_dimer",
+                  tutor_name: "Felipe",
+                  tutor_image: "felipe_dimer.jpg",
+                  course: "Physics (Perth)" do
+                  Felipe completed his undegraduate studies in physics in Brazil, after which he finished his PhD studies on Quantum Optics in NZ in 2007. From 2007 to 2015 he worked as a researcher in natural hazards working with the insurance industry in Sydney; this work resulted in a number of intelectual property and more than 10 articles in peer-review journals in subjects ranging from statistics to public policy. In 2015, Felipe left his job to study medicine at UWA. He is also interested in foreign languages, in particular French, which he speaks fluently.
+              .item-content
+                %h4.text-center Felipe
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "charlotte",
+                  tutor_name: "Charlotte",
+                  tutor_image: "charlotte.jpg",
+                  course: "Lead Chemistry Tutor (Sydney)" do
+                  Charlotte holds a Bachelor of Science (Advanced) in Pharmacology from the University of Sydney. She has over 4 years of experience tutoring maths, chemistry and biology at high school and university levels. She is currently a second year MD student at the University of Sydney and scored in the top 2% overall for GAMSAT 2017, including the top 1% for Section III
+              .item-content
+                %h4.text-center Charlotte Kench
+          .portfolio.sydney{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "amanda",
+                  tutor_name: "Amanda",
+                  tutor_image: "amanda.jpg",
+                  course: "Chemistry (Sydney)" do
+                  Amanda holds a PhD from the University of Sydney, in which she researched neurotransmitter transporters in the Department of Pharmacology. She has tutored undergraduate Pharmacology, Physiology, Anatomy and Medical Science students at the University of Sydney since 2010. Amanda scored in the top 2% for Overall Score in the GAMSAT, and is currently undertaking Doctor of Medicine at the University of Sydney.
+              .item-content
+                %h4.text-center Amanda
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "jacques_ma",
+                  tutor_name: "Jacques",
+                  tutor_image: "jacques_ma.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  Jacques is a current medical student at Monash University in her penultimate year. Having sat the UMAT in 2014, she took on the role of Hands on Health Director in 2016 to educate local high school students about the pathways into medicine and how to ace the UMAT. Jacques also has extensive experience marking GAMSAT essays for 2 years and hopes to help other students like her achieve their dreams of studying medicine.
+              .item-content
+                %h4.text-center Jacques
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "lisa_y",
+                  tutor_name: "Lisa ",
+                  tutor_image: "lisa_y.JPG",
+                  course: "Physics (Brisbane)" do
+                  Lisa is a medical student at UQ. Before going into medicine, she completed a PhD in molecular biology. Lisa enjoys teaching, with 10 years’ experience teaching a variety of subjects to students of all backgrounds - with students ranging from primary school to university! Lisa scored 75 overall (99th percentile) in the GAMSAT.
+              .item-content
+                %h4.text-center Lisa
+          .portfolio.brisbane{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "annika_h",
+                  tutor_name: "Annika ",
+                  tutor_image: "annika_h.jpg",
+                  course: "Chemistry (Brisbane)" do
+                  Annika graduated from a Bachelor of Science with an extended major in Biomedical Science from the University of Queensland, and is studying Doctor of Medicine at UQ. She has experience in tutoring, focusing on Chemistry, Physics and Mathematics and scored in the 99th percentile of the GAMSAT.
+              .item-content
+                %h4.text-center Annika
+          .portfolio.adelaide{"data-cat" => "adelaide"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "adelaide",
+                  tutor_id: "josipa_petric",
+                  tutor_name: "Josipa",
+                  tutor_image: "josipa_petric.jpg",
+                  course: "Chemistry (Adelaide)" do
+                  Josipa is a medical student at Flinders University, SA. She has an undergraduate Bachelor’s degree in Medical Science also from Flinders University. Josipa has 5 years of experience in teaching sciences to undergraduate students, as well as tutoring students individually. Josipa’s passion for chemistry coupled with her highly developed interpersonal skills enable her to provide the best possible support for her students.
+              .item-content
+                %h4.text-center Josipa
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "jack_west",
+                  tutor_name: "Jack",
+                  tutor_image: "jack_west.jpg",
+                  course: "Biology (Melbourne)" do
+                  Jack is a third-year medical student at the University of Melbourne, before which he completed a bachelor of Science majoring in Anatomy at the University of Melbourne. He has a passion for mentoring and has tutored biology in a number of settings. Jack scored in the top 1% for Section III of the GAMSAT.
+              .item-content
+                %h4.text-center Jack
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "edward_cheong",
+                  tutor_name: "Edward Cheong",
+                  tutor_image: "Edward Cheong.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  Edward is currently a Doctor of Medicine student at the University of Melbourne with broad teaching experience including in physics, chemistry and English. Edward’s overall GAMSAT score was in the top 1%. Edward’s latest interest is in pottery and he hopes to make a teapot one day - although that might be a long time coming!
+              .item-content
+                %h4.text-center Edward Cheong
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "kerry_jiang",
+                  tutor_name: "Kerry Jiang",
+                  tutor_image: "Kerry Jiang.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  Kerry is a graduate of the Bachelor of Biomedicine from the University of Melbourne. She has 3 years of experience in tutoring English and Maths, and enjoys analytical essays in particular. In her spare time she likes art, reading and cooking.
+              .item-content
+                %h4.text-center Kerry Jiang
+          .portfolio.sydney.essay-markers{"data-cat" => "sydney"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "sydney",
+                  tutor_id: "tessa_eves",
+                  tutor_name: "Tessa Eves",
+                  tutor_image: "Tessa Eves.png",
+                  course: "Essay Marker (Sydney)" do
+                  Tessa is a current medical student at the University of Sydney. She has also graduated from the University of Melbourne with a major in human structure and function, in addition to receiving first class honours for her honours thesis. Tessa has experience in private GAMSAT tutoring for all three sections.
+              .item-content
+                %h4.text-center Tessa Eves
+          .portfolio.brisbane.essay-markers{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "cameron_jang",
+                  tutor_name: "Cameron Jang ",
+                  tutor_image: "Cameron Jang.jpg",
+                  course: "Essay Marker (Brisbane)" do
+                  Cameron holds a Bachelor of Laws from the Queensland University of Technology.  He has practised as a lawyer in various national law firms in areas including public law and workplace relations, assisting a range of government and corporate clients.   Outside of his professional life, Cameron is a passionate musician and has a keen interest in humanities. 
+              .item-content
+                %h4.text-center Cameron Jang
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "joshua_rawicki",
+                  tutor_name: "Joshua Rawicki",
+                  tutor_image: "Joshua Rawicki.png",
+                  course: "Essay Marker (Melbourne)" do
+                  Joshua is currently a Doctor of Medicine student at The University of Melbourne. Having previously completed a Bachelor of Biomedical Sciences, he is somewhat of a GAMSAT veteran and knows exactly how frustrating the exam can be and is here to help. Joshua has previously tutored Year 12 students in a variety of subjects including both humanities and sciences, and is eager to assist the GradReady community in achieving their goals. Outside of the academic world, Joshua enjoys cooking, playing with his black Labrador, chilling out with his friends, and is a diehard Melbourne Demons supporter.
+              .item-content
+                %h4.text-center Joshua Rawicki
+          .portfolio.brisbane.essay-markers{"data-cat" => "brisbane"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "brisbane",
+                  tutor_id: "nicholas_pratt",
+                  tutor_name: "Nicholas Pratt",
+                  tutor_image: "Nicholas Pratt.png",
+                  course: "Essay Marker (Brisbane)" do
+                  Nicholas holds a Bachelor of Arts from the University of Queensland majoring in history with minors in both English literature and Classical Languages (Latin). He is currently enrolled in QUT’s LLB(Hons) program. He has tutored groups and individuals, both privately and for organisations since 2013. Nicholas has years of experience tutoring humanities and scored in the top 1% of students in GAMSAT section II, 2017. 
+              .item-content
+                %h4.text-center Nicholas Pratt 
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "kavya_khatri",
+                  tutor_name: "Kavya Khatri",
+                  tutor_image: "Kavya Khatri.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  Kavya completed a Bachelor of Biomedical Science from Monash University in 2017 and is currently a postgraduate medical student at the University of Melbourne. She has been a biology tutor for high school and university level students for five years, and scored in the 98th percentile of the GAMSAT overall. Kavya loves classic literature and films, and enjoys playing the piano. 
+              .item-content
+                %h4.text-center Kavya Khatri
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "kayley_crebbin",
+                  tutor_name: "Kayley Crebbin",
+                  tutor_image: "Kayley Crebbin.png",
+                  course: "Biology (Perth)" do
+                  Kayley completed a Bachelor of Philosophy degree majoring in Biomedical Science with First Class Honours in Medical Research. She is now a Doctor of Medicine student at the University of Western Australia, having been accepted through the graduate entry pathway. Kayley continues to be involved with research at Perth Children's Hospital and with volunteering at Sir Charles Gairdner Hospital.
+              .item-content
+                %h4.text-center Kayley Crebbin
+          .portfolio.melbourne.essay-markers{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "victoria_garwood",
+                  tutor_name: "Victoria Garwood",
+                  tutor_image: "Victoria Garwood.jpg",
+                  course: "Essay Marker (Melbourne)" do
+                  Victoria is a medical student at the University of Melbourne. Previously she has worked in clinical research and completed a Bachelor of Biomedicine from the University of Melbourne majoring in Pathology. Throughout her studies, Victoria has sought out opportunities to mentor and tutor younger students. Victoria’s background in STEM, coupled with her wider interests in history and philosophy, provide a unique perspective to the humanities sections of the GAMSAT. 
+              .item-content
+                %h4.text-center Victoria Garwood
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "stephanie_guiney",
+                  tutor_name: "Stephanie Guiney",
+                  tutor_image: "Stephanie Guiney.jpg",
+                  course: "Biology (Melbourne)" do
+                  Stephanie completed her Bachelor of Biomedicine and Honours year in 2013, and her GAMSAT score led to an offer for the Doctor of Medicine at the University of Melbourne. She ultimately chose to pursue her passion for problem-solving and research by enrolling in a PhD in Neuroscience at the University of Melbourne instead, and completed her project investigating the effect of different drug classes in a cell model of Parkinson’s disease neurodegeneration in 2019. Stephanie is passionate about teaching biomedical science subjects, and has worked in several teaching roles for biochemistry and pharmacology at the University of Melbourne and Deakin University. Outside of teaching, she enjoys outdoor adventures, and regularly goes kayaking, surfing and stand-up paddleboarding.   
+              .item-content
+                %h4.text-center Stephanie Guiney
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "kane_donnell",
+                  tutor_name: "Kane O'Donnell",
+                  tutor_image: "Kane O'Donnell.jpg",
+                  course: "Physics (Melbourne)" do
+                  Kane graduated from the University of Newcastle with first class honours and University medal in 2005, majoring in physics and mathematics. He then completed a PhD in Physics before heading to the UK for his first postdoctoral research position at the University of Bristol. After six or so years as a postdoc at various places, Kane started again and is now about to finish 3rd year at Melbourne Medical School. Kane has taught physics at tertiary level for undergraduates and graduate students, and is always motivated to make sure students have solid basic skills. His overall score for the 2016 GAMSAT was 85, with 91 in SIII.   
+              .item-content
+                %h4.text-center Kane O'Donnell
+          .portfolio.perth{"data-cat" => "perth"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "perth",
+                  tutor_id: "maia_van_kempen",
+                  tutor_name: "Maia van Kempen",
+                  tutor_image: "Maia van Kempen.png",
+                  course: "Chemistry (Perth)" do
+                  Maia is a current medical student at the University of Western Australia and has completed a Bachelor of Science majoring in Biochemistry and Molecular Biology. She has had four years experience as a chemistry tutor and in her spare time, she enjoys playing cello and performing music.   
+              .item-content
+                %h4.text-center Maia van Kempen
+          .portfolio.melbourne{"data-cat" => "melbourne"}
+            .vertical-item
+              .item-media
+                = tutor_profile data_category: "melbourne",
+                  tutor_id: "georgina_roberts",
+                  tutor_name: "Georgina Roberts",
+                  tutor_image: "Georgina Roberts.png",
+                  course: "Chemistry (Melbourne)" do
+                  Georgina is currently studying medicine at the University of Melbourne. She graduated with a Bachelor of Science in 2017, majoring in Chemistry and Biomedical Science. She has tutored classes of first-year chemistry students at the University of Queensland as well as a number of high school students in chemistry, physics, maths and English. When she is not busy studying, Georgina enjoys searching for Melbourne’s best hot chocolate.   
+              .item-content
+                %h4.text-center Georgina Roberts
+:javascript
+  $(document).ready(function() {
+
+    $(function () {
+      var filterList = {
+        init: function () {
+
+          $('#portfoliolist').mixItUp({
+            selectors: {
+              target: '.portfolio',
+              filter: '.filter'
+            },
+            load: {
+              filter: '.melbourne, .sydney, .brisbane, .adelaide, .perth, .development-leads'
+            }
+          });
+        }
+      };
+
+      filterList.init();
+    });
+  });
+

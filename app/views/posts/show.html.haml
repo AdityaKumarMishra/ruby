@@ -1,0 +1,126 @@
+- title post_title(@post)
+- meta_description @post.meta_description.present? ? @post.meta_description : post_description(params[:id], @post.blog_type.upcase)
+- meta_keywords @post.meta_keywords
+#typed.notification_bar.blg_notification_mrgn
+  %p
+    = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+.blog_hdr_bnr.blog_show_bnr.blg_mrgn_tp
+  .blog_slider_wrapper
+    .blog_cars_img_sec.blog_show
+      - unless @post.image.url(:thumb) == "/images/thumb/missing.png"
+        -if @post.alt_text.present?
+          = image_tag @post.image.url(:thumb), alt: "#{@post.try(:alt_text)}"
+        -else
+          = image_tag @post.image.url(:thumb)
+      -else
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_header_bnr1_no_image.png'
+.blog_cl
+  .container
+    .row
+      .col-lg-8.col-md-8.col-sm-8.col-xs-12.blog_left_cl{:itemscope => "", :itemtype => "http://schema.org/Blog"}
+        %span{:content => "GradReady", :itemprop => "provider"}
+        %div{:itemprop => "copyrightHolder", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+          %span{:content => "GradReady", :itemprop => "name"}
+        %div{:itemprop => "publisher", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+          %span{:content => "GradReady", :itemprop => "name"}
+          %div{:itemprop => "address", :itemscope => "", :itemtype => "http://schema.org/PostalAddress"}
+            %span{:content => "306/569 Glenferrie Rd></span>", :itemprop => "streetAddress"}
+            %span{:content => "Melbourne", :itemprop => "addressLocality"}
+            %span{:content => "VIC", :itemprop => "addressRegion"}
+            %span{:content => "3122", :itemprop => "postalCode"}
+        %h1{:itemprop => "name"} #{@post.name}
+        %p
+          by
+          %span.blog_by
+            %span{:itemprop => "author"}> #{@post.author}
+            ,
+            %span{:itemprop => "datePublished dateCreated dateModified"}
+              #{@post.created_at.strftime("%d %B, %Y")}
+            %br
+              %i.fa.fa-user{'aria-hidden': "true"}
+              = "Read #{@post.read_count} times"
+
+        %span{:itemprop => "description"}
+          = raw @post.description
+
+        .col-lg-12.social_imgs.aos-item.blog_top50{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+          - if @post.blog_type == 'umat'
+            .blog_socials
+              %a{href: "https://www.facebook.com/GradReadyUMAT/", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat-blog_fb_icon.svg'
+                .blog_icon_desc
+                  %h6 Like Us
+                  %p
+                    Like our page to access free
+                    seminars, sample material and tips.
+            .blog_socials
+              %a{href: umat_preparation_courses_path, :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat-blog_why_icon.svg'
+                .blog_icon_desc
+                  %h6 Why GradReady?
+                  %p
+                    Find out how we can improve
+                    your results by 24 percentile points.
+            .blog_socials
+              %a{href: "/blog/umat-preparation-courses", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat-blog_moreblog_icon.svg'
+                .blog_icon_desc
+                  %h6 More Blogs
+                  %p
+                    We post new blogs from our
+                    experienced tutors every week.
+            .blog_socials
+              %a{href: "/", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat-blog_free_icon.svg'
+                .blog_icon_desc
+                  %h6 Free Study Guide
+                  %p Get free access to GradReady study guides to get ahead of the pack!
+          - else
+            .blog_socials
+              %a{href: "https://www.facebook.com/GradReadyGAMSAT/", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_fb_icon.svg'
+                .blog_icon_desc
+                  %h6 Like Us
+                  %p
+                    Like our page to access free
+                    seminars, sample material and tips.
+            .blog_socials
+              %a{href: "/gamsat-preparation-courses/overview", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_why_icon.svg'
+                .blog_icon_desc
+                  %h6 Why GradReady?
+                  %p
+                    Find out how we can improve
+                    your results by 24 percentile points.
+            .blog_socials
+              %a{href: "/blog/gamsat-preparation-courses", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_moreblog_icon.svg'
+                .blog_icon_desc
+                  %h6 More Blogs
+                  %p
+                    We post new blogs from our
+                    experienced tutors every week.
+            .blog_socials
+              %a{href: "/", :target => "_blank"}
+                %span.blog_icon
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_free_icon.svg'
+                .blog_icon_desc
+                  %h6 Free Study Guide
+                  %p Get free access to GradReady study guides to get ahead of the pack!
+      .col-lg-4.col-md-4.col-sm-4.col-xs-12.blog_rght_cl
+        - if current_user && !current_user.student?
+          = link_to "Edit", edit_post_path(@post), class: "default_btn hvr-shutter-in-horizontal"
+          = link_to 'Delete', @post, method: :delete, data: { :confirm => 'Are you sure?' }, class: 'default_btn hvr-shutter-in-horizontal'
+        = render partial: "public_page_partial/blog_left_column", locals: { blog_type: @post.blog_type }
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

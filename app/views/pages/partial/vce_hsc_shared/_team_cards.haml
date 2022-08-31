@@ -1,0 +1,28 @@
+// This is reusable partial view to render an array of team cards
+
+- user.each do |u|
+  - if rendered_users.include? u
+    - next
+  - else 
+    - rendered_users << u
+  %a.profile-pic{"data-category" => map_country_code_to_name(u.area).downcase, "data-toggle" => "modal", :href => "##{u.first_name}#{u.id}", :role => "button"}
+    // Only show staff member if photo and bio exists 
+    - if u.photo.exists? && u.bio.to_s != ''
+      = image_tag(u.photo.url(:small), size: '140x140', alt: u.full_name)
+
+  .modal.teacher-profile{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :id => "#{u.first_name}#{u.id}"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          .col-md-4
+            - if u.photo.exists?
+              %br
+              = image_tag(u.photo.url(:standard), width: '200px', alt: u.full_name)
+          .col-md-8
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h1= u.first_name
+            - if tag.nil?
+              %h3= subject.capitalize + '(' + map_country_code_to_name(u.area) + ')'
+            - else
+              %h3= subject.capitalize + ' - ' + subject_name(tag) + '(' + map_country_code_to_name(u.area) + ')'
+            %p= u.bio

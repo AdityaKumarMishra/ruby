@@ -1,0 +1,6 @@
+<% simple_nested_form_for(@product_version) do |f| %>
+  <% @js = escape_javascript(
+    render(partial: '/product_versions/product_version_feature_prices', locals: { :@product_version => @product_version, :@product_line => @product_line, :@master_features => @master_features, :@old_product_version => @old_product_version, f: f, course_type: params[:course_type] })
+  ) %>
+<% end %>
+$("#productVersionCourseType").html("<%= @js %>");

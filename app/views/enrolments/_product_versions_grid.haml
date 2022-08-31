@@ -1,0 +1,69 @@
+- product_info = send(product_line+"_product_info")
+- price_label = subject ? "price_#{subject}".to_sym : :price
+%ul.modal_tablist.first_col
+  %li.dark_sky_up
+    %a{href: dynamic_product_version_uri(product_versions[2], product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          = "$ #{product_info[product_versions[2]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        %p (Essentials)
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "Essential live tutorials and online study tools. Online Essentials package, plus 31 hrs of live classroom tutorials and a mock exam day"
+  %li.dark_green_up
+    %a{href: dynamic_product_version_uri(product_versions[3], product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          = "$ #{product_info[product_versions[3]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        %p (Comprehensive)
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "A comprehensive suite of classes and online study tools with online tutor support. Attendance Essentials package, plus 6 online exams, online tutor access and 10 marked essays."
+  %li.dark_blue_up
+    %a{href: dynamic_product_version_uri(product_versions[4], product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          = "$ #{product_info[product_versions[4]][price_label]}"
+      %span.left_bot_col
+        %b
+          ATTENDANCE
+        -if (product_line == 'gamsat' || product_line == 'umat')
+          %p (Complete Care)
+        -else
+          %p (Comprehensive + Private Tutoring)
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "Get the ultimate advantage with 1 on 1 in-person and online tutor support. Attendance Comprehensive + 5x 1hr private tutoring sessions."
+
+  %li.dark_sky_down
+    %a{href: dynamic_product_version_uri(product_versions[1], product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          = "$ #{product_info[product_versions[1]][price_label]}"
+      %span.left_bot_col
+        %b
+          ONLINE
+        %p (Comprehensive)
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "A comprehensive set of online study tools with online tutor support. Online Essentials package, plus 6 online exams, online access to tutors and 10 marked essays."
+  %li.dark_green_down
+    %a{href: dynamic_product_version_uri(product_versions[0], product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          = "$ #{product_info[product_versions[0]][price_label]}"
+      %span.left_bot_col
+        %b
+          ONLINE
+        %p (Essentials)
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "All the essentials you need to self-study online. Includes 6000+MCQs, 40 Practise Essay Topics, 1000 study guide and 22 hrs of tutorial videos."
+
+  %li.dark_blue_down
+    %a{href: dynamic_product_version_uri('custom', product_line, subject)}
+      %span.right_txt_col
+        %b.crs_value
+          =# "$ #{product_info[product_versions[4]][price_label]}"
+      %span.left_bot_col
+        %b
+          Custom
+        %p
+    = render "enrolments/product_version_tile_info", product_line: product_line, course: trial_course, desc: "Custom Course"
+

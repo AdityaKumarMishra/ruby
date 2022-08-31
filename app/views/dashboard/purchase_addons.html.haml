@@ -1,0 +1,70 @@
+=#javascript_include_tag 'addon_purchase'
+%div
+  %h2 Purchase Addons
+  %h3 Product Version
+  = @product_version.name
+
+  %div
+    - if @paid_at.present?
+      %h3 Addons Available
+      = form_tag url_for({controller: 'purchase_addons', action:'paypal_payment'}),method: 'post'
+      %table.table
+        %thead
+          %tr
+            %td Feature
+            %td
+            %td Price
+            %td Add
+          -@inactive_features.compact.each_with_index do |f,index|
+            %tr
+              %td
+                = f.name.gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
+              %td
+                - if f.private_tutoring? && f.feature_enrolments.last.active
+                  Hours:
+                  = f.tutor_time
+              %td
+                = number_to_currency(f.price)
+              %td
+                = check_box_tag ('addon_'+index.to_s), f.to_json , false, class: 'addon_sum'
+      %fieldset{class: 'form pull-right'}
+
+        %div{class: 'form-group'}
+          %label Sub Total
+          %input{type:"text", required: true, id:'ast',class: 'form-control',style:'width:150px'}
+
+        %div{class: 'form-group'}
+          %label PayPal fee
+          %input{type:"text", required: true, id:'pp',class: 'form-control',style:'width:150px'}
+
+        %div{class: 'from-group'}
+          %label GST
+          %input{type:"text", required: true, id:'gst',class: 'form-control',style:'width:150px'}
+
+        %div{class: 'form-group'}
+          %label Total
+          %input{type:"text", required: true, id:'at',class: 'form-control',style:'width:150px'}
+
+
+        %div{class: 'input-group',style: 'padding: 5px'}
+        = hidden_field_tag 'feats',''
+        = submit_tag('Purchase',{class:'btn btn-gradready green no_confirm', id:'addon_submit'})
+      %br
+
+    -elsif @paid_at.nil?
+      %h3 No Purchase Addons Available
+      %p There are no purchasable addons for your current course
+
+    - else
+      %h3 All features are available
+      %table.table.table-bordered.table-hover
+        %tbody
+          %tr
+            %td <b>Feature </b>
+            %td
+          - @active_features.each do |f|
+            %tr
+              %td
+                =f.name
+              %td
+                %i.fa.fa-check

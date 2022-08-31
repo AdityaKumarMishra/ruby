@@ -1,0 +1,41 @@
+// Place all the styles related to the ProductVersions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#enrolment_dates {
+  display: inline;
+  height: 34px;
+  line-height: 34px;
+}
+#pv_table_filter { display: none }
+#pv_table th::after { display: none};
+table.dataTable.pv_data_table thead > tr > th
+{
+  padding-left: 9px;
+  padding-right: 9px;
+  padding-top: 9px;
+  padding-bottom: 7px;
+ vertical-align:bottom;
+}
+table.dataTable.pv_data_table td {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  vertical-align:top;
+}
+table.dataTable.pv_data_table {
+  border-collapse: collapse !important;
+}
+#pv_table_info {display:none;}
+
+.product_div{
+  margin-top: 65px;
+}
+
+.notification-dialog .btn_top{
+  top: 20px;
+  margin-right: 0;
+  right:20px
+}
+

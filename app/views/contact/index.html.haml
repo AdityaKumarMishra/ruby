@@ -1,0 +1,288 @@
+-if @product_line == 'gamsat'
+  - title "Contact Us | GAMSAT Preparation Courses"
+  - meta_description "Questions about studying for the GAMSAT or our GAMSAT preparation courses? Get in touch with our team for free advice on everything from how to prepare for the GAMSAT to life as a medical student."
+-elsif @product_line == 'umat'
+  - title "Contact Us | UCAT Preparation Courses"
+  - meta_description "Unsure about the UCAT exam? Contact us for more information."
+
+- content_for :head do
+  %script{:type => "application/ld+json"}
+    {"@context":"http:\/\/schema.org\/","@type":"ContactPage","about":"GradReady Locations","url":"https://gradready.com.au/gamsat-preparation-courses/contact","keywords":["Locations","Contact Page","Contact GradReady"],"sameAs":["https://www.facebook.com/GradReadyGAMSAT/","https://twitter.com/GradReadyGAMSAT","https://www.instagram.com/gradreadygamsat/"],"specialty":"GAMSAT and UCAT Courses","publisher":"GradReady","locationCreated":[{"@type":"Place","address":{"@type":"PostalAddress","addressCountry":"Australia","addressLocality":"VIC","addressRegion":"Melbourne","streetAddress":"62-66 King St","postalCode":"3000"},"name":"MAIN OFFICE","telephone":"+61 475 390 660"}]}
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        -if @product_line == 'gamsat'
+          GAMSAT
+        -elsif @product_line == 'umat'
+          UCAT
+        %sup ®
+        Preparation Courses | Contact Us
+/ %section
+/   .text-center.container
+/     .row
+/       .text-center.col-md-12.col-sm-12.col-lg-12.col-xs-12
+/         .cont_team_section
+/           %span.cont_laoder
+/             = image_tag 'public_pages/contact_loader_img.gif'
+/           %figure
+/             .mis-stage{style: 'display: none;'}
+/               %ol.mis-slider
+/                 %li.mis-slide
+/                   %a.mis-container{href: "javascript:void(0)"}
+/                     %figure
+/                       = image_tag 'public_pages/Peitong.jpg'
+/                       %figcaption.name Peitong
+/                       %figcaption.city Student Services
+/                   .slide_cntnt
+/                     %a.ask_btn.ask_ques_sec.hvr-shutter-in-horizontal{href: "javascript:void(0)"} ASK QUESTION
+/                 %li.mis-slide
+/                   %a.mis-container{href: "javascript:void(0)"}
+/                     %figure
+/                       = image_tag 'public_pages/hemant_team.jpg'
+/                       %figcaption.name Hemant
+/                       %figcaption.city Escalation of Issues
+/                   .slide_cntnt
+/                     %a.ask_btn.ask_ques_sec.hvr-shutter-in-horizontal{href: "javascript:void(0)"} ASK QUESTION
+%section.faq_col
+  .text-center.container
+    .text-center.full_width
+      %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+        Have a question? Check out our
+        %a{href: "#{root_url}gamsat-preparation-courses/faq"}FAQs
+    .row
+      .text-center.col-md-12.col-sm-12.col-lg-12.col-xs-12
+        %ul.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+          -if @product_line == 'umat'
+            %li
+              = link_to "How is the GradReady's UCAT® course different from other UCAT® exam preparation courses?", faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))+'#how-is-the'
+            %li
+              = link_to 'How early should I sign up to a UCAT® preparation course?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#how-early'
+            %li
+              = link_to 'When can I sit the UCAT® exam?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))+'#when-can'
+            %li
+              = link_to 'How much preparation do I have to do for the UCAT® exam?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#how-much'
+            %li
+              = link_to 'I am currently in Year 11 and enrolled in a Year 12 subject, can I sit the UCAT® exam?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))+'#i-am'
+            %li
+              = link_to 'Does GradReady cover everything that is tested in the UCAT® exam?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))+'#does-umatready'
+            %li
+              = link_to 'For how long is my subscription valid?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#for-i-long-is-my-subscription'
+
+            %li
+              = link_to 'Am I able to pay in instalments/ a deposit to reserve a place?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#am-i-able-to-pay'
+            %li
+              = link_to 'Is there a group discount available?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#is-there-a-group-discount'
+            %li
+              = link_to 'Which medical schools accept UCAT® exam results?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))+'#which-medical-schools-accept-umat-results'
+          -else
+            %li
+              = link_to 'How is GradReady different from other preparatory providers?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#how-is-gradready-different'
+            %li
+              %a{href: "/gamsat-preparation-courses#compare-table"}
+                What is the difference between the types of courses that GradReady offers?
+            %li
+              = link_to ' How much preparation do I have to do for the GAMSAT® exam?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#how-much-preparation-do-i-have-to-do'
+            %li
+              = link_to 'Does GradReady cover everything that is tested in the GAMSAT® exam?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#does-gradready-cover-everything-that-is-tested'
+            %li
+              = link_to 'Do I need any preparation material in addition to those provided by GAMSAT® course?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#Do I need any preparation material'
+            %li
+              = link_to 'How early should I sign up to a GAMSAT® preparation course?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#how-early-should-i-sign-up'
+            %li
+              = link_to 'Can I upgrade to a new course after enrollment?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#Can I Upgrade to a New Course After Enrolment?'
+            %li
+              = link_to 'Am I able to pay in installments/a deposit to reserve a place?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#Instalments'
+            %li
+              =link_to 'For how long is my subscription valid?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#For%20how%20long'
+            %li
+              = link_to 'I wish to retake a GAMSAT® exam Ready course - do I receive a discount?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#I wish to'
+            %li
+              = link_to 'What is the Refund Policy?', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#refund-policy'
+        - if @product_line == 'umat'
+          %a.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init{"data-aos" => "fade-left", "data-aos-duration" => "1200", href: "#{root_url}umat-preparation-courses/faq"} MORE FAQs
+        - else
+          %a.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init{"data-aos" => "fade-left", "data-aos-duration" => "1200", href: "#{root_url}gamsat-preparation-courses/faq"} MORE FAQs
+%section.middle_course_section
+  .text-center.container
+    .row
+      .text-center.col-md-12.col-sm-12.col-lg-12.col-xs-12
+        .text-center.call_contact_wrapper
+          #call_back_overlay.aos-item.call_contact_box.z_index.hvr-shutter-out-horizontal{"data-aos" => "fade-right", "data-aos-duration" => "1100"}
+            - if @product_line == 'umat'
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_call_us_icon.svg', alt: 'Call Us'
+            - else
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/call_us_icon.svg', alt: 'Call Us'
+            %h3
+              Call Us for
+              %br/
+              Course Information
+            .overlay_content
+              - contact = CommonContent.first
+              %p.fs12= contact.contact_number
+              %p.fs12= contact.contact_number2
+              %p.fs12 9 AM - 5 PM Melbourne Time Mon - Fri
+              %p.fs12 For Payment and Course Administration Queries Please
+              / %span or
+              %a#call_back_btn.hvr-shutter-in-horizontal.default_btn.submit_tkt{href: "javascript:void(0)"} Submit Ticket
+          #email-back-btn.aos-item.call_contact_box.hvr-shutter-out-horizontal{"data-aos" => "fade-left", "data-aos-duration" => "1100"}
+            - if @product_line == 'umat'
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_email_us_icon.svg', alt: 'Emails'
+            - else
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/email_us_icon.svg', alt: 'Emails'
+            %h3 Email Us
+            %p
+              We'll do our best to respond within 24 hours.
+          %p.smll_txt
+            Our Ticketing System is designed to streamline the resolution of your issues, ensuring the correct team expert is able to handle your issues promptly. Please use the Ticketing System for all Payment, Course Administration, Website, and Escalation issues. Phone support is only available for Course and General Information. If the Ticketing System is not working for you, please email us at
+            %a{href: "mailto:support@gradready.com.au"} support@gradready.com.au
+          %p.smll_txt
+            Interested in partnering with us? Send us an email at partnerships@gradready.com.au and we'd be happy to have a chat
+.join_gradready_col
+  %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"} Want to join GradReady?
+  .clear
+  %a.aos-item.default_btn.hvr-shutter-in-horizontal{"data-aos" => "fade-up", "data-aos-duration" => "1200", href: "/jobs/available-positions", class: 'appropriate_class_question(@product_line)'} APPLY NOW
+%section.middle_course_section
+  .container
+    .text-center.meet_the_tutors
+      %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"} Meet our Tutors
+      .row
+        .aos-item.col-md-12{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+          #tutors_slide.contact_slide_wrp.carousel.slide{"data-ride" => "carousel"}
+            - if @product_line == 'umat'
+              .carousel-inner
+                .active.item
+                  .row
+                    .text-center.col-md-12
+                      .testi_content
+                        = image_tag 'staff-gr/sachin.png', alt: 'Sachin'
+                        %p.autor_name
+                          Sachin
+                          %span Logical Reasoning (Melbourne)
+                        %p.contact_para
+                          Sachin is currently a student at Monash University doing undergraduate medicine with honors. Sachin completed the UCAT
+                          %sup ®
+                          in 2012 getting an over all score in the 96th percentile with a raw score of 70. In his spare time he enjoys playing basketball and cricket as well as teaching.
+                .item
+                  .row
+                    .text-center.col-md-12
+                      .testi_content
+                        = image_tag 'staff-gr/miriam_asar.jpg', alt: 'Miriam'
+                        %p.autor_name
+                          Miriam
+                          %span Understanding People (Sydney)
+                        %p.contact_para
+                          Miriam is a student at the University of Sydney, undertaking a combined Bachelor of Laws and Bachelor of Arts, majoring in Government and International Relations. She has been tutoring primary and secondary students since 2011 in various roles and subjects.
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'staff-gr/kynanngai.jpg', alt: 'Kynan'
+                        %p.autor_name
+                          Kynan
+                          %span Logical reasoning (Sydney)
+                        %p.contact_para
+                          Kynan is completing his Bachelor of Medical Science, and has been accepted into the Lateral Entry stream into Medicine at the University of New South Wales. He scored in the 99th percentile for the UCAT
+                          %sup ®
+                          with a score of 76 in Section 1, 64 in Section 2 and 65 in Section 3. Kynan has tutored students in Mathematics Extension I. In his spare time, he enjoys reading, TV shows and long walks.
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'staff-gr/crystal_li.jpg', alt: 'Crystal'
+                        %p.autor_name
+                          Crystal
+                          %span Non-verbal Reasoning (Sydney)
+                        %p.contact_para
+                          Crystal is currently a Medical Science Honours student at UNSW working with vancomycin. Next year, she will begin a Doctor of Medicine at UNSW under the Graduate Entry Program. She is currently an anatomy demonstrator at UNSW and scored in the 99th percentile in UCAT
+                          %sup ®
+                          2014.
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'staff-gr/sam_shaju.jpg', alt: 'Sam'
+                        %p.autor_name
+                          Sam
+                          %span Non Verbal Reasoning (Brisbane)
+                        %p.contact_para
+                          Sam is a first year medical science student at the University of Queensland and is also part of the Doctor of Medicine Provisional Entry program. He scored 96th percentile overall, with raw scores of 69 in Section 1, 60 in Section 2, and 67 in Section 3. He has also had past experience in tutoring high school students in Biology, Chemistry and Physics. In his spare time, Sam enjoys reading, playing the piano and seeking the finest chicken burritos Brisbane has to offer.
+            -else
+              .carousel-inner
+                .active.item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/elliot.jpg', alt: 'Elliot'
+                        %p.autor_name
+                          Elliot
+                          %span Lead Humanities Tutor (Melbourne)
+                        %p.contact_para
+                          Elliot Dolan-Evans is a PhD student in political economy and feminist studies, a non-practicing medical practitioner, and a law graduate, awaiting admission in the Supreme Court of Victoria. Elliot was awarded an MBBS at Griffith University and hasy completed his internship at the Prince Charles Hospital. Throughout medical school and his early practice, Elliot has been strongly involved in the medical community. During medical school he pioneered and founded the award-winning Surgical Interest Association (www.surgia.org), helped establish the national student surgical body, the Australasian Students’ Surgical Association, represented his fellow medical students in roles with the Griffith medical society and in the university, and was also involved in work with the Australian Medical Students Association. Elliot published six research papers during his time in medical school, in neuroscience, medical/surgical/dental education, and thyroid cancer. Throughout medical school Elliot also held down numerous casual employments, as well as volunteering positions in refugee and asylum seeker health and legal representation. He still volunteers his time with the Australian Lawyers for Human Rights, the Refugee and Immigration Legal Service, the Asylum Seeker Resource Centre, and the Salvation Army.
+
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/new_staff/claire_baxter.jpg', alt: 'Claire'
+                        %p.autor_name
+                          Claire
+                          %span Lead Biology Tutor (Adelaide)
+                        %p.contact_para
+                          I am a current medical student at Flinders University. I have been working with Gradready since 2016 as a biology tutor. In my spare time I run, box and spend time with my labradoodle Archie.
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/new_staff/lee_graham.jpg', alt: 'Lee'
+                        %p.autor_name
+                          Lee
+                          %span Lead Physics Tutor (Melbourne)
+                        %p.contact_para
+                          Lee is a current medical student at the University of Melbourne, and has completed a Bachelor of Science (Physics) at Melbourne and a Masters of Medical Physics at RMIT. He has tutored maths and physics at a high school and university level for several years. Lee scored in the top 0.1% for the GAMSAT overall and in SIII.
+                .item
+                  .row
+                    .text-center.col-md-12.col-sm-12
+                      .testi_content
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/new_staff/charlotte.jpg', alt: 'Charlotte'
+                        %p.autor_name
+                          Charlotte
+                          %span Chemistry (Sydney)
+                        %p.contact_para
+                          Charlotte holds a Bachelor of Science (Advanced) in Pharmacology from the University of Sydney. She has over 4 years of experience tutoring maths, chemistry and biology at high school and university levels. She is currently a second year MD student at the University of Sydney and scored in the top 2% overall for GAMSAT 2017, including the top 1% for Section III.
+
+            %a.carousel-control.left{"data-slide" => "prev", href: "#tutors_slide"}
+              %i.fa.fa-angle-left{"aria-hidden" => "true"}
+            %a.carousel-control.right{"data-slide" => "next", href: "#tutors_slide"}
+              %i.fa.fa-angle-right{"aria-hidden" => "true"}
+      = link_to "More Tutors", fetch_contact_team_url(@product_line), class: 'appropriate_class_question(@product_line) aos-item default_btn hvr-shutter-in-horizontal'
+
+:javascript
+  jQuery(function(t){t(".mis-stage").miSlider({speed: 700, stageHeight: 300, slidesContinuous: !0, slidesOnStage: !1, slidePosition: "center", slideStart: "mid", slideScaling: 160, offsetV: -5, centerV: !0, navButtonsShow: !0, navButtons: !1, navButtonsOpacity: 1}); t(".richText").richText()})
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });
+
+  $("#email-back-btn").click(function(){
+    $('#faqDirect').modal('show');
+  });
+
+  $("#faq-yes-btn").click(function(){
+    window.location.href = "/gamsat-preparation-courses/faq";
+  });
+
+  $("#faq-no-btn").click(function(){
+    $(".qa_query_form").addClass("show_qa_query_form");
+    $(".qa_query_form").find('.qa_form_header h3').html("Got a Question?");
+  });
+
+:css 
+  .contact_para{
+    height: 160px;
+    overflow: auto;
+  }

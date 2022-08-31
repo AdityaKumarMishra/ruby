@@ -1,0 +1,77 @@
+-# NOTE: a variable 'product_line' must be passed into this view for the rendering to work
+%footer
+  .container
+    .row
+      .col-lg-8.col-md-9.col-sm-12.footer_top
+        %select.btn.btn-mini.u-text-black.u-padding-17{:id => 'footer-js'}
+          %option{:value => 'gamsat', :selected => (true if (product_line == 'gamsat'))} GAMSAT® EXAM
+          %option{:value => 'umat', :selected => (true if (product_line == 'umat'))}UCAT® EXAM
+          / %option{:value => 'vce', :selected => (true if (product_line == 'vce'))}VCE® EXAM
+          / %option{:value => 'hsc', :selected => (true if (product_line == 'hsc'))}HSC® EXAM
+        %div{:style => ""}
+        %div#grad-new-footer.greadyready_footer_col
+          - if params[:controller]== 'pages' && params[:action] == 'umat'
+            = render 'partial/umat_footer'
+          -elsif params[:controller]== 'pages' && params[:action] == 'hsc'
+            = render 'partial/hsc_footer'
+          -elsif params[:controller]== 'pages' && params[:action] == 'vce'
+            = render 'partial/vce_footer'
+          -else
+            = render 'partial/gamsat_footer'
+
+      .col-lg-4.col-md-3.col-sm-12.mobile_full_wdt
+        .col-md-12.pdlft.mob_fottr_full
+          %h3.connect_icons Connect with us
+          %ul.social
+            %li
+              - @product_line = product_line
+              - product_line_caps = product_line.upcase
+              %a{:href => "https://www.facebook.com/GradReady#{product_line_caps}/", :target => "_blank", id: 'facebook'}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/facebook.png'
+            %li
+              %a{:href => "https://www.twitter.com/GradReadyGAMSAT", :target => "_blank"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/twitter.png'
+            %li
+              %a{href: "https://www.instagram.com/gradready#{product_line}/", target: "_blank", id: 'instagram'}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/instagram.png'
+        .pull-left.fwmobile
+          .gr-logo.pull-left
+            = link_to root_path do
+              - if product_line == 'gamsat'
+                = image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_gamsat_ready.png", width:"50px", height: "40px", id: "logo", alt: "GradReady GAMSAT favicon")
+                = favicon_link_tag "/images/favicon-gradready.png",type: 'image/png'
+              - elsif product_line == 'umat'
+                =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_umat_ready.png", width:"50px", height: "40px", id: "logo", alt: "GradReady UCAT favicon")
+                = favicon_link_tag "/images/favicon-umat.png",type: 'image/png'
+              - elsif product_line == 'vce'
+                =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_vce_ready.png", width:"50px", height: "40px", id: "logo", alt: "GradReady VCE favicon")
+                = favicon_link_tag "/images/favicon-gradready.png",type: 'image/png'
+              - elsif product_line == 'hsc'
+                =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_hsc_ready.png", width:"50px", height: "40px", id: "logo", alt: "GradReady HSC favicon")
+                = favicon_link_tag "/images/favicon-hsc.png",type: 'image/png'
+            %a.btn.call_btn{:href => contact_path + "#contact-form", class: product_line_class(product_line)} Call
+            %a.btn.call_btn{:href => contact_path, class: product_line_class(product_line)} Email
+
+
+          .copyright-notice.pull-left.mob_notice
+            ABN: 21 152 121 456
+            .notice-links
+              %a.u-white-link{:href => "#{root_url}terms", :id => 'terms'} Terms &amp; Conditions
+              |
+              %a.u-white-link{:href => "#{root_url}privacy", :id => 'policy'} Privacy Policy
+              |
+              %a.u-white-link{:href => " https://gradready.com.au/sitemap.html", :id => 'link'} Sitemap
+    .row
+      .col-lg-12.col-md-12.col-sm-12
+        .notice-text.footer-copyright.mobfooter
+          .col-lg-7.col-lg-offset-2.col-md-7.col-md-offset-2.col-sm-7.col-sm-offset-2
+            %p.m_btm2 Copyright © 2017 by GradReady. All rights reserved.
+            %p
+              GradReady is not in any way affiliated with ACER, nor are any materials produced or services offered by it relating to the GAMSAT
+              %sup ®
+              test endorsed
+              %br
+              or approved by ACER.
+
+
+= render 'issue_forum/submit_ticket_modal', options: {}

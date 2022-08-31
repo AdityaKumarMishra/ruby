@@ -1,0 +1,322 @@
+wb = xlsx_package.workbook
+if @type == 'student_profile'
+  wb.add_worksheet(name: "Student profile") do |sheet|
+    date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+    def data_array(user)
+      data_array = []
+
+      data_array.push(user.id)
+
+      data_array.push("#{user.first_name} #{user.last_name}")
+
+      if user.state
+        data_array.push(user.state)
+      else
+        data_array.push("")
+      end
+
+      if user.try(:questionnaire)
+        if user.questionnaire.student_level == "highschool"
+          data_array.push("High School")
+
+          data_array.push(user.questionnaire.current_highschool)
+
+          data_array.push(user.questionnaire.target_uni_course)
+
+          data_array.push(user.questionnaire.highschool_year_level)
+
+          data_array.push("")
+
+          data_array.push("")
+
+          data_array.push("")
+
+        elsif user.questionnaire.student_level == "university"
+          data_array.push("University Student")
+
+          data_array.push("")
+
+          data_array.push("")
+
+          data_array.push("")
+
+          if user.questionnaire.try(:university).try(:name)
+            data_array.push(user.questionnaire.university.name)
+          else
+            data_array.push("")
+          end
+
+          if user.questionnaire.try(:degree).try(:name)
+            data_array.push(user.questionnaire.degree.name)
+          else
+            data_array.push("")
+          end
+
+          if user.questionnaire.try(:year)
+            year_validate = (1900..2100).include?(user.questionnaire.year.to_i) ? true : false
+
+            if year_validate
+              data_array.push(user.questionnaire.year.to_i)
+            else
+              data_array.push("")
+            end
+          else
+            data_array.push("")
+          end
+        else
+          data_array.push("")
+          data_array.push("")
+          data_array.push("")
+          data_array.push("")
+          data_array.push("")
+          data_array.push("")
+          data_array.push("")
+        end
+
+        if !user.questionnaire.try(:umat_high_school).nil?
+          if user.questionnaire.umat_high_school
+            data_array.push("Yes")
+          else
+            data_array.push("No")
+          end
+        else
+          data_array.push("NA")
+        end
+
+        if !user.questionnaire.try(:umat_uni).nil?
+          if user.questionnaire.umat_uni
+            data_array.push("Yes")
+          else
+            data_array.push("No")
+          end
+        else
+          data_array.push("NA")
+        end
+
+        if user.questionnaire.try(:source).include? "Google/Search"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Word of mouth"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Facebook"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Posters(Large A3 sheets posted on wall)"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Posters(A4 sheets posted on wall)"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Flyers(Smaller A5 handouts)"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Brochures"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "In class"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Workshop"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "Through student society"
+          data_array.push("Yes")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:source).include? "other"
+          other_val = user.questionnaire.try(:source).reject(&:empty?).split("other").last[0]
+          data_array.push("#{other_val}")
+        else
+          data_array.push("No")
+        end
+
+        if user.questionnaire.try(:last_source)
+          data_array.push(user.questionnaire.last_source)
+        else
+          data_array.push("")
+        end
+
+        if user.questionnaire.try(:language_spoken)
+          data_array.push(user.questionnaire.language_spoken == 'na' ? user.questionnaire.language_spoken.upcase : user.questionnaire.language_spoken.titleize)
+        else
+          data_array.push("")
+        end
+      else
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+      end
+
+      data_array.push(user.enrolled_in_trial)
+
+      data_array.push(user.trial_course_name)
+
+      first_course = user.purchased_courses.first
+      if first_course.present?
+        data_array.push(first_course.product_version.product_line.try(:name).try(:upcase))
+
+        data_array.push(first_course.city)
+
+        data_array.push(first_course.name)
+      else
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+      end
+
+      data_array.push(user.created_at.to_date)
+
+      if user.enrolments.present?
+        data_array.push(user.enrolments.order(:id).first.created_at.to_date)
+      else
+        data_array.push("")
+      end
+
+      if user.paid_enrolments.present?
+        data_array.push(user.paid_enrolments.order(:paid_at).first.paid_at.to_date)
+      else
+        data_array.push("")
+      end
+
+      data_array.push(user.referals_count)
+
+      second_course = user.purchased_courses.second
+      if second_course.present?
+        data_array.push(second_course.name)
+        data_array.push(user.course_purchase_date(second_course.id))
+      else
+        data_array.push("")
+        data_array.push("")
+      end
+
+      third_course = user.purchased_courses.third
+      if third_course.present?
+        data_array.push(third_course.name)
+        data_array.push(user.course_purchase_date(third_course.id))
+      else
+        data_array.push("")
+        data_array.push("")
+      end
+
+      fourth_course = user.purchased_courses.fourth
+      if fourth_course.present?
+        data_array.push(fourth_course.name)
+        data_array.push(user.course_purchase_date(fourth_course.id))
+      else
+        data_array.push("")
+        data_array.push("")
+      end
+
+      data_array.push(user.total_commulative_spend)
+    end
+    sheet.add_row ["User ID", "Name",  "State", "High School/University Student",  "Current High School", "Target University course",  "Year Level",  "University",  "Degree",  "Commencement Year", "Have you sat the UCAT?",  "Are you going to sit the UCAT again?", "Google/Search", "Word of mouth","Facebook","Posters(Large A3 sheets posted on wall)","Posters(A4 sheets posted on wall)","Flyers(Smaller A5 handouts)","Brochures","In class","Workshop","Through student society", "Other", "Where did you LAST see/hear about us before signing up?", "Language Spoken at Home Other than English", "Enrolled in Trial?", "Trial Course Name", "First Paid Course: Type", "First Paid Course: City", "First Paid Course: Name", "Registration Date", "Enrolment Date", "Payment Date(First Purchase)",  "Number of referrals made", "Second Course Name", "Second Course Payment Date", "Third Course Name", "Third Course Payment Date", "Fourth Course Name", "Fourth Course Payment Date", "Total cumulative spend"], :style => [date_format]
+
+    @all_users.includes(:address, questionnaire:[:university, :degree]).each do |user|
+      sheet.add_row data_array(user)
+    end
+  end
+else
+
+  wb.add_worksheet(name: "Feature Upgrades") do |sheet|
+    date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+    def data_array(user, purchase_item=nil)
+      data_array = []
+      if purchase_item.present?
+        data_array.push(user.id)
+
+        data_array.push(purchase_item.order.reference_number)
+
+        data_array.push(user.full_name)
+
+        data_array.push(user.email)
+
+        if purchase_item. purchasable_type == 'FeatureLog'
+          data_array.push(purchase_item.purchase_description)
+        elsif purchase_item. purchasable_type == 'Enrolment'
+          data_array.push(purchase_item.purchasable.course.try(:name))
+        else
+          data_array.push("")
+        end
+
+        data_array.push(purchase_item.order.total_cost)
+
+        if purchase_item.order.paid_at.present?
+          data_array.push(purchase_item.order.paid_at.to_date)
+        else
+          data_array.push(purchase_item.order.created_at.to_date)
+        end
+      else
+        data_array.push(user.id)
+        data_array.push("")
+        data_array.push(user.full_name)
+        data_array.push(user.email)
+        data_array.push("")
+        data_array.push("")
+        data_array.push("")
+      end
+      return data_array
+    end
+
+    sheet.add_row ["User ID", "Invoice Number", "Name", "Email ID", "Course/Feature Name", "Course/Feature price", "Purchase Date"], :style => [date_format]
+
+    @all_users.each do |user|
+      purchase_items = user.purchase_items.select{ |p|  p.order.paid? }
+      if purchase_items.present?
+        purchase_items.each do |purchase_item|
+          sheet.add_row data_array(user, purchase_item)
+        end
+      else
+        sheet.add_row data_array(user)
+      end
+    end
+  end
+end

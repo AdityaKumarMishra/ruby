@@ -1,0 +1,49 @@
+.div{class: ("alert_top_mrgn" if flash.present?)}
+%h1 Listing enrolments
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Email
+      %th New course
+      %th PayPal Payment
+      %th PayPal Token
+      %th Created At
+      %th Subtotal
+      %th GST
+      %th PayPal fee
+      %th BankTrans
+      %th Status
+      %th{ colspan: 3 } Actions
+
+  %tbody
+    - @enrolments.each do |enrolment|
+      %tr
+        %td= enrolment.user.try(:email)
+        %td= link_to(enrolment.try(:course).try(:name), controller: :courses, action: :edit, id: enrolment.try(:course_id))
+        %td= enrolment.try(:paypal_payment)
+        %td= enrolment.try(:paypal_token)
+        %td
+          = enrolment.try(:created_at).in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if enrolment.try(:created_at)
+        %td= enrolment.try(:subtotal)
+        %td= enrolment.try(:gst)
+        %td= enrolment.try(:paypal_fee)
+        %td= enrolment.try(:banktrans)
+        %td
+          -if enrolment.trial && enrolment.user.upgraded_user?
+            %span.label.label-success= "Upgraded"
+          -elsif enrolment.trial && enrolment.trial_expired?
+            %span.label.label-warning= "Expired"
+          - elsif enrolment.trial
+            %span.label.label-danger= "Active"
+
+
+        %td= link_to 'Transfer course', transfer_by_enrolment_path(id: enrolment, user_id: params[:user_id]), remote: :true, class: 'btn btn-success btn-sm'
+        %td= link_to 'Edit', edit_user_enrolment_path(@student, enrolment), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', user_enrolment_path(@student, enrolment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+%br
+#Transfer-Cousrse-Partail
+
+-if @student.id.present?
+  = link_to "New Enrolment", "#", "data-toggle" => "modal", 'data-target' => '#courseModal', id: 'course_link'
+= render 'enrolments/course_selection_modal', student: @student

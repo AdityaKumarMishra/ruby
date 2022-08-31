@@ -1,0 +1,23 @@
+%ul
+  - @mock_exam_essay.mock_essays.each_with_index do |essay, index|
+    %li
+      %span.essay-title
+        = "Essay #{index + 1}"
+      %span.essay-middle
+        = link_to essay.title, download_file_mock_essay_path(essay, format: :pdf)
+      %span.essay-marked
+        - if essay.mock_essay_feedback
+          Marked
+
+  %li
+    %span.essay-title
+      Status:
+    %span.essay-middle
+      %span
+        = @mock_exam_essay.status == "partially_marked" ? "Submitted" : @mock_exam_essay.status.titleize
+    %span.essay-marked
+
+  - if MockExamEssay.statuses[@mock_exam_essay.status] == 2 || MockExamEssay.statuses[@mock_exam_essay.status] == 3
+    %li
+      = link_to "View Feedback", feedbacks_mock_exam_essay_path(@mock_exam_essay.id), class: "black_default_btn hvr-shutter-in-horizontal save-score-button view-feedback"
+

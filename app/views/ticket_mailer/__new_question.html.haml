@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      ="Question from student #{@question.asker_full_name}"
+    %p
+      ="Hi #{@tutor.first_name},"
+    %p
+      The following is the question from
+      =@question.asker_firstname
+    %p
+      =@question.title
+    %p
+      =sanitize @question.question
+      %br/
+    %p
+      Click
+      =link_to 'here', issue_url(@question)
+      to response.
+
+    %p Kind regards,
+    %p GradReady Student Success Team

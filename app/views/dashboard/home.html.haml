@@ -1,0 +1,378 @@
+- title "Courses"
+- if current_user.student? && !current_user.confirmed?
+  - content_for :show_left_panel, true
+  - content_for :page_heading, 'Welcome'
+  .faq_list.para_fs14
+    .wlcom_col
+      %h4
+        %strong
+          Welcome,
+          = current_user.first_name.present? ? current_user.first_name : current_user.email
+
+      %p You have been sent an email confirmation link, please confirm your email address prior to proceeding. Your Email will our primary method of notifying you of any updates.
+
+      %p
+        If you did not receive such an email, the most common causes are as follows
+      %p
+        1. The email went to your spam folder - please check your spam folder.
+      %p
+        2. You had misspelt your email address when signing up - please submit a ticket so we may update your email address.
+      %p
+        3. You signed up using a government or university email address that has blocked the email from reaching you - please submit a ticket so we may update your email address to another address.
+      %p
+        If your payment has been confirmed, you will be able to access course material once you confirm your email.
+
+      %p.note_unconfirmed_user
+        Note (does not apply for Trial Course users): If you have made a payment through Direct Debt, It may take between 3 to 5 working days to receive your payment, after which you will be able to access the online material. Please be patient. Alternatively, you may choose to pay via PayPal or Credit Card for immediate access.
+
+        -if !current_user.paid_courses.present? && current_user.orders.pending.present?
+          %br
+          %br
+          = link_to 'Pay via Credit Card/PayPal', current_user.orders.pending.first, class: 'default_btn hvr-shutter-in-horizontal'
+
+-elsif @only_dd_pending
+  - content_for :show_left_panel, true
+  - content_for :page_heading, 'Welcome'
+  .faq_list.para_fs14
+    .wlcom_col
+      %h4
+        %strong
+          Welcome,
+          = current_user.first_name.present? ? current_user.first_name : current_user.email
+
+      %p NOTE: For Bank Transfer users, It may take between 3 to 5 working days to receive your payment, after which you will be able to access the online material. Please be patient. Alternatively, you may choose to pay via PayPal or Credit Card for immediate access.
+      = link_to 'Pay via Credit Card/PayPal', current_user.orders.pending.first, class: 'default_btn hvr-shutter-in-horizontal'
+-elsif @only_expired_course
+  - content_for :page_heading, 'Course Expired'
+  .dashbord_right
+    .not-confirmed-user
+      .resource_col
+        %h4.mbot25
+          Hi,
+          = current_user.first_name.present? ? current_user.first_name : current_user.email
+      %br
+      %p
+        = "Thanks for enrolling into #{current_user.courses.first.name}."
+      %br
+      %br
+      %p
+        Checkout options below to Learn More about current available courses.
+
+    .gamsat_no_acess
+      .no_access_col.no_green
+        %h2
+          GAMSAT
+          %sup{ style: "margin-right: -4px;"} ®
+          %span.crs_spn_mrgn Courses
+        %p
+          Comprehensive and
+          %br
+          widely-used
+          %br
+          GAMSAT
+          %sup{ style: "margin-right: -4px;"} ®
+          %br
+          preparation courses
+        = link_to gamsat_path + "#course-packages", class: "default_btn hvr-shutter-in-horizontal" do
+          Learn More
+      .no_access_col.no_blue
+        %h2
+          UCAT
+          %sup{ style: "margin-right: -4px;"} ®
+          %span.crs_spn_mrgn Courses
+        %p
+          Technologically advanced
+          %br
+          and personalized
+          %br
+          UCAT
+          %sup{ style: "margin-right: -4px;"} ®
+          %br
+          preparation course.
+        = link_to ucat_path + "#course-packages", class: "default_btn hvr-shutter-in-horizontal" do
+          Learn More
+
+-else
+  - if @update_background
+    - content_for :show_left_panel, true
+    - content_for :page_heading, 'Background'
+    .resource_col
+      %h4 Your Background
+    .faq_list.para_fs14.steps_col
+      .faq_list_col
+        .course_frm.filter_box_shadow.stap_from_field
+          / Before proceeding to the online system, please take 1 minute to fill out the following information to help us better understand our students.
+          = simple_form_for(@user, url: save_detail_user_path(@user.id), method: :put) do |f|
+            =# display_errors @user
+            -error_cls = display_errors @user
+            .alert.alert-danger.bckground_error{class: ("bckground_has_error" if error_cls.present?)}
+              Please review the problems below.
+            = f.simple_fields_for :questionnaire_attributes, @questionnaire  do |q|
+              .form-group
+                %label.control-label{class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:student_level].blank?)} *Are you a university or high school student?
+                = q.input :student_level, required: true, as: :select, collection: student_collection, label: false, prompt: "Please Select"
+                = hidden_field_tag 'update_questionnaire', params[:update_background]
+              .form-group
+                .col-sm-12.hide_background#user_questionnaire_university_questions
+                  = f.simple_fields_for :questionnaire_attributes, @questionnaire  do |q|
+                    .col-sm-6.mobmrg_tp
+                      = q.label :university_id, required: true, label: 'University', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:university_id].blank?)
+                      = q.input :university_id, required: true, label: false, as: :select, collection: University.all, prompt: 'Select University...'
+                      = q.label :degree_id, required: true, label: 'Degree', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:degree_id].blank?)
+                      = q.input :degree_id, required: true, label: false, as: :select, collection: Degree.all, prompt: 'Select Course...'
+                      = q.label :year, required: true, label: 'Commencement Year', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:year].blank?)
+                      = q.input :year, required: true, label: false
+                    .col-sm-6
+                      = q.label :umat_high_school, required: true, label: 'Did you sit the UCAT in high school?', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:umat_high_school].blank?)
+                      = q.input :umat_high_school, required: true, as: :radio_buttons, label: false, input_html: { class: 'remove_height radio_lbl' }
+                      = q.label :umat_uni, required: true, label: 'Are you going to sit/have you sat the UCAT again while at uni?', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:umat_uni].blank?)
+                      = q.input :umat_uni, required: true, as: :radio_buttons, label: false, input_html: { class: 'remove_height radio_lbl' }
+                .col-sm-12.hide_background#user_questionnaire_highschool_questions
+                  = f.simple_fields_for :questionnaire_attributes, @questionnaire  do |q|
+                    .col-sm-6
+                      = q.label :current_highschool, label: 'Current High School', required: true, class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:current_highschool].blank?)
+                      = q.input :current_highschool, label: false, required: true
+                      = q.label :target_uni_course, label: 'Target University Course', required: true, class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:target_uni_course].blank?)
+                      = q.input :target_uni_course, label: false, required: true
+
+                    .col-sm-6
+                      = q.label :highschool_year_level, required: true, label: 'Year Level',  class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:highschool_year_level].blank?)
+                      = q.input :highschool_year_level, required: true, as: :radio_buttons, collection: year_level_collection, prompt: 'Select Year Level...', label: false, input_html: { class: 'remove_height' }
+                .col-sm-12.hide_background#user_questionnaire_other_questions
+                  = f.simple_fields_for :questionnaire_attributes, @questionnaire  do |q|
+                    .col-sm-6
+                      = q.label :designation, required: true, label: 'Profession/Job/Training', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:designation].blank?)
+                      = q.input :designation, required: true, label: false
+
+                      = q.label :learning_institution, required: true, label: 'Previous University/Learning Institution', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:learning_institution].blank?)
+                      = q.input :learning_institution, required: true, label: false
+
+                      = q.label :year_of_most_recent_completed_qualification, required: true, label: 'Year of Most Recently Completed Qualification', class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:year_of_most_recent_completed_qualification].blank?)
+                      = q.input :year_of_most_recent_completed_qualification, required: true, label: false
+                .form-group
+                  = q.label :student_region, required: true, label: 'Are you a domestic or international student?',  class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:student_region].blank?)
+                  = q.input :student_region, required: true, as: :radio_buttons, collection: student_region_collection, prompt: 'Select Year Region...', label: false, input_html: { class: 'remove_height' }
+              .form-group
+                %label.control-label.mg_top10{class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:source].blank?)} *How did you hear about GradReady? Please select all that apply.
+
+                - source_collection.each_with_index do |f_source, index|
+                  -if( index % 4 == 0)
+                    = "<div class='col-md-4'>".html_safe
+                  .checkbox_row.checkbox_col.bg_info_chkbox
+                    = check_box_tag "user_questionnaire_attributes_source_#{f_source.first.downcase}" , f_source.first, f.object.questionnaire.source.include?(f_source.first), name: "user[questionnaire_attributes][source][]"
+                    = label_tag "user_questionnaire_attributes_source_#{f_source.first.downcase}", f_source.first
+
+                  -if( index % 4 == 3 || source_collection.length == index + 1)
+                    = "</div>".html_safe
+              .form-group
+                = text_field_tag 'source', "#{params[:source].present? ? params[:source]: ""}", class: "hidden_source hidden form-control width60", placeholder: "Please enter ..."
+                %p.other_source
+              .form-group
+                %label.control-label.mg_top10{class: ("bck_has_error" if error_cls.present? && params[:user][:questionnaire_attributes][:last_source].blank?)} *Where did you LAST see/hear about us before signing up?
+                = q.input :last_source, required: true, as: :select, collection: last_source_collection, label: false, prompt: 'Please Select'
+              .form-group
+                = text_field_tag 'last_source', "#{params[:last_source].present? ? params[:last_source]: ""}", class: "hidden_last_source hidden form-control", placeholder: "Please enter ..."
+                %p.other_last_source
+              .form-group
+                %label.control-label.mg_top10 *Language Spoken at Home Other than English
+                = q.input :language_spoken, required: true, as: :select, collection:language_collection, label: false, selected:"#{params[:user].present? ? params[:user][:questionnaire_attributes][:language_spoken]: ""}", prompt: 'Please Select Language', class: 'form-control cstm_select'
+              .form-group
+                = text_field_tag 'language_spoken', "#{params[:language_spoken].present? ? params[:language_spoken]: ""}", class: "hidden_language hidden form-control", placeholder: "Please enter a language"
+                %p.no_language_spoken
+            .text-center.full_width
+              = f.button :submit, "Update",class: 'default_btn resp_btn hvr-shutter-in-horizontal'
+
+  -else
+    .dashbord_right
+      - if current_user && (current_user.student?)
+        - if !@announcement.nil?
+          - content_for :page_heading, 'Announcements'
+          .resource_col
+            %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+          .faq_list.para_fs14
+            = render 'announcements/student_announcement', announcement: @announcement, title: 'Announcements', user_announcement: @user_announcement
+
+      -# if !@update_background && current_user.has_only_free_trial?
+        =# render 'enrolments/upgrade_free_trial', trial_enrolment: current_user.trial_enrolment, trial_course: current_user.trial_course
+      - elsif current_user.current_enrolment.nil? and current_user.student?
+        %h2 You're not currently enrolled in a course
+        %br
+        %h4 Checkout options below to Learn More about current available courses.
+        .row
+          .col-md-3.col-sm-12.green_opicity.gm_box
+            %h2
+              GAMSAT
+              %sup{ style: "margin-right: -4px;"} ®
+              %span.crs_spn_mrgn Courses
+            %p
+              Comprehensive and
+              %br
+              widely-used
+              %br
+              GAMSAT
+              %sup{ style: "margin-right: -4px;"} ®
+              %br
+              preparation courses
+            = link_to gamsat_path + "#course-packages", class: "btn btn-default learn_more_btn" do
+              LEARN MORE
+          .col-md-2
+          .col-md-3.col-sm-12.blue_col.um_box
+            %h2
+              UCAT
+              %sup{ style: "margin-right: -4px;"} ®
+              %span.crs_spn_mrgn Courses
+            %p
+              Technologically advanced
+              %br
+              and personalized
+              %br
+              UCAT
+              %sup{ style: "margin-right: -4px;"} ®
+              %br
+              preparation course.
+            = link_to umat_path + "#course-packages", class: "btn btn-default learn_more_btn" do
+              LEARN MORE
+
+  - if !current_user.seen_discount_popup? && @last_order.try(:generated_promo).present?
+    = render 'orders/promo_modal', order: @last_order, show_unsubscribe: true
+- if @update_background
+  :javascript
+    $(document).ready(function(){
+      student_level = $("#user_questionnaire_attributes_student_level").val();
+      if (student_level == 'highschool' ){
+        $("#user_questionnaire_highschool_questions").css('display','block');
+      }
+      else if(student_level == 'university'){
+        $("#user_questionnaire_university_questions").css('display','block');
+      }
+      else if(student_level == 'other'){
+        $("#user_questionnaire_other_questions").css('display','block');
+      }
+    });
+
+    $("#user_questionnaire_attributes_student_level").change(function() {
+      var student_type = $(this).val()
+      check(student_type)
+    });
+
+    function check(student_type){
+      switch (student_type) {
+        case "highschool":
+          $("#user_questionnaire_university_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_highschool_questions").fadeIn('fast');
+          });
+          $("#user_questionnaire_other_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_highschool_questions").fadeIn('fast');
+          });
+          break;
+        case "university":
+          $("#user_questionnaire_highschool_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_university_questions").fadeIn('fast');
+          });
+          $("#user_questionnaire_other_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_university_questions").fadeIn('fast');
+          });
+          break;
+        case "other":
+          $("#user_questionnaire_highschool_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_other_questions").fadeIn('fast');
+          });
+          $("#user_questionnaire_university_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_other_questions").fadeIn('fast');
+          });
+          break;
+        default:
+          $("#user_questionnaire_highschool_questions").fadeOut('fast');
+          $("#user_questionnaire_university_questions").fadeOut('fast');
+          $("#user_questionnaire_other_questions").fadeOut('fast');
+      }
+    }
+
+    $('#user_questionnaire_attributes_current_highschool').autocomplete({
+      source: '/high_schools.json'
+    });
+
+    $('#user_questionnaire_attributes_language_spoken').on('change',function(){
+      if ($(this).val()=="other"){
+        $("#language_spoken").removeClass('hidden')
+      }else{
+        $("#language_spoken").addClass('hidden')
+      }
+    })
+
+    $('#user_questionnaire_attributes_last_source').on('change',function(){
+      if ($(this).val()=="other"){
+        $("#last_source").removeClass('hidden')
+      }else{
+        $("#last_source").addClass('hidden')
+      }
+    })
+
+    $('#user_questionnaire_attributes_source_other').on('click',function(){
+      if ($(this).val()=="Other" && $(this).is(':checked')){
+        $("#source").removeClass('hidden')
+      }else{
+        $("#source").addClass('hidden')
+      }
+    })
+
+
+    $('#new_user').submit(function( e ){
+      var language_spoken = $('#user_questionnaire_attributes_language_spoken').val();
+
+      var language_spoken_text = $('#language_spoken').val();
+
+      var last_source = $('#user_questionnaire_attributes_last_source').val();
+      var last_source_text = $('#last_source').val();
+
+      if (language_spoken){
+        if (language_spoken && language_spoken!="other"){
+          $('.no_language_spoken').text("");
+          true;
+        }else{
+          if (language_spoken && language_spoken_text){
+            $('.no_language_spoken').text("");
+            true;
+          }else{
+            $('.no_language_spoken').text('Please select a language');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.no_language_spoken').text('Please select a language');
+        e.preventDefault();
+      }
+
+
+      if (last_source){
+        if (last_source && last_source!="other"){
+          $('.other_last_source').text("");
+          true;
+        }else{
+          if (last_source && last_source_text){
+            $('.other_last_source').text("");
+            true;
+          }else{
+            $('.other_last_source').text('Please select an option');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.other_last_source').text('Please select an option');
+        e.preventDefault();
+      }
+
+
+      if ($('#user_questionnaire_attributes_source_other').is(':checked')){
+        if (!$('.hidden_source').hasClass('hidden') && $('.hidden_source').val()==""){
+          $('.other_source').text('This field is Required.');
+          e.preventDefault();
+        }else{
+          $('.other_source').text("");
+          true;
+        }
+      }else{
+        $('.other_source').text("");
+        true;
+      }
+    });

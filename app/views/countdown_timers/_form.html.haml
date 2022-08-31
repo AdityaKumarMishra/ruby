@@ -1,0 +1,24 @@
+= simple_form_for(@countdown_timer) do |f|
+  .form-group
+    = f.input :title, class: "form-control"
+  .form-group
+    = f.input :description, label: "Description", as: :ckeditor, :input_html => { :ckeditor => { :height => 500 } }
+  .form-group
+    = f.input :destination_link, label: "Add go to action link for the Countdown Timer here:"
+  .form-group
+    = f.label :end_date, "Timer End Date"
+    = f.input :end_date, label: false, class: "form-control"
+  .form-group
+    = f.label :end_date, "Timer End Time"
+    = f.input :end_time, label: false, class: "form-control"
+  .form-group
+    = f.label :active, "Active"
+    .checkbox
+    %label.radio-inline
+      = f.radio_button :active, true
+      &nbsp;Yes
+    %label.radio-inline
+      = f.radio_button :active, false
+      &nbsp;No
+  .form-actions
+    = f.button :submit, "Update"

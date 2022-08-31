@@ -1,0 +1,227 @@
+- content_for :show_left_panel, true
+- content_for :page_heading, 'Contact Details'
+.faq_list.para_fs14.stap_from_field.step_form_wrap.text-center
+  -if @enrolment_items.present?
+    %ul.step_points.horizonatal
+      -unless @user.paid_courses.present?
+        %li.completed_step LOGIN / SIGNUP
+      - if (@user.paid_courses.present? && @user.has_free_trial_only?) || !@user.paid_courses.present? || !@user.address.present?
+        %li.completed_step CONTACT DETAILS
+      %li.active_step COURSE DETAILS
+      %li PAYMENT
+  - if @notification.present? && @notification.active?
+    .notification.highlight_box.gamsat-prep.mbot20.notify_box
+      %h3.mbot20
+        = @notification.title.upcase
+      .desc
+        = @notification.description.html_safe
+  .faq_list_col
+    .outer_form.mob_course_detal_col
+      .row.mbot15
+        .col-md-4.col-sm-4.cstm_detail
+          .box_header
+            City
+          .box_content.text-center{style: "padding: 25px;"}
+            .select_col
+              .course-date-selection
+                = select_tag "city_courses", options_for_select(@cities, selected: @course.try(:city)), id: "city", class: 'new_city_panel', "data-precity" => "#{@course.try(:city)}"
+
+        .col-md-4.col-sm-4.cstm_detail
+          .box_header
+            Course
+          .box_content.text-center{style: "padding: 25px;"}
+            .select_col
+              .course-date-selection
+                = select_tag "city_courses", options_for_select(@courses.map{|c|[c.name, c.id]}, selected: @course.try(:id)), id: "course"
+        .col-md-4.col-sm-4.cstm_detail
+          .box_header
+            Course Dates
+          .box_content.course_details_fnt_17{style: "padding: 15px!important;"}
+            .course_date
+              %span#courseEnrolmentDate
+                %b.gren_txt Enrolment closure date
+                ="- #{@course.enrolment_end_date.strftime("%d %b %Y")}"
+              %span#courseExpiryDate
+                = link_to "Expiry date", root_url + course_faq_expiry(@course.product_version.type), class: 'no_confirm'
+                = "- #{@course.expiry_date.strftime("%d %b %Y")}"
+
+      - course_type = ProductVersion.course_types[@course.product_version.try(:course_type)]
+      -if ![1,2,3,9].include?(course_type) && !(@course.product_version.type == 'UmatReady')
+        - hardcopy_feature = @course.product_version.product_version_feature_prices.includes(:master_feature).where('is_default=false AND is_additional = false AND master_features.name LIKE(?)', '%TextbookHardCopyFeature%').references(:master_features)
+        %section.course_txt_col
+          .box_header
+            Textbook Option
+            %i.fa.fa-question-circle{title: "You have the option of choosing either online OR hardcopy textbook at no extra charge. Alternatively, you may choose both options for an extra charge of $#{hardcopy_feature.first.try(:price_after_discount).try(:to_i)}"}
+          .box_content
+            %form
+              .form-group.myfrm_grp
+                .checkbox_col.custom-checkbox
+                  %input#online_textbook{:type => "checkbox", value: '', checked: @enrolment.online_textbook}/
+                  %label{:for => "online_textbook"}
+                    Online Textbook
+              .form-group.myfrm_grp.mg_top
+                .checkbox_col.custom-checkbox
+                  %input#textbook_hardcopy{:type => "checkbox", value: "#{hardcopy_feature.first.try(:id)}", checked: @enrolment.hardcopy}/
+                  %label{:for => "textbook_hardcopy"}
+                    Hardcopy of Textbook (+ Postage and Handling Fee)
+                  -if @outofstock.present? && @outofstock.out_of_stock?
+                    .custom_course_outofstock{:style => "margin-left: 25px;font-weight:600;"}
+                      -if @outofstock.content.present?
+                        %span *Out of stock - #{@outofstock.content}
+                      -else
+                        %span *Out of stock
+                  %div#hrdcpy-div{:style => "margin-left: 25px;"}
+                    Estimated delivery time for Australia: 3-7 business days. For international deliveries, please see
+                    = succeed "." do
+                      %a.green{href: "https://gradready.com.au/gamsat-preparation-courses/faq/enrolment-and-payment#sixteen_faq", target: :_blank}
+                        our FAQs
+              - document = Document.find_by(for_timetable: true, product_line_id: @course.product_version.product_line.try(:id), accessible: true)
+
+        = render 'users/hardcopy_modal', hardcopy_feature: hardcopy_feature
+
+      -if ![2,3,9].include?(course_type) && @course.product_version.product_version_feature_prices.where(is_default: false, is_additional: false).present?
+        %section.course_txt_col
+          .box_header.add_res_mobile
+            - if course_type == 1 || course_type == 11
+              Additional Resources
+            -else
+              = succeed "off when purchased during checkout" do
+                Additional resources:
+                %b
+                  25%
+          .box_content{:style => "padding: 20px 0;"}
+            #course_new_addons
+              -if @course.city == "Other"
+                - no_ids = @course.product_version.product_version_feature_prices.includes(:master_feature).where('is_default = false AND is_additional = false AND master_features.name iLIKE ANY ( array[?] )', ['%LiveMockExamFeature%', '%AttendanceTutorialsFeature%']).references(:master_features)
+                - pvfps = @course.product_version.product_version_feature_prices.includes(:master_feature).where(is_default: false, is_additional: false).where.not(id: no_ids).order('master_features.popular_order')
+              -else
+                - pvfps = @course.product_version.product_version_feature_prices.includes(:master_feature).where(is_default: false, is_additional: false).order('master_features.popular_order')
+              = render 'course_addons', pvfps: pvfps, enrolment: @enrolment, course_type: course_type, order: @order
+
+      -if @course.product_version.slug.include?("attendence") && document.present?
+        = link_to 'Download Sample Class Schedule', download_file_document_path(document, format: :pdf), class: 'no_confirm default_btn mtop25 hvr-shutter-in-horizontal next '
+      .cstm_panel_desc.pos_rel{class: "#{@course.lessons.present? ? '' : 'cstm_condition'}"}
+        -if @custom_mock
+          #cust-mock-exam{value: 'true'}
+        - if @course.try(:lessons).present? && @show_lesson
+          .box_header
+            Course Schedule
+          .box_content.cstm_panel_desc_content
+            -@course.lessons.order(:date).each_with_index do |lesson, index|
+              .course_row_lesson{class: "#{index == 0 ? 'show' : ''}"}
+                %h4=lesson.location
+                %p= lesson.item_covered
+                .unvrsty_schedule
+                  %h4= lesson.date.present? ? lesson.date.strftime('%d %b %Y') : ''
+                  %p="#{lesson.start_time.strftime('%I:%M %p')} | #{lesson.end_time.strftime('%I:%M %p')}"
+
+          %a.toggle_courses{:href => "javascript:void(0)"}
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/full_schedule.svg', class: 'down_sign'
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/collpase_icon.svg', class: 'up_sign hide'
+
+    -if ![1,2,3,9].include?(course_type) && !(@course.product_version.type == 'UmatReady')
+
+      = link_to 'Next', order_path(id: @order, payment_page: true), class: 'no_confirm default_btn hvr-shutter-in-horizontal next hide', id: 'order_page_link'
+      = link_to 'Next', 'javascript:void(0)', class: 'no_confirm default_btn hvr-shutter-in-horizontal next next_mob_btn', id: 'check_textbook'
+    -else
+      = link_to 'Next', order_path(id: @order, payment_page: true), class: 'no_confirm default_btn next_mob_btn hvr-shutter-in-horizontal next'
+
+-if params[:different_course].eql?('true') && @course.present?
+  = render 'orders/location_course_modal'
+= render 'users/textbooks_modal'
+= render 'users/hardcopy_delivery_modal'
+:javascript
+  var pv_id = '#{ @course.try(:product_version_id) }';
+  takeNewCourseScript(pv_id);
+
+  $("#city").on('change', function () {
+    var city = $(this).val();
+    var previous_city = $(this).attr('data-precity');
+    $(this).attr('data-precity', city);
+    if(previous_city == 'Other' || city == 'Other'){
+      var course_type = '#{course_type}';
+      var id = '#{@course.id}';
+      var enrolment_id = '#{@enrolment.id}';
+      var order_id = '#{@order.id}';
+
+      $.ajax({
+        url: "/courses/"+ id +"/get_addons",
+        method: "GET",
+        data: {enrolment_id: enrolment_id, course_type: course_type, city: city, order_id: order_id}
+      });
+    }
+  });
+
+  $(".toggle_courses").click(function(){
+    $(".cstm_panel_desc_content").toggleClass("more_feature_col", 'slow');
+  });
+  var islessondown=true;
+  $(".toggle_courses").click(function(){
+    if(islessondown){
+      $(".toggle_courses .up_sign").removeClass('hide');
+      $(".toggle_courses .down_sign").addClass('hide');
+      islessondown=false;
+    }
+    else{
+      $(".toggle_courses .up_sign").addClass('hide');
+      $(".toggle_courses .down_sign").removeClass('hide');
+      islessondown=true;
+    }
+  })
+
+-if ![1,2,3,9].include?(course_type) && !(@course.product_version.type == 'UmatReady')
+  :javascript
+    $(document).ready(function(){
+      $("#check_textbook").click(function(){
+        var online_check = $('#online_textbook').is(':checked');
+        var hardcopy_checked = $('#textbook_hardcopy').is(':checked');
+
+        if(online_check || hardcopy_checked){
+          $('#order_page_link').get(0).click();
+        }else{
+          $('#textbookCheck').modal('show');
+        }
+      });
+    });
+
+    $('#online_textbook, #textbook_hardcopy').click(function(){
+      var user = '#{current_user.id}';
+      var course = '#{@course.id}'
+      var cookie_name = 'user_' + user + 'course_' + course
+      if(Cookies.get(cookie_name) == "true"){}else{
+        var d = new Date();
+        d.setTime(d.getTime() + (1*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cookie_name + "=" + true + ";" + expires + ";path=/";
+        $('#hardCopyCheck').modal('show');
+      }
+    });
+     $('#hrdcpy-div').hide();
+    $('#textbook_hardcopy').click(function(){
+      if ($('#textbook_hardcopy').is(":checked")){
+        $('#hrdcpy-div').show();
+      }else{
+        $('#hrdcpy-div').hide();
+      }
+    });
+
+:javascript
+    var mySwiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+    spaceBetween: 0,
+    pagination: {
+       el: '.swiper-pagination',
+       dynamicBullets: true,
+       clickable: true,
+     },
+
+    });
+
+  $(window).bind('beforeunload', function(e){
+    if (!$(document.activeElement).hasClass('no_confirm')) {
+      $.ajax({
+        type: 'delete',
+        url: '/users/destroy_ongoing_orders',
+      });
+    }
+  });

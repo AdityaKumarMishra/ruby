@@ -1,0 +1,102 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body#nav-tabs
+    %ul.gr-nav.gr-nav-pills
+      %li.default_range.active
+        %a{"data-toggle" => "tab", href: "#default"}  Custom Range
+      %li.custom_range
+        %a{"data-toggle" => "tab", href: "#custom"} Default Range
+    .clearfix
+    %br
+    .tab-content
+      #default.tab-pane.fade.in.active
+        .form-group
+          = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit', class: "custom_filter_form"  }  do |f|
+            =hidden_field_tag :filter_type, 'custom'
+            %p
+              Date start
+              =f.text_field(:with_start, class: 'form-control tutor-datepicker', required: true, autocomplete: "off")
+            %p
+              Date end
+              =f.text_field(:with_end, class: 'form-control tutor-datepicker', required: true, autocomplete: "off")
+            %br
+            %p
+              = link_to 'Filter', 'javascript:void(0)', class: 'btn btn-gradready green submit-filter'
+              / =# f.submit 'Filter', class: 'btn btn-gradready green'
+              = link_to 'Reset filters', dashboard_count_tutor_appointments_path(reset: true), class: 'btn btn-gr-light-green'
+            %br
+            = link_to "Download csv",'javascript:void(0)', class: 'btn btn-primary csv_btn'
+      #custom.tab-pane.fade.in
+        .form-group
+          %p
+            Pay Period
+            = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit', class: "pay_period_filter_form" }  do |f|
+              =hidden_field_tag :filter_type, 'pay_period'
+              = select_tag :with_pay_period, options_for_select(Appointment.pay_periods, @selected_date), class: 'form-control pay_period_filter'
+              %br
+              %p
+                = link_to 'Filter', 'javascript:void(0)', class: 'btn btn-gradready green submit-filter'
+                / =# f.submit 'Filter', class: 'btn btn-gradready green'
+                = link_to 'Reset filters', dashboard_count_tutor_appointments_path(filter_type: 'pay_period', reset: true), class: 'btn btn-gr-light-green'
+              %br
+              = link_to "Download csv",'javascript:void(0)', class: 'btn btn-primary csv_btn'
+
+.div#tutor-apt-table
+  = render(partial: 'dashboard/partial/count_tutor_appointments', locals: { appointments: @appointments, tutors: @tutors, appointment_hours: @appointment_hours } )
+
+:javascript
+  $(function () {
+    $('.tutor-datepicker').datepicker({
+      "format": "yyyy-mm-dd",
+      "autoclose": true,
+      orientation: 'bottom'});
+    var type = "#{params[:filter_type]}";
+    if(type == "pay_period"){
+      $('#custom').addClass('active');
+      $('#default').removeClass('active');
+      $('.custom_range').addClass('active');
+      $('.default_range').removeClass('active');
+    }
+  });
+  $('#nav-tabs li').click(function(){
+    if(!($(this).hasClass('active'))){
+      var element = ($(this).attr('class').split('_')[0])
+      var form = $('#'+element).find('form')
+      var action = form.attr('action');
+      if(action.search('.xls') != -1){
+        form.attr('action', (form.attr('action').split('.')[0]))
+      }
+      var url = form.attr('action');
+      $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+     });
+    }
+  })
+  $('.csv_btn').click(function(){
+    var form = $(this).parent()
+    var action = form.attr('action')
+    if(action.search('.xls') == -1){
+      form.attr('action', (form.attr('action')+'.xls'))
+    }
+    form[0].submit();
+  })
+  $('.submit-filter').click(function(){
+    var form = $(this).parent().parent();
+    var action = form.attr('action')
+    if(action.search('.xls') != -1){
+      form.attr('action', (form.attr('action').split('.')[0]))
+    }
+    var url = form.attr('action');
+    $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+    });
+  })

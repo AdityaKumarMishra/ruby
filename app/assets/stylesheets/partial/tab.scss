@@ -1,0 +1,42 @@
+// Declare variables
+$tab-background-active: $gamsat-color;
+$tab-item-font-size: rem-calc(12);
+$tab-content-border: $gamsat-color;
+
+.updates {
+  .nav.nav-tabs{
+    li {
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 10px;
+      padding: 20px 20px;
+      font-size: 18px;
+      border-top: thick solid $gamsat-color;
+      &.active {
+        color: $white;
+        background: $gamsat-color;
+      }
+      &.alternate{
+        border-top: thick solid $grGreyDark;
+        &.blue{
+          &.active{
+            color: $white;
+            background: $umat-color;
+          }
+        }
+        &.purple{
+          &.active{
+            color: $white;
+            background: $vce-color;
+          }
+        }
+        &.red{
+          &.active{
+            color: $white;
+            background: $hsc-color;
+          }
+        }
+      }
+    }
+  }
+}

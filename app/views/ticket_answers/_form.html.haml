@@ -1,0 +1,11 @@
+= simple_form_for @ticket_answer, url:if @ticket_answer.id.nil? then ticket_ticket_answers_path(@ticket.id) else ticket_ticket_answer_path(@ticket_answer.ticket, @ticket_answer) end do |f|
+
+  .form-inputs
+    = f.input :content
+    = f.association :ticket
+    = f.association :user
+    = f.input :public
+    = f.input :helpfulness
+
+  .form-actions
+    = f.button :submit

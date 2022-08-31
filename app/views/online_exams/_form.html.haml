@@ -1,0 +1,90 @@
+= render 'online_exam_video_guide'
+
+- positions = OnlineExam.ordered_positions(@product_line&.id || @online_exam.product_line_id || @product_lines.first.id)
+- available_positions = ((1..positions.first.to_i).to_a + (positions.first.to_i..positions.last.to_i).to_a + (positions.last.to_i..(positions.last.to_i + 5)).to_a).uniq
+- positions += [0]
+- available_positions = available_positions - positions
+- available_positions = (available_positions + [@online_exam.position]).uniq if @online_exam.position.present?
+- selected_product_line_id = @product_line&.id || @online_exam.product_line_id
+
+.form_div
+  = simple_form_for(@online_exam, html: {class: 'online-exam-form'}) do |f|
+    .form-inputs
+      = f.hidden_field :id, value: @online_exam.id
+      = f.input :title
+      .div_field
+        = f.input :published, label: false
+        = f.label :published, label: "* Make Exam Visible to Student"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only tick this box if the exam is definitely ready to be seen and taken by the students.
+      .div_field
+        = f.input :is_finish, label: false
+        = f.label :is_finish, label: "* Force student to complete exam within allotted time"
+      %br
+      .div_field
+        = f.label :product_line_id, label: '* Product Line'
+        = f.input :product_line_id, as: :select, collection: ProductLine.all.pluck(:name, :id).map{ |pl| [pl.first.upcase, pl.last] }, label: false, prompt: 'Please select product line', selected: selected_product_line_id
+      %br
+      - if selected_product_line_id.present?
+        .div_field
+          = f.label :position
+          .position_div
+            = f.input :position, as: :select, collection: available_positions.sort, prompt: 'Please select position', selected: @online_exam.position, label: false
+      - else
+        .div_field{style: 'display: none;'}
+          = f.label :position
+          .position_div
+            = f.input :position, as: :select, collection: available_positions.sort, prompt: 'Please select position', selected: @online_exam.position, label: false
+      %br
+      .div_field
+        = f.label :tags, label: "* Tags"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only choose one tag
+      .div_field
+        = f.association :tags, collection: policy_scope(Tag).level_one_exclude_pt_public, label: false, input_html: { class: 'chosen-select tag-list' }
+      .div_field
+        = f.label :instruction, label: "* Instruction"
+        = f.input :instruction, as: :ckeditor, input_html: { ckeditor: { height: 400 }}, required: true, label: false
+      .div_field
+        = f.input :document, label: 'Document'
+    .form-actions
+      = f.button :submit, class: 'btn btn-gradready green'
+
+:javascript
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+    $('#position-verify').click(function(){
+      $.ajax({
+        url: "/online_exams/check_position",
+        type: "GET",
+        data: {position: $('#online_exam_position').val(), product_line_id: $('#product-line-id').val(), online_exam_id: "#{@online_exam.id}" },
+        success: function(responseData) {
+          if(responseData.status)
+            $('#valid-msg').css('color', 'green')
+          else
+            $('#valid-msg').css('color', 'red')
+          $('#valid-msg').text(responseData.message)
+        }
+      });
+    })
+  });
+
+  $(document).ready(function(){
+    $('#online_exam_product_line_id').on('change', function(evt){
+      var productLineId = $(evt.target).val();
+      var onlineExamId = $('#online_exam_id').val();
+
+      $.ajax({
+        type: 'post',
+        url: "/online_exams/update_product_line_positions",
+        data: { product_line_id: productLineId, online_exam_id: onlineExamId }
+      });
+    });
+  });

@@ -1,0 +1,13 @@
+.feature-icon-container.col-md-6{:id => ""}
+  .feature-icon.pull-left
+    %i.fa.fa-book{"aria-hidden" => "true"}
+  .feature-content.pull-right
+    %h4
+      Abbreviated Edition of Textbook - Hard Copy
+      / .label.label-mini.label-enhanced
+      / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+      / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+    - if paid
+      %h4 $#{price.ceil} (including $29 Shipping) + 10% GST = $#{price_with_gst.ceil}
+    .text
+      %p.u-word-spacing Due to many student comments regarding size of book in past years, we decided to leave out the slides in the 2016 edition. The resulting hardcopy edition is 500 pages in length. To see what was left out of the hard copy edition, you may view the online version through signing up to a free trial. If you would like to see the full hardcopy version again, please share your thoughts with us through the Contact Us page. The Textbook will be shipped to you from your nearest capital city every Monday.

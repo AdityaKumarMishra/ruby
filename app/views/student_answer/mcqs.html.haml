@@ -1,0 +1,5 @@
+.container
+  .row
+    = simple_form_for :mcqs, url: mcq_student_answers_path(mcq_stems: params[:mcq_stems]), method: :post do |i|
+      .panel.panel-default
+        #mcq_stem= render 'student_answer/mcq_stem_form', i: i

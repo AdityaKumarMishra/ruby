@@ -1,0 +1,714 @@
+%section.padd_bttm40.mob_paddbttm0#student_improved_score
+  .container
+    .student_perform
+      .perform_heading.text-center
+        %h2
+          GAMSAT
+          %sup ®
+          Student Results
+      #reviews_col_tabbing.comparison_table_tabbing
+        %ul.nav.attendce_tabbing{role: "tablist"}
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "reviews_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#third_perform", role: "tab"}
+              %h4 2014 Statistics
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "reviews_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#second_perform", role: "tab"}
+              %h4 2015 Statistics
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#first_perform", role: "tab"}
+              %h4 2016 Statistics
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2017_perform", role: "tab"}
+              %h4 2017 Statistics
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2018_perform", role: "tab"}
+              %h4 2018 Statistics
+          %br
+          %br
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2019_perform", role: "tab"}
+              %h4 2019 Statistics
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2020_perform", role: "tab"}
+              %h4 2020 Statistics
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2021_perform", role: "tab"}
+              %h4 2021 Statistics
+          %li.non_active_review.active{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2022_perform", role: "tab"}
+              %h4 2022 Statistics
+              
+
+        .tab-content.full_width
+        
+          
+          #2022_perform.tab-pane.active{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.hgt_58_3
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.3
+                .graph_bar.graph_bar2018.hgt_67_4
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2022_1', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:67.4
+                .graph_bar.mg_lft50.hgt_63_4_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:63.4
+                .graph_bar.graph_bar2018.hgt_68
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2022_2', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:68.0
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2022, we surveyed our students who had sat the March 2022 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  67.4
+                  %sup 2
+                and ranked in the
+                %span.green 84th percentile
+                of the 2022 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 63.4
+                %sup 4
+                = "->"
+                %span.green
+                  68.0
+                  %sup 5
+              %p
+                Rank: 66th percentile -&gt;
+                %span.green 87th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 21 percentile points
+              %p Improvement remains statistically significant when assessed using 95% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 7.0
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 4.5
+                  %li Standard Deviation 6.4
+  
+          #2021_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.hgt_58_5
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.5
+                .graph_bar.graph_bar2018.hgt_67_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2021_1', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:67.22
+                .graph_bar.mg_lft50.hgt_61_5_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:61.54
+                .graph_bar.graph_bar2018.hgt_66_7
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2021_2', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:66.75
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2021, we surveyed our students who had sat the March 2021 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  67.22
+                  %sup 2
+                and ranked in the
+                %span.green 86th percentile
+                of the 2021 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 61.54
+                %sup 4
+                = "->"
+                %span.green
+                  66.75
+                  %sup 5
+              %p
+                Rank: 65th percentile -&gt;
+                %span.green 85th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 20 percentile points
+              %p Improvement remains statistically significant when assessed using 95% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.8
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 6.1
+                  %li Standard Deviation 5.9
+                  %li 25 percentile average score increase achieved 6 out of 8 years where data was tracked. 8 out of 8 years tracked have achieved at least a 20 percentile average score increase.
+
+
+
+
+          #2020_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph
+                .graph_bar.hgt_59_5
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:59.5
+                .graph_bar.graph_bar2018.hgt_65_1
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2020_1', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:65.1
+                .graph_bar.mg_lft50.hgt_58_8_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.8
+                .graph_bar.graph_bar2018.hgt_64_1
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2020_2', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:64.1
+            .col-md-7.perfrm_grph_content
+              %p
+                In July 2020, we surveyed our students who had sat the May 2020 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  65.1
+                  %sup 2
+                and ranked in the
+                %span.green 76th percentile
+                of the 2020 May GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 58.8
+                %sup 4
+                = "->"
+                %span.green
+                  64.1
+                  %sup 5
+              %p
+                Rank: 47th percentile -&gt;
+                %span.green 72nd percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 25 percentile points
+              %p Improvement remains statistically significant when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.5
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.5
+                  %li Standard Deviation 6.2
+          #2019_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg_64
+                .graph_bar.hgt_58_3
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.3
+                .graph_bar.graph_bar2018.hgt_63_3
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2019_1', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:63.3
+                .graph_bar.mg_lft50.hgt_58_0_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.0
+                .graph_bar.graph_bar2018.hgt_62_7
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2019_2', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:62.7
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2019, we surveyed our students who had sat the March 2019 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  63.3
+                  %sup 2
+                and ranked in the
+                %span.green 76th percentile
+                of the 2019 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 58.0
+                %sup 4
+                = "->"
+                %span.green
+                  62.7
+                  %sup 5
+              %p
+                Rank: 48th percentile -&gt;
+                %span.green 74th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 26 percentile points
+              %p Improvement remains statistically significant when assessed using 95% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.0
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.7
+                  %li Standard Deviation 5.7
+          #2018_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg_64
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.graph_bar2018.hgt_61_7
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2018_1', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:61.7
+                .graph_bar.mg_lft50.hgt_57_4_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.4
+                .graph_bar.graph_bar2018.hgt_61_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2018_2', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:61.2
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2018, we surveyed our students who had sat the March 2018 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  61.7
+                  %sup 2
+                and ranked in the
+                %span.green 60th percentile
+                of the 2018 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 57.4
+                %sup 4
+                = "->"
+                %span.green
+                  61.2
+                  %sup 5
+              %p
+                Rank: 40th percentile -&gt;
+                %span.green 60th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 20 percentile points
+              %p Improvement remains statistically significant when assessed using 80% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 7.2
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.9
+                  %li Standard Deviation 7.4
+          #2017_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.hgt_98
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.hgt_254.btm_261
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:66.1
+                .graph_bar.mg_lft50.hgt_159
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:61.0
+                .graph_bar.hgt_262.btm_268
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:66.3
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2017, we surveyed our students who had sat the March 2017 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  66.1
+                  %sup 2
+                and ranked in the
+                %span.green 87th percentile
+                of the 2017 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 61.0
+                %sup 4
+                = "->"
+                %span.green
+                  66.3
+                  %sup 5
+              %p
+                Rank: 64th percentile -&gt;
+                %span.green 89th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 25 percentile points
+              %p
+                Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.8
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.4
+                  %li Standard Deviation 5.9
+          #first_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.hgt_63_8
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:63.8
+                .graph_bar.mg_lft50.hgt_58_2
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.2
+                .graph_bar.hgt_64_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:64.2
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2016, we surveyed our students who had sat the March 2016 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  63.8
+                  %sup 2
+                and ranked in the
+                %span.green 79th percentile
+                of the 2016 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 59.1
+                %sup 4
+                = "->"
+                %span.green
+                  64.2
+                  %sup 5
+              %p
+                Rank: 54th percentile -&gt;
+                %span.green 80th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 26 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.6
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.0
+                  %li Standard Deviation 6.6
+          #second_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:63.1
+                .graph_bar.mg_lft50.hgt_58_2
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.4
+                .graph_bar.hgt_64_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:64.3
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2015, we surveyed our students who had sat the March 2015 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  63.1
+                  %sup 2
+                and ranked in the
+                %span.green 75th  percentile
+                of the 2015  March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 59.3
+                %sup 4
+                = "->"
+                %span.green
+                  64.3
+                  %sup 5
+              %p
+                Rank: 55th percentile -&gt;
+                %span.green 80th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 25 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.4
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 4.9
+                  %li Standard Deviation 5.4
+          #third_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.graph_bar2014.hgt_57
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.4
+                .graph_bar.graph_bar2014.hgt_65
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', class: 'gr_bar2014', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover GradReady Student:65.4
+                .graph_bar.graph_bar2014.mg_lft50.hgt_60
+                  %span.blck_bar
+                  %span.bar_hover Avg GradReady Student:60.1
+                .graph_bar.graph_bar2014.hgt_68
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:67.8
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2014, we surveyed our students who had sat the March 2014 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.green
+                  65.4
+                  %sup 2
+                and ranked in the
+                %span.green 87th  percentile
+                of the 2014   March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 60.6
+                %sup 4
+                = "->"
+                %span.green
+                  67.8
+                  %sup 5
+              %p
+                Rank: 68th percentile -&gt;
+                %span.green 92nd percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.green 24 percentile points
+              %p
+                Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "green"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.1
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 3.7
+                  %li Standard Deviation 4.1
+
+:css
+
+  .graph_bar.hgt_58_3 span.blck_bar{
+    height: 115px;
+  }
+  .graph_bar.hgt_67_4 span.green_bar { 
+    height: 265px;
+  } 
+  .graph_bar.hgt_63_4_black span.blck_bar{
+    height: 197px; 
+  }
+  .graph_bar.hgt_68 span.green_bar {
+    height: 285px;
+  }
+
+  .graph_bar.graph_bar2018 img.gr_bar2022_1 {
+    bottom: 275px;
+  }
+  .graph_bar.graph_bar2018 img.gr_bar2022_2 {
+    bottom: 295px;
+  }

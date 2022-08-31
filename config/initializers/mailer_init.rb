@@ -1,0 +1,1 @@
+Dir[Rails.root + 'app/mailers/*.rb'].map {|f| File.basename(f, '.*').camelize.constantize }

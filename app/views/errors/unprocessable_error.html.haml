@@ -1,0 +1,31 @@
+- title "Page Not Found | GradReady"
+- meta_description "Page Not Found"
+- meta_keywords "page, file, URL, not, found, error"
+
+%section.pad50
+  .container.error_col.text-center
+    = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/oops.png'
+    %p.marg25 The change you wanted was rejected. Maybe you tried to change something you didn't have access to. If you are the application owner check the logs for more information.
+    = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gr.svg', class: 'gr_image'
+    .error_code Error code: 422
+    = render partial: "errors/contact_ticketing", locals: { :@error_type => '404'}
+    %p Below are few helpful links,
+    %ul
+      %li
+        %a{href: "/"} Home
+      %li
+        %a{href: "/gamsat-preparation-courses/faq"} FAQ
+      %li
+        %a{href: "/gamsat-preparation-courses"}
+          GAMSAT
+          %sup ®
+          Preparation Courses
+      %li
+        %a{href: "/umat-preparation-courses"}
+          UCAT
+          %sup ®
+          Preparation Courses
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

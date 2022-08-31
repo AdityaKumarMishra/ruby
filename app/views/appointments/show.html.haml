@@ -1,0 +1,14 @@
+%p
+  %b Tutor:
+  = @appointment.tutor
+%p
+  %b Student:
+  = @appointment.student
+
+%p
+  %b Content:
+  = @appointment.content.html_safe if @appointment.content
+
+= link_to 'Edit', edit_appointment_path(@appointment)
+\|
+= link_to 'Back', tutor_availabilities_path

@@ -1,0 +1,22 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Listing tags
+      .panel-body
+        .col-md-5.col-md-offset-1
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th Tag name
+                %th Quantity
+            %tbody
+              - @tags.each do |p, tag|
+                - tag.each do |t|
+                  %tr
+                    %td
+                      %h5= t.name
+                    %td.text-center
+                      %span.badge= t.mcqs.size
+          =will_paginate @tags, renderer: BootstrapPagination::Rails, :param_name => 'tags_page'

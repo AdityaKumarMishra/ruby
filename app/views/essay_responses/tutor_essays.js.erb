@@ -1,0 +1,6 @@
+<% js = escape_javascript(
+  render(partial: 'essay_responses/partial/tutor_essays', locals: { response_counts: @response_counts })
+) %>
+
+$("#tutor_essays").html("<%= js %>");
+download_marked_essay();

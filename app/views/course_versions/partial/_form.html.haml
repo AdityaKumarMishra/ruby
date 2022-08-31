@@ -1,0 +1,14 @@
+= simple_form_for([@course,@course_version]) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :version_number
+    = f.input :date_added
+    = f.input :class_size
+    = f.input :expiry_date
+    = f.input :enrolment_end_added
+    = f.input :students_count
+    =f.simple_fields_for :address do |m|
+      =render 'addresses/fields',{f: m}
+  .form-actions
+    = f.button :submit
+

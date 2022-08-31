@@ -1,0 +1,37 @@
+%tr
+  - (0..2).each do |n|
+    - if gamsat_product_info[product_versions[n]][:live_component]
+      %td
+        .component-title.under_line
+          %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'live_component')}
+            LIVE COMPONENTS
+    - else
+      %td{rowspan: 4}
+
+%tr
+  - (0..2).each do |n|
+    - if gamsat_product_info[product_versions[n]][:live_component]
+      %td
+        %li
+          / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'mmi_overview')}
+          MMI Overview
+        %li
+          / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'assessment_criteria')}
+          The "ideal" medical candidate and assessment criteria
+        %li
+          / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'commonn_scenarios')}
+          10 common scenarios
+        %li
+          / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'critiques_discussion')}
+          Critiques and discussions
+        %li
+          / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'class_booklet')}
+          In class booklet
+        - if product_versions[n] == "interviewready-attendance-essentials"
+          %li
+            / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'peer_interviews')}
+            Tutor facilitated peer interviews
+        - else
+          %li
+            / %a{:href => dynamic_gamsat_product_version_uri(product_versions[n],'realistic_mmi')}
+            Realistic mock MMI

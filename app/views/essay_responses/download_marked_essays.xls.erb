@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <% if @tutor.present? %>
+    <Worksheet ss:Name= "Essasy Marked" >
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">Tutor Name</Data></Cell>
+          <Cell><Data ss:Type="String">Essay Marked</Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String"><%= @tutor.full_name %></Data></Cell>
+          <% count = @responses.count %>
+          <Cell><Data ss:Type="Number"><%=count%></Data></Cell>
+        </Row>
+      </Table>
+    </Worksheet>
+  <% else %>
+    <Worksheet ss:Name= "Essasy Marked" >
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">Tutor Name</Data></Cell>
+          <Cell><Data ss:Type="String">Essay Marked</Data></Cell>
+        </Row>
+
+        <% @responses.group_by(&:staff_profile).each do |staff_profile, responses| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= staff_profile.staff.full_name %></Data></Cell>
+            <% mock_count = @mock_responses.where(user_id: staff_profile.staff.id).count %>
+            <% total_count = responses.count %>
+
+            <Cell><Data ss:Type="Number"><%= total_count %></Data></Cell>
+          </Row>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>

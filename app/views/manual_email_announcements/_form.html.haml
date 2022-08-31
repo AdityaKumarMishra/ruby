@@ -1,0 +1,122 @@
+= render 'manual_email_template_guideline_video'
+= simple_form_for @manual_email_announcement do |f|
+  =# f.error_notification
+  .form-inputs
+    .div_field
+      = f.label :product_version, "Product Version"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select the Product Versions you want this email to fire for
+      = f.collection_select :product_version_ids, @product_versions ,:id,:name,{ include_blank: false},{ class: 'chosen-select', :multiple=>true, id: 'pv-select'}
+    %br
+    .div_field#courses-div
+      = render 'select_courses'
+    %br
+    .div_field#features-div
+      = render 'select_master_features'
+    %br
+    .div_field
+      = f.label :subject, "Email Subject"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Subject line of the email
+      = f.input :subject, label: false
+    %br
+    .div_field
+      = f.label :greeting, "Standard Greeting"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Include text above email: Dear [Student First Name]
+      = f.select(:greeting, EmailCustomise.greetings.map { |value| [ value[0], value[1] ] },{ include_blank: false},{ class: 'chosen-select-course', :multiple=>true})
+    %br
+    .div_field
+      = f.label :content, "Email Content"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        %p
+          1. Add the email content.
+        %p
+          2. When you add links, please go to Link --> Advanced -> Style and add "color:#007833" for GAMSAT and "color:#007ecc" for UCAT to ensure that links colour matches the whole website theme.
+        %p
+          3. Any Links to open in new tab ensure you select Link --> Target and select Target value as "New Window(_blank)"
+      = f.input :content, label: false, as: :ckeditor, input_html: {ckeditor: { height: 300 } }
+    %br
+    .div_field
+      = f.label :firs, "Attachment"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Attachment will be attached in email
+      = f.file_field :first_docuemnt, label: 'Document', id: 'first-email-attachment'
+      = hidden_field_tag :is_first_docuemnt, false
+      - if @manual_email_announcement.first_docuemnt.file?
+        .div.attachment-email#first-attachment-email
+          = link_to 'Remove Attachment', "javascript:", class: 'btn btn-danger', id: "remove-first-attachment"
+          = @manual_email_announcement.first_docuemnt.original_filename
+          %br
+          = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), @manual_email_announcement.first_docuemnt.url, target: '_blank'
+    %br
+    .div_field
+      = f.label :firs, "Attachment"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Attachment will be attached in email
+      = f.file_field :second_docuemnt, label: 'Document', id: 'second-email-attachment'
+      = hidden_field_tag :is_second_docuemnt, false
+      - if @manual_email_announcement.second_docuemnt.file?
+        .div.attachment-email#second-attachment-email
+          = link_to 'Remove Attachment', "javascript:", class: 'btn btn-danger', id: "remove-second-attachment"
+          = @manual_email_announcement.second_docuemnt.original_filename
+          %br
+          = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), @manual_email_announcement.second_docuemnt.url, target: '_blank'
+    %br
+    .div_field
+      = f.label :firs, "Attachment"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Attachment will be attached in email
+      = f.file_field :third_docuemnt, label: 'Document', id: 'third-email-attachment'
+      = hidden_field_tag :is_third_docuemnt, false
+      - if @manual_email_announcement.third_docuemnt.file?
+        .div.attachment-email#third-attachment-email
+          = link_to 'Remove Attachment', "javascript:", class: 'btn btn-danger', id: "remove-third-attachment"
+          = @manual_email_announcement.third_docuemnt.original_filename
+          %br
+          = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), @manual_email_announcement.third_docuemnt.url, target: '_blank'
+  %br
+  .form-actions
+    = f.button :submit, @manual_email_announcement.new_record? ? "Create Manual Email Template" : "Update Manual Email Template",class: 'btn btn-gradready green'
+    = link_to 'Back', "javascript:history.back();", class: 'btn btn-danger'
+
+:javascript
+  $('.help_link').click(function(){
+    $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+    $(this).closest('.div_field').find('.div_info').toggle();
+  });
+  $('#pv-select').change(function(){
+    var pv_ids = $(this).val()
+    $.ajax({
+      type: 'get',
+      url: '/manual_email_announcements/courses',
+      data: {pv_ids: pv_ids },
+    }).done(function (response) {
+    });
+  })
+  $('#remove-first-attachment').click(function(){
+    $('#first-attachment-email').remove();
+    $('#is_first_docuemnt').val(true);
+  })
+   $('#remove-second-attachment').click(function(){
+    $('#second-attachment-email').remove();
+    $('#is_second_docuemnt').val(true);
+  })
+   $('#remove-third-attachment').click(function(){
+    $('#third-attachment-email').remove();
+    $('#is_third_docuemnt').val(true);
+  })

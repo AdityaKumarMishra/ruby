@@ -1,0 +1,20 @@
+- product_line = trial_course.product_version.type.underscore.split("_")[0]
+- #product_line = "vce"
+#upgrade-free-trial-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"}
+          %span ×
+        .modal-title.text-center
+          %h4
+            = upgrade_free_trial_title(trial_enrolment)
+          %p
+            = "Enrol into one of the below courses to continue your #{product_line.upcase} preparations."
+      .modal-body.text-center
+        = render 'enrolments/product_versions_summary', product_line: product_line, trial_course: trial_course
+
+:css
+  .modal-backdrop{
+    z-index: 1;
+  }

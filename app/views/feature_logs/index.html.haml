@@ -1,0 +1,27 @@
+- content_for :page_heading, 'More Features'
+.dashbord_right
+  .resource_col
+    #notice1
+    #add_paragraph
+      - temp_arr = ["Online Mock Exam 1", "GAMSAT Weekend Course", "Online Mock Exam 2"]
+      - if temp_arr.any? {|a| @in_cart.map{|c| c.master_feature.title}.include?(a) }
+        .notification.highlight_box.gamsat-prep.mbot20.notify_box
+          .desc
+            Please note that for the March 2021 GAMSAT exam, the GAMSAT Weekend Course will run online. For further details & dates, please visit our Custom Course page and select your relevant city.
+            %br
+            For the Online Mock Exams please note that Online Mock Exam 2 does not include marked essays. For Online Mock Exam dates, please visit our Custom Course page and select your relevant city.
+            %br
+            Please submit a support ticket under the category 2. Course Administration if you have any further queries.
+    %h4.fl Listing Features
+    .faq_list.para_fs14
+      .faq_list_col.table_3_col
+        .faq_list_col
+          #feature_log_table
+            = render partial: 'feature_logs/partial/index_table', locals: { in_cart: @in_cart, inactive: @inactive, pending_confirmation: @pending_confirmation }
+
+          .text-center.full_width.mtop30.mbot10
+            - view_type = AdminControl.find_by(name: 'Signup view')
+            -if view_type.present? && view_type.new_view && current_user.has_free_trial_only?
+              = link_to "Go to Cart", update_contact_user_path(current_user), class: 'mg_rht0 default_btn hvr-shutter-in-horizontal no_confirm go_to_cart_btn', target: :_blank
+            -else
+              = link_to "Go to Cart", user_ongoing_order_link, class: 'mg_rht0 default_btn hvr-shutter-in-horizontal no_confirm go_to_cart_btn', target: :_blank

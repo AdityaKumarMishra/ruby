@@ -1,0 +1,477 @@
+//colors
+$color_mine_shaft_approx: #333;
+$black_50: rgba(0, 0, 0, .5);
+$color_salem_approx: #009348;
+$white: #fff;
+$white_20: rgba(255,255,255,0.2);
+
+//@extend-elements
+//original selectors
+//.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown
+%extend_1 {
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+//original selectors
+//.mCS-inset.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-2-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-3.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-3-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+%extend_2 {
+  width: 16px;
+  position: absolute;
+  height: 16px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 9px;
+  background-color: $color_salem_approx;
+}
+
+//original selectors
+//.mCS-inset.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-dark.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-2.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-2-dark.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-3.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar, .mCS-inset-3-dark.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar
+%extend_3 {
+  height: 6px;
+  margin: 5px 3px;
+  position: absolute;
+  width: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+//original selectors
+//.mCS-inset.mCSB_scrollTools_horizontal .mCSB_draggerRail, .mCS-inset-dark.mCSB_scrollTools_horizontal .mCSB_draggerRail, .mCS-inset-2.mCSB_scrollTools_horizontal .mCSB_draggerRail, .mCS-inset-2-dark.mCSB_scrollTools_horizontal .mCSB_draggerRail, .mCS-inset-3.mCSB_scrollTools_horizontal .mCSB_draggerRail, .mCS-inset-3-dark.mCSB_scrollTools_horizontal .mCSB_draggerRail
+%extend_4 {
+  width: 100%;
+  height: 12px;
+  margin: 2px 0;
+}
+
+//original selectors
+//.mCS-inset-2.mCSB_scrollTools .mCSB_draggerRail, .mCS-inset-2-dark.mCSB_scrollTools .mCSB_draggerRail
+%extend_5 {
+  background-color: #007833;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $white;
+  border-color: $white_20;
+  //Instead of the line below you could use @include box-sizing($bs)
+  box-sizing: border-box;
+}
+
+
+.scroll_main_content {
+  overflow: auto;
+  position: relative;
+  padding: 3px;
+  margin: 10px;
+  width: 100%;
+  max-width: 99%;
+  height: 265px;
+  color: $color_mine_shaft_approx;
+  //Instead of the line below you could use @include box-sizing($bs)
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 4px;
+  background-color: $black_50;
+}
+.mCustomScrollbar {
+  touch-action: pinch-zoom;
+  &.mCS_no_scrollbar {
+    touch-action: auto;
+  }
+  &.mCS_touch_action {
+    touch-action: auto;
+  }
+}
+.mCustomScrollBox {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  max-width: 100%;
+  outline: none;
+  direction: ltr;
+}
+.mCSB_container {
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  &.mCS_no_scrollbar_y.mCS_y_hidden {
+    margin-right: 0;
+  }
+}
+.mCSB_scrollTools {
+  position: absolute;
+  width: 16px;
+  height: auto;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  .mCSB_draggerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: auto;
+  }
+  .mCSB_draggerRail {
+    width: 2px;
+    height: 100%;
+    margin: 0 auto;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 16px;
+    border: 1px solid #007833;
+  }
+  .mCSB_dragger {
+    cursor: pointer;
+    width: 16px;
+    height: 16px !important;
+    z-index: 1;
+    background: #007833;
+    border-radius: 9px;
+    .mCSB_dragger_bar {
+      position: relative;
+      width: 2px;
+      height: 14px !important;
+      background: #007833;
+      margin: 0 auto;
+      //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+      border-radius: 16px;
+      text-align: center;
+    }
+  }
+  .mCSB_buttonUp {
+    @extend %extend_1;
+  }
+  .mCSB_buttonDown {
+    @extend %extend_1;
+    bottom: 0;
+  }
+  a + .mCSB_draggerContainer {
+    margin: 20px 0;
+  }
+}
+.mCS-inset {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+    }
+    .mCSB_buttonUp {
+      background-position: -32px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -32px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -40px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -40px -128px;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_2;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCS-inset-dark {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+      background-color: $color_salem_approx;
+    }
+    .mCSB_dragger {
+      .mCSB_dragger_bar {
+        @extend %extend_2;
+        background-color: $color_salem_approx;
+      }
+      &:hover .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &:active .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &.mCSB_dragger_onDrag .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+    }
+    .mCSB_buttonUp {
+      background-position: -112px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -112px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -120px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -120px -128px;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCS-inset-2 {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+      @extend %extend_5;
+    }
+    .mCSB_buttonUp {
+      background-position: -32px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -32px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -40px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -40px -128px;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_2;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCS-inset-2-dark {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+      background-color: $color_salem_approx;
+      @extend %extend_5;
+      border-color: $color_salem_approx;
+      background: $color_salem_approx;
+    }
+    .mCSB_dragger {
+      .mCSB_dragger_bar {
+        @extend %extend_2;
+        background-color: $color_salem_approx;
+      }
+      &:hover .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &:active .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &.mCSB_dragger_onDrag .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+    }
+    .mCSB_buttonUp {
+      background-position: -112px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -112px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -120px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -120px -128px;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCS-inset-3 {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+    }
+    .mCSB_buttonUp {
+      background-position: -32px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -32px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -40px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -40px -128px;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_2;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCS-inset-3-dark {
+  &.mCSB_scrollTools {
+    .mCSB_draggerRail {
+      width: 2px;
+      background-color: $color_salem_approx;
+      background-color: $color_salem_approx;
+    }
+    .mCSB_dragger {
+      .mCSB_dragger_bar {
+        @extend %extend_2;
+        background-color: $color_salem_approx;
+      }
+      &:hover .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &:active .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+      &.mCSB_dragger_onDrag .mCSB_dragger_bar {
+        background-color: $color_salem_approx;
+      }
+    }
+    .mCSB_buttonUp {
+      background-position: -112px -72px;
+    }
+    .mCSB_buttonDown {
+      background-position: -112px -92px;
+    }
+    .mCSB_buttonLeft {
+      background-position: -120px -112px;
+    }
+    .mCSB_buttonRight {
+      background-position: -120px -128px;
+    }
+  }
+  &.mCSB_scrollTools_horizontal {
+    .mCSB_draggerRail {
+      @extend %extend_4;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      @extend %extend_3;
+    }
+  }
+}
+.mCSB_inside > .mCSB_container {
+  margin-right: 0px;
+}
+.mCS-dir-rtl > {
+  .mCSB_inside > {
+    .mCSB_container {
+      margin-right: 0;
+      margin-left: 30px;
+      &.mCS_no_scrollbar_y.mCS_y_hidden {
+        margin-left: 0;
+      }
+    }
+    .mCSB_scrollTools {
+      right: auto;
+      left: 0;
+    }
+  }
+  .mCSB_outside + .mCSB_scrollTools {
+    right: auto;
+    left: 0;
+    left: -26px;
+  }
+}
+.mCSB_outside + .mCSB_scrollTools {
+  right: -26px;
+}
+.mCSB_scrollTools_vertical.mCSB_scrollTools_onDrag_expand {
+  .mCSB_dragger.mCSB_dragger_onDrag_expanded {
+    .mCSB_dragger_bar {
+      width: 12px;
+    }
+    + .mCSB_draggerRail {
+      width: 8px;
+    }
+  }
+  .mCSB_draggerContainer:hover {
+    .mCSB_draggerRail {
+      width: 8px;
+    }
+    .mCSB_dragger .mCSB_dragger_bar {
+      width: 12px;
+    }
+  }
+}
+.scroll_blue .mCSB_scrollTools .mCSB_draggerRail {
+  border: 1px solid #007ecc;
+}
+.scroll_blue .mCSB_scrollTools .mCSB_dragger {
+  background: #007ecc;
+}
+.scroll_blue .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background: #007ecc;
+}
+
+.scroll_purple .mCSB_scrollTools .mCSB_draggerRail {
+  border: 1px solid #462c9f;
+}
+.scroll_purple .mCSB_scrollTools .mCSB_dragger {
+  background: #462c9f;
+}
+.scroll_purple .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background: #462c9f;
+}
+
+.scroll_red .mCSB_scrollTools .mCSB_draggerRail {
+  border: 1px solid #be382a;
+}
+.scroll_red .mCSB_scrollTools .mCSB_dragger {
+  background: #be382a;
+}
+.scroll_red .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background: #be382a;
+}
+
+.height_750.scroll_main_content {
+  height: 750px;
+}
+
+.height_200.scroll_main_content {
+  height: 200px;
+}

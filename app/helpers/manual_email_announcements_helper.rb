@@ -1,0 +1,2 @@
+module ManualEmailAnnouncementsHelper
+end

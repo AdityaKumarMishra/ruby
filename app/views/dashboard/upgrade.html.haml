@@ -1,0 +1,4 @@
+- if current_course&.trial_enabled? || (@courses.blank? && current_user.trial_course.present?)
+  - content_for :page_heading, 'Upgrade'
+  .dashbord_right
+    = render 'enrolments/upgrade_free_trial', trial_enrolment: current_user.trial_enrolment, trial_course: current_user.trial_course

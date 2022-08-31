@@ -1,0 +1,8 @@
+%h1 Editing Course Version
+= render 'course_versions/partial/form'
+
+= render :partial => 'course_versions/partial/subject_list', :locals => {:subjects => @course_version.subjects}
+
+= link_to 'Show', course_course_version_path(@course,@course_version)
+|
+= link_to 'Back', course_course_versions_path(@course)

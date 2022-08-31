@@ -1,0 +1,8 @@
+= form_tag mailing_list_subscribe_path(list: "blog_#{blog_type}"), method: :post, remote: true, id: 'subscribe-blog-list' do
+  .form-group
+    = text_field_tag :email, nil, placeholder: 'Email', required: true, class: "form-control"
+  .form-group
+    = text_field_tag :first_name, nil, placeholder: 'First Name', required: false, class: "form-control"
+  .form-group
+    = text_field_tag :last_name, nil, placeholder: 'Last Name', required: false, class: "form-control"
+  = submit_tag 'Subscribe',{class: "btn btn-primary"}

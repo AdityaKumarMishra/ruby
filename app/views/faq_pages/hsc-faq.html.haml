@@ -1,0 +1,130 @@
+- title "HSC Preparation Courses | Frequently Asked Questions"
+.container.default-main-container.ng-scope
+  .row
+    .span12
+      %h1.under_hsc.freq_asked_quest Frequently Asked Questions
+      .faq_wrapper
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['und_hsc'])
+            %h3
+              .under_hsc_heading
+                Understanding HSC
+                %sup{ style: "margin-right: -5px;"} ®
+                Exam
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('und_hsc'))+'#what-is-the-hsc'}
+                  What is the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                =link_to 'How is my ATAR calculated?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('und_hsc'))+'#how-is-my-atar'
+              %li
+                =link_to 'How important are internal ranks?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('und_hsc'))+'#how-important-are'
+            .under_hsc
+              %a.link_pos_rltv{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('und_hsc'))}
+                See all HSC
+                %sup.faq_sup ®
+                &nbsp;
+                questions
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['preparation'])
+            %h3
+              .under_hsc_heading Understanding the value of Preparation
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('preparation'))+'#why-should-i-enrol'}
+                  Why should I enrol in a preparation course for the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                %a{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('preparation'))+'#how-early-should-i'}
+                  How early should I sign up to a HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  preparation course?
+              %li
+                %a{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('preparation'))+'#how-much-preparation'}
+                  How much preparation do I have to do for the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+            .under_hsc
+              %a.link_pos_rltv{:href => faq_topic_path(:hsc , FaqTopic.hsc.for_code('preparation'))}
+                See all HSC
+                %sup.faq_sup ®
+                &nbsp;
+                Preparation questions
+        .clear
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['hscready'])
+            %h3
+              .under_hsc_heading
+                About GradReady
+          .faq_list
+            %ul
+              %li
+                %a{:href => faq_topic_path(:hsc, FaqTopic.hsc.for_code('hscready'))+'#how-is-the-hsc-ready-course'}
+                  How is the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  Ready course different from other HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  preparation courses?
+              %li
+                %a{:href => faq_topic_path(:hsc, FaqTopic.hsc.for_code('hscready'))+'#is-there-any-prerequisite'}
+                  Is there any prerequisite knowledge required for the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+              %li
+                %a{:href => faq_topic_path(:hsc, FaqTopic.hsc.for_code('hscready'))+'#does-hsc-ready-cover-everything'}
+                  Does HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  Ready cover everything that is tested in the HSC
+                  %sup{ style: "margin-right: -5px;"} ®
+                  ?
+            .under_hsc
+              %a.link_pos_rltv{:href => faq_topic_path(:hsc, FaqTopic.hsc.for_code('hscready'))}
+                See all HSC
+                %sup.faq_sup ®
+                &nbsp;
+                Ready questions
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['enrolment'])
+            %h3
+              .under_hsc_heading
+                Enrolment, Payment and Refund policy
+          .faq_list
+            %ul
+              %li
+                =link_to 'How do I enrol into a GradReady course?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#how-do-i-enrol'
+              %li
+                =link_to 'Is there a group discount available?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#is-there-a-group'
+              %li
+                =link_to 'Can discounts be combined?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#Can-discounts-be'
+              %li
+                =link_to 'What is the Refund policy?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#what-is-the-refund'
+              %li
+                =link_to 'For how long is my subscription valid?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#for-how-long-is'
+            .under_hsc
+              =link_to 'See all Enrolment and Payment Queries Questions', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))
+        .clear
+        .faq_col_box
+          .faq_heading
+            =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/'+@icons['university-admissions'])
+            %h3
+              .under_hsc_heading
+                University Admissions
+          .faq_list
+            %ul
+              %li
+                =link_to 'When do I need to start my university application process?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('university-admissions'))+'#when-do-i-need'
+              %li
+                =link_to 'What ATAR score do I need to get into the course I want?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('university-admissions'))+'#what-atar-score'
+              %li
+                =link_to 'If I receive an offer, can I defer for a year?', faq_topic_path(:hsc, FaqTopic.hsc.for_code('university-admissions'))+'#if-i-receive'
+            .under_hsc
+              =link_to 'See all university admissions questions', faq_topic_path(:hsc, FaqTopic.hsc.for_code('university-admissions'))

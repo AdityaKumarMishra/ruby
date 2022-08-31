@@ -1,0 +1,17 @@
+%h1 Listing master features
+
+%h4 Filter Master Features
+.panel.panel-default
+  .panel-body
+    = form_for_filterrific @filterrific do |f|
+      .form-group
+        %label Type
+        =f.select(:by_product_line, @filterrific.select_options[:by_product_line],{ include_blank: '- All -' }, class: 'form-control')
+      = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default'
+
+
+= link_to 'New Feature', new_master_feature_path, class: 'btn btn-gradready green'
+
+%br
+%br
+=render(partial: 'master_features/table', locals: { master_features: @master_features })

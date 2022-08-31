@@ -1,0 +1,38 @@
+- title "Resend confirmation email | GradReady"
+- view_type = AdminControl.find_by(name: 'Signup view')
+- content_for :show_left_panel, true
+- content_for :show_dashboard_bg, true
+-if view_type.present? && view_type.new_view
+  .step_full_wdt
+    .register_col.steps_col_wrapper.stap_from_field
+      .register_lft_col
+      .register_rgt_col
+        %h2.form_title.text-center Resend confirmation email
+        %p.back-msg-reset Enter your registered email Address below, and we'll resend confirmation email.
+        .course_frm
+          = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+
+            = f.input :email, required: true, autofocus: true, class: 'form-control input-lg'
+            .btn_submit_cntr
+              = f.button :submit, "Resend", class: 'default_btn resp_btn hvr-shutter-in-horizontal'
+          %center.new_shared_links
+            = render "devise/shared/links"
+-else
+  %h2.text-align-center Resend confirmation instructions
+  = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    =# display_errors resource
+    =# f.full_error :confirmation_token
+    .form-inputs
+      .row
+        .col-sm-4
+        .col-sm-4
+          .text-align-center
+            %br
+            %br
+          = f.input :email, required: true, autofocus: true
+          = f.button :submit, "Resend confirmation instructions", class: 'btn btn-large-grey'
+        .col-sm4
+        .form-actions
+
+  %center
+    = render "devise/shared/links"

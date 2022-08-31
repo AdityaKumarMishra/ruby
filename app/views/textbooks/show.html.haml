@@ -1,0 +1,88 @@
+- if current_user.student?
+  - content_for :page_heading, 'Textbook'
+  .dashbord_right
+    .resource_col.mbot21
+      %h4.fl
+        %strong Title:
+        = @textbook.title.present? ? @textbook.title : @textbook.course.name if @textbook.present?
+    - @content = @textbook
+    .faq_list.para_fs14.mar5
+      .faq_list_col
+        .textbook_tabbing_links.written_view_btn.marzero
+          %ul
+            %li= link_to 'Back to Textbooks', "/dashboard/textbooks"
+            - if @textbook.present? && !@textbook.for_document?
+              %li= link_to "Show Relevant Videos", exercise_review_videos_textbook_path(@textbook), {remote: true}
+            %li= link_to "Give Feedback", textbook_feedback_textbook_path(@textbook), {remote: true} if @textbook.present?
+            %li
+              %a{class: "new-ticket", href: url_for(controller: 'issue_forum', action: 'list', content_id: @content.try(:id), content_type: @content.class)}
+                GetClarity
+
+        #pdf-data.hide= @textbook.encrypted if @textbook.present?
+        - if @print_count && (@print_count >= 2)
+          #hover-text.red-text You have reached the limit for the number of times this document can be printed.
+        .written_view_col
+          - if @textbook.present? && (@textbook.for_textbook || @textbook.for_live_slide || @textbook.for_document || @textbook.for_textbook_slide || (@print_count && (@print_count >= 2)))
+
+            %iframe.embed-responsive-item.auto-hide-navbar#textbookGrad{src:"/pdfjs/web/student_viewer.html?file=#{@textbook_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+          - else
+            %iframe.embed-responsive-item.auto-hide-navbar#textbookGrad{src:"/pdfjs/web/viewer.html?file=#{@textbook_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+    = render 'issue_forum/feedback_modal', options: {}
+  .div{id: "mod_video_attempt"}
+- else
+  %p
+    %b Title:
+    = @textbook.title.present? ? @textbook.title : @textbook.course.name if @textbook.present?
+  .next_prev_div
+    = link_to 'Back to Textbooks', "/dashboard/textbooks", class: "btn btn-default feedback_bth_wdth"
+  %p
+  %br
+  #pdf-data.hide= @textbook.encrypted if @textbook.present?
+
+  #hover-text
+
+  %iframe.embed-responsive-item.auto-hide-navbar#textbookGrad{src:"/pdfjs/web/viewer.html?file=#{@textbook_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+
+  %br
+  %br
+  = link_to 'Back', dashboard_textbooks_path, class: 'btn btn-danger'
+  .div{id: "mod_video_attempt"}
+- textbook_completed = current_user.performance_stats.where(performable: @textbook).present? || (!@textbook.for_textbook && !@textbook.for_textbook_slide) if @textbook.present?
+
+:javascript
+  $('#textbookGrad').load(function(){
+    if ("#{@role}" == "student")
+    {
+      var iframe = $('#textbookGrad').contents();
+      iframe.find(".toolbarButton.print").remove();
+
+      var frameDoc = $("#textbookGrad").contents()[0];
+      var bookMarkedRead = false  
+      frameDoc.addEventListener("pagechange", function (evt) {
+        if(!bookMarkedRead){
+          totalPages = iframe.find('#pageNumber')[0].getAttribute('max')
+          console.log(totalPages)
+          if(parseInt(evt.pageNumber) == parseInt(totalPages)){
+            setTextbookRead();
+            bookMarkedRead = true
+          }
+        }
+      });
+    }
+
+  });
+  $(document).on('keydown', function(e) {
+    if((e.ctrlKey || e.metaKey) && (e.key == "p" || e.charCode == 16 || e.charCode == 112 || e.keyCode == 80) ){
+      e.cancelBubble = true;
+      e.preventDefault();
+
+      e.stopImmediatePropagation();
+    }
+  });
+  function setTextbookRead(){
+    $.ajax({
+      url: '/mark-book-read',
+      type: 'GET',
+      data: {id: "#{@textbook.try(:id)}"}
+    })
+  }

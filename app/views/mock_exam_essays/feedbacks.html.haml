@@ -1,0 +1,17 @@
+- content_for :page_heading, 'Mock Exam Essays Feedbacks'
+.dashbord_right
+  .resource_col.mbot21.martopbot10.mob_btm
+    %h4.fl
+      = "#{@mock_exam_essay.user.full_name} Mock Exam Essays Feedbacks"
+  - @mock_exam_essay.mock_essays.each_with_index do |essay, index|
+    .statics_static_table.online_exam.mg_bttm20
+      %ul
+        %li
+          %span
+            = "Essay #{index + 1}"
+        %li
+          %span Mark :
+          = essay.mock_essay_feedback ? essay.mock_essay_feedback.rating : "NA"
+        %li
+          %span= "Feedback for Essay #{index + 1} : "
+          = essay.mock_essay_feedback ? essay.mock_essay_feedback.response.html_safe : "NA"

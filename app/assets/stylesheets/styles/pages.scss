@@ -1,0 +1,287 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.h1-green {
+  color: #009348;
+  font-weight: bold !important;
+}
+
+#GradNavbar .main_menu li a{display:inline;padding:0;}
+.main_menu{
+  position:relative;
+}
+.main_menu li {padding:14px 15px;}
+.main_menu li:hover{
+  border-bottom:4px solid transparent;
+
+}
+.main_menu li:hover .dropdown-menu.sub_menu{
+  display:block;
+}
+.dropdown-menu.sub_menu{
+    display: none;
+    left: 0;
+    background: #009348;
+    padding: 0px 0;
+    overflow: visible;
+    text-align: center;
+    width: 1094px;
+    margin-left: -370px;
+    border:0px;
+
+    border-radius: 0px;
+}
+
+#GradNavbar > ul > li{
+    position: static; padding:0px;}
+
+.menu_pointer{
+content: "";
+    position: absolute;
+    border-top: 0;
+    border-bottom: 14px solid #009348;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: -13px;
+    left: 46%;
+}
+#GradNavbar .main_menu li:hover{border-bottom:0px;}
+#GradNavbar .main_menu li a{position: relative;
+    padding: 14px 15px;
+    float: left;}
+#GradNavbar .main_menu li a:hover:after{ content: "";
+    position: absolute;
+    border-top: 0;
+    border-bottom: 14px solid #009348;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+        top: 37px;
+    left: 46%;
+    z-index: 999;}
+#GradNavbar .main_menu li a.no_icon:hover:after{display:none;}
+.dropdown-menu.sub_menu:before{
+    content: "";
+    position: absolute;
+    width:100%;
+    left:-100%;
+    height:48px;
+    background:#009348;
+
+
+}
+.dropdown-menu.sub_menu:after{
+    content: "";
+    position: absolute;
+    width:100%;
+    right:-100%;
+    height:48px;
+    background:#009348;
+}
+#GradNavbar > ul > li .caret{position: relative;
+    top: 12px;
+    left: -7px;}
+
+.sub_menu li{
+  display:inline-block;
+  padding: 14px 17px;
+      height: 43px;
+  position:relative;
+
+
+}
+.sub_menu li:hover{background:#31905a;}
+.sub_menu li .inner_menu li:hover{ border-bottom:1px solid #000 !important; background:#bfbfbf;}
+
+.sub_menu li .inner_menu li{
+   border-bottom:1px solid #000 !important;
+}
+.sub_menu li .inner_menu li a:hover:after{display:none;}
+#GradNavbar > ul > li .sub_menu li a{
+      color: #000 !important;
+    padding: 0 !important;
+    display: inline;
+
+}
+#GradNavbar > ul > li .sub_menu li a:after{display:none;}
+#GradNavbar > ul > li .sub_menu li a:hover{text-decoration:none !important;}
+
+
+.dropdown-menu.sub_menu li:hover .inner_menu{display:block;}
+
+.dropdown-menu.sub_menu .inner_menu{
+    display: none;
+    width: 500px;
+    left: 0;
+    overflow: visible;
+
+    border: 0;
+    margin-top: 0;
+    border-radius: 0;
+
+}
+#GradNavbar > ul > li .sub_menu li .inner_menu li a{
+  font-size:13px;
+  text-transform:capitalize !important;
+}
+.sub_menu li .inner_menu li{
+      display: block;
+    border-bottom: 1px solid #fff;
+    padding: 5px 6px;
+    height: auto;
+    float: left;
+    width: 100%;
+}
+
+.sub_menu li .inner_menu li:last-child{
+  border-bottom:0;
+}
+
+
+#GradNavbar > ul > li .sub_menu li .inner_menu li a:hover{
+  text-decoration:none !important;
+}
+.green_caret{
+color:#009348;
+}
+.blue_caret{
+color:#007ecc;
+}
+.purple_caret{
+color:#462c9f;
+}
+.red_caret{
+color:#be382a;
+}
+#GradNavbar > ul > li .caret.white_caret{
+    color: #fff;
+    position: absolute;
+    right: 0;
+        left: inherit;
+    top: 23px;
+}
+
+#GradNavbar > ul > li.blue_logo_icon:hover > .navbar.other-products .navbar-brand{display:none}
+
+//blue
+.dropdown-menu.sub_menu.blue_sub_menu{
+  background:#007ecc;
+}
+.dropdown-menu.sub_menu.blue_sub_menu:before{
+  background:#007ecc;
+}
+.dropdown-menu.sub_menu.blue_sub_menu:after{
+  background:#007ecc;
+}
+#GradNavbar .main_menu li a.main_menu_blu_caret:hover:after{
+  border-bottom:14px solid #007ecc;
+}
+
+.dropdown-menu.sub_menu.blue_sub_menu .inner_menu{
+  background:#fff;
+}
+.sub_menu.blue_sub_menu li:hover{
+  background:#0096f3;
+}
+.sub_menu.blue_sub_menu li .inner_menu li:hover{
+   background:#bfbf;
+}
+
+//purple
+.dropdown-menu.sub_menu.purple_sub_menu{
+  background:#462c9f;
+}
+.dropdown-menu.sub_menu.purple_sub_menu:before{
+  background:#462c9f;
+}
+.dropdown-menu.sub_menu.purple_sub_menu:after{
+  background:#462c9f;
+}
+#GradNavbar .main_menu li a.main_menu_prple_caret:hover:after{
+  border-bottom:14px solid #462c9f;
+}
+.dropdown-menu.sub_menu.purple_sub_menu .inner_menu{
+  background:#fff;
+}
+.sub_menu.purple_sub_menu li:hover{
+  background:#6a56b2;
+}
+
+//red
+.dropdown-menu.sub_menu.red_sub_menu{
+  background:#be382a;
+}
+.dropdown-menu.sub_menu.red_sub_menu:before{
+  background:#be382a;
+}
+.dropdown-menu.sub_menu.red_sub_menu:after{
+  background:#be382a;
+}
+#GradNavbar .main_menu li a.main_menu_red_caret:hover:after{
+  border-bottom:14px solid #be382a;
+}
+
+.sub_menu.red_sub_menu li:hover{
+  background:#c44b3f;
+}
+
+.dropdown-menu.sub_menu .inner_menu li:hover .sub_inner_menu{
+  display:block;
+}
+.sub_inner_menu{
+    display: none;
+    position: absolute;
+    left: 220px !important;
+    top: -7px;
+    width: 483px;
+    overflow: visible;
+    border-radius:0;
+}
+.sub_inner_menu li:hover{
+  padding:8px;
+}
+
+#essay_filter .pagination { margin-top: 0; }
+a.cke_dialog_tab {display: inline-block !important;}
+a.cke_dialog_ui_button {display: inline-block !important;}
+
+#learning_tools{
+  width: 100%;
+  float: left;
+}
+
+#target_tutor{
+  width: 100%;
+  float: left;
+}
+
+#online_component{
+  width: 100%;
+  float: left;
+}
+
+#live_component{
+  width: 100%;
+  float: left;
+}
+
+#live_components{
+  width: 100%;
+  float: left;
+}
+
+.gamsat-compare > tbody > tr > td .component-title.under_line a {
+    text-decoration: underline;
+}
+
+.umat-compare > tbody > tr > td .component-title.under_line a {
+    text-decoration: underline;
+}
+
+.show_image{
+  display:block;
+}
+
+.hide_image{
+  display:none;
+}

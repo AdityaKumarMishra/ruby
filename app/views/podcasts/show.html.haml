@@ -1,0 +1,62 @@
+- title @podcast.title_tag.present? ? @podcast.title_tag : ""
+- meta_description @podcast.meta_description.present? ? @podcast.meta_description : ""
+- content_for :page_heading, true
+%section.podcast-index
+  .encoraging_col.talk_to_bg.home_faq.dashboard_bg.responsive_block
+    .text-center-left
+      .col-md-4.podcast-season
+        .img-col
+          = image_tag @podcast.s3_image_url, class: "img-responsive"
+      .col-md-7.podcast-season-txt.podcast-single
+        %h1.mob_pad0 #{@podcast.title}
+        %p.ep-info
+          %i.fa.fa-calendar
+            %span{style: "font-family: 'Open Sans';"} #{@podcast.uploaded_on.strftime('%B %d, %Y')}
+          %i.fa.fa-clock-o
+            %span{style: "font-family: 'Open Sans';"} #{@podcast.duration}
+        %p
+          .episode-frame
+            %iframe.iframe_class{src: @podcast.frame_url, frameborder: "0", scrolling: "no"}
+        = render 'social_links'
+
+%section.faq_wrapper.faq_details.free_sources_sec
+  .container.public_container
+    .preparation_col.head_aftr_none.mg_bottm10
+      = @podcast.full_desc.html_safe
+      -if @podcast.video_url.present?
+        %h2
+          Video Podcast
+        .tab-content
+          .container.podcast_video_wdt
+            #grad_video_testimonial.carousel.slide.blog_slider.result_slider{"data-ride" => "carousel", "data-interval" => "false"}
+              .carousel-inner.tab1
+                .item.active
+                  %video.video-js.vjs-default-skin.test_slide_height.new_test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: @podcast.s3_image_url}
+                    %source{src: "#{@podcast.video_url}", type: "video/mp4"}
+      -elsif @podcast.audio_url.present?
+        %h2
+          Audio Podcast
+        .tab-content
+          .container{style: "text-align: center"}
+            %audio{style: "width: 50%", controls: ""}
+              %source{src: "#{@podcast.audio_url}", type: "audio/mp3"}
+
+:css
+  .encoraging_col h1{
+    font-size: 26px;
+  }
+
+  .iframe_class{
+    height: 102px ;
+    width: 700px ;
+  }
+
+  @media only screen and (min-width: 260px) and (max-width: 767px){
+    .iframe_class{
+      width: 100%;
+    }
+
+    .mob_pad0{
+      padding: 0;
+    }
+  }

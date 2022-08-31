@@ -1,0 +1,242 @@
+- tot_author_hours = 0
+- tot_author_hours_per_mcq = 0
+- tot_reviewer_1_hours = 0
+- tot_reviewer_1_hours_per_mcq = 0
+- tot_reviewer_2_hours = 0
+- tot_reviewer_2_hours_per_mcq = 0
+- tot_video_explainer_hours = 0
+- tot_video_explainer_hours_per_mcq = 0
+- tot_video_explanation_reviewer_hours = 0
+- tot_video_explanation_reviewer_hours_per_mcq = 0
+- tot_all_hours = 0
+- work_status_hash = work_status_collection.to_h
+
+- if @mcq_stems.present?
+  = will_paginate @mcq_stems, renderer: BootstrapPagination::Rails
+
+= hidden_field_tag :filename, @file_name
+.loader{style: 'display: none;'}
+%table.table.table-bordered.table-hover#table_id
+  %thead
+    %tr
+      %th MCQ Stem ID and Title
+      %th Tags
+      %th Work Status
+      %th Number Of Child MCQs
+      %th Author
+      %th Author Hours
+      %th Author Hours / MCQs
+      %th Reviewer 1
+      %th Reviewer 1 Hours
+      %th Reviewer 1 Hours / MCQs
+      %th Reviewer 2
+      %th Reviewer 2 Hours
+      %th Reviewer 2 Hours / MCQs
+      %th Video Explainer
+      %th Video Explainer Hours
+      %th Video Explainer Hours / MCQs
+      %th Video Explanation Reviewer
+      %th Video Explanation Reviewer Hours
+      %th Video Explanation Reviewer Hours / MCQs
+      %th Total Hours
+    - if @mcq_stems.present?
+      - @mcq_stems.each do |mcq_stem|
+        - mcq_hours = mcq_stem.mcq_hours
+        - mcq_hours = mcq_hours.created_with_start(@from_filter).created_with_end(@to_filter) if date_range
+        - mcqs_size = mcq_stem.mcqs.size
+        - authors = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'author' }.group_by(&:user)
+        - author_hours = authors.map{ |k, v| v.map(&:hours).sum }
+        - author_hours_per_mcq = author_hours.map{ |author_hour| (author_hour.to_f / mcqs_size.to_f).round(2) }
+        - reviewer_1s = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'reviewer_1' }.group_by(&:user)
+        - reviewer_1_hours = reviewer_1s.map{ |k, v| v.map(&:hours).sum }
+        - reviewer_1_hours_per_mcq = reviewer_1_hours.map{ |reviewer_1_hour| (reviewer_1_hour.to_f / mcqs_size.to_f).round(2) }
+        - reviewer_2s = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'reviewer_2' }.group_by(&:user)
+        - reviewer_2_hours = reviewer_2s.map{ |k, v| v.map(&:hours).sum }
+        - reviewer_2_hours_per_mcq = reviewer_2_hours.map{ |reviewer_2_hour| (reviewer_2_hour.to_f / mcqs_size.to_f).round(2) }
+        - video_explainers = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'video_explainer' }.group_by(&:user)
+        - video_explainer_hours = video_explainers.map{ |k, v| v.map(&:hours).sum }
+        - video_explainer_hours_per_mcq = video_explainer_hours.map{ |video_explainer_hour| (video_explainer_hour.to_f / mcqs_size.to_f).round(2) }
+        - video_explanation_reviewers = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'video_explanation_reviewer' }.group_by(&:user)
+        - video_explanation_reviewer_hours = video_explanation_reviewers.map{ |k, v| v.map(&:hours).sum }
+        - video_explanation_reviewer_hours_per_mcq = video_explanation_reviewer_hours.map{ |video_explanation_reviewer_hour| (video_explanation_reviewer_hour.to_f / mcqs_size.to_f).round(2) }
+
+        - max_arr = [author_hours.size, reviewer_1_hours.size, reviewer_2_hours.size, video_explainer_hours.size, video_explanation_reviewer_hours.size].max
+        - max_arr = max_arr.zero? ? 1 : max_arr
+
+        - all_hours = (1..max_arr).to_a.map { |ind| (author_hours[ind - 1].to_f.round(2) + reviewer_2_hours[ind - 1].to_f.round(2) + reviewer_1_hours[ind - 1].to_f.round(2) + video_explainer_hours[ind - 1].to_f.round(2) + video_explanation_reviewer_hours[ind - 1].to_f.round(2)) }
+
+        - (1..max_arr).each do |index|
+          - tot_author_hours += author_hours[index - 1].to_f unless current_user.tutor? && authors.keys[index - 1]&.id != current_user.id
+          - tot_author_hours_per_mcq += author_hours_per_mcq[index - 1].to_f unless current_user.tutor? && authors.keys[index - 1]&.id != current_user.id
+          - tot_reviewer_1_hours += reviewer_1_hours[index - 1].to_f unless current_user.tutor? && reviewer_1s.keys[index - 1]&.id != current_user.id
+          - tot_reviewer_1_hours_per_mcq += reviewer_1_hours_per_mcq[index - 1].to_f unless current_user.tutor? && reviewer_1s.keys[index - 1]&.id != current_user.id
+          - tot_reviewer_2_hours += reviewer_2_hours[index - 1].to_f unless current_user.tutor? && reviewer_2s.keys[index - 1]&.id != current_user.id
+          - tot_reviewer_2_hours_per_mcq += reviewer_2_hours_per_mcq[index - 1].to_f unless current_user.tutor? && reviewer_2s.keys[index - 1]&.id != current_user.id
+          - tot_video_explainer_hours += video_explainer_hours[index - 1].to_f unless current_user.tutor? && video_explainers.keys[index - 1]&.id != current_user.id
+          - tot_video_explainer_hours_per_mcq += video_explainer_hours_per_mcq[index - 1].to_f unless current_user.tutor? && video_explainers.keys[index - 1]&.id != current_user.id
+          - tot_video_explanation_reviewer_hours += video_explanation_reviewer_hours[index - 1].to_f unless current_user.tutor? && video_explanation_reviewers.keys[index - 1]&.id != current_user.id
+          - tot_video_explanation_reviewer_hours_per_mcq += video_explanation_reviewer_hours_per_mcq[index - 1].to_f unless current_user.tutor? && video_explanation_reviewers.keys[index - 1]&.id != current_user.id
+          - tot_all_hours += all_hours[index - 1] unless current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id].exclude?(current_user.id)
+
+          - next if current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id].reject(&:blank?).exclude?(current_user.id)
+          %tr
+            %td= link_to "ID: #{mcq_stem.id}, Title: #{mcq_stem.title}", edit_mcq_stem_path(mcq_stem), target: :_blank
+            %td{style: 'max-width: 200px;'}
+              - mcq_stem.tags.each do |t|
+                %span.label.label-default{style:"white-space:normal; font-family: 'Open Sans', sans-serif;"}= t.name
+            %td= work_status_hash.key(mcq_stem.work_status)
+            %td= mcqs_size
+            %td= authors.keys[index - 1]&.full_name.to_s unless current_user.tutor? && authors.keys[index - 1]&.id != current_user.id
+            %td= author_hours[index - 1].to_f.round(2) unless current_user.tutor? && authors.keys[index - 1]&.id != current_user.id
+            %td= author_hours_per_mcq[index - 1].to_f.round(2) unless current_user.tutor? && authors.keys[index - 1]&.id != current_user.id
+            %td= reviewer_1s.keys[index - 1]&.full_name.to_s unless current_user.tutor? && reviewer_1s.keys[index - 1]&.id != current_user.id
+            %td= reviewer_1_hours[index - 1].to_f.round(2) unless current_user.tutor? && reviewer_1s.keys[index - 1]&.id != current_user.id
+            %td= reviewer_1_hours_per_mcq[index - 1].to_f.round(2) unless current_user.tutor? && reviewer_1s.keys[index - 1]&.id != current_user.id
+            %td= reviewer_2s.keys[index - 1]&.full_name.to_s unless current_user.tutor? && reviewer_2s.keys[index - 1]&.id != current_user.id
+            %td= reviewer_2_hours[index - 1].to_f.round(2) unless current_user.tutor? && reviewer_2s.keys[index - 1]&.id != current_user.id
+            %td= reviewer_2_hours_per_mcq[index - 1].to_f.round(2) unless current_user.tutor? && reviewer_2s.keys[index - 1]&.id != current_user.id
+            %td= video_explainers.keys[index - 1]&.full_name.to_s unless current_user.tutor? && video_explainers.keys[index - 1]&.id != current_user.id
+            %td= video_explainer_hours[index - 1].to_f.round(2) unless current_user.tutor? && video_explainers.keys[index - 1]&.id != current_user.id
+            %td= video_explainer_hours_per_mcq[index - 1].to_f.round(2) unless current_user.tutor? && video_explainers.keys[index - 1]&.id != current_user.id
+            %td= video_explanation_reviewers.keys[index - 1]&.full_name.to_s unless current_user.tutor? && video_explanation_reviewers.keys[index - 1]&.id != current_user.id
+            %td= video_explanation_reviewer_hours[index - 1].to_f.round(2) unless current_user.tutor? && video_explanation_reviewers.keys[index - 1]&.id != current_user.id
+            %td= video_explanation_reviewer_hours_per_mcq[index - 1].to_f.round(2) unless current_user.tutor? && video_explanation_reviewers.keys[index - 1]&.id != current_user.id
+            %td= all_hours[index - 1] unless current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id].exclude?(current_user.id)
+  %tfoot
+    %tr
+      %td
+        %b Page Total
+      %td
+      %td
+      %td
+      %td
+      %td= tot_author_hours.round(2)
+      %td= tot_author_hours.zero? ? 0.0 : (tot_author_hours.round(2) / @mcq_stems.select { |st| @mcq_hours.where(logging_type: 'author').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2)
+      %td
+      %td= tot_reviewer_1_hours.round(2)
+      %td= tot_reviewer_1_hours.zero? ? 0.0 : (tot_reviewer_1_hours.round(2) / @mcq_stems.select { |st| @mcq_hours.where(logging_type: 'reviewer_1').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2)
+      %td
+      %td= tot_reviewer_2_hours.round(2)
+      %td= tot_reviewer_2_hours.zero? ? 0.0 : (tot_reviewer_2_hours.round(2) / @mcq_stems.select { |st| @mcq_hours.where(logging_type: 'reviewer_2').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2)
+      %td
+      %td= tot_video_explainer_hours.round(2)
+      %td= tot_video_explainer_hours.zero? ? 0.0 : (tot_video_explainer_hours.round(2) / @mcq_stems.select { |st| @mcq_hours.where(logging_type: 'video_explainer').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2)
+      %td
+      %td= tot_video_explanation_reviewer_hours.round(2)
+      %td= tot_video_explanation_reviewer_hours.zero? ? 0.0 : (tot_video_explanation_reviewer_hours.round(2) / @mcq_stems.select { |st| @mcq_hours.where(logging_type: 'video_explanation_reviewer').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2)
+      %td= tot_all_hours.round(2)
+    %tr
+      %td
+        %b All Total
+      %td
+      %td
+      %td
+      %td
+      %td= @totals[:author_hours]
+      %td= @totals[:author_hours_per_mcq]
+      %td
+      %td= @totals[:reviewer_1_hours]
+      %td= @totals[:reviewer_1_hours_per_mcq]
+      %td
+      %td= @totals[:reviewer_2_hours]
+      %td= @totals[:reviewer_2_hours_per_mcq]
+      %td
+      %td= @totals[:video_explainer_hours]
+      %td= @totals[:video_explainer_hours_per_mcq]
+      %td
+      %td= @totals[:video_explanation_reviewer_hours]
+      %td= @totals[:video_explanation_reviewer_hours_per_mcq]
+      %td= @total_hours
+
+:javascript
+  $('#nav-tabs li').click(function(){
+    if(!($(this).hasClass('active'))){
+      var element = ($(this).attr('class').split('_')[0])
+      var form = $('#'+element).find('form')
+      var action = form.attr('action');
+      if(action.search('.xls') != -1){
+        form.attr('action', (form.attr('action').split('.')[0]))
+      }
+      var url = form.attr('action');
+      $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+     });
+    }
+  })
+  $('.csv_btn').click(function(){
+    var form = $('.main_form')
+    var page_no = $(this).attr('pageno')
+
+    if (page_no == undefined){
+      page_no = ''
+    }
+    $('#current_page').val(page_no)
+
+    page_name = ''
+    if (page_no != ''){
+      page_name = page_name + ' - Page ' + page_no
+    }
+
+    var action = form.attr('action')
+    if(action.search('.xls') == -1){
+      form.attr('action', (form.attr('action')+'.xls'))
+    }
+
+    $('.loader').show();
+    $('.csv_clicker').attr('disabled', true)
+    fetch(form.attr('action') + '?' + form.serialize() + "&selection=" + encodeURI($('.ap_select').val()))
+    .then(resp => resp.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = $('#filename').val() + page_name + '.xls';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      $('.loader').hide();
+      $('.csv_clicker').attr('disabled', false);
+    })
+    .catch(() => alert('Unable to download file'));
+
+
+    form.attr('action', form.attr('action').substring(0, form.attr('action').length - 4));
+  })
+
+  $('.submit-filter').click(function(){
+    var form = $(this).parent().parent();
+    var action = form.attr('action')
+    if(action.search('.xls') != -1){
+      form.attr('action', (form.attr('action').split('.')[0]))
+    }
+    var url = form.attr('action');
+    $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize() + "&selection=" + encodeURI($('.ap_select').val())
+    });
+  })
+
+:css
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid green;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

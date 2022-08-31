@@ -1,0 +1,5 @@
+.nested-fields.lesson-fields
+	.cstm_file{ class: ('file_field_wdth' if f.object.video_file_name.present?) }
+		= f.file_field :video,  class: "file_field"
+		.txtbook_titl= f.object.video_file_name
+		= link_to_remove_association "Remove", f, class: "btn btn-danger btn-xs remove_btn"

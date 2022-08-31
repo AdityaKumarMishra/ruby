@@ -1,0 +1,4 @@
+<% js = escape_javascript(render(partial: 'mock_exam_essays/assign_tutor', locals: { tutors: @tutors, response: @mock_exam_essay }))%>
+$("#AssignTutorToMockEssay").html("<%= js %>");
+
+$('#AssignTutorMockEssay').modal();

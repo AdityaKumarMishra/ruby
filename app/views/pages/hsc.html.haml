@@ -1,0 +1,108 @@
+
+- title "HSC Preparation, HSC Prep, HSC Course, HSC Tutors, HSC Exam Tips"
+- meta_description "We offer the most comprehensive and personalised HSC preparation courses in Australia. Our HSC course will help you prepare with methods and web based tools in sync with 2017."
+- meta_keywords "HSC prep, HSC prep course, HSC preparation, HSC preparation course, HSC preparation tips, HSC math methods, HSC english, HSC exams, HSC tutor"
+
+.home-page-banner.hsc
+  = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .banner-content
+    %h3.hsc-banner-title
+      Get
+      %span
+        HSC
+        %sup{ style: "left: -21px; margin-right: -30px;"} ®
+        EXAM
+      Ready
+    %p
+      Combining the latest education technology and pedagogy to help you excel in your HSC
+      %sup{ style: "margin-right: -4px;"} ®
+      preparation.
+    %h5.skinny-banner-title 2017 courses opening in July
+
+
+%br
+%br
+
+= render 'pages/partial/hsc/hsc_courses_comparison'
+
+#how-is-gr-different.hover
+  .container
+    .course-title
+      %h1
+        How are
+        %span.red Grad
+        %span.stick-left
+          Ready HSC
+          %sup{ style: "left: -13px;"} ®
+        %br Preparation Courses Different?
+
+    .row.thumbnails
+      .col-md-4
+        %i.fa.fa-users.banner-icon.red{"aria-hidden" => "true"}
+        %h2 High Engagement
+        %p
+          Our
+          %a{:href => "/hsc/hscready-math-extension-1-attendance-comprehensive"}
+            HSC
+            %sup{ style: "margin-right: -4px;"} ®
+            exam Ready classes
+          are delivered in a way that maximises your learning capacity. We don’t waste our class time by providing you with basic information.
+          Rather, we provide you with access to resources covering the core concepts and knowledge of your course before class begins,
+          so that when you’re with our tutors you can work on applying that information through example assessment questions.
+          By allowing time between face to face classes, students are able to independently build upon their knowledge and evaluate their strengths and weaknesses.
+          This means that when they’re in the classroom again our HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam specialised tutors can give them the assistance and HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam tips they personally need to succeed in their studies.
+
+
+      .col-md-4
+        %i.fa.fa-crosshairs.banner-icon.red{"aria-hidden" => "true"}
+        %h2 Targeted Learning
+        %p
+          Our courses are designed to assist students in getting the most from their HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam preparation time.
+          We understand that students have limited time to dedicate to each subject they’re studying, so our
+          = link_to "Cross Referencing system. ", "/hsc/hscready-math-extension-1-attendance-comprehensive-private-tutoring"
+          allows students to locate
+          = link_to "online resources", "/hsc/hscready-english-advanced-online-comprehensive"
+          quickly based on their areas of need. Our face to face learning experience also ensures that students are able to tailor their experience, with
+          = link_to "small class sizes", "/hsc/hscready-math-extension-1-attendance-comprehensive"
+          and dedicated HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam Maths tutors and HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam English tutors enabling students to target their learning.
+      .col-md-4
+        %i.fa.fa-desktop.banner-icon.red{"aria-hidden" => "true"}
+        %h2 Effective Online Tools
+        %p
+          As pioneers in
+          %a{:href => "/hsc/english-advanced-online-comprehensive"}
+            online HSC
+            %sup{ style: "margin-right: -4px;"} ®
+            exam teaching
+          , we make learning accessible and convenient. We offer a wide variety of
+          = link_to "online learning resources", "/hsc/hscready-english-advanced-online-comprehensive"
+          ,including web based text guides, videos and forum discussions. Students can tailor their HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam prep course experience by selecting the style of resource that suits them.
+          They can also connect with other students and have their questions answered by our experienced and knowledgeable tutors.
+          Furthermore, they benefit from the flexibility on an online learning environment, so they can complete their HSC
+          %sup{ style: "margin-right: -4px;"} ®
+          exam prep at their own pace.
+          Our online resources are under constant review, and we allow for students to give feedback and ask questions about the
+          = link_to "online tools", "/hsc/hscready-math-extension-1-online-comprehensive"
+          that we have available.
+
+
+.container.no_padding
+  .all-suggest-feature
+    .heading
+      Suggest a Feature or Package
+    .content
+      %p We pride ourselves on being able to adapt to the needs of our students.
+      %p Please feel free to share with us your thoughts on what you would like us to provide.
+    %a.btn.btn-gradready.red{:href => "/hsc/contact"} Get in touch

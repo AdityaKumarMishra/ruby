@@ -1,0 +1,22 @@
+$(document).ajaxComplete(function() {
+  <% unless params[:type].nil? %>
+  <% if params[:type] == 'enquiry' %>
+    <% js = escape_javascript(render(partial: 'user_emails/enquiry_users_filter_form')) %>
+    $("#enquiry_users").html("<%= js %>");
+    $("#enrolled_users").html("");
+    $("#blog_users").html("");
+  <% elsif params[:type] == 'enrolled' %>
+    <% js = escape_javascript(render(partial: 'user_emails/enrolled_users_filter_form')) %>
+    $("#enrolled_users").html("<%= js %>");
+    $("#enquiry_users").html("");
+    $("#blog_users").html("");
+  <% elsif params[:type] == 'blog' %>
+    <% js = escape_javascript(render(partial: 'user_emails/blog_users_filter_form')) %>
+    $("#blog_users").html("<%= js %>");
+    $("#enrolled_users").html("");
+    $("#enquiry_users").html("");
+  <% end %>
+  $('[type="<%= params[:type] %>"]').tab('show');
+<% else %>
+<% end %>
+});

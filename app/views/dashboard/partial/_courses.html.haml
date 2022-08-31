@@ -1,0 +1,20 @@
+- if @courses.present?
+  .table-responsive
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th Course
+          %th City
+          - if [:superadmin, :admin, :manager].include? current_user.role.to_sym
+            %th{colspan: 2} Actions
+      %tbody
+        - @courses.each do |course|
+          %tr{'data-link': url_for(course_path(course))}
+            %td= course.name
+            %td= course.try(:city)
+            -#%td= link_to 'View Product Page', course.product_version, class: 'btn btn-default'
+            - if [:superadmin, :admin, :manager].include? current_user.role.to_sym
+              %td= link_to 'Edit', edit_course_path(course), class: 'btn btn-info btn-sm'
+              %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+- else
+  There is no courses, in which you are enrolled.

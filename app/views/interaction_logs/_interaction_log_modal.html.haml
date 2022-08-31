@@ -1,0 +1,52 @@
+%script{:src => "//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"}
+#interaction-modal.modal-input-edit.modal.latest_pop.fade{:role => "dialog"}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content
+      = simple_form_for(@interaction_log, html: {class: 'interaction_log_form' }) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title
+            = @interaction_log.new_record? ? "New Interaction Log" : "Edit Interaction Log"
+        .modal-body
+          = f.input :interaction_type, collection: type_for_select, include_blank: 'Please Select Type', input_html: {class: 'cstm_select'}
+          = f.input :opened_at, label: "Date", :input_html => { class: "", id: "datepicker-ticket", autocomplete: 'off' }, as: :string
+          = f.input :title
+          = f.input :details, input_html: {class:"ticket_question", id: "ticket-detail"}
+          = f.input :answerer_id, as: :hidden, input_html: { value: current_user.id}
+          = f.input :asker_id, as: :hidden, input_html: { value: params[:user_id].present? ? params[:user_id] : @interaction_log.asker_id}
+        .modal-footer
+          = f.button :submit, class: 'btn btn-gradready green interaction_log_submit'
+          - unless @interaction_log.new_record?
+            = link_to 'Delete Interaction log', interaction_log_path(@interaction_log.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-gradready'
+
+:javascript
+  $( document ).ready(function() {
+    $(".interaction_log_form").validate({
+      rules: {
+        "interaction_log[title]":{
+          required:true,
+        },
+        "interaction_log[interaction_type]":{
+          required:true,
+        }
+      },
+      messages: {
+        "interaction_log[title]":{
+          required: "Title can't be blank"
+        },
+        "interaction_log[interaction_type]":{
+          required: "Please select interaction type"
+        }
+      },
+    });
+    $('#interaction-modal').on('shown.bs.modal', (e) => {
+        CKEDITOR.replace('ticket-detail',{height: '300px'});
+        $($('.table-condensed .datepicker-title')[0]).css('display', 'block');
+    });
+    datepicker = $('#datepicker-ticket').datepicker({
+      "format": "yyyy-mm-dd",
+      "endDate": new Date(), 
+      orientation: 'bottom'
+    });
+  });

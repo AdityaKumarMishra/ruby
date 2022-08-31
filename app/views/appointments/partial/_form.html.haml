@@ -1,0 +1,9 @@
+= simple_form_for(@appointment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :hours, collection: (1..@appointment.student.appointments.active.where(course_id: @appointment.course_id, tutor_id: @appointment.tutor_id, hours: 0).count)
+    = hidden_field_tag :a_ids, params[:a_ids]
+
+  .form-actions
+    = f.button :submit, 'Log Session'

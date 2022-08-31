@@ -1,0 +1,15 @@
+= simple_form_for(@online_exam_attempt, url: online_exam_attempts_path) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.hidden_field :course_id, value: @course.try(:id)
+
+    = f.association :assessable, collection: policy_scope(OnlineExam).sort_by(&:title), label: "Online Exam Attempt", include_blank: 'Select an Online Exam to attempt'
+  .form-inputs
+    = f.input :question_style, as: :select, collection: Exercise.exercise_question_styles.map { |k, v| [k, v]  }, label: "Question Style", include_blank: false
+  .form-inputs
+    = f.label :timer_option_type, 'Timer Option'
+    %i.glyphicon.glyphicon-question-sign.question-sign{:title => "If you select Apply Time Limit to Individual Questions, a time limit will be set for each question. Once the allotted time is elapsed you will automatically be moved on to the next question, but you are still able to go back and answer previous question."}
+    = f.input :timer_option_type, as: :select, collection: [["Apply Time Limit to Entire Exam ", "entire_exam"], ["Apply Time Limit to Individual Questions", "individual_question"]], label: false, include_blank: false
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-default'

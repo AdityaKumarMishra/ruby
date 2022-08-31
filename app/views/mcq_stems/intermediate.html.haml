@@ -1,0 +1,14 @@
+:javascript
+  if(action.search('.xls') != -1){
+    form.attr('action', (form.attr('action').split('.')[0]))
+  }
+  var url = form.attr('action');
+
+  for(var i = 1; i <= gon.total_pages; i++){
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: 'script',
+      data: form.serialize() + '&current_page=' + i
+    });
+  }

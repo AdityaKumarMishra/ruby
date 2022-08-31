@@ -1,0 +1,141 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.marg_top{margin-top: 25px;}
+.user_address_country { margin-top: 12px; }
+.check_box_align{
+  width: 100%;
+  float: left;
+}
+.check_box_align .form-group{
+	float: left;
+}
+
+.user_details{
+  padding:0;
+  margin:0;
+}
+.user_details li{
+  list-style:none;
+  line-height: 40px;
+  clear:both;
+  width:100%;
+  float:left;
+}
+.user_details li .user_label {
+  font-weight:bold;
+  float:left;
+  min-width:200px;
+}
+.user_details li .user_value {
+  min-width: 235px;
+    width: 54%;
+    float: right;
+}
+.user_details li .user_value {
+  min-width: 235px;
+    width: 54%;
+    float: right;
+}
+.user_profile_row h2 {font-size:23px;}
+.user_profile_row h3 {font-size:21px;}
+.invoice_header {
+  padding-bottom: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+table.table-bordered.user_mgmt_tabl td:last-child {border-right-width: 1px;}
+
+.userdown-xls{
+  position:relative;
+}
+.dropdown-menu.user-xlsx-down{
+  top: 34px;
+  left: 0%;
+}
+
+.user-mgmt-filter-p1{
+  width: 48%;
+  display: inline-block;
+}
+
+.user-mgmt-filter-p2{
+  width: 47%;
+  float: right;
+}
+
+#user-mgmt-data{
+  width: 100%;
+  float: left;
+  overflow-x: scroll;
+  margin-bottom: 20px;
+}
+
+.email_suscribe {
+  line-height: 38px;
+  margin-right: 8px;
+}
+
+.cstm_label{
+  width: 6%;
+  vertical-align:inherit;
+}
+
+.form-inline .cstm_input .form-group{
+  vertical-align: inherit;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+.form-inline  .cstm_input .form-group .form-control{
+  width:100%;
+}
+
+.searchable_div span.select2-container { width: 100% !important}
+
+.searchable_div span.select2-selection {
+  height: 34px;
+  border: 1px solid #ccc;
+  padding: 3px 7px;
+
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.userFilterTooltip { cursor: pointer;     padding-top: 7px;}
+
+.login_span {
+  position: absolute;
+  top: 19px;
+  right: 18px;
+}
+.enrol_login {
+    position: absolute;
+    top: 80px;
+    right: 23px;
+}
+.add_interaction_btn{
+  margin-top: -50px !important;
+  float: right !important;
+}
+.pink_tr{
+  background-color: #ffb6c1;
+}
+.pink_tr:hovor, .pink_tr:focus{
+  background-color: #ffb6c1;
+  opacity: 0.8;
+}
+.orange_tr{
+  background-color: #fed8b1  ;
+}
+.orange_tr:hovor, .orange_tr:focus{
+  background-color: #fed8b1  ;
+  opacity: 0.8;
+}
+.blue_tr{
+  background-color: #add8e6  ;
+}
+.blue_tr:hovor, .blue_tr:focus{
+  background-color: #add8e6  ;
+  opacity: 0.8;
+}
+

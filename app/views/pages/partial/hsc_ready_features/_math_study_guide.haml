@@ -1,0 +1,13 @@
+.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Comprehensive study guide for your selected text of study
+      - if paid
+        %h4 $#{price.ceil } (including $29 Shipping) + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing All students will be provided with a comprehensive and detailed study guide for each topic under the Mathematics Extension 1 Curriculum. These guides include step by step solutions, and cover all the fundamental concepts that will help you build a thorough knowledge and understanding of all the Mathematical concepts covered in the curriculum. 
+
+

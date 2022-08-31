@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Course Summary" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Tag</Data></Cell>
+        <Cell><Data ss:Type="String">Easy</Data></Cell>
+        <Cell><Data ss:Type="String">Medium</Data></Cell>
+        <Cell><Data ss:Type="String">Hard</Data></Cell>
+        <Cell><Data ss:Type="String">Total</Data></Cell>
+      
+      </Row>
+      <% @difficulties.each do |info| %>    
+        <Row>
+          <Cell><Data ss:Type="String"><%= "#{"__"* info[:level]} #{info[:name]}" %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= info[:easy] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= info[:medium] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= info[:hard] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= info[:total] %></Data></Cell>
+        </Row>        
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

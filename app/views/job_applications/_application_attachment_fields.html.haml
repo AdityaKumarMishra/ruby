@@ -1,0 +1,5 @@
+.form-group.col-md-12.nested-fields
+  %label{for: "exampleInputFile"} Upload additional document (doc/docx, pdf, png, or jpeg format)
+  = f.input :document, as: :file, label: false, wrapper: false
+  .remove-link
+    = link_to_remove_association "Remove Attachment", f

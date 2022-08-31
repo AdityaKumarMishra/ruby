@@ -1,0 +1,15 @@
+- content_for :page_heading, 'Exercises'
+.dashbord_right
+  .resource_col
+    %h4 Filter
+  .faq_list.para_fs14
+    .faq_list_col
+      .course_frm.filter_box_shadow
+        = form_for_filterrific @filterrific, input_html: {id: 'mcq-exercise-search'} do |f|
+          .form-group
+            %label Title
+            =f.text_field(:search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search for...')
+          =link_to 'Reset filter', reset_filterrific_url, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+
+      #filterrific_results
+        = render 'mcq_stems', mcq_stems: @mcq_stems, exercises: @exercises, s_query: @s_query

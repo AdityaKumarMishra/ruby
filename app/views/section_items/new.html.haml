@@ -1,0 +1,15 @@
+%h1= "New #{@parent_resource.class.name.underscore.humanize.downcase} Question"
+
+.alert.alert-info All child MCQs will be added in the exam/test.
+- error ||= nil
+- if error
+  .alert.alert-danger=error
+= form_tag polymorphic_path([@parent_resource, @section, SectionItem]), method: :post do
+  = select_tag('mcq_stem_ids[]', options_from_collection_for_select(policy_scope(McqStem).where(examinable: true), 'id', 'title'), multiple: true, class: 'chosen-select')
+  -#- policy_scope(McqStem).where(examinable: true).each do |m|
+  -#  %div
+  -#    = check_box_tag 'mcq_stem_ids[]', m.id
+  -#    = m.title
+  = submit_tag 'Add Question(s)', class: 'btn btn-success'
+
+= link_to 'Back', polymorphic_path([@parent_resource, @section, SectionItem]), class: 'btn btn-default'

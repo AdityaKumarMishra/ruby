@@ -1,0 +1,3 @@
+class SystemInfo < ApplicationRecord
+
+end

@@ -1,0 +1,27 @@
+/ #nav_layout.hide_nav
+/   .nav_wrapper_inner
+/     .btn.btn-gradready.green.toggle_nav Hide Menu
+-if current_user.present?
+  - if current_user.student?
+    = render 'dashboard/partial/student_left_panel'
+  - else
+    %p.gr-nav-title
+      RESOURCES
+    %br
+    - if current_user.admin? || current_user.superadmin?
+      = render 'dashboard/partial/admin_left_panel'
+    - elsif current_user.manager?
+      = render 'dashboard/partial/manager_left_panel'
+    - elsif current_user.tutor?
+      = render 'dashboard/partial/tutor_left_panel'
+
+:javascript
+  // $(document).ready(function(){
+  //   $(".toggle_nav").click(function() {
+  //       $("#nav_layout").toggleClass("hide_nav");
+  //       $(".toggle_nav").toggleClass("red");
+  //       $(this).text(function(i, text){
+  //        return text === "Hide Menu" ? "Show Menu" : "Hide Menu";
+  //       })
+  //   });
+  // });

@@ -1,0 +1,48 @@
+- if current_user && (current_user.student?)
+  - if !@announcement.nil?
+    = render 'announcements/student_announcement', announcement: @announcement, title: 'Downloadable Resources Announcements', user_announcement: @user_announcement
+
+%h1 Downloadable Resources
+
+.panel.panel-success
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    .form-group
+      = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+        - if !current_user.student?
+          %p
+            Type
+            =f.select(:by_product_line, @filterrific.select_options[:by_product_line], {include_blank: 'All'}, class: 'form-control')
+        %p
+          Topic
+          =f.select(:with_tag, @filterrific.select_options[:tag], { include_blank: 'Please Select Topic' }, class: 'form-control chosen-select')
+        %p
+          Keyword
+          =f.text_field(:with_title, class: 'filterrific-periodically-observed form-control', placeholder: 'Search by Title')
+        %p
+          Sort by
+          =f.select(:sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Any' }, class: 'form-control')
+        %p
+          = f.submit 'Filter', class: 'btn btn-gradready green'
+          =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+
+%br
+- if policy(Document).new?
+  %p= link_to 'Upload Document', new_document_path, class: 'btn btn-gradready green'
+=render(partial: 'documents/partial/table', locals: { documents: @documents } )
+
+:javascript
+  $(function () {
+    $("#filterrific_by_product_line").on('change', function(){
+        $.ajax({
+          url: "/documents/filter_topics",
+          type: "GET",
+          dataType: 'script',
+          data: {type: $("#filterrific_by_product_line").val() },
+
+        });
+    })
+  });

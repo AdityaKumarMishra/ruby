@@ -1,0 +1,45 @@
+wb = xlsx_package.workbook
+  assessment_attempts = @online_exam.assessment_attempts.completed.order(completed_at: :desc)
+
+  wb.add_worksheet(name: "Section-I") do |section1_sheet|
+    section1_sheet.add_row ["Completion Date/Time", "Student Name","Email Address", "Section Title", "Total Questions","Raw Score", "Percentile Score"]
+
+    assessment_attempts.each do |assessment_attempt|
+      assessment_attempt.section_attempts.order(:section_id).each do |sa|
+        if (sa.section.title.include?("Section I") || sa.section.sectionable.title.include?("Section I")) &&  sa.section.position == 1
+          section1_sheet.add_row [
+            assessment_attempt.completed_at.strftime("%F - %T"),
+            assessment_attempt.user.try(:full_name),
+            assessment_attempt.user.try(:email),
+            sa.section.try(:title),
+            sa.try(:section).try(:mcqs).try(:count),
+            sa.mark,
+            sa.percentile.present? ? sa.percentile.round(2) : 0
+          ].flatten
+        end
+      end
+    end
+  end
+
+  wb.add_worksheet(name: "Section-III") do |section3_sheet|
+    section3_sheet.add_row ["Completion Date/Time", "Student Name","Email Address", "Section Title", "Total Questions","Raw Score", "Percentile Score", "Total Raw Score", "Total Perecentile"]
+
+    assessment_attempts.each do |assessment_attempt|
+      assessment_attempt.section_attempts.order(:section_id).each do |sa|
+        unless (sa.section.title.include?("Section I") || sa.section.sectionable.title.include?("Section I")) &&  sa.section.position == 1
+          section3_sheet.add_row [
+            assessment_attempt.completed_at.strftime("%F - %T"),
+            assessment_attempt.user.try(:full_name),
+            assessment_attempt.user.try(:email),
+            sa.section.try(:title),
+            sa.try(:section).try(:mcqs).try(:count),
+            sa.mark,
+            sa.percentile.present? ? sa.percentile.round(2) : 0,
+            assessment_attempt.total_score.present? ? assessment_attempt.total_score.round(2) : 0,
+            assessment_attempt.percentile.present? ? assessment_attempt.percentile.round(2) : 0
+          ].flatten
+        end
+      end
+    end
+  end
+

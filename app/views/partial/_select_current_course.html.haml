@@ -1,0 +1,6 @@
+- if current_user && current_user.student? && current_course.present?
+  .header_select
+    =  form_tag set_current_course_courses_path do |f|
+      = select_tag 'course_id', options_for_select(@courses.collect{ |u| [u.name, u.id] }, selected: current_course.id), onchange: "this.form.submit();"
+
+

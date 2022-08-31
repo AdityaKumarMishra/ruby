@@ -1,0 +1,10 @@
+%h1 Editing surveys_survey
+
+= render 'surveys/surveys/partial/form'
+
+.btn-group
+  = link_to 'Show', @surveys_survey, class: 'btn btn-default'
+  = link_to 'Add questions', new_surveys_survey_question_path(:survey_id => @surveys_survey.id), class: 'btn btn-default'
+  = link_to 'Back', surveys_surveys_path, class: 'btn btn-default'
+
+=render :partial => 'surveys/survey_questions/partial/table', :locals => {:surveys_survey_questions => @surveys_survey.survey_questions}

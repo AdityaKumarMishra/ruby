@@ -1,0 +1,43 @@
+.gamsat{
+  .under_gamsat {
+    color: green;
+    margin-top: 18px;
+    padding-left: 0px;
+  }
+
+  .under_gamsat_heading {
+    color: green;
+    float: left;
+    width: 109%;
+    margin-top: 10px;
+  }
+  .under_gamsat a {
+    color: green !important;
+    text-decoration: underline;
+  }
+}
+
+.col_how_do {
+  color: black;
+}
+
+.heading_gam {
+  &.green{
+    color: green;
+  }
+
+  &.purple{
+    color: #462AA1;
+  }
+
+  &.red {
+    color: #be382a;
+  }
+}
+
+#faq-content h1 {
+  font-weight: bold !important;
+  padding-top: 50px !important;
+  margin-top: -50px !important;
+  margin: 0px;
+}

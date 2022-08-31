@@ -1,0 +1,31 @@
+.row
+  .col-md-10.col-md-offset-1
+    %p#notice= notice
+
+    %p
+      %b Date started:
+      = format_date_long @exam.date_started
+    %p
+      %b Date finished:
+      = format_date_long @exam.date_finished
+    -if @exam.subject.present?
+      %p
+        %strong Subject:
+        = @exam.subject.title
+    %p
+      %b Type:
+      = @exam.type
+    - if @exam.exam_sections.present?
+      %p
+        %strong Exam sections:
+        = simple_form_for @exam, url: exam_delete_exam_sections_path(exam_id: @exam.id, id: @exam.id), method: :post do |exam|
+          .inline-checkbox.collection-checkboxes= exam.collection_check_boxes :exam_sections, @exam.exam_sections, :id, :title
+          = exam.button :submit, 'Delete marked exam sections', class: 'btn btn-danger'
+    - else
+      There are no exam sections.
+
+    %br
+
+    = link_to 'Edit', edit_exam_path(@exam), class: 'btn btn-default'
+    \|
+    = link_to 'Back', exams_path, class: 'btn btn-default'

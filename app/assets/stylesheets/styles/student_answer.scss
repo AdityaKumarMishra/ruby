@@ -1,0 +1,24 @@
+// Place all the styles related to the StudentAnswer controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#mcq-students-answer{
+  padding: 20px;
+  form{
+    span{
+      display: block;
+    }
+  }
+}
+
+#student-answer-summary{
+  table{
+    tbody{
+      tr{
+        td:first-child{
+          width:50%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title Gradready
+    = Gon::Base.render_data
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = render partial: 'layouts/shiv'
+    = render partial: 'layouts/structured_data'
+    = hotjar_tag
+  %body
+    = render :partial => 'partial/gamsat_main_menu'
+    %p.notice
+      = notice
+    %p.alert
+      = alert
+    .container-fluid
+      .row.mg-bottom
+        .col-md-3= render partial: 'managers/sidebar_manager'
+        .col-md-9= yield

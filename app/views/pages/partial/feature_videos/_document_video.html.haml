@@ -1,0 +1,13 @@
+%h2.faq_question.response_headng{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#written_resources", role: "button"}
+  %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+  How to use Written Resources
+#written_resources.panel-collapse.collapse{"aria-labelledby" => "headingOne", role: "tabpanel"}
+  / .video_box
+  /   - if @announcement.video.present?
+  /     %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :title => "GAMSATReady", :width => "100%", height: "307px"}
+  /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '360'}
+  /       %source{src: @announcement.generate_output_url_for('original'), type: 'video/mp4','data-res' => '720'}
+  - if announcement.story.present?
+    %h4 Guideline
+    .ck-editor-list
+      = sanitize announcement.story

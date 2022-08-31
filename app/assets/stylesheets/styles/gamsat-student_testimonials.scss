@@ -1,0 +1,216 @@
+.inner_mid{
+  h3, .test_cont_col h3 {
+    font-size: 42px;
+    color: #00853e !important;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    letter-spacing: -2px;
+  }
+
+
+  h1, .test_cont_col h1 {
+    font-size: 42px;
+    color: #00853e !important;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    letter-spacing: -2px;
+  }
+
+  h1{
+    font-size:28px;
+    font-weight:normal;
+  }
+
+  .center_txt {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .nav-tabs {
+    border-bottom: 1px solid #ddd;
+    background: whitesmoke;
+    > li {
+      width:50%;
+    }
+    &.stats_tab > li {
+      width: 33.33%;
+    }
+  }
+
+  .nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus {
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+    background: #00853e;
+    color: white;
+    text-align: center;
+  }
+
+  .nav-tabs>li>a.font_sty {
+    font-family: droid_serifregular;
+    font-size: 24px;
+  }
+
+  .nav-tabs>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    background: #D9D9D9;
+    color: #000;
+    border-radius: 0;
+    text-align: center;
+    font-size: 21px;
+    height: 55px;
+  }
+  .nav-tabs>.active>a .gam_wht {
+  color: #fff;
+  }
+  .gam_wht {
+    display: inline-block;
+    letter-spacing: 4px;
+    color: #00853e;
+  }
+
+  .gam_blck {
+    display: inline-block;
+    letter-spacing: 4px;
+    color: #333;
+  }
+
+  .gam_bl_normal {
+    display: inline-block;
+    font-family: arial;
+    color: #333;
+  }
+  .prod_main_slider1 .carousel-control {
+    color: #000 !important;
+    background: none !important;
+  }
+  .ytp-thumbnail-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    background-position: center;
+    background-repeat: no-repeat;
+    -moz-transition: opacity .5s cubic-bezier(0.0,0.0,0.2,1);
+    -webkit-transition: opacity .5s cubic-bezier(0.0,0.0,0.2,1);
+    transition: opacity .5s cubic-bezier(0.0,0.0,0.2,1);
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+  }
+  .std_test .std_test_img {
+    width: 58%;
+    float: left;
+    margin-right: 26px;
+  }
+  .std_test .std_test_img iframe {
+    width: 100%;
+    height: 314px;
+  }
+  .white_bg h6 {
+    font-size: 18px;
+    color: #000;
+    margin: 30px 0px 5px 0px;
+  }
+  .carousel-control.right.testi_caro_rightvi {
+    right: -100px;
+    top: 45%;
+    font-size: 40px;
+  }
+  .carousel-control.left.testi_caro_leftvi {
+    left: -100px;
+    top: 45%;
+    font-size: 40px;
+  }
+  .nav {
+    margin-left: 0;
+    margin-bottom: 20px;
+    list-style: none;
+  }
+  .std_test {
+    width: 100%;
+    float: left;
+    padding: 25px 36px 0px;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .martin-ist {
+    width: 33%;
+    float: left;
+    background: #d9d9d9;
+    position: relative;
+    margin-right: 3px;
+    height: 340px;
+  }
+  .martin-ist p {
+    margin: 20px 70px;
+    text-align: center;
+  }
+  .carousel-control.right.testi_caro_right4 {
+    right: -100px;
+    top: 45%;
+    font-size: 40px;
+  }
+  .carousel-control.left.testi_caro_left4 {
+    left: -100px;
+    top: 45%;
+    font-size: 40px;
+  }
+  b.writer_name {
+    margin-left: 220px;
+  }
+  .martin-ist:after {
+    background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/martin_after.jpg');
+    right: 30px;
+    position: absolute;
+    content: '';
+    width: 25px;
+    bottom: -29px;
+    height: 29px;
+  }
+  .stat_graph {
+    width: 45%;
+    float: left;
+    img{
+      width: 100%;
+    }
+  }
+  .stat_col .stat_rht {
+    width: 52%;
+    float: right;
+  }
+}
+
+.prod_main_slider1 .carousel-inner>.item {
+    padding-bottom: 30px !important;
+    float: left !important;
+}
+.std_test .std_test_img {
+    width: 58%;
+    float: left;
+    margin-right: 26px;
+}
+.white_bg h6 {
+    font-size: 18px;
+    color: #000;
+    margin: 30px 0px 5px 0px;
+}
+.list_no {
+  margin-left: -2px;
+}
+.foot_note_margin { margin-top: 40px; font-size: 13px;}
+.foot_note li { font-size: 11.5px; }

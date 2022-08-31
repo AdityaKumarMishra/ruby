@@ -1,0 +1,222 @@
+- if current_user.student?
+  .textbook_tabbing_links.swiper-container
+    %ul
+      - @types.each_with_index do |type, index|
+        -if @type.present? && @type==type
+          -cls="active"
+        -else
+          -cls=""
+        %li.swiper-slide{role: 'presentation', class: cls}
+          %a{class: 'vod_tabs', 'data-tag': index, role: 'tab', href: dashboard_textbooks_path(type: type), onclick: 'dd_loader();'}
+            -if type == "attendance_course_resources"
+              = "PBL Additional Resources"
+            -elsif type == "attendance_course_slides"
+              = "PBL In-Class Slides"
+            -elsif type == "textbook_chapters"
+              = "Foundation Textbook"
+            -elsif type == "additional_chapters"
+              = "Reasoning Textbook"
+            -elsif type== "textbook_hardcopy"
+              = "Textbook Hardcopy"
+            -elsif type== "revision_weekend"
+              = "Revision Weekend Resources"
+            -elsif type== "mock_exam"
+              = "Mock Exam"
+            -else
+              = type.titleize
+            / = type == "attendance_course_resources" ? "Attendance Course Additional Resources" :  type == "attendance_course_slides" ? "Attendance Course In-Class Slides" : type.titleize
+  - if @textbooks.present? && type!= "textbook_hardcopy"
+    =will_paginate @textbooks, renderer: BootstrapPagination::Rails
+    -if request.variant.blank?
+      %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+        %thead
+          %tr
+            %th Name
+            %th Topic
+            %th Status
+            %th{ colspan: 2 } Actions
+        %tbody
+          - @textbooks.each do |textbook|
+            %tr
+              %td.mobile_mousehover_tool= textbook.title
+              %td= textbook.tags.map{|t| t.name}.join.html_safe
+              %td
+                - textbook_read = get_textbook(textbook)
+                - if textbook_read.present? && textbook_read.is_read
+                  %span.trackable_read Read
+                - elsif textbook_read.present? && textbook_read.is_open
+                  %span.trackable_unread Reading
+                - else
+                  %span.trackable_unread_red Unread
+              %td
+                %a.table_icon_col{"data-placement" => "top", "data-toggle" => "tooltip", href: textbook_path(textbook), title: "View", onclick: 'dd_loader();'}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+              - if @type == "attendance_course_resources" || @type == "downloadable_resources" || @type == "attendance_course_slides"
+                %td
+                  %a.table_icon_col{"data-placement" => "top", "data-toggle" => "tooltip", href: download_file_path(textbook, format: :pdf, type: @type), title: "Download"}
+
+                    = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/download_icon.jpg"
+    -if request.variant == [:phone]
+      .mobile_table_border
+        %ul.tbl_head
+          %li.width_inc Name
+          %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool
+            Action
+        - @textbooks.each do |textbook|
+          %ul.mobile_table_body.listing.tbl_head.exercise_bdr_none
+            %li.mobile_mousehover_tool.width_inc
+              = truncate(textbook.title, :length => 25)
+              %ul.tool_tip
+                %li
+                  Topic:
+                  %br
+                  = textbook.tags.map{|t| t.name}.join.html_safe
+                  %br
+                  %br
+                  Status:
+                  %br
+                  - textbook_read = get_textbook(textbook)
+                  - if textbook_read.present? && textbook_read.is_read
+                    %span.trackable_read Read
+                  - elsif textbook_read.present? && textbook_read.is_open
+                    %span.trackable_unread Reading
+                  - else
+                    %span.trackable_unread_read Unread
+            %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16
+              %a.table_icon_col{href: textbook_path(textbook)}
+                = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+              %span.heading_tool_tip.view_topic_tip
+                %p View
+              - if @type == "attendance_course_resources" || @type == "downloadable_resources"
+                %a.table_icon_col{href: download_file_path(textbook, format: :pdf)}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/download_icon.jpg"
+                %span.heading_tool_tip.view_topic_tip
+                  %p Download
+
+  -elsif type=="textbook_hardcopy"
+    -if request.variant.blank?
+      %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+        %thead
+          %tr
+            %th Status
+            %th Date Sent
+            %th Tracking Number
+        %tbody
+          - textbook_delivery = current_user.try(:textbook_deliveries).first if current_user.try(:textbook_deliveries).present?
+          - status = textbook_delivery.present? ? TextbookDelivery.statuses[textbook_delivery.status] : ""
+          %tr
+            %td= textbook_delivery.try(:status)
+            %td= textbook_delivery.try(:date_sent).in_time_zone('Australia/Melbourne').strftime('%e/%-m/%Y') if textbook_delivery.present? && textbook_delivery.date_sent.present? 
+            %td= textbook_delivery.try(:tracking_number) if textbook_delivery.present?
+    
+      
+  - else
+    .div_no_data
+      = "No #{@type.titleize} Available"
+  :javascript
+
+    $(".mobile_mousehover_tool").click(function(){
+      $(".mobile_mousehover_tool").removeClass("acitve");
+      $(this).addClass("acitve");
+      $(".overlay_show").addClass("show_tool_wrapper");
+    });
+
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+    spaceBetween: 0,
+
+    });
+
+- else
+  .filter_btm_space#textbook_pagination
+    = link_to 'New Textbook', new_textbook_path, class: 'btn btn-gradready green', onclick: 'dd_loader();'
+    %br
+    %br
+
+    %ul.gr-nav.gr-nav-tabs.cstm-gr-nav.text_book_tab_ul
+      = select_tag 'tab_dropdown', options_for_select(tab_collection, selected: select_tab_values(params[:type])), { class: 'form-control tab_dropdown' }
+      / - @types.each_with_index do |type, index|
+      /   -if @type.present? && @type==type
+      /     -cls="active"
+      /   -else
+      /     -cls=""
+
+      /   %li{role: 'presentation', class: cls}
+      /     %a{class: 'vod_tabs', 'data-tag': index, role: 'tab', href: dashboard_textbooks_path(type: type)}
+      /       -if type == "attendance_course_resources"
+      /         = "PBL Additional Resources (PBLs) DL - Yes"
+      /       -elsif type == "attendance_course_slides"
+      /         = "PBL In-Class Slides (PBLs) DL - No"
+      /       -elsif type == "textbook_chapters"
+      /         = "Foundation Textbook(Online or Hardcopy TB) DL - No"
+      /       -elsif type == "additional_chapters"
+      /         = "Reasoning Textbook(Online TB) DL - No"
+      /       -elsif type== "revision_weekend"
+      /         = "Revision Weekend (Revision Weekend) DL - No"
+      /       -elsif type== "mock_exam"
+      /         = "Mock Exam (Online Exams) DL - No"
+      /       -elsif type== "textbook_slides"
+      /         = "Textbook Slides(Online or Hardcopy TB) DL - No"
+      /       -elsif type== "supplementary_resources"
+      /         = "Supplementary Resources (All paying and non-paying students) DL - No"
+      /       -elsif type== "downloadable_resources"
+      /         = "Downloadable Resources (All paying and non-paying students) DL - Yes"
+      /       -else
+      /         = type.titleize
+            
+    - if @textbooks.present?
+      =will_paginate @textbooks, renderer: BootstrapPagination::Rails
+      %table.gr-table.gr-table-bordered.table-hover
+        %thead
+          %tr
+            %th Name
+            %th Topic
+            - if @type == "supplementary_resources" or @type == "downloadable_resources"
+              %th Timetable
+            %th Last Updated at
+            %th Last Updated by
+            %th{ colspan: 5 } Actions
+        %tbody
+          - @textbooks.each do |textbook|
+            %tr
+              %td= textbook.title
+              %td= textbook.tags.map{|t| t.name}.join.html_safe
+              - if @type == "supplementary_resources" or @type == "downloadable_resources"
+                %td= textbook.for_timetable? ? "Yes" : "No"
+              %td= format_date_long textbook.updated_at.in_time_zone("Australia/Melbourne")
+              %td= textbook.user
+              %td= link_to 'View', textbook_path(textbook), class: 'btn btn-success btn-sm', target: :_blank
+              - if textbook.course.present?
+                %td=# link_to 'Edit', edit_textbook_path(textbook), class: 'btn btn-info btn-sm', target: :_blank
+              - else
+                %td= link_to 'Edit', edit_textbook_path(textbook), class: 'btn btn-info btn-sm', target: :_blank
+
+              - if current_user.admin? || current_user.superadmin? 
+                %td= link_to 'Destroy', textbook_path(textbook, type: @type), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+              - if (current_user.admin? || current_user.superadmin? || @type == "attendance_course_resources" || @type == "downloadable_resources") && @type != ("revision_weekend") &&  @type != ("mock_exam")
+                %td= link_to 'Download', download_file_path(textbook, format: :pdf, type: @type), class: 'btn btn-info btn-sm'
+              %td= link_to "Reset Access", reset_access_textbook_path(textbook), {class: "btn btn-default", remote: true}
+    - else
+      .div_no_data
+        = "No #{@type.titleize} Available"
+
+.div{id: "access_div"}
+:javascript
+
+  $('.chosen-select').chosen();
+
+  $(function(){
+    $('.tab_dropdown').bind('change', function () {
+     var url = $(this).val()
+     console.log(url)
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });
+
+:css 
+  table td span.trackable_unread_red, li span.trackable_unread_red{
+    color: #ff0000;
+  }

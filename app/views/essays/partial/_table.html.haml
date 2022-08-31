@@ -1,0 +1,31 @@
+%h1 Essays
+- if @essays.present?
+  =will_paginate @essays, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered.table-responsive
+    %thead
+      %tr
+        %th Essay Number
+        %th Title
+        %th Question
+        %th Unmarked Questions
+        %th Unanswered Questions
+        - if current_user.moderator?
+          %th{colspan: 2} Actions
+        -else
+          %th{colspan: 1} Actions
+    %tbody
+      - @essays.each do |e|
+
+        %tr.essay_list_row
+          %td= @essays.find_index(e) + 1
+          %td= e.title
+          %td= strip_tags(e.question).remove("Consider the following comments and develop a piece of writing in response to one or more of them. Your writing will be judged on the quality of your response to the theme; how well you organise and present your point of view, and how effectively you express yourself. You will not be judged on the views or attitudes you express.")
+          %td= e.unmarked_responses(current_user).count.to_s
+          %td= e.unanswered_responses(current_user).count.to_s
+          %td= link_to 'Edit', edit_essay_path(e), class: 'btn btn-info btn-sm', target: :_blank
+          - if current_user.moderator?
+            %td= link_to 'Destroy', e, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+
+- else
+  %i There are not any essays.

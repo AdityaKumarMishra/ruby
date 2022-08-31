@@ -1,0 +1,20 @@
+= label :master_feature, "Master Features"
+= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+.fa.fa-minus.icn_sze
+.div_info
+	Select the Master Features you want this email to fire for
+- if @master_features.present?
+	= select("email_customise", "master_feature_ids", @master_features.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Master Features', disabled: '', selected: @custom_email.present? ? @custom_email.master_feature_ids : []},{class: 'chosen-select', :multiple=>true})
+- else
+	= select("email_customise", "master_feature_ids", @master_features.collect {|p| [ p.name, p.id ] }, {prompt: 'No master features found', disabled: ''},{class: 'chosen-select', :multiple=>true})
+
+:javascript
+	$(document).ready(function(){
+		$('.chosen-select').chosen({
+	        allow_single_deselect: true,
+	        no_results_text: 'No results matched',
+	        placeholder_text_multiple: 'Click here',
+	        //inherit_select_classes: true,
+	        width: '100%'
+	    });
+	})

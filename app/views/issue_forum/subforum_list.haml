@@ -1,0 +1,50 @@
+- if current_user && current_user.student?
+  - content_for :page_heading, 'GetClarity'
+  .dashbord_right
+    .resource_col.mob_resorce
+      - if @default_tag
+        %a.black_default_btn.hvr-shutter-in-horizontal.fr{href: url_for(:back)} Back
+
+      - else
+        %a.black_default_btn.hvr-shutter-in-horizontal.fr{href: url_for(controller: 'contact', action: 'index')}
+          Back
+
+      = render 'issue_forum/new_ticket_button', classes: 'itf-btn-spacing'
+      = render 'issue_forum/submit_ticket_modal', options: {content: @content}
+    .comment_section_col.ticketing-col-margin.full_col
+      - @subforums.each do |subforum|
+        %a{href: issues_path(id: subforum.id)}
+          .parent_comment_col.btm_wht_space
+            %h3.tickt_ttl= subforum.name
+
+            .comment_mesg_col
+              %p
+                %b
+                  #{subforum.child_tickets.length} Tickets:
+                %small
+                  = subforum.resolved_child_tickets.length
+                  Resolved,
+                  = subforum.unresolved_child_tickets.length
+                  Unresolved
+
+
+-else
+  - if @default_tag
+    = render 'issue_forum/back_button'
+  - else
+    %a.btn.btn-primary.submit-ticket{href: url_for(controller: 'contact', action: 'index'), 'style' => 'margin-bottom: 20px'}
+      Back
+  = render 'issue_forum/new_ticket_button', classes: 'itf-btn-spacing'
+  .list-group
+    - @subforums.each do |subforum|
+      %a.list-group-item{href: issues_path(id: subforum.id)}
+        %h4.list-group-item-heading
+          = subforum.name
+        %p.list-group-item-text
+          %b
+            #{subforum.child_tickets.length} Tickets:
+          %small
+            = subforum.resolved_child_tickets.length
+            Resolved,
+            = subforum.unresolved_child_tickets.length
+            Unresolved

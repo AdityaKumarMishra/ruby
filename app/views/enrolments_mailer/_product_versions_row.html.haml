@@ -1,0 +1,150 @@
+- product_info = send(product_line+"_product_info")
+- price_label = subject ? "price_#{subject}".to_sym : :price
+%ul.modal_tablist.no_decoration
+  %li.col1
+    %a{href: "#{root_url}#{dynamic_product_version_uri('success-assured', product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info['success-assured'][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          SUCCESS ASSURED
+        %p (Essentials)
+  %li.col2
+    %a{href: "#{root_url}#{dynamic_product_version_uri(product_versions[2], product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info[product_versions[2]][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          ATTENDANCE
+        %p (Essentials)
+  %li.col3
+    %a{href: "#{root_url}#{dynamic_product_version_uri(product_versions[3], product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info[product_versions[3]][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          ATTENDANCE
+        %p (Comprehensive)
+  %li.col4
+    %a{href: "#{root_url}#{dynamic_product_version_uri(product_versions[4], product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info[product_versions[4]][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          ATTENDANCE
+        -if (product_line == 'gamsat' || product_line == 'umat')
+          %p (Complete Care)
+        -else
+          %p (Comprehensive + Private Tutoring)
+  %li.col5
+    %a{href: "#{root_url}#{dynamic_product_version_uri(product_versions[1], product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info[product_versions[1]][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          ONLINE
+        %p (Comprehensive)
+  %li.col6
+    %a{href: "#{root_url}#{dynamic_product_version_uri(product_versions[0], product_line, subject)}"}
+      %div.price_outer
+        %div.price_inner
+          = "$ #{product_info[product_versions[0]][price_label]}"
+      %div.course_outer
+        %div.course_inner
+          ONLINE
+        %p (Essentials)
+
+  %li.col7
+    %a{href: "#{root_url}#{dynamic_product_version_uri('custom', product_line, subject)}"}
+      %div.custom_outer
+        %div.custom_inner
+          Custom
+        %p
+
+:css
+  .modal_tablist.no_decoration{
+    list-style:none;
+    float:left;
+    margin:0px;
+    max-width: 600px;
+    width:100%;
+    padding:0px;
+    text-align:center
+  }
+
+  .modal_tablist.no_decoration li{
+    float:left;
+    min-height: inherit;
+    padding: 5px;
+    position: relative !important;
+    max-width:186px;
+    width:100%;
+    margin:0px 2px 2px 0px;
+
+  }
+
+  .modal_tablist.no_decoration li.col1{
+    float:left; background-color: #30ffd3;background: -moz-linear-gradient(top, #0ae3b8 1%, #30ffd3 100%);background: -webkit-linear-gradient(top, #0ae3b8 1%,#30ffd3 100%);background: linear-gradient(to bottom, #0ae3b8 1%,#30ffd3 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0ae3b8', endColorstr='#30ffd3',GradientType=0 );
+  }
+
+  .Object a{
+    display: block;text-decoration: none;
+  }
+
+  .price_outer{
+    margin: 4px 5px 0 0;text-align: right;
+  }
+  .price_inner{
+    color: #fff;font-size: 16px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .course_outer{
+    width: auto;text-align: center;float: left;margin: 76px 0 3px 3px;
+  }
+
+  .course_inner{
+    color: #fff;font-size: 16px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .course_outer p{
+    color: #fff;margin: 0px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 12px;
+  }
+
+  .modal_tablist.no_decoration li.col2{
+    background-color: #15ed70;background: -moz-linear-gradient(top, #18c762 1%, #15ed70 100%);background: -webkit-linear-gradient(top, #18c762 1%,#15ed70 100%);background: linear-gradient(to bottom, #18c762 1%,#15ed70 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#18c762', endColorstr='#15ed70',GradientType=0 );
+  }
+
+  .modal_tablist.no_decoration li.col3{
+    background-color: #74c6fe;background: -moz-linear-gradient(top, #48b2fc 2%, #74c6fe 100%);background: -webkit-linear-gradient(top, #48b2fc 2%,#74c6fe 100%);background: linear-gradient(to bottom, #48b2fc 2%,#74c6fe 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48b2fc', endColorstr='#74c6fe',GradientType=0 );}
+
+  .modal_tablist.no_decoration li.col4{
+    background-color: #30ffd3;background: -moz-linear-gradient(top, #30ffd3 1%, #0ae3b8 100%);background: -webkit-linear-gradient(top, #30ffd3 1%,#0ae3b8 100%);background: linear-gradient(to bottom, #30ffd3 1%,#0ae3b8 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#30ffd3', endColorstr='#0ae3b8',GradientType=0 );  }
+
+  .modal_tablist.no_decoration li.col5{
+    background-color: #15ed70;background: -moz-linear-gradient(top, #15ed70 2%, #18c762 100%);background: linear-gradient(to bottom, #15ed70 2%,#18c762 100%);background: -webkit-linear-gradient(top, #15ed70 2%,#18c762 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#15ed70', endColorstr='#18c762',GradientType=0 );
+  }
+
+  .modal_tablist.no_decoration li.col6{
+    background-color: #74c6fe;background: -moz-linear-gradient(top, #74c6fe 3%, #48b2fc 100%);background: -webkit-linear-gradient(top, #74c6fe 3%,#48b2fc 100%);background: linear-gradient(to bottom, #74c6fe 3%,#48b2fc 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74c6fe', endColorstr='#48b2fc',GradientType=0 );
+  }
+
+  .modal_tablist.no_decoration li.col7{
+    background-color: #74c6fe;background: -moz-linear-gradient(top, #74c6fe 4%, #48b2fc 100%);background: -webkit-linear-gradient(top, #74c6fe 4%,#48b2fc 100%);background: linear-gradient(to bottom, #74c6fe 4%,#48b2fc 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74c6fe', endColorstr='#48b2fc',GradientType=0 );
+  }
+
+  .custom_outer{
+    width: auto;text-align: center;float: left;margin: 112px 0 3px 3px;
+  }
+
+  .custom_inner{
+    color: #fff;font-size: 16px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  .custom_outer p{
+    color: #fff;margin: 0px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 12px;
+  }

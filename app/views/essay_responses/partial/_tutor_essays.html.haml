@@ -1,0 +1,76 @@
+#calendar
+  #date-popover.popover.top{style: "cursor: pointer; display: block; margin-left: 33%; margin-top: -50px; width: 175px;"}
+    .arrow
+    %h3.popover-title{style:"display: none;"}
+
+    #date-popover-content.popover-content
+  #my-calendar
+    :javascript
+      $("#date-popover").popover({html: true, trigger: "manual"});
+      $("#date-popover").hide()
+
+      var events = #{raw(@response_counts.to_json)}
+      var calendarData = #{raw(@calendar_data.to_json)}
+      var events_array = []
+
+      $(document).on('click', '.appointment-event', function(event){
+        if ($('#essay_count_filter').val() != 'Unmarked'){
+          return true;
+        }
+
+        $("#date-popover").hide();
+        var date = $(event.target).attr('id')
+        var tutor = $('#tutor_filter :selected').text()
+
+        if (tutor == 'All'){
+          var text = $.map(calendarData[date], function(count, name) { return "" + name + ": " + count }).join("<br>")
+        }
+        else{
+          var text = $.map(calendarData[date], function(count, name) { return "" + name + ": " + count }).filter(x => x.includes(tutor)).join("<br>")
+        }
+
+        $("#date-popover-content").html(text);
+        $("#date-popover").show();
+        return true;
+      })
+
+      $(document).on('click', function(event){
+        if (!$(event.target).hasClass('appointment-event')){
+          $('#date-popover').hide();
+        }
+      })
+
+      $.each( events, function( i )
+      {
+        events_array.push({
+          "id": i,
+          "date": i,
+          "classname": "bold_date",
+          "title": events[i],
+          "type": "appointment",
+          "reminder": "",
+          "time": "09:00",
+          "description": "Lorem ipsum dolor sit amet."
+        })
+      })
+
+      if ($("#my-calendar").length > 0) {
+        $("#my-calendar").zabuto_calendar({
+          language: "en",
+          events: {
+            local: events_array,
+            ajax: {
+              url: "" // load ajax json events here...
+            }
+          }
+        })
+      }
+
+    :css
+      #date-popover {
+        margin-top: 100px !important;
+      }
+
+%br
+- if !current_user.tutor?
+  = render 'essay_responses/partial/csv_download_link', params: params

@@ -1,0 +1,21 @@
+#rating-modal.modal.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %h4.modal-title Quality Assurance System - Feedback
+      .modal-body
+        = simple_form_for(rate , method: :put, url: rate_path(rate), remote: true) do |f|
+          .form-inputs
+            = f.input :description, label: 'Please share your feedback if you think that the question can be improved in any way. However, if you do not quite understand why an answer is correct, please use the GetClarity system to ask clarification questions; clarification questions submitted through the Quality Assurance system will not be answered.', input_html: {class: "desc"}
+          .form-actions
+            = f.button :submit, "Submit", class: "rate_form"
+      .modal-footer
+        %button.btn.btn-default.clos_mod{"data-dismiss" => "modal", :type => "button"} Close
+/ :javascript
+/   $(document).ready(function(){
+/     $(".clos_mod").click(function(){
+/       $(".desc").val('');
+/       $(".rate_form").click();
+/     });
+/   });

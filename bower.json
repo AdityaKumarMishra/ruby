@@ -1,0 +1,28 @@
+{
+  "name": "gradready",
+  "version": "0.0.0",
+  "homepage": "n",
+  "authors": [
+    "Tomasz Buchta <tomasz.buchta@polcode.net>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "video.js": "videojs#~5.0.2",
+    "videojs-resolution-selector": "~1.6.2",
+    "jquery-uploadfile": "~4.0.2"
+  },
+  "resolutions": {
+    "video.js": "^4.7"
+  }
+}

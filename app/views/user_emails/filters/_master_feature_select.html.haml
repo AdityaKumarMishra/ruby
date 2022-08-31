@@ -1,0 +1,6 @@
+%select#user-master-feature-filter.form-control
+  - reseted_dependent_parameters = request.query_parameters.except(:not_enroled)
+  %option{ {value: user_emails_path(request.query_parameters.except(:by_master_feature))}}= ''
+  - master_features.each do |master_feature|
+    %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_master_feature: master_feature.id))}.merge(selected: params[:by_master_feature] == master_feature.id.to_s) }
+      = "#{master_feature.name} (##{master_feature.id})"

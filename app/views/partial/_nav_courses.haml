@@ -1,0 +1,56 @@
+- courses = {gamsat: [["Success Assured", "success-assured"],
+  ["Online (Essentials)", "online-essentials"],
+  ["Online (Comprehensive)", "online-comprehensive"],
+  ["Attendance (Essentials)", "attendance-essentials"],
+  ["Attendance (Comprehensive)", "attendance-comprehensive"],
+  ["Attendance (Complete Care)", "attendance-complete-care"],
+  ["Custom/2 day Weekend Course", "custom"],
+  ["GAMSAT Textbook", "gamsat-textbooks"]],
+  gamsat_interview: [["InterviewReady Online Essentials", "interview-online-essentials"],
+  ["InterviewReady Online MMI Comprehensive", "interview-attendance-comprehensive"]],
+  umat: [["Online (Essentials)", "online-essentials"],
+  ["Online (Comprehensive)", "online-comprehensive"],
+  ["Attendence (Essentials)", "attendance-essentials"],
+  ["Attendence (Comprehensive)", "attendance-comprehensive"],
+  ["Attendance (Complete Care)", "attendance-complete-care"],
+  ["Custom/2 day Weekend Course", "custom"]],
+  hsc: [["Math Extension 1 - Online (Essentials)", "hscready-math-extension-1-online-essentials"],
+  ["Math Extension 1 - Online (Comprehensive)", "hscready-math-extension-1-online-comprehensive"],
+  ["Math Extension 1 - Attendance (Essentials)", "hscready-math-extension-1-attendance-essentials"],
+  ["Math Extension 1 - Attendance (Comprehensive)", "hscready-math-extension-1-attendance-comprehensive"],
+  ["Math Extension 1 - Attendance (Comprehensive + Private Tutoring)", "hscready-math-extension-1-attendance-comprehensive-private-tutoring"],
+  ["Math Extension 1 - Custom", "math-extension-1-cutsom"],
+  ["English Advanced - Online (Essentials)", "hscready-english-advanced-online-essentials"],
+  ["English Advanced - Online (Comprehensive)", "hscready-english-advanced-online-comprehensive"],
+  ["English Advanced - Attendance (Essentials)", "hscready-english-advanced-attendance-essentials"],
+  ["English Advanced - Attendance (Comprehensive)", "hscready-english-advanced-attendance-comprehensive"],
+  ["English Advanced - Attendance (Comprehensive + Private Tutoring)", "hscready-english-advanced-attendance-comprehensive-private-tutoring"],
+  ["English Advanced - Custom", "english-advanced-custom"]],
+  vce: [["Mathematical Methods (CAS) - Online (Essentials)", "math-extension-1-online-essentials"],
+  ["Mathematical Methods (CAS) - Online (Comprehensive)", "math-extension-1-online-comprehensive"],
+  ["Mathematical Methods (CAS) - Attendance (Essentials)", "math-extension-1-attendance-essentials"],
+  ["Mathematical Methods (CAS) - Attendance (Comprehensive)", "math-extension-1-attendance-comprehensive"],
+  ["Mathematical Methods (CAS) - Attendance (Comprehensive + Private Tutoring)", "math-extension-1-attendance-comprehensive-private-tutoring"],
+  ["Mathematical Methods (CAS) - Custom", "mathematical-methods-cas-custom"],
+  ["English - Online (Essentials)", "english-advanced-online-essentials"],
+  ["English - Online (Comprehensive)", "english-advanced-online-comprehensive"],
+  ["English - Attendance (Essentials)", "english-advanced-attendance-essentials"],
+  ["English - Attendance (Comprehensive)", "english-advanced-attendance-comprehensive"],
+  ["English - Attendance (Comprehensive + Private Tutoring)", "english-advanced-attendance-comprehensive-private-tutoring"],
+  ["English - Custom", "english-custom"]]}
+-if type=="gamsat-preparation-courses"
+  -type1="gamsat"
+-elsif type=="umat-preparation-courses"
+  -type1="umat"
+-elsif type=="gamsat_interview"
+  -type1= type
+  -type = "gamsat-preparation-courses"
+-else
+  -type1 = type
+
+- courses[type1.downcase.to_sym].each do |item|
+  %li
+    -if item.first == "GAMSAT Textbook"
+      %a{href: "/#{item.last}"}= item.first
+    -else
+      %a{href: "/#{type}/#{item.last}"}= item.first

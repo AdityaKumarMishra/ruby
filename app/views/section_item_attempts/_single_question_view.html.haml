@@ -1,0 +1,111 @@
+- if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+  %div{class: 'hidden', id: 'question-allotted-time', value: "#{@question_time}"}
+
+.resource_col.mbot21
+  %h4.fl= @section_attempt.section.title
+  .exam_list.side_exam_ques.mcq_mock_single{style: "max-width:fit-content"}
+    .pagination.pagination_mcq_single_question
+      - count = 1
+      - @sorted_mcq_stems.each_with_index do |mcq_stem, index|
+        - @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |s_attempt, ind|
+          %li{ role: 'presentation', class: "#{(@selected_tab.present? ? (@selected_tab == s_attempt.mcq.id.to_s) : (index == 0 && ind == 0)) ? 'active' : ''} #{s_attempt.mcq_answer.present? ? 'add_green' : '' }" }
+            %a{ "data-toggle": 'tab', role: 'tab', href: "\#m#{index}_#{ind}", 'aria-controls': "m#{index}_#{ind}", onclick: "stopRunnerTimer_single(event)", id: "#{s_attempt.id}" }
+              = "#{count}"
+              - count = count + 1
+              .mcq-stem-id.hidden= s_attempt.mcq.id if s_attempt.mcq
+              .mcq-stem-question-id.hidden= mcq_stem.id
+.ques_exam_list
+  .tab-content.tab_content_width
+    .time_wrapper
+      .time_heading
+        - if @section_attempt.assessment_attempt.timer_option_type == 'entire_exam'
+          .question_timer
+            %i.fa.fa-clock-o
+            %b Time Remaining:
+            %span{id: "exam_total_time_remaining"}
+    -count = 0
+    - @sorted_mcq_stems.each_with_index do |mcq_stem, index|
+      - @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |s_attempt, ind|
+        .tab-pane{ id: "m#{index}_#{ind}", role: 'tabpanel', class: ('active' if @selected_tab.present? ? (@selected_tab == s_attempt.mcq.id.to_s) : (index == 0 && ind == 0))}
+          %div{class: 'hidden', id: 'mcq-stem-timer', 'exercise-id': @section_attempt.id, 'section-type': 'SectionAttempt' }
+          .mcq-stem-question-id-active.hidden= mcq_stem.id
+          - exercise_count = @section_attempt.section_item_attempts.includes(mcq:[:mcq_answers, :mcq_stem]).where(mcq_stem: mcq_stem).order(:mcq_id).count
+          %p{style: "margin-top: 30px;"} There #{exercise_count == 1 ? 'is' : 'are'} #{exercise_count} #{exercise_count == 1 ? 'question' : 'questions'} from this exercise
+          %h4.fnt-20= mcq_stem.title
+          - if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+            .time_wrapper
+            .time_heading
+              .question_timer
+                %b Time Allotted(M):
+                %span=Time.at(@question_time).utc.strftime("%M:%S")
+                %br
+                %b Time Remaining:
+                %span{id: "question_time_remaining_#{s_attempt.mcq.id}"}
+          .mcq_stem_description.ck_edtr_cstm_list{id: "#{s_attempt.id}",style: "width: 60%;padding-right:30px;"}
+            = mcq_stem.description.html_safe
+          .div.finish{id: "#{@section_attempt.assessment_attempt.is_finish}"}
+          .quest-col{style: "width: 40%;border-top:0px;padding-top:0px;", class: "question", id: "#{s_attempt.id}"}
+            %h4.pos_rel.fnt-20
+              %span.mcqNum= "#{count += 1}."
+              = s_attempt.mcq.question.html_safe if s_attempt.mcq
+            = simple_fields_for "section_item_attempts[#{s_attempt.id}]", s_attempt do |e|
+              %ul.exer-list.ques_ans_list
+                -if s_attempt.mcq
+                  - ans_ind = 0
+                  = e.collection_radio_buttons(:mcq_answer_id, s_attempt.mcq.mcq_answers, :id, :answer, { boolean_style: :inline, item_wrapper_tag: false }) do |builder|
+                    - answer_text = builder.text.include?('<p>') ? builder.text : "<p>#{builder.text}</p>"
+                    %li.admin_custom_radio.answer_scroll_bar
+                      = builder.radio_button(class: "unattempt_question") + list_exam_alphabet_style(ans_ind, answer_text.html_safe, "section_item_attempts_#{s_attempt.id}_mcq_answer_id_#{builder.object.id}").html_safe
+                      - ans_ind += 1
+                .flash_message{style:"display: none;"}
+
+          .text-center.full_width.mtop30.mbot10
+            - if index != 0 || ind != 0
+              %button.black_default_btn.hvr-shutter-in-horizontal.btnPrevious1{ type: 'button' } Previous
+            - if index != @sorted_mcq_stems.count - 1
+              %button.black_default_btn.hvr-shutter-in-horizontal.btnNext1{ type: 'button', class: "#{params[:online_exam_attempt_id].present? ? 'only_exam_attempt' : ''}"} Next
+            - if index == @sorted_mcq_stems.count - 1
+              -if (@section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).count - 1) > ind
+                %button.btnNext1.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Next
+              -else
+                = link_to 'Complete', "javascript:void(0)", class: 'mg_rht0 default_btn hvr-shutter-in-horizontal return_font', id: "submit_item_attempt", onclick: "stopRunnerTimer()"
+- if @section_attempt.assessment_attempt.timer_option_type == 'individual_question'
+  :javascript
+    var time = $("#question-allotted-time").attr('value');
+    var m_id = $('.nav-tabs').find('li.active').find('.mcq-stem-id').text();
+    showRemaningTimer(time, m_id);
+- if @section_attempt.assessment_attempt.timer_option_type == 'entire_exam'
+  :javascript
+    var sa = Cookies.get('current_sa')
+    if(sa){
+      sa = JSON.parse(sa)
+      var time = sa['end'] - sa['time_elapsed']
+    }else{
+      var time = '#{@section_attempt.section.duration * 60}'
+    }
+    showExamRemaningTimer(time);
+
+:javascript
+
+  $(document).ready(function() {
+    $('.btn_reset').addClass('zoom_active');
+    $(".faq_wrapper").toggleClass("hide_sidebar");
+  });
+
+  QuestionsFontResize();
+
+
+:css
+  .pos_rel{
+    overflow-y: scroll;
+  }
+  .answer_scroll_bar{
+    overflow-y: scroll;
+  }
+  .ans_option_text img{
+    width: auto;
+    height: auto;
+  }
+  .ck_edtr_cstm_list{
+    overflow-x: scroll;
+  }

@@ -1,0 +1,36 @@
+.row
+  - @mock_exam_essay.mock_essays.each_with_index do |essay, index|
+    = simple_form_for(@mock_essay_feedback, url: mock_essay_mock_essay_feedbacks_path(mock_essay_id: essay.id)) do |f|
+      .panel.panel-warning
+        .panel-heading
+          .panel-title
+            %h3
+              %strong= "Essay #{index + 1} Tutor feedback"
+        .panel-body.line-40
+          = f.error_notification
+
+          .row
+            .col-md-2
+              %strong= "Essay #{index + 1}"
+            .col-md-8
+              %strong= essay.title
+            .col-md-2
+              %strong= link_to 'Download', download_file_mock_essay_path(essay, format: :pdf), class: 'btn btn-info btn-sm'
+          .row
+            .col-md-12
+              %strong Give Rating out of 100
+              .form-inputs{class: ('has_error_mock' if flash[:error].present?)}
+                = f.input :rating, :as => :select, :collection => (1..100), label: false
+          .row
+            .col-md-12
+              %strong Feedback
+              .form-inputs{class: ('has_error_mock' if flash[:error].present?)}
+                = f.input :response, label: false, as: :ckeditor, input_html: { ckeditor: { height: 200 }, id: "mock_essay_feedback_response_#{index}"}
+
+
+          .row
+            .col-md-12
+              .form-actions
+                = f.button :submit, :class => "btn btn-gradready green", value: "Submit Feedback"
+
+

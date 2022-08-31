@@ -1,0 +1,43 @@
+.alert.alert-warning.alert-dismissible{:role => "alert"}
+  %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  - if current_user && (current_user.student?)
+    - if !@announcement.nil?
+      = render 'announcements/student_announcement', announcement: @announcement, title: 'Online exams Announcements', user_announcement: @user_announcement
+
+.panel.panel-warning
+  .panel-heading
+    %h1.panel-title
+      %strong Online exams
+  .panel-body
+    - if @exams.present?
+      .table-responsive
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th Title
+              %th Num sections
+              %th Status
+              %th Actions
+          %tbody
+            - @exams.each do |e|
+              %tr{'data-link': url_for(dashboard_online_exam_path(e))}
+                %td
+                  %i.fa.fa-arrow-right
+                  = e.title
+                %td
+                  - if e.exam_sections.present?
+                    = e.exam_sections.size
+                  - else
+                    %i No exam sections.
+                %td
+                  - if e.date_finished.present?
+                    %span.label.label-danger Completed
+                  - elsif e.date_started.present?
+                    %span.label.label-warning Started
+                  - else
+                    %span.label.label-info New
+                %td= link_to 'Delete', dashboard_online_exam_path(e), class: 'btn btn-danger btn-sm cl-white', method: :delete, :data => { :confirm => 'Are you sure?' }
+
+    - else
+      %i There are not any online exams.

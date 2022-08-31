@@ -1,0 +1,10 @@
+%h1 Editing subject
+
+= render 'subjects/partial/form'
+
+%h3 Classes
+=render :partial => 'student_classes/partial/table', :locals => {:student_classes => @subject.student_classes}
+
+= link_to 'Show', @subject
+\|
+= link_to 'Back', subjects_path

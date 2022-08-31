@@ -1,0 +1,20 @@
+.container
+  .row
+    = simple_form_for(@mcq_student_answer) do |f|
+      .panel.panel-success
+        .panel-heading
+          %h1.panel-title
+            %strong Editing Mcq Student Answer
+        .panel-body
+          .row
+            .col-md-offset-1.col-md-10
+              = f.error_notification
+              .form-inputs
+                .row
+                  .col-md-6
+                    = f.association :mcq_answer, collection: @mcq_answers, label_method: :truncated_answer
+                    = f.association :user, collection: @students
+        .panel-footer
+          .btn-group
+            = f.button :submit, class: 'btn btn-success cl-white'
+            = link_to 'Back', mcq_student_answers_path, class: 'btn btn-default'

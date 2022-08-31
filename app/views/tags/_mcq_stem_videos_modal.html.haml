@@ -1,0 +1,17 @@
+#mcq_stem-vid-modal.modal.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Videos
+      .modal-body
+        - if vods.present?
+          - vods.first(3).each do |vod|
+            .li.text-align-left
+              = link_to "#{vod.title}", vod_path(vod)
+            %br/
+        -else
+          No video present.
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

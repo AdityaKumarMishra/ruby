@@ -1,0 +1,17 @@
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no

@@ -1,0 +1,39 @@
+.col-lg-7.col-md-6.col-sm-12.col-xs-12
+  .cr_descr_text_col
+    %p.text_content
+      This package was created for those who want to start their
+      = product_line
+      %sup ®
+      preparations, but are not quite ready to commit to any provider just yet. Experience our industry leading systems and try a
+      -if product_line == 'GAMSAT'
+        %a.gmsat_text{href: '/gamsat-preparation-courses#comparison_table'}comparable package
+      -else
+        %a.umat_text{href: '/umat-preparation-courses#comparison_table'}comparable package
+      from another provider - you will see why GradReady is the most widely used
+      = product_line
+      %sup ®
+      course provider and why we are able to
+      -if product_line == 'GAMSAT'
+        %a.gmsat_text{href: '/gamsat-preparation-courses/student_testimonials#student_improved_score'}achieve the best result for our students
+      -else
+        %a.umat_text{href: '/umat-preparation-courses/student_testimonials#student_improved_score'}achieve the best result for our students
+      year after year.
+    .content-mask
+  %a.read_more_cr_decr{href: "javascript:void(0)"} Read more
+  %a.read_less_cr_decr{href: "javascript:void(0)"} Read less
+
+.col-lg-5.col-md-6.col-sm-12.col-xs-12.pull-right.cr_descr_banner_col
+  #cr_description_col.carousel.slide{"data-ride" => "carousel"}
+    .carousel-inner{role: "listbox"}
+      .item.active
+        %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "GAMSATReady", :width => "100%", height: "320px"}
+          %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+      .item
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_starter_desc.png'
+    %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next

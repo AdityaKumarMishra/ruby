@@ -1,0 +1,12 @@
+//= require jquery
+//= require jquery_ujs
+//= require react-common-libs
+//= require inject-react-tap-event-plugin
+//= require_self
+//= require cocoon
+//= require toastr_rails
+//= require video
+//= require videojs-resolution-selector/video-quality-selector.js
+//= require vods
+//= require js.cookie
+//= require_tree ./public_pages

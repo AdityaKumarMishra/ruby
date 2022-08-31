@@ -1,0 +1,18 @@
+.panel.panel-info
+  .panel-heading
+    %h1.panel-title
+      %strong Listing by Tags
+  .panel-body
+    %table.table.table-bordered.table-hover
+      -items.each do |item|
+        .well.well-sm.col-md-5.col-md-offset-1
+          %strong.col-md-4=item[:name]
+          %strong=I18n.t :easy
+          %span.badge=item[:easy]
+          %strong=I18n.t :medium
+          %span.badge=item[:medium]
+          %strong=I18n.t :hard
+          %span.badge=item[:hard]
+    =will_paginate items, renderer: BootstrapPagination::Rails, :param_name => 'tags_page'
+
+

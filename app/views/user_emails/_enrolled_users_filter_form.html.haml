@@ -1,0 +1,58 @@
+-unless @enrolled_filterrific.nil?
+  = form_for_filterrific @enrolled_filterrific, url: user_emails_path do |f|
+    .form-group.user-mgmt-filter-p1
+      %label Enrolment Date Start
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Defined by the Enrolment Created On Date."}
+      =f.hidden_field(:filter_type, value: "enrolled")
+      =f.text_field(:with_start, class: 'form-control datepicker', autocomplete: 'off')
+    .form-group.user-mgmt-filter-p2
+      %label Enrolment Date End
+      %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Defined by the Enrolment Created On Date."}
+      =f.text_field(:with_end, class: 'form-control datepicker', autocomplete: 'off')
+    .form-group
+      %label Keyword
+      = f.text_field :with_name, class: 'form-control', placeholder: 'Name/Email/Contact No.'
+    .gradready_users
+      .form-group
+        %label Roles
+        = f.select :with_role, @enrolled_filterrific.select_options[:with_role], {include_blank: 'All'}, class: 'form-control'
+      .form-group
+        %label Account Status
+        = f.select :with_account_status, @enrolled_filterrific.select_options[:with_account_status], { include_blank: 'All' }, class: 'form-control'
+      .form-group
+        %label Specialty
+        = f.select :with_specialty, @enrolled_filterrific.select_options[:with_specialty], { include_blank: 'All' }, class: 'form-control'
+      .form-group
+        %label Courses Status
+        = f.select :by_courses_status, [['Active Courses', 1], ['All courses', 0]],{include_blank: false} ,class: 'form-control'
+      .student_filters
+        .form-group
+          %label Student Category
+          = f.select :by_enroled, [['Paid', 0], ['DD Incomplete', 1], ['Checkout Incomplete', 2], ['Free Trial', 3], ['Registration Incomplete', 4]], { include_blank: 'All' }, class: 'form-control'
+        .for_enrolled_users
+          .form-group
+            %label Product Line
+            = f.select :by_product_line, (['Gamsat', 'Grad','Hsc', 'Umat', 'Vce']), { include_blank: 'All' }, class: 'form-control'
+        .non_trial_filters
+          .form-group
+            %label Email Subscription
+            = f.select :by_subscription, (['Subscribed']), { include_blank: 'All' }, class: 'form-control'
+          .form-group
+            %label City
+            = f.select :by_state, options_for_select(available_cities, f.object&.by_state.present? ? f.object.by_state : ''), {include_blank: false}, multiple: true, class: "form-control chosen-select"
+          .for_enrolled_users.searchable_div
+            .form-group.massEmailPvlabel{class: f.object.by_product_line.present? ? "" : "hide"}
+              %label Product Versions
+              = f.select :by_product_version, @enrolled_filterrific.select_options[:product_versions].map{|p| [p.name, p.id]}, { include_blank: false }, multiple: true, class: "chosen-select form-control #{((params[:filterrific].present? && params[:filterrific][:by_product_line].present?) || (f.object.by_product_line.present?)) ? '' : 'hide'}"
+            .form-group.massEmailMslabel{class: f.object.by_product_line.present? ? "" : "hide"}
+              %label Master Features
+              - @enrolled_filterrific.select_options[:master_features] = [] if !@enrolled_filterrific.select_options[:master_features].present?
+              = f.select :by_master_feature, @enrolled_filterrific.select_options[:master_features].map{|p| [p.name, p.id]}, { include_blank: false }, multiple: true, class: "chosen-select form-control #{((params[:filterrific].present? && params[:filterrific][:by_product_line].present?) || (f.object.by_product_line.present?))  ? '' : 'hide'}"
+            .form-group.massEmailCrlabel{class: f.object.by_product_version.present? ? "" : "hide"}
+              %label Courses
+              = f.select :by_course, @enrolled_filterrific.select_options[:courses].map{|p| [p.name, p.id]}, { include_blank: 'All' }, class: "select2_searchable form-control #{((params[:filterrific].present? && params[:filterrific][:by_product_version].present?) || (f.object.by_product_version.present?))  ? '' : 'hide'}"
+    .form-group
+      %label Sort By
+      = f.select :sorted_by, @enrolled_filterrific.select_options[:sorted_by], { include_blank: 'Select Sorting Option' }, class: 'form-control'
+    = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+    / = link_to 'Expand', textbook_deliveries_path, class: 'btn btn-gr-light-green', id: "expandBtn", style: "float: right;"

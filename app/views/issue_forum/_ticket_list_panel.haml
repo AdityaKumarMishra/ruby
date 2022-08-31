@@ -1,0 +1,9 @@
+-# A list of tickets (see _ticket_list.haml), but pre-formatted for content pages
+-# Requires an options hash which has three keys: :tickets, :content, and :tag
+-# :tickets is required, and must be an array of tickets to display
+-# :content is optional, and corresponds to an ActiveRecord record that this question is going to be asked about
+-# :tag is optional, and is a tag that we pre-populate the tags array with for the new ticket
+
+-#= render 'issue_forum/new_ticket_button'
+= render 'issue_forum/ticket_list', tickets: options[:tickets]
+= render 'issue_forum/submit_ticket_modal', options: options.select {|key| [:content, :tag].include?(key)}

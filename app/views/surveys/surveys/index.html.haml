@@ -1,0 +1,6 @@
+%h1 Listing surveys_surveys
+
+=render :partial => 'surveys/surveys/partial/table', :locals => {:surveys_surveys => @surveys_surveys}
+%br
+
+= link_to 'New Survey', new_surveys_survey_path,class: 'btn btn-primary'

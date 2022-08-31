@@ -1,0 +1,7 @@
+%h1 Editing section_item
+
+= render 'form'
+
+= link_to 'Show', polymorphic_path([@parent_resource, @section, @section_item]), class: 'btn btn-default'
+\|
+= link_to 'Back', polymorphic_path([@parent_resource, @section, SectionItem]), class: 'btn btn-default'

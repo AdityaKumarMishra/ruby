@@ -1,0 +1,240 @@
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title Invoice
+    / Bootstrap cdn
+
+    %link{crossorigin: "anonymous", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity: "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", rel: "stylesheet"}/
+    %link{crossorigin: "anonymous", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity: "sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", rel: "stylesheet"}/
+    %link{href: "styles/invoice_style.css", rel: "stylesheet"}/
+  %body
+    .invoice_wrapper
+      %h3= "New DirectDebit for #{@student_name}"
+      %p{style: "margin: 0px 20px 30px;"}
+        = "In #{@course.name}"
+      .row.invoice_no
+        .col-md-12.col-sm-12.col-xs-12
+          .panel.panel-default{style: "border-color: transparent;box-shadow: none;"}
+            .panel-heading
+              %h4.panel-title
+                %strong{style: "color: #fff !important;"} Transfer Info
+            .panel-body{style: "border-right: 1px solid #ddd; border-left: 1px solid #ddd;"}
+              .table-responsive
+                %table.table.cstm_tbl.table-bordered
+                  %tr
+                    %td.bdr_left{style: "border-right:1px solid #ddd;border-right-width: 1px;border-color:#ddd;border-right-style: solid;"}
+                      %strong Order Id
+                    %td.bdr_left{style: "border-right:1px solid #ddd;border-right-width: 1px;border-color:#ddd;border-right-style: solid;"}
+                      %strong Amount
+                    %td
+                      %strong Banking Reference
+                  %tbody
+                    %tr
+                      %td #{@order.id}
+                      %td #{number_to_currency @order.total_cost}
+                      %td #{@order.reference_number}
+          .panel.panel-default.info_panel{style: "box-shadow: none;"}
+            .panel-heading.bdr_radius_none
+              %h4.panel-title
+                %strong{style: "color: #fff !important;"} Student Info
+            .panel-body{style: "border-right: 1px solid #ddd; border-left: 1px solid #ddd;"}
+              .table-responsive
+                %table.table.table-bordered
+                  %tr
+                    %th{rowspan: "2", style: "width: 35%"}
+                      - if @student.address.present?
+                        Address
+                        %p{style: "font-weight:normal;"}
+                          - add_str = ""
+                          - add_str += (@student.address.line_one.titleize + ', ') if @student.address.line_one.present?
+                          - add_str += (@student.address.line_two.titleize + ', ') if @student.address.line_two.present?
+                          - add_str += (@student.address.suburb.titleize + ', ') if @student.address.suburb.present?
+                          - add_str += (@student.address.post_code.titleize + ', ') if @student.address.post_code.present?
+                          - add_str += (@student.address.state.titleize + ', ') if @student.address.state.present?
+                          - add_str += @student.address.country.titleize if @student.address.country.present?
+                          #{add_str}
+                    %td
+                      %strong Name
+                      %p
+                        #{@student.try(:full_name).titleize}
+                    - if @student.phone_number.present?
+                      %td
+                        %strong Phone
+                        %p
+                          %a{href: "#", style: "color: #000;text-decoration: none;"} #{(@student.phone_number || '')}
+                  %tr
+                    %td{colspan: "2"}
+                      %strong Email
+                      %p
+                        %a.email_lnk
+                          #{@student.try(:email)}
+                  -if !@student.questionnaire.nil?
+                    -if @student.questionnaire.student_level == 'university'
+                      %tr
+                        %td{rowspan: "4", style: "width: 35%; vertical-align:top;"}
+                          %p
+                            %strong Background Information
+                            %p
+                              %strong University :
+                          %p #{(@student.questionnaire.university.name.titleize)}
+                        %td
+                          - if @student.questionnaire.degree
+                            %strong Degree
+                            %p #{(@student.questionnaire.degree.name.titleize)}
+                        %td
+                          - if @student.questionnaire.year
+                            %strong Year
+                            %p #{(@student.questionnaire.year.titleize)}
+                      %tr
+                        %td
+                          %strong UMAT in High School
+                          - if @student.questionnaire.umat_high_school
+                            %p Yes
+                          -else
+                            %p N/A
+                        %td
+                          %strong UMAT again in University
+                          - if @student.questionnaire.umat_uni
+                            %p
+                              Yes
+                          - else
+                            %p N/A
+                    -else
+                      - if @student.questionnaire.current_highschool
+                        %tr
+                          %td{rowspan: "4", style: "width: 35%"}
+                            %p
+                              %strong Background Information
+                              %p
+                                %strong High School :
+                            %p #{(@student.questionnaire.current_highschool.titleize)}
+                          %td
+                            - if @student.questionnaire.target_uni_course
+                              %strong Target Uni Course
+                              %p #{(@student.questionnaire.target_uni_course.titleize)}
+                          %td
+                            - if @student.questionnaire.highschool_year_level
+                              %strong  High School Year
+                              %p #{(@student.questionnaire.highschool_year_level.titleize)}
+                    %tr
+                      - if @student.questionnaire.source
+                        %td
+                          %strong How they heard about GR
+                          %p #{(@student.questionnaire.source.join(" "))}
+                      - if @student.questionnaire.last_source &&   (@student.questionnaire.last_source != "na")
+                        %td
+                          %strong Last saw/heard GR through
+                          %p #{(@student.questionnaire.last_source.titleize)}
+                  -else
+                    %tr
+                      %td{rowspan: "4", colspan:"3"}
+                        %p
+                          %strong Background Information not added
+                %table.table.table-bordered
+                  %tr.text-center
+                    %td
+                      %strong No.
+                    %td
+                      %strong Course / Feature Name
+                    %td{style: "width:15%;"}
+                      %strong Cost (GST Exclusive)
+                    %td{style: "width:8%;"}
+                      %strong GST
+                    %td.text-center
+                      %strong Discounts
+                    %td
+                      %strong Shipping Cost
+                  - if @order.purchase_items.present?
+                    -@order.purchase_items.each_with_index do |item, index|
+                      %tr.text-center
+                        %td{style: "width:5%"}
+                          = "#{index + 1}"
+                        %td{style: "height:86px;text-align:left;"}
+                          = "#{item.purchase_description}"
+                        %td{style: "width:15%;"}
+                          = "#{number_to_currency(item.initial_cost.ceil).to_s}"
+                        %td{style: "width:8%;"}
+                          = "#{number_to_currency(item.added_gst.ceil).to_s}"
+                        %td.text-center{style: "width:6%;"}
+                          = "#{number_to_currency(item.discount_applied).to_s}"
+                        %td{style: "width:6%;"}
+                          = "#{number_to_currency(item.shipping_cost).to_s}"
+
+                  - custom_pis = @order.purchase_items.includes(enrolment: [course: :product_version]).where(product_versions: {course_type: 1})
+                  -if custom_pis.present?
+                    - @order.purchase_items.includes(enrolment: [course: :product_version]).where(product_versions: {course_type: 1}).each do |cus_pi|
+                      - cus_pi.enrolment.feature_logs.where(description: 'custom purchase').each  do |fl|
+                        %tr.text-center
+                        %td{style: "width:5%"}
+                          = ""
+                        %td{style: "height:86px;text-align:left;"}
+                          = "#{fl.master_feature.custom_feature_name(fl.product_version_feature_price.qty, fl.course.product_version.try(:type))}"
+                        %td.text-center{style: "width:15%;"}
+                          = "$#{number_with_precision(fl.product_version_feature_price.price, precision: 2)}"
+                        %td.text-center{style: "width:8%;"}
+                          - without_gst_price = fl.product_version_feature_price.ten_percent_gst_amount - fl.product_version_feature_price.price
+                          = "#{number_with_precision(without_gst_price, precision: 2)}"
+                        %td.text-center{style: "width:6%;"}
+                          = "$0.00"
+                        %td.text-center{style: "width:6%;"}
+                          - if fl.product_version_feature_price.master_feature.hardcopy?
+                            = "$#{@student.textbook_shipping_cost}"
+                          - else
+                            $0.00
+
+            .panel.panel-default.info_panel.bdr_none
+              .panel-body.pad_top0{style: "border-right: 1px solid #ddd; border-left: 1px solid #ddd;"}
+                .table-responsive
+                  %table.table.table-bordered
+                    %tr
+                      %th{rowspan: "7", style:"vertical-align: top;"}
+                        Kind Regards
+                        %p{style: "font-weight:normal;"} GradReady Student Success Team
+                      %td
+                        Cost (GST Exclusive):
+                        %span.price
+                          = "#{number_to_currency(@order.total_initial_cost).to_s}"
+                    %tr
+                      %td
+                        GST:
+                        %span.price
+                          = "#{number_to_currency(@order.total_added_gst).to_s}"
+                    %tr
+                      %td
+                        Discount:
+                        %span.price
+                          = "#{number_to_currency(@order.total_discount).to_s}"
+                    %tr
+                      %td
+                        %strong Sub Total:
+                        %span.price.totl
+                          = "#{number_to_currency(@order.order_subtotal).to_s}"
+                    %tr
+                      %td
+                        Shipping Cost:
+                        %span.price
+                          = "#{number_to_currency(@order.total_shipping_cost).to_s}"
+                    %tr
+                      %td
+                        Payment Fees:
+                        %span.price
+                          = "#{number_to_currency(@order.total_method_fee).to_s}"
+                    %tr
+                      %td
+                        %strong Total Cost:
+                        %span.price.totl
+                          = "#{number_to_currency(@order.total_cost).to_s}"
+
+:css
+  td, th{
+    padding:8px !important;
+    font-family:arial !important;
+  }
+  .btn_visit{
+    color: #fff !Important;
+  }
+  .copy_right{
+    color: #797979 !Important;
+  }

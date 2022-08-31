@@ -1,0 +1,17 @@
+#TransactionModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "MassDeleteLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Warning!!!
+      -if orders.present?
+        .modal-body
+          You are deleting
+          = orders.count
+          incomplete transactions. Deleting data action cannot be reversed. Please click Yes if you are 100% sure else click No.
+        .modal-footer
+          %button.btn.btn-default.btn-danger.align-top-btn{"data-dismiss" => "modal", :type => "button"} No
+          = form_tag('/user_emails/destroy_incomplete_transactions', method: :delete, class: 'align-top-btn') do |f|
+            = hidden_field_tag "order_ids", orders.pluck(:id)
+            = button_tag(type: 'submit', class: 'btn btn-success pull-right') do
+              Yes

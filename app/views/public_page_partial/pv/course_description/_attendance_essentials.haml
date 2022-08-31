@@ -1,0 +1,37 @@
+.col-lg-7.col-md-6.col-sm-12.col-xs-12
+  .cr_descr_text_col
+    %p.text_content
+      We created this package for you to obtain the full benefits of an Attendance course at a more affordable price.
+      We left out some of the most labour intensive parts of the course in this package, and passed on the savings to you. However, you still have access to the necessary content to prepare yourself for our Attendance course and to practise.
+      All online materials are immediately available for access after purchase.
+
+      - if product_line == "GAMSAT" && !gamsat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/gamsat_improved_percentile'
+      -elsif product_line == "UMAT" && !umat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/umat_improved_percentile'
+    .content-mask
+  %a.read_more_cr_decr{href: "javascript:void(0)"} Read more
+  %a.read_less_cr_decr{href: "javascript:void(0)"} Read less
+
+.col-lg-5.col-md-6.col-sm-12.col-xs-12.pull-right.cr_descr_banner_col
+  #cr_description_col.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
+    .carousel-inner{role: "listbox"}
+      .item
+        - if product_line == "GAMSAT"
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_att_essen_desc.png'
+        - else
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/small_banner_slide_img.jpg'
+      .item.active
+        %video.video-js.vjs-default-skin.check-video{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png', :title => "GAMSATReady", :width => "100%", height: "320px"}
+          %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+      .item
+        %video.video-js.vjs-default-skin.check-video{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/christine_manuel.png', :title => "GAMSATReady", :width => "100%", height: "320px"}
+          %source{:src => "https://s3-ap-southeast-2.amazonaws.com/gradready-prod/public/christine_manuel.mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://s3-ap-southeast-2.amazonaws.com/gradready-prod/public/christine_manuel.mp4", :type => "video/mp4"}
+    %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next

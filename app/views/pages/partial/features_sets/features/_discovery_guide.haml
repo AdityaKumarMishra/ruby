@@ -1,0 +1,15 @@
+#discovery_guide.feature-icon-container
+  .clearfix
+    .feature-icon
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content
+      %h4
+        Area of Study: Discovery Guide
+        %span.enhance-features
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          = link_to 'Enhanced', recent_update_path(tab: product_line), class:appropriate_icon(product_line)
+      .text
+        %p.u-word-spacing
+          The Discovery section in the HSC
+          %sup{ style: "margin-right: -5px;"} ®
+          English exam is one of the most technically challenging aspects of the entire subject. To assist students, we have compiled and written a detailed step by step guide introducing you to all the key components of how to analyse the points of discovery, break its components down and construct a comprehensive piece of analysis.

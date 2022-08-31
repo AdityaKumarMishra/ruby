@@ -1,0 +1,19 @@
+#procced-modal.modal.fade.latest_pop{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Questions
+      .modal-body
+        = "You have only #{left_questions} questions left for the selected topic and difficulty. Do you want to proceed?"
+      .modal-footer
+        %button.default_btn.hvr-shutter-in-horizontal.submit_exercise_popup Ok
+
+:javascript
+  $(".submit_exercise_popup").click(function(){
+    if("#{condition_first}"){
+      $('#exercise_amount').val("#{left_questions}");
+    }
+    document.getElementById("new_exercise").submit();
+  });

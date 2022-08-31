@@ -1,0 +1,27 @@
+// Expect local var - product price & early bird from product_version_table.haml
+- unless component_value.nil?
+  %span COMPONENT VALUE
+  %a.strike
+    = component_value
+  %span.marg_4
+    = early_bird == true ? "Early Bird" : "  "
+%span.fnt_size.marg_4
+  %strong
+    = product_price.round.to_s
+  - new_price = (product_price*1.1).round
+%span.marg_4
+%span.fnt_size.price_fnt
+  = "+ 10\% GST = " + new_price.to_s
+%br
+
+- if product_line == "gamsat"
+  =# link_to '( What is GST? )', faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'What is GST')
+- if product_line == "umat"
+  = link_to '( What is GST? )', faq_topic_path(type: 'ucat-preparation-courses', topic: 'enrolment-and-payment-queries', anchor: 'what-is-gst')
+- if product_line =="vce"
+  = link_to '( What is GST? )', faq_topic_path(type: 'vce', topic: 'enrolment-and-payment-queries-8ce773eb-d42b-46e5-94fc-de2af251151f', anchor: 'what-is-gst')
+- if product_line == "hsc"
+  = link_to '( What is GST? )', faq_topic_path(type: 'hsc', topic: 'enrolment-and-payment-queries-8d98aefc-ed4d-4f26-a324-3addac1c2587', anchor: 'what-is-gst')
+%br
+%br
+%a.btn.btn-gradready.aos-item.default_btn.hvr-shutter-in-horizontal.fl_none.aos-init.aos-animate{:href => dynamic_product_version_uri(product_version, product_line, subject), class: [('' if product_line == 'gamsat'), ('blue' if product_line == 'umat'), ('purple' if product_line == 'vce'), ('red' if product_line == 'hsc')]} SECURE YOUR PLACE

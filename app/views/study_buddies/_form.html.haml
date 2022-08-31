@@ -1,0 +1,40 @@
+- study_buddy = StudyBuddy.new
+.study_buddy_info
+  = simple_form_for(study_buddy) do |f|
+    .row
+      %p.add_valid_details
+      .col-lg-5
+        .form-group
+          = f.input :name, required: true
+      .col-lg-7
+        .form-group
+          = f.input :email, label: "Email Address", required: true
+    .row
+      .col-lg-5
+        .form-group
+          = f.input :phone_number
+      .col-lg-7
+        .form-group
+          = f.input :grad_student, required: true, as: :select, collection: [["Yes", true], ["No", false]] ,prompt: 'Choose', label: "Are you currently a GradReady student?"
+    .form-group
+      = f.input :exam_to_prepare, required: true, as: :select, collection: StudyBuddy.exam_to_prepares.keys.map { |k| [k.titleize, k] }, prompt: 'Choose', label: "Which exam are you preparing for?"
+    .form-group
+      = f.input :university_id, required: true, as: :select, collection: University.all, prompt: 'Choose'
+    .form-group
+      = f.input :degree_id, required: true, as: :select, collection: Degree.all, prompt: 'Choose'
+    .form-group
+      = f.input :city, required: true, as: :select, collection: StudyBuddy.cities.keys.map { |k| [k.titleize, k] }, prompt: 'Choose'
+    .form-group
+      = f.input :city_area, required: true, as: :select, collection: StudyBuddy.city_areas.keys.map { |k| [k.titleize, k] }, prompt: 'Choose', label: "City area (your approximate location in your city)"
+    .form-group
+      = f.input :suburb, label: "Suburb/further location details", required: true
+    .form-group
+      = f.input :focus_area, required: true, as: :select, collection: StudyBuddy.focus_areas.keys.map { |k| [k.titleize, k] }, prompt: 'Choose', label: "Which area of are you focusing on?"
+    .form-group
+      = f.input :focus_study, label: "If you selected 'Other' for the previous question, please briefly describe what you are focusing your study on"
+    .form-group
+      = f.input :buddy_type, required: true, as: :select, collection: StudyBuddy.buddy_types.keys.map { |k| [k.titleize, k] }, prompt: 'Choose', label: "Would you prefer an online or in-person Study Buddy?"
+    .form-group
+      = f.input :other_info, label: "Any other information you want to provide?"
+    .form-actions
+      = f.button :submit, "SUBMIT", class: "btn btn-gradready green"

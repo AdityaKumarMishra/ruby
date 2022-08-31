@@ -1,0 +1,10 @@
+= simple_form_for([@parent_resource,@section]) do |f|
+  = f.error_notification
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-gradready green'
+  %br
+  .form-inputs
+    = f.input :title
+    = f.input :duration, label: 'Duration (minutes)'
+    = f.input :position

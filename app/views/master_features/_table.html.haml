@@ -1,0 +1,33 @@
+#filterrific_results
+  #user-mgmt-data
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th Name
+          %th Title
+          %th Partials
+          %th Type
+          %th Url
+          %th Icon
+          %th Show in sidebar
+          %th Position
+          %th Model permissions
+          %th{colspan: 2} Actions
+
+      %tbody
+        - @master_features.each do |feature|
+          %tr
+            %td= feature.name
+            %td= feature.title
+            %td= feature.partials.join("\n")
+            %td= feature.types.join(', ')
+            %td= feature.url
+            %td= feature.icon
+            %td= feature.show_in_sidebar
+            %td= feature.position
+            %td= feature.model_permissions.join("\n")
+            %td= link_to 'Edit', edit_master_feature_path(feature), class: 'btn btn-info btn-sm'
+            - if current_user.superadmin? && feature.product_versions.count == 0
+              %td= link_to 'Destroy', feature, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+            - else
+              %td

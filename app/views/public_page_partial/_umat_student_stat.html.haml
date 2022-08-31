@@ -1,0 +1,401 @@
+%section.padd_bttm40.mob_paddbttm0.padd_35.mtop50#student_improved_score
+  .container
+    .student_perform
+      .perform_heading.text-center
+        %h2 How Our Students Perform
+      #reviews_col_tabbing.comparison_table_tabbing
+        %ul.nav.attendce_tabbing{role: "tablist"}
+          %li.active_review.active{role: "presentation"}
+            %a{"aria-controls" => "reviews_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#third_perform", role: "tab"}
+              %h4 2014 Statistics
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "reviews_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#second_perform", role: "tab"}
+              %h4 2015 Statistics
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#first_perform", role: "tab"}
+              %h4 2016 Statistics
+          %li.active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2017_perform", role: "tab"}
+              %h4 2017 Statistics
+          %li.non_active_review{role: "presentation"}
+            %a{"aria-controls" => "features_col", "aria-expanded" => "true", "data-toggle" => "tab", href: "#2018_perform", role: "tab"}
+              %h4 2018 Statistics
+        .tab-content.full_width
+          #third_perform.tab-pane.active{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.graph_bar2014.hgt_57
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.4
+                .graph_bar.graph_bar2014.hgt_65
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', class: 'gr_bar2014', alt: "GradReady UCAT Preparation Courses"
+                  / %img.gr_bar2014{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover GradReady Student:65.4
+                .graph_bar.graph_bar2014.mg_lft50.hgt_60
+                  %span.blck_bar
+                  %span.bar_hover Avg GradReady Student:60.1
+                .graph_bar.graph_bar2014.hgt_68
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  / %img{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:67.8
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2014, we surveyed over 1000 students who we had helped to prepare for the March 2014   GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.blue
+                  65.4
+                  %sup 2
+                and ranked in the
+                %span.blue 87th  percentile
+                of the 2014   March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br
+                Score: 60.6
+                %sup 4
+                = "->"
+                %span.blue
+                  67.8
+                  %sup 5
+              %p
+                Rank: 68th percentile -&gt;
+                %span.blue 92nd percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.blue 24 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#why-should-i-enrol-in-a-preparation-course', class: "blue"
+                GradReady students score so well.
+              %p
+                Moreover, in 2014, 100% of InterviewReady Students
+                %sup 1
+                gained admission into medical school.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.1
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 3.7
+                  %li Standard Deviation 4.1
+          #second_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  / %img{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:63.1
+                .graph_bar.mg_lft50.hgt_58_2
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.4
+                .graph_bar.hgt_64_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  / %img{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:64.3
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2015, we surveyed over 1000 students who we had helped to prepare for the March 2015  GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.blue
+                  63.1
+                  %sup 2
+                and ranked in the
+                %span.blue 75th  percentile
+                of the 2015  March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br
+                Score: 59.3
+                %sup 4
+                = "->"
+                %span.blue
+                  64.3
+                  %sup 5
+              %p
+                Rank: 55th percentile -&gt;
+                %span.blue 80th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.blue 25 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#why-should-i-enrol-in-a-preparation-course', class: "blue"
+                GradReady students score so well.
+              %p
+                Moreover, in 2015, 90% of InterviewReady Students
+                %sup 1
+                gained admission into medical school.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.4
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 4.9
+                  %li Standard Deviation 5.4
+          #first_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.hgt_63_8
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  / %img{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:63.8
+                .graph_bar.mg_lft50.hgt_58_2
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:58.2
+                .graph_bar.hgt_64_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  / %img{src: "images/graph_gr_umat.png"}/
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:64.2
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2016, we surveyed over 1000 students who we had helped to prepare for the March 2016 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.blue
+                  63.8
+                  %sup 2
+                and ranked in the
+                %span.blue 79th percentile
+                of the 2016 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br
+                Score: 59.1
+                %sup 4
+                = "->"
+                %span.blue
+                  64.2
+                  %sup 5
+              %p
+                Rank: 54th percentile -&gt;
+                %span.blue 80th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.blue 26 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#why-should-i-enrol-in-a-preparation-course', class: "blue"
+                GradReady students score so well.
+              %p
+                Moreover, in 2016, 91% of InterviewReady Students
+                %sup 1
+                gained admission into medical school.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.6
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.0
+                  %li Standard Deviation 6.6
+          #2017_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg
+                .graph_bar.hgt_98
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.hgt_254.btm_261
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:66.1
+                .graph_bar.mg_lft50.hgt_159
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:61.0
+                .graph_bar.hgt_262.btm_268
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady UCAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:66.3
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2017, we surveyed over 1000 students who we had helped to prepare for the March 2017 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.blue
+                  66.1
+                  %sup 2
+                and ranked in the
+                %span.blue 87th percentile
+                of the 2017 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 61.0
+                %sup 4
+                = "->"
+                %span.blue
+                  66.3
+                  %sup 5
+              %p
+                Rank: 64th percentile -&gt;
+                %span.blue 89th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.blue 25 percentile points
+              %p Improvement remains statistically significant even when assessed using 99% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#why-should-i-enrol-in-a-preparation-course', class: "blue"
+                GradReady students score so well.
+              %p
+                Moreover, in 2017, 90% of InterviewReady Students
+                %sup 1
+                gained admission into medical school.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 6.8
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.4
+                  %li Standard Deviation 5.9
+          #2018_perform.tab-pane{role: "tabpanel"}
+            .col-md-5.perform_graph
+              .main_perform_graph.bar_bg_64
+                .graph_bar.hgt_57_8
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.8
+                .graph_bar.graph_bar2018.hgt_61_7
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', class: 'gr_bar2018_1', alt: "GradReady UCAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:61.7
+                .graph_bar.mg_lft50.hgt_57_4_black
+                  %span.blck_bar
+                  %span.bar_hover Avg GMSAT Student:57.4
+                .graph_bar.graph_bar2018.hgt_61_2
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', class: 'gr_bar2018_2', alt: "GradReady UCAT Preparation Courses"
+                  %span.blck_bar.green_bar
+                  %span.bar_hover Avg GradReady Student:61.2
+            .col-md-7.perfrm_grph_content
+              %p
+                In May 2018, we surveyed our students who had sat the March 2018 GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student
+                %sup 1
+                scored
+                %span.blue
+                  61.7
+                  %sup 2
+                and ranked in the
+                %span.blue 60th percentile
+                of the 2018 March GAMSAT
+                %sup ®
+                exam.
+              %p
+                The average GradReady student re-taking
+                %sup 3
+                the GAMSAT
+                %sup ®
+                exam improved from:
+                %br/
+                Score: 57.4
+                %sup 4
+                = "->"
+                %span.blue
+                  61.2
+                  %sup 5
+              %p
+                Rank: 40th percentile -&gt;
+                %span.blue 60th percentile
+              %p
+                The above improvement represents an improvement of
+                = succeed "." do
+                  %span.blue 20 percentile points
+              %p Improvement remains statistically significant when assessed using 80% confidence intervals.
+              %p
+                %span
+                  = link_to 'Learn why', faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?', class: "blue"
+                GradReady students score so well.
+            .col-md-12
+              .footnotes
+                %p Footnotes:
+                %ol
+                  %li Out of respondents
+                  %li Standard Deviation 7.2
+                  %li
+                    A subgroup of the respondents had previously taken the GAMSAT
+                    %sup ®
+                    exam
+                  %li Standard Deviation 5.9
+                  %li Standard Deviation 7.4
+

@@ -1,0 +1,27 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Mcq Student Answer
+      .panel-body
+        %table.table.table-bordered.table-hover
+          %tr
+            %td
+              %h5 Mcq Answer
+            %td
+              %h4= @mcq_student_answer.mcq_answer.answer
+          %tr
+            %td
+              %h5 Student
+            %td
+              %h4= @mcq_student_answer.user.full_name
+          %tr
+            %td
+              %h5 Time taken
+            %td
+              %h4= @mcq_student_answer.time_taken
+      .panel-footer.cl-white
+        .btn-group
+          = link_to 'Edit', edit_mcq_student_answer_path(@mcq_student_answer.id), class: 'btn btn-success cl-white'
+          = link_to 'Back', mcq_student_answers_path, class: 'btn btn-default'

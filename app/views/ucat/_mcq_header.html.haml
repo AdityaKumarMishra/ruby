@@ -1,0 +1,25 @@
+.header
+  .top_header
+    .head_title
+      %h2
+        Practice
+        = succeed "est" do
+          %span.tile_t T
+    .head_timer
+      %h4#clock
+        %i.fa.fa-clock-o{"aria-hidden" => "true"}
+        %span.time
+          Time Remaining
+          %span 14:21
+      %h4#all_ques
+        %i.fa.fa-book{"aria-hidden" => "true"}
+        %span.number#que-count
+  .btm_header.padd
+    %a.calc{href: "javascript:",'data-toggle'=>"modal", 'data-target'=>"#calc-modal"}
+      %i.fa.fa-calculator{"aria-hidden" => "true"}
+      = succeed "alculator" do
+        %span C
+    %a.calc#mcq-flag{href: "#"}
+      %i.fa.fa-flag-checkered{"aria-hidden" => "true"}
+      = succeed "lag" do
+        %span F

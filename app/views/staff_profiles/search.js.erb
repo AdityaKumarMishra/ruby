@@ -1,0 +1,1 @@
+$("#results").html("<%= escape_javascript(render(partial: "#{@return_path}/staff_search", locals: { staffs: @staff_profiles } )) %>");

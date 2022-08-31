@@ -1,0 +1,84 @@
+#public-page h1 {
+  color: #009348;
+}
+
+.width100{
+  width:100%;
+}
+
+.fl_mar {
+  float: left;
+  border-top: 1px solid #ccc;
+  padding-top: 14px;
+  text-align: left !important;
+  margin-top: 15px;
+}
+.wdht_100 {
+  width: 100%;
+  float: left;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.fl_mar {
+  h3 {
+    color: #009348;
+  }
+  &.blue h3 {
+    color: $umat-color;
+  }
+}
+
+h5 {
+    margin: 10px 0;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: 20px;
+    color: #292929;
+    text-rendering: optimizelegibility;
+}
+h5 {
+    display: block;
+    font-size: 0.83em;
+    -webkit-margin-before: 1.67em;
+    -webkit-margin-after: 1.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+.scholarship{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: 20px;
+  color: #333;
+  font-size: 14px !important;
+  // These styles break the container centering
+  // -webkit-margin-before: 1em;
+  // -webkit-margin-after: 1em;
+  // -webkit-margin-start: 0px;
+  // -webkit-margin-end: 0px;
+  p{
+    margin: 0 0 10px;
+    font-size: 14px ;
+    line-height: 20px;
+  }
+  h5 {
+    font-weight: bold !important;
+    font-size: 1.2em !important;
+  }
+}
+
+.margin-top10{
+  margin-top:10px;
+}
+
+.padding-top0{
+  padding-top:0px;
+}
+
+.img_mgin {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}

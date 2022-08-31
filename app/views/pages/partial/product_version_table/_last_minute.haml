@@ -1,0 +1,78 @@
+.col-md-12
+	.features_section_wrapper{:style => "margin-bottom: 100px;"}
+		.clearfix
+		.row
+			-last_min_course = LastMinCourse.all
+			.col-sm-4
+				-last_min_course.first((last_min_course.count - (last_min_course.count/2))).each do |lmc|
+					.col-xs-12
+						.features_content_section.grey
+							.features_img_circle
+								%i.fa.fa-calendar{"aria-hidden" => "true"}
+							.feature-content.mtop20
+								%h2
+									=lmc.course_name
+								%p.mtop20{:style => "font-size: 20px;"}
+									=lmc.date
+								%p{:style => "font-size: 20px;"}
+									=lmc.amount
+								%p
+									+ 10% GST :
+									=lmc.amount+(lmc.amount*0.1).round
+								.show_full_content.no_arrow.last_min_page_custom
+									=lmc.description.html_safe
+								%p.mtop20
+									%a.research_temp.aos-item.default_btn.hvr-shutter-in-horizontal.fl_none.aos-init{href: "/gamsat-preparation-courses/#{lmc.course_type.gsub("_","-")}"} Secure Your Place Now
+			.col-sm-4
+				.col-xs-12
+					.features_content_section.l_grey
+						%ul.footer_left
+							%li.gr_logo
+								= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady UCAT Preparation Courses"
+						.feature-content.mtop20
+							%h2.bodr_btm Online Courses
+							%h3 Online Essential
+							%p.mtop20{:style => "font-size: 20px;"} 634
+							%p
+								+ 10% GST :
+								697
+							.show_full_content.no_arrow.last_min_page
+								Take your GAMSAT Preparation to the next level with our Online Courses to consolidate your study. 
+
+								Both the Online Essentials & Comprehensive course will provide you with a extensive set of review materials for the GAMSAT Exam, including our textbook which covers all of Section 1, 2, & 3. Through compiling student feedback, we picked our best tutors to develop an online classroom consisting of many hours of engaging and bite-sized videos to complement our textbook. 
+
+								To allow you to develop your understanding of the concepts & apply the foundational content, you'll also have access to 4000 MCQs in our MCQ Bank which tracks your performance across 43 subtopics, as well as 8 Online Practice Exams.
+
+								Our Online Comprehensive Course adds on top of that 10 Marked Essays with personalised feedback and access to our GetClarity System which allows you to submit queries to our team of tutors with a response within 48 hours - It's essentially on-demand tutor assistance.
+							%p.mtop20.mbot20
+								%a.research_temp.aos-item.default_btn.hvr-shutter-in-horizontal.fl_none.aos-init{href: "/gamsat-preparation-courses/online-essentials"} Secure Your Place Now
+							%h3.mtop30 Online Comprehensive
+							%p.mtop20{:style => "font-size: 20px;"} 796
+							%p
+								+ 10% GST :
+								876
+							%p.mtop20
+								%a.research_temp.aos-item.default_btn.hvr-shutter-in-horizontal.fl_none.aos-init{href: "/gamsat-preparation-courses/online-comprehensive"} Secure Your Place Now
+			.col-sm-4
+				-last_min_course.last(last_min_course.count/2).each do |lmc|
+					.col-xs-12
+						.features_content_section.grey
+							.features_img_circle
+								%i.fa.fa-file-text-o{"aria-hidden" => "true"}
+							.feature-content.mtop20
+								%h2
+									=lmc.course_name
+								%p.mtop20{:style => "font-size: 20px;"}
+									=lmc.date
+								%p{:style => "font-size: 20px;"}
+									=lmc.amount
+								%p
+									+ 10% GST :
+									=lmc.amount+(lmc.amount*0.1).round
+								.show_full_content.no_arrow.last_min_page_custom
+									=lmc.description.html_safe
+								%p.mtop20
+									%a.research_temp.aos-item.default_btn.hvr-shutter-in-horizontal.fl_none.aos-init{href: "/gamsat-preparation-courses/#{lmc.course_type.gsub("_","-")}"} Secure Your Place Now						
+
+.text-center.gst
+	%a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'What is GST')} * What is GST?

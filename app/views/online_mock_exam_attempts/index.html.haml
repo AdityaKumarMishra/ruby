@@ -1,0 +1,219 @@
+- content_for :page_heading, 'Online Mock Exam 2'
+.dashbord_right
+  - if @online_mock_exam_attempt.nil?
+    = render 'confirm_checkin_modal'
+    .no_access
+      .faq_list.para_fs14.steps_col
+        .faq_list_col
+          .course_frm.filter_box_shadow.stap_from_field.not_acces_page
+            .no_access_cont
+              - if current_user && (current_user.student?)
+                .add-cart.text-center.mbot10
+                  - begin
+                    -if @online_mock_exam.present?  && @online_mock_exam.is_published?
+                      - if @online_mock_exam.valid_attempt_to_create?
+                        %a.default_btn.hvr-shutter-in-horizontal.add_cart{'data-toggle' => 'modal', 'data-target'=> '#confirm-ol-mock_exam-checkin-modal'} Check In
+                      -else
+                        %h4.mbot25 You have arrived the exam venue at #{Time.zone.now.strftime("%H:%M").to_s}
+                        %h4.mbot25 Exam is Over
+                    -else
+                      %h4.mbot25 No Online Mock Exam Present
+                  - rescue
+                    %h4.mbot25 No Online Mock Exam Present
+  -else
+    - if !@announcement.nil?
+      .resource_col
+        %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+      - if current_user && (current_user.student?)
+        - if !@announcement.nil?
+          = render 'announcements/student_announcement', announcement: @announcement, title: 'Online Exams Announcements', user_announcement: @user_announcement
+          .faq_list_col
+            = render "pages/partial/feature_videos/exam_video", announcement: @announcement
+        .faq_list_col
+          - if @online_mock_exam_attempt.assessable.already_finished?
+            .faq_list_col
+              %h4.mbot25
+              .statics_static_table.mtop_botm
+                %ul
+                  %li
+                    %span
+                      %strong Overall Percentile
+                  %li
+                    %span
+                    %strong
+                      -if @online_mock_exam_attempt.section_attempts.completed.count != @online_mock_exam_attempt.section_attempts.count
+                        - percentile = nil
+                      - else
+                        - percentile = @online_mock_exam_attempt.overall_percentile if @online_mock_exam_attempt
+                      = (percentile.nil? || percentile.nan?) ? 'N/A' : percentile.round(1)
+              -if @online_mock_exam_attempt.persisted?
+                -if request.variant == [:phone]
+                  .mobile_table_border
+                    %ul.tbl_head
+                      %li.width_inc Section
+                      %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                        M
+                        %span.heading_tool_tip.mrht37
+                          %p Marks scored
+                      %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                        P
+                        %span.heading_tool_tip.mrht37
+                          %p Percentile
+                    - @section_attempts.includes(:section).sort_by{|s_a| s_a.section.position}.each_with_index do |section, index|
+                      %ul.mobile_table_body.listing.tbl_head.bdr_none
+                        %li.mobile_mousehover_tool.width_inc
+                          %ul.tool_tip
+                            %li
+                              = section.section.title
+                            %li
+                              Marks:
+                              = section.mark ? section.mark : 'N/A'
+                            %li
+                              Percentile:
+                              = section.percentile ? section.percentile.round(2) : 'N/A'
+                        %li.mobile_mousehover_tool.mobile_wdt_th.rht56
+                          = section.mark ? section.mark : 'N/A'
+                        %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+                          = section.percentile ? section.percentile.round(2) : 'N/A'
+                -else
+                  %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+                    %thead
+                      %tr
+                        %th Section
+                        %th Marks scored
+                        %th Percentile
+                    %tbody
+                      - count = 1
+                      - @section_attempts.includes(:section).sort_by{|s_a| s_a.section.position}.each_with_index do |section, index|
+                        %tr
+                          %td.mobile_mousehover_tool
+                            = section.section.sectionable.title + "-" + section.section.title
+                          %td
+                            = section.mark ? section.mark : 'N/A'
+                          %td
+                            = section.percentile ? section.percentile.round(1) : 'N/A'
+                        / - if (section.section.title.include?("Section I") || section.section.sectionable.title.include?("Section I")) && section.section.position == 1
+                        /   - if count == 1
+                        /     %tr
+                        /       %td.mobile_mousehover_tool
+                        /         Section II: Written Communication
+                        /       - if @online_mock_exam_attempt.essay_response.present? && @online_mock_exam_attempt.essay_response.essay_tutor_response.present?
+                        /         %td
+                        /           = @online_mock_exam_attempt.section_two_raw_score
+                        /         %td
+                        /           = @online_mock_exam_attempt.calculate_essay_percentile
+                        /       - else
+                        /         %td
+                        /           N/A
+                        /         %td
+                        /           N/A
+                        / - count = count + 1
+                  .div
+                    = render 'section_attempts/index', attemptable: @attemptable, section_attempts: @section_attempts
+              - else
+                -if request.variant == [:phone]
+                  .mobile_table_border
+                    %ul.tbl_head
+                      %li.width_inc Section
+                      %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                        M
+                        %span.heading_tool_tip.mrht37
+                          %p Marks scored
+                      %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                        P
+                        %span.heading_tool_tip.mrht37
+                          %p Percentile
+
+                        - @sections.each_with_index do |section, index|
+                          %ul.mobile_table_body.listing.tbl_head.bdr_none
+                            %li.mobile_mousehover_tool.width_inc
+                              =truncate(section, length: 30)
+                              %ul.tool_tip
+                                %li
+                                  =section
+                                %li
+                                  Marks:
+                                  N/A
+                                %li
+                                  Percentile:
+                                  N/A
+                            %li.mobile_mousehover_tool.mobile_wdt_th.rht56 N/A
+                            %li.mobile_mousehover_tool.mobile_wdt_th.rht15 N/A
+                -else
+                  %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+                    %thead
+                      %tr
+                        %th Section
+                        %th Marks
+                        %th Percentile
+                    %tbody
+                      - @sections.each do |section|
+                        %tr
+                          %td.mobile_mousehover_tool
+                            =section
+                          %td N/A
+                          %td N/A
+            / .faq_list_col.table-martop
+            /   %h4 Please enter scores
+            /   .course_frm.score-form
+            /     = render 'form', course: @current_course
+            /     = render 'form2', course: @current_course
+
+          - else
+            / .video_box
+            /   - if @online_mock_exam_attempt.assessable.online_mock_vod.present?
+            /     %video{:autoplay => "true", :controls => "", :width => "100%", height: "320px"}
+            /       %source{src: @online_mock_exam_attempt.assessable.online_mock_vod.generate_output_url_for('original') , type: 'video/mp4','data-res' => '360'}
+
+            %h4.mtop10
+              = "Hi #{current_user.full_name}, you have arrived at the exam venue"
+              - if calculate_passed_time(@online_mock_exam_attempt.assessable.try(:nearest_date_document_start,), @online_mock_exam_attempt.created_at.in_time_zone(@online_mock_exam_attempt.assessable.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne"))) == ""
+                = "at #{@online_mock_exam_attempt.created_at.in_time_zone(@online_mock_exam_attempt.assessable.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne")).strftime("%H:%M").to_s}"
+              -else
+                = "late at #{@online_mock_exam_attempt.created_at.in_time_zone(@online_mock_exam_attempt.assessable.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne")).strftime("%H:%M").to_s}, the exam started #{calculate_passed_time(@online_mock_exam_attempt.assessable.try(:nearest_date_document_start), @online_mock_exam_attempt.created_at.in_time_zone(@online_mock_exam_attempt.assessable.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne")))} ago"
+            - if @online_mock_exam_attempt.assessable.valid_mock_exam
+
+              -if @online_mock_exam_attempt.assessable.yet_to_start?
+                %div.ol_mock_exam_doc_container.mbot20.bdr_bottom
+                  %h4.mtop10
+                    = "The Exam will start in"
+                    #countdown_timer
+                  :javascript
+                    var year = parseInt("#{@online_mock_exam_attempt.assessable.try(:nearest_date_document_start).try(:year)}");
+                    var month = parseInt("#{@online_mock_exam_attempt.assessable.try(:nearest_date_document_start).try(:month)}");
+                    var date = parseInt("#{@online_mock_exam_attempt.assessable.try(:nearest_date_document_start).try(:day)}");
+                    var hour = parseInt("#{@online_mock_exam_attempt.assessable.try(:nearest_date_document_start).try(:hour)}");
+                    var minutes = parseInt("#{@online_mock_exam_attempt.assessable.try(:nearest_date_document_start).try(:min)}");
+                    var austDay = new Date(year, month-1, date, hour, minutes);
+                    var x = setInterval(function() {
+                      var now = new Date().getTime();
+                      var distance = austDay - now;
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                      document.querySelector("#countdown_timer").innerHTML = days + "d " + hours + "h "
+                      + minutes + "m " + seconds + "s ";
+                      if (distance < 0) {
+                        clearInterval(x);
+                        document.querySelector("#countdown_timer").innerHTML = "STARTED";
+                        location = window.location
+                      }
+                    }, 1000);
+            - else
+              - @online_mock_exam_attempt.assessable.online_mock_exam_sections.order(:position).each do |section|
+                - if section.section_type == 'video'
+                  %div.mbot20{ id: "doc_container_#{section.id}"}
+                    = render 'video_content', vod: section
+                -elsif section.section_type == 'online_exam'
+                  %div.mbot20{ id: "doc_container_#{section.id}"}
+                    = render 'exam_content', exam: section, online_mock_exam_attempt: @online_mock_exam_attempt
+                -elsif section.section_type == 'essay'
+                  %div.mbot20{ id: "doc_container_#{section.id}",style: "position: unset;"}
+                    = render 'essay_content', essay: section
+                - elsif section.section_type == 'document'
+                  %div.mbot20{ id: "doc_container_#{section.id}"}
+                    = render 'document_content_mock', doc: section
+                -else
+                  Nothing

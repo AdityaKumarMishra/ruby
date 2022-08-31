@@ -1,0 +1,1014 @@
+.home-main-background.main-page{
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/hero_img-main-page.jpg") no-repeat;
+  float: left;
+  margin: 0 -15px 20px;
+  padding-top: 30px;
+  display: block;
+  background-size: cover;
+  position: relative;
+  .home_banner {
+    padding-top: 90px;
+    padding-left: 20px;
+  }
+  .product-line-container-body{
+    height: 4em;
+
+  }
+  .product-line-container-button {
+    margin-top: 13em;
+  }
+
+  h4 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    text-align: left;
+    text-shadow: 3px 3px 8px #000;
+    line-height: 31px;
+    margin-top: 110px;
+    margin-bottom: 10px;
+  }
+
+  .gmat_read_green {
+      border-radius: 15px;
+      color: #fff;
+      padding: 29px 60px;
+      margin-bottom: 12px;
+      margin-left: 0px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-align: center;
+      height: 350px;
+      font-family: $museo;
+    h1, h2 {
+      font-family: $font-head;
+      font-weight: bold;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 19px;
+      line-height: 1.3;
+      color: #fff;
+    }
+    .learn_more_btn {
+      font-size: 18px;
+      color: #fff;
+      background: none;
+      padding: 8px 16px;
+      border: 1px solid #fff;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 0px;
+    }
+  }
+  .product_line_container{
+    width: 24.5%;
+    margin-left: .25%;
+    margin-right: .25%;
+  }
+  .blue_col {
+    @extend .gmat_read_green;
+    background: rgba(1,126,204,0.8);
+  }
+  .green_opicity {
+    @extend .gmat_read_green;
+    background: rgba(0, 120, 51, 0.8);
+    width: 24.75%;
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .perpal_col {
+    @extend .gmat_read_green;
+    background: rgba(70, 44, 159, 0.8);
+  }
+  .red_col {
+    @extend .gmat_read_green;
+    background: rgba(190, 56, 42, 0.8);
+    width: 24.75%;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .umat_read_blue {
+      background: rgba(1,136,204,0.8);
+      border-radius: 0 15px 15px 0;
+      color: #fff;
+      padding: 29px 60px;
+      margin-bottom: 12px;
+      margin-left: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      text-align: center;
+      opacity: 0.8;
+  }
+}
+@media(max-width:767px){
+  .home_pag_bnner.main-page .col-md-6.col-sm-12.gmat_read_green{
+    width:100%;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+  }
+}
+
+#how-is-gr-different, .course-title {
+  h1 {
+    font-family: $font-head;
+    font-size: $font-head-size;
+    font-weight: bold;
+    span.green{
+      color: $gamsat-color;
+    }
+    span.blue{
+      color: $umat-color;
+    }
+    span.red {
+      color: $hsc-color;
+    }
+    span.purple {
+      color: $vce-color;
+    }
+    span.stick-left{
+      margin-left:-13px;
+    }
+  }
+  p {
+    margin-right: 1em;
+  }
+}
+
+
+#how-is-gr-different, .course-title {
+  h3 {
+    font-family: $font-head;
+    font-size: $font-head-size;
+    font-weight: bold;
+    margin: .67em 0;
+    padding: 50px 0px;
+    span.green{
+      color: $gamsat-color;
+    }
+    span.blue{
+      color: $umat-color;
+    }
+    span.red {
+      color: $hsc-color;
+    }
+    span.purple {
+      color: $vce-color;
+    }
+    span.stick-left{
+      margin-left:-13px;
+    }
+  }
+  p {
+    margin-right: 1em;
+  }
+}
+
+
+#how-is-gr-different.hover{
+  .container {
+    padding-top: 20px;
+  }
+  .notice-links {
+    a:hover {
+      color: $standard-blue;
+    }
+  }
+  .col-md-4 {
+    padding: 20px 0px 15px;
+  }
+
+  .txt_blck{
+    position: absolute;
+    top: -20px;
+    background-color: rgba(51, 51, 51, 0.90);
+    text-shadow: 0 0 3px #000;
+    color: white;
+    padding: 25px;
+    min-height: 290px;
+    display: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    a {
+      color: #428bca;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .col-md-4:hover .txt_blck{
+    display: block;
+  }
+}
+
+.cours_desc_box {
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/background_bg_img.jpg");
+  background-size: cover;
+  float: left;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  font-family: $font-subhead;
+  .coaching_col {
+    min-height: 454px;
+    width: 49.5%;
+    float: left;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    background: rgba(255,255,255,0.9);
+    border-radius: 0;
+    padding: 10px 70px 30px 50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    &.umat_box, &.hsc_box {
+      float: right;
+      border-radius: 0;
+    }
+  }
+
+  .coaching_col h3 {
+    font-family: $font-head !important;
+    color: #20221d;
+    font-size: 45px;
+    font-weight: bold;
+  }
+  .coaching_col h3 span {
+    color: #167f47;
+  }
+  .coaching_col.umat_box h3 span {
+    color: #0088cc;
+  }
+  .coaching_col.vce_box h3 span {
+    color: $vce-color;
+  }
+  .coaching_col.hsc_box h3 span {
+    color: $hsc-color;
+  }
+  .coaching_col h4 {
+    font-size: 24px;
+    color: #3b403d;
+    line-height: 29px;
+    margin: 20px 0 7px 0;
+    font-weight: bold;
+  }
+  .coaching_col p {
+    font-family: $font-subhead;
+    color: #000;
+    font-size: 13px;
+  }
+  .coaching_col p span {
+    color: #167f47;
+    font-weight: bold;
+  }
+  .learn_btn_course {
+    background: #167f47;
+    padding: 7px 6px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+  }
+  .coaching_col.umat_box p span {
+    color: #0088cc;
+  }
+  .coaching_col.vce_box p span {
+    color: $vce-color;
+  }
+  .coaching_col.hsc_box p span {
+    color: $hsc-color;
+  }
+  .umat_box .learn_btn_course {
+    background: #0088cc;
+  }
+  .vce_box .learn_btn_course {
+    background: $vce-color;
+  }
+  .hsc_box .learn_btn_course {
+    background: $hsc-color;
+  }
+  .coaching_col {
+    &.umat_box, &.hsc_box {
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    &.gamsat_box, &.vce_box {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+}
+@media(max-width: 760px){
+  .cours_desc_box .coaching_col {
+    width: 100%;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+  }
+}
+.row-break {
+  overflow: auto;
+}
+.ready_course {
+    float: left;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 80px;
+    margin-bottom: -140px;
+    h3 {
+    font-family: $font-subhead;
+    margin-bottom: $font-subhead-size;
+    font-weight: bold;
+    color: #20221d;
+    font-size: 45px;
+    span {
+      color: #167f47;
+    }
+  }
+  p {
+    color: #000;
+    font-size: 13px;
+    color: #000;
+    font-size: 13px;
+    padding: 0 120px 50px;
+    margin-bottom: 60px;
+  }
+  @media(max-width: 760px){
+    p{
+      padding: 0 20px;
+    }
+  }
+}
+
+.essential_cont {
+  z-index: 999999;
+  width: 100%;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+  .essential_left {
+    width: 49%;
+    float: left;
+    margin: 0 1px;
+    h2 {
+      background: #333;
+      color: #fff;
+      padding: 6px 0;
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+  p{
+
+  }
+  .pract-out {
+    width: 100%;
+    float: left;
+    padding: 0 14px;
+    -webkit-box-sizing: border-box;
+    background-color: white;
+    margin-bottom: 15px;
+    background: #f6f6f6;
+  }
+  .essent_txt {
+      border-bottom: 3px solid white;
+      width: 106%;
+      margin-left: -15px;
+      p{
+        line-height: 25px;
+      }
+  }
+  .what_gts {
+      background: #333;
+      color: white;
+      padding: 15px 0;
+  }
+  .essential_right {
+      width: 49%;
+      float: left;
+      margin: 0 1px;
+  }
+  .essential_right h2 {
+      background: #333;
+      color: #fff;
+      padding: 6px 0;
+      font-size: 18px;
+      margin: 0;
+  }
+  .mar_left_es {
+    margin-left: 2px;
+  }
+  .center {
+    text-align: center;
+
+    .essent_txt.bdr0 {
+      border: 0;
+    }
+  }
+  .btn-gr {
+    margin-top: 10px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #008b44;
+    background-image: -moz-linear-gradient(top, #009348, #00813f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009348), to(#00813f));
+    background-image: -webkit-linear-gradient(top, #009348, #00813f);
+    background-image: -o-linear-gradient(top, #009348, #00813f);
+    background-image: linear-gradient(to bottom, #009348, #00813f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF009348', endColorstr='#FF00813F', GradientType=0);
+    border-color: #00813f #00813f #00351a;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    font-weight: bold;
+  }
+}
+.main-page.hover-wrraper{
+  position: relative;
+}
+.umat.main-page.hover, .gamsat.main-page.hover,
+.vce.main-page.hover, .hsc.main-page.hover,
+.umat-provider.main-page.hover,
+.gamsat-provider.main-page.hover,
+.vce-provider.main-page.hover,
+.hsc-provider.main-page.hover{
+  display: none;
+  top: 100px;
+  width: 100%;
+  background-color: rgba(255,255,255,1)
+}
+
+.close-btn-umat{
+  font-size: 30px;
+  position: relative;
+  top: -20px;
+  left: -40px;
+  cursor: pointer;
+}
+.close-btn-hsc{
+  font-size: 30px;
+  position: relative;
+  top: -20px;
+  left: -40px;
+  cursor: pointer;
+}
+
+.close-btn-vce{
+  font-size: 30px;
+  position: relative;
+  top: -20px;
+  left: -40px;
+  cursor: pointer;
+}
+
+.close-btn-hsc-provider,
+.close-btn-vce-provider,
+.close-btn-umat-provider,
+.close-btn-gamsat-provider,
+.close-btn-gamsat {
+  @extend .close-btn-umat;
+}
+
+.faq-product-banner{
+  height: 20vh;
+  width: 50wx;
+  &.gamsat {
+    background-color: $gamsat-color;
+  }
+  &.umat {
+    background-color: $umat-color;
+  }
+  &.vce {
+    background-color: $vce-color;
+  }
+  &.hsc {
+    background-color: $hsc-color;
+  }
+}
+
+//=======
+//
+//
+//footer {
+//  height:auto !important;
+//  color:#f6f6f6;
+//  background:#3b403c;
+//  float:left;
+//  width:100%;
+//  .container {
+//    padding-top:0;
+//    padding-bottom:20px
+//  }
+//  .ftLinks ul{
+//    float:left;
+//    list-style:none outside none;
+//    margin:0 22px 0 0;
+//    padding:0;
+//    line-height:13px;
+//    padding-left:5px
+//  }
+//  .fwmobile .gr-logo{
+//    width:100%;
+//  }
+//  .social {
+//    float:left;
+//    margin-top:5px;
+//    margin-left:-30px;
+//  }
+//  .social i {
+//    background-color: #333;
+//    border-radius: 40px;
+//    color: #fff;
+//    height: 40px;
+//    line-height: 40px;
+//    width: 40px;
+//    font-size: 15px;
+//    text-align: center;
+//    margin-right: 3px;
+//  }
+//  .social li {
+//    float: left;
+//    display: inline-block;
+//  }
+//  .copyright-notice{
+//    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+//    padding-top:10px;
+//    text-align:left;
+//    font-size:11px;
+//    width:100%
+//  }
+//  .ftLinks {
+//    width:50%;
+//    padding-top:20px
+//  }
+//  .ftLinks h2{
+//    width:100%;
+//    font-family:'museo500';
+//    font-size:15px;
+//    float:left;
+//    border-bottom:1px solid #fff;
+//    padding-left:4px;
+//    padding-bottom:2px;
+//    margin-top:8px;
+//    margin-bottom:3px
+//  }
+//  .notice-links a{
+//    color:#fff;
+//  }
+//}
+//>>>>>>> remotes/origin/stage:app/assets/stylesheets/main_page.scss
+
+.recommender_box {
+  position: fixed;
+  bottom: 0;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 14px;
+  display:none;
+  background-color: #eeeeee;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  z-index: 99;
+  left: 0;
+
+  .course_text {
+    color: #007833;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background: #eeeeee;
+    width: 183px;
+  }
+  .course_text:focus{outline:none;}
+}
+.home_pag_bnner.home-banner-img{
+  min-height: 513px;
+}
+.u-padding-17{ margin-left: 15px;
+    padding-left: 7px;}
+
+@media only screen and (min-width: 260px) and (max-width: 959px){
+   .font_sty1 img {
+    max-width: 100%!important;
+    width: auto !important;
+}
+.container-fluid.application-container{  float: left;
+    margin-top: 40px;
+    width: 100%;}
+
+.gamsat-blog-container {padding:0px;}
+.gr-courses {
+    padding: 30px 0;
+  }
+  .gr-courses__header {
+
+    font-size: 32px;
+    }
+    .dashboard-container a:not(.btn), .application-container a:not(.btn) {
+    padding: 25px 20px;
+}
+.cours_desc_box {
+    padding-top: 20px;
+}
+.cours_desc_box .coaching_col {
+
+    padding: 10px 10px 30px;
+
+}
+.gr-courses__course-content {
+    padding: 20px !important;
+    }
+.cours_desc_box .coaching_col h3 {
+    font-size: 32px;
+    }
+    .cours_desc_box .learn_btn_course {
+
+    padding: 16px 10px !important;
+    float:left;
+    width: 100%;
+}
+.cours_desc_box .coaching_col h4 {
+
+    float: left;
+    font-size: 24px;
+
+    margin:10px 0 10px;
+    width: 100%;
+}
+.cours_desc_box .coaching_col h4 .learn_link_course{  font-size: 19px;
+    padding: 0;}
+
+    .notification-dialog {
+
+    top: 79px;
+    }
+  .gradready_home_banner a.home_trial_btn {
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-left: 12px !important;
+    position:relative;
+     margin-top: 39px;
+    line-height: 43px;
+  }
+
+  .gradready_home_banner .home_trial_btn span {
+    width:46px;
+    height: 46px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .home-page-banner.umat .home_trial_btn span {
+    width:46px;
+    height: 46px;
+    right: 0px;
+    top: 0px;
+  }
+
+  .home-page-banner.umat a.home_trial_btn {
+    margin-top: 39px;
+    line-height: 43px;
+    margin-bottom: 20px;
+    position:relative;
+  }
+
+   .gradready_home_banner .trial_option_overlay .trial_course_link {
+      max-width: 306px;
+      min-height: 170px;
+    }
+
+  .gradready_home_banner .trial_option_overlay .home_trial_btn {
+    max-width: 150px;
+    margin-top: 20px !important;
+  }
+  .gradready_home_banner .trial_option_overlay .home_trial_btn span {
+    height: 50px;
+  }
+
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1130px){
+
+.home_pag_bnner.main-page.gamsat .course-banner-bg {
+    min-height: 396px !important;
+}
+
+}
+
+.m_btm2 { margin-bottom: 2px; }
+
+.trial_option_overlay.show{
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+}
+.trial_option_overlay .trial_course_link{
+  max-width: 351px;
+  font-family: "museo-slab";
+  font-size: 46px;
+  color: #017733 !important;
+  display: inline-block;
+  padding-top: 55px;
+  text-decoration:none !important;
+  width: 100%;
+  margin:0 10px;
+  min-height: 196px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #c7c7c7;
+  border-radius: 10px;
+}
+.trial_option_overlay .home_trial_btn span{
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/close_icon.png") no-repeat center center #005a27;
+  width: 46px;
+  height: 46px;
+  float: right;
+  border-radius: 0 5px 5px 0;
+}
+.trial_option_overlay .trial_course_link.blue_txt_col{
+  color:#007ecc !important;
+}
+.trial_option_overlay .trial_course_link sup{
+  font-size: 23px;
+  top: -20px;
+  left: -9px;
+}
+.trial_option_overlay .trial_course_link span{
+  width: 100%;
+  float: left;
+  font-size: 26px;
+}
+.gradready_home_banner .container p span img{
+  display: inline-block;
+  height: auto;
+  position: relative;
+  top: -1px;
+  margin: 0 4px;
+  vertical-align: top;
+}
+.home_trial_btn{
+  background: #007733 !important;
+  max-width: 184px;
+  height: 48px;
+  border: 1px solid #006029;
+  border-radius: 5px;
+  color: #fff !important;
+  font-size: 20px;
+  display: inline-block;
+  text-decoration:none !important;
+  width: 100%;
+  text-align: left;
+  padding:0 0 0 18px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 43px;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-family: 'Museo 300';
+}
+.home_trial_btn span{
+  background:url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/trial_btn_arrow.png") no-repeat center center #005a27;
+  width: 46px;
+  height: 46px;
+  float: right;
+  border-radius: 0 5px 5px 0;
+}
+#homepage-component {
+  float:left; width: 100%;
+  }
+.cstm_frm .default_green_btn.login_trial_btn {margin-top: 0;}
+.gradready_home_banner .container h2 span.green {color: #007833;}
+a.wht_hov{color: #fff !important;}
+.home_trial_btn.umat_trial_btn {background: #198ad1 !important;border: 1px solid #007ecc;}
+.home_trial_btn.umat_trial_btn span{
+  background:url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/trial_btn_arrow.png") no-repeat center center #007ecc;
+}
+.home_trial_btn.umat_trial_btn.hvr-bounce-to-right:before {background: #007ecc;}
+.home_pag_bnner.main-page.gamsat.padding_top_100 {padding-top: 35px;min-height: 470px;}
+.course-banner-bg h3 span.wht_clr{ color: #fff;}
+.cstm_frm .default_green_btn.drk_grn_cl{background-color: #007833;}
+
+.gr-courses__header span {
+    color: #007833 !important;
+}
+.u-banner-title.mid_font{font-size: 20px;line-height: 25px;}
+
+
+@font-face {
+    font-family: 'Museo 500';
+    src: asset-url('Webfonts/Museo-500.eot');
+    src: asset-url('Webfonts/Museo-500.eot?#iefix') format('embedded-opentype'),
+        font-url('Webfonts/Museo-500.woff') format('woff'),
+        font-url('Webfonts/Museo-500.ttf') format('truetype'),
+        font-url('Webfonts/Museo-500.svg#Museo-500') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo 700';
+    src: asset-url('Webfonts/Museo-700.eot');
+    src: asset-url('Webfonts/Museo-700.eot?#iefix') format('embedded-opentype'),
+        font-url('Webfonts/Museo-700.woff') format('woff'),
+        font-url('Webfonts/Museo-700.ttf') format('truetype'),
+        font-url('Webfonts/Museo-700.svg#Museo-700') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo 300';
+    src: asset-url('Webfonts/Museo-300.eot');
+    src: asset-url('Webfonts/Museo-300.eot?#iefix') format('embedded-opentype'),
+        font-url('Webfonts/Museo-300.woff') format('woff'),
+        font-url('Webfonts/Museo-300.ttf') format('truetype'),
+        font-url('Webfonts/Museo-300.svg#Museo-300') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.gradready_home_banner{
+  width: calc(100% + 35px);
+  text-align: center;
+  min-height: 390px;
+  border-bottom: 2px solid #007733;
+  float:left; background:url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/home_banner_lgt.jpg") no-repeat center center;
+  background-size: cover;
+  position:relative;
+  overflow: hidden;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.gradready_home_banner:before{content:''; width:100%; position:absolute; height:100%; top:0; left:0; background:rgba(0, 0, 0, .3);  }
+.gradready_home_banner .container p span.wht_bg_txt{background:rgba(255,255,255,.6); color:#007833; padding:0 4px; text-shadow: 0 0 0 #111;    border-radius: 45px;}
+.course-banner-bg .u-banner-title span.wht_bg_txt{background:rgba(255,255,255,.6); color:#007833; padding:0 4px; text-shadow: 0 0 0 #111;    border-radius: 45px;}
+.trial_option_overlay .trial_course_link span{
+  width: 100%;
+  float: left;
+  font-size: 26px;
+}
+.gradready_home_banner .container{
+  max-width:1170px;
+  padding-top: 86px;
+  position: relative;
+  margin:0px auto;
+}
+.home_trial_btn span{
+  background:url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/trial_btn_arrow.png") no-repeat center center #005a27;
+  width: 46px;
+  height: 46px;
+  float: right;
+  border-radius: 0 5px 5px 0;
+}
+.trial_option_overlay{
+  width:100%;
+  padding-top: 100px;
+  height:100%;
+  position:absolute;
+  text-align:center;
+  left:0px; top:0;
+  background:rgba(255,255,255,.9);
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 0 42%;
+  transform-origin: 0 42%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: .5s;
+  transition-duration: .5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;}
+.trial_option_overlay .trial_course_link{
+  max-width: 351px;
+  font-family: "museo-slab";
+  font-size: 46px;
+  color: #017733;
+  display: inline-block;
+  padding-top: 55px;
+  text-decoration:none !important;
+  width: 100%;
+  margin:0 10px;
+  min-height: 196px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #c7c7c7;
+  border-radius: 10px;}
+.trial_option_overlay .trial_course_link span{
+  width: 100%;
+  float: left;
+  font-size: 26px;
+}
+.gradready_home_banner .container h2{
+  font-size: 74px;
+  color: #007833;
+  text-shadow: 5px 4px 1px #101010;
+  font-weight: 700;
+  font-family: 'Museo 700';
+  margin: 10px 0;
+  width: auto;
+  display: inline-block;
+  border-bottom: 5px solid transparent;
+}
+.gradready_home_banner .container a:hover h2 {
+  border-bottom: 5px solid #007833;
+}
+.gradready_home_banner .container h2 span{
+  color: #fff;
+  margin-left: -20px;
+}
+.gradready_home_banner .container p{
+  font-size: 20px;
+  color: #007833;
+  text-shadow: 0px 2px 0px #111;
+  margin: 0 0 6px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 25px;
+  font-family: 'Museo 300';
+  width: auto;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+
+}
+.gradready_home_banner .container a:hover p{ border-bottom: 2px solid #fff;}
+
+.gradready_home_banner .container h4{
+  font-size: 20px;
+  color: #fff;
+  margin: 0 0 6px;
+  font-weight: 300;
+  padding: 49px 0 10px 0px;
+  font-family: 'Museo 300';
+}
+.gradready_home_banner .container p span{
+  color: #fff;
+}
+.gradready_home_banner .container h4 span img{
+  display: inline-block;
+  height: auto;
+  position: relative;
+  top: -1px;
+  margin: 0 4px;
+  vertical-align: top;
+}
+.home_trial_btn.hvr-bounce-to-right:before {
+  background: #005a27;
+}
+.course-banner-bg h3 {
+  text-shadow: 5px 4px 1px #101010;
+  font-weight: 700;
+  font-family: 'Museo 700';
+  font-size: 46px;
+  display: inline-block;
+  border-bottom: 3px solid transparent;
+}
+.course-banner-bg a:hover h3 { border-bottom: 3px solid #007833;}
+.course-banner-bg span {
+  text-shadow: 0px 2px 0px #111;
+  font-family: 'Museo 300';
+  font-style: normal;
+}
+
+.course-banner-bg h4 {
+  margin: 33px 0 15px;
+  font-size: 20px;
+}
+.u-banner-title p {
+  margin:0;
+  line-height:31px;
+  text-shadow: 0px 2px 0px #111;
+  width: auto;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+.u-banner-title h4 {
+  width: auto;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+.u-banner-title a:hover p{ border-bottom: 2px solid #fff;}
+.u-banner-title a:hover h4{ border-bottom: 2px solid #fff;}
+.u-banner-title a.trial_content {text-decoration: none;}
+.home-page-banner.umat .banner-content p{
+  line-height:38px;
+  text-shadow: 0px 2px 0px #111;
+
+}
+.home_trial_btn.trial_close_btn { margin-top: 50px;}
+.trial_option_overlay .home_trial_btn {max-width: 150px;}
+.trial_day {cursor: pointer;}

@@ -1,0 +1,235 @@
+- if @features.present?
+  %h1 Available Features
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Current Access
+        %th Please update only 1 feature at a time
+        %th{ colspan: 1 } Feature Access
+        %th Select
+        %th Action
+
+    %tbody
+      - @features.group_by(&:master_feature).sort_by{|master_feature, _extras| master_feature.title }.each do |master_feature, pvfps|
+        %tr
+          - if master_feature.private_tutoring?
+            = hidden_field_tag :pvfp_one_tutor_id, pvfps.first.id
+            - tutoring_hours = @enrolment.purchased_private_tutoring_session
+            %td= master_feature.friendly_feature_name
+            %td= tutoring_hours
+            %td
+              - sessions_arr = (1..10).to_a
+              - sessions_arr += -1.downto((tutoring_hours) * - 1).to_a
+              - sessions_arr.sort.reverse!
+              = select_tag "private_tutor_hour", options_for_select(sessions_arr), class: 'PurchaseAddonsDropdown'
+              %i.fa.fa-question{ data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Select number to either add or subtract number of sessions available to the student. Note that you can only subtract unbooked sessions.'} }
+            %td
+              #AddToCartPTDropDown
+                = render 'purchase_addon_status', pvfp: pvfps.first, enrolment_id: @enrolment.id
+            %td
+            %td
+          - elsif master_feature.essay?
+            - acquired_fls = @enrolment.feature_logs.includes(:master_feature).where('feature_logs.acquired IS NOT NULL AND master_features.name LIKE (?)', '%EssayFeature%').references(:master_feature)
+            - fls = @enrolment.feature_logs.includes(:master_feature).where('master_features.name LIKE (?)', '%EssayFeature%').references(:master_feature)
+            - essay_responses = @student.essay_responses.where(course_id: @enrolment.course_id)
+            - total_essays = Essay.includes(:tags).where(tags: { id: acquired_fls.first&.tags&.first&.self_and_descendants_ids })
+            - essays = Essay.where(id: essay_responses.pluck(:essay_id).uniq)
+            - total_essays = total_essays.or(essays)
+            - total_essays = total_essays.order('position')
+            - essays = essays.order('position')
+            - if pvfps.present?
+              %td= master_feature.friendly_feature_name
+              %td= essay_responses.count
+              %td
+                .add_or_remove_essay
+                  %a{href: '#', id: 'add_essay_btn'} Add Item
+                  |
+                  %a{href: '#', id: 'remove_essay_btn'} Remove Item
+                .add_essay_dd{style: 'display: none;'}
+                  = form_for (acquired_fls.present? ? acquired_fls.first : fls.first) do |f|
+                    = select_tag "add_essay_id", options_for_select(total_essays.where.not(id: essay_responses.pluck(:essay_id).uniq).pluck(:title, :id)), class: 'PurchaseAddonsDropdown chosen-select', multiple: true
+                    = f.submit 'Add', id: 'add_essay_submit', style: 'display: none;'
+                    %a{href: '#', class: 'cancel_essay_btn'} Cancel
+                .remove_essay_dd{style: 'display: none;'}
+                  = form_for (acquired_fls.present? ? acquired_fls.first : fls.first) do |f|
+                    = select_tag "remove_essay_id", options_for_select(essays.where(id: essay_responses.where(status: 'unanswered').pluck(:essay_id).uniq).pluck(:title, :id)), class: 'chosen-select', multiple: true
+                    = f.submit 'Remove', id: 'remove_essay_submit', style: 'display: none;'
+                    %i.fa.fa-question{ data: { toggle: 'tooltip', placement: 'top', "original-title" => 'If an essay is not available for removal, it means that the student has already attempted the essay. If you would like to remove that essay, please first reset it by using the Allow Submission function to the right.'} }
+                    %a{href: '#', class: 'cancel_essay_btn'} Cancel
+              %td
+                #AddToCartESDropDown
+                  = render 'purchase_addon_status', pvfp: pvfps.first, enrolment_id: @enrolment.id
+              - if @essay.present?
+                %td
+                  - essay = { 'Submitted' => @submit_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] }, 'Expired' => @expired_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] } }
+                  = select_tag :essay, grouped_options_for_select(essay), class: 'form-control essay_select', include_blank: 'All'
+                  .expry_date{style: 'display: none; margin-top:5px; margin-left:5px;'}
+                %td
+                  %input{:type => "text", :id => "dta", :placeholder => "Allow Submission" ,:class => "reset_essay", remote: true}
+              - else
+                %td
+                %td
+          -elsif master_feature.exam_feature?
+            = hidden_field_tag :pvfp_one_exam_id, pvfps.first.id
+            %td= master_feature.friendly_feature_name
+            - fl_ids = pvfps.map { |pfp| pfp.find_exam_feature_logs(@enrolment.id).map(&:id) }.flatten
+            - fls = FeatureLog.where(id: fl_ids)
+            - acquired_fls = fls.where.not(acquired: nil)
+            - total_exams = OnlineExam.joins(:tags).where(published:true, tags: { id: fls.first.tags.first.self_and_descendants_ids })
+            - taken_qty = acquired_fls.present? ? acquired_fls.sum(:qty) : 0
+            - exams = total_exams.offset(taken_qty).order('position')
+            %td= taken_qty
+            %td
+              - sessions_arr = (1..(exams.count)).to_a
+              - sessions_arr += -1.downto((taken_qty) * - 1).to_a
+              - sessions_arr.sort.reverse!
+              = select_tag "exam_count", options_for_select(sessions_arr), class: 'PurchaseAddonsDropdown'
+              %i.fa.fa-question{ data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Select number to either add or subtract number of exams available to the student.'} }
+            %td
+              = render 'purchase_addon_status', pvfp: pvfps.first,  enrolment_id: @enrolment.id
+            - if @exams.present?
+              %td= select_tag 'exam', options_for_select(@exams.collect{ |u| [u.assessable.title, u.id] }), { class: 'form-control', include_blank: 'All'}
+              %td= link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_exam', remote: true
+            - else
+              %td
+              %td
+          -elsif master_feature.online_mock_exam?
+            = hidden_field_tag :pvfp_one_exam_id, pvfps.first.id
+            %td= master_feature.friendly_feature_name
+            - fl_ids = pvfps.map { |pfp| pfp.find_exam_feature_logs(@enrolment.id).map(&:id) }.flatten
+            - fls = FeatureLog.where(id: fl_ids)
+            - acquired_fls = fls.where.not(acquired: nil)
+            - total_exams =  OnlineMockExam.joins(:tags).where(published:true, tags: { id: fls.first.tags.first.self_and_descendants_ids }, city: @enrolment.course.city, per_city_exam_count: 1, published: true)
+            - taken_qty = acquired_fls.present? ? acquired_fls.count : 0
+            - exams = total_exams.offset(taken_qty)
+            %td= taken_qty
+            %td
+              - sessions_arr = (1..(exams.count)).to_a
+              - sessions_arr += -1.downto((taken_qty) * - 1).to_a
+              - sessions_arr.sort.reverse!
+              =# select_tag "exam_count", options_for_select(sessions_arr), class: 'PurchaseAddonsDropdown'
+              / %i.fa.fa-question{ data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Select number to either add or subtract number of exams available to the student.'} }
+              N/A
+            %td
+              = render 'purchase_addon_status', pvfp: pvfps.first,  enrolment_id: @enrolment.id
+            -# if @mock_exams.present?
+              / %td=# select_tag 'online_mock_exam_at', options_for_select(@mock_exams.collect{ |u| [u.assessable.title, u.id] }), { class: 'form-control', include_blank: 'All'}
+              / %td=# link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_online_mock_exam_at', remote: true
+            -# else
+            %td
+            %td
+          - else
+            - mf_name = master_feature.friendly_feature_name
+            - unless mf_name == "Online Mock Exam 1" || mf_name == "Online Mock Exam 2" || mf_name == "Diagnostics Assessment" || mf_name == "Online Webinars"
+              %td= master_feature.friendly_feature_name
+              -taken_qty = pvfps.first.calucate_purchase_unit(@enrolment.id)
+              %td=taken_qty
+              %td
+                - fl = pvfps.first.find_purchase_feature_log(@enrolment.id)
+                -if taken_qty.is_a? Integer
+                  = form_for fl do |f|
+                    = f.number_field :qty, value: ''
+                    = f.submit 'Add'
+                -else
+                  N/A
+              %td
+                = render 'purchase_addon_status', pvfp: pvfps.first,  enrolment_id: @enrolment.id
+              %td
+              %td
+
+.loader_div
+- loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+
+:javascript
+  var img = '#{loader_img}';
+  var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...</div></div>"
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $('#add_essay_btn').click(function(event){
+    event.preventDefault();
+
+    $('.add_or_remove_essay').hide();
+    $('.add_essay_dd').show();
+    $('.remove_essay_dd').hide();
+  });
+
+  $('#remove_essay_btn').click(function(event){
+    event.preventDefault();
+
+    $('.add_or_remove_essay').hide();
+    $('.add_essay_dd').hide();
+    $('.remove_essay_dd').show();
+  });
+
+  $('.cancel_essay_btn').click(function(event){
+    event.preventDefault();
+
+    $('.add_or_remove_essay').show();
+    $('.add_essay_dd').hide();
+    $('.remove_essay_dd').hide();
+  });
+
+  $(".reset_exam").on('click', function(){
+    if(confirm("Are you sure to reset Online Exam ?")){
+      var student_id = #{@student.id};
+      var exam_id = $("#exam").val();
+      var enrolment_id = "#{@enrolment.id}";
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_ol_exam",
+        data: { exam_id: exam_id , user_id: student_id, enrolment_id: enrolment_id}
+      })
+    }
+  });
+
+  $(".reset_online_mock_exam_at").on('click', function(){
+    if(confirm("Are you sure to reset Online Mock Exam Attempt?")){
+      var student_id = #{@student.id};
+      var online_mock_exam_at_id = $("#online_mock_exam_at").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_online_mock_exam_attempt",
+        data: { online_mock_exam_at_id: online_mock_exam_at_id , user_id: student_id}
+      })
+    }
+  });
+
+  $('#dta').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "bottom left"
+    }).on("changeDate", function(e) {
+      var expiry_date = $('#dta').val();
+      var curnt_dte = new Date().toLocaleDateString('en-US', { timeZone: 'Australia/Queensland' });
+      var current_date = moment(curnt_dte,"MM/DD/YYYY").format("DD/MM/YYYY");
+      if (new Date(current_date) >= new Date(expiry_date)) {
+        alert("Can't select past date.");
+      }
+      else {
+        if(confirm("Are you sure to reset Essay ?")){
+          var student_id = #{@student.id};
+          var essay_response_id = $("#essay").val();
+          var enrolment_id = #{@enrolment.id};
+          $('.loader_div').html(loader);
+          $.ajax({
+            type: 'GET',
+            url: "/users/reset_essay",
+            data: { essay_response_id: essay_response_id , user_id: student_id, expiry_date: expiry_date, enrolment_id: enrolment_id}
+          })
+        }
+      }
+    });
+
+  $(".essay_select").on('change', function(){
+    var essay_id = $(this).val();
+    $.ajax({
+      type: 'GET',
+      url: "/users/display_expiry_date",
+      data: { essay_id: essay_id}
+    })
+  })

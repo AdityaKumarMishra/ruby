@@ -1,0 +1,24 @@
+%p
+  %b User:
+  = @surveys_survey.users.map(&:full_name)
+%p
+  %b Title:
+  = @surveys_survey.title
+%p
+  %b Date published:
+  = format_date_long @surveys_survey.date_published
+%p
+  %b Date start:
+  = format_date_long @surveys_survey.date_start
+%p
+  %b Published:
+  = @surveys_survey.published
+%p
+  %b Date closed:
+  = format_date_long @surveys_survey.date_closed
+
+=render :partial => 'surveys/survey_questions/partial/table', :locals => {:surveys_survey_questions => @surveys_survey.survey_questions}
+
+.btn-group
+  = link_to 'Edit', edit_surveys_survey_path(@surveys_survey), class: 'btn btn-default'
+  = link_to 'Back', surveys_surveys_path, class: 'btn btn-default'

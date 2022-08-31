@@ -1,0 +1,29 @@
+#feature-attendance_tutorials.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Attendance Tutorials [Mock Exam Day + Mock Exam Day Recap Included]
+        / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+        / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      %p
+        %i
+          %strong
+            Humanities - 9 hours
+      %p
+        %i
+          %strong
+            Physics - 7 hours
+      %p
+        %i
+          %strong
+            Biology - 8 hours
+      %p
+        %i
+          %strong
+            Chemistry - 7 hours
+      .text
+        %p.u-word-spacing Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through MCQs with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.

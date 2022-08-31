@@ -1,0 +1,107 @@
+// Place all the styles related to the CourseRecommenderUsages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.usage_rate {
+  width: 100%;
+  background: #f2f2f2;
+  border: solid 1px grey;
+  border-radius: 3px;
+  padding: 11px 0;
+  display: inline-block;
+  max-width: 496px;
+  margin: 33px auto;
+}
+.tracking_table > thead > tr > th  {
+  background-color: #575757;
+  color: #fff;
+  vertical-align:middle;
+  text-align:center;
+  font-size: 12px;
+}
+.tracking_table > thead > tr > th span  {
+  font-weight: normal;
+}
+.prod_wdth {
+  width:121px;
+}
+.tracking_table tr td.side_heading {
+  font-size:12px;
+  font-weight:600;
+  text-align:left;
+}
+.tracking_table tr td {
+  text-align:center;
+}
+/* .tracking_table > tbody > tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+.tracking_table > tbody > tr:nth-of-type(even) {
+  background-color: #e6f1eb;
+}
+*/
+.usage_rate_section {
+  width: 100%;
+  text-align: center;
+  max-width: 555px;
+  margin: 23px auto 0;
+  float: none;
+}
+.trackin_steps {
+  font-size: 13px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+.recom_text {
+  font-weight: 600;
+  margin-bottom: -10px;
+}
+.counting_text{
+  font-size: 16px;
+}
+.new_score {
+  padding: 3px;
+  color: rgb(0, 120, 51);
+}
+.old_score {
+  padding: 3px;
+}
+.rate_star{
+      margin-top: 0;
+    float: left;
+    text-align: left;
+    width: 100%;
+}
+.average_score{
+     float: left;
+    text-align: left;
+    margin-top: 11px;
+}
+.course_review{margin-right: 16px;}
+.review_rate{margin-right: 5px;}
+.recomnd_star {
+    width: 100%;
+    float: left;
+}
+.star_row {
+    display: flex;
+    float: left;
+width: 100%;
+}
+.starmg_left10{
+  margin-left:10px;
+}
+.avg_score{
+  width: 100%;
+    float: left;
+    text-align: left;
+    margin-top:10px;
+}
+
+.cr__recommendation .wht_colr{
+  color:#fff !important;
+}
+
+.umat_bg{
+  background:#428bca;
+}

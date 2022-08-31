@@ -1,0 +1,26 @@
+%h1 Listing Download Hit Counter
+
+#filterrific_results
+  %table.gr-table.gr-table-bordered.table-hover
+    %thead
+      %tr
+        %th
+          Title
+        %th
+          Download Hit Counter
+        %th
+          Estimated Read Time
+        %th
+          Action
+    - @download_hit_counters.each do |download_hit_counter|
+      %tbody
+        %tr
+          %td
+            = get_readable_text(download_hit_counter.file)
+          %td
+            = download_hit_counter.download_count
+          %td
+            = download_hit_counter.estimated_read_time
+          %td
+            = link_to "Edit", edit_download_hit_counter_path(download_hit_counter), class: "btn btn-info btn-sm"
+

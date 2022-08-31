@@ -1,0 +1,6 @@
+
+<% js = escape_javascript(
+    render(partial: 'waitlist_modal', locals: { waitlist_user: @waitlist_user })
+  ) %>
+  $("#wait-modal").html("<%= js %>");
+  $('#waitlist-modal').modal('show');  

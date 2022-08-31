@@ -1,0 +1,13 @@
+#locationOrderCourseModal.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title Purchase Course
+      .modal-body
+        %p
+          You are about to enrol into a course not in your location. We highly recommend that you enrol into a course in your State for effective management of any Live Components. Are you sure you want to continue?
+      .modal-footer
+        = link_to 'Reselect', course_details_user_path(current_user, reselect_course: true), class: 'no_confirm btn btn-default default_btn resp_btn hvr-shutter-in-horizontal'
+        = link_to 'Continue', order_path(id: @order.id, allow_purchase: true, payment_page: true), class: 'no_confirm btn default_btn resp_btn hvr-shutter-in-horizontal btn_danger'
+:javascript
+  $('#locationOrderCourseModal').modal('show');

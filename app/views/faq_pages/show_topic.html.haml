@@ -1,0 +1,148 @@
+- topic = @faq_page.faq_topic.code
+- if @faq_type == "gamsat"
+  - if topic == "understanding-gamsat"
+    - title "Understanding GAMSAT Exam | FAQ | GAMSAT Prep Courses"
+    - meta_description "What is GAMSAT Exams?"
+    - meta_keywords "GAMSAT Exam"
+  - elsif topic == "preparing-gamsat"
+    - title "GAMSAT Exam | FAQ | GAMSAT Preparation Courses"
+    - meta_description "How to prepare for GAMSAT Exam"
+    - meta_keywords "GAMSAT Preparation Courses, GAMSAT Exam"
+  - elsif topic == "about-gradready"
+    - title "About GradReady | FAQ | GAMSAT Preparation Courses"
+    - meta_description "GradReady GAMSAT Preparation Courses"
+    - meta_keywords "GAMSAT Preparation Courses"
+  - elsif topic == "enrolment-payment"
+    - title "Enrolment and Payment | FAQ | GAMSAT Preparation Courses"
+    - meta_description "Enrolment to GAMSAT Courses"
+    - meta_keywords "GAMSAT Preparation Courses"
+  - elsif topic == "non-science-background"
+    - title "Non-Science Background | FAQ | GAMSAT Preparation Courses"
+    - meta_description "Frequently asked Non-Science Background queries"
+    - meta_keywords "GAMSAT Preparation Courses"
+  - elsif topic == "postgraduate-medical-school-admissions"
+    - title "Medical School Admissions | FAQ | GAMSAT Prep Courses"
+    - meta_description "Frequently asked Postgraduate Medical School Admission queries"
+    - meta_keywords "GAMSAT Preparation Courses, InterviewReady Preparation Courses"
+  - else
+    - title "GAMSAT Preparation Courses | Frequently Asked Questions | #{@faq_page.faq_topic.title}"
+- elsif @faq_type == "umat"
+  - if topic == "und_umat"
+    - title "Understanding UCAT Exam | FAQ | UCAT Prep Courses"
+    - meta_description "What is UCAT Exams?"
+    - meta_keywords "UCAT Exam"
+  - elsif topic == "preparation"
+    - title "UCAT Exam Preparation | FAQ | UCAT Courses"
+    - meta_description "GradReady UCAT Preparation Courses"
+    - meta_keywords "UCAT Preparation Courses"
+  - elsif topic == "umatready"
+    - title "About GradReady | FAQ | UCAT Preparation Courses"
+    - meta_description "About GradReady UCAT preparation Courses"
+    - meta_keywords "UCAT Preparation Courses"
+  - elsif topic == "enrolment"
+    - title "Enrolment and Payment | FAQ | UCAT Preparation Courses"
+    - meta_description "Enrolment and Payment queries for UCAT Courses"
+    - meta_keywords "UCAT Preparation Courses"
+  - elsif topic == 'eligibility'
+    - title "Eligibility | FAQ | UCAT Preparation Courses"
+    - meta_description "Eligible for UCAT Exam"
+    - meta_keywords "UCAT Preparation Courses, UCAT Exam"
+  - elsif topic == 'undergraduate'
+    - title "Medical School Admissions | FAQ | UCAT Prep Courses"
+    - meta_description "Frequently asked Medical School Admission queries"
+    - meta_keywords "UCAT Preparation Courses"
+  - else
+    - title "UCAT Preparation Courses | Frequently Asked Questions | #{@faq_page.faq_topic.title}"
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    - if @faq_type == "gamsat"
+      - if topic == 'understanding-gamsat'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.gamsat_question_icon
+          %h1
+            Understanding GAMSAT
+            %sup ®
+            Exam
+      - elsif topic == 'preparing-gamsat'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.preparation_question
+          %h1
+            Preparing for the GAMSAT
+            %sup ®
+            Exam
+      - elsif topic == 'about-gradready'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.gradready_question
+          %h1
+            About GradReady
+      - elsif topic == 'enrolment-payment'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.enrolment_question
+          %h1
+            Enrolment, Payment and Refund Policy
+      - elsif topic == 'non-science-background'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.non_science_question
+          %h1
+            For Students from a Non-Science Background
+      - elsif topic == 'postgraduate-medical-school-admissions'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.med_related_question
+          %h1
+            Postgraduate Medical School Admissions
+    - elsif @faq_type == "umat"
+      - if topic == 'und_umat'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.gamsat_question_icon
+          %h1
+            Understanding UCAT
+            %sup ®
+            exam
+      - elsif topic == 'eligibility'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.preparation_question
+          %h1
+            Eligibility for UCAT
+            %sup ®
+            exam
+      - elsif topic == 'preparation'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.non_science_question
+          %h1
+            Understanding the value of Preparation
+      - elsif topic == 'umatready'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.gradready_question
+          %h1
+            About GradReady
+      - elsif topic == 'undergraduate'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.med_related_question
+          %h1
+            Undergraduate Medical School Admissions
+      - elsif topic == 'enrolment'
+        .support_col.looking_corse.text-center.faq_detail_head_icon.enrolment_question
+          %h1
+            Enrolment, Payment and Refund policy
+%section.faq_wrapper.faq_details
+  .row
+    .container
+      .col-lg-12
+        %a.pull-left.bk_fa_page{href: faq_path(@faq_page.map_faq_type)}
+          %i.fa.fa-angle-left{"aria-hidden" => "true"}>
+           Back To all FAQ
+          %small s
+        %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void"} Hide All
+      .faq_list.ck-editor-list
+        = @faq_page.content.html_safe
+
+.join_gradready_col
+  %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"} Didn't Find the Question You Were Searching For?
+  .clear
+  %a.aos-item.default_btn.hvr-shutter-in-horizontal{"data-aos" => "fade-up", "data-aos-duration" => "1200", href: "/#{params[:type]}/contact"} CONTACT US
+
+:javascript
+  $(document).ready(function(){
+    $(".faq_list h2").click(function(){
+      $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+      $(this).parent().toggleClass("faq_show");
+      var selected_accordian = $(this).siblings('div.panel-collapse.collapse');
+      selected_accordian.removeAttr("style");
+    });
+  });
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

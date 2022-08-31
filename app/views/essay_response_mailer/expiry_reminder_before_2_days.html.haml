@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "Dear #{@student.first_name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; color: #FFF; margin-bottom: 20px; font-size: 15px; padding: 5px 14px; font-weight: 600; background: #007833;"}
+              = "#{@essay} is going to  expire on #{@expiry_date}"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;"}
+              Please ensure to plan to submit the essay before expiry date and note that NO late submissions will be accepted. Keeping to the expiry dates will mean that you get the consistent practice that you need - remember that essay writing skills do not improve if you "cram" - and to ensure that the workload for our essay markers is manageable. Also, please do not leave submission to the last minute - your connection timing out will not be given consideration and if you forget to submit essay before the expiry date, any response saved in draft format will be automatically deleted from the system.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

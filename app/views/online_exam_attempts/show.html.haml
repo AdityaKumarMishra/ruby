@@ -1,0 +1,31 @@
+- content_for :page_heading, 'Exam Attempt'
+.dashbord_right
+  .resource_col.mbot21.martopbot10
+    %h4.fl Exam Attempt
+  .statics_static_table.online_exam
+    %ul
+      %li
+        %span Title :
+        = sanitize @online_exam_attempt.assessable.title
+      %li.instruction_font
+        %span Instruction :
+        = sanitize @online_exam_attempt.assessable.instruction
+      %li
+        %span Mark :
+        = @online_exam_attempt.mark.nil? ? 'N/A' : "#{@online_exam_attempt.mark} / #{@online_exam_attempt.mcqs.count}"
+      %li
+        %span Percentile :
+        -if @online_exam_attempt.section_attempts.completed.count != @online_exam_attempt.section_attempts.count
+          - percentile = nil
+        - else
+          - percentile = @online_exam_attempt.overall_percentile
+        = (percentile.nil? || percentile.nan?) ? 'N/A' : percentile.round(1)
+
+      - if @online_exam_attempt.assessable.show_stat
+        %li
+          %span Attempted by (no. of student) :
+          = @online_exam_attempt.assessable.assessment_attempts.completed.count
+
+  = render 'section_attempts/index', section_attempts: @online_exam_attempt.section_attempts, attemptable: @online_exam_attempt
+
+  = link_to 'Back', online_exam_attempts_path, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal'

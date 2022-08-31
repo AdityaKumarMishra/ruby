@@ -1,0 +1,9 @@
+%p
+  %b Title:
+  = @document.title
+
+  .next_prev_div
+    = link_to 'Back to Downloadable Resources', documents_path, class: "btn btn-default"
+%p
+%br
+%iframe.embed-responsive-item.auto-hide-navbar{src:"/pdfjs/web/viewer.html?file=#{@document_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}

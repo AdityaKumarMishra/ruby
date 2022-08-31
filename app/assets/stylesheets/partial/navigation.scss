@@ -1,0 +1,209 @@
+/* Note when modifying or improving this stylesheet:
+ * WARNING: Should always do a quick recursive search on these
+ * navigation class names before modifying them in case they'd
+ * have spillover effect on other front-end pages
+ *
+ * TO-DO: Remove unncessary !important declaration after cleaning up
+ * all front-end SCSS files
+ *
+ * The structure and declaration of classes follow closely to that of
+ * bootstrap such that the use of stylings is similar to how you would
+ * use bootstrap classes
+ * */
+
+// Shared navigation variables
+$nav-link-padding: 10px 15px;
+$nav-link-hover-green-bg: $gamsat-color;
+$nav-link-hover-blue-bg: $umat-color;
+$nav-link-hover-red-bg: $hsc-color;
+$nav-link-hover-purple-bg: $vce-color;
+
+$nav-tabs-active-link-hover-bg: $white;
+
+$nav-pills-border-radius: 4px;
+$nav-pills-active-link-hover-color: $white;
+$line-height-std: 1.5;
+
+$nav-tabs-border-color: #ddd;
+
+// Base
+.gr-nav {
+  margin-bottom: 0;
+  padding-left: 0; // Override default ul/ol
+  list-style: none;
+
+  > li {
+    position: relative;
+    display: block !important;
+
+    > a {
+      font-family: $museo-slab;
+      font-size: 14px;
+      font-weight: bold !important;
+      color: #2b2b2b !important;
+      position: relative;
+      display: block;
+      padding: $nav-link-padding;
+      &:hover,
+      &:focus {
+        color: $white !important;
+        text-decoration: none;
+        background-color: $nav-link-hover-green-bg;
+      }
+    }
+  }
+}
+
+.gr-nav-header {
+  font-family: $museo-slab;
+  font-weight: bold;
+  font-size: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.gr-nav-title {
+  font-family: $museo-slab;
+  color: $gamsat-color;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.gr-nav-pills {
+  > li {
+    float: left;
+
+    > a {
+      border-radius: $nav-pills-border-radius;
+    }
+    + li {
+      margin-left: 2px;
+    }
+
+    // Active state
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        font-family: $museo;
+        color: $nav-pills-active-link-hover-color !important;
+        background-color: $nav-link-hover-green-bg;
+      }
+    }
+  }
+}
+
+.gr-nav-stacked {
+  > li {
+    float: none;
+    + li {
+      margin-top: 2px;
+      margin-left: 0;
+    }
+  }
+}
+
+.gr-nav-tabs {
+  > li {
+    float: left;
+    margin-bottom: -1px;
+
+    // Actual tabs (as links)
+    > a {
+      color: $white !important;
+      margin-right: 2px;
+      line-height: $line-height-std;
+      background-color: $gamsat-color;
+      border-radius: 4px 4px 0 0;
+      &:hover {
+        border-color: #eee #eee #ddd;
+      }
+    }
+
+    // Active state, and its :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $black !important;
+        background-color: $nav-tabs-active-link-hover-bg;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+
+
+.list_outer_section{
+  margin-left: 20px;
+}
+
+#nav_layout{
+  z-index: 1000;
+  left: 250px;
+  width: 0;
+  height: 100%;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#nav_layout.hide_nav .nav_wrapper_inner {
+  width: 250px;
+}
+.nav_wrapper_inner {
+  z-index: 1000;
+  width: 0;
+  height: 100%;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.nav_wrapper_inner ul{
+  width: 177px;
+}
+#nav_layout.hide_nav {
+  position: relative;
+  left: 0;
+}
+.btn.btn-gradready.green.toggle_nav{
+    position: relative;
+    right: -88px;
+    margin-bottom: 13px;
+}
+.btn.btn-gradready.green.toggle_nav.red{
+  right: -177px;
+  background: #be382a;
+  }
+
+@media (min-width: 768px){
+  #nav_layout {
+    padding-left: 0;
+        position: relative;
+    left: -197%;
+  }
+
+  #nav_layout.hide_nav .nav_wrapper_inner {
+     width: 180px;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width:1024px){
+  .nav_wrapper_inner .gr-nav-pills > li > a{
+    padding: 12px 5px;
+  }
+}
+
+@media only screen and (min-width: 270px) and (max-width:767px){
+  .nav_wrapper_inner .gr-nav-pills > li > a{
+    padding: 12px 5px;
+  }
+}

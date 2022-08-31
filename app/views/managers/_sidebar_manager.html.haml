@@ -1,0 +1,135 @@
+.navbar-header#manager-links
+  %button.navbar-toggle#manager-button{"data-target" => "#responsive-tabs", "data-toggle" => "collapse", :type => "button", style: 'color: black' }
+    HOME
+
+.collapse.navbar-collapse#responsive-tabs
+  %ul.nav.head-menu.sidebar-nav
+    %li.nav-header#mng-mcq-list
+      %strong MCQ's
+      %span.right
+        = link_to '#mng-clps-mcq', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-mcq.collapsing_links
+      %li
+        = link_to "CRUD Create MCQ's", ''
+        %i.right.fa.fa-chevron-right
+      %li
+        = link_to "MCQ's comments", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-exam-list
+      %strong Exams
+      %span.right
+        = link_to '#mng-clps-exam', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-exam.collapsing_links
+      %li
+        = link_to 'CRUD Exams', ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-essay-list
+      %strong Essay's
+      %span.right
+        = link_to '#mng-clps-essay', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-essay.collapsing_links
+      %li
+        = link_to "CRUD Essay's", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-vod-list
+      %strong Video On Demand
+      %span.right
+        = link_to '#mng-clps-vod', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-vod.collapsing_links
+      %li
+        = link_to "CRUD Upload VOD", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-ovs-list
+      %strong Online Video Stream
+      %span.right
+        = link_to '#mng-clps-ovs', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-ovs.collapsing_links
+      %li
+        = link_to "CRUD Online Video Stream", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-textbook-list
+      %strong Textbooks
+      %span.right
+        = link_to '#mng-clps-textbook', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-textbook.collapsing_links
+      %li
+        = link_to "CRUD Create / edit Textbooks", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-blog-list
+      %strong Blog
+      %span.right
+        = link_to '#mng-clps-blog', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-blog.collapsing_links
+      %li
+        = link_to "CRUD New Blog's Article", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-faq-list
+      %strong FAQ
+      %span.right
+        = link_to '#mng-clps-faq', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-faq.collapsing_links
+      %li
+        = link_to "CRUD FAQ", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-product-list
+      %strong Products
+      %span.right
+        = link_to '#mng-clps-product', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-product.collapsing_links
+      %li
+        = link_to "CRUD Products", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-teacher-list
+      %strong Teachers
+      %span.right
+        = link_to '#mng-clps-teacher', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-teacher.collapsing_links
+      %li
+        = link_to "CRUD Teachers", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-student-list
+      %strong Students
+      %span.right
+        = link_to '#mng-clps-student', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-student.collapsing_links
+      %li
+        = link_to "Students", ''
+        %i.right.fa.fa-chevron-right
+      %li
+        = link_to "Students marks", ''
+        %i.right.fa.fa-chevron-right
+    %li.nav-header#mng-other-list
+      %strong Others
+      %span.right
+        = link_to '#mng-clps-other', "data-toggle" => "collapse" do
+          %i.fa.fa-chevron-circle-down.fa-2x
+    .collapse#mng-clps-other.collapsing_links
+      %li
+        = link_to "Statistics", ''
+        %i.right.fa.fa-chevron-right
+
+:javascript
+  $(document).ready(function() {
+     var array = ['mcq', 'exam', 'essay', 'vod', 'ovs', 'textbook',
+      'blog', 'faq', 'product', 'teacher', 'student', 'other'];
+
+    array.forEach(function(arrayElement) {
+      $('#mng' + '-clps-' + arrayElement).on('shown.bs.collapse', function() {
+        $('#mng-' + arrayElement + '-list').find('i').toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
+      });
+      $('#mng' + '-clps-' + arrayElement).on('hidden.bs.collapse', function() {
+        $('#mng-' + arrayElement + '-list').find('i').toggleClass('fa-chevron-circle-down fa-chevron-circle-up');
+      });
+    })
+  });

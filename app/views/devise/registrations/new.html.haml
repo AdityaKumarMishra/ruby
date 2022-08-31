@@ -1,0 +1,304 @@
+- content_for :show_left_panel, true
+- content_for :show_dashboard_bg, true
+- title "Register"
+- view_type = AdminControl.find_by(name: 'Signup view')
+-if view_type.present? && view_type.new_view
+  .step_full_wdt#reg-form
+    .register_col.steps_col_wrapper.stap_from_field.register_wrap
+      .register_lft_col
+        %ul.step_points
+          -unless @trail_course || @free_study_guide
+            %li.active_step LOGIN / SIGNUP
+            %li CONTACT DETAILS
+            %li COURSE DETAILS
+            %li PAYMENT
+          -else
+            %li.active_step= @trail_course.present? ? 'FREE TRIAL' : 'FREE STUDY GUIDE'
+      .register_rgt_col
+        %h2.form_title.text-center.regiser_page_heading
+          -if @trail_course
+            Free Trial
+          - elsif @free_study_guide
+            Free Study Guide
+          -else
+            %span.new_reg_text Register
+            %span.login_reg_page
+              or
+              %span
+                %a#newSignInLink{href: "/login"} Login
+          -if @trail_course || @free_study_guide
+            %h4.back-msg-login.mob_view_header
+              See how
+              = link_to '1000s of happy students', @course.student_testimonial_page
+              improve their scores!
+        .course_frm
+          = simple_form_for(resource, as: resource_name, url:registration_path(resource_name)) do |f|
+            = f.invisible_captcha :subtitle
+            = f.input :email, label: 'E-mail', required: true, placeholder: "example@domain.com", class: 'form-control input-lg'
+            = f.input :password, required: true, placeholder: "minimum 8 characters", class: 'form-control input-lg'
+            = f.input :password_confirmation, required: true, class: 'form-control input-lg'
+            -if current_user.nil?
+              %p.add_capctha_issue.mb5{style: "color: red; text-align: center"}
+              .free_trial_capctcha
+                = recaptcha_tags
+
+            .text-center.mtop30.mbot10
+              = f.button :submit, "#{@trail_course.present? ? 'Get Started' : 'Register'}", class: 'default_btn resp_btn hvr-shutter-in-horizontal registor_btn'
+          .registration_note.mob_view_header
+            %span It is recommended that you register using a non-university email address to avoid important emails being filtered or blocked.
+-else
+  %h2 Register
+  = simple_form_for(resource, as: resource_name, url:registration_path(resource_name)) do |f|
+    = display_errors resource
+    .form-inputs#reg-form
+      .row
+        .col-md-4
+          %h4 Your Details
+          = f.input :email, required: true, autofocus: true
+          = f.input :phone_number, required: true
+          = f.input :first_name, required: true
+          = f.input :last_name, required: true
+          = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+          = f.input :password_confirmation, required: true
+          - if request.referrer.present? && (request.referrer.include?("/gamsat-preparation-courses/") || request.referrer.include?("/umat-preparation-courses/") || request.referrer.include?("/hsc/") ||  request.referrer.include?("/vce/"))
+            - session_val = session[:previous_url]
+          - else
+            - session_val = nil
+          = f.hidden_field :session_url, value: session_val
+        .col-md-3
+          %h4 Contact Information
+          = f.simple_fields_for :address_attributes do |a|
+            = a.input :line_one, label: 'Address line 1', required: true
+            = a.input :line_two, label: 'Address line 2', required: false
+            = a.input :suburb, required: true
+            = a.input :post_code, label: 'Postcode', required: true
+            = f.label :country, required: true
+            = a.select :country, options_for_select(country_names_for_select), {include_blank: 'Please Select Country'} , required: true, label: true, class: "form-control"
+            %br
+            = f.label :state, required: true
+            = a.select :state, options_for_select(state_names_for_select), {include_blank: 'Please Select State'} , required: true, label: true, class: "form-control"
+            %p.no-selected-state
+            %br
+        .col-md-5
+          %h4 Your Background
+          .row
+            .col-sm-12
+              = f.simple_fields_for :questionnaire_attributes  do |q|
+                = q.input :student_level, required: true, as: :select, collection: student_collection, label: 'Are you a university or high school student?', prompt: "Please Select"
+
+          .row
+            .col-sm-12#user_questionnaire_university_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes  do |q|
+                .row
+                  .col-sm-6
+                    = q.input :university_id, required: true, as: :select, collection: University.all, prompt: 'Select University...'
+                    = q.input :degree_id, required: true, as: :select, collection: Degree.all, prompt: 'Select Course...'
+                    = q.input :year, required: true, label: 'Commencement Year'
+                  .col-sm-6
+                    = q.input :umat_high_school, required: true, as: :radio_buttons, label: 'Did you sit the UCAT in high school?'
+                    = q.input :umat_uni, required: true, as: :radio_buttons, label: 'Are you going to sit/have you sat the UCAT again while at uni?'
+            .col-sm-12#user_questionnaire_highschool_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes  do |q|
+                .row
+                  .col-sm-6
+                    = q.input :current_highschool, label: 'Current High School', required: true
+                    = q.input :target_uni_course, label: 'Target University Course', required: true
+
+                  .col-sm-6
+                    = q.input :highschool_year_level, required: true, as: :radio_buttons, collection: year_level_collection, prompt: 'Select Year Level...', label: 'Year Level'
+            .col-sm-12
+              = f.simple_fields_for :questionnaire_attributes  do |q|
+                = q.input :source, required: true, as: :check_boxes, collection: source_collection, label: 'How did you hear about GradReady? Please select all that apply.', :input_html=>{class: "source_checkboxes"}
+                = text_field_tag 'source', "#{params[:source].present? ? params[:source]: ""}", class: "hidden_source hidden form-control", placeholder: "Please enter ..."
+                %p.other_source
+                = q.input :last_source, required: true, as: :select, collection: last_source_collection, label: 'Where did you LAST see/hear about us before signing up?', prompt: 'Please Select'
+                = text_field_tag 'last_source', "#{params[:last_source].present? ? params[:last_source]: ""}", class:"hidden_last_source hidden form-control", placeholder: "Please enter ..."
+                %p.other_last_source
+            .col-sm-12
+              = f.simple_fields_for :questionnaire_attributes  do |q|
+
+                = q.input :language_spoken, required: true, as: :select, collection:language_collection, label: 'Language Spoken at Home Other than English', selected:"#{params[:user].present? ? params[:user][:questionnaire_attributes][:language_spoken]: ""}", prompt: 'Please Select Language'
+                = text_field_tag 'language_spoken', "#{params[:language_spoken].present? ? params[:language_spoken]: ""}", class:"hidden_language hidden form-control", placeholder: "Please enter a language"
+                %p.no_language_spoken
+
+
+
+    .form-actions
+      .row{class: "text-center"}
+        .col-sm-12
+          = f.button :submit, "Register",class: 'btn btn-lg', id: "new_user_submit"
+        .col-sm-12
+          %br
+          = render "devise/shared/links"
+
+  :javascript
+    $("#user_questionnaire_attributes_student_level").change(function() {
+      var student_type = $(this).val()
+      check(student_type)
+    });
+
+    function check(student_type){
+      switch (student_type) {
+        case "highschool":
+          $("#user_questionnaire_university_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_highschool_questions").fadeIn('fast');
+          });
+          break;
+        case "university":
+          $("#user_questionnaire_highschool_questions").fadeOut('fast', function() {
+            $("#user_questionnaire_university_questions").fadeIn('fast');
+          });
+          break;
+        default:
+          $("#user_questionnaire_highschool_questions").fadeOut('fast');
+          $("#user_questionnaire_university_questions").fadeOut('fast');
+      }
+    }
+
+    $('#user_questionnaire_attributes_current_highschool').autocomplete({
+      source: '/high_schools.json'
+    });
+
+    $('#user_questionnaire_attributes_language_spoken').on('change',function(){
+      if ($(this).val()=="other"){
+        $("#language_spoken").removeClass('hidden')
+      }else{
+        $("#language_spoken").addClass('hidden')
+      }
+    })
+
+    $('#user_questionnaire_attributes_last_source').on('change',function(){
+      if ($(this).val()=="other"){
+        $("#last_source").removeClass('hidden')
+      }else{
+        $("#last_source").addClass('hidden')
+      }
+    })
+
+    $('#user_questionnaire_attributes_source_other').on('click',function(){
+      if ($(this).val()=="other" && $(this).is(':checked')){
+        $("#source").removeClass('hidden')
+      }else{
+        $("#source").addClass('hidden')
+      }
+    })
+
+
+    $('#new_user').submit(function( e ){
+      var language_spoken = $('#user_questionnaire_attributes_language_spoken').val();
+
+      var language_spoken_text = $('#language_spoken').val();
+
+      var last_source = $('#user_questionnaire_attributes_last_source').val();
+      var last_source_text = $('#last_source').val();
+
+      if (language_spoken){
+        if (language_spoken && language_spoken!="other"){
+          $('.no_language_spoken').text("");
+          true;
+        }else{
+          if (language_spoken && language_spoken_text){
+            $('.no_language_spoken').text("");
+            true;
+          }else{
+            $('.no_language_spoken').text('Please select a language');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.no_language_spoken').text('Please select a language');
+        e.preventDefault();
+      }
+
+
+      if (last_source){
+        if (last_source && last_source!="other"){
+          $('.other_last_source').text("");
+          true;
+        }else{
+          if (last_source && last_source_text){
+            $('.other_last_source').text("");
+            true;
+          }else{
+            $('.other_last_source').text('Please select an option');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.other_last_source').text('Please select an option');
+        e.preventDefault();
+      }
+
+
+      if ($('#user_questionnaire_attributes_source_other').is(':checked')){
+        if (!$('.hidden_source').hasClass('hidden') && $('.hidden_source').val()==""){
+          $('.other_source').text('This field is Required.');
+          e.preventDefault();
+        }else{
+          $('.other_source').text("");
+          true;
+        }
+      }else{
+        $('.other_source').text("");
+        true;
+      }
+
+      var state = $('#user_address_attributes_state').val();
+      if(state){
+        true;
+      }else{
+        $('.no-selected-state').text('Please select state..');
+        e.preventDefault();
+      }
+    });
+
+
+= render 'validations/signup_validator'
+:javascript
+  $( document ).ready(function() {
+    $('.registor_btn').addClass("mtop85")
+  });
+
+  $('#new_user').submit(function( e ){
+    if(grecaptcha.getResponse() == "") {
+      $('.add_capctha_issue').text('Please verify CAPCTHA');
+      $('.registor_btn').removeClass("mtop85");
+      $('.registor_btn').addClass("mtop_nag");
+      e.preventDefault();
+    }
+  });
+
+:css
+  .mtop85{
+    margin-top: 85px !important;
+  }
+  .free_trial_capctcha{
+    margin-left: 115px;
+  }
+  .mtop_nag{
+    margin-top: -20px;
+  }
+
+  #reg-form .error{
+    color: red !important;
+  }
+
+  @media only screen and (min-width: 310px) and (max-width: 768px) {
+    .mob_view_header{
+      text-align: initial;
+    }
+    .admin_page .form-control {
+      width: 90%;
+    }
+    .register_wrap{
+         flex-direction: column;
+    }
+    .free_trial_capctcha{
+    width: 100%;
+    float: left;
+    margin-left:0;
+    }
+    .register_wrap .mtop85{
+      margin-top: 0px !important;
+    }
+  }

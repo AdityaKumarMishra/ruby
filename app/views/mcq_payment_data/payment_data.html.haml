@@ -1,0 +1,118 @@
+= select_tag 'mcq_stem_view', options_for_select(mcq_stem_collection, selected: select_option_values(params[:action])), { class: 'form-control stem_dropdown' }
+%br
+
+
+%h1 Payment Data - Payroll
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body#nav-tabs
+    = select_tag 'payroll_view', options_for_select([["By Staff"], ["By MCQ" ]], :selected=> params[:selection] || "By Staff"), { class: 'form-control ap_select' }
+    .clearfix
+    %br
+    %ul.gr-nav.gr-nav-pills
+      %li.default_range{class: @filter_type == 'pay_period' ? 'active' : ''}
+        %a{"data-toggle" => "tab", href: "#default"}  Default Range
+      %li.custom_range{class: @filter_type == 'custom_range' ? 'active' : ''}
+        %a{"data-toggle" => "tab", href: "#custom"} Custom Range
+    .clearfix
+    %br
+    .tab-content
+      #custom.tab-pane.fade.in{class: @filter_type == 'custom_range' ? 'active' : ''}
+        .form-group
+          = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit', class: "pay_period_filter_form main_form" }  do |f|
+            =hidden_field_tag :filter_type, 'custom_range'
+            = hidden_field_tag :current_page, ''
+            %p
+              Date start
+              =f.text_field(:with_start, class: 'form-control mcq-datepicker', autocomplete: "off")
+            %p
+              Date end
+              =f.text_field(:with_end, class: 'form-control mcq-datepicker', autocomplete: "off")
+            %br
+            %p
+              = link_to 'Filter', 'javascript:void(0)', class: 'btn btn-gradready green submit-filter'
+              =link_to 'Reset filters', payment_data_path(filter_type: 'custom_range', reset: true), class: 'btn btn-gr-light-green'
+            %br
+            #download_xls_btn.dropdown
+              = render(partial: 'mcq_payment_data/partial/download_xls', locals: { total_size: @total_size })
+      #default.tab-pane.fade.in{class: @filter_type == 'pay_period' ? 'active' : ''}
+        .form-group
+          %p
+            Pay Period
+            = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit', class: "pay_period_filter_form main_form" }  do |f|
+              =hidden_field_tag :filter_type, 'pay_period'
+              = hidden_field_tag :current_page, ''
+              = select_tag :with_pay_period, options_for_select(Appointment.pay_periods, @selected_date), class: 'form-control pay_period_filter'
+              %br
+              %p
+                = link_to 'Filter', 'javascript:void(0)', class: 'btn btn-gradready green submit-filter'
+              %br
+              #download_xls_btn.dropdown
+                = render(partial: 'mcq_payment_data/partial/download_xls', locals: { total_size: @total_size })
+.div#tutor-apt-table
+  - if params[:selection] == 'By MCQ'
+    = render(partial: 'mcq_payment_data/partial/logged_hours', locals: { date_range: true })
+  - else
+    = render(partial: 'mcq_payment_data/partial/logged_hours_by_staff')
+
+:css
+  .stem_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }
+
+:javascript
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $(function () {
+    $('.mcq-datepicker').datepicker({
+      "format": "yyyy-mm-dd",
+      "autoclose": true,
+      orientation: 'bottom'});
+    var type = "#{params[:filter_type]}";
+    if(type == "pay_period"){
+      $('#default').addClass('active');
+      $('#custom').removeClass('active');
+      $('.default_range').addClass('active');
+      $('.custom_range').removeClass('active');
+    }
+  });
+
+  $(function(){
+    $('.stem_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });
+
+  $('#nav-tabs li').click(function(){
+    if(!($(this).hasClass('active'))){
+      var element = ($(this).attr('class').split('_')[0])
+      var form = $('#'+element).find('form')
+      var action = form.attr('action')
+      if(action.search('.xls') != -1){
+        form.attr('action', (form.attr('action').split('.')[0]))
+      }
+      var url = form.attr('action');
+      $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+     });
+    }
+  });
+
+  $(document).on('change', '#payroll_view', function(evt){
+    var selection = $(evt.target).val();
+
+    window.location.href = '/mcq_stems/payment_data?selection='+selection;
+  });

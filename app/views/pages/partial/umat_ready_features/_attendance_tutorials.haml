@@ -1,0 +1,17 @@
+#feature-attendance_tutorials.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        - if paid
+          Attendance Tutorials
+          %h4 $#{price.ceil}+ 10% GST = #{price_with_gst.ceil} [Mock Exam Day + Mock Exam Day Recap Included]
+        - else
+          Attendance Tutorials
+      .text
+        %span.u-word-spacing Logical Reasoning - 12 hours
+        %span.u-word-spacing Understanding People - 7 Hours
+        %span.u-word-spacing Non-verbal Reasoning - 11 Hours
+        %br
+        %span.u-word-spacing Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through MCQs with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.

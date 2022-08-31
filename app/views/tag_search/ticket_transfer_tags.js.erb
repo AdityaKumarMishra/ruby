@@ -1,0 +1,8 @@
+<% if @options.present? %>
+  <%html=""%>
+  <% @options.each do |tag| %>
+    <% html += "<option value='#{tag.id}'>#{tag.name}</option>" %>
+  <%end%>
+  $("#answer_tag_id").html("");
+  $("#answer_tag_id").html("<%= html.html_safe %>");
+<% end %>

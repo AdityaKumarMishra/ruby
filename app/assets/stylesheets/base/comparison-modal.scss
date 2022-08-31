@@ -1,0 +1,28 @@
+.cm {
+
+  &__wrapper {
+    overflow: auto;
+    height: 87%;
+    width: 85%;
+  }
+
+  &__content {
+    position: relative;
+    width: 100%;
+  }
+
+  &__not-to-show-btn {
+    bottom: -55px;
+  }
+}
+
+
+@media only screen and (min-width: 260px) and (max-width: 760px){
+
+  #comparison-modal .cr__close .cr__btn {
+    position: fixed;
+    margin-top: -12px;
+    right: 36px;
+    z-index: 9;
+  }
+}

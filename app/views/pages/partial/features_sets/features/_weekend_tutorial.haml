@@ -1,0 +1,38 @@
+.feature-content
+  =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+  -if params[:id] != 'custom'
+    %h4 Revision Weekend Tutorial (2 optional days)
+    / %h4 Weekend Tutorial (2 optional days)
+  -else
+    %h4 Revision Weekend Tutorial (2 optional days)
+    / %h4 Weekend Tutorial
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+  -if [1,4,5].include?(new_course_type)
+    %p
+      A fast paced course for those who only have the time to ...
+    .show_full_content
+      Updated with new MCQs & additional emphasis on reasoning skill.
+      %br
+      A fast paced course designed to give you one final overview of the essential knowledge required to sit the GAMSAT
+      %sup ®
+      exam. The 2 day course is designed for those who have attended our full course but would like to be taken over some of the content just one more time and those who would like a recap just before the exam.
+      %br
+      Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+
+      / A fast paced course for those who only have the time to attend a 2 day course. Our expert tutors have constructed this course to cover the absolute essentials of the GAMSAT
+      / %sup ®
+      / exam given the time constraints. Not a substitute for our more in-depth full attendance courses, this Summary Weekend is perfect however for those who are short on time or would like a recap just before the exam.
+      / %br
+      / Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+  -else
+    %p
+      A fast paced course designed to give you one final overview...
+    .show_full_content
+      Updated with new MCQs & additional emphasis on reasoning skill.
+      %br
+      A fast paced course designed to give you one final overview of the essential knowledge required to sit the GAMSAT
+      %sup ®
+      exam. The 2 day course is designed for those who have attended our full course but would like to be taken over some of the content just one more time and those who would like a recap just before the exam.
+      %br
+      Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+

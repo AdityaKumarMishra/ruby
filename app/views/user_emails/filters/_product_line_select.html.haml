@@ -1,0 +1,13 @@
+%select#user-product-line-filter.form-control
+  - reseted_dependent_parameters = request.query_parameters.except(:not_enroled, :by_master_feature, :by_product_version, :by_course)
+  %option{ {value: user_emails_path(request.query_parameters.except(:by_product_line))}}= ''
+  %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_line: 'Gamsat'))}.merge(selected: params[:by_product_line] == 'Gamsat') }
+    Gamsat
+  %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_line: 'Umat'))}.merge(selected: params[:by_product_line] == 'Umat') }
+    Umat
+  %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_line: 'Vce'))}.merge(selected: params[:by_product_line] == 'Vce') }
+    Vce
+  %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_line: 'Hsc'))}.merge(selected: params[:by_product_line] == 'Hsc') }
+    Hsc
+  %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_line: 'Grad'))}.merge(selected: params[:by_product_line] == 'Grad') }
+    Grad

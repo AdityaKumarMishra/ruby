@@ -1,0 +1,22 @@
+= simple_form_for(@online_mock_exam_attempt, method: :post, url: online_mock_exam_attempt_temps_path(), html: { class: "form"} ) do |f|
+  = f.error_notification
+
+  .form-inputs.cstm_score_form
+    %div.form-group.integer.required.online_mock_exam_attempt_section_three_score
+      .form-group.score-div
+        - if @online_mock_exam_attempt.section_one_score != 0
+          = f.input :section_one_score, label: 'Section one score (Raw score, not percentage)', wrapper: false, input_html: {value: @online_mock_exam_attempt.section_one_score, class: "flt_left form-control score-field", id: 'online_mock_exam_attempt_section_one_score' }, readonly: true
+        - else
+          = f.input :section_one_score, label: 'Section one score (Raw score, not percentage)', wrapper: false, input_html: {value: @online_mock_exam_attempt.section_one_score, class: "flt_left form-control score-field", id: 'online_mock_exam_attempt_section_one_score' }, readonly: false
+          = f.button :submit, value: 'Save score', class: 'mg_left20 default_btn hvr-shutter-in-horizontal save-score-button last_btnsave section_one_button'
+          = f.hidden_field :course_id, value: course.id
+          = f.hidden_field :section_type, value: course.product_version.try(:type)
+
+:javascript
+  $(".section_one_button").click(function(){
+    var score_one = $("#online_mock_exam_attempt_section_one_score").val()
+    if(score_one <= 0 || score_one == "" || score_one > 200){
+     alert("Please enter section one score greater than Zero and less than equal to 200")
+     return false;
+    }
+  });

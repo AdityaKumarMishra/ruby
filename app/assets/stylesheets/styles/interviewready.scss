@@ -1,0 +1,53 @@
+.interviewready-display {
+  margin-top: 35px;
+  float: left;
+  width: 100%;
+  h2 {
+    color: $grGreen;
+    font-size: 40px;
+    font-family: "museo-slab";
+    font-weight: bold;
+    .word-ready {
+      color: $black;
+      margin-left: -10px;
+    }
+  }
+  table {
+    $ir-table: $gray-lighter;
+    width: 100%;
+    border: 1px solid $ir-table;
+    thead {
+      background-color: $gray-darker;
+      td {
+        font-size: 26px;
+        font-weight: bold;
+        color: $gray-lighter;
+      }
+    }
+    td {
+      font-size: 15px;
+      padding: 20px 0;
+      &.off-top {
+        padding-top: 0;
+      }
+    }
+    .bordered {
+      border-bottom: 1px solid $ir-table;
+    }
+    .ir-footer {
+      background-color: #ddd;
+    }
+  }
+}
+.onln_heading{
+  text-align: center;
+  font-size: 18px;
+  padding-top: 15px;
+  background: #b2d6c1;
+  padding-bottom: 15px;
+  color: #007833 !important;
+}
+.interview_course_tbl tbody tr{background: #e5f1ea;}
+.interview_course_tbl thead { border: 2px solid #fff;}
+.interview_course_tbl tbody a{ color: #333333 !important;}
+.interview_course_tbl thead a{ color: #eeeeee !important;}

@@ -1,0 +1,12 @@
+.modal.fade{"aria-labelledby" => "gridSystemModalLabel", :role => "dialog", id: "modal-tutor-#{object.id}"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-body
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        .row.mg-top
+          .col-md-4.text-center
+            = image_tag(object.profile_image, alt: object.full_name, class: 'img-responsive')
+          .col-md-8
+            %h1.h1-green= object.full_name.html_safe
+            %h4= object.bio.html_safe

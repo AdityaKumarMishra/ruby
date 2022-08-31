@@ -1,0 +1,61 @@
+.nested-fields
+  .form-inputs.full_width_wrapper
+    .child_div
+      = "Child Questions " + (f.index.to_i + 1).to_s
+      - que_name= "Child Questions " + (f.index.to_i + 1).to_s
+      = link_to_remove_association "Remove child mcq", f, class: 'btn btn-danger btn-sm'
+    = f.input :difficulty, as: :select, collection: @difficulties, selected: f.object.persisted? ? f.object.fetch_difficulity : f.object.difficulty.present? ? f.object.fetch_difficulity : ''
+    =# f.input :examinable, label: 'Make online exam MCQ'
+    / = f.input :publish
+    - tagging = f.object.persisted? ? f.object.tagging :  f.object.build_tagging
+
+    = f.simple_fields_for :tagging,  tagging do |t|
+      = t.input :tag_id,label: 'Question Topic (Tag)', collection: @tags, required: :true, input_html: {class: 'chosen-select'}, include_blank: "Please Select One Tag"
+    -if @mcq_stem.errors.full_messages.present? && @mcq_stem.errors.full_messages.include?("Mcqs tagging tag can't be blank")
+      %span{style: 'color:#a94442;'}= "tag can't be blank"
+    = f.input :skill_tag_id, label: 'Skill Tag',as: :select, collection: skill_tags_collection, required: true, input_html: {class: "chosen-select"}
+    / = f.input :similarity_score, label: 'Overall Score',as: :select, collection: score_collection, required: true
+    / = f.input :display_type, label: 'Display Type',as: :select, collection: display_type_collection, required: true, include_blank: "Select an Option"
+    = f.input :question, label: 'Question Shown to Student', as: :ckeditor, input_html: { ckeditor: { height: 400 } }
+    = f.input :explanation, label: 'Explanation Shown to Student on Review', as: :ckeditor, input_html: { ckeditor: { height: 150 } }
+    %p.links.add_mcq
+      -if video_btn_visibility? || f.object.mcq_stem.try(:video_reviewer).try(:id) == current_user.try(:id)
+        -if f.object.mcq_video.present? && f.object.mcq_video.try(:id).present?
+          = f.simple_fields_for :mcq_video, f.object.mcq_video do |mcq_video|
+            =render '/mcq_stems/mcq_video_fields',{f: mcq_video, que_no: (f.index.to_i + 1) }
+        -else
+          =link_to_add_association 'Add Video', f, :mcq_video, :render_options => {:locals => {:que_no => (f.index.to_i + 1)}}, class: 'btn btn-gradready green add-vid-btn', id: "add-vid-btn-#{f.object.try(:id)}"
+
+
+    %h3 Answers
+    -if @mcq_stem.errors.full_messages.present? && @mcq_stem.errors.full_messages.include?("Mcqs mcq answers Mcq should have one correct answer!") && !f.object.mcq_answers.map(&:correct).include?(true)
+      %span{style: 'color:#a94442;'}= 'Mcq should have one correct answer!'
+    = f.simple_fields_for :mcq_answers do |answer|
+      =render 'mcq_answer_fields',{f: answer}
+    %p.links.answr_width
+      =link_to_add_association 'Add answer',f,:mcq_answers, class: 'btn btn-default'
+    .div_field.cstm_width86
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link mcq_btn'
+      .fa.fa-minus.icn_sze
+    .div_info.mcq_info
+      Please make sure you add the correct amount of answers for the MCQ section you are writing for.  Do not use brackets as follows: A) just include the letter A.
+
+:javascript
+  $(document).ready(function(){
+    $('.mcq_btn').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $('.mcq_info').toggle();
+    });
+
+    $('.chosen-select').chosen();
+    for (var i in CKEDITOR.instances) {
+      CKEDITOR.instances[i].on('change', function(){
+        this.updateElement();
+      });
+    }
+  });
+
+:css
+  .child_div{
+    margin-top: 30px;
+  }

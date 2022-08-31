@@ -1,0 +1,22 @@
+%h1 Listing video_categories
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Subject
+      %th Videos
+      %th{colspan: 2} Actions
+
+  %tbody
+    - @video_categories.each do |video_category|
+      %tr{'data-link': url_for(video_category)}
+        %td= video_category.name
+        %td= video_category.subject
+        %td= link_to 'Video', vods_path(video_category_id: video_category.to_param), class: 'btn btn-default btn-sm'
+        %td= link_to 'Edit', edit_video_category_path(video_category), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', video_category, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Video category', new_video_category_path,class: 'btn btn-primary'

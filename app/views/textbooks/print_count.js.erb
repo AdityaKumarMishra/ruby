@@ -1,0 +1,11 @@
+<% if !@print.nil? %>
+  <% if @print.print_count >= 2 %>
+    var iframe = $('#textbookGrad').contents();
+    iframe.find(".toolbarButton.print").addClass('disabled');
+    iframe.find(".toolbarButton.print").prop('disabled', true);
+    iframe.find(".toolbarButton.print").remove();
+    $('#hover-text').text('You have reached the limit for the number of times this document can be printed.');
+    $('#hover-text').addClass('red-text');
+  <% end %>
+<% end %>
+

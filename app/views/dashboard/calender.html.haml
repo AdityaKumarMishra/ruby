@@ -1,0 +1,20 @@
+- content_for :page_heading, 'Calendar'
+.dashbord_right
+  .resource_col
+    %h4 Important Dates
+  .faq_list.para_fs14
+    .dashboard-calendar-header
+      #calendar
+        = render 'dashboard/partial/calendar'
+      - unless @closest_events.present?
+        .div.no_events
+          .col-md-12.event_detail_col
+            .col-md-10.event_desc_col.no_update_description
+              You have no important dates coming up
+      - else
+        .important_dates
+          = render'dashboard/partial/calender_dates', mon_date: @first_day, events: @closest_events
+      .div.no_event_for_the_day{style: "display:none"}
+        .col-md-12.event_detail_col
+          .col-md-10.event_desc_col.no_update_description
+            .no_event_html

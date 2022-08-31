@@ -1,0 +1,80 @@
+- content_for :page_heading, 'Mcq Attempt'
+.dashbord_right
+  .resource_col.mbot21
+    %h4.fl MCQ Attempt
+  .statics_static_table
+    %ul
+      %li
+        %span Difficulty of Questions :
+        = @exercise.difficulty
+      %li
+        %span Number of Questions :
+        = @exercise.amount
+      %li
+        %span Completed at :
+        = @exercise.completed_at ? @exercise.completed_at.to_formatted_s(:long) : "N/A"
+      %li
+        %span Percent Correct :
+        = number_to_percentage(@exercise.percentage, precision: 1) || "N/A"
+
+  .faq_list
+    .faq_list_col.table_3_col
+      .new_excercise
+        %h4 Statistics
+        %ul.indicator.excercise_indictor
+          %li
+            %i.fa.fa-frown-o{"aria-hidden" => "true"}
+            \&lt;50%
+          %li
+            %i.fa.fa-frown-o{"aria-hidden" => "true"}
+            50% - 69.99%
+          %li
+            %i.fa.fa-smile-o{"aria-hidden" => "true"}
+            70% - 100%
+      .excercise_tbl.satatics_table
+        %ul.tbl_head
+          %li.width_inc Name
+          %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+            C
+            %span.heading_tool_tip.mrht37
+              %p Correct
+          %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+            I
+            %span.heading_tool_tip.mrht37
+              %p Incorrect
+          %li.wdth6 Correct
+          %li.wdth6 Incorrect
+          %li.wdth6
+            Not
+            = succeed "Attempted" do
+              %br/
+          %li.wdth6 Total
+          %li
+            Time Taken
+            = succeed "(Min)" do
+              %br/
+          %li
+            Time taken
+            %br/
+            per question (Min)
+        .first_child_section
+          - @exercise.tags.sort_by{|tag| tag.name}.each do |q|
+            - result = @exercise.show_tag_result q
+            - if result['total'] > 0
+              - level,leaf_tag = tag_level(q)
+              - score_class = tag_level_row_style(level, leaf_tag, score_by_tag_statistics(q, result['correct'], result['total']), (result['total']-result['not_attempted']) )
+
+              -if level == 1
+                .second_child_section
+                  = render 'mcq_tag_result', tag: q, result: result, score_class: score_class
+              -elsif level == 2
+                .second_child_section
+                  .third_child_section
+                    = render 'mcq_tag_result', tag: q, result: result, score_class: score_class
+              -else
+                = render 'mcq_tag_result', tag: q, result: result, score_class: score_class
+
+
+      .text-center.full_width.mtop30.mbot10
+        = link_to 'Review', review_exercise_exercise_review_path(@exercise), class: 'default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+        = link_to 'Back', exercises_path, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'

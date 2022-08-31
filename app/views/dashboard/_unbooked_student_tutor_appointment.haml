@@ -1,0 +1,89 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+
+  .panel-body#nav-tabs
+    %ul.gr-nav.gr-nav-pills
+      %li.default_range.active
+        %a{"data-toggle" => "tab", href: "#default"}  Custom Range
+    .clearfix
+    %br
+    .tab-content
+      #default.tab-pane.fade.in.active
+        .form-group
+          = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+            = hidden_field_tag :selection, 'PT Sessions by Student - Unused Sessions'
+            %p
+              Date Up To
+              =f.text_field(:with_end, class: 'form-control tutor-datepicker', autocomplete: "off")
+            %p
+              Student
+              =f.text_field(:student, class: 'form-control')
+            %p
+              City
+              =f.select :city, options_for_select(available_cities), {include_blank: 'Please select a City'}, class: 'form-control'
+            %br
+            %p
+              = link_to 'Filter', 'javascript:void(0)', class: 'btn btn-gradready green submit-filter'
+              / =# f.submit 'Filter', class: 'btn btn-gradready green'
+              =link_to 'Reset filters', dashboard_count_tutor_appointments_path(selection: 'PT Sessions by Student - Unused Sessions',reset: true), class: 'btn btn-gr-light-green'
+            %br
+            = link_to "Download csv",'javascript:void(0)', class: 'btn btn-primary csv_btn'
+.div#tutor-apt-table
+  = render(partial: 'dashboard/partial/count_unbooked_student_appointments')
+
+:javascript
+  $(function () {
+    $('.tutor-datepicker').datepicker({
+      "format": "yyyy-mm-dd",
+      "autoclose": true,
+      orientation: 'bottom'});
+    var type = "#{params[:filter_type]}";
+    if(type == "pay_period"){
+      $('#custom').addClass('active');
+      $('#default').removeClass('active');
+      $('.custom_range').addClass('active');
+      $('.default_range').removeClass('active');
+    }
+  });
+  $('#nav-tabs li').click(function(){
+    if(!($(this).hasClass('active'))){
+      var element = ($(this).attr('class').split('_')[0])
+      var form = $('#'+element).find('form')
+      var action = form.attr('action')
+      if(action.search('.xls') != -1){
+        form.attr('action', (form.attr('action').split('.')[0]))
+      }
+      var url = form.attr('action');
+      $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+     });
+    }
+  })
+  $('.csv_btn').click(function(){
+    var form = $(this).parent()
+    var action = form.attr('action')
+    if(action.search('.xls') == -1){
+      form.attr('action', (form.attr('action')+'.xls'))
+    }
+    form.submit();
+  })
+  $('.submit-filter').click(function(){
+    var form = $(this).parent().parent();
+    var action = form.attr('action')
+    if(action.search('.xls') != -1){
+      form.attr('action', (form.attr('action').split('.')[0]))
+    }
+    var url = form.attr('action');
+    $.ajax({
+       type: "GET",
+       url: url,
+       dataType: 'script',
+       data: form.serialize()
+    });
+  })

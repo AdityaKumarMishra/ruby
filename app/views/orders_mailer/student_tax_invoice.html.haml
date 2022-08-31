@@ -1,0 +1,50 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          -if @student.present?
+            %tr
+              %td{style: "font-weight: 700;"}
+                = "Dear #{@student.first_name} #{@student.last_name},"
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+                = "Thank you for choosing Gradready."
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+                -if @order.purchase_items.count == 1 && @feature_log
+                  %p= "Online components for “#{@title}” has been activated and is now accessible."
+                -else
+                  %p= "Online components for “#{@title}” has been activated and are now accessible."
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+                Your order's unique reference number is <b> #{@reference_number} </b>
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+                %strong Please ensure the attached tax invoice is correct.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 60px;"}
+                Your total amount is <b>$#{@order.total_cost.to_s}</b>.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 60px;"}
+                %p Share this link to give discounts to friends and earn a 5% cashback for each person you refer!
+                -if @order.generated_promo.present? && @order.generated_promo.token.present?
+                  %p= link_to user_promo_link_url(@order.generated_promo.token), user_promo_link_url(@order.generated_promo.token), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+
+            %tr
+              %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+                Kind regards,
+            %tr
+              %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+                GradReady Student Success Team
+

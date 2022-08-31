@@ -1,0 +1,71 @@
+.nested-fields
+  %div.video-fields{ id: "vid-fields-#{f.object.mcq.id rescue nil}"}
+    %h3 Video Explanation
+    =# f.simple_fields_for :mcq_video, que_no, f.object || f.object.build_mcq_video do |f|
+    =# hidden_field_tag :delete_video, false, id: "#{f.object.id}-vid"
+    - if (f.object.video_file_size.present?)
+      - your_video_path = f.object.video.url
+      - result = `ffmpeg -i #{your_video_path} 2>&1`
+      - videotime = result.match("Duration: ([0-9]+):([0-9]+):([0-9]+).([0-9]+)")[0].split("Duration: ").last.split(".").first if result.match("Duration: ([0-9]+):([0-9]+):([0-9]+).([0-9]+)").present?
+      -if (que_no == 1)
+        - f.object.title= "Breakdown of Stem + Question 1 Answer Video Explanation"
+        - f.object.description= "[#{videotime}] This video contains a breakdown of the stem and worked explanation of Question 1"
+      -else
+        - f.object.title= "Question #{que_no} Answer Video Explanation"
+        - f.object.description= "[#{videotime}] This video contains a worked explanation of Question #{que_no}"
+    - else
+      - f.object.title= ""
+      - f.object.description= ""
+    .div_field
+      = f.label :title, label: "Title"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Unless the MCQ is for an exam, please think of a creative title and don't put the Author's name in the title.
+    = f.input :title, label: false, input_html: { readonly: true }, value: f.object.title
+    .div_field
+      = f.label :description, label: "Description"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Please include a description and the running time of the video in the following format [12:31] Humanities in the GAMSAT & theme finding
+    = f.input :description, label: false, input_html: { readonly: true }
+    = f.input :video, as: :file, input_html: { class: 'video-select' }
+    -if f.object.id.present?
+      = f.hidden_field :id, value: f.object.id
+      .video_box.vedio_main_row
+        %video.video-js.vjs-default-skin.cstm_vedio{controls: "", autoplay: false, "data-setup" => '{ "playbackRates": [2, 1.5, 1.2, 1, 0.5], "plugins" : { "resolutionSelector" : { "default_res" : "360" } }}', :height => "270px", :width => "480px"}
+          %source{src: f.object.video.url, type: 'video/mp4','data-res' => '360'}
+          %source{src: f.object.video.url, type: 'video/mp4','data-res' => '720'}
+    .published_div
+      = f.input :published
+    =link_to_remove_association "Remove Video", f, class: 'btn btn-danger btn-sm', id: "rm-vid-#{f.object.mcq.id rescue nil}" unless f.object.id.present?
+
+:javascript
+  $(".published_div").hide();
+
+  $(document).ready(function(){
+    var fileName = "#{f.object.video.original_filename}"
+    console.log(fileName);
+    if (fileName) {
+      $(".published_div").show();
+    }else{
+      $(".published_div").hide();
+    }
+  })
+
+  $(document).ready(function(){
+    $('#add-vid-btn-'+ "#{f.object.mcq.id rescue nil}").hide();
+  })
+  $('#rm-vid-'+ "#{f.object.mcq.id rescue nil}").click(function(){
+    $('#add-vid-btn-'+ "#{f.object.mcq.id rescue nil}").show();
+  })
+
+  $(".video-select").change(function (){
+    var fileName = $(this).val();
+    if (fileName) {
+      $(".published_div").show();
+    }else{
+      $(".published_div").hide();
+    }
+  });

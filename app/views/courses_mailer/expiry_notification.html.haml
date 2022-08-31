@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "Hi #{@student_name},"
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                Thank you for preparing with GradReady.
+              -else
+                We wanted to let you that your online course has reached its expiration date today and as such you will no longer have access to your online materials including MCQs, textbooks and marked exams/essays.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                Your online subscription has now expired.
+              -else
+                We would like to remind you that if you wish to continue using GradReady in the future, we encourage you to take advantage of our 25% repeat customer discount policy.
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                If you would like to extend your subscription, please see information
+                %a{href: 'https://gradready.com.au/gamsat-preparation-courses/faq/enrolment-and-payment#contact_eleven_id'}here.
+              -else
+                We would like to thank you once again for using GradReady for your studies and we wish you the best of luck in your future endeavours.
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              -if @product_line == 'GAMSAT'
+                We hope that you've enjoyed your course and looking forward to hearing the good news from you.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

@@ -1,0 +1,40 @@
+#book-access-modal.modal.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Select Textbook
+      .modal-body
+        %p.text-info
+          .form-inputs
+            = select_tag 'user_ids', options_for_select(Textbook.to_reset.map { |u| [u.title, u.id] }), class: 'form-control chosen-select book_selection', include_blank: "All", multiple: true
+          .form-actions.access_btn_div
+            %a.submit_book.btn.btn-success.btn-sm Reset
+
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+
+:javascript
+
+  $(function(){
+    $('.chosen-select').chosen({
+        allow_single_deselect: true,
+        no_results_text: 'No results matched',
+        placeholder_text_multiple: 'Click here',
+        width: '100%'
+    });
+  });
+
+
+  $(".submit_book").click(function(){
+    uid = "#{@user.id}";
+    tid = $(".book_selection").val();
+    $("#book-access-modal").modal("hide");
+    $.ajax({
+      url: "/user_emails/"+ uid + "/update_book_access",
+      type: "GET",
+      dataType: 'script',
+      data: {book_id: tid},
+    });
+  });

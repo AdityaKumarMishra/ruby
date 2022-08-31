@@ -1,0 +1,19 @@
+%section.talk_to_bg.home_faq.count-timer{class: ("bg_grey_count" if page_name == "main")}
+  .container
+    .countdown_timer_col.looking_corse.text-center
+      %p
+        = @countdown_timer.description
+      %a{href: "#{@countdown_timer.destination_link}", target: "_blank"}
+        #countdown_timer
+
+:javascript
+  if(#{@countdown_timer.nil? ? "false" : "true"})
+    $(function() {
+      var year = parseInt("#{@countdown_timer.try(:end_date).try(:year)}");
+      var month = parseInt("#{@countdown_timer.try(:end_date).try(:month)}");
+      var date = parseInt("#{@countdown_timer.try(:end_date).try(:day)}");
+      var hour = parseInt("#{@countdown_timer.try(:end_time).try(:hour)}");
+      var minutes = parseInt("#{@countdown_timer.try(:end_time).try(:min)}");
+      var austDay = new Date(year, month-1, date, hour, minutes);
+      $('#countdown_timer').countdown({until: austDay, timezone: +11});
+    });

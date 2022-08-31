@@ -1,0 +1,39 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+    .btm_header
+  .main_contant.width100
+    .uni_logo
+      / %img{src: "images/univer.png"}/
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png'
+    .para_contant.ipad_scroll.mob_scroll.mob_top
+      %h4.terms_hdng NON-DISCLOSURE AGREEMENT AND GENERAL TERMS OF USE AND ATTRIBUTES FOR EXAMS DEVELOPED FOR THE UCAT PROGRAMME
+      %p This exam is UCAT confidential. The exam is made available to you as an examinee, solely for the purpose of being assessed in this exam. You are expressly prohibited from disclosing, publishing, reproducing, or transmitting this exam, in whole or in part, in any form or by any means including visual, aural, verbal, written, electronic or mechanical means, for any purpose, without the prior express written permission of UCAT.
+      %p Your personal data and test data will both be stored in the Pearson VUE and UCAT databases.
+      %p All examination contents are the published and confidential and propriety materials of Pearson VUE.
+      %p
+        Click the
+        %span.font_bold Next (N)
+        button to proceed.
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-sign-out{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises"}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft{"data-target" => "#exampleModal", "data-toggle" => "modal", href: "#"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+
+

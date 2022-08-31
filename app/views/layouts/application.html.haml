@@ -1,0 +1,103 @@
+!!!
+%html{:lang => "en"}
+  %head
+    =# render 'layouts/google_analytics' if Rails.env.production?
+    %title= title
+    = Gon::Base.render_data
+    %meta{name: 'description', content: meta_description}
+    %meta{name: 'keywords', content: meta_keywords}
+    / Google Tag Manager
+    :javascript
+      logged_user = "#{current_user.present? ? current_user.id : nil}";
+      dataLayer = [{'userID': logged_user}];
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+      {'gtm.start': new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M9MF8XK');
+    / End Google Tag Manager
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag Ckeditor.cdn_url
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = sentry_tag
+    -unless(request.fullpath == "/gamsat-preparation-courses" || request.fullpath == "/umat-preparation-courses" || request.fullpath == "/hsc" || request.fullpath == "/vce")
+      - if request.fullpath == "/gamsat-preparation-courses/our_students" || request.fullpath == "/umat-preparation-courses/our_students" || request.fullpath == "/hsc/our_students" || request.fullpath == "/vce/our_students"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/our_students', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/student_testimonials" ||request.fullpath == "/umat-preparation-courses/student_testimonials" || request.fullpath == "/hsc/student_testimonials" || request.fullpath == "/vce/student_testimonials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/student_testimonials', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/scholarship" || request.fullpath == "/umat-preparation-courses/scholarship" || request.fullpath == "/hsc/scholarship" || request.fullpath == "/vce/scholarship"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/scholarship', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/access-program" || request.fullpath == "/umat-preparation-courses/access-program" || request.fullpath == "/hsc/access-program" || request.fullpath == "/vce/access-program"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/access-program', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/custom"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/online-comprehensive"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/online-essentials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/attendance-essentials"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/gamsat-preparation-courses/attendance-complete-care"
+        = tag :link, href: 'https://gradready.com.au/gamsat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+
+      - elsif request.fullpath == "/umat-preparation-courses/custom"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/online-comprehensive"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/online-essentials"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/attendance-essentials"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      - elsif request.fullpath == "/umat-preparation-courses/attendance-complete-care"
+        = tag :link, href: 'https://gradready.com.au/umat-preparation-courses/attendance-comprehensive', rel: 'canonical'
+      -elsif request.fullpath == "/updates?tab=GAMSAT" || "updates?tab=UMAT"
+        = tag :link, href: 'https://gradready.com.au/updates', rel: 'canonical'
+      - else
+        = canonical_tag
+    -if current_user.nil? or current_user.current_enrolment.nil?
+      - if map_path_to_prodline(request.env['PATH_INFO']) == "gamsat-preparation-courses"
+        - prodline = "gamsat"
+      - elsif map_path_to_prodline(request.env['PATH_INFO']) == "umat-preparation-courses" || map_path_to_prodline(request.env['PATH_INFO']) == "umat"
+        - prodline = "umat"
+      - else
+        - prodline = map_path_to_prodline(request.env['PATH_INFO'])
+      = favicon_link_tag '/images/favicon-'+prodline+'.png',type: 'image/png'
+    -else
+      = favicon_link_tag '/images/favicon-'+map_prodline(current_user.current_enrolment.course.product_version.type)+'.png',type: 'image/png'
+
+
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = yield(:head)
+    = render partial: 'layouts/shiv'
+    = render partial: 'layouts/structured_data'
+  %body{:class => params[:controller]}
+    / Google Tag Manager (noscript)
+    %noscript
+      %iframe{:height => "0", :src => "https://www.googletagmanager.com/ns.html?id=GTM-M9MF8XK", :style => "display:none;visibility:hidden", :width => "0"}
+    / End Google Tag Manager (noscript)
+    = render_nav_bar request.env['PATH_INFO']
+
+    = flash_messages
+
+
+    .container-fluid.application-container
+      #body
+        = content_for?(:content) ? yield(:content) : yield
+
+    -if current_user.nil? or current_user.current_enrolment.nil?
+      = render partial: 'layouts/footer', locals: {product_line: map_path_to_prodline_footer(request.env['PATH_INFO'])}
+    -else
+      = render partial: 'layouts/footer', locals: {product_line: map_prodline(current_user.current_enrolment.course.product_version.type)}
+
+    = render partial: 'section_item_attempts/partial/status'
+    = render partial: 'exercises/status'
+
+    - if @show_course_recommender
+      = course_recommender_tag(@show_course_recommender)
+
+      = render partial: "partial/course_recommender_button"
+
+    =# comparison_modal_tag

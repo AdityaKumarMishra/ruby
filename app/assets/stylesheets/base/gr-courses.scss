@@ -1,0 +1,134 @@
+.gr-courses {
+  position: relative;
+  padding: 30px 20px;
+  margin-bottom: 10px;
+
+  &__header {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 45px;
+    font-weight: bold;
+    font-family: "museo-slab";
+    text-align: center;
+  }
+
+  &__header span {
+    color: $green-dot;
+  }
+
+  &__courses ul {
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    max-width: 1400px;
+  }
+
+  &__course {
+    position: relative;
+    margin-bottom: 10px;
+    color: white;
+    background-color: black;
+
+  }
+
+  &__course:nth-child(1) {
+    background-color: $gamsat-color;
+  }
+
+  &__course:nth-child(2) {
+    background-color: $umat-color;
+  }
+
+  &__course:nth-child(3) {
+    background-color: $vce-color;
+  }
+
+  &__course:nth-child(4) {
+    background-color: $hsc-color;
+  }
+
+  &__course:last-child {
+    margin-bottom: 0;
+  }
+
+  &__course-content {
+    display: block;
+    padding: 20px;
+    text-decoration: none !important;
+    color: white !important;
+  }
+
+  &__course p {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 16px;
+  }
+
+  &__course h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  &__course span {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .gr-courses {
+    padding: 60px 40px;
+
+    &__header {
+      margin-bottom: 60px;
+      font-size: 40px;
+    }
+
+    &__courses ul {
+      display: flex;
+    }
+
+    &__course {
+      box-sizing: border-box;
+      width: 49%;
+      max-width: 49%;
+      margin-right: 8px;
+      margin-bottom: 0;
+      transition: transform 0.2s;
+
+      -webkit-font-smoothing: antialiased;
+      -webkit-backface-visibility: hidden;
+      -webkit-transform: translateZ(0) scale(1.0, 1.0);
+      -webkit-transform-style: preserve-3d;
+      transform: scale(1) translateZ(0);
+    }
+
+    &__course:last-child {
+      margin-right: 0;
+    }
+
+    &__course:hover {
+      transform: scale(1.02);
+    }
+
+    &__course-content {
+      padding: 35px;
+    }
+
+    &__course p {
+      padding-bottom: 0;
+      height: 190px;
+      overflow: auto;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    &__course h3 {
+      font-size: 30px;
+    }
+
+    &__course span {
+      font-size: 18px;
+    }
+  }
+}

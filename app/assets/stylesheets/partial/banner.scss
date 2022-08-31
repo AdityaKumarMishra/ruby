@@ -1,0 +1,156 @@
+// Titles for banners
+.umat-banner-title {
+  @include product-line-title($umat-color, 74px);
+  text-shadow: 5px 4px 1px #101010;
+  font-weight: 700;
+  font-family: 'Museo 700';
+  margin: 30px 0;
+  margin-bottom: 17px;
+}
+.gamsat-banner-title {
+  @include product-line-title($gamsat-color, 60px);
+}
+.vce-banner-title {
+  @include product-line-title($vce-color, 60px);
+}
+.hsc-banner-title {
+  @include product-line-title($hsc-color, 60px);
+}
+
+.skinny-banner-title {
+  font-size: 32px;
+  margin-bottom: 43px;
+  color: $white;
+  margin-top: 6px;
+  text-shadow: 0px 2px 0px #111;
+  font-weight: 500;
+  font-family: "museo";
+  width: auto;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  padding: 4px;
+}
+.banner-content a:hover h5{ border-bottom: 2px solid #fff;padding: 4px;}
+// Product lines home page(s) banner
+.home-page-banner{
+  position: relative;
+  float: left;
+  min-height: 550px;
+  margin: 0 -20px 31px -20px;
+  width: calc(100% + 35px);
+  padding-top: 192px;
+  text-align: center;
+  display: block;
+  color: $white;
+  .banner-content {
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    margin: 0 0 50px;
+    text-align: center;
+    p {
+      font-size: 23px;
+      font-family: $museo;
+      font-weight: normal;
+      line-height: 1.1;
+    }
+  }
+  .course-banner-bg {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    min-height: 266px;
+    padding-top: 20px;
+  }
+  // Product lines specific background image(s)
+  &.umat {
+    background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/hero_img.jpg");
+    background-size: cover;
+  }
+  &.gamsat{
+    background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/hero_img-main-page-blurred.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  &.vce,
+  &.hsc {
+    background: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/imgo.jpg') 0 0 no-repeat;
+    background-size: cover;
+  }
+}
+
+.announcement-container {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  margin-left: -15px;
+}
+
+// Announcement styles across features and product lines
+.announcement-banner {
+  color: $white;
+  display: block;
+  font: bold 23px $helvetica;
+  min-height: 50px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top: -55px;
+  line-height: 2;
+  width: 100%;
+  -webkit-animation: alert 1s ease forwards;
+  -moz-animation: alert 1s ease forwards;
+  -ms-animation: alert 1s ease forwards;
+  -o-animation: alert 1s ease forwards;
+  animation: alert 1s ease forwards;
+  &.green-bg {
+    background-color: $gamsat-color;
+  }
+  &.blue-bg {
+    background-color: $umat-color;
+  }
+  &.purple-bg {
+    background-color: $vce-color;
+  }
+  &.red-bg {
+    background-color: $hsc-color;
+  }
+  &.standard-bg {
+    background-color: $light-green;
+    font-size: 12px;
+  }
+  &.relative {
+    position: relative;
+  }
+}
+
+/* Animation */
+@-webkit-keyframes alert {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 0; }
+}
+@-moz-keyframes alert {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 0; }
+}
+@-ms-keyframes alert {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 0; }
+}
+@-o-keyframes alert {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 0; }
+}
+@keyframes alert {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 0; }
+}
+.banner_small_font{ font-size: 16px !important;}
+
+
+

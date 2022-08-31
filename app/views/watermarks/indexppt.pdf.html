@@ -1,0 +1,38 @@
+<style type="text/css">
+  /*.container{
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1'><text fill='rgba(192, 192, 192, 0.4)' transform='rotate(-60)'><tspan y='18cm' x='-24cm' font-size='160'>Deepti Sharma</tspan><tspan y='21cm' x='-27cm' font-size='110'>peitong.li@gmail.commm</tspan></text></svg>");
+
+  }*/
+  .watermark-test {
+    height: auto; !important;
+    background: rgb(255,255,255);
+    background: rgba(255,255,255, 0.1);
+    color: rgba(110, 110, 110);
+    color: rgba(110, 110, 110, 0.4);
+    z-index: 0;
+    font-size: 80px;
+    width: 1111px;
+    text-align: center;
+    top: 65%;
+    left: 120px;
+    position: absolute;
+    transform: translate(-40%, -40%);
+  }
+  .watermark-test .rotate-text{
+    text-align: center;
+    display: inline-block;
+    -webkit-transform: rotate(-36deg);
+    -webkit-backface-visibility: hidden;
+  }
+  .watermark-test .rotate-text .email{
+    font-size: 71px;
+    float: left;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all;
+    
+  }
+</style>
+<div class="watermark-test">
+  <span class="rotate-text"><span><%= current_user.try(:full_name) %></span><br><span class="email"><%= current_user.try(:email) %></span></span>
+</div>

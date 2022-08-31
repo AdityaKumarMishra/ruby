@@ -1,0 +1,152 @@
+- title "UCAT Preparation Courses | UCAT Tutoring and Prep | GradReady"
+- meta_description "GradReady: Best UCAT Preparation Courses and Tutors. UCAT Prep with a Targeted and Interactive Approach with the Most Advanced Learning Technology on the Market. Join over 6000+ GR Students and see the difference today."
+- meta_keywords "UCAT, UCAT Prep, UCAT Preparation, UCAT Preparation Course, UCAT Course, UCAT Exam, UCAT Help, UCAT Australia, UCAT Online, UCAT, UCAT Prep, UCAT Preparation, UCAT Preparation Course, UCAT Course, UCAT Exam, UCAT Help, UCAT Australia, UCAT Online"
+.banner_wrapper.banner_inner_page.banner_image_pl
+  %div.grad_kaplan_div
+    %div.right
+      %a{href: "javascript:void(0)"}
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready-logo-blue.png', alt: "GradReady UMAT Courses"
+    %div.left
+      %a{href: "javascript:void(0)"}
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/kaplan_umat.png', alt: "GradReady UMAT Courses"
+  .statics_section
+    .row
+      .container
+        .aos-item.col-sm-6.first_paddrght0{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+          .hvr-shutter-out-vertical.umat-bg.statics_text
+            %h3
+              %a
+                %span.incrementalNumber{"data-value" => "65"}
+                %span + yrs
+                %p Combined Teaching Experience
+        .aos-item.col-sm-6.second_paddlft0{"data-aos" => "fade-up", "data-aos-duration" => "1600"}
+          .hvr-shutter-out-vertical.umat-bg.statics_text.bdr_right0
+            %h3
+              %a
+                %span.incrementalNumber{"big-number" => "79500", "data-value" => "80000"}
+                %span +
+                %p Students
+= render 'public_page_partial/countdown_timer', page_name: "umat" if @countdown_timer.try(:show_countdown?)
+%section.middle_course_section.padd_35#mob_course
+  = render 'public_page_partial/grad_kaplan'
+= render 'public_page_partial/about_ucat_exam'
+
+.pro_partner
+  = render 'public_page_partial/partners'
+.mtop50
+  = render 'public_page_partial/umat_student_stat'
+= render 'public_page_partial/our_students'
+
+
+%a#plus_nav.plus_circl{href: "javascript:void(0)", title: "More Links"}
+  %i.fa.fa-plus{"aria-hidden" => "true"}
+.more_links_popup
+  %ul
+    %li
+      %a{href: "#gamsat_pre_course"}
+        Ucat
+        %sup ®
+        Preparation Course
+    %li
+      %a{href: "#comparison_table"} Comparison Table
+    %li
+      %a{href: "#student_improved_score"} GRADREADY STUDENT STATS
+    %li
+      %a{href: "#course_different"} Compare GradReady
+    %li
+      %a{href: "#student_testimonial"} Student Testimonial
+
+#recommender_div
+  #course-recommender
+  = javascript_include_tag 'course-recommender'
+
+:javascript
+
+  $(document).ready(function(){
+    $("#umat_tbl.attendance").hide();
+    $("#inter_tbl.int_attendance").hide();
+    $("#comp_tbl .at_other").hide();
+    $("#comp_tbl .ol_other").hide();
+    $('#online').prop("checked", true);
+
+    $('.umat_courses').click(function(){
+      var inputValue = $(this).attr("id");
+      var targetBox = $("." + inputValue);
+      $('#umat_tbl:not(targetBox)').hide();
+      $(targetBox).show();
+    });
+
+    $(".add_mob_course").click(function(){
+      $(this).find("i").toggleClass("fa-plus fa-minus");
+    });
+
+    $('.inter_course').click(function(){
+      var inputValue = $(this).attr("id");
+      var targetBox = $("." + inputValue);
+      $('#inter_tbl:not(targetBox)').hide();
+      $(targetBox).show();
+    });
+
+    $('#attendce_pack').click(function(){
+      $('#at_grad').prop("checked", true);
+      $("#comp_tbl .at_grad").show();
+      $("#comp_tbl .at_other").hide();
+    })
+
+    $('#non_attendce_pack').click(function(){
+      $('#ol_grad').prop("checked", true);
+      $("#comp_tbl .ol_grad").show();
+      $("#comp_tbl .ol_other").hide();
+    })
+
+    $('.at_comparison').click(function(){
+      var inputValue = $(this).attr("id");
+      var targetBox = $("span." + inputValue);
+      $('span.tbl_col2:not(.inputValue)').hide();
+      $(targetBox).show();
+    });
+
+    $('.ol_comparison').click(function(){
+      var inputValue = $(this).attr("id");
+      var targetBox = $("span." + inputValue);
+      $('span.tbl_col2:not(.inputValue)').hide();
+      $(targetBox).show();
+    });
+
+  });
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });
+
+  $(".open_recommender").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });
+
+  $(document).ready(function(){
+
+    $(".plus_circl").click(function(){
+      $(".more_links_popup").delay(100).fadeToggle(300);
+      $(".overlay_page").addClass("show");
+    });
+
+    $(".overlay_page").click(function(){
+      $(".overlay_page").removeClass("show");
+      $(".more_links_popup").hide();
+    });
+
+
+    $(".more_links_popup ul li").click(function() {
+      $(".more_links_popup").hide();
+      $(".overlay_page").removeClass("show");
+    });
+
+    $(document).ready(function() {
+      $(".banner_inner_page h1 a").on("click", function( e ) {
+        e.preventDefault();
+        $("body, html").animate({
+          scrollTop: $( $(this).attr('href') ).offset().top
+        }, 600);
+      });
+    });
+  });

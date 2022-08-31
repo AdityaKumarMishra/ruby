@@ -1,0 +1,208 @@
+- expiry_date = @essay_response.expiry_date.in_time_zone("Australia/Queensland")
+- if current_user.student?
+  - content_for :page_heading, 'Essays Response'
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void"} Hide All
+    .faq_list.para_fs14
+      .faq_list_col
+        %h2.faq_question.response_headng{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#essay_announcement", role: "button"}
+          %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}
+          = "Essay: #{@essay_response.essay.title}"
+        #essay_announcement.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+          %h4 Description:
+          = @essay_response.essay.question.html_safe
+        - if (@essay_response.response.present? && @essay_response.time_submited.present?) || (@essay_response.response.present? && expiry_date > Time.zone.now.in_time_zone("Australia/Queensland"))
+          .statics_static_table.mtop_botm.cstm_full_wdth
+            %ul
+              %li
+                %span Response:
+                = @essay_response.response.html_safe
+        - elsif expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")
+        -else
+          %h5
+            %i You are yet to write a response
+
+
+        - if @essay_response.time_submited.present?
+          %p
+            %strong Time
+          .statics_static_table.mtop_botm
+            %ul
+              %li
+                %span Essay submitted on:
+                = @essay_response.time_submited.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+              %li
+                %span Essay completed in:
+                = display_time(@essay_response.elapsed_time)
+        -if @essay_response.essay_tutor_response.present?
+          %strong Tutor Feedback:
+          .statics_static_table.mtop_botm.cstm_full_wdth
+            %ul
+              %li
+                %span Tutor Feedback:
+                = @essay_response.essay_tutor_response.response.html_safe
+          .statics_static_table.mtop_botm
+            %ul
+              %li
+                %span Tutor Mark:
+                = @essay_response.essay_tutor_response.rating.to_s
+              %li
+                %span Tutor Marked on
+                = @essay_response.essay_tutor_response.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+
+          -if @essay_response.essay_tutor_feedback.present?
+            %p
+              %strong Student Feedback :
+            .comment_section_col
+              .parent_comment_col
+                %h3= @essay_response.essay_tutor_feedback.user.full_name
+                %span.comment_date= @essay_response.essay_tutor_feedback.created_at.strftime('%-d %B, %Y')
+                .comment_mesg_col
+                  = @essay_response.essay_tutor_feedback.response.html_safe
+                %span.reply_message
+                  %a{'data-toggle' => 'modal', 'data-target' => "#comment_#{@essay_response.essay_tutor_feedback.id}", href: "#"}
+                    %i.fa.fa-reply
+                    Reply
+                  = render 'issue_forum/submit_comment_modal', options: {answer: @essay_response.essay_tutor_feedback}
+                  - if @essay_response.essay_tutor_feedback.comments.size > 1
+                    = ":"
+                    = @essay_response.essay_tutor_feedback.comments.pluck(:id).count
+                - @essay_response.essay_tutor_feedback.comments.reverse.each do |comment|
+                  - unless comment.new_record?
+                    .parent_comment_col.child_comment
+                      - if comment.user.present?
+                        %h3= comment.user.username.present? ? comment.user.username : comment.user.first_name
+                      %span.comment_date= comment.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')
+                      .comment_mesg_col
+                        = sanitize(comment.content).to_s
+          -if @essay_response.essay_tutor_response.staff_profile.present?
+
+            -if @essay_response.essay_tutor_feedback.nil?
+              .fdbck_btn= link_to 'Give Feedback', new_essay_response_essay_tutor_feedback_path(essay_response_id: @essay_response.id, essay_tutor_response_id: @essay_response.essay_tutor_response.id), class: 'default_btn hvr-shutter-in-horizontal'
+        -elsif @essay_response.time_submited.nil?
+          -if !(expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")) && !@essay_response.assessment_attempt_id.present?
+            %h3 Please press the Submit Response button to submit the essay for marking
+        -else
+          - unless @essay_response.assessment_attempt_id.present?
+            %h3 Your Essay will be marked shortly
+        .text-center.full_width.mtop30.mbot10
+          -if @essay_response.time_submited.nil? && current_user.student? && !(expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")) && !@essay_response.assessment_attempt_id.present?
+            = link_to 'Edit Response', edit_essay_response_path(@essay_response.id), class: 'default_btn hvr-shutter-in-horizontal mrgn-bottom', onclick: 'dd_loader();'
+          -if @essay_response.time_submited.nil? && current_user.student? && !(expiry_date < Time.zone.now.in_time_zone("Australia/Queensland"))
+            = link_to 'Submit Response', essay_response_submit_path(@essay_response.id), class: 'default_btn hvr-shutter-in-horizontal mrgn-bottom', data: { confirm: 'Are you sure? This cannot be undone.' }, method: :post
+          -if @essay_response.time_submited.present?
+            = link_to 'Convert To Pdf', essay_response_path(@essay_response, format: :pdf), class: 'default_btn hvr-shutter-in-horizontal mrgn-bottom'
+          -if @essay_response.assessment_attempt_id.present?
+            -if @essay_response.assessment_attempt.assessable.per_city_exam_count > 1
+              = link_to 'Back', online_mock_exam_attempts_path , class: 'black_default_btn hvr-shutter-in-horizontal mrgn-bottom', onclick: 'dd_loader();'
+            - else
+              = link_to 'Back', online_mock_exam_attempt_temps_path , class: 'black_default_btn hvr-shutter-in-horizontal mrgn-bottom', onclick: 'dd_loader();'
+          -else
+            = link_to 'Back', essay_responses_path , class: 'black_default_btn hvr-shutter-in-horizontal mrgn-bottom', onclick: 'dd_loader();'
+  :javascript
+    $( document ).ready(function() {
+      $(".faq_list h2").click(function() {
+        $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+        $(this).parent().toggleClass("faq_show");
+      });
+
+    });
+- else
+  .panel.panel-warning
+    .panel-heading
+      .panel-title
+        %h3
+          %strong= "Essay: #{@essay_response.essay.title}"
+    %h2
+      = @user.full_name
+      's Essay Response
+    .panel-body.line-40
+      %strong Description:
+      = @essay_response.essay.question.html_safe
+      %br
+      - if (@essay_response.response.present? && @essay_response.time_submited.present?) || (@essay_response.response.present? && expiry_date > Time.zone.now.in_time_zone("Australia/Queensland"))
+        %strong Response:
+        = @essay_response.response.html_safe
+      - elsif expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")
+      -else
+        %h5
+          %i You are yet to write a response
+
+      - if @essay_response.time_submited.present?
+        %h3 Time
+        %p
+          Essay submitted on
+          %strong= @essay_response.time_submited.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+        %p
+          Essay completed in
+          %strong= display_time(@essay_response.elapsed_time)
+      %strong Course:
+      %p= @essay_response.course.name if @essay_response.course
+      -if @essay_response.essay_tutor_response.present?
+        %strong Tutor Feedback:
+        %p= @essay_response.essay_tutor_response.response.html_safe
+        %strong Tutor Mark:
+        %p= @essay_response.essay_tutor_response.rating.to_s
+        %strong Tutor Marked on:
+        %p= @essay_response.essay_tutor_response.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M')
+        -if @essay_response.essay_tutor_feedback.present?
+          %strong Student Feedback:
+          .panel.panel-default.itf-show
+            .panel-heading
+              .row
+                .col-sm-8
+                  .author
+                    %strong #{@essay_response.essay_tutor_feedback.user.full_name}
+                    on
+                    %strong #{@essay_response.essay_tutor_feedback.created_at.strftime('%-d %B, %Y')}
+
+            .panel-body
+              %p.body
+                = @essay_response.essay_tutor_feedback.response.html_safe
+            .panel-footer
+              -# Comment button
+              %a.btn.btn-primary.submit-ticket{class: 'btn btn-default', 'data-toggle' => 'modal', 'data-target' => "#comment_#{@essay_response.essay_tutor_feedback.id}"}
+                Comment
+              = render 'issue_forum/submit_comment_modal', options: {answer: @essay_response.essay_tutor_feedback}
+
+          -# COMMENTS
+
+          - if @essay_response.essay_tutor_feedback.comments.size > 1
+            .row
+              .col-sm-11.col-sm-offset-1.essay_comment
+                %strong Comments
+                - @essay_response.essay_tutor_feedback.comments.reverse.each do |comment|
+                  - unless comment.new_record?
+                    .panel.panel-default.itf-comment
+                      .panel-body
+                        = sanitize(comment.content).to_s
+                      .panel-footer
+                        %span.span_left #{comment.created_at.in_time_zone('Australia/Melbourne').strftime('%-d %B, %Y %k:%M')}
+                        -if comment.user.present?
+                          -if comment.user.username.present?
+                            By <strong>#{comment.user.username}</strong>
+                          -else
+                            By <strong>#{comment.user.first_name}</strong>
+
+        %p
+          Time spent marking:
+          = display_time(@essay_response.essay_tutor_response.elapsed_time)
+        = link_to 'Update Mark', edit_essay_response_essay_tutor_response_path(essay_response_id: @essay_response.id, essay_tutor_response_id: @essay_response.essay_tutor_response.id), class: 'btn btn-success cl-white'
+
+      -elsif @essay_response.time_submited.nil?
+        = link_to 'Assign Tutor', assign_tutor_essay_response_path(id: @essay_response.id), remote: true, class: 'btn btn-danger feature_rght'
+        #AssignTutorToEssay
+      -else
+        %h3 Your Essay will be marked shortly
+        = link_to 'Mark Essay', new_essay_response_essay_tutor_response_path(@essay_response.id), class: 'btn btn-success cl-white'
+        -if @essay_response.status == "unmarked" && current_user.moderator?
+          = link_to 'Assign Tutor', assign_tutor_essay_response_path(id: @essay_response.id), remote: true, class: 'btn btn-danger feature_rght'
+          #AssignTutorToEssay
+
+    .panel-footer
+      -if @essay_response.time_submited.present?
+        = link_to 'Convert To Pdf', essay_response_path(@essay_response, format: :pdf), class: 'btn btn-default'
+
+      = link_to 'Back', essays_path , class: 'btn btn-default'
+

@@ -1,0 +1,17 @@
+%h1= @job_application_form.title
+- if !@job_application_form.description.empty?
+  %p
+    %b Description:
+    = simple_format(@job_application_form.description)
+
+- if !@job_application_form.empty_attachment
+  %p
+    %b Attachment:
+    = render 'job_application_forms/job_description', job_description: @job_application_form.job_description
+
+
+
+
+%br= link_to 'Apply', new_job_application_form_job_application_path( { job_application_form_id: @job_application_form.id } ), class:'btn btn-primary'
+
+= link_to 'Back',  available_positions_job_application_forms_path

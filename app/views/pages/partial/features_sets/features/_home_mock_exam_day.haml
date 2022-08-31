@@ -1,0 +1,12 @@
+.feature-content
+  =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+  -if params[:id] != 'custom'
+    %h4 Home Mock Exam Day (1 optional day)
+  -else
+    %h4 Home Mock Exam Day
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+  %p
+    For those who wish to experience the exam one more time with external pressure ...
+  .show_full_content
+    Updated: New Digital Exam System & Updated MCQs.
+    For those who wish to experience the exam one more time with external pressure. Join other students online from your home and complete the day together under real time pressure. Just like the attendance Mock Exam Day, you will be able to receive a percentile ranking and be walked through the answers. However, the essays will not be marked.

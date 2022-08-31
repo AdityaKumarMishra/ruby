@@ -1,0 +1,2 @@
+class DiagnosticTestPolicy < OnlineExamPolicy
+end

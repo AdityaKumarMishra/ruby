@@ -1,0 +1,9 @@
+- content_for :show_left_panel, true
+- content_for :show_dashboard_bg, true
+.step_full_wdt
+  .register_col.thankyou_page.mob_thankyou_page
+    .thank_heading_col
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/thankyou_heading.png'
+      = link_to @path, class: 'default_btn hvr-shutter-in-horizontal' do
+        GO TO DASHBOARD
+        %span

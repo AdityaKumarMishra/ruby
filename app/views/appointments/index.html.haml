@@ -1,0 +1,8 @@
+%h1 Listing Booked Appointments
+
+= render partial: 'appointments/partial/appointments_table', locals: { appointments: @appointments }
+
+= link_to 'New Appointment', new_appointment_path, class: 'btn btn-primary'
+
+= link_to 'Back', dashboard_book_tutor_path, class: 'btn btn-primary'
+

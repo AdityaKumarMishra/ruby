@@ -1,0 +1,18 @@
+-if @product_version.name=="Attendance (Comprehensive + Private Tutoring)"
+  -product_version_name= "Attendance (Complete Care)"
+-else
+  -product_version_name= @product_version.name
+On average,
+%a.text_green{:href => "/gamsat-preparation-courses/student_testimonials#student_improved_score"}
+  = product_version_name
+GradReady students improved their percentiles from
+= gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:percentile_from]
+to
+%a.text_green{:href => "/gamsat-preparation-courses/student_testimonials#student_improved_score"}
+  = gamsat_improvment_scores[ ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:percentile_to]
+(Raw Score:
+= gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:from]
+to
+%a.text_green{:href => "/gamsat-preparation-courses/student_testimonials#student_improved_score"}
+  = gamsat_improvment_scores[ ProductVersion.course_types[@product_version.course_type].to_s.to_sym][:to]
+)

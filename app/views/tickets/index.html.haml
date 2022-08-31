@@ -1,0 +1,28 @@
+%h1 Listing tickets
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Question
+      %th Asker
+      %th Answerer
+      %th Public
+      %th Answered at
+      %th{colspan: 2} Actions
+
+  %tbody
+    - @tickets.each do |ticket|
+      %tr{'data-link': url_for(ticket)}
+        %td= ticket.title
+        %td= ticket.question
+        %td= ticket.asker
+        %td= ticket.answerer
+        %td= ticket.public
+        %td= ticket.answered_at
+        %td= link_to 'Edit', edit_ticket_path(ticket), class: 'btn btn-info btn-sm'
+        %td= link_to 'Destroy', ticket, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Ticket', new_ticket_path

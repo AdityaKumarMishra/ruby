@@ -1,0 +1,34 @@
+- if params[:filterrific].present?
+  - @from_date = "#{params[:filterrific][:from_ticket_ans]}"
+  - @to_date = "#{params[:filterrific][:to_ticket_ans]}"
+  %h4= "Showing count of questions answered between #{@from_date} and #{@to_date}"
+#filterrific_results
+  %table.table.table-bordered.table-hover#tutors_table
+    %thead
+      %tr
+        %th Directed at
+        %th GC Ticket
+        %th No. overdue
+        %th FeedBack
+        %th Complaints
+    %tbody
+      - tutors.each do |tutor|
+        %tr
+          %td= tutor.first_name
+          %td= tutor.ticket_answer_count(tickets)
+          %td= tutor.overdue_count(tickets)
+          %td= tutor.feedback_ticket_count(tickets)
+          %td= tutor.complaint_ticket_count(tickets)
+- if tutors.count > 1
+  = will_paginate tutors, renderer: BootstrapPagination::Rails
+
+:javascript
+
+  $(document).ready(function() {
+    $('#tutors_table').DataTable({
+      "bPaginate": false,
+      "bFilter": false,
+      "searching": false,
+      "bInfo": false,
+    });
+  });

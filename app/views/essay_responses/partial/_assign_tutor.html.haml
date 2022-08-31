@@ -1,0 +1,21 @@
+#AssignTutorEssay.modal.fade{:role => "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Assign Tutor
+      .modal-body
+        %p.text-info
+          = form_tag update_tutor_essay_response_path(response), method: :post do |f|
+            .form-inputs
+              = select_tag 'tutor', options_for_select(tutors.map{|s|[s.full_name, s.id]}), include_blank: true, class: 'form-control transfer_tutor', style: "width: 100%"
+              .form-actions.access_btn_div
+                = button_tag(type: 'submit', class: 'btn btn-default btn-success') do
+                  Assign
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+:javascript
+  $(".transfer_tutor").select2({
+    placeholder: "Please select staff"
+  });

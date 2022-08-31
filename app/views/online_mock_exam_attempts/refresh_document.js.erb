@@ -1,0 +1,9 @@
+<% if @document.section_type == "video" %>
+	$('#doc_container_<%= params[:document_id] %>').html("<%= escape_javascript(render(:partial => 'video_content',locals: { vod: @document }, :content_type => 'text/html'))%>");
+<% elsif @document.section_type == "document" %>
+	$('#doc_container_<%= params[:document_id] %>').html("<%= escape_javascript(render(:partial => 'document_content_mock',locals: { doc: @document }, :content_type => 'text/html'))%>");
+<% elsif @document.section_type == "online_exam" %>
+	$('#doc_container_<%= params[:document_id] %>').html("<%= escape_javascript(render(:partial => 'exam_content',locals: { exam: @document ,online_mock_exam_attempt: @online_mock_exam_attempt }, :content_type => 'text/html'))%>");
+<% else %>
+	$('#doc_container_<%= params[:document_id] %>').html("<%= escape_javascript(render(:partial => 'essay_content',locals: { essay: @document,essay_responses: @essays_responses }, :content_type => 'text/html'))%>");
+<% end %>

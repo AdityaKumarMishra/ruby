@@ -1,0 +1,7 @@
+- if current_user.nil? || !current_user.courses.present?
+  .recommender_box
+    %button{class: "course_text"} Course Recommender
+:javascript
+  $(".course_text").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

@@ -1,0 +1,14 @@
+-if other_course.enrolment_end_date >= Time.zone.now.beginning_of_day
+    %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10{href: "/courses/" + other_course.id.to_s + "/enrolments/enrol"} SECURE YOUR PLACE NOW
+    %p.custom_mok_show{style: "margin-top: 15px;"}
+    %strong>
+        All Online Components are Available Immediately After Completion of Payment
+
+-else
+    #wait-modal-btn
+        = link_to "ENROLMENT CLOSED. JOIN WAITLIST", new_waitlist_user_path(course_id: other_course.id), remote: true, class: "default_btn fs14 hvr-shutter-in-horizontal mbot10"
+    %p.custom_mok_show{style: "margin-top: 15px;"}
+    %strong>
+        Or Select Next Available Course
+
+#wait-modal

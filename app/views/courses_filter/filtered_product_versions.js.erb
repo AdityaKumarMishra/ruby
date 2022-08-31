@@ -1,0 +1,9 @@
+<%html=""%>
+<% html += "<option value=''>All</option>" %>
+<% @options.each do |pv| %>
+  <% html += "<option value='#{pv.id}'>#{pv.name}</option>" %>
+<%end%>
+$(".pv_select").html("");
+$(".pv_select").html("<%= html.html_safe %>");
+$(".pv_select").trigger("chosen:updated");
+$('#trial-period').hide();

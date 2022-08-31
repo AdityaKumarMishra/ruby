@@ -1,0 +1,15 @@
+- events.each do |e_name, e_data|
+  -if e_data.present?
+    - e_data.each do |ele|
+      .col-md-12.event_detail_col
+        .col-md-2.event_date_col
+          %strong.date
+            = mon_date.to_date.strftime("%d")
+          %span
+            = mon_date.to_date.strftime("%B").upcase.first(3)
+        .col-md-10.event_desc_col
+          - ele.each do |key, value|
+            %p
+              %strong= "#{key}:"
+              = value
+

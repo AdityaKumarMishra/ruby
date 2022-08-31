@@ -1,0 +1,63 @@
+- if current_user.student?
+  :javascript
+    $(document).ready(function () {
+      var events = #{@events_dates}
+      var events_array = [];
+      $.each( events, function( i )
+      {
+        events_array.push({
+          "id": i,
+          "date": events[i],
+          "title": "",
+        });
+      });
+
+      $("#date-popover").popover();
+      $("#calendar").zabuto_calendar({
+
+        language: "en",
+        weekstartson: 0,
+        callbacks: {
+          on_cell_clicked: function() {
+            return myDateFunction(this.id);
+          }
+        },
+        events: {
+          local: events_array,
+          ajax: {
+            url: "" // load ajax json events here...
+          }
+        }
+      });
+
+
+      function myDateFunction(id) {
+        var date = $("#" + id).data("date");
+        if ($("#" + id + "-events").find("span").hasClass("badge"))
+        {
+          $(".no_event_for_the_day").hide();
+          $(".important_dates").removeClass("disable");
+          for (var i = 0; i < events_array.length; i++) {
+            if( events_array[i]["date"] == date){
+              $.ajax({
+                method: 'GET',
+                url: '/dashboard/important_dates',
+                data: {date: date }
+                });
+            }
+          }
+        }
+        else{
+          $(".important_dates,.no_events").addClass("disable");
+          $(".no_event_for_the_day").show();
+          $(".no_event_for_the_day .no_event_html").html("No Events on "+date)
+
+        }
+      }
+    });
+- else
+  :javascript
+    $(document).ready(function () {
+    $("#date-popover").popover();
+      $("#calendar").zabuto_calendar();
+    });

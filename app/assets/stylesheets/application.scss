@@ -1,0 +1,58 @@
+/*
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-social";
+@import "font-awesome";
+@import 'chosen/chosen.min';
+@import "video-js";
+@import "select2";
+
+@import "videojs-resolution-selector/video-quality-selector";
+@import 'bootstrap-datetimepicker';
+@import 'jquery.fileupload';
+@import 'jquery.fileupload-ui';
+
+@import 'normalize.scss';
+@import 'jquery.tagit.scss';
+@import 'tagit.ui-zendesk.scss';
+@import 'bootstrap-datepicker';
+@import 'jquery-ui';
+
+// import application wide stylings
+@import 'base/variables.scss';
+@import 'base/color.scss';
+@import 'base/mixins.scss';
+@import 'partial/*';
+@import 'base/globals.scss';
+@import 'base/utilities.scss';
+@import 'base/owl.carousel.scss';
+@import 'base/owl.theme.scss';
+@import 'base/grid.scss';
+@import 'base/hover.scss';
+
+// styles for React components
+@import 'base/course-recommender';
+@import 'base/sign-up';
+@import 'base/slideshow';
+@import 'base/gr-courses';
+@import 'base/feedbacks';
+@import 'base/comparison-modal';
+
+// (not optimal) import controller's CSS separately
+@import 'essays/*';
+@import 'surveys/*';
+@import 'styles/*';
+@import 'issue_forums.scss';
+@import 'feature_logs.scss';
+// import third party library css
+@import 'lib/*';
+@import 'validations/*';
+@import 'mCustomScrollbar.scss';
+@import 'sign_up.scss';
+@import 'ion.rangeSlider.scss';
+@import 'ion.rangeSlider.skinFlat.scss';
+@import 'course_detail.scss';
+@import 'jquery.growl.scss';

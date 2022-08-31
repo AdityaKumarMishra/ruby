@@ -1,0 +1,12 @@
+#textbookCheck.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "textbookCheck", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Select Textbooks
+      .modal-body
+        %p
+          You have not selected any textbook option. If you would like a Hardcopy of textbook, please click on "Cancel" and check the box in front of Hardcopy of Textbook option. Otherwise select "Continue" to select Online Textbook.
+      .modal-footer
+        = link_to 'Continue', order_path(id: @order, payment_page: true), class: 'no_confirm btn btn-default btn_danger default_btn resp_btn hvr-shutter-in-horizontal'
+

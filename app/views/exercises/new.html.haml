@@ -1,0 +1,13 @@
+- content_for :page_heading, 'MCQs'
+.dashbord_right
+  .resource_col
+    %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+  .faq_list.para_fs14
+    - if current_user && (current_user.student?)
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'Mcq Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/mcq_video", announcement: @announcement
+    .faq_list_col.table_3_col
+      = render 'form'
+

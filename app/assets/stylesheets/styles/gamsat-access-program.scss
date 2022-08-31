@@ -1,0 +1,29 @@
+#public-page h1 {
+  color: #009348;
+}
+.width100{
+  width:100%;
+}
+.access_program{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: 20px;
+  color: #333;
+  font-size: 14px !important;
+  p{
+    margin: 0 0 10px;
+    font-size: 14px ;
+    line-height: 20px;
+  }
+  p.apply_text{
+    margin-left: 15px;
+  }
+  h5 {
+    font-weight: bold !important;
+    font-size: 1.2em !important;
+  }
+  p.no_botm_margin {margin-bottom:0;}
+}
+.access_program p.access_foot_note {
+  margin-top: 76px;
+  font-size: 12px;
+ }

@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 1px; float: left; color: #FFF; margin-bottom: 40px; font-size: 15px; padding: 5px 14px; font-weight: 600; background: #007833;"}
+              - if @question.resolver
+                = "Ticket on your Name is resolved by #{@question.resolver.first_name}"
+              - else
+                = "Ticket on your Name is resolved"
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; float: left; font-size: 15px;"}
+              ="Hi,"
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              - if @question.resolver
+                = "Ticket #{@question.title} created by #{@question.asker_firstname} #{@question.asker_lastname} is marked as resolved by #{@question.resolver.first_name} "
+              - else
+                = "Ticket #{@question.title} created by #{@question.asker_firstname} #{@question.asker_lastname} is marked as resolved"
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

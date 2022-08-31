@@ -1,0 +1,26 @@
+
+%p
+  %b Name:
+  = @master_feature.name
+%p
+  %b Types:
+  = @master_feature.types.reject { |c| c.empty? }.join(', ')
+%p
+  %b Url:
+  = @master_feature.url
+%p
+  %b Icon:
+  = @master_feature.icon
+%p
+  %b Show in sidebar:
+  = @master_feature.show_in_sidebar
+%p
+  %b Position:
+  = @master_feature.position
+%p
+  %b Default state:
+  = @master_feature.default_state
+
+= link_to 'Edit', edit_master_feature_path(@master_feature)
+\|
+= link_to 'Back', master_features_path

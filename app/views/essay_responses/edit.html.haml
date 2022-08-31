@@ -1,0 +1,13 @@
+- if current_user.student?
+  - content_for :page_heading, 'Write Response'
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void"} Hide All
+    .faq_list.para_fs14
+      = simple_form_for(@essay_response, url: essay_response_path(essay_id: @essay.slug)) do |f|
+        = render 'essay_responses/partial/form', f: f
+- else
+  .container
+    .row
+      = simple_form_for(@essay_response, url: essay_response_path(essay_id: @essay.slug)) do |f|
+        = render 'essay_responses/partial/form', f: f

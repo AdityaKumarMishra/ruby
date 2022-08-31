@@ -1,0 +1,194 @@
+= simple_nested_form_for(@product_version, url: "/product_versions/#{@product_version.slug}") do |f|
+  =# f.error_notification
+  .form-inputs
+    = f.hidden_field :product_line_id, value: @product_line.try(:id)
+    = f.input :name
+    = f.input :description
+    = f.input :early_bird, label: "Display Early Bird"
+    = f.input :price
+    = f.input :type, label: 'Product Line', readonly: true
+    = f.input :course_type, collection: ProductVersion::course_types.map{|k,v| [((v==0 || v==10)? "FE - " : "NM - ") + k.titleize, v] }, include_blank: 'Please Select Type', selected: f.object.present? ? ProductVersion.course_types[f.object.course_type] : false, input_html: { class: f.object.persisted? ? '' : 'CourseTypeMasterFeature', id: 'pv_course_type' }
+    = f.hidden_field :freemium, value: (f.object.course_type == 'free_trial' ? true : false), id: 'freemium'
+    .h1
+      Add Features
+    #productVersionCourseType
+      = f.fields_for :product_version_feature_prices, f.object.persisted? ? f.object.product_version_feature_prices.where(is_additional: false) : true do |feat|
+        .row
+          .col-md-12.master_feature
+            .add_master_feature_block
+              %h3 Select master feature
+              = feat.input :is_default, collection: [true, false], selected: feat.object.is_default, input_html: { class: 'is_default_dropdown' }
+              - data = @master_features.pluck(:name, :id)
+              - data.map! { |s| [master_feature_humanize_name(s[0]), s[1]]}
+              -if feat.object.persisted?
+                - master_feature = feat.object.master_feature
+              -else
+                - master_feature = @master_features[feat.index.to_i]
+              -if feat.object.persisted?
+                / = feat.input :master_feature_id, collection: data, input_html: {class: 'master-fetaure-drop-list'}
+                = feat.input :master_feature_id, collection: data, selected: master_feature.try(:id), input_html: {class: 'chosen-select master_feature_dropdown'}
+              -else
+                = feat.input :master_feature_id, collection: data, selected: master_feature.try(:id), input_html: {class: 'chosen-select master_feature_dropdown'}
+
+              .form-group.subtype_group
+                = feat.label :subtype
+                %i.fa.fa-question-circle{ style: 'font-size: 15px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Subtype 1 features are features where additional units are actually purchased separately by students.<br> Subtype 2 features are features where additional units are NOT actually purchased separately by students' } }
+                = feat.select :subtype, options_for_select(ProductVersionFeaturePrice.subtypes.keys.map{|st| [st.humanize, st] }, selected: feat.object.subtype), {include_blank: false}, class: 'form-control subtype_dropdown'
+
+              .form-group
+                %label.price_label Unit Price
+                -if feat.object.persisted?
+                  = feat.number_field :price, class: "form-control"
+                -else
+                  = feat.number_field :price, value: @product_version.get_master_feature_price(master_feature.try(:id)), class: "form-control"
+
+              - if master_feature.live_exam? || master_feature.get_clarity? || master_feature.hardcopy? || master_feature.document_feature? || master_feature.attendance? || master_feature.online_mock_exam? || master_feature.weekend_feature? || master_feature.diagnostic_feature? || !feat.object.is_default
+                %div.form-group.master-qty.row{style: 'display: none;'}
+                  .col-md-10.col-lg-10.col-sm-10
+                    %label Default Access Number
+                    = feat.number_field :qty, {class: 'form-control dan_input', disabled: feat.object.qty.blank? }
+                  .col-md-2.col-lg-2.col-sm-2.unlimited_div{style: 'margin-top: 10px;'}
+                    %label Unlimited
+                    %br
+                    = feat.check_box :unlimited, as: :boolean, checked: feat.object.qty.blank?, class: 'unlimited_checkbox'
+              - else
+                %div.form-group.master-qty.row
+                  .col-md-10.col-lg-10.col-sm-10
+                    %label Default Access Number
+                    = feat.number_field :qty, {class: 'form-control dan_input', disabled: feat.object.qty.blank? && !master_feature.private_tutoring? }
+                  .col-md-2.col-lg-2.col-sm-2.unlimited_div{style: 'margin-top: 10px;' + (master_feature.private_tutoring? ? 'display: none;' : '')}
+                    %label Unlimited
+                    %br
+                    = feat.check_box :unlimited, as: :boolean, checked: feat.object.qty.blank? && !master_feature.private_tutoring?, class: 'unlimited_checkbox'
+
+              -if feat.object.persisted?
+                = feat.association :tags, input_html: { class: 'chosen-select tag-list tag_type', "data-selected" => "#{feat.object.tags.present? ? feat.object.tags.collect{|e| e.id.to_s} : []}" }
+              -else
+                = feat.association :tags, selected: "#{feat.object.selected_feature_tag(@product_line)}",input_html: { class: 'chosen-select tag-list' }
+              = feat.link_to_remove "remove", class: 'pull-right', data: {apply_confirm: feat.object.id.present?}
+  .form-actions
+    = f.link_to_add('+ Add another feature', :product_version_feature_prices, class: 'add-pvfp-button')
+  .form-actions
+    %br/
+    = f.button :submit
+
+:javascript
+  $(document).ready(function(){
+    $('.edit_gamsat_ready').submit(function(){
+      $('.edit_gamsat_ready :disabled').removeAttr('disabled')
+    })
+  });
+
+  $(document).on('change', '.subtype_dropdown', function(event){
+    var priceLabel = $(event.target).parents('.add_master_feature_block').find('.price_label');
+    var subtype = $(event.target).val();
+
+    if (subtype == 'subtype_1'){
+      priceLabel.text('Unit Price');
+    }
+    else if (subtype == 'subtype_2'){
+      priceLabel.text('Feature Price');
+    }
+  });
+
+  $(document).on('change', '.unlimited_checkbox', function(evt){
+    var checkBox = $(evt.target);
+    var danInput = checkBox.parents('.master-qty').find('.dan_input');
+
+    if (checkBox.is(':checked')){
+      danInput.val(0);
+      danInput.attr('disabled', true);
+    } else {
+      danInput.attr('disabled', false);
+    }
+  });
+
+  $(document).on('change', '.is_default_dropdown', function(event){
+    var dd = $(event.target);
+    var dropdownVal = $(event.target).parents('.add_master_feature_block').find('.master_feature_dropdown option:selected').text();
+
+    if (dd.val() == 'true' && !(dropdownVal.includes('Live Mock Exam Feature') || dropdownVal.includes('Clarity Feature') || dropdownVal.includes('Textbook Hard Copy Feature') || dropdownVal.includes('Documents Feature') || dropdownVal.includes('Tutorials Feature'))){
+      dd.parents('.add_master_feature_block').find('.master-qty').show();
+    } else {
+      dd.parents('.add_master_feature_block').find('.dan_input').val(0);
+      dd.parents('.add_master_feature_block').find('.master-qty').hide();
+    }
+  });
+
+  $(document).on('change', '.master_feature_dropdown', function(event){
+    var danDiv = $(event.target).parents('.add_master_feature_block').find('.master-qty');
+    var unlimited_div = $(event.target).parents('.add_master_feature_block').find('.unlimited_div');
+    var dropdownVal = $(event.target).parents('.add_master_feature_block').find('.master_feature_dropdown option:selected').text();
+
+    if (dropdownVal.includes('Live Mock Exam Feature') || dropdownVal.includes('Clarity Feature') || dropdownVal.includes('Textbook Hard Copy Feature') || dropdownVal.includes('Documents Feature') || dropdownVal.includes('Tutorials Feature')){
+      danDiv.hide();
+      $(event.target).parents('.add_master_feature_block').find('.dan_input').val(0);
+      unlimited_div.hide();
+      unlimited_div.find('input').prop('checked', false);
+    }
+    else if (dropdownVal.includes('Private Tutoring Feature')){
+      unlimited_div.hide();
+      unlimited_div.find('input').prop('checked', false);
+    }
+    else {
+      danDiv.show();
+      unlimited_div.show();
+      unlimited_div.find('input').prop('checked', false);
+    }
+  });
+
+  $('#pv_course_type').on('change', function(){
+    var course_type = $(this).find('option:selected').text().substr(0, 2);
+    if (course_type == 'FE'){
+      $("#freemium").val(true);
+    }
+    else{
+      $("#freemium").val(false);
+    }
+  });
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $('.tag_type').on('change', function(event) {
+    var selected_val = $(this).val();
+    var already_val = new Array($(this).data('selected'));
+    if(already_val!=null){
+      if (already_val.length!=0 && already_val[0].length!=0 && (!hasSubArray(selected_val, already_val[0]))){
+        alert("Unable to remove tag due to prevention of data loss");
+        $(this).val(already_val[0]).trigger('chosen:updated');
+      }
+    }
+  });
+
+  $(".container").on('click',"a.remove_nested_fields",function(e){
+    if($(this).data('apply-confirm')){
+      alert("Unable to remove tag due to prevention of data loss");
+      e.stopImmediatePropagation();
+    }
+  });
+  
+  function hasSubArray(master, sub1) {
+    if((master != null) && (sub1 != null)){
+      return containsAll(sub1,master)
+    }
+    else if(sub1 != null){
+      return false
+    }
+    else{
+      return true;
+    }
+  }
+
+  function containsAll(needles, haystack){ 
+    for(var i = 0; i < needles.length; i++){
+       if($.inArray(needles[i], haystack) == -1) return false;
+    }
+    return true;
+  }
+
+:css
+  .chosen-single span {
+    color: #555555;
+  }

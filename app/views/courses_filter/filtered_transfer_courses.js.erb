@@ -1,0 +1,21 @@
+<% if @options.present? %>
+  <%html=""%>
+  <% html += "<option value=''>All</option>" %>
+  <% @options.each do |pv| %>
+    <% html += "<option value='#{pv.id}'>#{pv.name}</option>" %>
+  <%end%>
+  $(".pv_select").html("");
+  $(".pv_select").html("<%= html.html_safe %>");
+  $(".pv_select").trigger("chosen:updated");
+<% end %>
+
+<%html=""%>
+<% if @courses.present? %>
+  <% html += "<option value=''>Please Select Course</option>" %>
+  <% @courses.each do |c| %>
+    <% html += "<option value='#{c.id}'>#{c.name}</option>" %>
+  <%end%>
+<%end%>
+$(".chosen-select").html("");
+$(".chosen-select").html("<%= html.html_safe %>");
+$(".chosen-select").trigger("chosen:updated");

@@ -1,0 +1,10 @@
+%tr
+  %td
+    = blog_category.name
+  %td
+    = blog_category.blog_type
+  %td
+    = link_to "Edit", edit_blog_category_path(blog_category.id), class: "btn btn-info btn-sm"
+  %td
+    -if blog_category.posts.size == 0
+      = link_to "Delete", blog_category_path(blog_category.id), method: :delete, remote: true, data: {confirm: "Are You sure?"}, class: "btn btn-danger btn-sm"

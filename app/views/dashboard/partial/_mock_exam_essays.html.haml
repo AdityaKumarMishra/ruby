@@ -1,0 +1,77 @@
+= will_paginate responses, renderer: BootstrapPagination::Rails
+%br
+= form_for :assign_essays, url: mass_update_tutor_mock_exam_essays_path, html: {id: 'assign-essays-tutor'} do |f|
+  %label
+    = check_box_tag :essay_select_all, nil, false, essay_type: 'Mock'
+    Select all
+
+  %button.btn.btn-success{"data-target" => "#MassAssignTutorEssay", "data-toggle" => "modal", type: "button", id: 'mass_assign_tutor_essay', disabled: true} Assign Essays
+  %br
+  %br
+  %table.table.table-bordered.table-hover#mock_essay_table
+    %thead
+      %tr
+        %th
+        %th Date Submitted
+        %th Date Marked
+        %th Student First Name
+        %th Student Last Name
+        %th Course Name
+        %th Submitted Tutor
+        %th Marked Tutor
+        %th Status
+        %th.brdr_rt_nn Actions
+        %th.brdr_lf_nn.brdr_rt_nn
+    %tbody
+      = hidden_field_tag :total_response_ids, total_responses.ids
+      - responses.each do |response|
+        %tr
+          %td
+            = f.check_box :responses_ids, { multiple: true, class: 'essay-id-checkbox' }, response.id, false
+
+          %td= response.submitted_at.present? ? response.submitted_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s : ""
+          - date_marked = response.status == "marked"? response.marked_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s : ""
+          %td= date_marked
+          %td= response.user.first_name
+          %td= response.user.last_name
+          %td= response.course.try(:name)
+          %td= response.submitted_tutor
+          -if response.mock_essays.joins(:mock_essay_feedback).present?
+            - tutor_feedback = response.mock_essays.joins(:mock_essay_feedback).first.mock_essay_feedback
+            %td= tutor_feedback.user.full_name
+          -else
+            %td -
+          %td
+            -if MockExamEssay.statuses[response.status] == 0
+              .label-default.label
+                = response.status.titleize
+            -elsif MockExamEssay.statuses[response.status] == 1
+              .label-danger.label
+                = response.status.titleize
+            -else
+              .label-success.label
+                = response.status.titleize
+
+          %td=link_to 'View', mock_essay_mock_essay_feedbacks_path(response.id),class: 'btn btn-info btn-sm', target: "_blank"
+          -if [1,0].include?(MockExamEssay.statuses[response.status]) && !(current_user.student? || current_user.tutor?)
+            %td= link_to 'Assign', assign_tutor_mock_exam_essay_path(id: response.id), remote: true, class: 'btn btn-danger btn-sm'
+          - else
+            %td
+  = render 'essay_responses/partial/mass_assign_tutor'
+  #AssignTutorToMockEssay
+:javascript
+  $(document).ready(function(){
+    if(Cookies.get('to_mark_mock_essay') == "true"){
+      $('#essay_select_all').click();
+    }
+  });
+
+  $(document).ready(function() {
+      $('#mock_essay_table').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "aoColumnDefs" : [
+          { orderable: false, targets: [0, 3, 4, 5, 6, 7, 8, 9] } ]
+      });
+  } );

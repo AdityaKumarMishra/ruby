@@ -1,0 +1,250 @@
+- title "GAMSAT Preparation Courses Australia | GradReady"
+- meta_description "Best GAMSAT Preparation Courses in Australia. Our students have achieved an average improvement of 20+ Percentile Points, 5 years in a row. Join 6000+ GradReady Students today and see how our Targeted Approach and Industry-Leading Learning Technology has made the difference."
+- meta_keywords "gamsat preparation courses, gamsat prep courses, gamsat courses, gamsat preparation australia, gamsat prep australia"
+
+- content_for :head do
+  %script{:type => "application/ld+json"}
+    {"@context":"http://schema.org","@type":"Organization","name":"GradReady","url":"https://gradready.com.au/","logo":"https://gradready.com.au/assets/gradready-logo-green-a87ed737b9ddbb67a11deaa615db7e88fd997b30cdf54a70975a7dde239ade94.png","sameAs":["https://www.facebook.com/GradReadyGAMSAT/","https://twitter.com/GradReadyGAMSAT","https://www.instagram.com/gradreadygamsat/"],"areaServed":[{"@type":"State","name":"Brisbane, Australia"},{"@type":"State","name":"Melbourne, Australia"},{"@type":"State","name":"Perth, Australia"},{"@type":"State","name":"Adelaide, Australia"},{"@type":"State","name":"Sydney, Australia"}],"contactPoint":[{"@type":"ContactPoint","contactType":"Customer Support","url":"https://gradready.com.au/gamsat-preparation-courses/contact","telephone":"+61-475-390-660"}]}
+  %script{:type => "application/ld+json"}
+    {"@context":"http://schema.org","@type":"WebSite","about":"Over 1,000 students each year use our GAMSAT®, UCAT®, VCE® and HSC® preparation courses. We offer live and online classes and tutors in Sydney, Melbourne, Brisbane, Perth, Adelaide and Canberra.","inLanguage":"English","publisher":"GradReady","potentialAction":{"@type":"SearchAction","target":"https://gradready.com.au/#s={search_term_string}","query-input":"required name=search_term_string"},"keywords":["material","exams","gst","purchase","comprehensive","study","hrs","getclarity","diagnostics","referencing","cross","mcqs","attendance","tracking","assurance","strategy","component","components","practical","teaching"],"copyrightHolder":[{"@type":"Organization","url":"https://gradready.com.au/","name":"GradReady"}],"name":"GradReady ","alternateName":"GradReady","url":"https://gradready.com.au/"}
+
+/ Home Page Banner Images and Free Study Guide
+.banner_wrapper.home_banner_sec
+  #free_study_guide.banner_graph_section
+    .banner_container
+      .graph_content.mob_bg_graph
+        %a{href: "#{gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+      %a.mob_graph{href: 'javascript:void(0)'}
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+
+  -if FreeStudyBuddy.first.present? and FreeStudyBuddy.first.try(:is_active?)
+    =render 'free_study_buddies/free_study_buddy_modal'
+  .free_trial_form.fr_desktop
+    -#unless FreeStudyBuddy.all.blank?
+    -if FreeStudyBuddy.first.present? and FreeStudyBuddy.first.try(:is_active?)
+      -free_study_buddy = FreeStudyBuddy.first
+      =render 'free_study_buddies/free_study_buddy_modal'
+      %form.hvr-shutter-in-horizontalut-vertical.trial_form_wrapper
+        %p.free_trial_heading
+          =free_study_buddy.title
+        %p
+          =free_study_buddy.info_text
+        %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "button", 'data-toggle' => 'modal', 'data-target'=> '#free-study-buddy-modal'}
+          =free_study_buddy.button_text
+          %span.span_arrow
+            %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+    -elsif FreeStudyBuddy.find_by(title: "GAMSAT Free Trial").present? and FreeStudyBuddy.find_by(title: "GAMSAT Free Trial").try(:is_active?)
+      -free_study_buddy = FreeStudyBuddy.second
+      = simple_form_for(@user, url: free_gamsat_trial_users_path, html: {role: "search", class: 'hvr-shutter-out-vertical trial_form_wrapper'}) do |f|
+        = f.invisible_captcha :subtitle
+        %p.free_trial_heading
+          =free_study_buddy.title
+        %p
+          =free_study_buddy.info_text
+        = f.input :email, label: false, input_html: { placeholder: "Email", class: ('has_error' if flash[:error].present?) }
+        = f.input :password, label: false, input_html: {placeholder: "Password"}
+        = f.hidden_field :signup_form_start_time
+        = f.hidden_field :signup_form_end_time
+        - if current_user.nil?
+          %p.add_capctha_issue.mb5{style: "color: red;"}
+          .add_capctcha_main
+            = recaptcha_tags
+        .trial_btn_wrapper
+          %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "submit", value: 'Gamsat', name: 'commit'}
+            =free_study_buddy.button_text
+    -else
+      = simple_form_for(@user, url: study_guide_users_path, html: {role: "search", class: 'hvr-shutter-out-vertical trial_form_wrapper'}) do |f|
+        %p.free_trial_heading Free Study Guide
+        %p
+          Get free access to GradReady study guides to get ahead of the pack!
+        = f.input :email, label: false, input_html: { placeholder: "Email", class: ('has_error' if flash[:error].present?) }
+        = f.input :password, label: false, input_html: {placeholder: "Password"}
+        -if current_user.nil?
+          %p.add_capctha_issue.mb5{style: "color: red;"}
+          .add_capctcha_main
+            = recaptcha_tags
+        .trial_btn_wrapper
+          %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "submit", value: 'Gamsat', name: 'commit'}
+            Get GAMSAT
+            %sup ®
+            Guides
+          / %span.or_col OR
+          / %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn.umat_trial_btn{type: "submit", value: 'Umat', name: 'commit'}
+          /   Get UCAT
+          /   %sup ®
+          /   Guides
+          /   %span.span_arrow
+          /     %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+          /   %span.span_arrow
+          /     %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+
+    %h1.btm_space_hght
+      %a{href: "#happy_student"}
+        GradReady GAMSAT
+        %sup ®
+        &amp; UCAT
+        %sup ®
+        Preparation
+
+  .pro_line.fr_desktop.mt100
+    = render 'public_page_partial/happy_student'
+  .free_trial_form.fr_mobile.mg15
+    -if FreeStudyBuddy.first.present? and FreeStudyBuddy.first.try(:is_active?)
+      -free_study_buddy = FreeStudyBuddy.first
+      %form.hvr-shutter-in-horizontalut-vertical.trial_form_wrapper
+        %p.free_trial_heading
+          =free_study_buddy.title
+        %p
+          =free_study_buddy.info_text
+        %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "button", 'data-toggle' => 'modal', 'data-target'=> '#free-study-buddy-modal'}
+          =free_study_buddy.button_text
+          %span.span_arrow
+            %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+    -elsif FreeStudyBuddy.find_by(title: "GAMSAT Free Trial").present? and FreeStudyBuddy.find_by(title: "GAMSAT Free Trial").try(:is_active?)
+      -free_study_buddy = FreeStudyBuddy.second
+      = simple_form_for(@user, url: free_gamsat_trial_users_path, html: {role: "search", class: 'hvr-shutter-out-vertical trial_form_wrapper'}) do |f|
+        %p.free_trial_heading
+          =free_study_buddy.title
+        %p
+          =free_study_buddy.info_text
+        = f.input :email, label: false, input_html: { placeholder: "Email", class: ('has_error' if flash[:error].present?) }
+        = f.input :password, label: false, input_html: {placeholder: "Password"}
+        .trial_btn_wrapper
+          %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "submit", value: 'Gamsat', name: 'commit'}
+            Sign Up
+    -else
+      = simple_form_for(@user, url: study_guide_users_path, html: {role: "search", class: 'hvr-shutter-out-vertical trial_form_wrapper', id: ''}) do |f|
+        %p.free_trial_heading Free Study Guide
+        %p
+          Get free access to GradReady study guides to get ahead of the pack!
+        = f.input :email, label: false, input_html: { placeholder: "Email", class: ('has_error' if flash[:error].present?), id: 'mob_user_email' }
+        = f.input :password, label: false, input_html: {placeholder: "Password", id: 'mob_user_password'}
+        .trial_btn_wrapper
+          %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "submit", value: 'Gamsat', name: 'commit'}
+            Get GAMSAT
+            %sup ®
+            Guides
+            %span.span_arrow
+              %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+          / %span.or_col OR
+          / %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn.umat_trial_btn{type: "submit", value: 'Umat', name: 'commit'}
+          /   Get UCAT
+          /   %sup ®
+          /   Guides
+          /   %span.span_arrow
+          /     %i.fa.fa-chevron-right{"aria-hidden" => "true"}
+= render 'public_page_partial/partners'
+%section.mob_padd0#mob_course
+  .text-center.full_width.mbtop_50.mobtop_50.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+    %h2.mbtop_50
+      GAMSAT
+      %sup ®
+      &amp; UCAT
+      %sup ®
+      Courses at
+      %span.grad_logo_head
+        %span.green
+          Grad
+        %span.black
+          Ready
+  .gamsat_course_wrapper.gm-course-flex.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+    .gamsat_courses_col.hvr-sweep-to-left
+      .gamsat_courses_description
+        %a{href: "/gamsat-preparation-courses"}
+          %span
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gmat_logo.png', alt: "GradReady GAMSAT and UCAT Courses"
+          %h3
+            15 Day (8 core + 7 optional) GAMSAT
+            %sup ®
+            \&amp; Interview Courses
+          %p
+            Most comprehensive and widely-used Graduate Medical School Admissions Test (GAMSAT
+            %sup ®
+            ) preparation course.
+    .hvr-sweep-to-right.gamsat_courses_col.umat_course_bg
+      .gamsat_courses_description
+        %a{href: "/umat-preparation-courses"}
+          %span
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gmat_logo.png', alt: "GradReady GAMSAT and UCAT Courses"
+          %h3
+            GradReady + Kaplan UCAT
+            %sup ®
+            Courses (12 Years Experience  )
+          %p
+            GradReady is proud to recommend Kaplan to provide expert UCAT
+            %sup ®
+            preparation, refined over 12 years of teaching and testing.
+
+%section.mob_padd0
+  = render 'public_page_partial/countdown_timer',  page_name: 'main' if @countdown_timer.try(:show_countdown?)
+/ How are Grad Ready Preparation Courses Differen
+= render 'public_page_partial/gradready_different', page_name: 'main'
+/ Talk to us page
+%section.talk_to_bg.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+  .container
+    .support_col
+      %span
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/talk_img.png', alt: "Support"
+      .support_content
+        %h3 Need help on specific topics?
+        %p
+          Call Us or schedule a call back with our student support team.
+      %a#quiz.default_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/contact#call_back_overlay"} TALK TO US
+/ Student Testimonials page
+= render 'public_page_partial/our_students'
+= render 'validations/signup_validator'
+-if params[:tutor_gc]
+  :javascript
+    $(document).ready(function() {
+      $(".support_icon").click();
+      $("form#new_ticket #answer_tag_id").val(359);
+    })
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });
+
+  var signupFormStartTime = null;
+  var signupFormEndTime = null;
+
+  $(document).ready(function() {
+    $(".free_trial_form h1 a").on("click", function( e ) {
+      e.preventDefault();
+      $("body, html").animate({
+        scrollTop: $( $(this).attr('href') ).offset().top
+      }, 600);
+    });
+
+    setTimeout(function() {
+      $(".g-recaptcha").addClass("resize_capctha");
+    }, 500);
+
+    $('#user_email, #user_password').on('input', function(e){
+      if (signupFormStartTime == null) {
+        signupFormStartTime = (new Date()).getTime();
+
+        $('#user_signup_form_start_time').val(signupFormStartTime);
+      } else {
+        signupFormEndTime = (new Date()).getTime();
+
+        $('#user_signup_form_end_time').val(signupFormEndTime);
+      }
+    });
+  });
+
+  $('#new_user').submit(function( e ){
+    if(grecaptcha.getResponse() == "") {
+      $('.add_capctha_issue').text('Please verify CAPCTHA');
+      $('.add_capctcha_main').addClass("mb5")
+      e.preventDefault();
+    }
+  });
+
+:css
+  #new_user .error{
+    color: red;
+    font-weight: 400;
+  } 

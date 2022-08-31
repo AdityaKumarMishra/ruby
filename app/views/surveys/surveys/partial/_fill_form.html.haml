@@ -1,0 +1,30 @@
+-content_for :head do
+  :javascript
+    $(function() {
+    setInterval(function(){
+      $.ajax({
+              url: "#{surveys_survey_filled_path questions.first.survey}",
+              type: 'post',
+              dataType: 'json',
+              data: $('form.filled_survey').serialize()+ "&incomplete=true",
+              success: function(data) {}
+          });
+    },10000);
+    });
+- if questions.any?
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        Questions
+        = simple_form_for :filled_survey do |f|
+          - questions.each do |question|
+            .panel.panel-default
+              .panel-body
+                = raw question.question
+                = f.input question.answer_input_html_name,
+                  :as => :text,
+                  :label => false,
+                  :input_html => { :value => question.answer_for_user(current_user) },
+                  :readonly => question.is_answered(current_user)
+          .btn-group
+            = f.button :submit, class: 'btn btn-primary'

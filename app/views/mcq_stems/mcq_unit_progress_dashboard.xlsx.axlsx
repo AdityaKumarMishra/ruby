@@ -1,0 +1,69 @@
+require 'json'
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "MCQs Details") do |sheet|
+  def data_array(mcq_stem) 
+    data_array = []
+    mcq_stem = OpenStruct.new(mcq_stem)
+    all_stars = mcq_stem.all_stars.delete('\\"{}').split(',').map{|x| x.split('|').last}.reject(&:blank?).map(&:to_f) rescue []
+    if all_stars.present? &&  all_stars.count > 0
+      avg_rating  = (all_stars.sum/all_stars.count).to_f.round(1)
+    else
+      avg_rating = 0.0
+    end
+    tag_names = mcq_stem.tag_names.delete('\\"{}') rescue ''
+    exam_titles = mcq_stem.exam_titles.delete('\\"{}') rescue ''
+    test_titles = mcq_stem.test_titles.delete('\\"{}') rescue ''
+    data_array.push("#{mcq_stem.id.to_s} - #{mcq_stem.title.to_s}")
+    data_array.push(tag_names)
+    data_array.push(McqStem.work_statuses.keys[mcq_stem.work_status]) if mcq_stem.work_status.present?
+    data_array.push(mcq_stem.work_status_updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s)  
+    data_array.push(McqStem.statuses.keys[mcq_stem.status]) if mcq_stem.status.present?
+    data_array.push(appear_in_exam mcq_stem)
+    data_array.push(mcq_stem.try(:author))
+    data_array.push(mcq_stem.try(:reviewer))
+    data_array.push(mcq_stem.try(:reviewer2))
+    data_array.push(mcq_stem.try(:video_explainer))
+    data_array.push(mcq_stem.try(:video_reviewer))
+    data_array.push(McqStem.pools.keys[mcq_stem.pool])
+    data_array.push(mcq_stem.try(:similarity_score))
+    data_array.push(difficulty_to_human(mcq_stem.difficulty.to_i))
+    data_array.push(mcq_stem.mcq_count)
+
+    mcq_stem.try(:mcqs).present? ? data_array.push(mcq_stem.mcq_videos_count) : data_array.push(0)
+
+    mcq_stem.try(:mcqs).present?  ? data_array.push(mcq_stem.published_videos_count) : data_array.push(0)
+    
+    data_array.push(mcq_stem.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s)
+
+    data_array.push(mcq_stem.updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s)
+  end
+
+  sheet.add_row [
+    "MCQ Stem ID & Title",
+    "Tags",
+    "Work Status",
+    "Time of Last Work Status Update",
+    "Published Status",
+    "Appears in",
+    "Author",
+    "Reviewer 1",
+    "Reviewer 2",
+    "Video Explainer",
+    "Video Explanation Reviewer",
+    "MCQ Unit Pool",
+    "Overall Score",
+    "Stem Difficulty",
+    "Number of Questions",
+    "Number of Videos",
+    "Number of Videos Published",
+    "Created on",
+    "Last Updated on"
+  ]
+
+  @mcq_stems.each do |mcq_stem|
+    row = sheet.add_row data_array(mcq_stem)
+    sheet.add_hyperlink :location => edit_mcq_stem_url(mcq_stem["id"]), :ref => row.cells[0]
+    sheet.add_hyperlink :location => total_rating_mcq_stem_url(mcq_stem["id"]), :ref => row.cells[2]
+  end
+end

@@ -1,0 +1,143 @@
+- content_for :page_heading, 'Mock Exam'
+- if current_user && (current_user.student?)
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+      - if !@announcement.nil?
+        .faq_list_col
+          = render 'announcements/student_announcement', announcement: @announcement, title: 'Mock Exams Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "mock_exam_online_guideline", announcement: @announcement
+
+        .faq_list_col
+          %h4.mbot25 Mock Exam
+          .statics_static_table.mtop_botm
+            %ul
+              %li
+                %span
+                  %strong Overall Percentile
+              %li
+                %span
+                %strong
+                  - if @live_exam.present? && @live_exam.persisted? && @live_exam.all_sections_completed
+                    = @live_exam.total_percentile.round(1)
+                  - else
+                    N/A
+
+          -if @live_exam.persisted?
+            -if request.variant == [:phone]
+              .mobile_table_border
+                %ul.tbl_head
+                  %li.width_inc Section
+                  %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                    M
+                    %span.heading_tool_tip.mrht37
+                      %p Marks scored
+                  %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                    P
+                    %span.heading_tool_tip.mrht37
+                      %p Percentile
+
+                - @sections.each_with_index do |section, index|
+                  %ul.mobile_table_body.listing.tbl_head.bdr_none
+                    %li.mobile_mousehover_tool.width_inc
+                      =truncate(section, length: 30)
+                      %ul.tool_tip
+                        %li
+                          =section
+                        %li
+                          Marks:
+                          = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_score : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_score : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_score : 'N/A'
+                        %li
+                          Percentile:
+                          = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_percentile.round(1) : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_percentile.round(1) : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_percentile.round(1) : 'N/A'
+                    %li.mobile_mousehover_tool.mobile_wdt_th.rht56
+                      = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_score : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_score : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_score : 'N/A'
+                    %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+                      = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_percentile.round(1) : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_percentile.round(1) : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_percentile.round(1) : 'N/A'
+            -else
+              %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+                %thead
+                  %tr
+                    %th Section
+                    %th Marks scored
+                    %th Percentile
+                %tbody
+                  - @sections.each_with_index do |section, index|
+                    %tr
+                      %td.mobile_mousehover_tool
+                        =section
+                      %td
+                        = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_score : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_score : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_score : 'N/A'
+                      %td
+                        = index == 0 ? @live_exam.section_one_score != 0 ? @live_exam.section_one_percentile.round(1) : 'N/A' : index == 1 ? @live_exam.section_two_score != 0 ? @live_exam.section_two_percentile.round(1) : 'N/A' : @live_exam.section_three_score != 0 ? @live_exam.section_three_percentile.round(1) : 'N/A'
+
+
+
+          - else
+            -if request.variant == [:phone]
+              .mobile_table_border
+                %ul.tbl_head
+                  %li.width_inc Section
+                  %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                    M
+                    %span.heading_tool_tip.mrht37
+                      %p Marks scored
+                  %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                    P
+                    %span.heading_tool_tip.mrht37
+                      %p Percentile
+
+                - @sections.each_with_index do |section, index|
+                  %ul.mobile_table_body.listing.tbl_head.bdr_none
+                    %li.mobile_mousehover_tool.width_inc
+                      =truncate(section, length: 30)
+                      %ul.tool_tip
+                        %li
+                          =section
+                        %li
+                          Marks:
+                          N/A
+                        %li
+                          Percentile:
+                          N/A
+                    %li.mobile_mousehover_tool.mobile_wdt_th.rht56 N/A
+                    %li.mobile_mousehover_tool.mobile_wdt_th.rht15 N/A
+            -else
+              %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+                %thead
+                  %tr
+                    %th Section
+                    %th Marks
+                    %th Percentile
+                %tbody
+                  - @sections.each do |section|
+                    %tr
+                      %td.mobile_mousehover_tool
+                        =section
+                      %td N/A
+                      %td N/A
+
+
+
+        .faq_list_col.table-martop
+          %h4 Please enter scores
+          .course_frm.score-form
+            = render 'form', course: @current_course
+
+            .score-hide-col#essay_view.uploaded_files_wrapper
+              -if MockExamEssay.statuses[@mock_exam_essay.status] == 0
+                = render 'mock_exam_essays/form', course: @current_course
+              -else
+                = render 'mock_exam_essays/index', course: @current_course
+
+            = render 'form_2', course: @current_course
+
+:javascript
+
+  $( "#upload_essay" ).click(function() {
+    $(".score-hide-col").slideToggle("slow");
+    $( "#live_exam_section_two_score" ).toggleClass('section_two_space');
+    $( "#upload_essay" ).toggleClass('upload_btn_pos');
+  });

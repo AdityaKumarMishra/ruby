@@ -1,0 +1,73 @@
+.container-fluid.bg-grey{
+  background-color: #eee;
+}
+.white_bg.shadow_col {
+  position: relative;
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.white_bg h4 {
+  font-size: 30px;
+  color: #00853e;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.str_col {
+  width: 100%;
+  float: left;
+  margin-bottom: 33px;
+  text-align: left;
+  margin-top: 16px;
+}
+
+.str_col img {
+  width: 19.4%;
+  float: left;
+  margin-right: 55px;
+}
+.inner_mid h5, .test_cont_col h5 {
+  font-size: 20px;
+  color: #000;
+  text-align: center;
+  margin: 0px 0px 28px 0px;
+  font-weight: bold;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.white_bg {
+  width: 100%;
+  float: left;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 54px;
+}
+
+.white_bg h6.border_bot {
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 16px;
+    float: left;
+    width: 100%;
+}
+
+#public-courses .feature-icon-container .feature-content span.enhance-features{
+  display: inline-block ;
+}
+
+
+.str_col.rounded img {
+    border-radius: 100%;
+}
+.updates .nav.nav-tabs li.umat_blue.active {
+    color: #fff;
+    background: #007ecc;
+}
+.updates .nav.nav-tabs li.umat_blue{
+  border-top: thick solid #007ecc;
+}

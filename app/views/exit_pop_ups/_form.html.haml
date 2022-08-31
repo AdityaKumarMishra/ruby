@@ -1,0 +1,86 @@
+= render 'exit_popup_guideline_video'
+
+= simple_form_for(@exit_pop_up) do |f|
+  =# f.error_notification
+  .form-inputs
+    .div_field
+      = f.label :category, "* Category"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select Page Category on which the Exit Popup is required to be displayed.
+      = f.input :category, collection: ["Homepage", "Gamsat", "Umat"], prompt: "Please select category", label: false
+
+    .div_field
+      = f.label :display_name, "* Display Name"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Add name which will be displayed as title of the popup.
+      = f.input :display_name, label: false
+
+    .div_field
+      = f.label :message, "* Message"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        %p
+          1. Add message that will be visible in body of the exit popup.
+        %p
+          2. When you add Links, please go to Link --> Advanced -> Style and add "color:#007833" for GAMSAT and "color:#007ecc" for UCAT to ensure that links colour matches the whole website theme.
+        %p
+          3. Any Links to open in new tab ensure you select Link --> Target and select Target value as "New Window(_blank)"
+          Add name which will be displayed as title of the popup.
+      = f.input :message, label: false, as: :ckeditor, input_html: {ckeditor: { height: 300 } }
+
+    .div_field
+      = f.check_box :visible_to_user, as: :boolean
+      = f.label :visible_to_user
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Ensure you select the check box when you want to the exit popup to be visible to user.
+
+    .div_field
+      = f.label :cookie_name, "* Cookie Name"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        When you update the popup, please ensure you edit the name of the cookie so that both new and old users will get the exit pop-up for the set frequency. For example, if it was gamsat_pl when it was created 1st time, on edit or update change it to gamsat_pl1. Ensure on creating new after deletion you follow the same idea.
+      = f.input :cookie_name, label: false
+
+    .div_field
+      = f.label :popup_frequency, "* Exit Popup Frequency"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select frequency in numbers based on requirement.
+      = f.input :popup_frequency, label: false
+
+    .div_field
+      = f.label :btn_text, "* Text on button"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Set any valid name upto 20 characters. Can use number and special characters.
+      = f.input :btn_text, label: false
+
+    .div_field
+      = f.label :btn_url, "* Button url link"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Add URL to which user will be taken to on click.
+      = f.input :btn_url, label: false
+
+  %br
+  .form-actions
+    = f.button :submit, class: 'btn btn-gradready green'
+    = link_to 'Back', exit_pop_ups_path, class: 'btn btn-danger'
+
+
+:javascript
+  $('.help_link').click(function(){
+    $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+    $(this).closest('.div_field').find('.div_info').toggle();
+  });

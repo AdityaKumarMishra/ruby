@@ -1,0 +1,24 @@
+<%if @type == 'purchase_addons' %>
+  <% if @pvfp.master_feature.private_tutoring? %>
+    $('#AddToCartPTDropDown').html('<%= escape_javascript(render 'enrolments/purchase_addon_status', pvfp: @pvfp, :@student => @student, enrolment_id: @enrolment.try(:id)) %>');
+  <% else %>
+    $('#AddToCartESDropDown').html('<%= escape_javascript(render 'enrolments/purchase_addon_status', pvfp: @pvfp, :@student => @student, enrolment_id: @enrolment.try(:id)) %>');
+  <% end %>
+<% else %>
+  <% price = number_to_currency(@pvfp.price) %>
+  <% mid = @pvfp.master_feature.id.to_s %>
+
+  <% if @pvfp.master_feature.private_tutoring? %>
+    $("#PricePTGst").text("<%=price%>");
+    $('#AddToCartPTDropDown').html('<%= escape_javascript(render 'feature_logs/add_to_cart', a: @pvfp) %>');
+  <% elsif @pvfp.master_feature.essay? %>
+    $("#PriceESGst").text("<%=price%>");
+    $('#AddToCartESDropDown').html('<%= escape_javascript(render 'feature_logs/add_to_cart', a: @pvfp) %>');
+  <% elsif @pvfp.master_feature.mcq_feature? %>
+    $("#PriceMCQst").text("<%=price%>");
+    $('#AddToCartMCQDropDown').html('<%= escape_javascript(render 'feature_logs/add_to_cart', a: @pvfp) %>');
+  <% else %>
+    $('#Price' + "<%= mid%>" + 'st').text("<%=price%>");
+    $('#AddToCart' + "<%= mid%>" + 'DropDown').html('<%= escape_javascript(render 'feature_logs/add_to_cart', a: @pvfp) %>');
+  <% end %>
+<% end %>

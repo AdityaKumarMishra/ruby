@@ -1,0 +1,181 @@
+#public-courses {
+  position: relative;
+  .cours_to {
+    position: relative;
+    top: 8px;
+    font-size: 42px;
+  }
+
+  .text_blue {
+    color: #007ecc !important;
+    font-weight: 800;
+  }
+
+  #course-dates-container{
+    background: #eee;
+    padding: 20px 0;
+    margin-left: -15px;
+    width: calc(100% + 30px);
+  }
+
+  #course-dates-container .headings h1{
+    color: #007ecc;
+    font-weight: bold;
+  }
+
+  #course-dates-container .headings h3{
+    color: #007ecc;
+    font-weight: bold;
+  }
+
+  #course-dates-container .course-dates-table-container{
+    padding: 30px;
+    background-color: #fafafa;
+  }
+
+  .text_italic {
+    font-style: italic;
+  }
+
+  #course-dates-container .course-dates-table-container .course-purchase{
+      padding: 20px 0;
+      text-align: center;
+  }
+
+  #course-dates-container .course-dates-table-container label{
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 4px 10px 4px 0;
+  }
+
+  select {
+    width: 220px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 33px;
+  }
+
+  #course-dates-container .course-dates-table-container .course-date-selection{
+    padding-left: 50px;
+  }
+
+  #course-dates-container .course-dates-table-container .course-enrolment-selection{
+    padding-left: 50px;
+    text-align: center;
+  }
+
+  #course-dates-container .course-dates-table-container .course-options{
+    padding-bottom: 20px;
+  }
+
+  #course-dates-container .course-dates-table-container .course-dates-table{
+        background-color: #fff;
+    border: 1px solid #c9c9c9;
+    float: left;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  #course-dates-container .course-dates-table-container .course-dates-table table{
+    margin: 10px auto;
+    width: 95%;
+  }
+
+  #course-dates-container .course-dates-table-container .course-purchase .pricing-details, #course-dates-container .course-dates-table-container .course-purchase .pricing-details p{
+    font-family: inherit;
+    font-size: 24px;
+    float: left;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  #course-dates-container .course-dates-table-container .course-purchase .pricing-details p{
+    line-height: 35px;
+  }
+
+  .notice-links {
+    text-align: center;
+    a{
+      color: black;
+    }
+  }
+  #a_link_clr h4 {
+    font-size: 15px;
+  }
+
+  #course-headers h1 {
+    font-size: 36pt;
+    color: #007ecc;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  #course-headers h3 {
+    font-size: 36pt;
+    color: #007ecc;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .ftr_txt {
+    font-size: 36pt;
+    color: #007ecc;
+  }
+
+  .feature-description {
+    padding-bottom: 10px;
+  }
+
+  .feature-icon-container {
+    padding-top:50px;
+    margin-top:-20px;
+
+    .feature-icon {
+      margin-right:9px;
+      font-size: 40px;
+      width: 40px;
+    }
+    .feature-content{
+      width: 90%;
+      h3 {
+        font-size:18px;
+        margin:0;
+        line-height:1;
+        padding-bottom:10px
+      }
+      h4 {
+        margin:0;
+        margin-bottom:5px;
+      }
+      span{
+        display: block;
+      }
+      .text {
+        text-align: justify;
+        text-justify: inter-word;
+      }
+    }
+  }
+
+  .feature-icon-container-top {
+    padding-top:30px;
+    margin-top:-20px;
+  }
+
+  .feature-icon-container {
+    .feature-content h3 {
+      font-size: 16px;
+      padding-top: 80px !important;
+      margin-top: -63px !important;
+      }
+    .blu_heading {
+      color: #007ecc;
+    }
+    display: inline-block;
+    width: 100%;
+  }
+  #course-package-details p{
+    font-size: 14px;
+  }
+}

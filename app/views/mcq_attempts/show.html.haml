@@ -1,0 +1,18 @@
+%p#notice= notice
+- if @mcq_attempt.present?
+  %p
+    %b Exercise:
+    = @mcq_attempt.exercise
+  %p
+    %b Mcq stem:
+    = @mcq_attempt.mcq_stem
+  %p
+    %b Mcq:
+    = @mcq_attempt.mcq
+  %p
+    %b Mcq answer:
+    = @mcq_attempt.mcq_answer
+
+  = link_to 'Edit', edit_mcq_attempt_path(@mcq_attempt)
+  \|
+  = link_to 'Back', exercise_mcq_attempts_path(@exercise)

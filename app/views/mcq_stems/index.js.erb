@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'mcq_stems/partial/table', locals: { mcq_stems: @mcq_stems, mcqs: @mcqs, js_render: true }))%>
+$("#table_content").html("<%= js %>");

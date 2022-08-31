@@ -1,0 +1,129 @@
+- section_attempts.includes(:section).sort_by{|s_a| s_a.section.position}.each_with_index do |sa, index|
+  - if attemptable.assessable_type == "OnlineMockExam"
+    - if (sa.section.title.include?("Section III") || sa.section.sectionable.title.include?("Section III"))
+      .resource_col.mbot21{class: "#{index == 0 ? 'martopbot10' : ''}"}
+        %h4.fl Section II - Written Communication
+      .div
+        - essay_response = section_attempts.first.assessment_attempt.essay_response
+        - if essay_response.present? && essay_response.time_submited.present?
+          = link_to 'Review Essay', essay_response_path(section_attempts.first.assessment_attempt.essay_response), class: 'default_btn hvr-shutter-in-horizontal' if section_attempts.first.assessment_attempt.essay_response.present?
+        -else
+          = link_to 'Start',edit_essay_response_path(essay_response.id), class: 'default_btn hvr-shutter-in-horizontal' if section_attempts.first.assessment_attempt.essay_response.present?
+  .resource_col.mbot21{class: "#{index == 0 ? 'martopbot10' : ''}"}
+    %h4.fl= sa.section.title
+  .statics_static_table
+    %ul
+      %li
+        %span Duration (Minutes) :
+        = sa.section.duration
+      %li
+        %span Percentile :
+        -if sa.completed_at.present?
+          -if sa.assessment_attempt.present? && sa.assessment_attempt.assessable_type == "OnlineMockExam"
+            - OnlineMockExamService.calculate_section_percentile(sa)
+          -else
+            - sa.calculate_percentile
+        -if !sa.percentile.nil?
+          -if !sa.percentile.nan?
+            -if attemptable.assessable.class == DiagnosticTest
+              = @diagnostic_test_attempt.percentile.round(1) if @diagnostic_test_attempt.percentile.present?
+            -else
+              = sa.percentile.round(2) if sa.percentile.present?
+          -else
+            N/A
+        -else
+          N/A
+      %li
+        %span Actions :
+        -if sa.completed_at.nil?
+          - if attemptable.assessable.class == OnlineExam
+            - type = "OnlineExam"
+            - start_path = online_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          - elsif attemptable.assessable.class == DiagnosticTest
+            - type = "DiagnosticTest"
+            - start_path = diagnostic_test_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          - elsif attemptable.assessable.class == OnlineMockExam
+            - type = "OnlineMockExam"
+            - if attemptable.assessable.per_city_exam_count > 1
+              - start_path = online_mock_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+            - else
+              - start_path = online_mock_exam_attempt_temp_section_attempt_section_item_attempts_path(attemptable, sa)
+              / - start_path = online_mock_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          = link_to 'Start', start_path, class: 'default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+        -else
+          - if attemptable.assessable.class == OnlineExam
+            - review_path = review_online_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          - elsif attemptable.assessable.class == DiagnosticTest
+            - review_path = review_diagnostic_test_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          - elsif attemptable.assessable.class == OnlineMockExam
+            - if attemptable.assessable.per_city_exam_count > 1
+              - review_path = review_online_mock_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+            - else
+              - review_path = review_online_mock_exam_attempt_temp_section_attempt_section_item_attempts_path(attemptable, sa)
+            / - review_path = review_online_mock_exam_attempt_section_attempt_section_item_attempts_path(attemptable, sa)
+          = link_to 'Review', review_path, class: 'default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+
+  .faq_list
+    .faq_list_col.table_3_col
+      .new_excercise
+        %h4 Statistics
+        %ul.indicator.excercise_indictor
+          %li
+            %i.fa.fa-frown-o{"aria-hidden" => "true"}
+            \&lt;50%
+          %li
+            %i.fa.fa-frown-o{"aria-hidden" => "true"}
+            50% - 69.99%
+          %li
+            %i.fa.fa-smile-o{"aria-hidden" => "true"}
+            70% - 100%
+      .excercise_tbl.satatics_table
+        %ul.tbl_head
+          %li.width_inc Name
+          %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+            C
+            %span.heading_tool_tip.mrht37
+              %p Correct
+          %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+            I
+            %span.heading_tool_tip.mrht37
+              %p Incorrect
+          %li.wdth6 Correct
+          %li.wdth6 Incorrect
+          %li.wdth6
+            Not
+            = succeed "Attempted" do
+              %br/
+          %li.wdth6 Total
+          %li
+            Time Taken
+            = succeed "(Min)" do
+              %br/
+          %li
+            Time taken
+            %br/
+            per question (Min)
+        .first_child_section
+          -if sa.section_item_tags.nil?
+            - next
+          -else
+            -sa.section_item_tags.sort_by{|st| st.name}.each do |sec_tag|
+              - level, leaf_tag = tag_level(sec_tag)
+              -if sa.completed_at.nil?
+                - tag_ids = sec_tag.self_and_descendants_ids
+                - total = sa.section_item_attempts.includes(mcq: { tagging: {} }, mcq_answer: {}).where(taggings: { tag_id: tag_ids }).size
+                - result = {'correct' =>  0, 'incorrect' => 0, 'not_attempted' => total, 'total' => total, 'score' => 0 }
+              -else
+                - result = current_user.fetch_user_exam_stats_result(sec_tag, sa)
+
+              - score_class = tag_level_row_style(level, leaf_tag, result['score'], (result['total']-result['not_attempted']) )
+
+              -if level == 1
+                .second_child_section
+                  = render 'exercises/mcq_tag_result', tag: sec_tag, result: result, score_class: score_class
+              -elsif level == 2
+                .second_child_section
+                  .third_child_section
+                    = render 'exercises/mcq_tag_result', tag: sec_tag, result: result, score_class: score_class
+              -else
+                = render 'exercises/mcq_tag_result', tag: sec_tag, result: result, score_class: score_class

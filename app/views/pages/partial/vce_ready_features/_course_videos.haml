@@ -1,0 +1,11 @@
+#Course-Videos.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-film{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Course Videos
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text 
+        %p.u-word-spacing The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the VCE and serve as an excellent starting point for your VCE preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.

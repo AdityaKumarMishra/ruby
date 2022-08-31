@@ -1,0 +1,74 @@
+- tot_tut_avail = 0
+- tot_tut_apoint = 0
+- tot_session = 0
+- tot_session_used = 0
+- if tutors.present?
+  =will_paginate tutors, renderer: BootstrapPagination::Rails
+%table.table.table-bordered.table-hover#table_id
+  %thead
+    %tr
+      %th Tutor
+      %th State
+      %th Subject
+      %th
+        Completed Sessions During Date Range
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Sessions Completed (ie. Tutor have delivered the sessions and logged the session as delivered) from 00:00:00 from starting date to 23:59:59 of finishing date' } }
+      %th
+        Booked
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Sessions purchased by student that have been booked with a specific tutor, as of 23:59:59 of the last date in the selected date range' } }
+      %th
+        Accumulated Completed Sessions as of Start of Date Range
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Total sessions used as of 00:00:00 at first date of Date Range' } }
+  %tbody
+    - if tutors.present?
+      - tutors.each do |tutor|
+        / - if appointments.any? Comment this code to fix GRAD-2386 fix issue
+        - tutor_appointments_end = @appointments_with_end.where(status: 0, tutor_id: tutor.id)
+        - tutor_appointments = appointments.where(status: 0,tutor_id: tutor.id)
+        - tutor_ap_hours_start = @ah_start.where(appointment_id: @appointments_with_start.where(tutor_id: tutor.id, student_id: tutor_appointments_end.pluck(:student_id).uniq).ids).group_by(&:appointment_id)
+        - tutor_ap_hours_start.keys.each { |k| tutor_ap_hours_start[k] = tutor_ap_hours_start[k].map(&:hours).sum }
+        - tutor_ap_hours = @ah.where(appointment_id: tutor_appointments.ids).group_by(&:appointment_id)
+        - tutor_ap_hours.keys.each { |k| tutor_ap_hours[k] = tutor_ap_hours[k].map(&:hours).sum }
+        - tutor_appointments_start_count = tutor_ap_hours_start.values.sum
+        %tr
+          %td= tutor.full_name
+          %td= tutor.state
+          %td= (tutor.tutor_profile.tags.pluck(:name)).join(", ")
+          - sessions_completed_in_range = tutor_ap_hours.values.sum
+          - tot_tut_apoint = tot_tut_apoint + sessions_completed_in_range
+          %td= sessions_completed_in_range
+          - ap_hours = appointment_hours.values_at(*tutor_appointments.pluck(:id)).compact
+          - if ap_hours.present?
+            - ap_hours_with_end_sum = tutor_appointments_end.where(hours: 0).size
+            - tot_session +=  ap_hours_with_end_sum
+            - tot_session_used += tutor_appointments_start_count
+            %td= ap_hours_with_end_sum
+            %td= tutor_appointments_start_count
+          - else
+            %td= 0
+            %td= 0
+  %tfoot
+    %tr
+      %td
+        %b Total
+      %td
+      %td
+      %td= tot_tut_apoint
+      %td= tot_session
+      %td= tot_session_used
+
+
+:javascript
+
+  $(document).ready(function() {
+      $('#table_id').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+
+      });
+  });
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });

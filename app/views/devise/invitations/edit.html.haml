@@ -1,0 +1,11 @@
+%h2 Enter your details
+= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
+  = devise_error_messages!
+  = f.hidden_field :invitation_token
+  = f.input :first_name, required: true
+  = f.input :last_name, required: true
+  = f.input :phone_number, required: true
+  = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+  = f.input :password_confirmation, required: true
+  = render 'addresses/fields', f: f
+  = f.button :submit, t("devise.invitations.edit.submit_button")

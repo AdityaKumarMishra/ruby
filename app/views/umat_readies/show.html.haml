@@ -1,0 +1,275 @@
+- new_course_type = ProductVersion.course_types[@product_version.course_type]
+- if new_course_type == 4
+  - product_version_name = "Courses - Online (Essentials)"
+  - title "Essential Online UCAT Course | UCAT Preparation"
+  - meta_description 'If you"re looking to improve your UCAT preparation, our Essential Online course will give you all the essential material you need.'
+  - meta_keywords "UCAT Preparation"
+  - secure_course = "Secure Your Essential Online UCAT® Course"
+-elsif new_course_type == 5
+  - product_version_name = "Courses - Online (Comprehensive)"
+  - title "Comprehensive Online UCAT Courses | Advance Exam Prep"
+  - meta_description "Improve your UCAT preparation by choosing our Online Essentials course, giving you access to our most powerful tools and systems."
+  - meta_keywords "UCAT Prep"
+  - secure_course = "Secure Your Comprehensive Online UCAT® Course"
+-elsif new_course_type == 6
+  - product_version_name = "Courses - Attendance (Essentials)"
+  - title "Essential Attendance UCAT Course | Improve UCAT Scores"
+  - meta_description "Solidify your UCAT knowledge by attending our live workshops, where experienced tutors teach you the material from top to bottom."
+  - meta_keywords "UCAT Attendance Courses"
+  - secure_course = "Secure Your Essential 8 Day UCAT® Course"
+-elsif new_course_type == 7
+  - product_version_name = "Courses - Attendance (Comprehensive)"
+  - title "Comprehensive Attendance Courses | UCAT Courses"
+  - meta_description "Our experienced tutors will aid you in your UCAT preparation. You also have access to our advanced online tools and systems."
+  - meta_keywords "UCAT Preparation Course"
+  - secure_course = "Secure Your Comprehensive 8 Day UCAT® Course"
+-elsif new_course_type == 8
+  - product_version_name = "Courses - Attendance (Complete Care)"
+  - title "Best UCAT Prep Course | Tutorials, tutors, and more!"
+  - meta_description "Our most comprehensive package. Contains private tutoring, live courses, and access to all of our systems and tools."
+  - meta_keywords "UCAT Course"
+  - secure_course = "Secure Your Complete Care 8 Day UCAT® Course"
+-elsif new_course_type == 1
+  - product_version_name = "Courses - Custom"
+  - title "Custom UCAT Prep Courses | Create your Own Course"
+  - meta_description "Want to design your own custom UCAT preparation course? Choose from our various systems and live courses and personalise your study."
+  - meta_keywords "UCAT Prep"
+  - secure_course = "Secure Your Custom UCAT® Course"
+-elsif new_course_type == 0
+  - product_version_name = "Courses - Free Trial"
+  - title "Free UCAT Preparation Trial Course | GradReady"
+  - meta_description "Want to improve your UCAT results? Give our advanced UCAT Preparation courses a trial. Gain access to free resources, sample questions, and practice tests."
+  - meta_keywords "UCAT Free Trial"
+  - secure_course = "Secure Your Free Trial UCAT® Course"
+-elsif new_course_type == 11
+  -product_version_name = @product_version.couple_name
+  - title "Starter UCAT Course | Kick Start Your UCAT Preparation"
+  - meta_description 'If you"re looking to kick start your UCAT preparation, our Starter course will give you all the basic features you need.'
+  - meta_keywords "UCAT Preparation, UCAT Courses, UCAT Online Courses"
+  - secure_course = "Secure Your UCAT® Starter Course"
+-elsif new_course_type == 10
+  -product_version_name = @product_version.couple_name
+  - title "Free UCAT Study Guides | GradReady"
+  - meta_description 'Good preparation is the key to success in the UCAT exam. Register now to get free access to Daily Study Guide prepared by team of experienced tutors.'
+  - meta_keywords "UCAT Preparation, Study Guide, Free Study Plan, UCAT Prep"
+  - secure_course = "Secure Your Free UCAT® Study Guides"
+-else
+  -product_version_name = @product_version.couple_name
+  - meta_description "Our UCAT Preparation Courses are designed to enhance your exam study. We use both online and live classes, tutors, and offer courses in Sydney, Melbourne, Brisbane, Perth, Adelaide and Canberra."
+  - secure_course = "Secure Your UCAT® Course"
+
+%div{:itemscope => "", :itemtype => "http://schema.org/Course"}
+  %span{:content => "Online essential/Attendance Essential", :itemprop => "accessMode"}
+  %span{:content => "GradReady", :itemprop => "accountablePerson"}
+  %span{:content => "Australia", :itemprop => "contentLocation"}
+  %span{:content => "Training", :itemprop => "educationalUse"}
+  %span{:content => "Traning", :itemprop => "genre"}
+  %span{:content => "English", :itemprop => "inLanguage"}
+  %span{:content => "GradReady", :itemprop => "publisher"}
+  %span{:content => "GradReady", :itemprop => "provider"}
+  %div{:itemprop => "copyrightHolder", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+  %div{:itemprop => "creator", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+  %div{:itemprop => "producer", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+
+  / Banner for PV page
+  .banner_wrapper.banner_inner_page.banner_image_pl
+    .banner_graph_section
+      #typed.notification_bar
+        %p
+          = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+      .banner_container
+        .graph_content.mob_bg_graph
+          %a{href: "#{umat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+        %a.mob_graph{href: 'javascript:void(0)'}
+    %h1.top35.aos-item{"data-aos" => "fade", "data-aos-duration" => "1100", :itemprop => "name"}
+      %a{href: "#take_down_pricing"}
+        = secure_course
+
+    .pro_line.fr_desktop
+      .statics_section
+        .row
+          .container
+            .aos-item.col-sm-4{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+              .hvr-shutter-out-vertical.statics_text
+                %a{href: "#{umat_preparation_courses_about_url(anchor: 'grad_history')}"}
+                  %span.incrementalNumber{"data-value" => "8"}
+                  %span + yrs
+                  %p TRUSTED EXPERIENCE
+            .aos-item.col-sm-4{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+              .hvr-shutter-out-vertical.statics_text
+                %a{href: "#{umat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+                  %span.incrementalNumber{"data-value" => "90"}
+                  %span % +
+                  %p MEDICAL SCHOOL ADMISSIONS
+            .aos-item.col-sm-4{"data-aos" => "fade-up", "data-aos-duration" => "1600"}
+              .hvr-shutter-out-vertical.statics_text
+                %a{href: "/umat-preparation-courses/our_students"}
+                  %span.incrementalNumber{"big-number" => "4500", "data-value" => "5000"}
+                  %span +
+                  %p HAPPY STUDENTS
+  .pro_partner
+    = render 'public_page_partial/partners'
+
+  / Secure Your Place Code
+  -if new_course_type == 1
+    / Custom course secure place
+    %section#custom_price_show.middle_course_section.padd_35.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+      .text-center.full_width
+        -if @selected_course.present?
+          %h2 Course Details
+          .early_bird_price.hide_box
+            %strong.gmsat_text
+              0
+              %span.fnt_size.small_size.pv_price + 10% GST = 0
+          .clearfix
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10.custom_course_purchase{"data-target" => "#secure_place", "data-toggle" => "modal", href: "javascript:void(0)"} SECURE YOUR PLACE NOW
+        -else
+          %h2
+            %p.heading_p_tag Courses Will Reopen in the New Season
+          %br
+          = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+
+  - elsif [0,4,5,10,11].include? new_course_type
+    / Online and Free Trial courses secure place
+    %section#take_down_pricing.middle_course_section.padd_35
+      .text-center.full_width
+        -if @other_course.present?
+          %h2 Course Details
+          %p.sub_heading_txt.custom_mok_show
+            %strong> Enrollment Closure Date:
+            = " #{@other_course.enrolment_end_date.strftime("%d %b %Y")}"
+
+          -if [4,5,11].include? new_course_type
+            .early_bird_price
+              %span Components Value
+              %span.line_throug.mg_top8= @product_version.online_courses_price('umat')
+              - if @product_version.early_bird
+                %span.gmsat_text.fnt_size.small_size Early Bird
+              %strong.gmsat_text
+                = @product_version.price.round.to_s
+                %span.fnt_size.small_size.pv_price= "+ 10% GST = #{@product_version.price_with_gst.round.to_s}"
+        -else
+          %h2
+            %p.heading_p_tag Courses Will Reopen in the New Season
+          %br
+          = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+        .clearfix
+        -if @other_course.present?
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10{href: "/courses/" + @other_course.id.to_s + "/enrolments/enrol"} SECURE YOUR PLACE NOW
+      = render 'public_page_partial/refer_a_friend', pv_type: 'umat'
+  -else
+    / Attendance courses secure place
+    %section#take_down_pricing.middle_course_section.padd_35
+      .text-center.full_width
+        -if @selected_course.present?
+          %h2 Course Details
+          .early_bird_price{:itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+            %span{:content => "AUD", :itemprop => "priceCurrency"}
+            %span Components Value
+            %span.line_throug.mg_top8= @product_version.attendance_courses_price('umat')
+            - if @product_version.early_bird
+              %span.gmsat_text.fnt_size.small_size Early Bird
+            %strong.gmsat_text{:itemprop => "price"}
+              = @product_version.price.round.to_s
+              %span.fnt_size.small_size.pv_price= "+ 10% GST = #{@product_version.price_with_gst.round.to_s}"
+        -else
+          #ucat-important-date
+            %h2
+              %p.heading_p_tag Courses Will Reopen in the New Season
+            %br
+            = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+        .clearfix
+        -if @selected_course.present?
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10#purchase_course_link{href: "/courses/" + @selected_course.id.to_s + "/enrolments/enrol"} SECURE YOUR PLACE NOW
+          - document = Document.find_by(for_timetable: true, product_line_id: @product_version.product_line.try(:id))
+          -if document.present?
+            %p.discrpton
+              = link_to 'Download Sample Class Schedule', download_file_document_path(document, format: :pdf), class: 'download_smple_data'
+
+  / Course Details for Attendance courses
+  -if ProductVersion::course_types.values.reject.with_index { |e,i| [0,1,4,5,10,11].include? i }.include?(new_course_type.to_i)
+    %section.aos-item#ucat-important-date{"data-aos" => "fade-up", "data-aos-duration" => "1300", class: "#{@selected_course.present? ? 'pad50' : ''}"}
+      -if @selected_course.present?
+        .text-center.container.mbot30
+          %h2 Course Information
+          %p.sub_heading_txt Please choose your City and Course from the drop down selections below.
+          #gamsat_course_cities
+            = render 'gamsat_readies/course_cities', courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city
+
+      = render 'public_page_partial/refer_a_friend', pv_type: 'umat'
+
+  / Course description details for custom course
+  -if new_course_type == 1 && @selected_course.present?
+    = render 'product_versions/custom_course_purchase', courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city
+
+  / Course Details
+  %section.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1500"}
+    .text-center.container.mbot30{:itemprop => "description"}
+      %h2.mbot50 Course Description
+      .clearfix
+      = render 'public_page_partial/pv/gamsat_course_package_details', course_type: new_course_type, product_line: 'UCAT'
+
+  / Additional details
+  -if new_course_type != 10
+    %section.pad50.feature_revew_col
+      .text-center.mbot40
+        %h2 Additional Details
+      #reviews_col_tabbing.comparison_table_tabbing
+        %ul.nav.attendce_tabbing{role: "tablist"}
+          %li.non_active_review.active{role: "presentation"}
+            %a{"aria-controls" => "features_col", "data-toggle" => "tab", href: "#features_col", role: "tab"} FEATURES
+        .container
+          .tab-content
+            #features_col.tab-pane.active{role: "tabpanel"}
+              - if new_course_type == 4
+                = render 'pages/partial/features_sets/online_basic_umat', new_course_type: new_course_type
+              - elsif new_course_type == 5
+                = render 'pages/partial/features_sets/online_comprehensive_umat', new_course_type: new_course_type
+              - elsif new_course_type == 6
+                = render 'pages/partial/features_sets/attendance_essentials_umat', new_course_type: new_course_type
+              - elsif new_course_type == 8
+                = render 'pages/partial/features_sets/attendance_comprehensive_private_tutoring_umat', new_course_type: new_course_type, product_version: @product_version
+              - elsif new_course_type == 7
+                = render 'pages/partial/features_sets/attendance_comprehensive_umat', new_course_type: new_course_type
+              - elsif new_course_type == 1
+                = render 'pages/partial/features_sets/custom_umat', new_course_type: new_course_type
+              - elsif new_course_type == 0
+                = render 'pages/partial/features_sets/free_trial_umat', new_course_type: new_course_type
+              - elsif new_course_type == 11
+                = render 'pages/partial/features_sets/starter_umat'
+
+  -if params[:different_course].eql?('true') && @course.present?
+    = render 'enrolments/location_course_modal'
+
+  :javascript
+    AOS.init({
+      easing: "ease-in-out-sine"
+    });
+
+    $(document).ready(function(){
+      $(".read_more_cr_decr").click(function(){
+        $(this).hide();
+        $(".read_less_cr_decr").show();
+        $(".content-mask").css("display","none");
+        $(".cr_descr_text_col").delay(100).css("height","100%");
+      });
+
+      $(".read_less_cr_decr").click(function(){
+        $(this).hide();
+        $(".read_more_cr_decr").show();
+        $(".content-mask").css("display","block");
+        $(".cr_descr_text_col").delay(100).css("height","243px");
+      });
+    });
+
+    $(document).ready(function() {
+      $(".banner_inner_page h1.top35 a").on("click", function( e ) {
+      e.preventDefault();
+        $("body, html").animate({
+          scrollTop: $( $(this).attr('href') ).offset().top
+        }, 600);
+      });
+    });

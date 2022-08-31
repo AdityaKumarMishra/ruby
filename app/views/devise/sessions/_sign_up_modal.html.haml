@@ -1,0 +1,78 @@
+#signup_modal.modal.fade.latest_pop
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"}
+          %span ×
+
+        
+          
+      .modal-body.text-center#reg-form
+        %div{style: "margin-bottom: 50px;"}
+          %h3 Sign Up for our GAMSAT Free Trial
+        = simple_form_for(@user, url: free_gamsat_trial_users_path, html: {role: "search", class: 'trial_form_wrapper signup_form'}) do |f|
+          = f.invisible_captcha :subtitle
+          = f.input :email, label: false, input_html: { placeholder: "Email", class: ('has_error' if flash[:error].present?) }
+          = f.input :password, label: false, input_html: {placeholder: "Password"}
+          = f.hidden_field :signup_form_start_time
+          = f.hidden_field :signup_form_end_time
+          = f.input :redirect_sign_up, :as => :hidden, :input_html => { :value => "true" }
+          -if current_user.nil?
+            %p.add_capctha_issue.mb5{style: "color: red; text-align: center"}
+            .add_capctcha_main{style: "margin-left: 13%;"}
+              = recaptcha_tags
+          .trial_btn_wrapper
+            %button.hvr-sweep-to-right.gamsat_trial_btn.home_trial_btn{type: "submit", value: 'Gamsat', name: 'commit'}
+              Sign Up
+
+= render 'validations/signup_validator'
+        
+:javascript
+  $('#new_user').submit(function( e ){
+    if(grecaptcha.getResponse() == "") {
+      $('.add_capctha_issue').text('Please verify CAPCTHA');
+      $('.add_capctcha_main').addClass("mb5")
+      e.preventDefault();
+    }
+  });
+
+  var signupFormStartTime = null;
+  var signup_form_end_time = null;
+
+  $('#user_email, #user_password').on('input', function(e){
+    if (signupFormStartTime == null) {
+      signupFormStartTime = (new Date()).getTime();
+
+      $('#user_signup_form_start_time').val(signupFormStartTime);
+    } else {
+      signupFormEndTime = (new Date()).getTime();
+
+      $('#user_signup_form_end_time').val(signupFormEndTime);
+    }
+  });
+
+
+:css
+  .signup_form:before{
+    background: transparent!important;
+  }
+  .signup_form{
+    background: transparent!important;
+  }
+  #signup_modal .simple_form { 
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    background: #e1e1e1;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+  }
+  #reg-form .error{
+    color: red !important;
+    font-weight: 400;
+  } 

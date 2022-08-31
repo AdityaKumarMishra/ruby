@@ -1,0 +1,475 @@
+.dark_full_raw_green td {
+  background-color:  #009a42 !important;
+}
+
+.dark_full_raw_green .live_comp_green .component-title{
+  color: #fff !important;
+  font-size:16px;
+  line-height:1.5;
+}
+
+.dark_full_raw_green .live_comp_green .live_component-title{
+  line-height:2.5 !important;
+}
+
+
+.dark_full_raw_green .live_comp_green .component-title.text_description{
+ font-size:13px;
+ line-height:2.5;
+}
+
+// Base gradready comparison table for product versions
+.gr-comparison-table {
+  width: 90%;
+  font-size: 13px;
+  color: $black;
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        width: 15%;
+        line-height: 2;
+        vertical-align: top;
+        text-align: center;
+        ul, li {
+          list-style-type: none;
+          position: relative;
+          &:hover {
+            .price_tbl_row_hover {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  th p{
+    font-size:14px;
+    color:#fff;
+    font-weight: normal;
+    margin-top:5px;
+    line-height: 1.2 !important;
+  }
+  th p.margin_zero{
+    margin:0px;
+  }
+
+  th, td {
+    border: 2.5px solid #f3f3f3;
+  }
+
+  > tfoot,
+  > thead {
+    color: $white;
+    td, th {
+      background-color: #3c3c3c; // dark grey background
+    }
+    td:nth-child(even), th:nth-child(even) {
+      background-color: #575757; // light grey
+    }
+    th {
+      padding: 6px;
+      font-weight: normal;
+      line-height: 1.2 !important;
+      a {
+        color: $white !important;
+        font-size: 20px;
+        font-weight: normal;
+      }
+    }
+    .title-text {
+      font-size: 17px;
+      font-weight: bold;
+    }
+  }
+
+  > tfoot {
+    td {
+      line-height: 1 !important;
+      > .btn.btn-gradready {
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'Open Sans', sans-serif;
+        white-space: nowrap !important;
+        padding: 6px 12px;
+      }
+    }
+  }
+
+  > tbody {
+    > tr {
+      > td{
+        padding:0px !important;
+        vertical-align: middle;
+
+      }
+    }
+
+    a {
+      color: $black !important;
+    }
+    a:after {
+      content: "»"
+    }
+  }
+}
+
+
+
+.gamsat-compare {
+  @include product-comparison-table(#e5f1ea, none, $gamsat-color);
+  // For GAMSAT nested row for '6 Online Exam'
+  // Break the default alternate odd/even rules
+  >tbody {
+    > tr {
+      td:first-child {
+        background: #fff;
+      }
+    }
+  }
+}
+
+table.gamsat_comparison_table {
+  @include provider-comparison-table-gamsat($gamsat-color, $light-green)
+}
+
+tr.last_row td {
+  background: none !important;
+  border:none;
+  padding:0px !important;
+}
+
+#course-packages{
+  .discountt{
+    position: relative;
+    top:20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    span{
+      color: #008b44;
+    }
+  }
+  .row-fluid .span3.tbl_wdth {
+      width: 18%;
+  }
+  .grn_clr.mbottom {
+      float: left;
+      width: 100%;
+      margin-bottom: 14px;
+  }
+  @media (min-width: 1200px){
+    .row-fluid {
+      width: 100%;
+    }
+  }
+  .row-fluid .span3.tbl_wdth {
+      width: 20%;
+      float: left;
+  }
+  .lgt_gn {
+      background-color: #d5f5e5;
+  }
+  .lgt_gn.dark {
+      background-color: #b3d6c1;
+  }
+  .course-packages .package-description .title {
+    background-color: black;
+    color: white;
+    background-color: #353535;
+    background-image: -moz-linear-gradient(top, #4e4e4e, #101010);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4e4e4e), to(#101010));
+    background-image: -webkit-linear-gradient(top, #4e4e4e, #101010);
+    background-image: -o-linear-gradient(top, #4e4e4e, #101010);
+    background-image: linear-gradient(to bottom, #4e4e4e, #101010);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF4E4E4E', endColorstr='#FF101010', GradientType=0);
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+  }
+  .course-packages .package-description .title .main {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 18px;
+    position: relative;
+    top: -17px;
+  }
+  .course-packages .package-description .title .sub-title {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 14px;
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform:translate(-50%, 0px);
+    white-space: nowrap;
+  }
+  .course-packages .package-description .content-separator {
+    border-bottom: 2px white solid;
+    padding: 5px 0;
+    margin-bottom: 20px;
+    width: 110%;
+    margin-left: -5px;
+  }
+  .course-packages .package-description .content {
+    padding: 5px;
+  }
+  .gr {
+    color: #009348;
+    font-weight: bolder;
+    font-size: small;
+    margin-top: -15px;
+  }
+  .grn_clr {
+    color: #009348;
+    font-weight: bolder;
+  }
+  .mrgn_31 {
+    margin-top: 52px;
+  }
+  .mrgn_40 {
+    margin-top: 38.3px;
+  }
+  .grey_clr {
+    color: #009348;
+    font-weight: bolder;
+  }
+  .gry_clr a {
+    color: #009348 !important;
+    font-weight: bolder;
+  }
+  .mrgn_20 {
+      margin-top: 20px;
+  }
+  .mrgn_120 {
+      margin-top: 120px;
+  }
+  .mrgn_100 {
+      margin-top: 100px;
+  }
+  .mrgn_70 {
+      margin-top: 136px;
+  }
+  .mrgn_55 {
+      margin-top: 72px;
+  }
+  .lgt_gr {
+      background-color: #ececec;
+  }
+  .lgt_gr.dark {
+      background-color: #dadada;
+  }
+  .package-description .package-pricing {
+      border: 1px #c9c9c9 solid;
+      padding: 15px 0;
+      background-color: #333;
+      color: white;
+  }
+  .row-fluid [class*="span"].ml12 {
+      padding: 0;
+      border-left: 2px solid #fff;
+      margin-right: 0;
+  }
+
+  .course-description-container .course-description.gamsatready .description-heading{
+    font-family: $font-head;
+    font-size: 40px;
+    span{
+      color: black;
+      position: relative;
+      right: 0px;
+    }
+  }
+  .course-description-container .course-description .description-sub-heading {
+      font-family: inherit;
+      font-size: 18px;
+      padding-bottom: 10px;
+      font-weight: bold;
+  }
+  .course-description-container .course-description .description-tag-text {
+      display: inline-block;
+      font-size: 20px;
+      padding: 5px 30px;
+      margin-bottom: 15px;
+      color: white;
+      background: #009348;
+      border-radius: 0;
+      background-size: 100% auto;
+  }
+  .course-description-container .course-description .description-tag-text.custom_font { font-size: 17px;
+  }
+  .custom_bck_grund {
+    background: #009348 !important;
+    padding: 20px;
+    margin-left: 14px;
+    position: relative;
+    top: -20px;
+    //z-index: -9;
+    font-size: 17px;
+    width: 60%;
+    margin-left: 20%;
+    color: white;
+    line-height: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    a{
+      color: white;
+    }
+  }
+  .btn-gr.button-grn {
+    color: #fff;
+    background-color: #007833;
+    font-weight: bold;
+  }
+  .discount{
+    position: relative;
+    top: -40px;
+    margin-bottom: 40px;
+  }
+  h3 {
+    padding: 30px 30px 0px;
+    color: #009348;
+  }
+  .border_bottom {
+      border-bottom: 3px solid #000;
+      padding-bottom: 9px;
+      margin-bottom: 5px;
+      float: left;
+      width: 100%;
+      font-weight: bold;
+  }
+  ul.comris_table li.drk_green {
+      background: #008b44;
+      color: #fff;
+  }
+  ul.comris_table li.lgt_green {
+    background: #90C694;
+    color: #fff;
+  }
+  .txt_green {
+    color: #008b44;
+  }
+}
+#course-packages .grn_clr {
+  color: #009348;
+  span{
+    color: black;
+    position: relative;
+    right: 7px;
+  }
+  .description-heading h3{
+    font-family: $font-head;
+    font-size: $font-head-size;
+  }
+  p{
+    color: black;
+    font-weight: 500;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+  }
+}
+#course-packages .grn_clr.blu-color{
+  color: #007ecc;
+}
+
+
+#course-packages .course-description-container .course-description .description-heading {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 20px 0;
+  text-transform: uppercase;
+}
+#course-packages .suggest-a-package .content {
+  padding: 10px 30px 20px;
+}
+#a_link_clr .notice-links.chnge_lnk_clr a {
+
+  color: #000;
+  font-size: 11px;
+}
+#course-packages .course-description-container .course-description {
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+
+
+th.reltve {
+  position: relative;
+}
+img.most-popular {
+  position: absolute;
+  right: 0;
+  top: 0px;
+  max-width: 115px;
+}
+th.reltve.tbl_head {
+  padding: 0px 0 0;
+  position: relative;
+}
+th.reltve.tbl_head .heading_highlght{
+  height: 60px;
+  float: left;
+  background: #575757;
+  width: 100%;
+  position: relative;
+  margin-top: -33px;
+  padding-top: 36px;
+}
+th.reltve.tbl_head .popular_hightligt{
+  height: 26px;
+  background: #575757;
+  width: 100%;
+  position: absolute;
+  border-bottom: 2.5px solid white;
+}
+center.table_overflow.reltve {
+    position: relative;
+}
+center.table_overflow.reltve.pos_float {
+  float: left;
+  width: 100%;
+}
+
+@media screen and  (min-width:768px) and (max-width:1024px){
+  .gr-comparison-table {
+    margin-top:40px;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 990px){
+  .table_overflow{
+    overflow-x:scroll;
+    width:100%;
+    padding-bottom:14px;
+  }
+  #course-packages .course-description-container .course-description{
+    padding-bottom: 14px;
+  }
+
+  #course-packages{ margin-top: 0;}
+  #course-packages .course-description-container .course-description.gamsatready .description-heading{
+    font-size: 27px;
+    line-height: 33px;
+    padding:0 0 15px;
+  }
+  .application-container #course-packages {
+    margin-top: 10px;
+  }
+  #course-packages .course-description-container .course-description .description-tag-text{
+    font-size: 17px;
+  }
+
+}
+
+@media screen and  (min-width:260px) and (max-width:767px){
+  .gr-comparison-table {
+    margin-top:40px;
+  }
+}

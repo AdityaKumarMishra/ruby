@@ -1,0 +1,7 @@
+.address
+  =address.line_one
+  =address.suburb
+  =address.city
+  =address.post_code
+  =address.state if User.areas.keys.include?(address.state)
+  =address.country

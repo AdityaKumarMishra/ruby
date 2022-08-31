@@ -1,0 +1,48 @@
+%h4
+  =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+  - if @course_type == 'starter'
+    500 MCQs + Tracking System
+  -else
+    - if product_line == 'GAMSAT'
+      4000+ MCQs (and growing) + Tracking System
+    - elsif product_line == 'UMAT'
+      2000 MCQs (and growing) + Tracking System
+    -else
+      Online Questions + Tracking System
+
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+- if product_line == 'VCE'
+  .text
+    %p.u-word-spacing
+      Our innovative use of Multiple Choice Questions (MCQs) allows the VCE
+      %sup{ style: "margin-right: -5px;"} ®
+      Ready Online Question Bank to incorporate cutting edge web education technology in performance tracking and topic targeting. The questions are categorised into subtopics where our advanced MCQ system not only tracks your performance in each subtopic but also allows you to create sets of questions based on subtopics of your choosing. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may re-attempt the questions. Explanations are provided for all questions to help your VCE
+      %sup{ style: "margin-right: -5px;"} ®
+      preparation.
+- elsif product_line == 'HSC'
+  .text
+    %p.u-word-spacing
+      Our innovative use of Multiple Choice Questions (MCQs) allows the HSC
+      %sup{ style: "margin-right: -5px;"} ®
+      Ready Online Question Bank to incorporate cutting edge web education technology in performance tracking and topic targeting. The questions are categorised into subtopics where our advanced MCQ system not only tracks your performance in each subtopic but also allows you to create sets of questions based on subtopics of your choosing. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may re-attempt the questions. Explanations are provided for all questions to help your HSC
+      %sup{ style: "margin-right: -5px;"} ®
+      preparation.
+- elsif product_line == 'UMAT'
+  %p The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking and topic targeting...
+  .show_full_content
+    The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking and topic targeting.
+    The MCQs are categorised into 19 subtopics - our advanced MCQ system not only tracks your performance in each subtopic, it also allows you to create sets of MCQs based on subtopics of your choosing – meaning you can focus on what you need to. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may reattempt the MCQs. Explanations are provided for all MCQs.
+- elsif product_line == 'GAMSAT'
+  %p The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking...
+  .show_full_content
+    Updated for the new GAMSAT
+    %sup ®
+    Exam: New MCQs continuously added in real-time right up until the March GAMSAT
+    %sup ®
+    exam.
+    %br
+    The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking and topic targeting. The MCQs are categorised into 43 subtopics - our advanced MCQ system not only tracks your performance in each subtopic, it also allows you to create sets of MCQs based on subtopics of your choosing – meaning you can focus on what you need to. In addition, you are able to set the difficulty of the questions, allowing you to tailor the MCQs to your own ability. Explanations are provided for all MCQs. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may reattempt the MCQs.

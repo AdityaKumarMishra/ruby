@@ -1,0 +1,19 @@
+#assessmentSentTime.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "assessmentSentTimeModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Are you Sure?
+      .modal-body
+        %p Send Initial Assessment?
+      .modal-footer
+        = simple_form_for @job_application, url: job_application_form_job_application_path(@job_application_form.friendly_id.parameterize, @job_application), method: :patch, remote: true do |f|
+          = f.hidden_field 'status', value: '1.2 Sent Initial Assessment'
+          = hidden_field_tag 'send_email', 'true'
+          = f.button :submit, 'Continue', class: 'btn btn-default btn-danger', id: 'btn_assessment'
+          %button.btn.btn-default.btn-success{"data-dismiss" => "modal", :type => "button"} Cancel
+
+:javascript
+  $('#btn_assessment').click(function(){
+    window.location.reload();
+  });

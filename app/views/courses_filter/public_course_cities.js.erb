@@ -1,0 +1,26 @@
+<% if @course_type == 'custom' %>
+	<% js = escape_javascript(
+	  render(partial: 'product_versions/custom_course_cities', locals: { courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city })
+	) %>
+	var selected_course = '<%= @selected_course.id %>'
+	$("#custom_course_cities").html("<%= js %>");
+	$('#custom-course-purchase-form').attr('action', '/courses/' + selected_course + '/enrolments/custom_enrol');
+	$('.course_frm').removeClass('hide_box');
+
+	<% js1 = escape_javascript(
+	  render(partial: 'product_versions/custom_course_lessons', locals: { selected_course: @selected_course })
+	) %>
+	$('#custom_course_lessons').html("<%= js1 %>")
+	$('.course_tbl').removeClass('hide_box');
+<% else %>
+	<% js = escape_javascript(
+	  render(partial: 'gamsat_readies/course_cities', locals: { courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city })
+	) %>
+	<% js1 = escape_javascript(
+	  render(partial: 'gamsat_readies/courses_visible', locals: { other_course: @selected_course })
+	) %>
+	var selected_course = '<%= @selected_course.id %>'
+	$("#gamsat_course_cities").html("<%= js %>");
+	$("#course_visiblee").html("<%= js1 %>");
+	$('#purchase_course_link').attr('href', '/courses/' + selected_course + '/enrolments/enrol');
+<% end %>

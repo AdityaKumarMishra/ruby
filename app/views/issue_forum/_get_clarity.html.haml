@@ -1,0 +1,7 @@
+- if current_user && (current_user.student?)
+  %a.feedback_bth_wdth{class: "new-ticket", href: url_for(controller: 'issue_forum', action: 'list', content_id: content.id, content_type: content.class)}
+    GetClarity
+
+-else
+  %a.btn.btn-default.feedback_bth_wdth{class: "new-ticket", href: url_for(controller: 'issue_forum', action: 'list', content_id: content.id, content_type: content.class)}
+    GetClarity

@@ -1,0 +1,7 @@
+%select#user-enrolment-filter.form-control
+  - reseted_dependent_parameters = request.query_parameters
+  %option{ {value: user_emails_path(reseted_dependent_parameters.except(:enroled, :not_enroled))}}= ''
+  %option{ {value: user_emails_path(reseted_dependent_parameters.except(:not_enroled).merge(enroled: '1'))}.merge(selected: params[:enroled] == '1') }
+    Yes
+  %option{ {value: user_emails_path(reseted_dependent_parameters.except(:enroled).merge(not_enroled: '1'))}.merge(selected: params[:not_enroled] == '1') }
+    No

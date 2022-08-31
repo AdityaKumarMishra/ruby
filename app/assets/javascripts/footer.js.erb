@@ -1,0 +1,35 @@
+$(document).ready(function () {
+  <% environment.context_class.instance_eval { include PagesHelper } %>
+
+  $('#footer-js').on("change", function(){
+    var product_version = $(this).val();
+    // social media links
+    document.getElementById('facebook').href = 'https://www.facebook.com/GradReady' + product_version.toUpperCase() + '/';
+    document.getElementById('instagram').href = 'https://www.instagram.com/gradready' + product_version;
+
+    // Ugly way of doing course links update
+    if (product_version == 'gamsat') {
+      document.getElementById("logo").src = "<%= 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_gamsat_ready.png' %>";
+      $('.call_btn').removeClass('red purple blue').addClass('grn_call_btn');
+    }
+    else if (product_version == 'umat') {
+      document.getElementById("logo").src = "<%= 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_umat_ready.png' %>";
+      $('.call_btn').removeClass('grn_call_btn red purple').addClass('blue');
+    }
+    else if (product_version == 'vce') {
+      document.getElementById("logo").src = "<%= 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_vce_ready.png' %>";
+      $('.call_btn').removeClass('grn_call_btn red blue').addClass('purple');
+    }
+    else if (product_version == 'hsc') {
+      document.getElementById("logo").src = 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/footer_hsc_ready.png';
+      $('.call_btn').removeClass('grn_call_btn purple blue').addClass('red');
+    }
+
+    $.ajax({
+      type: 'get',
+      url: '/pages/set_footer',
+      data: {type: product_version},
+    }).done(function (response) {
+    });
+  });
+});

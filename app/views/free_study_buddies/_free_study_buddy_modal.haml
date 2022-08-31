@@ -1,0 +1,147 @@
+#free-study-buddy-modal.modal.fade.latest_pop
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"}
+          %span &times;
+        %h4.modal-title
+      .modal-body.text-center
+        %p
+          =FreeStudyBuddy.first.description.html_safe
+        = render "study_buddies/form"
+
+:css
+  .modal-backdrop{
+    display: none;
+  }
+
+
+:javascript
+
+    $('#new_study_buddy').submit(function( e ){
+      var study_buddy_name = $('#study_buddy_name').val();
+      var study_buddy_email = $('#study_buddy_email').val();
+      var study_buddy_phone_number = $('#study_buddy_phone_number').val();
+      var study_buddy_grad_student = $('#study_buddy_grad_student').val();
+      var study_buddy_exam_to_prepare = $('#study_buddy_exam_to_prepare').val();
+      var study_buddy_university_id = $('#study_buddy_university_id').val();
+      var study_buddy_degree_id = $('#study_buddy_degree_id').val();
+      var study_buddy_city = $('#study_buddy_city').val();
+      var study_buddy_city_area = $('#study_buddy_city_area').val();
+      var study_buddy_focus_area = $('#study_buddy_focus_area').val();
+      var study_buddy_suburb = $('#study_buddy_suburb').val();
+      var study_buddy_buddy_type = $('#study_buddy_buddy_type').val();
+
+      $('#study_buddy_name').removeClass('error_box');
+      $('#study_buddy_email').removeClass('error_box');
+      $('#study_buddy_phone_number').removeClass('error_box');
+      $('#study_buddy_grad_student').removeClass('error_box');
+      $('#study_buddy_exam_to_prepare').removeClass('error_box');
+      $('#study_buddy_university_id').removeClass('error_box');
+      $('#study_buddy_degree_id').removeClass('error_box');
+      $('#study_buddy_city').removeClass('error_box');
+      $('#study_buddy_city_area').removeClass('error_box');
+      $('#study_buddy_focus_area').removeClass('error_box');
+      $('#study_buddy_suburb').removeClass('error_box');
+      $('#study_buddy_buddy_type').removeClass('error_box');
+
+
+
+      $('.add_valid_details').text('');
+      var filter = /^[0-9-+]+$/;
+
+
+      if (study_buddy_name == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_name').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_suburb == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_suburb').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_buddy_type == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_buddy_type').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_grad_student == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_grad_student').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_exam_to_prepare == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_exam_to_prepare').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_university_id == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_university_id').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_degree_id == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_degree_id').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_city == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_city').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_city_area == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_city_area').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_focus_area == ""){
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_focus_area').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if ($.trim(study_buddy_email).length == 0) {
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_email').addClass('error_box');
+        e.preventDefault();
+      }
+
+      if (study_buddy_phone_number.length > 0) {
+        if ((study_buddy_phone_number.length < 10 || study_buddy_phone_number.length > 15)){
+          $('.add_valid_details').text('Please enter valid details');
+          $('#study_buddy_phone_number').addClass('error_box');
+          e.preventDefault();
+        }
+        if (filter.test(study_buddy_phone_number)) {
+        }
+        else
+        {
+          $('.add_valid_details').text('Please enter valid details');
+          $('#study_buddy_phone_number').addClass('error_box');
+          e.preventDefault();
+        }
+      }
+
+
+
+      if (validateEmail(study_buddy_email)) {
+      }
+      else
+      {
+        $('.add_valid_details').text('Please enter valid details');
+        $('#study_buddy_email').addClass('error_box');
+        e.preventDefault();
+      }
+
+  });

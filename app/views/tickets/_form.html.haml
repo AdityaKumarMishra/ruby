@@ -1,0 +1,5 @@
+= simple_form_for(@ticket, class: "ticket_form") do |f|
+  = render 'tickets/form_inputs', f: f
+  .form-actions
+    = f.button :submit
+

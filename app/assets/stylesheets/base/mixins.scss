@@ -1,0 +1,356 @@
+// MIXINS
+
+@mixin background-arrow-right($color, $size) {
+  // From http://cssarrowplease.com/
+  position: relative;
+  background: $color;
+
+  &:after {
+    left: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:after {
+    border-color: rgba(213, 0, 0, 0);
+    border-left-color: $color;
+    top: 50%;
+    border-width: $size;
+    margin-top: -($size);
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin product-comparison-table($bg-light, $bg-dark, $title-color) {
+  >tbody {
+    > tr {
+      > td {
+        padding: 13px 17px;
+        .component-title {
+          font-size: 13px;
+          color: $title-color !important;
+        }
+        .component-title a{
+          font-size: 13px;
+          color: $title-color !important;
+        }
+      }
+      &:first-child {
+        color: $title-color;
+      }
+    }
+  }
+
+  >tbody:nth-child(even) {
+    > tr {
+      > td {
+        line-height: 2.5;
+        background: $bg-dark;
+        &:nth-child(even) {
+          background: $bg-light;
+        }
+      }
+    }
+  }
+
+  >tbody:nth-child(odd) {
+    > tr {
+      > td {
+        line-height: 2.5;
+        background: #dadada;
+        &:nth-child(even) {
+          background: #e5e5e5;
+        }
+      }
+    }
+  }
+
+}
+
+@mixin comparison-table-content($light_color, $dark_color, $blank_height, $grey_blank_height) {
+  float: left;
+  width: 100%;
+  font-size: 13px;
+  border-bottom: 2px solid #fff;
+  line-height: 2;
+  &:last-child {
+    border-bottom: none;
+  }
+  .light {
+    background: $light_color;
+    padding: 13px 17px;
+  }
+  .dark {
+    background: $dark_color;
+    padding: 13px 17px;
+  }
+  .extend_small {
+    min-height: 230px;
+  }
+  .blank_dark {
+    min-height: $blank_height;
+    background: $dark_color;
+  }
+  .blank_light {
+    min-height: $blank_height;
+    background: $light_color;
+  }
+  .pricing-dark {
+    padding: 20px;
+    background: #3c3c3c;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    p {
+      font-size: 17px !important;
+      font-weight: bold;
+      line-height: 1.1;
+      color: #fff;
+    }
+  }
+  .pricing-light {
+    padding: 20px;
+    background: #575757;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    p {
+      font-size: 17px !important;
+      font-weight: bold;
+      line-height: 1.1;
+      color: #fff;
+    }
+  }
+  .main {
+    line-height: 1.5;
+  }
+  .grey_dark {
+    padding: 13px 17px;
+    background: #dadada;
+    &.blank{
+      min-height: $grey_blank_height;
+    }
+  }
+  .grey_light {
+    padding: 13px 17px;
+    background: #e5e5e5;
+  }
+  a {
+    color: $black !important;
+  }
+}
+
+@mixin provider-comparison-table($dark-color, $light-color) {
+  width: 100%;
+  font-size: 13px;
+  tr.main-title {
+    border-bottom: 3px solid #e6e6e6;
+    td {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+    }
+  }
+  tr, td {
+    height: 33px;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  tr td:first-child {
+    padding-left: 10px;
+  }
+  td {
+    @media screen and (min-width: 980px) {
+      width: 33%;
+    }
+    @media screen  and (max-width: 979px) {
+      width: 33%;
+    }
+    @media screen and (max-width: 500px) {
+      width: 100% !important;
+    }
+    a:hover {
+      color: $dark-color;
+    }
+  }
+  td:first-child {
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(2) {
+    background-color: $white !important;
+  }
+  tr:last-child {
+    td {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    background-color: $white;
+  }
+  td.highlight-price {
+    color: $dark-color;
+  }
+  th {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+  }
+  tr.title {
+    background-color: $black;
+    font-weight: bold;
+    color: $white;
+    font-size: 14px;
+    padding: 8px;
+    height: 37px;
+    border-bottom: none;
+    td {text-align: left};
+  }
+  td.red {
+    background-color: $dark-color;
+    color: $white;
+  }
+  td.light-red {
+    background-color: $light-color;
+    color: $white;
+  }
+}
+
+@mixin provider-comparison-table-gamsat($dark-color, $light-color) {
+   width: 100%;
+   font-size: 13px;
+   tr.main-title {
+     border-bottom: 3px solid #e6e6e6;
+     td {
+     text-align: center;
+     font-size: 18px;
+     font-weight: bold;
+     padding: 0 10px 0 10px;
+     }
+   }
+   tr, td {
+     height: 33px;
+     text-align: center;
+     border-bottom: 1px solid white;
+   }
+   tr td:first-child {
+     padding-left: 10px;
+   }
+   td {
+     @media screen and (min-width: 980px) {
+       width: 25%;
+     }
+     @media screen  and (max-width: 979px) {
+       width: 25%;
+     }
+     @media screen and (max-width: 500px) {
+       width: 100% !important;
+     }
+     a:hover {
+       color: $dark-color;
+     }
+   }
+   td:first-child {
+     text-align: left;
+   }
+   tr:nth-child(even) {
+     background-color: #f2f2f2;
+   }
+   tr:nth-child(2) {
+     background-color: $white !important;
+   }
+   tr:last-child {
+     td {
+       font-size: 18px;
+       font-weight: bold;
+     }
+     background-color: $white;
+   }
+   td.highlight-price {
+     color: $dark-color;
+   }
+   th {
+     font-size: 18px;
+     font-weight: bold;
+     text-align: center;
+     height: 50px;
+   }
+   tr.title {
+     background-color: $black;
+     font-weight: bold;
+     color: $white;
+     font-size: 14px;
+     padding: 8px;
+     height: 37px;
+     border-bottom: none;
+     td {text-align: left};
+   }
+   td.red {
+     background-color: $dark-color;
+     color: $white;
+   }
+   td.light-red {
+     background-color: $light-color;
+     color: $white;
+   }
+ }
+
+@mixin product-line-title($color, $font-size) {
+  font-color: $white;
+  font-size: $font-size;
+  font-weight: bold;
+  font-family: $font-head;
+  letter-spacing: 3px;
+  span{
+    color: $color;
+  }
+}
+
+@mixin gr-button-variant($color, $bg-color) {
+  @extend .btn-gradready;
+  background-color: $bg-color;
+  color: $color !important;
+  &:hover {
+    background-color: $bg-color;
+  }
+}
+
+@mixin gr-block-button-variant($main-color, $width, $height) {
+  position: relative;
+  width: $width;
+  height: $height;
+  color: $white !important;
+  display: block;
+  text-decoration: none;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: solid 1px $main-color;
+  background: $main-color !important;
+  text-align: center;
+  line-height: $height;
+  padding: 0px 30px;
+  font-size: 20px;
+  font-family: $museo-slab;
+  cursor: pointer;
+
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+}
+.gr-comparison-table > tbody a.content_none:after{
+  content:none;
+}

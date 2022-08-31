@@ -1,0 +1,55 @@
+.question_content.contant_scroll
+  %p.mrgtb20= mcq_stem.description.html_safe
+  %p.mrgtb20.question.yes_no{id: "#{m_attempt.id}"}= m_attempt.mcq.question.html_safe
+  .drag_wrap
+    .drag_list_col
+      %ul.drag_list
+        -m_attempt.mcq.mcq_answers.each do |mcq_answer|
+          - answer_text = mcq_answer.answer.gsub("\n", "").include?('<p>') ? mcq_answer.answer.gsub("\n", "") : "<p align='justify'>#{mcq_answer.answer.gsub("\n", "")}</p>"
+          %li.mcq-drag-list{id: "#{mcq_answer.id}-drag_list"}= answer_text.html_safe
+    .drag_box_col
+      %ul.drag_box
+        -attempts = m_attempt.mcq_attempt_answers
+        -m_attempt.mcq.mcq_answers.each do |mcq_answer|
+          -answer = attempts.find_by(mcq_answer_id: mcq_answer)
+          -if answer.present?
+            %li.droppable.dropbox{id: "#{mcq_answer.id}-droppable"}= answer.value ? 'Yes' : 'No'
+          -else
+            %li.droppable{id: "#{mcq_answer.id}-droppable"}
+    .drag_ans_col
+      %ul.drag_ans
+        %li.draggable yes
+        %li.draggable no
+
+:css
+  .dropbox{
+    height: 56px !important;
+    width: 99px !important;
+    border: 1px solid #000 !important;
+    background-color: #fff !important;
+    color: #000;
+    margin-bottom: 10px !important;
+    text-transform: capitalize;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+:javascript
+
+  $('.draggable').draggable({
+    revert: "invalid",
+    stack: ".draggable",
+    helper: 'clone'
+  });
+  $('.droppable').droppable({
+    accept: ".draggable",
+    drop: function(event, ui) {
+      var droppable = $(this);
+      var draggable = ui.draggable;
+      text = ui.draggable.text();
+      $(this).addClass('dropbox')
+      $(this).text(text);
+    }
+  });

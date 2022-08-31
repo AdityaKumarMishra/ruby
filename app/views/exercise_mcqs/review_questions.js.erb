@@ -1,0 +1,10 @@
+<% if @no_custom_access %>
+$("#confirm_procced").html("<%=escape_javascript(render('partial/access_limit_modal', type: 'Mcq', path: new_exercise_path, no_custom_access: @no_custom_access, more_access: false))%>");
+<% elsif @no_access %>
+  $("#confirm_procced").html("<%=escape_javascript(render('partial/access_limit_modal', type: 'Mcq', p_course_path: @p_course_path, product_line: @product_line, path: new_exercise_path, more_access: @more_access, access_limit: @access_limit, no_custom_access:  false))%>");
+<% elsif (@left_questions > 0) && (@amount > @left_questions) %>
+  $("#confirm_procced").html("<%=escape_javascript(render('exercises/procced_modal', left_questions: @left_questions, condition_first: @condition_first))%>");
+  $("#procced-modal").modal("show");
+<% else %>
+  document.getElementById("new_exercise").submit();
+<% end %>

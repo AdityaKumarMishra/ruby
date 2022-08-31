@@ -1,0 +1,74 @@
+!!!
+%html
+  %head
+    = Gon::Base.render_data
+    =# render 'layouts/google_analytics' if Rails.env.production?
+    / Google Tag Manager
+    :javascript
+      logged_user = "#{current_user.present? ? current_user.id : nil}";
+      dataLayer = [{'userID': logged_user}];
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+      {'gtm.start': new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M9MF8XK');
+    / End Google Tag Manager
+    %title Gradready
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag Ckeditor.cdn_url
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'https://polyfill.io/v3/polyfill.min.js?features=es6'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML.js', id: "MathJax-scrip"
+    = sentry_tag
+
+    -if current_user.nil? or current_user.current_enrolment.nil?
+      - if map_path_to_prodline(request.env['PATH_INFO']) == "gamsat-preparation-courses"
+        - prodline = "gamsat"
+      - elsif map_path_to_prodline(request.env['PATH_INFO']) == "umat-preparation-courses"
+        - prodline = "umat"
+      - else
+        - prodline = map_path_to_prodline(request.env['PATH_INFO'])
+      = favicon_link_tag '/images/favicon-'+prodline+'.png',type: 'image/png'
+    -else
+      = favicon_link_tag '/images/favicon-'+map_prodline(current_user.current_enrolment.course.product_version.type)+'.png',type: 'image/png'
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = yield(:head)
+    = render partial: 'layouts/shiv'
+    = render partial: 'layouts/structured_data'
+    = hotjar_tag
+  %body
+    -if (current_user.nil? or current_user.current_enrolment.nil?)
+      = render :partial => 'partial/gamsat_main_menu'
+    -else
+      = render :partial => 'partial/'+map_prodline(current_user.current_enrolment.course.product_version.type)+'_main_menu'
+    -#= flash_messages
+    .dashboard-container
+      .container
+        .row
+          .col-md-2.col-md-offset-1
+            = render 'dashboard/partial/left_panel'
+          .col-md-9
+            = render 'dashboard/partial/alert_message'
+            = yield
+    %br/
+    -if current_user.nil? or current_user.current_enrolment.nil?
+      = render partial: 'layouts/footer', locals: {product_line: 'gamsat'}
+    -else
+      = render partial: 'layouts/footer', locals: {product_line: map_prodline(current_user.current_enrolment.course.product_version.type)}
+
+    = render partial: 'section_item_attempts/partial/status'
+    .dynamic_time_rem
+      = render partial: 'exercises/status'
+.loader_payment
+  - loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+  :javascript
+    var img = '#{loader_img}';
+    var clientToken = "#{@token}";
+    var braintree_activated = false;
+    var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...<br><b>Do not press Back or Refresh</b></div></div>"
+    function dd_loader(){
+      $('.loader_payment').html(loader);
+    }

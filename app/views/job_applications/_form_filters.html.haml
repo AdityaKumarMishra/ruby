@@ -1,0 +1,28 @@
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+  .panel-body
+    .form-group
+      = form_for_filterrific @filterrific do |f|
+        .form-group
+          = f.select :sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Sort By' }, class: 'form-control'
+        .form-group
+          = f.select :with_status, @filterrific.select_options[:with_status], { include_blank: 'All Statuses' }, class: 'form-control'
+        .form-group
+          = f.select :with_degree_type, @filterrific.select_options[:with_degree_type], { include_blank: 'All Degrees' }, class: 'form-control'
+        .form-group
+          = f.select :with_domestic, @filterrific.select_options[:with_domestic], { include_blank: 'All Student' }, class: 'form-control'
+        .form-group
+          = f.text_field :with_hours_available, class: 'form-control', placeholder: 'Hours Available'
+        .form-group
+          = f.text_field :with_name, class: 'form-control', placeholder: 'Name/Email/Status'
+        .form-group
+          = f.select :with_position, @filterrific.select_options[:with_position], { include_blank: 'All Position' }, class: 'form-control'
+        .form-group
+          = f.select :with_content_tag, @filterrific.select_options[:with_content_tag], { include_blank: 'All' }, class: 'form-control hidden'
+        .form_group
+          = f.select :with_state, @filterrific.select_options[:with_state], { include_blank: 'All States' }, class: 'form-control'
+        = render_filterrific_spinner
+
+        = link_to 'Reset filters', reset_filterrific_url, class: 'text-right btn btn-default'

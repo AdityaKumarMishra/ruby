@@ -1,0 +1,729 @@
+#public-courses
+  .container
+    #course-headers
+      .font_sty1.gr-img
+        =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/GamsatReady.png")
+        %strong.text_green.cours_to
+          = @product_version.name
+      %br/
+      %br/
+      .student_score.mrg_txt.light_f_g
+        GradReady students
+        %strong.text_green
+          %a.gren_font{:href => "/gamsat-preparation-courses/student_testimonials#my_clas"} on average improve
+        their score by
+        %strong.text_green
+          %a.gren_font{:href => "/gamsat-preparation-courses/student_testimonials#my_clas"} at least 24 percentile points.
+        .course_green_rating{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+          %i.fa.fa-star
+           
+          %i.fa.fa-star
+           
+          %i.fa.fa-star
+           
+          %i.fa.fa-star
+           
+          %i.fa.fa-star-o
+          %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+        %span.see-details
+      .student_score.light_f_g
+        .sp1
+        Helped
+        %a.gren_font{:href => "/gamsat-preparation-courses/our_students"} over 1000 students
+        prepare for the 2015 March GAMSAT
+      .righ_tex_o.online_tip
+        15 student reviews
+        %span.see-details
+        %br/
+        %br/
+  #course-dates-container.none_bg
+    .container
+      .headings
+        %h1.course_page_mrgn.green Course Dates
+        %p.text_italic
+          Please choose your City and Course from the drop down selections below.
+      .course-dates-table-container.date_table_m
+        %br/
+        .course-options
+          .clearfix
+            .course-city-selection.pull-left
+              .clearfix
+                %label.pull-left{:for => "city"} City
+                %select#city.pull-left
+                  %option{:value => "Adelaide"} Adelaide
+                  %option{:value => "Brisbane"} Brisbane
+                  %option{:value => "Canberra"} Canberra
+                  %option{:value => "Melbourne"} Melbourne
+                  %option{:value => "Other"} Other
+                  %option{:value => "Perth"} Perth
+                  %option{:value => "Sydney"} Sydney
+            .course-date-selection.pull-left
+              .clearfix
+                %label.pull-left{:for => "name"} Course
+                %select#course.pull-left
+            .course-enrolment-selection.pull-left
+              .clearfix
+                %label.pull-left.enrolment_clo_date{:for => "enrolment date"} Enrolment Closure Date
+                #enrolment_dates.pull-left.enrolment
+        %form{"accept-charset" => "UTF-8", :action => "/gamsat-preparation-courses/enrolments/account", :method => "get"}
+          %div{:style => "margin:0;padding:0;display:inline"}
+            %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+          .course-package-access{:style => "display:none;"}
+            %p.span3
+              %input#course_access_diagnostic_access{:checked => "checked", :name => "course_access[diagnostic_access]", :type => "checkbox", :value => "1"}/
+              Diagnostics Assessment $39
+            %p.span3
+              %input#course_access_online_exam_access{:checked => "checked", :name => "course_access[online_exam_access]", :type => "checkbox", :value => "1"}/
+              6 Online Exams(Essays not included) $179
+            %p.span3
+              %input#course_access_assignment_access{:checked => "checked", :name => "course_access[assignment_access]", :type => "checkbox", :value => "1"}/
+              6 Additional Essays $229
+            %p.span3
+              %input#course_access_mcq_access{:checked => "checked", :name => "course_access[mcq_access]", :type => "checkbox", :value => "1"}/
+              4000 MCQs $295
+            %p.span3
+              %input#course_access_forum_access{:checked => "checked", :name => "course_access[forum_access]", :type => "checkbox", :value => "1"}/
+              Online Tutor Access $145
+            %p.span3
+              %input#course_access_course_book_access{:checked => "checked", :name => "course_access[course_book_access]", :type => "checkbox", :value => "1"}/
+              1000 Page Online Textbook $188
+            %p.span3
+              %input#course_access_video_access{:checked => "checked", :name => "course_access[video_access]", :type => "checkbox", :value => "1"}/
+              Course Videos $159
+            %p.span3
+              %input#course_access_more_comments{:checked => "checked", :name => "course_access[more_comments]", :type => "checkbox", :value => "1"}/
+              Get Clarity System $145
+          .course-dates-table
+            %input#enrolment_course{:name => "course", :type => "hidden", :value => "5645b5123f2a81713c0001b8"}/
+            %input#enrolment_package{:name => "package", :type => "hidden", :value => "online"}/
+            %table.table
+              %thead
+                %tr
+                  %th.date Date
+                  %th.location Location
+                  %th.start Start Time
+                  %th.end End Time
+                  %th.items Items Covered
+              %tbody
+                %tr#lesson_table
+            .clear
+              .course-purchase.font_purchase
+                %span.pricing-details
+                / %p
+                / Early Bird Price:
+                %span.pricing-details
+                  Price:
+                  $#{@product_version.price}
+                %span.pricing-details.price_center
+                  + 10% GST =
+                  $#{@product_version.price * 1.1}
+                %span.gst_font.price_center.mrgn_0
+                  (
+                  %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#What%20is%20GST"} What is GST?
+                  )
+                %br/
+                %p.purchase-button
+                  %br/
+                  %input.course-enrol-button.btn.btn-gr.green{:href => "/gamsat-preparation-courses/enrolments/account?course=5645b5123f2a81713c0001b8&package=online", :name => "commit", :type => "submit", :value => "Take this course"}/
+          .discount
+            .cont_cours_das.cont_chan_da
+              #a_link_clr
+                %h4
+                  10% discount if you enrol in a group of 4 or more
+                  %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#group-discount-available"} Learn more
+                .notice-links
+                  %a{:href => "/gamsat-preparation-courses/faq/about-gradready#Can%20I%20access"} Sample Material
+                  |
+                  %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#For%20how%20long"} Sample Material
+                  |
+                  %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#How%20much%20does"} Post to outside Australia
+                  |
+                  -#%a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#10%-discount-policy"} Refund Policy
+
+
+  .container
+    #course-headers
+      %h1.green Course Description
+    .row
+      .col-md-6
+        #course-package-details
+          %p The Online package is an ideal alternative for students who cannot attend a Attendance course because of location or timing issues.
+          %p Through compiling student feedback, we picked our best tutors to develop an online classroom consisting of 25 hours of engaging and bite-sized videos.
+          %p Moreover, you will have online access to our team of devoted tutors. Our best tutors have also distilled some of their "gems" into our GAMSAT Strategy and Essay Writing Guide.
+          %p All online material are immediately available for access after purchase.
+      #course-package-video
+        .col-md-6.pos_rel
+          / .play_icon_new
+          / = image_tag "play-button.png"
+          %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "GAMSATReady Online", :width => "100%", height: "312px"}
+            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+      .main_oute2
+        %ul.nav.nav-tabs.tab_bl.n-tab{:role => "tablist"}
+          %li.active
+            %a.feture_btn{"data-toggle" => "tab", :href => "#grad_testi2", :role => "tab"} Features
+          %li
+            %a.feture_btn{"data-toggle" => "tab", :href => "#interview_testi2", :role => "tab"}
+              %i.fa.fa-star-o.icon-green-star-o{"aria-hidden" => "true"}
+              Reviews
+        .tab-content.scroll_inhirt
+          #grad_testi2.tab-pane.active.width_535
+            .span12
+              .feature-description
+                #Diagnostics-Assessment.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-clipboard{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Diagnostics Assessment
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      .text Use the 62 question test to test your familiarity of the fundamental concepts covered in the GAMSAT. Your performance will be automatically reported across the 4 subject areas and 24 subtopics. Use this information to guide the focus of your study. Note that this is not a diagnostics of your performance in the GAMSAT; the MCQs or Online Exams would better serve that purpose.
+                #6-Online-Exams.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-copy{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        6 Online Exams (Essay Not Included)
+                      .text Our online test system mimics the style of the GAMSAT by putting you under real time pressure. The exam results will be automatically broken down according to the applicable topics (from a pool of 43 topics), giving you a precise overview of your strengths and weaknesses. In addition, your performance will be automatically compared to that of other GradReady students, and you will be given the resulting percentile in the applicable sections and overall. Other than our Mock Exam Days, this is as close as it gets to the actual GAMSAT.
+                .clear
+                #10-Marked-Essays.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-align-right{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        10 Marked Essays
+                      .text Get personal feedback on your essays within 72 working hours. Experienced essay markers will identify your specific weaknesses and teach you how to improve.
+                .feature-icon-container.col-md-6{:id => "1500-MCQs-(and-growing)+Tracking-System"}
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-question-circle{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        4000 MCQs (and growing) + Tracking System
+                      .text
+                        The GradReady MCQ Bank utilises cutting edge web education technology in performance tracking and topic targeting. The MCQs are categorised into 43 subtopics - our
+                        %a{:href => "/faq#Can I access"} advanced MCQ system
+                        not only tracks your performance in each subtopic, it also allows you to create sets of MCQs based on subtopics of your choosing – meaning you can focus on what you need to. In addition, you are able to set the difficulty of the questions, allowing you to tailor the MCQs to your own ability. We are adding new questions to the bank every week and stay tuned for additional technology updates throughout the year. There is no limit on the number of times you may reattempt the MCQs. Explanations are provided for all MCQs.
+                .clear
+                #Online-Tutor-Access.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-comments{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Online Tutor Access
+                      .text Ask as many clarifying questions as it takes for you to truly understand a concept. Our dedicated team of tutors will answer your questions within 48 hours.
+                #Quality-Assurance-System.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-refresh{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Quality Assurance System
+                        / .label.label-mini.label-new
+                        %i.fa.fa-star.icon-green-star{"aria-hidden" => "true"}
+                        = link_to 'new', recent_update_path, class: 'c_grn'
+                      .text You are able to rate, out of 10 stars, everything within the GradReady web system - from MCQs to videos to essay feedback. This means that we can rapidly adapt to your needs.
+                .clear
+                #1000-page-Text.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-book{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        1000 Page Online Textbook
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      .text The online textbook comprehensively covers the GAMSAT. It includes sections on overarching strategies (general GAMSAT Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all sciences (37 topics).
+                #Study-Timeline-Guide.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-book{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Study Timeline Guide
+                        / .label.label-mini.label-new
+                        %i.fa.fa-star.icon-green-star{"aria-hidden" => "true"}
+                        = link_to 'new', recent_update_path, class: 'c_grn'
+                      %h5.gry_itl (included in course book)
+                      .text To help you navigate through the GAMSAT journey, we have provided a detailed Study Timeline Guide for Section I, Section II and each of the 3 Section III science areas. This guide is included in the Course Book.
+                .clear
+                #Essay-Writing-Guide.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-pencil-square-o{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Essay Writing Guide
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      .text In addition to our general essay writing strategies, we provide a detailed 8-step guide to crafting the perfect essay. We also provide analysis on 48 example essays of varying quality, allowing you to understand the characteristics of good and bad essays. In addition, there are 40 sets of quotes for you to use as practise (note that the essays you write here will not be marked). The guide is included in the Course Book.
+                #GAMSAT-Strategy.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-bullseye{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        GAMSAT Strategy
+                      .text Perform your best by understanding what makes the GAMSAT different, how to prepare for it and how to deal with high-pressure situations. This guide is included in the Course Book.
+                .clear
+                #Cross-Referencing-System.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-random{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Cross Referencing System
+                      .text To enable you to better tie together resources across platforms, we have introduced the Cross Referencing system where you will to able to match MCQs to precise videos and notes. So when you get an MCQ wrong, you will now know exactly which videos and notes to review to consolidate your knowledge.
+                .feature-icon-container.col-md-6{:id => "GetClarity System"}
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-comments{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        GetClarity System
+                      .text We believe that the best way to improve is to understand where you went wrong and how you may do better the next time. GetClarity System is a tool that will help you to dissect your weaknesses in even more detail than our standard, but already industry leading, features. The first step in this system is to enable you to easily ask follow-up questions about any content – meaning that you practically have a personal tutor at your fingertips 24/7. The system is currently being applied to our Videos, MCQs and Online Exams.
+                .clear
+                #Course-Videos.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-film{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Course Videos
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      %h5.gry_itl Humanities - 5 hours
+                      %h5.gry_itl Physics - 6 hours
+                      %h5.gry_itl Biology - 7 hours
+                      %h5.gry_itl Chemistry - 7 hours
+                      .text The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the GAMSAT and serve as an excellent starting point for your GAMSAT preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.
+                .feature-icon-container.col-md-6{:id => ""}
+                  .clearfix
+                    .feature-icon.pull-left
+                    .feature-content.pull-right
+                      %h4
+                      .text
+                .clear
+                .col-md-12
+                  %h3.text_green Upgrade options after enrolment:
+                %br/
+                .clear
+                .feature-icon-container.col-md-6{:id => "Mock-Exam-Day+Mock-Exam-Day-Recap"}
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Mock Exam Day + Mock Exam Day Recap
+                        / .label.label-mini.label-new
+                        %i.fa.fa-star.icon-green-star{"aria-hidden" => "true"}
+                        = link_to 'new', recent_update_path, class: 'c_grn'
+                      %h5.gry_itl $229 + 10% GST = $252
+                      .text The closest thing to the actual GAMSAT - you will be put through time pressures and a well-simulated test environment. Then our expert tutors will go through all the MCQs with you the next day and give you personalised feedback on your essays within the week. In addition, your performance will be compared with those by other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.
+                .feature-icon-container.col-md-6{:id => ""}
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-user{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Attendance Tutorials [Mock Exam Day + Mock Exam Day Recap Included]
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      %h5.gry_itl $550 + 10% GST = $605
+                      %h5.gry_itl Humanities - 9 hours
+                      %h5.gry_itl Physics - 7 hours
+                      %h5.gry_itl Biology - 8 hours
+                      %h5.gry_itl Chemistry - 6 hours
+                      .text Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through MCQs with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.
+                .clear
+                #5x1-hour-private-tutoring-session.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-street-view{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        5 x 1 hour private tutoring session
+                      %h5.gry_itl $495 + 10% GST = $545
+                      .text Be fully prepared for the GAMSAT by addressing your remaining weak points in one on one sessions.
+                #Extra-Essays.feature-icon-container.col-md-6
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-align-right{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Extra Essays
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      .text If you would like extra practise in essay writing, you have the option to purchase more essays in packs of 2, 4, 6 or 8. These essays will of course be marked with the same precision and care as any other essays submitted to the GradReady team.
+                .clear
+                .feature-icon-container.col-md-6{:id => ""}
+                  .clearfix
+                    .feature-icon.pull-left
+                      %i.fa.fa-book{"aria-hidden" => "true"}
+                    .feature-content.pull-right
+                      %h4
+                        Abbreviated Edition of Textbook - Hard Copy
+                        / .label.label-mini.label-enhanced
+                        %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+                        = link_to 'enhanced', recent_update_path, class: 'c_grn'
+                      %h5.gry_itl $49 + $29 Shipping + 10% GST = $86
+                      .text Due to many student comments regarding size of book in past years, we decided to leave out the slides in the 2016 edition. The resulting hardcopy edition is 500 pages in length. To see what was left out of the hard copy edition, you may view the online version through signing up to a free trial. If you would like to see the full hardcopy version again, please share your thoughts with us through the Contact Us page. The Textbook will be shipped to you from your nearest capital city every Monday.
+            .span12
+              .feature-icon-container.col-md-12.featu_wid.text-center
+                = link_to 'Learn About Recent Updates', recent_update_path, class: 'c_grn'
+              %br/
+          #interview_testi2.tab-pane.width_535
+            .feture_main_cont
+              %p.mule_revie
+                15 reviews for online
+              .col-md-6
+                %strong
+                  Luke R
+                .apri_date
+                  Oct 8,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "4.5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-half
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4.5"}/
+                %p
+                  the online resources ( quizzes) were great.
+                %hr/
+              .col-md-6
+                %strong
+                  Dane M
+                .apri_date
+                  Oct 9,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %p
+                  Feedback for essays was good. Really liked how the MQ went through the correct answers as well as the tutorials on different topics.
+                %hr/
+              .col-md-6
+                %strong
+                  Anonymous
+                .apri_date
+                  Sep 5,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+                %p
+                  Helped with essay feedback, needs more in terms of section 1 - reasoning in humanities. Tips on how to analyse texts and how to attempt the question would be useful.
+                %hr/
+              .col-md-6
+                %strong
+                  Molly W
+                .apri_date
+                  Sep 5,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %p
+                  The feedback was amazing and i definitely owe the improvement in my section 2 score to my markers feedback.
+                %hr/
+              .col-md-6
+                %strong
+                  Amelia F
+                .apri_date
+                  August 28,2015
+                  .course_green_rating.course_rating_right{"data-score" => "4.5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-half
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4.5"}/
+                %p
+                  Complex problems could have a forum where detail steps are available in working out problems. Marked essays good idea, need more of an explanation in advice given.
+                %hr/
+              .col-md-6
+                %strong
+                  Michael D
+                .apri_date
+                  August 13,2015
+                  .course_green_rating.course_rating_right{"data-score" => "3", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "3"}/
+                %p
+                  Science questions were too content heavy and did not focus on the problem skills required to answer GAMSAT style questions. The essays feedback was quite helpful, however there was not much editting associated with the essay marking. Whilst feedback is helpful, making meaningful change/edit is more important
+                %hr/
+              .col-md-6
+                %strong
+                  Srishti D
+                .apri_date
+                  August 12,2015
+                  .course_green_rating.course_rating_right{"data-score" => "3", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "3"}/
+                %p
+                  It helped me make sure that I was studying at least a little bit every day,even if it was just to make sure I was prepared for the next class on the weekend.
+                %hr/
+              .col-md-6
+                %strong
+                  Claudia H
+                .apri_date
+                  August 4,2015
+                  .course_green_rating.course_rating_right{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+                %p
+                  I believe the videos tutorials were so useful for someone like me, who is in NZ, and could not physically attend the course. The feedback given on each and every question to explain why you got it correct or incorrect. Sitting the mock exam allowed me to have a better gauge of my speed of performance under exam conditions. The mock exam also made me feel slightly insecure about my ability in a few sections, so it motivated me to improve on those sections in my last few weeks.
+                %hr/
+              .col-md-6
+                %strong
+                  Jessica H
+                .apri_date
+                  July 8,2015
+                  .course_green_rating.course_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %p
+                  Definitely improved my confidence in essay writing! The gradready book was amazing for section 3. Good amount of content covered for building up on basic science background.
+                %hr/
+              .col-md-6
+                %strong
+                  Blake K
+                .apri_date
+                  June 3,2015
+                  .course_green_rating.course_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %hr/
+                %p
+                  It helped me develop my science knowledge and improved me from a 54 to a 71 in that section. The tutorials worked well to simplify the harder concepts for me and the multitude of practice questions made a big difference. I found the marked essays very helpful also.
+              .col-md-6
+                %strong
+                  Annesley B
+                .apri_date
+                  May 12,2015
+                  .course_green_rating.course_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %p
+                  The marked essays in particular were very helpful. At first I wasn't scoring highly but I received good feedback and learnt how to improve. The videos were good for chemistry and physics in particular - to learn the basic prerequisite knowledge. The MCQs were good for revising content as well.
+                %hr/
+              .col-md-6
+                %strong
+                  Georgia G
+                .apri_date
+                  May 9,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+                %p
+                  Was great in terms of what to expect in how the exam was structured, however could've gone through more questions in the course and specifically why certain questions are right as a lot are very wordy
+                %hr/
+              .col-md-6
+                %strong
+                  Larisa B
+                .apri_date
+                  April 15,2015
+                  .course_green_rating.course_rating_right{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+                %p
+                  The thing I liked about the course was the large variety of practice questions. I also liked the markings of the essays, although the marks I did receive in the essays I did submit did not reflect on the marks I got in the exams.
+                %hr/
+              .col-md-6
+                %strong
+                  Alex H
+                .apri_date
+                  April 15,2015
+                  .course_green_rating.course_rating_right{"data-score" => "4", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star-o
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "4"}/
+                %p
+                  Helped with essay feedback, needs more in terms of section 1 - reasoning in humanities. Sure, hundreds of questions are great, but tips on how to analyse texts and how to attempt the question would be useful.
+                %hr/
+              .col-md-6
+                %strong
+                  Nathan E
+                .apri_date
+                  April 8,2015
+                  .course_green_rating.course_green_rating_right{"data-score" => "5", :style => "cursor: default; width: 100px;", :title => ""}
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                     
+                    %i.fa.fa-star
+                    %input{:name => "score", :readonly => "readonly", :type => "hidden", :value => "5"}/
+                %p
+                  I found the course very helpful and really benefited from the structured nature of the course.
+                %hr/
+-#%select#city.pull-left
+-#  %option{:value => "Adelaide"} Adelaide
+-#  %option{:value => "Brisbane"} Brisbane
+-#  %option{:value => "Canberra"} Canberra
+-#  %option{:value => "Melbourne"} Melbourne
+-#  %option{:value => "Other"} Other
+-#  %option{:value => "Perth"} Perth
+-#  %option{:value => "Sydney"} Sydney
+
+-#%select#course.pull-left
+
+:javascript
+  $('#city').on('change',function(){
+    $.ajax({
+      url: "/courses/list",
+      type: "GET",
+      data: {city: $('#city').val(), product_id: #{@product_version.id} },
+      success: function(responseData) {
+        html = "";
+        for(var i in responseData) {
+          var obj = responseData[i];
+          html += "<option value=" + obj["id"]  + ">" +obj["name"] + "</option>";
+        }
+        document.getElementById("course").innerHTML = html;
+      }
+    });
+  });
+:javascript
+  $('#course').on('change',function(){
+    $.ajax({
+      url: "/courses/list",
+      type: "GET",
+      data: {course_id: $('#course').val() },
+      success: function(obj) {
+        var enrolmentDate = new Date(obj["enrolment_end_date"]);
+        console.log(enrolmentDate);
+        var lessons = obj['lessons'];
+        var content = '';
+
+        $('#enrolment_dates').text(enrolmentDate);
+        for(var i=0;i<lessons.length;i++)
+        {
+            var tr="<tr>";
+            var td1="<td>"+(new Date(lessons[i]["date"])).toDateString()+"</td>";
+            var td2="<td>"+lessons[i]["location"]+"</td>";
+            var td3="<td>"+(new Date(lessons[i]["start_time"])).toTimeString()+"</td>";
+            var td4="<td>"+(new Date(lessons[i]["end_time"])).toTimeString()+"</td>";
+            var td5="<td>"+lessons[i]["item_covered"]+"</td></tr>";
+            content += tr + td1 +td2 + td3+ td4+ td5;
+
+        }
+        $("#lesson_table").replaceWith(content);
+      }
+    });
+  });

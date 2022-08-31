@@ -1,0 +1,100 @@
+%section#take_down_pricing.pad50
+  .text-center.container.mbot30
+    %h2 Course Information
+    %p.sub_heading_txt.custom_mok_show
+      -if selected_course.present?
+        %strong
+          Enrollment Closure Date:
+          = selected_course.enrolment_end_date.strftime("%d %b %Y")
+
+    #custom_course_cities
+      -if selected_course.present?
+        = render 'custom_course_cities', courses: courses, cities: cities, selected_course: selected_course, product_version: product_version, first_city: first_city
+
+    - pvfps = @product_version.product_version_feature_prices.where(is_default: false, is_additional: false)
+
+    - pvfps = recreate_pvfps(pvfps, @product_version)
+
+    .diagonestic_assignmnt
+      = form_for :custom_pvfps, url: selected_course.present? ? course_enrolments_custom_enrol_path(selected_course.id) : "javascript:void(0)", method: :get, html: { id: "custom-course-purchase-form" } do |f|
+        .left_assgmnt.bdr_right
+          %ul
+            -pvfps.first((pvfps.count - (pvfps.count/2))).each_with_index do |pvfp, index|
+              - next if pvfp.master_feature.online_mock_exam?
+              - mf_name = pvfp.master_feature.custom_feature_name(pvfp.qty, @product_version.try(:type))
+              - unless mf_name.downcase.include?("diagnostic")
+                %li.checkbox_col
+                  = f.check_box :pvfp_ids, { multiple: true, class: "custom-pvpf-checkbox" + " " + "#{mf_name}".downcase.tr(' ', '_'), label: false, id: "check_#{index}"}, pvfp.id, nil
+                  %label{for: "check_#{index}"}
+                    %span.non_gst.green_colr
+                      = mf_name
+                      %span.custom_price_high= pvfp.price.round
+                    %span.gst_small
+                      + 10% GST =
+                      = pvfp.ten_percent_gst_amount.round
+                  -if mf_name == "Hard Copy Edition of Course Book"
+                    -if @outofstock.present? && @outofstock.out_of_stock?
+                      -if @outofstock.content.present?
+                        %p.out-of-stock
+                          *Out of stock - #{@outofstock.content}
+                      -else
+                        %p.out-of-stock
+                          *Out of stock
+                  -if mf_name.include?("Hard Copy")
+                    %div
+                      .hard_copy Delivery time: 3-7 business days
+        .left_assgmnt.last_brdr
+          %ul
+            -pvfps.last(pvfps.count/2).each_with_index do |pvfp, index|
+              - next if pvfp.master_feature.online_mock_exam?
+              - mf_name = pvfp.master_feature.custom_feature_name(pvfp.qty, @product_version.try(:type))
+              %li.checkbox_col
+                = f.check_box :pvfp_ids, { multiple: true, class: "custom-pvpf-checkbox" + " " + "#{mf_name}".downcase.tr(' ', '_'), label: false, id: "check_#{index + 1 + (pvfps.count/2)}"}, pvfp.id, nil
+
+                %label{for: "check_#{index +1 + (pvfps.count/2)}"}
+                  %span.non_gst.green_colr
+                    = mf_name
+                    %span.custom_price_high= pvfp.price.round
+                  %span.gst_small
+                    + 10% GST =
+                    = pvfp.ten_percent_gst_amount.round
+                -if mf_name == "Hard Copy Edition of Course Book"
+                  -if @outofstock.present? && @outofstock.out_of_stock?
+                    -if @outofstock.content.present?
+                      %p.out-of-stock
+                        *Out of stock - #{@outofstock.content}
+                    -else
+                      %p.out-of-stock
+                        *Out of stock
+                -if mf_name.include?("Hard Copy")
+                  .hard_copy Delivery time: 3-7 business days
+    - if selected_course.present? && selected_course.lessons.present?
+      #custom_course_lessons
+        = render 'custom_course_lessons', selected_course: selected_course
+
+  = render 'public_page_partial/refer_a_friend', pv_type: product_version.type == 'GamsatReady' ? 'gamsat' : 'umat'
+
+  = render 'enrolments/feature_course_modal'
+
+  :javascript
+
+    $(".custom_course_purchase").click(function(e){
+      var len = 0;
+      var values = $('input:checkbox:checked.custom-pvpf-checkbox').map(function () {
+      return this.value;
+      }).get();
+      len = values.length;
+      if(len == 0){
+        e.preventDefault();
+      }else{
+        $('#custom-course-purchase-form').submit();
+      }
+    });
+
+    $('.hard_copy').hide();
+    $(".hard_copy_edition_of_course_book").click(function(e){
+      if($('.hard_copy_edition_of_course_book').is(":checked"))
+        $(".hard_copy").show();
+      else
+        $(".hard_copy").hide();
+    });

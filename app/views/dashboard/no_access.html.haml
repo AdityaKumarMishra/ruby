@@ -1,0 +1,65 @@
+- content_for :page_heading, "No Access"
+.dashbord_right
+  .no_access
+    .faq_list.para_fs14.steps_col
+      .faq_list_col
+        .course_frm.filter_box_shadow.stap_from_field.not_acces_page
+
+          - if @pvs.present?
+            - if @feature.essay?
+              %h4= "#{@feature.title} is not a part of your package. If you wish to add this feature please select appropriate quantity and click on 'Add to Cart' button."
+              - ten_essay = @pvs.find_by(qty: 10)
+              - if ten_essay.present?
+                .no_access_cont
+                  #PriceESGst.gst_price= number_to_currency(ten_essay.price)
+                  = select_tag "private_tutor_hour", options_for_select(@pvs.map{|pvfp| [pvfp.qty, pvfp.id]}, ten_essay.id), class: 'PurchaseAddonsDropdown'
+                  .add-cart
+                    #AddToCartESDropDown
+                      = render 'feature_logs/add_feat_to_cart', a: ten_essay
+              - else
+
+                .no_access_cont
+                  #PriceESGst.gst_price= number_to_currency(@pvs.first.price)
+                  = select_tag "private_tutor_hour", options_for_select(@pvs.map{|pvfp| [pvfp.qty, pvfp.id]}), class: 'PurchaseAddonsDropdown'
+                  .add-cart
+                    #AddToCartESDropDown.text-center.mtop30.mbot10
+                      = render 'feature_logs/add_feat_to_cart', a: @pvs.first
+
+            - elsif @feature.private_tutoring?
+              %h4= "#{@feature.title} is not a part of your package. If you wish to add this feature please select appropriate quantity and click on 'Add to Cart' button."
+              - five_tutor = @pvs.find_by(qty: 5)
+              - if five_tutor.present?
+                .no_access_cont
+                  #PricePTGst.gst_price= number_to_currency(five_tutor.price)
+                  = select_tag "private_tutor_hour", options_for_select(@pvs.map{|pvfp| [pvfp.qty, pvfp.id]}, selected: five_tutor.id), class: 'PurchaseAddonsDropdown'
+                  .add-cart
+                    #AddToCartPTDropDown
+                      = render 'feature_logs/add_feat_to_cart', a: five_tutor
+              - else
+                .no_access_cont
+                  #PricePTGst.gst_price= number_to_currency(@pvs.first.price)
+                  = select_tag "private_tutor_hour", options_for_select(@pvs.map{|pvfp| [pvfp.qty, pvfp.id]}), class: 'PurchaseAddonsDropdown'
+                  .add-cart
+                    #AddToCartPTDropDown
+                      = render 'feature_logs/add_feat_to_cart', a: @pvs.first
+
+            - else
+
+              %h4= "#{@feature.title == 'Exams' ? 'Diagnostics and Exams' : @feature.title} is not a part of this package. If you wish to add this feature please click on 'Add to Cart' button."
+              .gst_price= number_to_currency(@pvs.first.price)
+              .no_access_cont
+                .add-cart.text-center.mbot10= link_to 'Add to Cart', add_feature_cart_path(@pvs.first, :move_to_order => true), remote: true, class: 'default_btn hvr-shutter-in-horizontal add_cart', onclick: 'dd_loader();'
+          - else
+            %h4= "#{@feature.title} is not a part of this package."
+
+
+
+
+:javascript
+  $(".PurchaseAddonsDropdown").on('change', function(){
+    var id = $(this).val()
+    $.ajax({
+      type: 'GET',
+      url: "/feature_logs/" + id +"/find_pv_price"
+    })
+  });

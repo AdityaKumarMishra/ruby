@@ -1,0 +1,11 @@
+-# this view take in a local var 'product_line' when rendered
+
+.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-bullseye{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4= @product_line + " Strategy"
+      .text
+        %p.u-word-spacing
+          = "We’ve developed a guide that covers key areas of your HSC preparation such as subject selection, ATAR score/calculation, how to prepare it and how to survive it - it’s the one-stop-shop for doing your best in the HSC."

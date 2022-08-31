@@ -1,0 +1,401 @@
+- new_course_type = ProductVersion.course_types[@product_version.course_type]
+- if new_course_type == 3
+  - product_version_name = "Courses - InterviewReady Attendance Comprehensive"
+  - title "Comprehensive Attendance Interview Courses | GradReady Med Interview Preparation"
+  - meta_description "Get all the tools you need to ace your Medical Interview, including the most realistic Mock MMI available, with 8 stations and successful Medical Students at each station sharing their experience and feedback on every aspect of your performance."
+  - meta_keywords "medical interview preparation, mmi preparation, med interview preparation, medical interview course, mmi course"
+  - secure_course = "Secure Your InterviewReady MMI Comprehensive GAMSAT® Course"
+- elsif new_course_type == 2
+  - product_version_name = "Courses - InterviewReady Attendance Essentials"
+  - title "Essentials Attendance Interview Course | GradReady Med Interview Preparation"
+  - meta_description "Get all the tools you need to ace your Medical Interview, including comprehensive online resources and tutor facilitated peer interviews to help you put different scenarios into practice. Prepare in your own time with our MMI Question Bank and Exemplar Video Responses."
+  - secure_course = "Secure Your InterviewReady Attendance Essentials GAMSAT® Course"
+- elsif new_course_type == 9
+  - product_version_name = "Courses - InterviewReady Online Essentials"
+  - title "Essentials Online Interview Course | GradReady Med Interview Preparation"
+  - meta_description "Our Interview Essentials Course gives you all the online resources you need to make the right start to your MMI Prep. Take advantage of our MMI Question Bank and Exemplar Video Responses, with videos that demonstrate a high, average and low quality response."
+  - secure_course = "Secure Your InterviewReady Online Essentials GAMSAT® Course"
+-elsif new_course_type == 4
+  - product_version_name = "Courses - Online (Essentials)"
+  - title "Essential Online GAMSAT Course | GradReady GAMSAT Preparation"
+  - meta_description 'Get all the tools you need to improve your GAMSAT Preparation with our Online Essentials Course. Prepare in your own time from anywhere in the world with our industry-leading online learning system.'
+  - secure_course = "Secure Your Essential Online GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 5
+  - product_version_name = "Courses - Online (Comprehensive)"
+  - title "Comprehensive Online GAMSAT Course | GradReady GAMSAT Preparation"
+  - meta_description "Study for the GAMSAT from anywhere in the world with our Online Comprehensive Course providing you with all the materials you need at the click of a button. Get access to our most powerful tools and systems with our industry-leading learning technology."
+  - secure_course = "Secure Your Comprehensive Online GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 6
+  - product_version_name = "Courses - Attendance (Essentials)"
+  - title "Essential Attendance GAMSAT Course | GradReady GAMSAT Courses"
+  - meta_description "Solidify your GAMSAT knowledge by attending our live tutorials, capped at 21 students, where experienced med student tutors teach you the material and strategy from top to bottom."
+  - secure_course = "Secure Your Essential 15 Day (8 core + 7 optional) GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 7
+  - product_version_name = "Courses - Attendance (Comprehensive)"
+  - title "Comprehensive Attendance GAMSAT Course | GradReady GAMSAT Courses"
+  - meta_description "Prepare for the GAMSAT with our experienced med student tutors breaking down the reasoning and exam strategy needed to ace the GAMSAT Exam. Combine this with access to our industry-leading online learning system and consolidate your prep with our Attendance Comprehensive Course."
+  - secure_course = "Secure Your Comprehensive 15 Day (8 core + 7 optional) GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 8
+  - product_version_name = "Courses - Attendance (Complete Care)"
+  - title "Complete Care Attendance GAMSAT Course | GradReady GAMSAT Courses"
+  - meta_description "Our most comprehensive GAMSAT preparation package provides you with private tutoring, live classes and access to all of our industry-leading online systems and tools."
+  - secure_course = "Secure Your Complete Care 15 Day (8 core + 7 optional) GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 1
+  - product_version_name = "Courses - Custom"
+  - title "Custom GAMSAT Prep Courses | Create Your Own Course"
+  - meta_description "Want to design your own custom GAMSAT preparation course? Choose from our various systems and live courses and personalise your study."
+  - secure_course = "Secure Your Custom GAMSAT® Course"
+  - review_count = 4.5
+-elsif new_course_type == 0
+  - product_version_name = "Courses - Free Trial"
+  - title "Free GAMSAT Preparation Trial Course | GradReady"
+  - meta_description "Test our industry-leading online learning system for yourself and sign up for our GAMSAT Free trial. Gain access to free resources and practice questions and see how our advanced learning technology has made the difference for over 6000 students."
+  - meta_keywords "gamsat free trial"
+  - secure_course = "Secure Your Free Trial GAMSAT® Course"
+-elsif new_course_type == 10
+  - product_version_name = "Courses - Free Study Guide"
+  - title "Free GAMSAT Study Guides | GradReady"
+  - meta_description "Good preparation is the key to success in the GAMSAT exam. Register now to get free access to Daily Study Guide prepared by team of experienced tutors."
+  - meta_keywords "GAMSAT Preparation, Study Guide, Free Guide, GAMSAT Prep"
+  - secure_course = "Secure Your Free GAMSAT® Study Guides"
+-elsif new_course_type == 11
+  - product_version_name = "Courses - Starter"
+  - title "Starter GAMSAT Course | Kick Start Your GAMSAT Preparation"
+  - meta_description 'If you"re looking to kick start your GAMSAT preparation, our Starter course will give you all the basic features you need.'
+  - meta_keywords "GAMSAT Preparation, GAMSAT Courses, GAMSAT Online Courses"
+  - secure_course = "Secure Your GAMSAT® Starter Course"
+  - review_count = 4.5
+-elsif new_course_type == 12
+  - product_version_name = "Success Assured"
+  - title "Success Assured GAMSAT Course | GradReady GAMSAT Courses"
+  - meta_description 'If you"re looking to kick start your GAMSAT preparation, our Starter course will give you all the basic features you need.'
+  - meta_keywords "GAMSAT Preparation, GAMSAT Courses, GAMSAT Online Courses"
+  - secure_course = "Secure Your Success Assured 15 Day (8 core + 7 optional) GAMSAT® Course"
+  - review_count = 4.5
+-else
+  -product_version_name = @product_version.couple_name
+  - meta_description "Students use our GAMSAT preparation courses to enhance their exam study. If you want a career in medicine or want to be a doctor, we offer both online and live classes and tutors in Sydney, Melbourne, Brisbane, Perth, Adelaide and Canberra."
+  - meta_keywords "GAMSAT Preparation"
+  - secure_course = "Secure Your GAMSAT® Course"
+
+%div{:itemscope => "", :itemtype => "http://schema.org/Course"}
+  %span{:content => "Online essential/Attendance Essential", :itemprop => "accessMode"}
+  %span{:content => "GradReady", :itemprop => "accountablePerson"}
+  %span{:content => "Australia", :itemprop => "contentLocation"}
+  %span{:content => "Training", :itemprop => "educationalUse"}
+  %span{:content => "Traning", :itemprop => "genre"}
+  %span{:content => "English", :itemprop => "inLanguage"}
+  %span{:content => "GradReady", :itemprop => "publisher"}
+  %span{:content => "GradReady", :itemprop => "provider"}
+  %div{:itemprop => "copyrightHolder", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+  %div{:itemprop => "creator", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+  %div{:itemprop => "producer", :itemscope => "", :itemtype => "http://schema.org/Organization"}
+    %span{:content => "GradReady", :itemprop => "name"}
+
+  / Banner for PV page
+  .banner_wrapper.banner_inner_page.banner_image_pl
+    .banner_graph_section
+      #typed.notification_bar
+        %p
+          = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+      .banner_container
+        .graph_content.mob_bg_graph
+          %a{href: "#{gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+        %a.mob_graph{href: 'javascript:void(0)'}
+    %h1.top35.aos-item{"data-aos" => "fade", "data-aos-duration" => "1100", :itemprop => "name"}
+      %a{href: "#take_down_pricing"}
+        = secure_course
+    .pro_line.fr_desktop
+      - if [1,4,5,6,7,8,11].include? new_course_type
+        .banner_rating_col
+          - 4.times.each do |n|
+            %a.review_tab_open{href: "#reviews_col_tabbing"}
+              %i.fa.fa-star.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1200"}
+          -if review_count > 4.2
+            %a.review_tab_open{href: "#reviews_col_tabbing"}
+              %i.fa.fa-star-half-o.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1600"}
+          -else
+            %a.review_tab_open{href: "#reviews_col_tabbing"}
+              %i.fa.fa-star-o.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1600"}
+          .clearfix
+          %p.aos-item.review_tab_open{"data-aos" => "fade", "data-aos-duration" => "1700"}
+            %a{href: "#reviews_col_tabbing"}
+              %span{:itemprop => "aggregateRating", :itemscope => "", :itemtype => "http://schema.org/AggregateRating"}
+                %span{:itemprop => "ratingValue"}=review_count
+                Based on
+                %span{:itemprop => "reviewCount"}
+                Student Reviews
+
+    - if [1,4,5,6,7,8,11].include? new_course_type
+      .banner_rating_col
+        - 4.times.each do |n|
+          %a.review_tab_open{href: "#reviews_col_tabbing"}
+            %i.fa.fa-star.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1200"}
+        -if review_count > 4.2
+          %a.review_tab_open{href: "#reviews_col_tabbing"}
+            %i.fa.fa-star-half-o.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1600"}
+        -else
+          %a.review_tab_open{href: "#reviews_col_tabbing"}
+            %i.fa.fa-star-o.fa-2x.icon-green.aos-item{"data-aos" => "fade", "data-aos-duration" => "1600"}
+        .clearfix
+        %p.aos-item.review_tab_open{"data-aos" => "fade", "data-aos-duration" => "1700"}
+          %a{href: "#reviews_col_tabbing"}
+            %span{:itemprop => "aggregateRating", :itemscope => "", :itemtype => "http://schema.org/AggregateRating"}
+              %span{:itemprop => "ratingValue"}=review_count
+              Based on
+              %span{:itemprop => "reviewCount"}
+              Student Reviews
+
+      = render 'public_page_partial/happy_student'
+  .pro_partner
+    = render 'public_page_partial/partners'
+
+  / Secure Your Place Code
+  -if new_course_type == 1
+    / Custom course secure place
+    %section#custom_price_show.middle_course_section.padd_35.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+      .text-center.full_width
+        -if @selected_course.present?
+          %h2 Course Details
+          .early_bird_price.hide_box
+            %strong.gmsat_text
+              0
+              %span.fnt_size.small_size.pv_price + 10% GST = 0
+          .clearfix
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10.custom_course_purchase.hide{href: "javascript:void(0)"} SECURE YOUR PLACE NOW
+
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10.custom_course_purchase_modal{"data-target" => "#featureCourseModal", "data-toggle" => "modal", href: "javascript:void(0)"} SECURE YOUR PLACE NOW
+          %p.custom_mok_show{style: "margin-top: 15px;"}
+            %strong>
+              All Online Components are Available Immediately After Completion of Payment
+          %p.discrpton.weekend_course.hide_box
+            = link_to 'Download Sample Class Schedule', download_weekend_course_file_document_path(format: :pdf), class: 'download_smple_data'
+        -else
+          %h2
+            %p.heading_p_tag Courses Will Reopen in the New Season
+          %br
+          = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+  - elsif [0,4,5,10,11].include? new_course_type
+    / Online and Free Trial courses secure place
+    %section#take_down_pricing.middle_course_section.padd_35
+      .text-center.full_width
+        -if @other_course.present?
+          %h2 Course Details
+          %p.sub_heading_txt.custom_mok_show
+            %strong> Enrollment Closure Date:
+            = " #{@other_course.enrolment_end_date.strftime("%d %b %Y")}" if @other_course.present?
+          -if [4,5,11].include? new_course_type
+            .early_bird_price{:itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+              /%span{:content => "AUD", :itemprop => "priceCurrency"}
+              %span Components Value
+              %span.line_throug.mg_top8= @product_version.online_courses_price('gamsat')
+              - if @product_version.early_bird
+                %span.gmsat_text.fnt_size.small_size Early Bird
+              %strong.gmsat_text{:itemprop => "price"}
+                = @product_version.price.round.to_s
+                %span.fnt_size.small_size.pv_price= "+ 10% GST = #{@product_version.price_with_gst.round.to_s}"
+        -else
+          %h2
+            %p.heading_p_tag Courses Will Reopen in the New Season
+          %br
+          = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+        .clearfix
+        -if @other_course.present?
+          -if [4,5,10,11].include? new_course_type
+            #course_visiblee
+              =render 'gamsat_readies/courses_visible', other_course: @other_course
+          -else
+            %a.default_btn.fs14.hvr-shutter-in-horizontal.mbot10{href: "/courses/" + @other_course.id.to_s + "/enrolments/enrol"} SECURE YOUR FREE TRIAL
+        -if ProductVersion::course_types.values.reject.with_index { |e,i| [0,1,10,11].include? i }.include?(new_course_type.to_i)
+          %p.discrpton
+            %a.download_smple_data{href: "/gamsat-preparation-courses/faq/enrolment-and-payment#contact_eighteen_id"}
+              Pay in Instalments
+        - if new_course_type == 0
+          %br
+          %p.custom_mok_show
+            = "#{find_filename("free_trial")}+ Students have already signed up"
+            / 1200+ Students have already signed up
+      = render 'public_page_partial/refer_a_friend', pv_type: 'gamsat', new_course_type: new_course_type
+  -else
+    / Attendance and InterviewReady courses secure place
+    %section#take_down_pricing.middle_course_section.padd_35
+      .text-center.full_width
+        -if @selected_course.present?
+          %h2 Course Details
+          %p.sub_heading_txt.custom_mok_show
+            %strong> Enrollment Closure Date:
+            = " #{@selected_course.enrolment_end_date.strftime("%d %b %Y")}" if @selected_course.present?
+          .early_bird_price
+            %span Components Value
+            %span.line_throug.mg_top8= @product_version.attendance_courses_price('gamsat')
+            - if @product_version.early_bird
+              %span.gmsat_text.fnt_size.small_size Early Bird
+            %strong.gmsat_text
+              = @product_version.price.round.to_s
+              %span.fnt_size.small_size.pv_price= "+ 10% GST = #{@product_version.price_with_gst.round.to_s}"
+        -else
+          #gamsat-important-date
+            %h2
+              %p.heading_p_tag Courses Will Reopen in the New Season
+            %br
+            = link_to 'Register Your Interest', "Javascript:void(0);", class: 'default_btn hvr-shutter-in-horizontal ask_ques_sec'
+        .clearfix
+        -if @selected_course.present?
+          #course_visiblee
+            =render 'gamsat_readies/courses_visible', other_course: @selected_course
+         
+          %p.discrpton
+            -if new_course_type == 2
+              = link_to 'Download Sample Class Schedule', download_essential_file_document_path(format: :pdf), class: 'download_smple_data'
+            -elsif new_course_type == 3
+              = link_to 'Download Sample Class Schedule', download_comprehensive_file_document_path(format: :pdf), class: 'download_smple_data'
+            -elsif new_course_type == 9
+              // show nothing
+            - else
+              = link_to 'Download Sample Class Schedule', download_other_comprehensive_file_document_path(format: :pdf), class: 'download_smple_data'
+          -if ProductVersion::course_types.values.reject.with_index { |e,i| [0,1,10,11].include? i }.include?(new_course_type.to_i)
+            %p.discrpton
+              %a.download_smple_data{href: "/gamsat-preparation-courses/faq/enrolment-and-payment#contact_eighteen_id"}
+                Pay in Instalments
+
+  / Course Details for Attendance courses
+  -if ProductVersion::course_types.values.reject.with_index { |e,i| [0,1,4,5,10,11].include? i }.include?(new_course_type.to_i)
+    %section.aos-item#gamsat-important-date{"data-aos" => "fade-up", "data-aos-duration" => "1300", class: "#{@selected_course.present? ? 'pad50' : ''}"}
+      -if @selected_course.present?
+        .text-center.container.mbot30
+          %h2 Course Information
+          %p.sub_heading_txt Please choose your City and Course from the drop down selections below.
+          #gamsat_course_cities
+            = render 'course_cities', courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city
+
+      = render 'public_page_partial/refer_a_friend', pv_type: 'gamsat', new_course_type: new_course_type
+  / Course description details for custom course
+  -if new_course_type == 1 && @selected_course.present?
+    = render 'product_versions/custom_course_purchase', courses: @courses, cities: @cities, selected_course: @selected_course, product_version: @product_version, first_city: @first_city,outofstock: @outofstock
+
+  / Course Details
+  %section.pad50.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1500"}
+    .text-center.container.mbot30{:itemprop => "description"}
+      %h2.mbot50 Course Description
+      .clearfix
+      = render 'public_page_partial/pv/gamsat_course_package_details', course_type: new_course_type, product_line: 'GAMSAT'
+
+  / Additional details
+  -if new_course_type != 10 && new_course_type != 0
+    %section.pad50.feature_revew_col
+      .text-center.mbot40
+        %h2 Additional Details
+      #reviews_col_tabbing.comparison_table_tabbing
+        %ul.nav.attendce_tabbing{role: "tablist"}
+          %li.non_active_review.active{role: "presentation"}
+            %a{"aria-controls" => "features_col", "data-toggle" => "tab", href: "#features_col", role: "tab"} FEATURES
+          - if [4,5,6,7,8,12].include? new_course_type
+            %li.active_review{role: "presentation"}
+              %a{"aria-controls" => "details_col", "data-toggle" => "tab", href: "#details_col", role: "tab"} DETAILS
+          - if [1,4,5,6,7,8,11].include? new_course_type
+            %li.active_review{role: "presentation"}
+              %a{"aria-controls" => "reviews_col", "data-toggle" => "tab", href: "#reviews_col", role: "tab"} REVIEWS
+        .clearfix
+        .container
+          .tab-content
+            #features_col.tab-pane.active{role: "tabpanel"}
+              -if new_course_type == 4
+                = render 'pages/partial/features_sets/online_basic_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 5
+                = render 'pages/partial/features_sets/online_comprehensive_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 6
+                = render 'pages/partial/features_sets/attendance_essentials_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 8
+                = render 'pages/partial/features_sets/attendance_comprehensive_private_tutoring_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 7
+                = render 'pages/partial/features_sets/attendance_comprehensive_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 0
+                = render 'pages/partial/features_sets/online_comprehensive_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 1
+                = render 'pages/partial/features_sets/custom_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 2
+                = render 'pages/partial/features_sets/interviewready_essentials_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 3
+                = render 'pages/partial/features_sets/interviewready_comprehensive_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 9
+                = render 'pages/partial/features_sets/interviewready_online_essential', new_course_type: new_course_type
+              -elsif new_course_type == 10
+                = render 'pages/partial/features_sets/online_comprehensive_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 11
+                = render 'pages/partial/features_sets/starter_gamsat', new_course_type: new_course_type
+              -elsif new_course_type == 12
+                = render 'pages/partial/features_sets/success_assured', new_course_type: new_course_type
+
+            #details_col.tab-pane{role: "tabpanel"}
+              - case new_course_type
+                - when 4
+                  = render 'gamsat_readies/details/online_essentials'
+                - when 5
+                  = render 'gamsat_readies/details/online_comprehensive'
+                - when 6
+                  = render 'gamsat_readies/details/attendance_essentials'
+                - when 7
+                  = render 'gamsat_readies/details/attendance_comprehensive'
+                - when 8
+                  = render 'gamsat_readies/details/attendance_all'
+                - when 12
+                  = render 'gamsat_readies/details/secure_assured_details'
+                - else
+                  No details
+
+            #reviews_col.tab-pane{role: "tabpanel"}
+              - case new_course_type
+                - when 4 , 11
+                  = render 'gamsat_readies/reviews/online_essentials'
+                - when 5
+                  = render 'gamsat_readies/reviews/online_comprehensive'
+                - when 6
+                  = render 'gamsat_readies/reviews/attendance_essentials'
+                - when 7
+                  = render 'gamsat_readies/reviews/attendance_comprehensive'
+                - when 8
+                  = render 'gamsat_readies/reviews/attendance_all'
+                - when 1
+                  = render 'gamsat_readies/reviews/custom'
+                - else
+                  No reviews
+
+  -if params[:different_course].eql?('true') && @course.present?
+    = render 'enrolments/location_course_modal'
+
+  :javascript
+    AOS.init({
+      easing: "ease-in-out-sine"
+    });
+
+    $(document).ready(function(){
+      $(".read_more_cr_decr").click(function(){
+        $(this).hide();
+        $(".read_less_cr_decr").show();
+        $(".content-mask").css("display","none");
+        $(".cr_descr_text_col").delay(100).css("height","100%");
+      });
+
+      $(".read_less_cr_decr").click(function(){
+        $(this).hide();
+        $(".read_more_cr_decr").show();
+        $(".content-mask").css("display","block");
+        $(".cr_descr_text_col").delay(100).css("height","243px");
+      });
+    });
+
+    $(document).ready(function() {
+      $(".banner_inner_page h1.top35 a").on("click", function( e ) {
+      e.preventDefault();
+        $("body, html").animate({
+          scrollTop: $( $(this).attr('href') ).offset().top
+        }, 600);
+      });
+    });

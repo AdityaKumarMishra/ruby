@@ -1,0 +1,49 @@
+#filterrific_results
+  %p
+    = "Total number of product versions created: " + @product_versions.count.to_s
+  =will_paginate @product_versions, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Name
+        %th Product version
+        %th Price
+        %th Product Line
+        %th Type
+        %th Total Courses
+        %th
+        %th
+        -if current_user.superadmin?
+          %th
+        %th
+        %th
+
+    %tbody
+      - @product_versions.sort_by{|prod| [prod.type.upcase, prod.name.upcase]}.each do |product_version|
+        %tr
+          %td= product_version.name
+          %td= product_version.id
+          %td= product_version.price
+          %td= product_version.type
+          %td= product_version.course_type.try(:titleize)
+          %td= product_version.courses.count
+          %td= link_to 'Show', product_version, class: 'btn btn-success btn-sm', target: :_blank
+          %td= link_to 'Edit', edit_product_version_path(product_version), class: 'btn btn-info btn-sm', target: :_blank
+          - if current_user.superadmin?
+            %td
+              -if product_version.courses.count == 0
+                = link_to 'Destroy', product_version, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+          -if params[:action] == "index"
+            %td= link_to "Archive", push_in_archived_product_version_path(product_version), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
+          -else
+            %td= link_to "Unarchive", pull_from_archived_product_version_path(product_version), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-sm'
+          %td= link_to 'Course', product_version_courses_product_version_path(product_version), class: 'btn btn-info btn-sm', target: :_blank
+
+
+:javascript
+
+  $('#pv_table').DataTable({
+    "bPaginate": false,
+    "aoColumnDefs" : [
+      { orderable: false, targets: [5,6,7] } ]
+  });

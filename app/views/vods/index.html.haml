@@ -1,0 +1,97 @@
+- content_for :page_heading, 'Videos'
+- if current_user && (current_user.student?)
+
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+      - if !@announcement.nil?
+        .faq_list_col
+          = render 'announcements/student_announcement', announcement: @announcement, title: 'Videos Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/course_video", announcement: @announcement
+
+      .resource_col
+        %h4 Filter
+      .faq_list.para_fs14
+        .faq_list_col
+          .course_frm.filter_box_shadow
+            = form_for 'vods_filter', path: vods_path, method: 'GET', html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+              .form-group
+                %label{for: "city"} Subject Tags
+                = f.select(:by_level2_tag, @tags , { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level2_tag] : '', include_blank: 'All' }, class: 'form-control select selectpicker search_select_field')
+              .form-group
+                %label{for: "city"} Topic
+                = f.select(:by_level3_tag, @level3_tags, { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level3_tag] : '', include_blank: 'All' }, class: 'form-control select selectpicker search_select_field')
+              .form-group
+                = f.submit 'Filter', class: 'default_btn black_default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+                = link_to 'Reset filters', vods_path, class: 'black_default_btn resp_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+
+          =render(partial: 'vods/index', locals: { tag: @tag, vods: @vods, vod_tags: @vod_tags } )
+- else
+
+  %h1 Videos
+
+  .panel.panel-info
+    .panel-heading
+      %h3.panel-title
+        Filter
+        =render_filterrific_spinner
+    .panel-body
+      = form_for 'vods_filter', path: vods_path, method: 'GET', html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+        -if current_user.student?
+          .form-group
+            Subject Tags
+            = f.select(:by_level2_tag, @tags , { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level2_tag] : '', include_blank: 'All' }, class: 'form-control')
+          .form-group
+            Topics
+            = f.select(:by_level3_tag, @level3_tags, { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level3_tag] : '', include_blank: 'All' }, class: 'form-control')
+        -else
+          .form-group
+            Video Topic (Tag)
+            =f.select(:by_tag_id, Tag.options_for_select,{selected: params[:vods_filter].present? ?  params[:vods_filter][:by_tag_id] : '' , include_blank: '- Any -' }, class: 'chosen-select')
+          / .form-group
+          /   Type
+          /   = f.select(:by_product_line, ['Gamsat', 'Umat', 'Vce', 'Hsc'], {selected:  params[:vods_filter].present? ?  params[:vods_filter][:by_product_line] : '', include_blank: 'All' }, class: 'form-control')
+          / .form-group
+          /   Subject Tags
+          /   = f.select(:by_level2_tag, params[:vods_filter].present? ?  Vod.by_product_line(params[:vods_filter][:by_product_line]).map { |t| [t.name, t.id] } : @tags , { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level2_tag] : '', include_blank: 'All' }, class: 'form-control')
+          / .form-group
+          /   Topics
+          /   = f.select(:by_level3_tag, params[:vods_filter].present? ? Vod.by_level2_tag(params[:vods_filter][:by_level2_tag]).map { |t| [t.name, t.id] } : [], { selected: params[:vods_filter].present? ?  params[:vods_filter][:by_level3_tag] : '', include_blank: 'All' }, class: 'form-control')
+
+        .form-group
+          = f.submit 'Filter', class: 'btn btn-gradready green filter_media'
+          = link_to 'Reset filters', vods_path, class: 'btn btn-gr-light-green for_media'
+
+  =render(partial: 'vods/index', locals: { tag: @tag, vods: @vods, vod_tags: @vod_tags } )
+
+%br/
+- if current_user && !current_user.student?
+  %div= link_to 'New Video', new_vod_path, class: 'btn btn-gradready green'
+  %br/
+
+
+-if @access == 'false'
+  = render 'partial/access_limit_modal', type: 'video', p_course_path: @p_course_path, product_line: @product_line, path: vods_path(page: params[:page], tab: params[:tab], tag_id: params[:tag_id])
+
+:javascript
+  $(function () {
+    $("#vods_filter_by_product_line").on('change', function(){
+      $.ajax({
+        url: "/videos/filter_tags",
+        type: "GET",
+        dataType: 'script',
+        data: {type: $("#vods_filter_by_product_line").val() },
+      });
+    })
+
+    $("#vods_filter_by_level2_tag").on('change', function(){
+      $.ajax({
+        url: "/videos/filter_tags",
+        type: "GET",
+        dataType: 'script',
+        data: {level2_tag_id: $("#vods_filter_by_level2_tag").val() },
+      });
+    })
+  });

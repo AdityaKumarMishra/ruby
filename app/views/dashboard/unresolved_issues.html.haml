@@ -1,0 +1,131 @@
+- if current_user && (current_user.student?)
+  - content_for :page_heading, 'GetClarity Announcements'
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'GetClarity Announcements', user_announcement: @user_announcement
+                                                                                                                                                             
+        = render "dashboard/partial/getclarity_guideline", announcement: @announcement
+
+        .faq_list_col.table_3_col 
+          .new_excercise
+            .course_frm
+              = form_for_filterrific @filterrific do |f|
+                .form-group{style: "position: relative;"}
+                  %label Start Date
+                  =f.text_field(:with_start_filter, class: 'form-control datepicker mobile_mousehover_tool', required: true, "readonly": "readonly")
+                .form-group{style: "position: relative;"}
+                  %label{for: "end_date"} End Date
+                  =f.text_field(:with_end_filter, class: 'form-control datepicker mobile_mousehover_tool', required: true, "readonly": "readonly")
+                .form-group
+                  %label All Filter
+                  = f.text_field :keyword_filter, class: 'form-control input_excercise', placeholder: 'Keywords'
+                .form-group.custom_choose
+                  %label Topics Filter
+                  = f.select :tag_filter, @filterrific.select_options[:tag_filter], {include_blank: 'All' }, {class: 'chosen-select'}
+                .form-group
+                  %label Status Filter
+                  = f.select :resolved_filter, @filterrific.select_options[:resolved_filter], {include_blank: 'All Statuses'}
+                .form-group
+                  %label Sort By
+                  = f.select :sorted_by, @filterrific.select_options[:sorted_by], { }
+                .text-center.mtop30.mbot10
+                  = link_to 'Reset filters', reset_filterrific_url, class: 'black_default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+                  %a.mg_rht0.default_btn.hvr-shutter-in-horizontal#ask-ques Ask Question
+                  / %a.mg_rht0.default_btn.hvr-shutter-in-horizontal{'data-toggle' => 'modal', class: "new-ticket", 'data-target'=> '#ticket-modal'} Ask Question
+
+          = render :partial => 'dashboard/partial/unresolved_issues', locals: { tickets: @tickets}
+        = render 'issue_forum/submit_ticket_modal', options: {}
+- else
+
+  .panel.panel-default.flt_left
+    .panel-body
+      = form_for_filterrific @filterrific do |f|
+        .row
+          .col-md-4
+            %p
+              Date Start
+              =f.text_field(:with_start_filter, class: 'form-control datepicker', required: true, "readonly": "readonly")
+          .col-md-4
+            %p
+              Date End
+              =f.text_field(:with_end_filter, class: 'form-control datepicker', required: true, "readonly": "readonly",value: default_date)
+        .form-group
+          All Filter
+          = f.text_field :keyword_filter, class: 'form-control', placeholder: 'Keywords'
+        .form-group
+          Tag Filter
+          = f.select :tag_filter, @filterrific.select_options[:tag_filter], {include_blank: 'All' }, {class: 'form-control select2_searchable'}
+        .form-group
+          Directed At Filter
+          = f.select :answerer_filter, @filterrific.select_options[:answerer_filter], {include_blank: 'All'}, {class: 'form-control select2_searchable'}
+        .form-group
+          Status Filter
+          = f.select :resolved_filter, @filterrific.select_options[:resolved_filter], {include_blank: 'All Statuses'} , class: "form-control"
+        .form-group
+          Improvement Needed Filter
+          %i.fa.fa-question-circle{ style: 'cursor: pointer;', data: { toggle: 'tooltip', placement: 'top', "original-title" => ' Tickets for which the underlying cause is a deficiency from our part (it may be operational, software, content etc) and was flagged to be reviewed' } }
+          = f.select :complaint_filter, @filterrific.select_options[:complaint_filter], {include_blank: 'All'} , class: "form-control"
+        .form-group
+          Feedback Filter
+          = f.select :feedback_filter, @filterrific.select_options[:feedback_filter], {include_blank: 'All'} , class: "form-control"
+        .form-group
+          Student Filter
+          = f.select :asker_filter, @filterrific.select_options[:asker_filter], {include_blank: 'All'}, {class: 'form-control select2_searchable'}
+        .form-group
+          Sort By
+          = f.select :sorted_by, @filterrific.select_options[:sorted_by], { }, {class: 'form-control'}
+
+        = render_filterrific_spinner
+        -if current_user.admin? || current_user.manager?
+          - if @autoemail.is_active
+            = link_to 'Deactivate Autoemail', 'javascript:void(0)', class: 'btn btn-gradready red', id: 'deactivateAutoemail'
+          -else
+            = link_to 'Activate Autoemail', 'javascript:void(0)', class: 'btn btn-gradready green', id: 'activateAutoemail'
+
+        = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gradready green', onclick: 'dd_loader();'
+
+        .btn.btn-gradready.green{'data-toggle' => 'modal', class: "new-ticket", 'data-target'=> '#ticket-modal'} Ask Question
+
+        - if current_user.admin? || current_user.superadmin? || current_user.manager?
+          = link_to 'Stats', dashboard_staff_answered_questions_path, class: 'btn btn-gradready red', onclick: 'dd_loader();'
+        %span You have answered #{current_user.ticket_answers.count} questions
+        - if current_user.admin? || current_user.superadmin?
+          = link_to 'Delete Old Issues', destroy_old_issues_tickets_path, :method => :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-gradready red pull-right'
+  #autoemail-div
+  = render :partial => 'dashboard/partial/unresolved_issues', locals: { tickets: @tickets}
+= render 'issue_forum/student_faq_direct_modal'
+:javascript
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+  
+  $(function () {
+    $('.datepicker').datepicker({"format": "yyyy-mm-dd", "autoclose": true});
+    $(".select2_searchable").select2();
+  });
+  $('#activateAutoemail, #deactivateAutoemail').click(function(){
+    $.ajax({
+      method: 'GET',
+      url: '/autoemails/new',
+      data: {categort: 'get_clarity' }
+    })
+  })
+
+  $("#ask-ques").click(function(){
+    $('#faqStdDirect').modal('show');
+  });
+
+  $("#std-faq-yes-btn").click(function(){
+    window.location.href = "/gamsat-preparation-courses/faq";
+  });
+
+  $("#std-faq-no-btn").click(function(event){
+    $("#ticket-modal").modal({backdrop: false});
+    $('#ticket-modal').modal('show');
+  });
+
+

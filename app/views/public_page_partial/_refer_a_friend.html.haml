@@ -1,0 +1,50 @@
+-if pv_type == 'gamsat'
+  %section.middle_course_section
+    .preparation_corse
+      .container.text-center.refer_flex
+        .corse_col.hvr-sweep-to-right.aos-item.aos-init.aos-animate.refer_contain{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+          %a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'group-discount-available')}
+            .percent_icon
+            %p 15% discount if you enrol in groups of 3 or more
+        - if defined?(new_course_type) then
+          -if [2,3].include? new_course_type
+            .corse_col.hvr-sweep-to-right.aos-item.aos-init.aos-animate.refer_contain{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+              %a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'I_want_to_guarantee')}
+                .calender_icon
+                %p Follow these steps for a full refund if you don’t receive an interview offer
+        .corse_col.hvr-sweep-to-right.aos-item.aos-init.aos-animate.refer_contain{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+          %a{href: faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'refer_a_friend')}
+            .grp_icon  
+            %p Invite a friend to enrol - receive discounts for you and your friend
+      %ul.terms_policy_links.aos-item.aos-init.aos-animate{"data-aos" => "fade-up", "data-aos-duration" => "1500"}
+        %li
+          %h4
+            %a{:href => "/gamsat-preparation-courses/faq/enrolment-and-payment#For%20how%20long"} Online Material Expiry Date
+        %li
+          %h4
+            %a{:href => "/gamsat-preparation-courses/faq/enrolment-and-payment#How much does"} Postal Charges Outside Australia
+        %li
+          %h4
+            %a{:href => "/gamsat-preparation-courses/faq/enrolment-and-payment#refund-policy"} Refund Policy
+-else
+  %section.middle_course_section
+    .preparation_corse
+      .container.text-center
+        .corse_col.hvr-sweep-to-right.aos-item.aos-init.aos-animate{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+          %a{href: faq_topic_path(type: 'umat-preparation-courses', topic: 'enrolment-and-payment-queries', anchor: 'is-there-a-group-discount')}
+            .percent_icon
+            %p 15% discount if you enrol in groups of 3 or more
+        .corse_col.hvr-sweep-to-right.aos-item.aos-init.aos-animate{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+          %a{href: faq_topic_path(type: 'umat-preparation-courses', topic: 'enrolment-and-payment-queries', anchor: 'how-does-reffer-work')}
+            .grp_icon  
+            %p Invite a friend to enrol - receive discounts for you and your friend
+      %ul.terms_policy_links.aos-item.aos-init.aos-animate{"data-aos" => "fade-up", "data-aos-duration" => "1500"}
+        %li
+          %h4
+            %a{:href => "/umat-preparation-courses/faq/enrolment-and-payment-queries#for-i-long-is-my-subscription"} Online Material Expiry Date
+        %li
+          %h4
+            %a{:href => "/umat-preparation-courses/faq/enrolment-and-payment-queries#how-much-does-postage-cost"} Postal Charges Outside Australia
+        %li
+          %h4
+            %a{:href => "/umat-preparation-courses/faq/enrolment-and-payment-queries#what-is-refund-policy"} Refund Policy

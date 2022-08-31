@@ -1,0 +1,14 @@
+%h1 Editing Mcq Stem
+
+= render 'mcq_stems/partial/new_form', options: {edit_stem: @mcq_stem}
+.full_width_wrapper
+  = link_to 'Show', @mcq_stem
+  \|
+  = link_to 'Back', mcq_unit_progress_dashboard_mcq_stems_path
+
+:javascript
+  $(document).ready(function(){
+    $('.mcq_btn').click(function(){
+      $('.mcq_info').toggle();
+    });
+  });

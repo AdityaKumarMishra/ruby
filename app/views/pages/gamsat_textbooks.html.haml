@@ -1,0 +1,300 @@
+- title "GradReady GAMSAT Preparation Textbooks – 2021-2022 Edition"
+- meta_description "The GradReady GAMSAT Textbook has been updated to provide you with a comprehensive breakdown of what you need to know and how you need to study for the GAMSAT Exam. Start your GAMSAT prep today with our GAMSAT Textbook and take your study to the next level."
+- meta_keywords "gamsat textbook"
+
+%section.talk_to_bg.home_faq.dashboard_bg
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container.public_container
+    .support_col.looking_corse.text-center.gradready_question
+      %h1
+        GAMSAT Preparation Textbook 2021-2022
+%section.faq_wrapper.faq_details.free_sources_sec
+  .container.public_container
+    .preparation_col.head_aftr_none
+      %h2#an_intro
+        Introducing GradReady’s Updated 2021-2022 Comprehensive GAMSAT Textbook
+      .row.book_vols
+        .col-md-6
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/text_vol1.png'
+        .col-md-6
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/text_vol2.png'
+        .col-md-12
+          - if @selected_course.present?
+            %a.default_btn.fs14.hvr-shutter-in-horizontal.ol_book_purchase{href: course_enrolments_custom_enrol_path(@selected_course.id, "custom_pvfps"=>{"pvfp_ids"=>["#{@online_feature.id}"]})}
+              %i.fa.fa-shopping-cart{"aria-hidden" => "true"}
+              Online
+            %a.default_btn.fs14.hvr-shutter-in-horizontal{href: course_enrolments_custom_enrol_path(@selected_course.id, "custom_pvfps"=>{"pvfp_ids"=>["#{@hard_copy_feature.id}"]})}
+              %i.fa.fa-shopping-cart{"aria-hidden" => "true"}
+              Hard Copy
+        %div{style: "margin-left:150px;"}
+          %a.default_btn.fs14.hvr-shutter-in-horizontal.black_btn.shpmnt_mrgn.shpmnt-btn{href: "javascript:void(0)"}
+            %i.fa.fa-truck{"aria-hidden" => "true"}
+            Shipment: $19
+          -if @outofstock.present? && @outofstock.out_of_stock?
+            -if @outofstock.content.present?
+              %div{style: "margin-top:10px;font-weight:700;"} *Out of stock - #{@outofstock.content}
+            -else
+              %div{style: "margin-top:10px;font-weight:700;"} *Out of stock
+          %div{style: "margin-top:10px"} Delivery time: 3-7 business days
+      %p.mtop_zero
+        Introducing GradReady’s 2021-2022 GAMSAT
+        %sup ®
+        Textbook! Combining all the content you need to know for the Humanities, Biology, Chemistry and Physics components of the GAMSAT
+        %sup ®
+        Exam in a single neat package, our GAMSAT
+        %sup ®
+        Textbook not only breaks down all the foundational knowledge you need for the GAMSAT
+        %sup ®
+        Exam, it provides you with a framework of study and exam tips to help you develop your GAMSAT
+        %sup ®
+        MCQ Strategy.
+      %p
+        Distilled from 10+ years of experience in the GAMSAT
+        %sup ®
+        exam field and helping 7000+ students achieve statistically significant score improvements over the course of the years, the GradReady GAMSAT
+        %sup ®
+        Preparation Textbook offers a comprehensive set of information needed for success in the GAMSAT
+        %sup ®
+        exam. Together with GradReady’s industry leading algorithmic based online adaptive-learning system and Australia wide live courses, the GradReady GAMSAT
+        %sup ®
+        Preparation Textbook is set out to bring out the best in your abilities.
+
+    .preparation_col.head_aftr_none
+      %h2#an_intro
+        2021-2022 Edition - Features
+      %p.mtop_zero
+        The GradReady GAMSAT
+        %sup ®
+        Textbook allows you to build the foundation upon which you can begin to develop your GAMSAT
+        %sup ®
+        Exam Strategy. The latest update introduces a whole new textbook section that takes into account changes with the GAMSAT
+        %sup ®
+        Exam and the recent emphasis on reasoning and graphical skills for Section 3.  This includes 150+ pages on essential S3 skills, with topics such as Logical Reasoning, Scientific Method, MCQ & Stem Analysis, alongside our prized Worked Examples - complete with annotations and detailed explanations.
+      %p
+        Our GAMSAT
+        %sup ®
+        Textbook also contains 48 Example GAMSAT
+        %sup ®
+        Essays and a detailed Essay Writing Guide to give you an idea of the expected standard and help you avoid common errors.
+      %p
+        Furthermore, our online GAMSAT
+        %sup ®
+        Textbook is now also completely mobile friendly – In fact, our entire Online LMS is now mobile-friendly, allowing you to study and read on the go without having to carry around a heavy textbook! For those of you who like the feel and weight of a physical book, don’t despair, we also still ship physical copies.
+      %p
+        The GradReady GAMSAT
+        %sup ®
+        Textbook is not just mobile-friendly, it’s also completely integrated with the rest of our online learning resources. For students with access to our 4000+ Intelligent MCQ Bank and Online Exams, you can access the relevant chapters with the click of a button. Stuck on a Waves and Optics Physics MCQ? Can’t remember a particular concept you need to answer a question? You can immediately access the relevant chapters of our textbook as well as the relevant course videos with the click of a button.
+      %p
+        The GradReady GAMSAT
+        %sup ®
+        Textbook is an integral and integrated part of the GradReady learning experience – Everything you need to know for the exam and cross-referenced with all our online MCQs and exams so you can find what you need with the click of a button.
+
+    .preparation_col.head_aftr_none
+      %h2#textbooktopics
+        GAMSAT
+        / %sup{style: "text-decoration:none"} ®
+        Textbook Topics
+      %p.mtop_zero To help give you an idea of the topics covered in our textbook, you can find a summary of the chapters for each section below:
+
+    .preparation_col.head_aftr_none
+      %h3.mtop10.mbot20#section1gamsat
+        Section 1 GAMSAT
+        Textbook Topics
+      %p.mtop_zero
+        .highlight_box.gamsat-prep.green_box.mbot20
+          %ol
+            %li Poetry
+            %li Fiction
+            %li Cartoons
+            %li Non-fiction
+            %li Non-fiction, Non-medical
+            %li Charts & Diagrams
+    .preparation_col.head_aftr_none
+      %h3.mtop10.mbot20#section2gamsat
+        Section 2 GAMSAT
+        / %sup{style: "text-decoration:none"} ®
+        Textbook Topics
+      %p.mtop_zero
+        .highlight_box.gamsat-prep.green_box.mbot20
+          %ol
+            %li Expression & Organisation
+            %li Theme Finding
+            %li Essay Styles
+            %li The Bulls-eye Sentence
+            %li The Argumentative Essay
+            %li The Reflective Essay
+            %li Generating Ideas
+            %li Criteria & Review
+            %li Improving Vocabulary
+            %li Engaging with the Intellectual World
+    .preparation_col.head_aftr_none
+      %h3.mtop10.mbot20#sectiongamsat
+        Section 3 GAMSAT
+        / %sup{style: "text-decoration:none"} ®
+        Textbook Topics
+      .highlight_box.gamsat-prep.green_box.mbot20
+        .preparation_col.head_aftr_none
+          %h4.mtop10.mbot20#gamsatbiology
+            GAMSAT
+            / %sup{style: "text-decoration:none"}®
+            Biology
+          %p.mtop_zero
+            %ol
+              %li Biomolecules & the Cell
+              %li Enzymes, Cellular metabolism & the Central Dogma
+              %li Cell Division
+              %li Nervous System
+              %li Musculoskeletal System
+              %li Cardiovascular System
+              %li Respiratory System
+              %li Gastrointestinal System
+              %li Renal System
+              %li Endocrine System
+              %li Immune System
+              %li Genetics & Evolution
+              %li Reproductive System
+              %li Experimental Design and Data Analysis
+
+        .preparation_col.head_aftr_none
+          %h4.mtop10.mbot20.mtop10.mbot20#gamsatchemistry
+            GAMSAT
+            / %sup{style: "text-decoration:none"}®
+            Chemistry
+          %p.mtop_zero
+            %ol
+              %li Atoms
+              %li Arithmetic and Stoichiometry
+              %li Electronegativity and Bond Polarity
+              %li Electrons and Chemical Bonds
+              %li Gases
+              %li Thermodynamics and Kinetics
+              %li Acid and Bases
+              %li Electrochemistry
+              %li Common and Special Organic Reactions
+              %li Stereochemistry and Projections
+              %li Biochemistry
+              %li Spectroscopies, Spectrometry and Laboratory Techniques
+        .preparation_col.head_aftr_none
+          %h4.mtop10.mbot20#gamsatchemistry
+            GAMSAT
+            / %sup{style: "text-decoration:none"}®
+            Physics
+          %p.mtop_zero
+            %ol
+              %li Motion (1D and 2D Motion, Acceleration and Graphs)
+              %li Newton’s Laws (in particular Equilibrium) and Torque
+              %li Energy, Work and Conservation of moment
+              %li Physics of Liquids (especially Pressure, Archimedes’ Principle, Buoyant Force)
+              %li Electricity and Magnetism (electrostatic and magnetic forces)
+              %li Electric Circuits
+              %li Optics
+              %li Radioactive Decay and other exponential-type mathematical laws
+              %li Mathematical Operations, Fractions and Scientific Notation
+              %li Mathematical Functions (especially logarithmic and trigonometric functions)
+
+        .preparation_col.head_aftr_none
+          %h4.mtop10.mbot20#gamsatchemistry
+            Section 3 Reasoning
+          %p.mtop_zero
+            %ol
+              %li Exponentials, Logarithms and Trigonometry
+              %li Scientific Method & Experimental Design
+              %li Logical Reasoning
+              %li Introduction: MCQ Reasoning
+              %li Understanding the Stem
+              %li Diagrams & Figures
+              %li Questions & Answers
+              %li Worked Examples
+
+
+    .preparation_col.head_aftr_none
+      %h3.mtop10.mbot20
+        Product Details
+      %p
+        Softcover book: 1200 pages
+      %p
+        Publisher: GradReady Pty Ltd
+      %p
+        ISBN: 978-0-6484459-0-6
+      %p
+        Product Dimensions: 28 x 22 x 4 cm
+      %p
+        Shipping Weight: 3 kg
+      %p
+        Publication Date: 2021
+
+    .preparation_col.head_aftr_none.mg_bottm100
+      %h2
+        Further GAMSAT
+        / %sup ®
+        Preparation Materials
+      %p
+        Looking for further information on our courses and materials? You can visit our homepage here to learn more and compare our courses:
+        %a{href: "/gamsat-preparation-courses", target: :_blank}
+          %strong
+            GradReady GAMSAT
+            %sup ®
+            Preparation Courses
+      %p
+        If you’re after free materials, we’ve put together the most comprehensive library of free GAMSAT
+        %sup ®
+        Preparation materials below, with access to free Practice MCQs, Example Essays, Study Schedules and more:
+      .diffr_country
+        %ul.cstm_list_style
+          %li.mtop_zero
+            %a{href: "/free-gamsat-preparation-materials", target: :_blank}
+              %strong
+                GradReady Free GAMSAT
+                %sup ®
+                Preparation Materials
+      %p
+        If you want to try out our industry-leading learning technology and student LMS for yourself, sign up for our GAMSAT
+        %sup ®
+        Free Trial today!
+      .boxed
+        Get Access to:
+        %ul{:style => "list-style-type:none;padding: 16px 0px"}
+          %li 50 Free MCQs
+          %li Week-By-Week Study Guide
+          %li Complete Session 3 Topic List
+          %li Recorded Webinars
+        .free_gamsat_icon
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/free_trial.png', class: "icon30"
+        .button_right_section
+          %a.free_trial_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/free-gamsat-trial", target: :_blank} GAMSAT Free Trial
+
+:javascript
+  $(".open_recommender").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });
+  // Select all links with hashes
+  $('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+      &&
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top-74
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+
+        });
+      }
+    }
+  });

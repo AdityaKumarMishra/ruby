@@ -1,0 +1,96 @@
+
+
+= simple_form_for(@mock_exam_essay, html: {class: 'mock_essay_form'}) do |f|
+  = f.error_notification
+  .form-inputs.essay_wrapper
+    %ul
+      %li You can upload essay file with following extensions .doc, .docx & .pdf
+      %li
+        = f.simple_fields_for :mock_essays do |e|
+          %div.form-group.file.optional.mock_exam_essay_mock_essays_essay
+            %span.essay-title
+              = e.label :essay, label: "Essay 1",  wrapper: false
+            %span.essay-middle
+              = e.input :essay, as: :file, label: false,  wrapper: false
+            %span.essay-marked.size_color
+              (Max File Size: 2MB)
+
+      %li
+        = f.simple_fields_for :mock_essays do |e|
+          %div.form-group.file.optional.mock_exam_essay_mock_essays_essay
+            %span.essay-title
+              = e.label :essay, label: "Essay 2",  wrapper: false
+            %span.essay-middle
+              = e.input :essay, as: :file, label: false,  wrapper: false, class: 'cstm_upload2'
+            %span.essay-marked.size_color
+              (Max File Size: 2MB)
+
+      %li
+        %span.essay-title
+          Status:
+        %span.essay-middle
+          %span
+            = @mock_exam_essay.status == "partially_marked" ? "Submitted" : @mock_exam_essay.status.titleize
+        %span.essay-marked
+
+      = f.hidden_field :assigned_tutors, :multiple => true, :value => @assigned_tutor
+      = f.hidden_field :status, value: "submitted"
+      = f.hidden_field :submitted_at, value: Time.zone.now
+      = f.hidden_field :course_id, value: @current_course.id
+      = f.hidden_field :section_type, value: @current_course.product_version.try(:type)
+      %li
+        %a.black_default_btn.hvr-shutter-in-horizontal.save-score-button.essay-detail.submit_essay#submit_essays
+          Upload
+
+
+:javascript
+
+  $(document).ready(
+    function(){
+      $('#submit_essays').attr('disabled',true);
+      $('#mock_exam_essay_mock_essays_attributes_1_essay, #mock_exam_essay_mock_essays_attributes_0_essay').change(
+        function(){
+
+          var maxFileSize = 4194304;
+          file_1 = $("#mock_exam_essay_mock_essays_attributes_0_essay")[0].files[0].size;
+          file_2 = $("#mock_exam_essay_mock_essays_attributes_1_essay")[0].files[0].size;
+          upload_file_size = file_1 + file_2
+
+          if ($('#mock_exam_essay_mock_essays_attributes_1_essay').val() && $('#mock_exam_essay_mock_essays_attributes_0_essay').val())
+          {
+              $('#submit_essays').removeAttr('disabled');
+          }
+          else {
+              $('#submit_essays').attr('disabled',true);
+          }
+
+          if (maxFileSize < upload_file_size){
+            alert('Warning!! Please ensure that total file size do not exceed 4 MB i.e. 2 MB for each essay.')
+            $('#submit_essays').attr('disabled',true);
+          }
+
+        });
+
+
+    $(".submit_essay").click(function(){
+
+      if ($('.submit_essay').is('[disabled=disabled]')) {
+        alert("Please select both essay files to proceed.");
+      }
+      else
+      {
+        file1= $('#mock_exam_essay_mock_essays_attributes_0_essay').val();
+        file2= $('#mock_exam_essay_mock_essays_attributes_1_essay').val();
+
+        ext1 = file1.split('.').pop();
+        ext2 = file2.split('.').pop();
+        if((ext1=="pdf" || ext1=="docx" || ext1=="doc") && (ext2=="pdf" || ext2=="docx" || ext2=="doc")){
+          $(".mock_essay_form").submit();
+        } else{
+          alert("Invalid File format. Please upload essay file in one of the following extension .doc, .docx & .pdf");
+        }
+      }
+
+    });
+
+  });

@@ -1,0 +1,59 @@
+- if @post.blog_type == "umat"
+  .blog_container_panel
+    %ul.social_icon_col
+      %li
+        %a{href: "https://www.facebook.com/GradReadyUMAT/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/umat_like.png')
+      %li
+        %a{href: umat_preparation_courses_path, :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/umat_why.png')
+      %li
+        %a{href: "/blog/umat-preparation-courses", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/umat_blog.png')
+      %li
+        %a{href: dynamic_product_version_uri('free-trial', 'UMAT'), :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/umat_trial.png')
+    .blog_footer_contaner
+      %p.more_resource Do you want even more free UCAT resources?
+      %a.res_click_btn{href: "https://www.facebook.com/GradReadyUMAT/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/umat_click.png', class: "footer_img width100")
+
+- elsif @post.blog_type == "hsc"
+  .blog_container_panel
+    %ul.social_icon_col
+      %li
+        %a{href: "https://www.facebook.com/GradReadyHSC/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/hsc_like.png')
+      %li
+        %a{href: hsc_path, :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/hsc_why.png')
+      %li
+        %a{href: "/blog/hsc", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/hsc_blog.png')
+      %li
+        %a{href: "#"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/hsc_trial.png')
+    .blog_footer_contaner
+      %p.more_resource Do you want even more free HSC resources?
+      %a.res_click_btn{href: "https://www.facebook.com/GradReadyHSC/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/hsc_click.png', class: "footer_img width100")
+
+- elsif @post.blog_type == "vce"
+  .blog_container_panel
+    %ul.social_icon_col
+      %li
+        %a{href: "https://www.facebook.com/GradReadyVCE/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/vce_like.png')
+      %li
+        %a{href: vce_path, :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/vce_why.png')
+      %li
+        %a{href: "/blog/vce", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/vce_blog.png')
+      %li
+        %a{href: "#"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/vce_trial.png')
+    .blog_footer_contaner
+      %p.more_resource Do you want even more free VCE resources?
+      %a.res_click_btn{href: "https://www.facebook.com/GradReadyVCE/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/vce_click.png', class: "footer_img width100")
+
+- else
+  .blog_container_panel
+    %ul.social_icon_col
+      %li
+        %a{href: "https://www.facebook.com/GradReadyGAMSAT/", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/gamsat_like.png')
+      %li
+        %a{href: "/gamsat-preparation-courses/overview", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/gamsat_why.png')
+      %li
+        %a{href: "/blog/gamsat-preparation-courses", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/gamsat_blog.png')
+      %li
+        %a{href: dynamic_product_version_uri('free-trial', 'GAMSAT'), :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/gamsat_trial.png')
+    .blog_footer_contaner
+      %p.more_resource Do you want even more free GAMSAT resources?
+      %a{href: "/free-gamsat-preparation-materials", class: "res_click_btn", :target => "_blank"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/blog_footer/gamsat_click.png', class: "footer_img width100")

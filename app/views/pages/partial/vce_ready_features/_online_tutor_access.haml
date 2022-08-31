@@ -1,0 +1,11 @@
+#Online-Tutor-Access.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-comments{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Online Tutor Access
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text 
+        %p.u-word-spacing Ask as many clarifying questions as it takes for you to truly understand a concept. Our dedicated team of tutors will answer your questions within 48 hours.

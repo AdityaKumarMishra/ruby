@@ -1,0 +1,30 @@
+%h1 Listing Transfer Transactions
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th User
+      %th Course
+      %th Payment confirmed
+      %th Amount
+      %th Paid
+      %th Banking reference
+      %th{colspan: 2} Actions
+
+  %tbody
+    - @transfer_transactions.each do |transfer_transaction|
+      %tr{'data-link': url_for(transfer_transaction)}
+        %td= transfer_transaction.user
+        %td
+          - unless Course.find_by_id(transfer_transaction.course_id).nil?
+            = Course.find_by_id(transfer_transaction.course_id).name
+        %td= transfer_transaction.payment_confirmed
+        %td= transfer_transaction.amount
+        %td= transfer_transaction.paid
+        %td= transfer_transaction.banking_reference
+        %td= link_to 'Edit', edit_transfer_transaction_path(transfer_transaction), class: 'btn btn-info btn-sm'
+        %td= link_to 'Delete', transfer_transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Transfer transaction', new_transfer_transaction_path, class: 'btn btn-gradready green'

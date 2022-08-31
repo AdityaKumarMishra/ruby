@@ -1,0 +1,65 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              ="Dear #{@job_application.name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Thank you for your interest in GradReady.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              We'd like to invite you to participate in an initial assessment.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Please complete
+              = link_to " this assessment", "https://gradready.com.au/gamsat-preparation-courses/pre-employment-assessment", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              within 72 hours. It will take approximately 45 minutes.
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px"}
+              To access the assessment, click on the button “Secure Your Place Now”. This will prompt you to register and create an account on our website. Once you’ve done so, please make sure to check for the confirmation email (note that this email may be in your spam).
+          
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px"}
+              Once your email has been confirmed, head to the Dashboard and click on the tab Diagnostics and Exams, where you will find the assessment.
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px"}
+              Start the assessment and make sure you select the below options:
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px"}
+              %strong How would you like to perform the exam?:
+              Online Exam
+              %br
+              %strong Question Style:
+              All Questions on page
+              %br
+              %strong Timer Option:
+              Apply Time Limit to Entire Exam
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 60px;" }
+              If you have issues with completing the assessment, please get in touch by submitting a ticket with the Email Us options
+              %a{href: "https://gradready.com.au/gamsat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"}
+                here
+              and selecting topic Job Application Queries.
+          %tr
+            %td{style: "float: left;font-size: 15px;"}
+              Kind Regards,
+          %tr
+            %td{style: "float: left;font-size: 15px;"}
+              HR Manager 

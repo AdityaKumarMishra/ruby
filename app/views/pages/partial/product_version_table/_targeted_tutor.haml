@@ -1,0 +1,59 @@
+- if product_line == 'gamsat' || product_line == 'umat'
+  .component-title.under_line
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'target_tutor')}
+      TARGETED 1 ON 1 TUTOR ASSISTANCE
+-else
+  .component-title TARGETED 1 ON 1 TUTOR ASSISTANCE
+
+- if product_line == 'gamsat'
+  %li
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_MarkedEssays')}
+    10 Marked Essays
+
+- elsif product_line == 'vce' || product_line == 'hsc'
+  - if subject == 'english'
+    %li
+      %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_GetClarity')}
+        Targeted Essay Feedback
+
+// Same desc across all product lines
+%li
+  =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    GetClarity
+    %sup{ style: "font-size: 77%;"} ®
+    System for Online Exams
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_GetClarity')}
+      GetClarity
+      %sup{ style: "font-size: 77%;"} ®
+      System for Online Exams
+%li
+  =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    GetClarity
+    %sup{ style: "font-size: 77%;"} ®
+    System for MCQs
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_GetClarity')}
+      GetClarity
+      %sup{ style: "font-size: 77%;"} ®
+      System for MCQs
+%li
+  =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    GetClarity
+    %sup{ style: "font-size: 77%;"} ®
+    System for Videos
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_GetClarity')}
+      GetClarity
+      %sup{ style: "font-size: 77%;"} ®
+      System for Videos
+
+
+
+
+
+
+

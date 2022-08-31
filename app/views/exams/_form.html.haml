@@ -1,0 +1,17 @@
+= simple_form_for(@exam) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :date_started
+    = f.input :date_finished
+    = f.input :type, label: 'Type'
+    - if @exam_sections.present?
+      %strong Exam sections:
+      .collection-checkboxes= f.collection_check_boxes :exam_sections, @exam_sections, :id, :title
+    - else
+      %strong There are no free exam sections.
+
+    %br
+
+  .form-actions
+    = f.button :submit , class: 'btn btn-default'

@@ -1,0 +1,186 @@
+.top_navi
+  .container-fluid
+    .row
+      .abs_logo
+        .tp.top_left
+          %ul
+            %li
+              %a{href: "/"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_gradready_logo.png', alt: 'GradReady UCAT Preparation Course'
+            %li.head_fb
+              %a{href: "https://www.facebook.com/GradReadyUMAT"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/fb.svg', alt: 'img'
+      .col-sm-12
+        .tp.top_right
+          %ul
+            %li.contact
+              %a{href: "javascript:void(0)"} Courses
+              %ul.contact_list
+                %li
+                  %p
+                    UCAT
+                    = succeed "COURSES" do
+                      %sup ®
+                  %ul
+                    = render 'partial/nav_courses', type: "umat"
+                %li
+                  %p
+                    Guides
+                  %ul
+                    %li
+                      %a{:href => "/umat/free_resources"} Free Resources
+                    %li
+                      %a.recommender_popup{:href => "javascript:void(0);"} Course Recommender
+                    %li
+                      %a{:href => "/umat-preparation-courses#umat-courses-comparison"} Compare Courses
+
+                %li
+                  %p
+                    Important Dates
+                  %ul
+                    %li
+                      %a{:href => "/umat-preparation-courses/attendance-comprehensive#umat-important-date"}
+                        UCAT
+                        = succeed "Course Dates" do
+                          %sup{style: 'margin-left: -3px'} ®
+            %li
+              %a{:href => "/umat-preparation-courses#comparison_table"} Compare Gradready
+
+            %li.contact
+              %a{href: "javascript:void(0)"} TESTIMONIALS
+              %ul.contact_list
+                %li
+                  %p STUDENT TESTIMONIALS
+                  %ul
+                    %li
+                      %a{:href => "/umat-preparation-courses/student_testimonials"} STUDENT RESULTS
+                    %li
+                      %a{:href => "/umat-preparation-courses/our_students"} SATISFACTION SURVEY
+
+            %li.contact
+              %a{href: "javascript:void(0)"} SCHOLARSHIP
+              %ul.contact_list
+                %li
+                  %p SCHOLARSHIP
+                  %ul
+                    %li
+                      %a{:href => "/umat-preparation-courses/scholarship"} MILLENNIALS SCHOLARSHIP
+                    %li
+                      %a{:href => "/umat-preparation-courses/principal_scholarship"} PRINCIPAL'S SCHOLARSHIP
+                %li
+                  %p
+                    FINANCIAL AID
+                  %ul
+                    %li
+                      %a{:href => "/umat-preparation-courses/access-program"} ACCESS PROGRAM
+                    %li
+                      %a{href: "/umat-preparation-courses/faq/enrolment-and-payment-queries#am-i-able-to-pay"} PAYING IN INSTALMENTS
+            %li.contact
+              %a{href: "javascript:void(0)"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                2022
+              %ul.contact_list
+                %li
+                  %p
+                    UCAT
+                    = succeed "OVERVIEW" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/what-is-ucat"}
+                        What is UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{href: "/ucat-preparation"}
+                        How to prepare for the UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{href: "/ucat-structure"}
+                        UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Structure
+                    %li
+                      %a{href: "/ucat-vs-gamsat"}
+                        UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        vs
+                        GAMSAT
+                        %sup{style: 'margin-left: -3px'} ®
+                    %li
+                      %a{href: "/ucat-dentistry"}
+                        UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Dentistry
+                    %li
+                      %a{href: "/ucat-parents-guide"}
+                        UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Parents Guide
+                    %li
+                      %a{href: "/ucat-students-guide"}
+                        UCAT
+                        %sup{style: 'margin-left: -3px'} ®
+                        Students Guide
+            %li.contact
+              %a{href: "javascript:void(0)"} Contact Us
+              %ul.contact_list
+                %li
+                  %p
+                    Questions?
+                  %ul
+                    %li
+                      %a{href: "/umat-preparation-courses/faq"} FAQ
+                    %li
+                      %a{href: "/blog/umat-preparation-courses"} BLOG
+                    %li
+                      %a{href: "/umat-preparation-courses/contact"} GET IN TOUCH
+                    %li
+                      %a{href: "/jobs/available_positions"} JOIN US 
+                %li
+                  %p
+                    About
+                  %ul
+                    %li
+                      %a{href: "/umat-preparation-courses/about"} OVERVIEW
+                    %li
+                      %a{href: "/umat-preparation-courses/team"} TEAM
+                    %li
+                      %a{:href => "/updates?tab=UMAT"} RECENT UPDATES
+
+            - if user_signed_in?
+              / %li
+              /   %a{href: '/dashboard/home'} Dashboard
+              %li.contact
+                %a{href: "javascript:void(0)"}
+                  .fa.fa-cart-plus
+                - if current_user.student?
+                  %ul.contact_list
+                    %li
+                      %p CART
+                      %ul
+                        %li
+                          = link_to 'CART', user_ongoing_order_link if current_user.student?
+                        %li
+                          = link_to "PAST ORDERS", orders_path if current_user.student? && current_user.orders.where.not(status: 0).present?
+              %li.contact
+                %a{href: "javascript:void(0)"} Account
+                %ul.contact_list
+                  %li
+                    %p ACCOUNT
+                    %ul
+                      %li
+                        %a{href: '/dashboard/home'} DASHBOARD
+                      %li
+                        = link_to 'PROFILE', edit_user_registration_path
+                      %li
+                        = link_to "LOG OUT", destroy_user_session_path, :method => :delete
+            - else
+              %li
+                %a{href: "/login"} Login
+
+:javascript
+
+  $(".recommender_popup").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

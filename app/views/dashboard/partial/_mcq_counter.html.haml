@@ -1,0 +1,21 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %td
+        Tag
+      %td
+        Easy
+      %td
+        Medium
+      %td
+        Hard
+      %td
+        Total
+  %tbody
+    - @difficulties.each do |info|
+      %tr
+        %td= "#{"__"* info[:level]} #{info[:name]}"
+        %td= info[:easy]
+        %td= info[:medium]
+        %td= info[:hard]
+        %td= info[:total]

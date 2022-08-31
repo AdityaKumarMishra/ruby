@@ -1,0 +1,39 @@
+=will_paginate @online_exams, renderer: BootstrapPagination::Rails
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      / %th Instruction
+      %th Attempted by (no. of student)
+      %th Position
+      %th Published
+      - if current_user.admin? || current_user.superadmin?
+        %th{colspan: 5} Actions
+      - else
+        %th Actions
+
+  %tbody
+    - @online_exams.each do |online_exam|
+      %tr
+        %td= online_exam.title
+        / %td= sanitize online_exam.instruction
+        %td= online_exam.assessment_attempts.completed.count
+        %td= online_exam.position
+        %td= online_exam.published
+        %td= link_to 'Edit', edit_online_exam_path(online_exam), class: 'btn btn-info btn-sm', target: :_blank
+        - if current_user.admin? || current_user.superadmin?
+          -if online_exam.assessment_attempts.size == 0
+            %td= link_to 'Destroy', online_exam, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+          -else
+            %td
+          %td= link_to "#{online_exam.locked ? 'Unlock' : 'Lock'}", change_lock_online_exam_path(online_exam), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-info btn-sm'
+          %td= online_exam.show_stat ? link_to("Do not show stat to students", change_show_stat_online_exam_path(online_exam), class: 'btn btn-danger btn-sm') : link_to("Show stat to students", change_show_stat_online_exam_path(online_exam), class: 'btn btn-success btn-sm')
+          %td= link_to 'Duplicate', duplicate_online_exam_path(online_exam), method: :post, data: { confirm: 'It will create duplicate online exam' }, class: 'btn btn-success btn-sm', target: :_blank
+          %td.userdown-xls
+            = link_to "Download Analytics", '#', class: 'dropdown-toggle btn btn-primary btn-sm', "data-toggle" => "dropdown"
+            %ul.dropdown-menu.drop-menu.user-xlsx-down
+              %li
+                = link_to "Student Attempts and Statistics", online_exams_path(format: "xlsx", id: online_exam.id, type: 'student_statistics')
+              %li
+                = link_to "MCQ Difficulty Data", online_exams_path(format: "csv", id: online_exam.id, type: 'mcq_statistics')

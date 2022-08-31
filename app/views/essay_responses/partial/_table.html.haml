@@ -1,0 +1,128 @@
+- if @essays_responses.present?
+  -if request.variant.blank?
+    %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+      %thead
+        %tr
+          %th Title
+          %th Expiration date
+          %th Tutor
+          %th Status
+          %th{colspan: 3} Actions
+
+
+      %tbody
+        - @essays_responses.each do |e|
+          - if e.present?
+            - if e.course.present? && e.course.city.present?
+              - expiry_date = e.expiry_date.in_time_zone(e.course.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne"))
+              - show_expiry_date = e.expiry_date.in_time_zone(e.course.city.gsub("Sept-GAMSAT ","").gsub("Other","Melbourne"))
+            - else
+              - expiry_date = e.expiry_date.in_time_zone("Australia/Melbourne")
+              - show_expiry_date = e.expiry_date.in_time_zone("Australia/Melbourne")
+            %tr
+              %td.mobile_mousehover_tool= e.essay.title
+              %td= show_expiry_date.strftime('%d %b %Y %H:%M %p %Z ').to_s
+              -if e.essay_tutor_response.present? && e.essay_tutor_response.staff_profile.present?
+                %td= e.essay_tutor_response.staff_profile.staff.full_name
+              -elsif e.tutor.present?
+                %td= e.tutor.full_name
+              - else
+                %td Angie Miles
+              %td
+                -if e.essay_tutor_response.present?
+                  %a.green_expired_btn.status_btn{href: "javascript:void(0)"} Marked
+                -elsif e.time_submited.present?
+                  %a.yellow_submit_btn.status_btn{href: "javascript:void(0)"} Submitted
+                -elsif expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")
+                  %a.black_expired_btn.status_btn{href: "javascript:void(0)"} Expired
+                - else
+                  %a.red_not_submit_btn.status_btn{href: "javascript:void(0)"} Not Submitted
+
+              %td
+                -if e.essay_tutor_response.present?
+                  %a.table_icon_col{"data-original-title" => "View Essay Topic", "data-placement" => "top", "data-toggle" => "tooltip", href: essay_response_path(e.id), title: "", onclick: 'dd_loader();'}
+                    = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+                -elsif e.time_submited.present? && !e.assessment_attempt.present?
+                  %a.table_icon_col{"data-original-title" => "View Essay", "data-placement" => "top", "data-toggle" => "tooltip", href: essay_response_path(e.id), title: "", onclick: 'dd_loader();'}
+                    = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+                - elsif !(expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")) && e.time_submited.nil?
+                  %a.table_icon_col{"data-original-title" => "Write Response", "data-placement" => "top", "data-toggle" => "tooltip", href: edit_essay_response_path(e.id), title: "", onclick: 'dd_loader();'}
+                    = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/write_response_icon.svg"
+                -else
+                  -if e.assessment_attempt.present?
+                  -else
+                    %a.table_icon_col{"data-original-title" => "View Essay Topic", "data-placement" => "top", "data-toggle" => "tooltip", href: essay_response_path(e.id), title: "", onclick: 'dd_loader();'}
+                      = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+  -if request.variant == [:phone]
+    .mobile_table_border
+      %ul.tbl_head
+        %li.width_inc Title
+        %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+          A
+          %span.heading_tool_tip.mrht37
+            %p Action
+        %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+          S
+          %span.heading_tool_tip.mrht37
+            %p Status
+        - @essays_responses.each do |e|
+          %ul.mobile_table_body.listing.tbl_head.bdr_none
+            - expiry_date = e.expiry_date.in_time_zone("Australia/Queensland")
+            - show_expiry_date = e.expiry_date.in_time_zone("Australia/Queensland")
+            %li.mobile_mousehover_tool.width_inc
+              = e.essay.title
+              %ul.tool_tip
+                %li
+                  Expiration date:
+                  %br
+                  = show_expiry_date.strftime('%d %b %Y %I:%M %p %Z ').to_s
+
+                -if e.tutor.present?
+                  %li
+                    Tutor:
+                    %br
+                    = e.tutor.full_name
+                - else
+                  %li
+                    Tutor : Angie Miles
+            %li.mobile_mousehover_tool.mobile_wdt_th.rht56
+              -if e.essay_tutor_response.present?
+                %a{href: essay_response_path(e.id)}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+                %span.heading_tool_tip.view_topic_tip
+                  %p View Essay Topic
+              -elsif e.time_submited.present?
+                %a{href: essay_response_path(e.id)}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+                %span.heading_tool_tip.view_topic_tip
+                  %p View Essay
+              - elsif !(expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")) && e.time_submited.nil?
+                %a{href: edit_essay_response_path(e.id)}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/write_response_icon.svg"
+                %span.heading_tool_tip.view_topic_tip
+                  %p Write Response
+              -else
+                %a{href: essay_response_path(e.id)}
+                  = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg"
+                %span.heading_tool_tip.view_topic_tip
+                  %p View Essay Topic
+
+            %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+              -if e.essay_tutor_response.present?
+                %a.green_expired_btn.status_btn.mob_status_btn M
+                %span.heading_tool_tip.view_topic_tip
+                  %p Marked
+              -elsif e.time_submited.present?
+                %a.yellow_submit_btn.status_btn.mob_status_btn S
+                %span.heading_tool_tip.view_topic_tip
+                  %p Submitted
+              -elsif expiry_date < Time.zone.now.in_time_zone("Australia/Queensland")
+                %a.black_expired_btn.status_btn.mob_status_btn E
+                %span.heading_tool_tip.view_topic_tip
+                  %p Expired
+              - else
+                %a.red_not_submit_btn.status_btn.mob_status_btn NS
+                %span.heading_tool_tip.view_topic_tip
+                  %p Not Submitted
+- else
+  %i You have not purchased any essays.

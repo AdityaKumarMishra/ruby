@@ -1,0 +1,4 @@
+.nested_fields
+
+  = f.association :tags, label: 'Assigned Tags:', collection: policy_scope(Tag).sort_by{|tag| tag.name.upcase}, input_html: { class: 'chosen-select tag-list' }
+

@@ -1,0 +1,10 @@
+%h1 Edit Admin Control
+
+= simple_form_for(@admin_control) do |f|
+  = f.error_notification
+  = f.input :name, readonly: true
+  = f.check_box :new_view, label: false
+  = f.label :new_view, "Control Student SignUp view"
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-gradready green'

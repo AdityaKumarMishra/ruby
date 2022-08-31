@@ -1,0 +1,24 @@
+%h1 Product Versions
+
+%h4 Filter Product Versions
+.panel.panel-default
+  .panel-body
+    = form_for_filterrific @filterrific do |f|
+      .form-group
+        Product Line
+        =f.select(:by_product_line, @filterrific.select_options[:by_product_line],{ include_blank: '- All -' }, class: 'form-control')
+      .form-group
+        Type
+        =f.select(:by_type, @filterrific.select_options[:by_type],{ include_blank: '- All -' }, class: 'form-control')
+      .form-group
+        Title
+        =f.text_field(:search_by_title, class: 'filterrific-periodically-observed form-control', placeholder: 'Search for...')
+      = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default'
+
+.row
+  .col-md-4
+    = render partial: 'new_product_version_form'
+  .col-md-8
+    = link_to 'Archived Product Versions', archived_product_versions_product_versions_path , class: 'btn btn-gradready btn btn-primary'
+%br
+=render(partial: 'product_versions/table', locals: { product_versions: @product_versions })

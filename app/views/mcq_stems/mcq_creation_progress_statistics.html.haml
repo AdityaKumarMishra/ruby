@@ -1,0 +1,30 @@
+= select_tag 'mcq_stem_view', options_for_select(mcq_stem_collection, selected: select_option_values(params[:action])), { class: 'form-control stem_dropdown' }
+%h1 MCQ Creation Statistics
+= render 'mcq_stems_filters'
+
+/ %br
+/   %div.mcq-stem-btns{style: "display: flex;"}
+/     = link_to 'MCQ Unit Creation Board', mcq_unit_progress_dashboard_mcq_stems_path, class: 'btn btn-gradready green', style: "margin-right: 8px;"
+
+=render(partial: 'mcq_stems/partial/mcq_unit_creation_progress_table', locals: { mcq_stems: @mcq_stems, mcqs: @mcqs })
+
+:css
+  .stem_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }
+
+:javascript
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $(function(){
+    $('.stem_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });

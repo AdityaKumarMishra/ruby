@@ -1,0 +1,103 @@
+- pvfp_class = SecureRandom.hex
+- if pvfp.master_feature.private_tutoring? || pvfp.master_feature.essay? || pvfp.master_feature.exam_feature?
+  - if pvfp.master_feature.private_tutoring?
+    %input.btn.btn-default{type: 'submit', class: "pvfp_update_#{pvfp_class}", value: 'Update'}
+
+    :javascript
+      $('.'+'pvfp_update_#{pvfp_class}').click(function(e){
+        e.preventDefault();
+
+        var pvfp_id = $('#pvfp_one_tutor_id').val()
+        var neg = parseInt($(this).closest('td').prev('td').find('select option:selected').text()) != 0
+        var current_url = $(location).attr('href');
+        var enrol_id = current_url.split('/')[6]
+        $.ajax({
+          type: 'GET',
+          url: "/enrolments/" + enrol_id +"/student_addon_enrolment?pvfp_id="+ pvfp_id + "&enrol="+ true + "&positive_val=" + neg + "&quantity=" + $('#private_tutor_hour').val()
+        })
+      });
+  - elsif pvfp.master_feature.essay?
+    %input.btn.btn-default{type: 'submit', class: "pvfp_update_#{pvfp_class}", value: 'Update'}
+
+    :javascript
+      $('.'+'pvfp_update_#{pvfp_class}').click(function(e){
+        e.preventDefault();
+
+        if ($('.remove_essay_dd').is(':visible')) {
+          if ($('#remove_essay_id').val() != null)
+            $('#remove_essay_submit').click();
+          else
+            return false;
+        } else if ($('.add_essay_dd').is(':visible')) {
+          if ($('#add_essay_id').val() != null)
+            $('#add_essay_submit').click();
+          else
+            return false;
+        } else {
+          return false;
+        }
+      });
+  - elsif pvfp.master_feature.exam_feature?
+    %input.btn.btn-default{type: 'submit', class: "pvfp_update_#{pvfp_class}", value: 'Update'}
+
+    :javascript
+      $('.'+'pvfp_update_#{pvfp_class}').click(function(e){
+        e.preventDefault();
+
+        var pvfp_id = $('#pvfp_one_exam_id').val()
+        var neg = parseInt($(this).closest('td').prev('td').find('select option:selected').text()) != 0
+        var current_url = $(location).attr('href');
+        var enrol_id = current_url.split('/')[6]
+        $.ajax({
+          type: 'GET',
+          url: "/enrolments/" + enrol_id +"/student_addon_enrolment?pvfp_id="+ pvfp_id + "&enrol="+ true + "&positive_val=" + neg + "&quantity=" + $('#exam_count').val()
+        })
+      });
+
+  - elsif pvfp.master_feature.online_mock_exam?
+    %input.btn.btn-default{type: 'submit', class: "pvfp_update_#{pvfp_class}", value: 'Update'}
+
+    :javascript
+      $('.'+'pvfp_update_#{pvfp_class}').click(function(e){
+        e.preventDefault();
+
+        var pvfp_id = $('#pvfp_one_exam_id').val()
+        var neg = parseInt($(this).closest('td').prev('td').find('select option:selected').text()) != 0
+        var current_url = $(location).attr('href');
+        var enrol_id = current_url.split('/')[6]
+        $.ajax({
+          type: 'GET',
+          url: "/enrolments/" + enrol_id +"/student_addon_enrolment?pvfp_id="+ pvfp_id + "&enrol="+ true + "&positive_val=" + neg + "&quantity=" + $('#exam_count').val()
+        })
+      });
+- else
+  = check_box_tag('pvfp_id', pvfp.id, pvfp.enrolment_feature_activated(@student.id, enrolment_id, pvfp.master_feature&.id), disabled: false, class: pvfp_class)
+
+  :javascript
+    $('.'+'#{pvfp_class}').click(function(){
+        var message = confirm("Would you like to go ahead with updating the feature access?");
+
+        if (message){
+          if($(this).is(":checked")) {
+            var pvfp_id = $(this).val();
+            var neg = parseInt($(this).closest('td').prev('td').find('select option:selected').text()) > 0
+            var current_url = $(location).attr('href');
+            var enrol_id = current_url.split('/')[6]
+            $.ajax({
+              type: 'GET',
+              url: "/enrolments/" + enrol_id +"/student_addon_enrolment?pvfp_id="+ pvfp_id + "&enrol="+ true + "&positive_val=" + neg
+            })
+          }else{
+            var pvfp_id = $(this).val();
+            var current_url = $(location).attr('href');
+            var enrol_id = current_url.split('/')[6]
+            var neg = parseInt($(this).closest('td').prev('td').find('select option:selected').text()) > 0
+            $.ajax({
+              type: 'GET',
+              url: "/enrolments/" + enrol_id +"/student_addon_enrolment?pvfp_id="+ pvfp_id + "&enrol="+ false + "&positive_val=" + neg
+            })
+          }
+        } else {
+          return false;
+        }
+      });

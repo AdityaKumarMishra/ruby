@@ -1,0 +1,57 @@
+.col-lg-7.col-md-6.col-sm-12.col-xs-12
+  .cr_descr_text_col
+    %p.text_content
+      In this package, we teach you how to reason through and analyse the different question types in the
+      = product_line
+      %sup ®
+      = '.'
+      The Attendance portion of the course will focus on MCQ strategies, understanding and addressing your specific weaknesses, and really delving into the most challenging topics.
+
+      In addition you will be able to strengthen your weak points, at your own pace, through our online tutor forum and many hours worth of bite-sized videos.
+
+      All online material are immediately available for access after purchase.
+
+      - if product_line == "GAMSAT" && !gamsat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/gamsat_improved_percentile'
+      -elsif product_line == "UMAT" && !umat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/umat_improved_percentile'
+    .content-mask
+  %a.read_more_cr_decr{href: "javascript:void(0)"} Read more
+  %a.read_less_cr_decr{href: "javascript:void(0)"} Read less
+
+.col-lg-5.col-md-6.col-sm-12.col-xs-12.pull-right.cr_descr_banner_col
+  #cr_description_col.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
+    .carousel-inner{role: "listbox"}
+      .item
+        - if product_line == "GAMSAT"
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_att_comp_desc.png'
+        - else
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/small_banner_slide_img.jpg'
+      .item.check-video.active
+        %video.video-js.vjs-default-skin.check-video{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/christine_manuel.png', :title => "GAMSATReady", :width => "100%", height: "320px"}
+          %source{:src => "https://gradready-prod.s3.amazonaws.com/public/christine_manuel.mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/christine_manuel.mp4", :type => "video/mp4"}
+      .item.check-video
+        %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "GAMSATReady", :width => "100%", height: "320px", id: 'vince_vid'}
+          %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+    %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next
+
+:javascript
+  $('video').on('play', function (e) {
+    $("#cr_description_col").carousel('pause');
+  });
+  $('video').on('stop pause ended', function (e) {
+    $("#cr_description_col").carousel();
+  });
+
+  $('.carousel-control').click(function(){
+    v_id = $('.check-video').children('video').attr('id')
+    video_stop = videojs(v_id);
+    video_stop.pause()
+  })

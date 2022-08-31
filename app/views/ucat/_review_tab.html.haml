@@ -1,0 +1,28 @@
+- tag = Tag.find_by(id: tag_id)
+.card
+  #headingOne.card-header
+    %h2.mb-0
+      %button.btn.btn-link{"data-target" => "#collapseOne", "data-toggle" => "collapse", type: "button"}
+        %i.fa.fa-plus-square-o{"aria-hidden" => "true"}>
+        Practice Material - Practice Test A - 
+        = tag.name.gsub(/\d/, '').gsub('UM.', '')
+        %span{id: "incomplete-text-#{tag.id}"} 
+  #collapseOne.collapse.in{"aria-labelledby" => "headingOne", "data-parent" => "#accordionExample"}
+    .card_body_wrap
+      - count = 0
+      - filter_mcq_stems_with_tag(@exercise, tag).each_with_index do |mcq_stem, index|
+        - @exercise.mcq_attempts.includes(mcq:[:mcq_answers, :mcq_stem]).where(mcq_stem: mcq_stem).distinct.order(:mcq_id).each_with_index do |m_attempt, ind|
+          - count += 1
+          .card-body
+            .ques_flag
+              %a.calc{href: "javascript:", id: "m#{index}_#{ind}_#{tag.id}-review"}
+                %i.fa.fa-flag-checkered{"aria-hidden" => "true", style: ('color: #ffff00;' if m_attempt.flagged)}
+                Question 
+                = count
+            .ques_option
+              - if m_attempt.mcq_answer_id.blank?
+                %a{href: "javascript:", id: "m#{index}_#{ind}_#{tag.id}-review"} Incomplete
+:javascript
+  $(document).ready(function(){
+    add_review_text();
+  })

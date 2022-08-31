@@ -1,0 +1,197 @@
+- if @product_version.name.include? "Math"
+  - title "HSC Math Courses | HSC Prep"
+- elsif @product_version.name.include? "English"
+  - title "HSC English Courses | HSC Prep"
+
+- meta_description @product_version.description unless @product_version.description.blank?
+
+#public-courses
+  = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: true
+  .container.no_padding
+    #course-headers
+      .font_sty1.hr-img
+        =#image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/hsc-red.png")
+        %strong.hsc_color
+          HSC
+          %sup{ style: "margin-right: -12px;left: -11px;"} ®
+          = "Courses - #{@product_version.couple_name}"
+
+      %h4
+        %p.umat_center_txt
+          On average,
+          %b
+            = link_to "3 years in a row,", hsc_student_testimonials_url(anchor: 'student_improved_score'), class: "hsc_color "
+          GradReady students
+          %b
+            = link_to "improved their scores ", hsc_student_testimonials_url(anchor: 'student_improved_score'), class: "hsc_color"
+          by
+          %b
+            = link_to "at least 24 percentile points", hsc_student_testimonials_url(anchor: 'student_improved_score'), class: "hsc_color"
+          after taking a GradReady course
+        %p.umat_center_txt
+          Over 1000 students, for each of the
+          %b
+            = link_to "past 3 years,", hsc_our_students_url, class: "hsc_color"
+          trust GradReady with one of the most important exams of their career
+  #course-dates-container
+    .container
+      .headings
+        %h1.course_page_mrgn.hsc_color Course Dates
+        %p.text_italic
+          Please choose your City and Course from the drop down selections below.
+      .course-dates-table-container.date_table_m.contner_flt
+        %br/
+        .course-options
+          .clearfix
+            .course-city-selection.pull-left
+              .clearfix
+                %label.pull-left{:for => "city"} City
+                %select#city.pull-left{:name => "city", "ng-options" => "course_date.city in course_dates"}
+            .course-date-selection.pull-left
+              .clearfix
+                %label.pull-left{:for => "date"} Course
+                %select#course.pull-left{:name => "course", "ng-options" => "course_date.course_expiry_date in course_dates"}
+            .course-enrolment-selection.pull-left
+              .clearfix
+                %label.pull-left.enrolment_clo_date{:for => "enrolment date"} Enrolment Closure Date
+                %span#enrolment_dates.enr_change_dat
+        -if @product_version.name.include? "Custom"
+          = render 'product_versions/custom_course_purchase'
+        -else
+          %form.ng-pristine.ng-valid{"accept-charset" => "UTF-8", :action => "#", :method => "get"}
+            %div{:style => "margin:0;padding:0;display:inline"}
+              %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+            .course-dates-table
+              %input#enrolment_course{:name => "course", :type => "hidden", :value => ""}/
+              %input#enrolment_package{:name => "package", :type => "hidden", :value => "online-lite"}/
+
+              .course-purchase.font_purchase
+                - if @product_version.slug != "english-advanced-custom" && @product_version.slug != "math-extension-1-cutsom"  && @product_version.slug != "1-week-trial"
+                  %span.pricing-details
+                    / %p.u-line-height Early Bird Price:
+                  %span.pricing-details.ng-binding
+                    %p.u-line-height
+                      = '$' + @product_version.price.ceil.to_s
+                    %p.u-line-height
+                      = "+ 10% GST = " + '$' + @product_version.price_with_gst.ceil.to_s
+                  / %span.gst_font.price_center.mrgn_0
+                  /   (
+                  /   %a{:href => "faq/enrolment#what-is-gst"} What is GST?
+                  /   )
+                %br/
+                %p.purchase-button
+                  %br/
+                  %a.course-enrol-button.btn.btn-gradready.red.take-course-btn Take this Course
+                  %a.course-enrol-button.btn.btn-gradready.red.trial-btn Free Trial
+                  %a.btn.btn-gradready.red{:href => "/hsc/faq/enrolment-and-payment-queries-8d98aefc-ed4d-4f26-a324-3addac1c2587#Am I able to pay in instalments/ a deposit to reserve a place?"} Installments
+
+              - document = Document.find_by(for_timetable: true, product_line_id: @product_version.product_line.try(:id), accessible: true)
+              -if @product_version.slug.include?("attendence") && document.present?
+                .course-download-timetable
+                  = link_to 'Download Sample Timetable', download_file_document_path(document, format: :pdf), class: 'u-text-red'
+
+              %div.mCustomScrollbar.scroll_red.scroll_main_content.scroll_width.fluid.light{ class: "#{ @product_version.slug.include?("online") ? 'height_200' : 'height_200' }" }
+                %table.table.bdr_bottm
+                  %thead
+                    %tr
+                      %th.date Date
+                      %th.venue Venue
+                      %th.start Start Time
+                      %th.end End Time
+                      %th.items Items Covered
+                  %tbody
+                / %p.text_italic.course-scroll-txt
+                /   Scroll the bar on the right for complete set of dates (Attendance Courses Only)
+
+            - unless @product_version.slug.include?("free-trial")
+              .discount
+                .cont_cours_das.cont_chan_da
+                  #a_link_clr
+                    %h4.invite_font
+                      = link_to '10% discount', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#is-there-a-group', class: 'u-text-red'
+                      if you enrol in groups of 3 or more
+                      %span
+                        = link_to 'Learn more >', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#is-there-a-group', class: 'u-red-link u-standard-text'
+                    %h4
+                      %span.u-text-red.invite_font Invite a friend to enrol in a course and when they join you will both get money off your purchases
+                      %span
+                        = link_to 'Learn more >', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#can-discounts-be', class: 'u-red-link u-standard-text'
+                    .notice-links
+                      =link_to 'Online Material Expiry Date', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#for-how-long-is', :class => 'u-red-link'
+                      |
+                      =link_to 'Post to outside Australia', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#how-much-does-postage', :class => 'u-red-link'
+                      |
+                      =link_to 'Refund Policy', faq_topic_path(:hsc, FaqTopic.hsc.for_code('enrolment'))+'#what-is-the-refund', :class => 'u-red-link'
+
+  .container.no_padding
+    #course-headers
+      %h1.hsc_txt Course Description
+    .row
+      .col-md-6
+        #course-package-details
+          - partial = @product_version.name.delete("()").downcase.split(" ")
+          - @product_line = "HSC"
+          = render dynamic_desc(partial, false, @product_version.name.downcase), paid: false, object: @product_line
+      #course-package-video
+        .col-md-6.m_btm10
+          - if ['online_essentials', 'attendance_comprehensive'].include? dynamic_desc(partial, true) and !partial.include?('tutoring')
+            %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "HSCReady", :width => "100%", height: "312px"}
+              %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+                %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", :type => "video/mp4"}
+          - elsif ['attendance_essentials'].include? dynamic_desc(partial, true)
+            %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png', :title => "HSCReady", :width => "100%", height: "312px"}
+              %source{:src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+                %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", :type => "video/mp4"}
+          - elsif ['online_comprehensive', 'course_description'].include? dynamic_desc(partial, true) or partial.include?('tutoring') or partial.include?('trial')
+            %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", "data-autoresize" => "fit", "data-controls" => "true", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "HSCReady", :width => "100%", height: "312px"}
+              %source{:src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+                %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+
+      .scroll_inhirt
+        #grad_testi2.width_535
+          .col-md-12#course_features
+            - if partial.include?('english')
+              - if partial.include?('online') && partial.include?('essentials')
+                = render 'pages/partial/features_sets/online_basic_hsc_english'
+              - elsif partial.include?('online') && partial.include?('comprehensive')
+                = render 'pages/partial/features_sets/online_comprehensive_hsc_english'
+              - elsif partial.include?('attendance') && partial.include?('essentials')
+                = render 'pages/partial/features_sets/attendance_essentials_hsc_english'
+              - elsif partial.include?('attendance') && partial.include?('comprehensive') && partial.include?('private') && partial.include?('tutoring')
+                = render 'pages/partial/features_sets/attendance_comprehensive_private_tutoring_hsc_english'
+              - elsif partial.include?('attendance') && partial.include?('comprehensive')
+                = render 'pages/partial/features_sets/attendance_comprehensive_hsc_english'
+              -elsif partial.include?('custom')
+                = render 'pages/partial/features_sets/custom_hsc_english'
+            - if partial.include?('math')
+              - if partial.include?('online') && partial.include?('essentials')
+                = render 'pages/partial/features_sets/online_basic_hsc_math'
+              - elsif partial.include?('online') && partial.include?('comprehensive')
+                = render 'pages/partial/features_sets/online_comprehensive_hsc_math'
+              - elsif partial.include?('attendance') && partial.include?('essentials')
+                = render 'pages/partial/features_sets/attendance_essentials_hsc_math'
+              - elsif partial.include?('attendance') && partial.include?('comprehensive') && partial.include?('private') && partial.include?('tutoring')
+                = render 'pages/partial/features_sets/attendance_comprehensive_private_tutoring_hsc_math'
+              - elsif partial.include?('attendance') && partial.include?('comprehensive')
+                = render 'pages/partial/features_sets/attendance_comprehensive_hsc_math'
+              -elsif partial.include?('custom')
+                = render 'pages/partial/features_sets/custom_hsc_math'
+            - if partial.include?('trial') && partial.include?('free')
+              = render 'pages/partial/features_sets/free_trial_hsc'
+%div.text-center
+  %a{href: '#course-dates-container', class: 'btn btn-gradready red'} Enrol now
+
+-if params[:different_course].eql?('true') && @course.present?
+  = render 'enrolments/location_course_modal'
+
+:javascript
+
+  $('.grid_wall_wrapper').jaliswall({item:'.grid_single_item'});
+
+  var pv_id = '#{ @product_version.id }';
+  var pv_slug = '#{ @product_version.slug }';
+  takeCourseScript(pv_id, pv_slug);
+
+  $(".mCustomScrollbar").mCustomScrollbar({
+    scrollInertia: 40
+  });

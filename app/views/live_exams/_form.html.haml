@@ -1,0 +1,64 @@
+= simple_form_for(@live_exam, html: { class: "form"} ) do |f|
+  = f.error_notification
+
+  .form-inputs.cstm_score_form
+    %div.form-group.integer.required.live_exam_section_three_score
+      .form-group.score-div
+        - if @live_exam.section_one_score != 0
+          = f.input :section_one_score, label: 'Section one score (Raw score, not percentage)', wrapper: false, input_html: {value: @live_exam.section_one_score, class: "flt_left form-control score-field", id: 'live_exam_section_one_score' }, readonly: true
+        - else
+          = f.input :section_one_score, label: 'Section one score (Raw score, not percentage)', wrapper: false, input_html: {value: @live_exam.section_one_score, class: "flt_left form-control score-field", id: 'live_exam_section_one_score' }, readonly: false
+          = f.button :submit, value: 'Save score', class: 'mg_left20 default_btn hvr-shutter-in-horizontal save-score-button last_btnsave section_one_button'
+          = f.hidden_field :course_id, value: @current_course.id
+          = f.hidden_field :section_type, value: @current_course.product_version.try(:type)
+
+    %div.form-group.integer.required.live_exam_section_three_score
+      .form-group.score-div
+        -if current_course.product_version.type == 'GamsatReady'
+          = f.label :section_two_score
+          -if request.variant == [:phone]
+            %span.section_2_score_span
+              = @mock_exam_essay.present? ? @mock_exam_essay.average_rating.round : 0
+          -else
+            = f.input :section_two_score, wrapper: false, label: false, input_html: {value: @mock_exam_essay.present? ? @mock_exam_essay.average_rating.round : 0, class: "flt_left form-control score-field", id: 'filterrific_keyword_filter' }, readonly: true
+          %a.upload_mockup.last_btnsave.upload_btn_pos.default_btn.ftn14.hvr-shutter-in-horizontal.save-score-button.essay-detail#upload_essay
+            - if @mock_exam_essay
+              = MockExamEssay.statuses[@mock_exam_essay.status] == 0 ? "Upload Essays" : "Essays Details"
+            - else
+              = "Upload Essays"
+
+        -else
+          - if @live_exam.section_two_score != 0
+            = f.input :section_two_score, wrapper: false, input_html: {value: @live_exam.section_two_score, class: "flt_left form-control score-field", id: 'filterrific_keyword_filter'}, readonly: true
+          -else
+            = f.input :section_two_score, wrapper: false, input_html: {value: @live_exam.section_two_score, class: "flt_left form-control score-field", id: 'filterrific_keyword_filter' }, readonly: false
+            = f.button :submit, value: 'Save score', class: 'mg_left20 black_default_btn hvr-shutter-in-horizontal save-score-button essay-detail last_btnsave section_two_button'
+            = f.hidden_field :course_id, value: @current_course.id
+            = f.hidden_field :section_type, value: @current_course.product_version.try(:type)
+
+:javascript
+  $(".section_one_button").click(function(){
+    var score_one = $("#live_exam_section_one_score").val()
+    if(score_one <= 0 || score_one == "" || score_one > 200){
+     alert("Please enter section one score greater than Zero and less than equal to 200")
+     return false;
+    }
+  });
+
+  $(".section_two_button").click(function(){
+    var score_two = $("#live_exam_section_two_score").val()
+    if(score_two <= 0 || score_two == "" || score_two > 200){
+     alert("Please enter section two score greater than Zero and less than equal to 200")
+     return false;
+    }
+  });
+
+  $(".section_three_button").click(function(){
+
+    var score_three = $("#live_exam_section_three_score").val()
+    console.log(score_three)
+    if(score_three <= 0 || score_three == "" || score_three > 200){
+     alert("Please enter section three score greater than Zero and less than equal to 200")
+     return false;
+    }
+  });

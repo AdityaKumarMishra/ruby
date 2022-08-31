@@ -1,0 +1,257 @@
+.gamsat-placeholder
+.navbar.navbar-default.navbar-fixed-top.nav-down.other-products
+  .navbar-inner
+    .container
+      .navbar-header
+        %button.navbar-toggle{type: 'button'}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand.green_img{href: "#{root_path}"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready-logo-green.png', height: '30px', width: '150px', style: 'top: 5px;', alt: "GradReady GAMSAT logo")
+        %a.navbar-brand.blue_img.disable{href: "#{root_path}"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready-logo-blue.png', height: '30px', width: '150px', style: 'top: 5px;', alt: "GradReady UCAT logo")
+        %a.navbar-brand.purple_img.disable{href: "#{root_path}"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/gradready-logo-purple.png', height: '30px', width: '150px', style: 'top: 5px;', alt: "GradReady VCE logo")
+        %a.navbar-brand.red_img.disable{href: "#{root_path}"}= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/GradReady_Logo_red.png', height: '30px', width: '150px', style: 'top: 5px;', alt: "GradReady HSC logo")
+        %ul.nav.navbar-nav.navbar-left.like-buttons
+          %li
+            .fb-like{"data-action" => "like", "data-href" => "https://www.facebook.com/GradReadyGAMSAT", "data-layout" => "button_count", "data-share" => "true", "data-show-faces" => "true"}
+      - if user_signed_in?
+        .navbar-collapse#OtherNavbar
+          =# render 'partial/select_current_course'
+          %ul.nav.navbar-nav.navbar-right
+            - if current_product_line=="gamsat"
+              -product_line_type = "gamsat-preparation-courses"
+            -elsif current_product_line=="umat"
+              -product_line_type = "umat-preparation-courses"
+            -else
+              -product_line_type = current_product_line
+            = render partial: 'partial/nav_common', locals: { type: product_line_type }
+      - else
+        #GradNavbar.navbar-collapse
+          %ul.nav.navbar-nav.navbar-right.main_menu
+            %li.dropdown.green_logo_icon
+              %a{ :href => "/gamsat-preparation-courses"}
+                GAMSAT
+                %sup{ style: "margin-right: -4px;"} ®
+                COURSES
+              -#%span.caret.green_caret
+              -#%ul.dropdown-menu.sub_menu
+              -#  %li
+              -#    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Courses
+              -#    %span.caret.white_caret
+              -#
+              -#    %ul.dropdown-menu.inner_menu
+              -#      %li
+              -#        %a{:href => "/gamsat/online-basic"} Online (Essentials)
+              -#      %li
+              -#        %a{:href => "/gamsat/online"} Online (Comprehensive)
+              -#      %li
+              -#        %a{:href => "/gamsat/attendence-basic"} Attendance (Essentials)
+              -#      %li
+              -#        %a{href: dynamic_product_version_uri("attendance", "gamsat")} Attendance (Comprehensive)
+              -#      %li
+              -#        %a{:href => "/gamsat/attendence-all"} Attendance (Comprehensive + Private Tutoring)
+              -#      %li
+              -#        %a{:href => "/gamsat/custom"} Custom
+              -#      %li
+              -#        %a{:href => "/gamsat/interviewready-comprehensive"} InterviewReady Comprehensive
+              -#  %li
+              -#    %a{:href => "/gamsat/compare"} Compare GradReady
+              -#  %li
+              -#    %a{:href => "/gamsat/faq"} FAQ
+              -#  %li
+              -#    %a{:href => "/blog/gamsat"} Blog
+
+            %li.dropdown.blue_logo_icon
+              %a.main_menu_blu_caret{ :href => "/umat-preparation-courses"}
+                UCAT
+                %sup{ style: "margin-right: -4px;"} ®
+                COURSES
+              -#%span.caret.blue_caret
+              -#%ul.dropdown-menu.sub_menu.blue_sub_menu
+              -#  %li
+              -#    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Courses
+              -#    %span.caret.white_caret
+              -#    %ul.dropdown-menu.inner_menu
+              -#      %li
+              -#        %a{:href => "/umat/online-basic-5e64c230-6be0-4d7d-948a-4338a900b0af"} Online (Essentials)
+              -#      %li
+              -#        %a{:href => "/umat/online-44383c37-9593-4bba-8be2-23f6f123ce15"} Online (Comprehensive)
+              -#      %li
+              -#        %a{:href => "/umat/umatready-attendence-essentials"} Attendance (Essentials)
+              -#      %li
+              -#        %a{:href => "/umat/attendence"} Attendance (Comprehensive)
+              -#      %li
+              -#        %a{:href => "/umat/attendence-all-84386da2-92e7-4267-9912-f34e31a81a59"} Attendance (Comprehensive + Private Tutoring)
+              -#      %li
+              -#        %a{:href => "/umat/custom-5905ac7d-219c-4c96-8708-7d4655ab563c"} Custom
+              -#      %li
+              -#        %a{:href => "/umat/interviewready-comprehensive"} InterviewReady Comprehensive
+              -#  %li
+              -#    %a{:href => "/umat/compare"} Compare GradReady
+              -#  %li
+              -#    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Testimonials
+              -#    %span.caret.white_caret
+              -#    %ul.dropdown-menu.inner_menu
+              -#      %li
+              -#        %a{:href => "/gamsat/our_students"} Our Students
+              -#      %li
+              -#        %a{:href => "/gamsat/student_testimonials"} Student Comments
+              -#  %li
+              -#    %a{:href => "/umat/faq"} FAQ
+              -#  %li
+              -#    %a{:href => "/blog/umat"} Blog
+
+            -#%li.dropdown.purple_logo_icon
+            -#  %a.main_menu_prple_caret{ :href => "/vce"} VCE Ready
+            -#  %span.caret.purple_caret
+            -#  %ul.dropdown-menu.sub_menu.purple_sub_menu
+            -#    %li
+            -#      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Courses
+            -#      %span.caret.white_caret
+            -#      %ul.dropdown-menu.inner_menu
+            -#        %li
+            -#          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            -#          Mathematics
+            -#          %ul.dropdown-menu.sub_inner_menu
+            -#            %li
+            -#              %a{:href => "/vce/math-extension-1-online-essentials"} Mathematical Methods (CAS) - Online (Essentials)
+            -#            %li
+            -#              %a{:href => "/vce/math-extension-1-online-comprehensive"} Mathematical Methods (CAS) - Online (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/vce/math-extension-1-attendance-essentials"} Mathematical Methods (CAS) - Attendance (Essentials)
+            -#            %li
+            -#              %a{:href => "/vce/math-extension-1-attendance-comprehensive"} Mathematical Methods (CAS) - Attendance (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/vce/math-extension-1-attendance-comprehensive"} Mathematical Methods (CAS) - Attendance (Comprehensive + Private Tutoring)
+            -#            %li
+            -#              %a{:href => "/vce/mathematical-methods-cas-custom"} Mathematical Methods (CAS) - Custom
+            -#        %li
+            -#          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} English
+            -#          %ul.dropdown-menu.sub_inner_menu
+            -#            %li
+            -#              %a{:href => "/vce/english-advanced-online-essentials"} English - Online (Essentials)
+            -#            %li
+            -#              %a{:href => "/vce/english-advanced-online-comprehensive"} English - Online (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/vce/english-advanced-attendance-essentials"} English - Attendance (Essentials)
+            -#            %li
+            -#              %a{:href => "/vce/english-advanced-attendance-comprehensive"} English - Attendance (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/vce/english-advanced-attendance-comprehensive-private-tutoring"} English - Attendance (Comprehensive + Private Tutoring)
+            -#            %li
+            -#              %a{:href => "/vce/english-custom"} English - Custom
+            -#    %li
+            -#      %a{:href => "/vce/compare"} Compare GradReady
+            -#    %li
+            -#      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Testimonials
+            -#      %span.caret.white_caret
+            -#      %ul.dropdown-menu.inner_menu
+            -#        %li
+            -#          %a{:href => "/gamsat/our_students"} Our Students
+            -#        %li
+            -#          %a{:href => "/gamsat/student_testimonials"} Student Comments
+            -#    %li
+            -#      %a{:href => "/vce/faq"} FAQ
+            -#    %li
+            -#      %a{:href => "/blog/vce"} Blog
+            -#
+            -#%li.dropdown.red_logo_icon
+            -#  %a.main_menu_red_caret{:href => "/hsc"} HSC Ready
+            -#  %span.caret.red_caret
+            -#  %ul.dropdown-menu.sub_menu.red_sub_menu
+            -#    %li
+            -#      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Courses
+            -#      %span.caret.white_caret
+            -#      %ul.dropdown-menu.inner_menu
+            -#        %li
+            -#          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            -#          Mathematics
+            -#          %ul.dropdown-menu.sub_inner_menu
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-online-essentials"} Math Extension 1 (CAS) - Online (Essentials)
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-online-comprehensive"} Math Extension 1 (CAS) - Online (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-attendance-essentials"} Math Extension 1 (CAS) - Attendance (Essentials)
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-attendance-comprehensive"} Math Extension 1 (CAS) - Attendance (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-attendance-comprehensive-private-tutoring"} Math Extension 1 (CAS) - Attendance (Comprehensive + Private Tutoring)
+            -#            %li
+            -#              %a{:href => "/hsc/math-extension-1-cutsom"} Math Extension 1 (CAS) - Custom
+            -#        %li
+            -#          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} English
+            -#          %ul.dropdown-menu.sub_inner_menu
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-online-essentials"} Engilsh Advanced - Online (Essentials)
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-online-comprehensive"} Engilsh Advanced - Online (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-attendance-essentials"} Engilsh Advanced - Attendance (Essentials)
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-attendance-comprehensive"} Engilsh Advanced - Attendance (Comprehensive)
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-attendance-comprehensive-private-tutoring"} Engilsh Advanced - Attendance (Comprehensive + Private Tutoring)
+            -#            %li
+            -#              %a{:href => "/hsc/english-advanced-custom"} Engilsh Advanced - Custom
+            -#    %li
+            -#      %a{:href => "/hsc/compare"} Compare GradReady
+            -#    %li
+            -#      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} Testimonials
+            -#      %span.caret.white_caret
+            -#      %ul.dropdown-menu.inner_menu
+            -#        %li
+            -#          %a{:href => "/gamsat/our_students"} Our Students
+            -#        %li
+            -#          %a{:href => "/gamsat/student_testimonials"} Student Comments
+            -#    %li
+            -#      %a{:href => "/hsc/faq"} FAQ
+            -#    %li
+            -#      %a{:href => "/blog/hsc"} Blog
+            //-if (!current_user || current_user.current_enrolment.nil?)
+            //  %li
+            //    %a.no_icon{:href => '/gamsat/1-week-trial'} Free Trial
+            -if !current_user.nil?
+              %li
+                %a.no_icon{href: dashboard_home_path} Dashboard
+            -else
+              %li
+                %a.no_icon{href: "/login"} Login
+            %li
+              %a.no_icon{:href => '/gamsat-preparation-courses/contact'} CONTACT US
+            / -if current_user.nil?
+            /   %li.border_trial.dropdown
+            /     %a.dropdown-toggle.point.trial_brdr.gam_trial_btn{"data-toggle" => "dropdown"} Free Trial
+            /     %ul.dropdown-menu.home_mg_top
+            /       %li
+            /         %a.no_float{:href => "/gamsat-preparation-courses/free-trial"}
+            /           GAMSAT
+            /           %sup ®
+            /           Trial
+            /       %li
+            /         %a.no_float{:href => "/umat-preparation-courses/free-trial"}
+            /           UMAT
+            /           %sup ®
+            /           Trial
+            = render 'partial/cart_dropdown'
+:javascript
+  $(document).ready(function(){
+    $(".blue_logo_icon").hover(function() {
+      $(".blue_img").removeClass("disable")
+      $(".purple_img, .red_img, .green_img").addClass("disable")
+    });
+    $(".purple_logo_icon").hover(function() {
+      $(".blue_img, .red_img, .green_img").addClass("disable")
+      $(".purple_img").removeClass("disable")
+    });
+    $(".red_logo_icon").hover(function() {
+      $(".red_img").removeClass("disable")
+      $(".blue_img, .purple_img, .green_img").addClass("disable")
+    });
+
+    $(".green_logo_icon").hover(function() {
+     $(".blue_img, .purple_img, .red_img").addClass("disable")
+      $(".green_img").removeClass("disable")
+    });
+
+  });

@@ -1,0 +1,29 @@
+%br
+%br
+#filterrific_results
+  =#will_paginate @email_deliveries, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Email Subject
+        %th Recipient
+        %th Trigger/Regular Time As Applicable
+        %th Example Text
+
+    %tbody
+      - if @email_deliveries.present?
+        - @email_deliveries.each do |category,emails|
+          %tr
+            %td{:colspan => 4, style: 'text-align: center; background: #ddd; font-weight: bold;'}= (category == 'na' ? 'NA' : category.titleize) || 'NA'
+          - emails.each do |email|
+            %tr
+              %td= email.subject
+              %td= email.recipient
+              %td= email.trigger_name
+              %td
+                %ul
+                  %li{style: "list-style: inside;"}= link_to "download pdf", download_email_text_email_deliveries_path(id: email.id, format: :pdf)
+                  %li{style: "list-style: inside;"}= link_to "download word", download_email_text_email_deliveries_path(id: email.id,  format: :docx)
+      -else
+        %tr
+          %td No record found

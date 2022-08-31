@@ -1,0 +1,33 @@
+.col-lg-7.col-md-6.col-sm-12.col-xs-12
+  .cr_descr_text_col
+    %p.text_content
+      The Online package is an ideal alternative for students who cannot attend an Attendance course because of location or timing issues.
+      Through compiling student feedback, we picked our best tutors to develop an online classroom consisting of many hours of engaging and bite-sized videos.
+      Moreover, you will have online access to our team of devoted tutors.
+      All online materials are immediately available for access after purchase.
+
+      - if product_line == "GAMSAT" && !gamsat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/gamsat_improved_percentile'
+      -elsif product_line == "UMAT" && !umat_improvment_scores[course_type.to_s.to_sym].nil?
+        = render 'public_page_partial/pv/course_description/umat_improved_percentile'
+    .content-mask
+  %a.read_more_cr_decr{href: "javascript:void(0)"} Read more
+  %a.read_less_cr_decr{href: "javascript:void(0)"} Read less
+
+.col-lg-5.col-md-6.col-sm-12.col-xs-12.pull-right.cr_descr_banner_col
+  #cr_description_col.carousel.slide{"data-ride" => "carousel"}
+    .carousel-inner{role: "listbox"}
+      .item.active
+        %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "GAMSATReady", :width => "100%", height: "312px"}
+          %source{:src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+            %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+      - if product_line == "GAMSAT"
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/ol_comp_desc.png', class: "heigh_312"
+    - if product_line == "GAMSAT"
+      %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+        %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+        %span.sr-only Previous
+      %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+        %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+        %span.sr-only Next

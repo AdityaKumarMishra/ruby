@@ -1,0 +1,108 @@
+-if mcq_stems.present?
+  .text_btn_rght_col
+    %h4 Questions
+  %table.table.table-bordered.table-hover.essay_table.exer-table
+    %thead
+      %tr
+        %th.exercise_flr_mcq Title
+        %th.exercise_flr_mcq{colspan: 1} Action
+
+    %tbody
+      - mcq_stems.each do |mcq_stem|
+        %tr
+          %td= mcq_stem.title
+          %td
+            %a.table_icon_col{"data-placement" => "top", title: "Review", "data-toggle" => "tooltip", href: review_exercise_exercise_review_path(exercises.includes(:mcq_stems).find_by(mcq_stems: {id: mcq_stem.id}))}
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/review_icon.svg'
+-elsif s_query
+  .alert.alert-warning.nothing_found Nothing found
+-else
+  .text_btn_rght_col
+    %h4 Listing Exercises
+    = link_to 'New Exercise', new_exercise_path, class: 'default_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+  -if @exercises.present?
+    -if request.variant.blank?
+      %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+        %thead
+          %tr
+            %th Name
+            %th Difficulty
+            %th Amount Available
+            %th Completed
+            %th Action
+
+        %tbody
+          - @exercises.each do |exercise|
+            - exercise.add_attempted_mcqs if exercise.attempted_mcqs.blank?
+            %tr
+              %td= exercise.name
+              %td= exercise.difficulty
+              %td= exercise.mcqs.count
+              %td= exercise.completed_at.in_time_zone('Sydney').to_formatted_s(:long) if exercise.completed_at
+              %td
+                %span.exercise_btns
+                  - if exercise.completed_at.present?
+                    = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/resit_icon.svg'), repeat_path(id: exercise.id), method: :post, data: { confirm: 'Are you sure?', placement: 'top', toggle: 'tooltip', title: 'Resit'}, class: 'table_icon_col'
+                %span.exercise_btns
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/delete_icon.svg'), exercise_path(exercise), method: :delete, data: { confirm: 'Are you sure?', placement: 'top', toggle: 'tooltip', title: 'Delete'}, class: 'table_icon_col'
+                %span.exercise_btns
+                  -if exercise.completed_at.nil?
+                    - cea_data = JSON.parse(cookies[:current_exe_atmpt]) if !cookies[:current_exe_atmpt].blank?
+                    - cea_data = JSON.parse(cookies[:current_sa]) if !cookies[:current_sa].blank?
+                    - if !cookies[:current_sa].blank? || !cookies[:current_exe_atmpt].blank?
+                      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), data: { confirm: "You are trying to create a new “ #{exercise.name} ”, would you like to cancel the paused #{cea_data['name']} ?Please click Ok if you would like to create new attempt or press Cancel if you would like to continue.", placement: 'top', toggle: 'tooltip', title: 'Start'}, onclick: 'dd_loader();'
+                    - else
+                      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), class: 'table_icon_col', data: { placement: 'top', toggle: 'tooltip', title: 'Start'}, onclick: 'dd_loader();'
+                  -else
+                    = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/review_icon.svg'), exercise_path(exercise), class: 'table_icon_col', data: { placement: 'top', toggle: 'tooltip', title: 'Review'}, onclick: 'dd_loader();'
+    -if request.variant == [:phone]
+      .mobile_table_border
+        %ul.tbl_head
+          %li.width_inc Name
+          %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool
+            Action
+        - @exercises.each do |exercise|
+          %ul.mobile_table_body.listing.tbl_head.exercise_bdr_none
+            %li.mobile_mousehover_tool.width_inc
+              = exercise.name
+              %ul.tool_tip
+                %li= "Difficulty: #{exercise.difficulty}"
+                %li= "Amount Available: #{exercise.amount}"
+                %li= "Completed: #{exercise.completed_at.in_time_zone('Sydney').to_formatted_s(:long) if exercise.completed_at}"
+                %li
+                  - if exercise.completed_at.present?
+                    = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/resit_icon.svg'), repeat_path(id: exercise.id), method: :post, data: { confirm: 'Are you sure?', placement: 'top', toggle: 'tooltip', title: 'Resit'}, class: 'table_icon_col', onclick: 'dd_loader();'
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/delete_icon.svg'), exercise_path(exercise), method: :delete, data: { confirm: 'Are you sure?', placement: 'top', toggle: 'tooltip', title: 'Delete'}, class: 'table_icon_col', onclick: 'dd_loader();'
+                  -if exercise.completed_at.nil?
+                    - cea_data = JSON.parse(cookies[:current_exe_atmpt]) if !cookies[:current_exe_atmpt].blank?
+                    - cea_data = JSON.parse(cookies[:current_sa]) if !cookies[:current_sa].blank?
+                    - if !cookies[:current_sa].blank? || !cookies[:current_exe_atmpt].blank?
+                      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), class: 'table_icon_col', data: { confirm: "You are trying to create a new “ #{exercise.name} ”, would you like to cancel the paused #{cea_data['name']} ?Please click Ok if you would like to create new attempt or press Cancel if you would like to continue.", placement: 'top', toggle: 'tooltip', title: 'Start'}, onclick: 'dd_loader();'
+                    - else
+                      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), class: 'table_icon_col', data: { placement: 'top', toggle: 'tooltip', title: 'Start'}, onclick: 'dd_loader();'
+                  -else
+                    = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/review_icon.svg'), exercise_path(exercise), class: 'table_icon_col', data: { placement: 'top', toggle: 'tooltip', title: 'Review'}, onclick: 'dd_loader();'
+            %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16
+              -if exercise.completed_at.nil?
+                - cea_data = JSON.parse(cookies[:current_exe_atmpt]) if !cookies[:current_exe_atmpt].blank?
+                - cea_data = JSON.parse(cookies[:current_sa]) if !cookies[:current_sa].blank?
+                - if !cookies[:current_sa].blank? || !cookies[:current_exe_atmpt].blank?
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), data: { confirm: "You are trying to create a new “ #{exercise.name} ”, would you like to cancel the paused #{cea_data['name']} ?Please click Ok if you would like to create new attempt or press Cancel if you would like to continue."}, class: 'table_icon_col', onclick: 'dd_loader();'
+                  %span.heading_tool_tip.mrht37
+                    %p Start
+                - else
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start_icon.svg'), exercise_mcq_attempts_path(exercise), class: 'table_icon_col', onclick: 'dd_loader();'
+                  %span.heading_tool_tip.mrht37
+                    %p Start
+              -else
+                = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/review_icon.svg'), exercise_path(exercise), class: 'table_icon_col', onclick: 'dd_loader();'
+                %span.heading_tool_tip.mrht37
+                  %p Review
+  -else
+    .alert.alert-warning.nothing_found Nothing found
+:javascript
+  $(".mobile_mousehover_tool").click(function(){
+    $(".mobile_mousehover_tool").removeClass("acitve");
+    $(this).addClass("acitve");
+    $(".overlay_show").addClass("show_tool_wrapper");
+  });

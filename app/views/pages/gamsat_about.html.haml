@@ -1,0 +1,94 @@
+- title "How Our GAMSAT Courses Improve Your Scores | GradReady"
+- meta_description "Learn how our philosophy and targeted approach to learning has helped the average GradReady student improve 20+ percentile points on the GAMSAT Exam, 5 years in a row."
+
+.banner_wrapper.overview_bg.banner_inner_page
+  #free_study_guide.banner_graph_section.about-noti
+    #typed.notification_bar
+      %p
+        = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+    .banner_container
+      .graph_content.mob_bg_graph
+        %a{href: "#{gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+      / %a.mob_graph{href: "#{gamsat_preparation_courses_student_testimonials_url(anchor: 'student_improved_score')}"}
+      /   = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/mobile_graph_img_new.svg', alt: "Graph", height: "191", width: "700"
+  %h1.our_stragy
+    %a{href: "#strategy_col"} The GradReady Strategy
+  = render 'public_page_partial/happy_student'
+= render 'public_page_partial/gradready_different', page_name: 'gamsat'
+= render 'public_page_partial/our_students'
+
+%section#strategy_col.overview_features
+  .container.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+    .overview_box
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/sustain_learning_icon.svg'
+      %h3 Sustainable Learning
+      %p
+        Avoid information overload. Foster interest. Provide assistance from high quality GAMSAT
+        %sup ®
+        tutors.
+    .overview_box
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/efficient_system_icon.svg'
+      %h3 Efficient Systems
+      %p Leverage online technologies. Provide real-time feedback. Continually refine processes.
+    .overview_box
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/study_habbit_icon.svg'
+      %h3
+        Effective Study
+        Habits
+      %p Provide multi-modal learning formats. Emphasize practice questions. Give students perspectives.
+    .overview_box
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/custimization.svg'
+      %h3 Customization
+      %p Provide many learning options. Allow flexible exploration. Encourage innovative approaches.
+    .overview_box.bdr_right
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/collborative_icon.svg'
+      %h3
+        Collaborative
+        Environments
+      %p Make classes small. Dedicate time to interact. Instil question-answer thinking.
+%section.middle_course_section#grad_history.aos-item{"data-aos" => "fade", "data-aos-duration" => "1300"}
+  .container
+    .text-center.full_width.mbot30
+      %h2
+        History of
+        %span.grad_logo_head
+          %span.green
+            Grad
+          %span.black
+            Ready
+        \- GAMSAT
+        %sup ®
+        Courses
+    .col-md-12
+      .col-md-8.histry_left.text-left
+        %p
+          GradReady was founded by a group of medical doctors from the University of Melbourne. Our original aim was to help students in their GAMSAT
+          %sup ®
+          (Graduate Australian Medical School Admissions Test) Preparation. We found existing GAMSAT
+          %sup ®
+          exam preparation courses to be overly didactic, inattentive to differing student needs, and lacking in online tools.
+        %p Using our experience in education and IT, and leveraging the expertise of former lecturers at University of Western Australia and University of Otago, we founded GradReady, an education provider that is in sync with evolving educational philosophies.
+        %p
+          By the end of 2014, our GAMSAT
+          %sup ®
+          Courses had become the most widely used GAMSAT
+          %sup ®
+          exam preparation course with over 1000 students each year. Moreover, we were able to help our students achieve many milestones, including an average rise in percentile ranking of more than 24 percentage points and a medical school admission rate of over 90% year after year.
+        %p
+          The GradReady tuition team consists of successful current medical students, former university level lecturers and PhD candidates, with some of our GAMSAT
+          %sup ®
+          tutors being a combination of 2 or even 3 of these. In addition, all tutors have had extensive teaching experience, and were hand-picked for their engaging teaching style and superb ability to explain difficult concepts. To get to know our tutors a little more, please click on "Meet the Team" below.
+      .col-md-4.histry_right
+        #overview_vert_slider.carousel.slide.vertical{"data-ride" => "carousel"}
+          / Wrapper for slides
+          .carousel-inner{role: "listbox"}
+            .item.active
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/history_img1.png', alt: "history_img"
+            .item
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/history_img2.png', alt: "history_img"
+    .meet_plan.text-center
+      %a.default_btn.hvr-shutter-in-horizontal{href: "/gamsat/contact"} Meet the Team
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

@@ -1,0 +1,79 @@
+=image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+- if product_line == 'GAMSAT' && params[:id] != 'custom'
+  %h4 PBL Classes (6 core days) + Performance Assessment
+  / %h4 Attendance Tutorials (6 core days)
+-else
+  %h4 PBL Classes (6 core days) + Performance Assessment
+  / %h4 Attendance Tutorials
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+- if product_line == 'UMAT'
+  %span
+    %em
+    Logical Reasoning - 12 hours
+  %span
+    %em
+      Understanding People - 7 Hours
+  %span
+    %em
+      Non-verbal Reasoning - 11 Hours
+  .show_full_content
+    Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through MCQs with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.
+
+- elsif product_line == 'VCE' || product_line == 'HSC'
+  .text
+    %p.u-word-spacing Our expert tutors will teach you techniques and concepts by demonstrating their thinking process through working through questions with you, as well as dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.
+- elsif product_line == 'GAMSAT'
+  %span
+    %em
+    Humanities - 9 hrs
+    / Humanities - 9 hours
+  %span
+    %em
+    Section 3 Fundamentals - 2 hrs
+    / Physics - 7 hours
+  %span
+    %em
+    Physics - 7 hrs
+    / Biology - 8 hours
+  %span
+    %em
+    Biology - 8 hrs
+    / Chemistry - 7 hours
+  %span
+    %em
+    Chemistry - 7 hrs
+
+  - if params[:id].present? && params[:id].include?("custom")
+    .show_full_content
+      Updated Curriculum with new MCQs & additional emphasis on reasoning skill. Our expert tutors will teach you techniques and concepts by demonstrating their thinking process and working through MCQs with you. Our tutors will also dissect difficult questions and clarify your specific queries.
+      %br
+      To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through the relevant resources outlined in the preparation guides provided – our tutors will be directly referencing the content featured within the resources and will assume that you will be familiar with them.
+      %br
+      Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+      %br
+      This will also include Pre and Post Live Class Performance Assessments to assess your GAMSAT readiness before and after our classes
+      %br
+      Note: PBL = Problem Based Learning
+
+      / Updated Curriculum for 2021 with new MCQs & additional emphasis on reasoning skill. Our expert tutors will teach you techniques and concepts by demonstrating their thinking process and working through MCQs with you. Our tutors will also dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior to class – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.
+      / %br
+      / Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+  - else
+    .show_full_content
+      Updated Curriculum with new MCQs & additional emphasis on reasoning skill. Our expert tutors will teach you techniques and concepts by demonstrating their thinking process and working through MCQs with you. Our tutors will also dissect difficult questions and clarify your specific queries.
+      %br
+      To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through the relevant resources outlined in the preparation guides provided – our tutors will be directly referencing the content featured within the resources and will assume that you will be familiar with them.
+      %br
+      Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+      %br
+      This will also include Pre and Post Live Class Performance Assessments to assess your GAMSAT readiness before and after our classes.
+      %br
+      Note: PBL = Problem Based Learning
+      / Updated Curriculum for 2021 with new MCQs & additional emphasis on reasoning skill. Our expert tutors will teach you techniques and concepts by demonstrating their thinking process and working through MCQs with you. Our tutors will also dissect difficult concepts and clarify your specific questions. To reap the full benefits of our Attendance Tutorials, please ensure that you prepare by thoroughly working through all videos prior to class – our tutors will assume that you are familiar with the fundamental concepts covered in the videos.
+      / %br
+      / Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the course timetable above for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+

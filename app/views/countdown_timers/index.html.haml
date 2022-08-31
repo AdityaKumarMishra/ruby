@@ -1,0 +1,41 @@
+%h1 Listing Countdown Timers
+
+#filterrific_results
+  %table.gr-table.gr-table-bordered.table-hover
+    %thead
+      %tr
+        %th
+          Category
+        %th
+          Title
+        %th{colspan: 3}
+          Description
+        %th{colspan: 3}
+          Destination Link
+        %th
+          Timer End Date
+        %th
+          Timer End Time
+        %th
+          Active
+        %th{colspan: 2}
+          Action
+    - @countdown_timers.each do |countdown_timer|
+      %tbody
+        %tr{id: "countdown_timer_#{countdown_timer.id}"}
+          %td
+            = countdown_timer.page_type
+          %td
+            = countdown_timer.title
+          %td{colspan: 3}
+            = countdown_timer.description
+          %td{colspan: 3}
+            = countdown_timer.destination_link
+          %td
+            = format_date_long(countdown_timer.end_date)
+          %td
+            = countdown_timer.end_time.strftime('%H:%M')
+          %td
+            = countdown_timer.active == true ? "yes" : "no"
+          %td
+            = link_to "Edit", edit_countdown_timer_path(countdown_timer.id), class: "btn btn-info btn-sm"

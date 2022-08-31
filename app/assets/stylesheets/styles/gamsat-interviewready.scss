@@ -1,0 +1,65 @@
+.essen_te {
+    margin-left: 520px;
+    margin-top: -60px;
+    font-family: sans-serif;
+    font-size: 49px;
+}
+
+.text_green {
+    color: #009348 !important;
+    font-weight: 800;
+}
+
+.font_sty1 {
+    font-family: droid_serifregular;
+    font-size: 41px;
+    font-weight: bold;
+    margin-top: 14px;
+    img {
+      width: auto;
+      height: 36px;
+    }
+    &.gr-img img {
+      height: 30px;
+      margin-top: 5px;
+    }
+    &.ur-img img {
+      height: 40px;
+      margin-top: 12px;
+    }
+    &.vr-img, &.hr-img, &.ir-img img {
+      height: 36px;
+    }
+}
+
+.inter_stus {
+    font-size: 19px;
+    position: relative;
+    top: -35px;
+}
+
+.gren_font {
+    color: #009348 !important;
+}
+
+#public-courses #course-dates-container .headings h1.green {
+    color: #009348;
+}
+
+#public-courses #course-dates-container .headings h2.green {
+    color: #009348;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.btn-gr.green {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #008b44;
+}
+
+.cont_cours_das {
+    padding: 10px 0;
+    text-align: center;
+    margin: 15px;
+}

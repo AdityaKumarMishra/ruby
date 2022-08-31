@@ -1,0 +1,28 @@
+.panel.panel-warning
+  .panel-heading
+    .panel-title
+      %h3
+        %strong= "Essay: #{@essay.title}"
+  .panel-body.line-40
+    = f.error_notification
+    %strong Description:
+    = sanitize @essay.question
+    %strong Submission:
+    = sanitize @essay_response.response
+    = f.input :rating, :as => :select, :collection => (0..100)
+    %strong Submission:
+    .form-inputs= f.input :response, label: false, as: :ckeditor, :input_html => { :ckeditor => { :height => 150 } }
+    = f.hidden_field :initial_time, value: Time.now
+
+  .panel-footer
+    .form-actions
+      .btn-group
+        = f.button :submit, class: 'btn btn-success'
+        = link_to 'Back', essay_responses_path(id: @essay.slug), class: 'btn btn-default', data: {confirm: 'This will erase all your current progress, are you sure?' }
+      .right
+        %span Time:
+        %span#countdown.btn.btn-success
+
+:javascript
+  $('#countdown').stopwatch({startTime: #{@essay_tutor_response.elapsed_time}}).bind('tick.stopwatch').stopwatch('start');
+-#Note backend for timer being updated is all there, just set whatever the countdown is to the hidden field elapsed_time

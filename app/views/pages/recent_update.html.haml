@@ -1,0 +1,391 @@
+- title "Course, Website, and Content Updates | GradReady"
+- meta_description "Here you will find all course, website, and content updates we have made recently. We are constantly making improvements, so stay tuned!"
+- meta_keywords "GAMSAT, UCAT, Recent Updates"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1 Recent Updates
+%ul.nav.attendce_tabbing.recent_update_sect.mbot0.mtop40{role: "tablist"}
+  %li{class: ("active"), role: "presentation"}
+    %a{"aria-controls" => "gmsat_updates_tab", "data-toggle" => "tab", href: "#gmsat_updates_col", role: "tab"}
+      GAMSAT
+      %sup ®
+      Courses
+  / %li.umat_update_colr{class: ("active" if params[:tab] == "UMAT"), role: "presentation"}
+  /   %a{"aria-controls" => "umat_updates_tab", "data-toggle" => "tab", href: "#umat_updates_col", role: "tab"}
+  /     UCAT
+  /     %sup ®
+  /     Courses
+%section.pad_tp30
+  .container.text-center
+    %p.sub_heading_txt.mar_zero At GradReady, we pride ourselves in constantly improving and innovating. Here's a more detailed look at what we've done differently each year.
+%section.updates_list_wrap.tab-content
+  #gmsat_updates_col.container.tab-pane.fade.in{class: ("active"), role: "tabpanel"}
+    %ul.updates_tab_lists
+      %li.active
+        %a{"data-toggle" => "tab", href: "#updates_col1"} 2019 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col2"} 2018 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col3"} 2017 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col4"} 2016 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col5"} 2015 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col6"} 2014 Updates
+      %li
+        %a{"data-toggle" => "tab", href: "#updates_col7"} 2013 Updates
+    .upadtes_tab_cntnt
+      .tab-content
+        #updates_col1.tab-pane.fade.in.active{role: "tabpanel"}
+          %ul
+            %li
+              %h3 Course Updates
+              .tab_cntnt_details
+                %h4 Home Mock Exam Day
+                %p Join other students online from your home and complete the day together under real time pressure. Just like the attendance Mock Exam Day, you will be able to receive a percentile ranking and be walked through the answers.
+              .tab_cntnt_details
+                %h4 Weekend Intensive Tutorial
+                %p To help you squeeze in as much preparation as you can, we’ve introduced a fast-paced course designed to cover high-yield topics, exam strategy, and give you one final overview of the essential knowledge.
+              .tab_cntnt_details
+                %h4 InterviewReady Course
+                %p The InterviewReady course has been updated with even more practice stations and questions from a wider range of postgraduate medical schools, providing a more comprehensive approach to preparing for medical school interviews.
+            %li
+              %h3 Content Updates
+              .tab_cntnt_details
+                %h4 Mock Exam Review Videos
+                %p
+                  In addition to a Q&A session after the mock exam, you will have access to a series of review videos that provide a step-by-step walkthrough of all the questions in the paper. These videos will be made available after the exam, and with access up until the date of the GAMSAT
+                  %sup ®
+                  \.
+              .tab_cntnt_details
+                %h4 Textbook Content Updates
+                %p
+                  We have added 13 new chapters that cover the basics of 1st year medical biology, aiming to provide you with the necessary skills to tackle section III of the GAMSAT
+                  %sup ®
+                  \. In addition, we expanded on the Humanities section, providing a large variety of written material that includes how to address cartoons, poetry, as well as more sample essays.
+        #updates_col2.tab-pane.fade.in{role: "tabpanel"}
+          %ul
+            %li
+              %h3 Course Updates
+              .tab_cntnt_details
+                %h4 Online Interactive Tutorials
+                %p Utilising the same industry-leading syllabus and teaching material as the live course, our experienced tutors will deliver the classes via a webinar format, allowing you to tune in from anywhere around the world and catch up on missed classes.
+              .tab_cntnt_details
+                %h4 Regular Q&A Support Sessions
+                %p Our extra online sessions will help support you through the multi-month long preparation process, with topics ranging from helping you to keep on track with our detailed study plans to advice on stress management and keeping yourself motivated.
+            %li
+              %h3 Content Updates
+              .tab_cntnt_details
+                %h4 Additional Online Exams
+                %p We understand the importance of practice in consolidating what you have learned and putting yourself under realistic time pressure. That’s why we’ve added 2 new Online Practice Exams for a total of 8 exams that you can sit in your own time.
+            %li
+              %h3 Student Support
+              .tab_cntnt_details
+                %h4 Study Buddy
+                %p
+                  To help you keep on track and stay motivated with your GAMSAT
+                  %sup ®
+                  Prep, we will help connect you with one or more of the hundreds of students who use GradReady's services every year.
+              / %li
+              /   %h3 Website Updates
+              /   .tab_cntnt_details
+              /     %h4 My Performance Profile
+              /     %p
+              /       My Performance Profile
+              /       %sup ®
+              /       automatically identifies your area of weakness and compares your performance against the rest of the GradReady cohort. It provides a breakdown in terms of overall content learning, performance, and a corresponding guide of what areas to focus on to maximise your study. It utilises industry-leading software to hone in on specific subjects and chapters of the course, and so helps you stay on track to achieve the best possible GAMSAT
+              /       %sup ®
+              /       result.
+              .tab_cntnt_details
+                %h4 Mobile Friendly
+                %p
+                  We know that every minute is precious in your preparation - you are able to access every single one of our desktop features seamlessly via your mobile, allowing you to brush up on content and do practice MCQs on the go, wherever you are.
+        #updates_col3.tab-pane.fade.in{role: "tabpanel"}
+          %p.text-center Following are just what we have so far. There will be many more announcements to come throughout the year!
+          %ul
+            %li
+              %h3 Content Updates
+              .tab_cntnt_details
+                %h4 More MCQs
+                %p We understand the importance of practice in consolidating what you have learned. Therefore our team have worked to produce additional high quality MCQs. We now have 4000+ MCQs across our 43 subtopics, which will allow you to delve deep into and improve upon each of your weaknesses. Expect even more MCQs to be released throughout the year.
+            %li
+              %h3 New Web Learning Tools
+              .tab_cntnt_details
+                %h4 Cross Referencing System
+                %p This is a tool that will help you refer to resources across platforms. The Cross Referencing system allows students to match MCQs to precise videos and textbook chapters. This means that when you get an MCQ wrong, you will now know exactly which videos and textbook chapters to review to consolidate your knowledge about the relevant topic.
+            %li
+              %h3 System Updates
+              .tab_cntnt_details
+                %h4 Easy access to GetClarity System
+                %p Each year we receive tens of thousands of queries from students related to various topics. To ensure that you receive a timely reply on your queries, we have made the GetClarity feature easily accessible to you by allowing you to review questions and write replies quickly.
+              .tab_cntnt_details
+                %h4 Improved Feedback System
+                %p We are always open for suggestions and feedback. We have built an efficient feedback system which allows us to review and update our system regularly based on your feedback.
+              .tab_cntnt_details
+                %h4 Improved Essay Reminder / Marking System
+                %p We have made improvements to our essay management system and now send reminder emails to you prior to your essay expiring. Further, we have made improvements to the marking system which ensures that essays are marked in a timely manner.
+              .tab_cntnt_details
+                %h4 Improvements in Private Tutoring System
+                %p The booking system has been improved to allow you to more efficiently find just the right tutor that you need.
+              .tab_cntnt_details
+                %h4 Speed Optimisations
+                %p We understand how important it is to have a system with better speed to provide you with an optimal learning experience. At GradReady we are constantly working on enhancing your experience and have successfully improved speed for features such as MCQs, Online Exams, Diagnostic Assessment and GetClarity systems.
+              .tab_cntnt_details
+                %h4 Internal Logistics Optimisations
+                %p Over the course of current year we have made various improvement and implemented new systems to optimise our Course Management, Essay and Private Tutoring systems to ensure quality and timely responses.
+        #updates_col4.tab-pane.fade{role: "tabpanel"}
+          %ul
+            %li
+              %h3 System Wide Updates
+              .tab_cntnt_details
+                %h4 Brand New Website - 3.0
+                %p
+                  The current site is the third completely new GradReady site. By “new”, we are not referring to new versions, we are not referring to modifications, we are not even referring to pulling apart the old site and reassembling it. We mean that we had rebuilt it completely from scratch - so that we can use the latest software frameworks as foundation, enabling us to develop features that would be impossible in the older versions.
+                  If you have ever wondered why no other providers offer what we do, it is because the no one else had reinvested back into technology the way we have.GradReady 3.0 was released in April 2016. The new software framework allows the site to perform complex functions at lightning speed and serve as foundation for even more advanced technologies that we will release to GAMSAT
+                  %sup ®
+                  , UCAT
+                  %sup ®
+                  , VCE
+                  %sup ®
+                  and HSC
+                  %sup ®
+                  students throughout the year.
+            %li
+              %h3 Features Updates
+              .tab_cntnt_details
+                %h4 GetClarity System Modifications
+                %p The system has now been extended to Online Textbook, meaning that you can easily link your questions to discrete book chapters. We have also introduced a tracking system to questions submitted - assuring timely and quality responses. Stay tuned for more updates to this system later this year.
+            %li
+              %h3 Exemplar Interview Response Videos
+              .tab_cntnt_details
+                %p Videos have been added to demonstrate what makes a good, average and poor response to a range of typical MMI questions. This feature allows you to become familiar with techniques that you can implement to set yourself apart from other candidates.
+            %li
+              %h3 Bank of MMI Questions
+              .tab_cntnt_details
+                %p
+                  A bank of 200+ sample MMI questions have been created by medical students who have been through the interview process. The sample questions tie in with the 10 common scenarios to allow students to practice what they have learnt in class.
+                  You can set up a mock interview for yourself through our MMI Question Bank. The interview questions have been written by medical students who have gone through interviews themselves.
+        #updates_col5.tab-pane.fade{role: "tabpanel"}
+          %ul
+            %li
+              %h3 Content Updates
+              .tab_cntnt_details
+                %h4 Essay Writing Guide
+                %p The guide was one of our most highly rated sections in the book in 2014. However, we made the guide even better by adding in 30 more example essays and analysis and an additional 40 sets of quote for you to use for practice.
+              .tab_cntnt_details
+                %h4 More Online Exams
+                %p We have increase the number of Online Exams from 3 to 6, meaning that you will now be even better practiced for the exam.
+              .tab_cntnt_details
+                %h4 More MCQs
+                %p We understand the importance of practice in consolidating what you have learned. Therefore our team have constantly worked to produce additional high quality MCQs. We now have 3000 MCQs across our 43 subtopics, which will allow you to delve deep into and improve upon each one of your weaknesses. Expect even more MCQs to be released throughout the year.
+              .tab_cntnt_details
+                %h4 Updated MCQ explanations
+                %p We constantly expand upon the MCQ explanations to better help you understand the thinking require to solve various problems. The explanations, like the MCQs, are being constantly updated throughout the year based on your needs.
+              .tab_cntnt_details
+                %h4 Comprehensive Chemistry Module
+                %p Realising the challenges a lot of students faced in Chemistry, we have increased the number of live teaching hours in Chemistry and have expanded the resources available for the subject.
+            %li
+              %h3 New Web Learning Tools
+              .tab_cntnt_details
+                %h4 GetClarity TM System
+                %p This is a tool that will help you to dissect your weaknesses in even more detail than our standard, but already industry leading, features. The first step in this system is to enable you to easily ask follow-up questions about any content – meaning that you practically have a personal tutor at your fingertips 24/7. The system is currently being applied to our Videos, MCQs and Online Exams.
+              .tab_cntnt_details
+                %h4 Online Textbook
+                %p Now you can travel anywhere with your textbook without having to carry around an extra 2 kgs. But if you would also like a physical copy, we have reserved the option for you to purchase a hardcopy once you sign up.
+              .tab_cntnt_details
+                %h4 MCQ Performance Comparison
+                %p Ever wondered how many other students got a particular question correct? You can now view the percentage of students who picked the option that you did and that for other options.
+              .tab_cntnt_details
+                %h4 Customising MCQs Based on Difficulties
+                %p Improving upon our industry leading MCQ system, it is now possible for you to create groups of MCQs based on the difficulty level that is appropriate for you. This change means that you can focus on just the right MCQs, whether you are beginning to familiarise yourself with a particular subject or if you want to really become an expert.
+            %li
+              %h3 System Updates
+              .tab_cntnt_details
+                %h4 Upgraded Essay Feedback System
+                %p Each year we receive tens of thousands of essays. To ensure that you receive timely feedback, we have reengineered our essay management system to ensure that your submissions receive immediate attention and are returned promptly.
+        #updates_col6.tab-pane.fade{role: "tabpanel"}
+          %ul
+            %li
+              %h3 Content Updates
+              .tab_cntnt_details
+                %h4
+                  GAMSAT
+                  %sup ®
+                  exam -Style MCQs
+                %p
+                  Our academic team has perfected our MCQs to ensure that the style of our MCQs is as close to "GAMSAT
+                  %sup ®
+                  exam -Style" as possible. We have also increased the number of difficult MCQ questions. After practicing using our MCQ bank, the real GAMSAT
+                  %sup ®
+                  exam will feel like a breeze. To see some sample MCQs, please go to our blog and click on the Practice MCQs category on the right hand side.
+              .tab_cntnt_details
+                %h4 Cross Referencing
+                %p To enable you to better tie together resources across platforms, we have introduced the Cross Referencing system where you will to able to match MCQs to precise videos and notes. So when you get an MCQ wrong, you will now know exactly which videos and notes to review to consolidate your knowledge.
+              .tab_cntnt_details
+                %h4 Higher Emphasis on Humanities
+                %p Considering that Humanities is usually the weakest area of the typical candidate and it requires the most work to improve, we have substantially increased the amount of resources devoted to Humanities. We have increased the Live Humanities classes from 6 hours to 9 hours, Humanities videos from 2 hours to 5 hours, and doubled the amount of book notes devoted to essay writing and example essays aimed at helping to you understand what differentiates essays of differing standards.
+              .tab_cntnt_details
+                %h4 Updated Textbook
+                %p We have revamped much of our textbook to ensure that it focuses on fundamental concepts core to reasoning through the questions effectively. In addition, we have added a specific and detailed study guide for each of Humanities, Biology, Chemistry and Physics - to ensure that you stay on track.
+              .tab_cntnt_details
+                %h4 Even Better Videos
+                %p Taking abroad the feedback from past GradReady students, we have revamped much of our chemistry and physics videos to ensure that the presenters better focus on making the videos engaging as well as informative. Through the use real life examples and techniques loved by students in our Live classes, our presenters have created videos that will make studying for the an engaging experience.
+            %li
+              %h3 New Web Learning Tools
+              .tab_cntnt_details
+                %h4 MCQ Tracker
+                %p This tool will make it easy for you to work out and focus on your weaknesses. You will now be able to see the percentage of MCQs you have correct under each sub-topic, through our MCQ Tracker system. Combining the MCQ Tracker with our Cross Referencing system, you will then be able to allocate your time to areas where you need to spend it the most.
+            %li
+              %h3 Improved web user experience
+              .tab_cntnt_details
+                %h4 Student Launch Pad
+                %p The student home page is now evolving into a multi purpose tool for you to obtain important information about your course and progress. As a start, we have made it easier for you to access important announcements and keep abreast with important dates. As the year progresses, we will be revealing some exciting learning tools that we currently have in the works.
+              .tab_cntnt_details
+                %h4 Flexibility in Making Upgrades
+                %p We understand that sometimes it is hard to determine your availability to attend the Live Courses or even to work out the amount of time you have to study. To accommodate for everyone's differing needs, we've vastly broadened your ability to mix and match the features that you require.
+        #updates_col7.tab-pane.fade{role: "tabpanel"}
+          %ul
+            %li
+              %h3 Structural Changes
+              .tab_cntnt_details
+                %h4 Revamp of Live Course Content
+                %p In the past, live courses focused on the core humanities and science concepts. However, we found that the students’ favourite part of the class was when the tutor was explaining through demonstrating. Therefore, we made working through examples the focus of the live classes - let the examples be MCQs or articles. The core knowledge that we used to teach in class was not discarded of course; we simply moved it online, so that you can move at your own pace and ask plenty of questions in class.
+              .tab_cntnt_details
+                %h4 Brand New Website
+                %p We completely changed the site look and functionalities. The website now has a more intuitive flow. In addition, we have developed an advanced MCQ system that allows you to pick specific MCQs to target your weaknesses. This new site also lays the foundations for some exciting new developments that we have in the works.
+            %li
+              %h3 New Features
+              .tab_cntnt_details
+                %h4 Course Videos
+                %p The videos were made by the highest-rated GradReady tutors and cover the fundamental concepts addressed. These online videos allow you to work at your own pace, and compliment our Online Tutor Access system.
+              .tab_cntnt_details
+                %h4 Online Tutor Access
+                %p Inline with our philosophy of interaction-based learning, we’ve made our tutors accessible 24/7. We understand that having the right guidance will often speed up the learning process and make the learning much more effective. You can work though the videos and course book at your own pace, and ask away until you get clarity.
+              .tab_cntnt_details
+                %h4 Diagnostics Assessment
+                %p We found that our students get the highest yield when they focus on their weak points. Our 62-question test is designed to give you a detailed breakdown of your performance across 6 major topics and 27 subtopics. We designed the topics to correspond with our advanced MCQ system structure, meaning that you can use the diagnostics results to focus your practice.
+  / #umat_updates_col.container.tab-pane.fade.in{class: ("active" if params[:tab] == "UMAT"), role: "tabpanel"}
+  /   %ul.updates_tab_lists.umat_update_colr
+  /     %li.active
+  /       %a{"data-toggle" => "tab", href: "#updates_col_umat"} 2017 Updates
+  /     %li
+  /       %a{"data-toggle" => "tab", href: "#updates_col2_umat"} 2016 Updates
+  /     %li
+  /       %a{"data-toggle" => "tab", href: "#updates_col3_umat"} 2015 Updates
+  /     %li
+  /       %a{"data-toggle" => "tab", href: "#updates_col4_umat"} 2014 Updates
+  /   .upadtes_tab_cntnt.umat_update_colr
+  /     .tab-content
+  /       #updates_col_umat.tab-pane.fade.in.active{role: "tabpanel"}
+  /         %p.text-center Following are just what we have so far. There will be many more announcements to come throughout the year!
+  /         %ul
+  /           %li
+  /             %h3 Content Updates
+  /             .tab_cntnt_details
+  /               %h4 More MCQs
+  /               %p We understand the importance of practice in consolidating what you have learned. Therefore our team have worked to produce additional high quality MCQs. We now have 1500+ MCQs which are systematically categorised in 19 subtopics, which will allow you to delve deep into and improve upon each of your weaknesses. Expect even more MCQs to be released throughout the year.
+  /           %li
+  /             %h3 New Web Learning Tools
+  /             .tab_cntnt_details
+  /               %h4 Cross Referencing System
+  /               %p This is a tool that will help you refer to resources across platforms. The Cross Referencing system allows students to match MCQs to precise videos and textbook chapters. This means that when you get an MCQ wrong, you will now know exactly which videos and textbook chapters to review to consolidate your knowledge about the relevant topic.
+  /           %li
+  /             %h3 System Updates
+  /             .tab_cntnt_details
+  /               %h4 Easy access to GetClarity System
+  /               %p Each year we receive tens of thousands of queries from students related to various topics. To ensure that you receive a timely reply on your queries, we have made the GetClarity feature easily accessible to you by allowing you to review questions and write replies quickly.
+  /             .tab_cntnt_details
+  /               %h4 Improved Feedback System
+  /               %p We are always open for suggestions and feedback. We have built an efficient feedback system which allows us to review and update our system regularly based on your feedback.
+  /             .tab_cntnt_details
+  /               %h4 Improved Essay Reminder / Marking System
+  /               %p We have made improvements to our essay management system and now send reminder emails to you prior to your essay expiring. Further, we have made improvements to the marking system which ensures that essays are marked in a timely manner.
+  /             .tab_cntnt_details
+  /               %h4 Improvements in Private Tutoring System
+  /               %p The booking system has been improved to allow you to more efficiently find just the right tutor that you need.
+  /             .tab_cntnt_details
+  /               %h4 Speed Optimisations
+  /               %p We understand how important it is to have a system with better speed to provide you with an optimal learning experience. At GradReady we are constantly working on enhancing your experience and have successfully improved speed for features such as MCQs, Online Exams, Diagnostic Assessment and GetClarity systems.
+  /             .tab_cntnt_details
+  /               %h4 Internal Logistics Optimisations
+  /               %p Over the course of current year we have made various improvement and implemented new systems to optimise our Course Management, Essay and Private Tutoring systems to ensure quality and timely responses.
+  /       #updates_col2_umat.tab-pane.fade{role: "tabpanel"}
+  /         %ul
+  /           %li
+  /             %h3 System Wide Updates
+  /             .tab_cntnt_details
+  /               %h4 Brand New Website - 3.0
+  /               %p
+  /                 The current site is the third completely new GradReady site. By “new”, we are not referring to new versions, we are not referring to modifications, we are not even referring to pulling apart the old site and reassembling it. We mean that we had rebuilt it completely from scratch - so that we can use the latest software frameworks as foundation, enabling us to develop features that would be impossible in the older versions.
+  /                 If you have ever wondered why no other providers offer what we do, it is because the no one else had reinvested back into technology the way we have.GradReady 3.0 was released in April 2016. The new software framework allows the site to perform complex functions at lightning speed and serve as foundation for even more advanced technologies that we will release to GAMSAT
+  /                 %sup ®
+  /                 , UCAT
+  /                 %sup ®
+  /                 , VCE
+  /                 %sup ®
+  /                 and HSC
+  /                 %sup ®
+  /                 students throughout the year.
+  /           %li
+  /             %h3 Features Updates
+  /             .tab_cntnt_details
+  /               %h4 GetClarity System Modifications
+  /               %p The system has now been extended to Online Textbook, meaning that you can easily link your questions to discrete book chapters. We have also introduced a tracking system to questions submitted - assuring timely and quality responses. Stay tuned for more updates to this system later this year.
+  /       #updates_col3_umat.tab-pane.fade{role: "tabpanel"}
+  /         %ul
+  /           %li
+  /             %h3 New Web Learning Tools
+  /             .tab_cntnt_details
+  /               %h4 GetClarity TM System
+  /               %p This is a tool that will help you to dissect your weaknesses in even more detail than our standard, but already industry leading, features. The first step in this system is to enable you to easily ask follow-up questions about any content – meaning that you practically have a personal tutor at your fingertips 24/7. The system is currently being applied to our Videos, MCQs and Online Exams.
+  /             .tab_cntnt_details
+  /               %h4 Online Textbook
+  /               %p Now you can travel anywhere with your textbook without having to carry around an extra 2 kgs. But if you would also like a physical copy, we have reserved the option for you to purchase a hardcopy once you sign up.
+  /             .tab_cntnt_details
+  /               %h4 MCQ Performance Comparison
+  /               %p Ever wondered how many other students got a particular question correct? You can now view the percentage of students who picked the option that you did and that for other options.
+  /             .tab_cntnt_details
+  /               %h4 Customising MCQs Based on Difficulties
+  /               %p Improving upon our industry leading MCQ system, it is now possible for you to create groups of MCQs based on the difficulty level that is appropriate for you. This change means that you can focus on just the right MCQs, whether you are beginning to familiarise yourself with a particular subject or if you want to really become an expert.
+  /       #updates_col4_umat.tab-pane.fade{role: "tabpanel"}
+  /         %ul
+  /           %li
+  /             %h3 New Web Learning Tools
+  /             .tab_cntnt_details
+  /               %h4 MCQ Tracker
+  /               %p This tool will make it easy for you to work out and focus on your weaknesses. You will now be able to see the percentage of MCQs you have correct under each sub-topic, through our MCQ Tracker system. Combining the MCQ Tracker with our Cross Referencing system, you will then be able to allocate your time to areas where you need to spend it the most.
+  /           %li
+  /             %h3 Improved web user experience
+  /             .tab_cntnt_details
+  /               %h4 Student Launch Pad
+  /               %p The student home page is now evolving into a multi purpose tool for you to obtain important information about your course and progress. As a start, we have made it easier for you to access important announcements and keep abreast with important dates. As the year progresses, we will be revealing some exciting learning tools that we currently have in the works.
+  /             .tab_cntnt_details
+  /               %h4 Flexibility in Making Upgrades
+  /               %p We understand that sometimes it is hard to determine your availability to attend the Live Courses or even to work out the amount of time you have to study. To accommodate for everyone's differing needs, we've vastly broadened your ability to mix and match the features that you require.
+  /       #updates_col5_umat.tab-pane.fade{role: "tabpanel"}
+  /         %ul
+  /           %li
+  /             %h3 Structural Changes
+  /             .tab_cntnt_details
+  /               %h4 Revamp of Live Course Content
+  /               %p In the past, live courses focused on the core humanities and science concepts. However, we found that the students’ favourite part of the class was when the tutor was explaining through demonstrating. Therefore, we made working through examples the focus of the live classes - let the examples be MCQs or articles. The core knowledge that we used to teach in class was not discarded of course; we simply moved it online, so that you can move at your own pace and ask plenty of questions in class.
+  /             .tab_cntnt_details
+  /               %h4 Brand New Website
+  /               %p We completely changed the site look and functionalities. The website now has a more intuitive flow. In addition, we have developed an advanced MCQ system that allows you to pick specific MCQs to target your weaknesses. This new site also lays the foundations for some exciting new developments that we have in the works.
+  /           %li
+  /             %h3 New Features
+  /             .tab_cntnt_details
+  /               %h4 Course Videos
+  /               %p The videos were made by the highest-rated GradReady tutors and cover the fundamental concepts addressed. These online videos allow you to work at your own pace, and compliment our Online Tutor Access system.
+  /             .tab_cntnt_details
+  /               %h4 Online Tutor Access
+  /               %p Inline with our philosophy of interaction-based learning, we’ve made our tutors accessible 24/7. We understand that having the right guidance will often speed up the learning process and make the learning much more effective. You can work though the videos and course book at your own pace, and ask away until you get clarity.
+  /             .tab_cntnt_details
+  /               %h4 Diagnostics Assessment
+  /               %p We found that our students get the highest yield when they focus on their weak points. Our 62-question test is designed to give you a detailed breakdown of your performance across 6 major topics and 27 subtopics. We designed the topics to correspond with our advanced MCQ system structure, meaning that you can use the diagnostics results to focus your practice.

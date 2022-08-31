@@ -1,0 +1,30 @@
+- title "Careers | GradReady"
+- meta_description "Join us today to work with highly efficient and result oriented team."
+- meta_keywords "GradReady, Job"
+
+%section.talk_to_bg.home_faq
+  .container
+    .support_col.looking_corse.text-center
+      %h1.mob_wht_points Available Positions
+%section.faq_wrapper
+  .container
+    - if @available_positions.present?
+      - @available_positions.each_with_index do |available_position, index|
+        .col-lg-6.col-md-6.col-sm-6.col-xs-12
+          .job_box
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gr.svg'
+            %h3= available_position.title
+            %p= truncate(available_position.description, length: 200)
+            - unless available_position.empty_attachment
+              %p= link_to "#{available_position.job_description.document_file_name}", available_position.job_description.document.url(:original, false)
+
+            %a.btn.apply_btn.default_btn.hvr-shutter-in-horizontal{href: "#{new_job_application_form_job_application_path( { job_application_form_id: available_position.friendly_id.parameterize} )}"} Apply
+    - else
+      .job_box.no_pos_left
+        %h3 Unfortunately, we don't have any vacancies at the moment but please check back with us soon.
+
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

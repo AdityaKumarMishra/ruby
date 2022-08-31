@@ -1,0 +1,69 @@
+- title "Team"
+.team-page
+  .container.hsc
+    .row
+      .container
+        %center
+          %h1 Meet the Team
+        .row
+          = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/shadow-top.png', class: 'img-responsive', alt: 'Shadow Top')
+          #team-selection.team-bar
+            %h4 The GR Team
+            %ul
+              %li.active{"data-category" => "sydney"} Sydney
+
+          #team-images.team-prof-images
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "Miriam-Asar",
+              tutor_name: "Miriam",
+              tutor_image: "miriam_asar.jpg",
+              course: "English - HE HSC English Advanced (Sydney)" do
+              Miriam is a student at the University of Sydney, undertaking a combined Bachelor of Laws and Bachelor of Arts,
+              majoring in Government and International Relations. She has been tutoring primary and secondary students since 2011 in various roles and subjects.
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "Hasti-Saeedi",
+              tutor_name: "Hasti",
+              tutor_image: "hasti_saeedi.png",
+              course: "English - HE HSC English Advanced (Sydney)" do
+              Hasti is studying at the University of Sydney, undergoing Bachelor of Arts in 2016, with majors in English Literature and Philosophy.
+              She completed her HSC in 2014, including Extension 1 and 2 English, with a mark of 95 in Advanced English. She has been tutoring for 2 years,
+              is enthusiastic about teaching students the beauty of English, and believes everyone has the potential to succeed.
+              She loves poetry, Lord of the Rings, Led Zeppelin and has been playing guitar for 7 years
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "Kane_Hausfeld",
+              tutor_name: "Kane",
+              tutor_image: "kane_hausfeld.jpg",
+              course: "Math Extension 1 Tutor (Sydney)" do
+              Kane is currently undertaking a B Actuarial Studies/B Economics at the University of New South Wales, going into his 3rd year in 2016.
+              He achieved marks of 98 in both Mathematics and Mathematics Extension I in the 2012 HSC, followed by 96 in Mathematics Extension II the following year.
+              He has enjoyed the challenging, yet rewarding, occupation of private tutoring over the past two years and hopes to continue to help students succeed in mathematics over the coming years.
+              In his spare time, Kane loves playing sports – particularly cricket and soccer.
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "James_Huang",
+              tutor_name: "James",
+              tutor_image: "james_huang.jpg",
+              course: "Math Extension 1 Tutor (Sydney)" do
+              James is currently a Commerce and Science student studying at the University of Sydney. He scored an ATAR of 98.95 in 2014
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "mahan_ghobadi",
+              tutor_name: "Mahan",
+              tutor_image: "mahan_ghobadi.jpg",
+              course: "Mathematics (Sydney)" do
+              Mahan is currently a Science student majoring in advanced mathematics and physics at Sydney university.
+              He scored 99 in mathematics extension1 and 95 in mathematics extension2,and has 3 years experience as a tutor.
+              He also won the prize for the question 6 in the Sums competition in 2015. His interests include playing soccer and music.
+
+            = tutor_profile data_category: "sydney",
+              tutor_id: "hassan_naveed",
+              tutor_name: "Hassan",
+              tutor_image: "hassan_naveed.jpg",
+              course: "Maths Tutor/Content Developer (Sydney)" do
+              Hassan is currently doing a Actuarial Studies/Law degree at University of New South Wales.
+              He has been tutoring all levels of Mathematics and is passionate about teaching and motivated by student progress.
+              He is constantly developing his mathematical skills through his Actuarial Studies degree, which results in greater mathematical knowledge to pass on to students.
+              With an ATAR of 99.35, he completed his HSC in the top 0.65% of the state.

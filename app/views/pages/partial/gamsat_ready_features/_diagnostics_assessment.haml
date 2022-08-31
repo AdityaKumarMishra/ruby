@@ -1,0 +1,31 @@
+#Diagnostics-Assessment.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-clipboard{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Diagnostics Assessment
+        / .label.label-mini.label-enhanced
+        / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+        / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing Use the 62 question test to test your familiarity of the fundamental concepts covered in the GAMSAT. Your performance will be automatically reported across the 4 subject areas and 24 subtopics. Use this information not only to guide the focus of your studies but also to compare your performance with 1000s of other GradReady students. Note that this is not a diagnostics of your performance in the GAMSAT; the MCQs or Online Exams would better serve that purpose.
+
+/ #Diagnostics-Assessment.feature-icon-container
+/   .feature-icon.col-md-1
+/     %i.fa.fa-clipboard{"aria-hidden" => "true"}
+/   .feature-content.col-md-11
+/     %h4
+/       Diagnostics Assessment
+/       / .label.label-mini.label-enhanced
+/       / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+/       / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+/     - if paid
+/       %h5.gry_itl $#{price} + 10% GST = $#{price_with_gst}
+/     .row
+/       %br/
+/       .text
+/       Use the 50 question test to test your familiarity of the fundamental concepts covered in the UMAT. Your performance will be automatically reported across the 3 subject areas and 19 subtopics. Use this information to guide the focus of your study. Note that this is not a diagnostics of your performance in the UMAT; the MCQs or Online Exams would better serve that purpose.
+

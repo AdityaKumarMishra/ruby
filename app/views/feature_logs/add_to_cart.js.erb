@@ -1,0 +1,10 @@
+<% js = escape_javascript(render('feature_logs/partial/index_table', in_cart: @in_cart, inactive: @inactive, pending_confirmation: @pending_confirmation))%>
+$("#feature_log_table").html("<%= js %>");
+
+$("#notice1").html("<div class='alert alert-success' role='alert'><button class='close' data-dismiss='alert'><span aria-hidden='true'>×</span></button><div class='text-black'>Item added to cart</div></div>");
+$('.go_to_cart_btn').attr('href', "<%= order_path(@order) %>");
+
+<% temp_arr = ["Online Mock Exam 1", "GAMSAT Weekend Course", "Online Mock Exam 2"] %>
+<% if temp_arr.any? {|a| @in_cart.map{|c| c.master_feature.title}.include?(a) }%>
+  $("#add_paragraph").html("<div class='notification highlight_box gamsat-prep mbot20 notify_box'><div class='desc'>Please note that for the March 2021 GAMSAT exam, the GAMSAT Weekend Course will run online. For further details & dates, please visit our Custom Course page and select your relevant city.<br>For the Online Mock Exams please note that Online Mock Exam 2 does not include marked essays. For Online Mock Exam dates, please visit our Custom Course page and select your relevant city.<br>Please submit a support ticket under the category 2. Course Administration if you have any further queries.</div></div>");
+<% end %>

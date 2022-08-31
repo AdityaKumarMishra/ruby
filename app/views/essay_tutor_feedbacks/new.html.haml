@@ -1,0 +1,12 @@
+- if current_user && (current_user.student?)
+  - content_for :page_heading, 'Tutor feedback'
+  .dashbord_right
+    .resource_col.mbot21.martopbot10
+      = simple_form_for(@essay_tutor_feedback, url: essay_response_essay_tutor_feedbacks_path(essay_response_id: @essay_response.id)) do |f|
+        = render 'essay_tutor_feedbacks/partial/form', f: f
+
+- else
+  .container
+    .row
+      = simple_form_for(@essay_tutor_feedback, url: essay_response_essay_tutor_feedbacks_path(essay_response_id: @essay_response.id)) do |f|
+        = render 'essay_tutor_feedbacks/partial/form', f: f

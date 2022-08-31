@@ -1,0 +1,14 @@
+.dashbord_left
+  %h3
+    RESOURCES
+    %a.side_toggle{href: "javascript:void(0)"} Toggle Menu
+  %ul.admin_m_menu_hide
+    %li{class: [("active" if is_same_route?(dashboard_home_path)), ('new_side_tab' if dashboard_user_announcement_changed)]}
+      = link_to dashboard_home_path, onclick: 'dd_loader();' do
+        %span Announcements
+        %i.fa.fa-bell-o{"aria-hidden" => "true"}
+
+    %li{class: ("active" if is_same_route?(new_exercise_path))}
+      = link_to new_exercise_path(type: "ucat"), onclick: 'dd_loader();' do
+        %span Question Bank
+        %i.fa.fa-plus-circle{"aria-hidden" => "true"}

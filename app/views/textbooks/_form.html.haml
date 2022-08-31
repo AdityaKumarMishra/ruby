@@ -1,0 +1,232 @@
+= simple_form_for(@textbook) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.hidden_field :user_id , :value => current_user.id
+    = f.hidden_field :for_textbook
+    = f.hidden_field :for_textbook_slide
+    = f.hidden_field :for_live_handout
+    = f.hidden_field :for_live_slide
+    = f.hidden_field :for_document
+    = f.hidden_field :for_downloadable_resource
+    = f.hidden_field :for_weekend
+    = f.hidden_field :for_additional_chapter
+    = f.hidden_field :for_revision_weekend
+    = f.hidden_field :for_mock_exam 
+    = select_tag "on_textbook_type", options_for_select(['Supplementary Resources (All paying and non-paying students) DL - No','PBL Additional Resources (PBLs) DL - Yes', 'PBL In-Class Slides (PBLs) DL - No', 'Foundation Textbook (Online or Hardcopy TB) DL - No', 'Textbook Slides  (Online or Hardcopy TB) DL - No', 'Weekend Course Slides' ,'Downloadable Resources (All paying and non-paying students) DL - Yes', 'Reasoning Textbook (Online TB) DL - No', 'Revision Weekend (Revision Weekend) DL - No', 'Mock Exam (Online Exams) DL - No'], selected: f.object.selected_textbook_type), { include_blank: 'Please select textbook type', class: 'form-control' }
+    %br
+
+    #downloadable_resource_div
+      #document-paid-trial{ style: "display: #{f.object.try(:for_timetable) ? 'none' : ''}" }
+        = f.input :for_paid, label: 'Paid Courses'
+        = f.input :for_trial, label: 'Trial Courses'
+
+      -if f.object.persisted?
+        #document-timetable{ style: "display: #{f.object.try(:for_timetable) ? '' : 'none'}" }
+          = f.input :for_timetable, label: 'Timetable'
+      -else
+        #document-timetable
+          = f.input :for_timetable, label: 'Timetable'
+
+      #document-product-line{ style: "display: #{f.object.try(:for_timetable) ? '' : 'none'}" }
+        = f.input :product_line_id, collection: ProductLine.where.not(id: @for_timetable_ids).order(:name).map {|product_line| [product_line.name.try(:upcase), product_line.id]}, prompt: "Please select product line"
+
+    = f.input :document
+    = f.association :tags, collection: Tag.select{|p| [p.name, p.id]}, input_html: { class: 'chosen-select tag-list' }
+
+  .form-actions
+    = f.button :submit
+
+
+:javascript
+  $(document).on('change', '#on_textbook_type', function(){
+    var text_type = $(this).val();
+    if(text_type=='Supplementary Resources (All paying and non-paying students) DL - No'){
+      $('#textbook_for_document').val(true);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }else if(text_type=='PBL Additional Resources (PBLs) DL - Yes'){
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(true);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }else if(text_type=='PBL In-Class Slides (PBLs) DL - No'){
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(true);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }else if(text_type=='Foundation Textbook (Online or Hardcopy TB) DL - No'){
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(true);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }else if(text_type == 'Textbook Slides  (Online or Hardcopy TB) DL - No'){
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(true);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }else if(text_type == 'Downloadable Resources (All paying and non-paying students) DL - Yes'){
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(true);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#downloadable_resource_div').show();
+      $('#document-paid-trial').show();
+      $('#document-timetable').show();
+      $('#document-product-line').hide()
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+    }
+    else if(text_type == 'Weekend Course Slides'){
+      $('#textbook_for_weekend').val(true);
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }
+    else if(text_type == 'Reasoning Textbook (Online TB) DL - No'){
+      $('#textbook_for_additional_chapter').val(true);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      downloadable_resource_disable();
+    }
+
+    else if(text_type == 'Revision Weekend (Revision Weekend) DL - No'){
+      $('#textbook_for_revision_weekend').val(true);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      downloadable_resource_disable();
+    }
+
+    else if(text_type=='Mock Exam (Online Exams) DL - No'){
+      $('#textbook_for_mock_exam').val(true);
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      downloadable_resource_disable();
+    }
+    else{
+      $('#textbook_for_revision_weekend').val(false);
+      $('#textbook_for_mock_exam').val(false);
+      $('#textbook_for_document').val(false);
+      $('#textbook_for_live_handout').val(false);
+      $('#textbook_for_live_slide').val(false);
+      $('#textbook_for_textbook').val(false);
+      $('#textbook_for_textbook_slide').val(false);
+      $('#textbook_for_downloadable_resource').val(false);
+      $('#textbook_for_weekend').val(false);
+      $('#textbook_for_additional_chapter').val(false);
+      downloadable_resource_disable();
+    }
+  });
+
+
+
+  type_select()
+  function type_select(){
+    var text_type = $('#on_textbook_type').val();
+    if(text_type == 'Downloadable Resource'){
+      $('#downloadable_resource_div').show();
+    }
+    else{
+      $('#downloadable_resource_div').hide();
+    }
+  }
+
+  $('#textbook_for_timetable').on('change', function(){
+    if ($('#textbook_for_timetable').is(":checked")){
+      $("#document-product-line").show();
+      $("#document-paid-trial").hide();
+      $('#textbook_for_paid').prop('checked', false);
+      $('#textbook_for_trial').prop('checked', false);
+    }else{
+      $("#document-product-line").hide();
+      $("#textbook_product_line_id").val('');
+      $("#document-paid-trial").show();
+    }
+  });
+
+  $('#textbook_for_paid, #textbook_for_trial').on('change', function(){
+    if ($('#textbook_for_paid').is(":checked") || $('#textbook_for_trial').is(":checked")){
+      $("#document-timetable").hide();
+      $("#textbook_product_line_id").val('');
+      $('#textbook_for_timetable').prop('checked', false);
+    }else{
+      $("#document-timetable").show();
+    }
+  });
+
+  function downloadable_resource_disable(){
+    $('#downloadable_resource_div').hide();
+    $('#textbook_for_paid').prop('checked', false);
+    $('#textbook_for_trial').prop('checked', false);
+    $('#textbook_for_timetable').prop('checked', false);
+    $('#textbook_product_line_id').val('');
+  }

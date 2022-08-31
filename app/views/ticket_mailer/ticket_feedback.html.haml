@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 1px; float: left; color: #FFF; margin-bottom: 40px; font-size: 15px; padding: 5px 14px; font-weight: 600; background: #007833;"}
+              = "#{@title} has received a feedback from #{@student}"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Feedback:
+              =sanitize @ticket.question
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px; font-size: 15px;"}
+              Name:
+              =@student.full_name
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Email:
+              =@student.email
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px;font-size: 15px;"}
+              Phone Number:
+              =@student.phone_number
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Course Enrolled:
+              = @course_enrolled.name
+          %tr
+            %td{style: "margin-top: 5px; float: left; line-height: 25px; font-size: 15px;"}
+              Date of Enrolment:
+              = @course_enrolled.created_at.strftime('%d %b %Y')
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              Click
+              = link_to 'here', issue_url(@ticket), style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"
+              to check.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

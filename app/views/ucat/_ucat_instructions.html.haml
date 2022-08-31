@@ -1,0 +1,173 @@
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'individual_question'
+  %div{class: 'hidden', id: 'question-allotted-time', value: "#{@question_time}"}
+.page_Wrapper.width100.tabs-wrap#ucat-mcq{style: 'position: unset;'}
+  - is_mcq_tab_active = @exercise.mcq_attempts.pluck(:id).include? @exercise.selected_attempt.to_i
+  - is_review_tab_active = @exercise.selected_attempt.include? 'review' rescue false
+  .main-header
+    -if is_mcq_tab_active
+      = render '/ucat/mcq_header'
+    -elsif is_review_tab_active
+      = render '/ucat/review_header'
+    -else
+      = render '/ucat/header'
+  .width100{class:('main_contant' unless is_mcq_tab_active || (is_review_tab_active))}
+    - unless is_mcq_tab_active || (is_review_tab_active)
+      .uni_logo
+        / %img{src: "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png"}/
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png'
+    - tags = get_sections(@exercise)
+    .ipad_scroll.mob_scroll.mob_top.tab-content{class:('para_contant' unless is_mcq_tab_active)}
+      .tab-pane.active-tabs#welcome{role: 'tabpanel', class: ('active' if (@exercise.selected_attempt == "welcome") || @exercise.selected_attempt.blank?)}
+        %h4.text-center Welcome to the UCAT Practice Test
+        .exam_table
+          %h4 This exam consists of five subtests:
+          %table
+            %thead
+              %th.wdth138 Section
+              %th.wdth179 Title
+              %th.width333 Description
+              %th.wdth138
+                Duration
+                = succeed "(minutes)" do
+                  %br/
+              %th.width172 Number of Questions
+            %tbody
+              - tags.each_with_index do |tag, index|
+                %tr{style: 'height: 38px;'}
+                  %td.wdth138= index+1
+                  %td.wdth179.font_bold= tag.name.gsub("UM.0#{index+1}", '')
+                  %td.width333= tag.description
+                  %td.wdth138 21
+                  %td.width172= tag_question_count(tag, @exercise)
+        %p
+          Preceding each subtest you have
+          %span.font_bold 1
+          minute to read the instructions. In total, you have
+          = succeed "minutes" do
+            %span.font_bold 120
+        %p
+          Click the
+          %span.font_bold Next (N)
+          button to proceed.
+      .tab-pane.agreement-tab.active-tabs#agreement-tab{role: 'tabpanel', 'data-modal' => 'agreement_modal', class: ('active' if @exercise.selected_attempt == "agreement-tab")}
+        %h4.terms_hdng NON-DISCLOSURE AGREEMENT AND GENERAL TERMS OF USE AND ATTRIBUTES FOR EXAMS DEVELOPED FOR THE UCAT PROGRAMME
+        %p This exam is UCAT confidential. The exam is made available to you as an examinee, solely for the purpose of being assessed in this exam. You are expressly prohibited from disclosing, publishing, reproducing, or transmitting this exam, in whole or in part, in any form or by any means including visual, aural, verbal, written, electronic or mechanical means, for any purpose, without the prior express written permission of UCAT.
+        %p Your personal data and test data will both be stored in the Pearson VUE and UCAT databases.
+        %p All examination contents are the published and confidential and propriety materials of Pearson VUE.
+        %p
+          Click the
+          %span.font_bold Next (N)
+          button to proceed.
+      - tags.each_with_index do |tag, index|
+        .tab-pane.active-tabs{role: 'tabpanel', id: "#{tag.id}-instructions", class: ('active' if @exercise.selected_attempt == "#{tag.id}-instructions")}
+          %h4.text-center UCAT Practice Test
+          %h4.terms_hdng
+            = tag.name.gsub(/\d/, '').gsub('UM.', '').upcase 
+            INSTRUCTIONS
+          = tag.instruction.html_safe
+          %p
+            Click the
+            %span.font_bold Next (N)
+            button to proceed.
+        - count = 0
+        - total_count = tag_question_count(tag, @exercise) 
+        - filter_mcq_stems_with_tag(@exercise, tag).each_with_index do |mcq_stem, index|
+          - @exercise.mcq_attempts.includes(mcq:[:mcq_answers, :mcq_stem]).where(mcq_stem: mcq_stem).distinct.order(:mcq_id).each_with_index do |m_attempt, ind|
+            - count += 1
+            .tab-pane.mcq-tab.active-tabs{ id: "m#{index}_#{ind}_#{tag.id}", role: 'tabpanel', class: ('active' if @exercise.selected_attempt == m_attempt.id.to_s), section: "#{tag.id}-ques"}
+              %div{class: 'hidden', id: 'mcq-stem-timer', 'exercise-id': @exercise.id, 'section-type': 'Exercise', 'mcq-question-id': mcq_stem.id, 'mcq-attempt-id': m_attempt.id, 'que-count': count, 'total-count': total_count,'tag-id': tag.id, 'is-ans': m_attempt.mcq_answer_id.present?.to_s }
+              %div{class: 'hidden flagged', id: "#{m_attempt.id}-flagged", 'is-flagged': m_attempt.flagged.to_s}
+              - display_type = m_attempt.mcq.display_type
+              =render "/ucat/#{display_type}", m_attempt: m_attempt, mcq_stem: mcq_stem 
+        .tab-pane.review-tab.active-tabs{role: 'tabpanel', id: "#{tag.id}-review", class: ('active' if @exercise.selected_attempt == "#{tag.id}-review")}
+          .test_score{id: "accordionExample-#{tag.id}"}
+            =render '/ucat/review_tab', tag_id: tag.id
+
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt#submit-exam{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "javascript:", style: ('display: none;' if is_review_tab_active)}
+        %i.fa.fa-sign-out{"aria-hidden" => "true"}
+        = succeed "nd Exam" do
+          %span e
+      %button.ftr_btn.btn_bdr_rgt#end-review{style: ('display: none;' unless is_review_tab_active), type: 'button'}
+        %i.fa.fa-step-forward{"aria-hidden" => "true"}
+        = succeed "nd Review" do
+          %span e
+    .end_exam.step_btn_wrap#end-exam
+      %a.ftr_btn.btn_bdr_lft#back{href: "javascript:", style: ('display: none;' unless is_mcq_tab_active || (!is_review_tab_active))}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft#continue{href: "javascript:", style: ('display: none;' if is_review_tab_active)}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+      %button.ftr_btn.btn_bdr_lft.review-btns#review-all{style: ('display: none;' unless is_review_tab_active), type: "button"}
+        %i.flg_mrg5.fa.fa-flag-checkered{"aria-hidden" => "true"}>
+        Review
+        = succeed "ll" do
+          %span A
+      %button.ftr_btn.btn_bdr_lft.review-btns#review-incomplete{style: ('display: none;' unless is_review_tab_active), type: "button"}
+        %i.flg_mrg5.fa.fa-times{"aria-hidden" => "true"}>
+        Review
+        = succeed "ncomplete" do
+          %span I
+      %button.ftr_btn.btn_bdr_lft.review-btns#review-flagged{style: ('display: none;' unless is_review_tab_active), type: "button"}
+        %i.flg_mrg5.fa.fa-flag-checkered{"aria-hidden" => "true"}>
+        Re
+        %span> v
+        iew Flagged
+
+= render '/ucat/modals'
+
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'individual_question'
+  :javascript
+    var time = $("#question-allotted-time").attr('value');
+    var m_id = $('.pagination_mcq_single_question').find('li.active').find('.mcq-stem-id').text()
+    showRemaningTimer(time, m_id);
+
+-if !@exercise.overall_time.nil? && @exercise.timer_option_type == 'entire_exam'
+  :javascript
+    var sa = Cookies.get('current_exe_atmpt')
+    if(sa){
+      sa = JSON.parse(sa)
+      var time = sa['end'] - sa['start']
+    }else{
+      var time = '#{@exercise.overall_time * 60}'
+    }
+    showExamRemaningTimer(time);
+
+:javascript
+  function changeHeaderMcq(){
+    $('.main-header').html('#{escape_javascript(render partial: "/ucat/mcq_header")}');
+    onFlagChange();
+    changeQueCount();
+    setClockQuesToggle();
+  }
+  function changeHeader(){
+    $('.main-header').html('#{escape_javascript(render partial: "/ucat/header")}');  
+  }
+  function changeHeaderReview(){
+    $('.main-header').html('#{escape_javascript(render partial: "/ucat/review_header")}');
+  }
+  function renderQueList(){
+    var tag_id = $('#ucat-mcq .tab-pane.active.active-tabs').attr('id').split('-')[0]
+    $.ajax({
+      url: '/mcq_attempts/get_question_list',
+      type: 'GET',
+      data: {exercise_id: '#{@exercise.id}', tag_id: tag_id}
+    })
+  }
+  $(document).ready(function(){
+    // Add minus icon for collapse element which is open by default
+    $(".collapse.show").each(function(){
+      $(this).prev(".card-header").find(".fa").addClass("fa-minus-square-o").removeClass("fa-plus-square-o");
+    });
+
+    // Toggle plus minus icon on show hide of collapse element
+    $(".collapse").on('show.bs.collapse', function(){
+      $(this).prev(".card-header").find(".fa").removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
+    }).on('hide.bs.collapse', function(){
+      $(this).prev(".card-header").find(".fa").removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
+    });
+  });

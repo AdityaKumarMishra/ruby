@@ -1,0 +1,39 @@
+- content_for :show_left_panel, true
+- content_for :page_heading, 'Contact Details'
+.faq_list.para_fs14.stap_from_field.step_form_wrap.text-center
+  -if @enrolment_items.present?
+    %ul.step_points.horizonatal
+      -unless @user.paid_courses.present?
+        %li.completed_step LOGIN / SIGNUP
+      -if (@user.paid_courses.present? && @user.has_free_trial_only?) || !@user.paid_courses.present? || !@user.address.present?
+        %li.active_step CONTACT DETAILS
+      %li COURSE DETAILS
+      %li PAYMENT
+  .faq_list_col
+    .course_frm
+      = simple_form_for(@user, url: save_detail_user_path, method: :put) do |f|
+        = f.error_notification
+        .form-group.wdt49
+          = f.input :first_name, label: 'First Name', required: true
+        .form-group.wdt49.fr
+          = f.input :last_name, label: 'Last Name', required: true
+        .form-group.wdt49
+          = f.input :phone_number, label: 'Phone no.', placeholder:"0123098876", required: true
+
+        = f.fields_for :address do |a|
+          .form-group.wdt49.fr
+            = a.input :line_one, label: 'Address line 1', placeholder: 'Unit No., Street Address'
+          .form-group.wdt49
+            = a.input :line_two, label: 'Address line 2', placeholder: 'Unit No., Street Address', required: false
+          .form-group.wdt49.fr
+            = a.input :suburb, placeholder: 'e.g.: South Yarra'
+          .form-group.wdt49
+            = a.input :state, collection: state_for_select, include_blank: 'Please Select State', selected: a.object.present? ? a.object.state : false, input_html: {class: 'cstm_select'}
+          .form-group.wdt49.fr
+            = a.input :city, label: "Capital City", collection: city_for_select, include_blank: 'Please Select City', selected: a.object.present? ? a.object.city : false, input_html: {class: 'cstm_select'}
+          .form-group.wdt49.fr
+            = a.input :post_code, label: 'Postcode', placeholder: '3141'
+          .form-group.wdt49
+            = a.input :country, collection: country_for_select, label: 'Country/Region', include_blank: 'Please Select Country', selected: a.object.present? ? a.object.country: false, input_html: {class: 'cstm_select'}
+        .text-center.col-lg-12.mtop30.mbot10.btn_next_col
+          = f.button :submit, "Next", class: 'default_btn resp_btn hvr-shutter-in-horizontal'

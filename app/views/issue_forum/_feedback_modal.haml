@@ -1,0 +1,81 @@
+%script{:src => "//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"}
+#feedback-modal.modal-input-edit.modal.latest_pop.fade{:role => "dialog"}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content
+      - edit_ticket = Ticket.new(asker: current_user)
+      = simple_form_for(edit_ticket, html: {class: 'ticket-form new_ticket_feed_form'}) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title Give Feedback
+        .modal-body
+          = f.error_notification
+          .form-inputs.tag-select
+            = f.input :title, required: true
+            = f.association :asker, as: :hidden, collection: [current_user]
+            = f.input :public, as: :hidden, input_html: {value: false}
+            = f.input :feedback, as: :hidden, input_html: {value: 'Yes'}
+            = f.label :question, label: 'Please share your feedback if you think that the question can be improved in any way. However, if you do not quite understand why an answer is correct, please use the GetClarity system to ask clarification questions; clarification questions submitted through the Quality Assurance system will not be answered.', required: true, class: 'line25'
+            = f.input :question, label: false, as: :text, input_html: { rows: 10, cols: 10, class: "ticket_question in_box_height" }, required: true
+            = f.input :comment, as: :ckeditor, input_html: { ckeditor: { height: 400 }, class: "ticket_comment disable"}
+            = hidden_field_tag :transfer_ticket, false
+            = f.input :questionable_id, as: :hidden, input_html: { value: @content.try(:id)}
+            = f.input :questionable_type, as: :hidden, input_html: { value: @content.class.name}
+            - answerers = User.answerers_for_content(@content)
+            - if answerers.present? && !answerers.empty?
+              = f.association :answerer, label: 'Feedback To', collection: answerers, required: true
+            - if @given.present?
+              = f.hidden_field :given_type, value: @given.try(:class)
+              = f.hidden_field :given_id, value: @given.try(:id)
+              = hidden_field_tag :is_admin_ticket, true
+
+        .modal-footer
+          = link_to "Create Feedback", "javascript:void(0)", class: 'submit-ticket default_btn hvr-shutter-in-horizontal new_ticket_submit btn btn-default auto_wdt'
+
+:javascript
+  $( document ).ready(function() {
+      $(".new_ticket_feed_form").validate({
+        rules: {
+            "ticket[title]": {
+                            required:true
+                        },
+            "ticket[question]": {
+                                    required:true
+
+            },
+            "ticket[answerer_id]": {
+                                    required:true
+            }
+        },
+        messages: {
+
+            "ticket[title]":{
+                  required: "Please enter title"
+            },
+            "ticket[question]":{
+                  required: "Please enter content"
+            },
+            "ticket[first_name]":{
+                  required: "Please select Answerer"
+            }
+        },
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+
+      $(".new_ticket_submit").click(function(){
+        if( $('.new_ticket_submit').attr('disabled') ) {
+          return false;
+        }
+        else {
+          $("#feedback-modal").hide();
+          $(".application-container").html("Please do not press back");
+          $(".application-container").addClass("do_not_refersh");
+          $(".modal-backdrop").remove();
+          $(".new_ticket_feed_form").submit();
+          $(".new_ticket_submit").attr("disabled", true);
+        }
+      });
+  });
+

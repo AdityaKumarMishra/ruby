@@ -1,0 +1,86 @@
+- if current_user && (current_user.student?)
+  .resource_col.mbot21
+    %h4.fl
+      Title:
+      =vod.title
+
+  .faq_list.para_fs14.mar5
+    .faq_list_col
+      .textbook_tabbing_links.written_view_btn.marzero
+        %ul.vedio_tab
+          - if @previous_vod.present?
+            %li
+              %a{class: "new-ticket", href: url_for(controller: 'vods', action: 'show', id: @previous_vod)}
+                %i.fa.fa-arrow-left{'aria-hidden' => 'true'}
+                Previous Video
+          - if @next_vod.present?
+            %li
+              %a{class: "new-ticket", href: url_for(controller: 'vods', action: 'show', id: @next_vod)}
+                Next Video
+                %i.fa.fa-arrow-right{'aria-hidden' => 'true'}
+          %li
+            = link_to "Show Relevant Textbooks", exercise_review_textbooks_vod_path(vod), {class: "vid_mcq", remote: true}
+          %li
+            - @content = vod
+            = link_to "Give Feedback", vod_feedback_vod_path(vod), {remote: true}
+          -if current_user && current_user.has_clarity_feature.present?
+            %li
+              = render 'issue_forum/get_clarity', content: vod
+
+        .video_box.vedio_main_row
+          %video#video-js.video-js.vjs-default-skin.cstm_vedio{controls: "", "data-setup" => '{ "playbackRates": [2, 1.5, 1.2, 1, 0.5], "plugins" : { "resolutionSelector" : { "default_res" : "360" } }}', :height => "270px", :width => "480px"}
+            %source{src: vod.generate_output_url_for('360p'), type: 'video/mp4','data-res' => '360'}
+            %source{src: vod.generate_output_url_for('720p'), type: 'video/mp4','data-res' => '720'}
+        .video_content
+          -unless current_user.student?
+            .viewcount
+              Views:
+              =vod.viewcount
+          %h4 Description
+          = vod.description
+
+-else
+  .vod
+    %h3.title
+      =vod.title
+    .video
+      %video#video-js.video-js.vjs-default-skin{controls: "", "data-setup" => '{ "playbackRates": [2, 1.5, 1.2, 1, 0.5], "plugins" : { "resolutionSelector" : { "default_res" : "360" } }}', :height => "270px", :width => "480px"}
+        %source{src: vod.generate_output_url_for('360p'), type: 'video/mp4','data-res' => '360'}
+        %source{src: vod.generate_output_url_for('720p'), type: 'video/mp4','data-res' => '720'}
+      -unless current_user.student?
+        .viewcount
+          Views:
+          =vod.viewcount
+      %h4 Description
+      = vod.description
+      %hr
+      .next_prev_div
+        - if current_user.student?
+          - if @previous_vod.present?
+            %a.btn.btn-default{class: "new-ticket", href: url_for(controller: 'vods', action: 'show', id: @previous_vod)}
+              %i.fa.fa-arrow-left{'aria-hidden' => 'true'}
+              Previous Video
+
+          - if @next_vod.present?
+            %a.btn.btn-default{class: "new-ticket", href: url_for(controller: 'vods', action: 'show', id: @next_vod)}
+              Next Video
+              %i.fa.fa-arrow-right{'aria-hidden' => 'true'}
+      .video_feedback
+        = link_to "Show Relevant Textbooks", exercise_review_textbooks_vod_path(vod), {class: "btn btn-default vid_mcq", remote: true}
+        - @content = vod
+        = link_to "Give Feedback", vod_feedback_vod_path(vod), {class: "btn btn-default", remote: true}
+        -if current_user && current_user.has_clarity_feature.present?
+          = render 'issue_forum/get_clarity', content: vod
+      %br
+-unless current_user.performance_stats.where(performable: vod).present?
+  :javascript
+    var vod_id = "#{@vod.id}"
+    $("video").bind("play", function() {
+      $.ajax({
+        url: '/performance_stats',
+        type: "POST",
+        data: { performable_type: 'Vod', performable_id: vod_id },
+        success:function(data) {
+        }
+      });
+    });

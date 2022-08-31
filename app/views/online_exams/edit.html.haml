@@ -1,0 +1,11 @@
+%h1 Edit Online Exam
+.online_exam_form
+  = render 'form'
+%hr
+%br
+= render "sections/index", parent_resource: @online_exam
+%br
+%br
+
+
+= link_to 'Back', online_exams_path, class: 'btn btn-danger'

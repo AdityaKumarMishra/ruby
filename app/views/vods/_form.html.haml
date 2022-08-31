@@ -1,0 +1,58 @@
+= render 'vods_video_guide'
+.form_div
+  = simple_form_for(@vod , html: { id: "fileupload"  }) do |f|
+    =# f.error_notification
+
+    .form-inputs
+      .div_field
+        = f.label :title, label: "Title"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Please check naming conventions for the section you are uploading the video to and ensure you follow the structure.
+      = f.input :title, label: false
+      = f.input :date_published
+      = f.input :published
+      .div_field
+        = f.label :description, label: "Description"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Please include a description and the running time of the video in the following format [12:31] Humanities in the GAMSAT & theme finding
+      = f.input :description, label: false
+      = f.input :video, as: :file
+      .div_field
+        = f.label :tags, label: "* Tags"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Choose the exact sub topics i.e GM 02.02 Cell Division rather than GM .02 Biology
+      = f.association :tags, collection: policy_scope(Tag), input_html: { class: 'chosen-select tag-list', required: true }, label: false
+
+      .div_field
+        = f.label :work_directory, label: 'Work Directory'
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Please enter valid URL (Including https:// OR http://)
+      = f.input :work_directory, label: false
+      .div_field.text-right
+        - if @vod.work_directory.present?
+          %a.btn.btn-gradready.green.work_status_btn{href: "#{@vod.work_directory}", target: :_blank}
+            Work Directory
+
+    .form-actions
+      = f.button :submit, 'Upload Video'
+
+%script#template-upload{:type => "text/x-tmpl"}
+  :cdata
+    <div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div>
+
+:javascript
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+
+  });

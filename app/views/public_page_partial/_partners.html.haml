@@ -1,0 +1,96 @@
+.partners_wrap
+  %p.text-center Proudly Partnering With
+  .partners_bar
+    %a{:href => "/gamsat-preparation-courses/principal_scholarship"}
+      %ul.partners_list
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/bms.png', class: "partner_img"
+          %span Biomedicine Student Society (Melbourne)
+        %li
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/andrew.png", class: "partner_img"
+          %span St Andrew's College (Sydney)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/grad_austrialia.png', class: "partner_img"
+          %span PostGraduate Australia (Brisbane)
+        %li
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/kaplan_partner.png", class: "partner_img kaplan_img"
+          %span Kaplan (United States)
+        %li
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/cathriene.png", class: "partner_img"
+          %span St Catherine's College (Perth)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/sydney_medical_society.png', class: "partner_img"
+          %span Sydney University Medical Science Society (Sydney)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/ormond.png', class: "partner_img"
+          %span Ormond College (Melbourne)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/bioms.png', class: "partner_img"
+          %span Biomedical Science Society QUT (Brisbane)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/newman.png', class: "partner_img"
+          %span Newman College (Melbourne)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/grad_aust.png', class: "partner_img"
+          %span GradAustralia (Sydney)
+        %li
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/leo_college.png", class: "partner_img"
+          %span St Leo's College (Brisbane)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/sss.png', class: "partner_img"
+          %span Science Students Society (Melbourne)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/abs.png', class: "partner_img"
+          %span UQ Association of Biomedical Sciences (Brisbane)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/medical_science_UNSW.png', class: "partner_img"
+          %span Students of Medical Science Society UNSW (Sydney)
+        %li
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/womens_college.png", class: "partner_img"
+          %span The Women's College (Brisbane)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/university_college.png', class: "partner_img"
+          %span University College (Melbourne)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/scisoc.png', class: "partner_img"
+          %span UNSW Science Society (Sydney)
+        %li
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/partners/queensland_society.png', class: "partner_img"
+          %span UQ Pre-Medical Society (Brisbane)
+
+:javascript
+  $('.partners_list').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+  });
+
+  $(".slick-arrow").click(function( event ) {
+    event.preventDefault();
+  });

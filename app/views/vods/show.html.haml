@@ -1,0 +1,17 @@
+- content_for :page_heading, 'Videos'
+- if current_user && (current_user.student?)
+  .dashbord_right
+    .resource_col.mbot21
+      = link_to 'Back', vods_path(tag_id: @tag_id, page: params[:page], anchor: "selected_#{@vod.id}"), class:'black_default_btn hvr-shutter-in-horizontal fr'
+    =render 'vods/video', vod: @vod
+    .div{id: "mod_textbook_attempt"}
+
+-else
+  =render 'vods/video', vod: @vod
+
+  - if current_user.superadmin? || current_user.admin?
+    = link_to 'Edit', edit_vod_path(@vod)
+    \|
+
+  = link_to 'Back', vods_path(tag_id: @tag_id, page: params[:page], anchor: "selected_#{@vod.id}"), class:'btn btn-default'
+  .div{id: "mod_textbook_attempt"}

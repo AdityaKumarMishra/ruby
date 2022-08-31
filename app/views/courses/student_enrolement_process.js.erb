@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: 'courses/partial/table_student_enrolement', locals: { courses: @courses })
+) %>
+$('.filterrific_spinner').css('display', 'none');
+$("#filterrific_results").html("<%= js %>");

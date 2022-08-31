@@ -1,0 +1,20 @@
+%h4
+  InterviewReady Online MMI
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+%p
+  Our highly rated and industry leading MMI course is included...
+.show_full_content
+  Our highly rated and industry leading MMI course is included as a part of the Success Assured Course. Please click here
+  %a.mmilinks{href: "https://gradready.com.au/gamsat-preparation-courses/interview-attendance-comprehensive", target: :_blank}
+    %strong
+      Comprehensive Attendance Interview Courses | GradReady Med Interview Preparation
+  for more information.
+
+:css
+  .mmilinks{
+    color: #fff;
+  }

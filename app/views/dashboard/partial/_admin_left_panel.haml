@@ -1,0 +1,117 @@
+-# This view handles the logic of rendering dashboard panel for an admin AND superadmin user, ADD admin specific product feature to this view
+%p.gr-nav-header
+  Administration
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(courses_path))}
+    = link_to courses_path do
+      %i.fa.fa-plus-circle
+      Courses (M)
+  %li{class: ("active" if is_same_route?(essay_responses_path))}
+    = link_to essay_responses_to_mark_path do
+      %i.fa.fa-pencil
+      Essay Marking
+  / %li{class: ("active" if is_same_route?(dashboard_mock_exam_essays_path))}
+  /   = link_to dashboard_mock_exam_essays_path do
+  /     %i.fa.fa-pencil
+  /     Mock Exam Essays
+  %li{class: ("active" if is_same_route?(dashboard_online_mock_exam_essays_path))}
+    = link_to dashboard_online_mock_exam_essays_path do
+      %i.fa.fa-pencil
+      Online Mock Exam Essays
+  / %li{class: ("active" if is_same_route?(master_features_path))}
+  /   = link_to master_features_path do
+  /     %i.fa.fa-plus-circle
+  /     Master Features
+  %li{class: ("active" if is_same_route?(product_versions_path))}
+    = link_to product_versions_path do
+      %i.fa.fa-plus-circle
+      Product Version
+  %li{class: ("active" if is_same_route?(shippings_path))}
+    = link_to shippings_path do
+      %i.fa.fa-plus-circle
+      Shipping (A)
+  %li{class: ("active" if is_same_route?(tags_path))}
+    = link_to tags_path do
+      %i.fa.fa-tags
+      Tags (M)
+
+
+%br
+%p.gr-nav-header
+  Analytics
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(course_recommender_usages_path))}
+    = link_to course_recommender_usages_path do
+      %i.fa.fa-users
+      Course Recommender (A)
+  %li{class: ("active" if is_same_route?(promos_path))}
+    = link_to promos_path do
+      %i.fa.fa-dollar
+      Discount Codes (A)
+
+= render 'dashboard/partial/shared_left_panel'
+
+%p.gr-nav-header
+  Student Interaction
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(event_dates_path))}
+    = link_to event_dates_path do
+      %i.fa.fa-calendar
+      Add Calendar (A)
+  %li{class: ("active" if is_same_route?(announcements_path))}
+    = link_to announcements_path do
+      %i.fa.fa-bullhorn
+      Announcements (M)
+  %li{class: ("active" if is_same_route?(exit_pop_ups_path))}
+    = link_to exit_pop_ups_path do
+      %i.fa.fa-bullhorn
+      Exit PopUp (M)
+  %li{class: ("active" if is_same_route?(dashboard_unresolved_issues_path))}
+    = link_to dashboard_unresolved_issues_path  do
+      .fa.fa-question-circle
+      GetClarity
+  %li{class: ("active" if is_same_route?(dashboard_count_tutor_appointments_path))}
+    = link_to dashboard_count_tutor_appointments_path  do
+      .fa.fa-plus-circle
+      Private Tutoring Appointments (M)
+  %li{class: ("active" if is_same_route?(textbook_deliveries_path))}
+    = link_to textbook_deliveries_path do
+      .fa.fa-plus-circle
+      Textbook Deliveries
+  %li{class: ("active" if is_same_route?(study_buddies_path))}
+    = link_to study_buddies_path  do
+      .fa.fa-plus-circle
+      Study Buddy (M)
+%br
+%p.gr-nav-header
+  Student Management
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(display_pending_orders_path))}
+    = link_to display_pending_orders_path do
+      %i.fa.fa-bank
+      Bank Transfers (A)
+  %li{class: ("active" if is_same_route?(user_emails_path))}
+    = link_to user_emails_path do
+      %i.fa.fa-users
+      User Management
+  - if current_user.can_manage_admin
+    %li{class: ("active" if is_same_route?(email_customises_path))}
+      = link_to email_customises_path do
+        %i.fa.fa-envelope
+        Custom Enrolment Email
+    %li{class: ("active" if is_same_route?(manual_email_announcements_path))}
+      = link_to manual_email_announcements_path do
+        %i.fa.fa-envelope
+        Manual Email Announcement
+    / %li{class: ("active" if is_same_route?(student_enrolement_process_path))}
+    /   = link_to student_enrolement_process_path do
+    /     %i.fa.fa-envelope
+    /     Student Payment Setting
+  / %li{class: ("active" if is_same_route?(admin_controls_path))}
+  /   = link_to admin_controls_path do
+  /     %i.fa.fa-tags
+  /     Signup View (A)
+  %li{class: ("active" if is_same_route?(get_all_deliveries_email_deliveries_path))}
+    = link_to get_all_deliveries_email_deliveries_path do
+      %i.fa.fa-envelope
+      Autoemail List

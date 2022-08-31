@@ -1,0 +1,80 @@
+- title "VCE Preparation | VCE Prep Course, VCE Exam Tips"
+- meta_description "We offer the most comprehensive and personalised VCE preparation courses in Australia. Our VCE course will help you prepare with methods and web based tools in sync with 2017."
+- meta_keywords "VCE prep, VCE prep course, VCE preparation, VCE preparation course, vce preparation tips, VCE math methods, VCE english, VCE exams, VCE tutor"
+
+.home-page-banner.vce
+  = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .banner-content
+    %h3.vce-banner-title
+      Get
+      %span
+        VCE
+        %sup{ style: "margin-right: -32px;left: -24px;top: -0.6em;"} ®
+        EXAM
+      Ready
+    %p
+      Prepare with methods and web based tools in sync with 2017.
+    %h5.skinny-banner-title 2017 courses opening in July
+
+= render 'pages/partial/vce/vce_course'
+
+#how-is-gr-different.hover
+  .container
+    %h1.different_headign
+      How are
+      %span1 Grad
+      %span.blck_color
+        Ready VCE
+        %sup{ style: "left: -12px;"} ®
+      %br Preparation Courses Different?
+    .row.thumbnails
+      .col-md-4
+        %i.fa.fa-users.banner-icon.purple{"aria-hidden" => "true"}
+        %h2 High Engagement
+        %p
+          We provide students with yearlong access to extensive, detailed resources and
+          = link_to "face to face teaching.", "/vce/math-extension-1-attendance-comprehensive-private-tutoring"
+          Our VCE
+          %sup{ style: "margin-right: -4px;"} ®
+          exam prep materials include study guides, videos and example exam questions and answers that provide students with access to fundamental concepts and knowledge. During
+          = link_to "live classes,", "/vce/english-advanced-attendance-comprehensive"
+          our tutors focus on building skills in analysing and applying their knowledge by working through exam style questions and answers.
+          By providing students with access to different styles of teaching and learning resources we provide a tailored and comprehensive learning experience to make sure you are VCE
+          %sup{ style: "margin-right: -4px;"} ®
+          exam Ready.
+      .col-md-4
+        %i.fa.fa-crosshairs.banner-icon.purple{"aria-hidden" => "true"}
+        %h2 Targeted Learning
+        %p
+          The first step in improving exam performance is to understand your strengths and weaknesses. Our
+          = link_to "online tools", "/vce/math-extension-1-online-comprehensive"
+          allow you to assess yourself in order to identify the areas in which you need further improvement. From there you can customise the
+          = link_to "online resources", "/vce/english-advanced-online-comprehensive"
+          that you access on our website to maximise your learning in areas of weakness. Furthermore, you will have access to tutors through online forums and
+          = link_to "live classes", "/vce/math-extension-1-attendance-comprehensive-private-tutoring"
+          which allow you to ask questions of specific interest to you. Our
+          = link_to "extensive online question bank,", "/vce/english-advanced-attendance-comprehensive/#1500-MCQs-(and-growing)+Tracking-System"
+          not only allows you to practice but it also tracks your performance and provides you with a greater understanding of your own progress.
+      .col-md-4
+        %i.fa.fa-desktop.banner-icon.purple{"aria-hidden" => "true"}
+        %h2 Effective Online Tools
+        %p
+          At GradReady we are proud of our one of a kind
+          = link_to "online learning experience.", "/vce/math-extension-1-online-comprehensive"
+          We provide you with the resources you need to improve your VCE
+          %sup{ style: "margin-right: -4px;"} ®
+          exam performance at the click of a button. Our
+          = link_to "online tools", "/vce/english-advanced-online-comprehensive"
+          are not only comprehensive but organised in simple manner which allows students to select the information of interest to them. Our
+          = link_to "innovative online resources", "/vce/math-extension-1-attendance-comprehensive"
+          include practice examples, videos and forum access to our team of experienced tutors.
+
+.container.no_padding
+  .all-suggest-feature
+    .heading
+      Suggest a Feature or Package
+    .content
+      %p We pride ourselves on being able to adapt to the needs of our students.
+      %p Please feel free to share with us your thoughts on what you would like us to provide.
+    %a.btn.btn-gradready.purple{:href => "/vce/contact"} Get in touch
+    %br/

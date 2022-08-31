@@ -1,0 +1,61 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "/#{type}"} Courses
+  %ul.dropdown-menu.courses-dropdown.menu_height.home_mg_top
+    %a.recommender_popup{:href => "javascript:void(0);"} Course Recommender
+    = render 'partial/nav_courses', type: type
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} About
+  %ul.dropdown-menu.home_mg_top
+    / %li
+    /   %a{:href => "/#{type}/overview"} Overview
+    / %li
+    /   %a{:href => "/#{type}/online_system_demo"} Online Systems Demo
+    / %li
+    /   %a{:href => "/#{type}/compare"} Compare Gradready
+    %li
+      %a{:href => "/#{type}/team"} Team
+    %li
+      %a{:href => "/updates?tab=GAMSAT"} Recent Updates
+
+%li
+  %a{:href => "/#{type}/scholarship"} Scholarship
+
+%li
+  %a{:href => "/#{type}/compare"} Compare Gradready
+
+/ %li
+/   %a{:href => "/#{type}/free_resources"} Free Resources
+
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href =>"#"} TESTIMONIALS
+  %ul.dropdown-menu.home_mg_top
+    %li
+      %a{:href => "/gamsat-preparation-courses/our_students"} Satisfaction Survey
+    %li
+      %a{:href => "/gamsat-preparation-courses/student_testimonials"} Student Results
+
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "/#{type}/overview"} Contact Us
+  %ul.dropdown-menu.home_mg_top
+    %li
+      %a{:href => "/#{type}/faq"} FAQ
+    %li
+      %a{:href => "/#{type}/contact"} Get In Touch
+    %li
+      %a{:href => "/blog/#{type}"} Blog
+
+:javascript
+  (function($){
+    $(document).ready(function(){
+      $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).parent().siblings().removeClass('open');
+        $(this).parent().toggleClass('open');
+      });
+    });
+  })(jQuery);
+
+  $(".recommender_popup").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

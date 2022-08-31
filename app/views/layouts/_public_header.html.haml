@@ -1,0 +1,67 @@
+.mobile_menu_wrapper
+  %a.close_menu{href: "javascript:void(0)"}
+    %i.fa.fa-times{"aria-hidden" => "true"}
+  %ul
+    %li
+      %a{href: "/gamsat-preparation-courses"}
+        GAMSAT
+        %sup> ®
+        Courses
+    %li
+      %a{href: "/umat-preparation-courses"}
+        UCAT
+        %sup> ®
+        Courses
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        Contact Us
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          GAMSAT EXAM
+          %ul
+            %li
+              %a{href: "/gamsat-preparation-courses/faq"} FAQ
+            %li
+              %a{href: "/gamsat-preparation-courses/contact"} GET IN TOUCH
+            %li
+              %a{href: "/blog/gamsat-preparation-courses"} BLOG
+        %li
+          UCAT EXAM
+          %ul
+            %li
+              %a{href: "/umat-preparation-courses/faq"} FAQ
+            %li
+              %a{href: "/umat-preparation-courses/contact"} GET IN TOUCH
+            %li
+              %a{href: "/blog/umat-preparation-courses"} BLOG
+    %li
+      %a{href: "/login"} Login
+.overlay_show  
+.body_overlay_home  
+.fixed_social_icon
+  .content.shake.shake-constant
+    %a{href: "#free_study_guide"}
+      %span.clock
+        Free Study Guide
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/clock_icn.svg', alt: 'Free Trial'
+  .content
+    %a{id: 'public_course_recommender', href: "javascript:void(0)"}
+      %span.book
+        Course Recommender
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/book_icn.svg', alt: 'Course Recommender'
+  .content
+    %a{href: gamsat_path + "#student_infographic"}
+      %span.monitor
+        Who Uses GradReady
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/monitr_icn.svg', alt: 'Course Recommender'
+
+#recommender_div
+  #course-recommender
+  = javascript_include_tag 'course-recommender'
+
+:javascript
+  $("#public_course_recommender").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

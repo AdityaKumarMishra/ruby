@@ -1,0 +1,119 @@
+%div
+  .exam_list.ques_btn.col-md-4.pull-right
+    %h3.text-left Questions
+    %ul.nav.nav-tabs.mcq_review_tabs{ role: 'tablist', style: "border-bottom: none;" }
+      - @mcq_stem.mcqs.order(:id).each_with_index do |mcq, index|
+        %li{ role: 'presentation', class: ('active' if @mcq_id.present? ? (@mcq_id.to_i == mcq.id) : index == 0)}
+          %a{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}" }
+            = "#{index +1} #{@mcq_stem.title}"
+
+  .tab-content
+    %p
+      = link_to 'Create Another MCQ Stem', new_mcq_stem_path, class: 'btn btn-gradready green'
+      = link_to 'Edit MCQ Stem', edit_mcq_stem_path(@mcq_stem), class: 'btn btn-gradready green'
+
+    %h1 Mcq Stem
+    - @mcq_stem.mcqs.order(:id).each_with_index do |mcq, index|
+      .tab-pane{ id: "m#{index}", role: 'tabpanel', class: ('active' if @mcq_id.present? ? (@mcq_id.to_i == mcq.id) : index == 0) }
+        .mcq_stem_title= @mcq_stem.title
+        %h4.mr_btm
+          %span.tags_txt Tags:
+          - tags = @mcq_stem.mcq_tags
+          - tags.each do |tag|
+            - if tag != nil
+              %span.tags_name= tag.name
+        .mcq_stem_description.mcq_review_description.mcq_cstm_li.ques_single1
+          = @mcq_stem.description.html_safe
+        .ques_col_single_1
+          %h4.mr_btm
+            %span.tag_txt Tags:
+            - if mcq.tag.present?
+              %span.tags_name
+                = mcq.tag.name
+          %strong Difficulty Level:
+          %span= difficulty_to_human @mcq_stem.difficulty
+          %br
+          %br
+          .question1
+            %b.exam-m-bottom= mcq.question.html_safe
+            .answers.show_answer_options.show_answer_options_ques
+              = simple_fields_for "mcq_answers", mcq do |e|
+                - ans_ind = 0
+                = e.collection_radio_buttons(:id, mcq.mcq_answers,:id, :answer, item_wrapper_tag: 'div', item_wrapper_class: 'radio') do |builder|
+                  - answer_text = builder.text.include?('<p>') ? builder.text : "<p>#{builder.text}</p>"
+                  .answer.answer_radio_btn{class: builder.object.correct? ? "correct_#{mcq.id}" : ''}
+                    = builder.radio_button + list_exam_alphabet_style(ans_ind).html_safe + answer_text.html_safe
+                    %span.answer_percentage{class: "disable  mcq_percent_list mcq_percent_list_que mcq_per_#{mcq.id}"}
+                      = builder.object.fetch_answer_picked_percentage.to_s + "%"
+                    -if builder.object.correct?
+                      %span.answer_status.answer_status_tick{id: "corr_answer#{mcq.id}", class: "disable"}
+                        %i.fa.fa-check{'aria-hidden'=>'true'}
+                        .itf-query-button-fix
+                  - ans_ind += 1
+            .reveal_btn
+              %button{:type => "click", class: "rvl_exer btn btn-success", 'data-id' => "#{mcq.id}"} Reveal
+            %br
+            .explaination{class: "disable", id: "expl_#{mcq.id}"}
+              %b Explanation
+              = mcq.explanation.html_safe
+              -mcq_video = mcq.mcq_video
+              -if mcq_video.present? && mcq_video.published && mcq_video.id.present?
+                .video_box.vedio_main_row
+                  %video#video-js.video-js.vjs-default-skin.cstm_vedio{controls: "", "data-autoplay" => "false", "data-setup" => '{ "playbackRates": [2, 1.5, 1.2, 1, 0.5], "plugins" : { "resolutionSelector" : { "default_res" : "360" } }}', :height => "270px", :width => "480px", autoplay: false}
+                    %source{src: mcq_video.video.url, type: 'video/mp4','data-res' => '360'}
+                    %source{src: mcq_video.video.url, type: 'video/mp4','data-res' => '720'}
+        .next_btn
+          - if index != 0
+            %button.btnPrevious.btn.btn-default{ type: 'button' } Previous
+          - if index != @mcq_stem.mcqs.count - 1
+            %button.btnNext.btn.btn-default{ type: 'button' } Next
+          - if index == @mcq_stem.mcqs.count - 1
+            =nil
+
+:javascript
+  $(document).ready(function(){
+
+    $('.rvl_exer').click(function(){
+      var mcq_id = $(this).attr('data-id');
+      $(".correct_"+mcq_id).toggleClass("correct_answer");
+      $("#corr_answer"+mcq_id).toggleClass("disable");
+      $("#expl_"+mcq_id).toggleClass("disable");
+      $(".mcq_per_"+mcq_id).toggleClass("disable");
+    });
+  });
+
+:css
+  .question1{
+    overflow-y: scroll;
+  }
+  .ques_btn{
+    position: absolute;
+    top: -20px;
+    right: 0;
+    min-height: 110px;
+    overflow: auto;
+    height: 150px;
+  }
+  .next_btn{
+    text-align: center;
+    margin-top: 20px;
+  }
+  .ques_single1{
+    width: 60%;
+    padding-right:30px;
+  }
+  .ques_col_single_1{
+    width: 40%;
+    border-top:0px;
+    padding-top:0px;
+    float: right;
+  }
+   @media only screen and (min-width: 310px) and (max-width: 768px) {
+   .ques_single1{
+      width:100%;
+    }
+    .ques_col_single_1{
+      width:100%;
+    }
+  }
+

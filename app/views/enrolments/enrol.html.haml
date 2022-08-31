@@ -1,0 +1,172 @@
+### This view is also not in use ######
+.container
+  .row
+    .col-md-6
+      %h1.u-text-green
+        Course Details
+      %dl.dl-horizontal.dl-lg
+        %dt Title
+        %dd= @course.name
+        %dt Price
+        %dd= number_to_currency @course.price
+        %dt City
+        %dd= @course.city
+        %dt Start Date
+        %dd= @course.enrolment_end_date.strftime('%Y-%m-%d')
+        %dt End Date
+        %dd= @course.expiry_date.strftime('%Y-%m-%d')
+    .col-md-6
+      %h1.u-text-green Account Details
+
+      %dl.dl-horizontal.dl-lg
+        %dt First Name
+        %dd= current_user.first_name
+        %dt Last Name
+        %dd= current_user.last_name
+        %dt Email
+        %dd= current_user.email
+        %dt Address
+        -if current_user.address.present?
+          %dd
+            - if !current_user.try(:address).try(:line_one).nil?
+              = current_user.address.line_one
+              - if !current_user.address.line_two.nil?
+                %br
+                = current_user.address.line_two
+            - else
+              = current_user.address.try(:number)
+              = current_user.address.try(:street_name)
+              = current_user.address.try(:street_type)
+            %br
+            = current_user.address.try(:suburb)
+            = current_user.address.try(:state)
+            = current_user.address.try(:post_code)
+          %dt Phone Number
+          %dd= current_user.phone_number
+        - else
+        %dd N/A
+  .row
+    .col-md-12
+      %h1.u-text-green Payment Details
+
+      %dl.dl-horizontal.dl-lg
+        %dt Price
+        %dd= number_to_currency @course.price
+        %dt GST (10%)
+        %dd= number_to_currency @course.tax
+        %dt Total Price + GST
+        %dd= number_to_currency(@course.price + @course.tax)
+        %span#paypal-fees{style:"display:none;"}
+          %br
+          %dt Paypal Fees (2%)
+          %dd= number_to_currency(@course.paypal_fee)
+          %dt Total + Paypal Fees
+          %dd
+            %strong= number_to_currency(@course.paypal_total)
+
+      .checkbox.text-center
+        %label
+          =check_box_tag "check", "accept", false, id: "terms-condition-check"
+          I agree to
+          %a= link_to "Terms and Conditions", root_url + product_terms_uri(@course.product_version.type)
+          set forth by GradReady, including, but not limited to, Course and Essay-Submission expiration dates (if applicable), and the
+          %a= link_to "GradReady Refund Policy",root_url + product_faq_uri(@course.product_version.type)
+  .row
+    .col-md-6
+      %h1.u-text-green
+        %label.radio-inline
+          %input{type: "radio", name: "payment-method", value: "bank"}
+            Direct Debit
+      #bank-pay{style:"opacity: 0.3;"}
+        %h4.u-text-green Enrolment Process:
+        %p
+          = "Complete Direct Debit transfer AND press the I have completed payment of #{number_to_currency(@course.price + @course.tax)} button. Pressing the button will ensure that the GradReady Enrolment department receives your Enrolment request."
+
+        %p Bank: <b>Commonwealth Bank</b>
+        %p Account Name: <b> GradReady Pty Ltd. </b>
+        %p BSB: <b> 06 2692 </b>
+        %p Account Number: <b> 3519 6353 </b>
+        %h4 Using the reference: #{@enrolment.banktrans}
+        %br
+        .text-center
+          =link_to("I have completed payment of #{number_to_currency(@course.price + @course.tax)}",{ action: 'transfer_payment', banking_reference:@enrolment.banktrans},{method: :post,:class => 'btn btn-default disabled', id: "bank-pay-btn"})
+        %br
+        %p.u-standard-title.u-text-green Wait Period for Online Access:
+        %p
+          Up to 1 week.
+        %p
+          Once your payment is confirmed by the GradReady Enrolment Department, you will receive a Welcome Email and access to the Online Content. Depending on your bank, the payment may take between 3-5 working days to arrive.
+        %p
+          If you are undertaking an Attendance Course and the course starts in less than 2 weeks, we recommend that you use the PayPal option, for the benefit of leaving yourself enough time to go through the Online Content needed to prepare for the classes.
+        %p
+          For any questions regarding your Direct Debit payment, please contact
+          %a.u-standard-blink{:href => "mailto:enrolments@gradready.com.au"} enrolments@gradready.com.au
+    .col-md-6
+      %h1.u-text-green
+        %label.radio-inline
+          %input{type: "radio", name: "payment-method", value: "paypal"}
+            Paypal
+      #paypal-pay{style:"opacity: 0.3;"}
+        %h4.u-text-green Enrolment Process:
+        %p
+          Note that AMEX is not accepted by the Credit Card facility. However, you are able to pay via AMEX through PayPal, by clicking on the "PayPal" button below.
+
+        %br
+        .text-center
+          =form_tag(course_enrolments_paypal_payment_path(@course, @enrolment))
+          .form-actions
+            = image_submit_tag("https://www.paypalobjects.com/en_AU/i/btn/btn_xpressCheckout.gif", id: "paypal-pay-btn", disabled: true)
+        %p.u-standard-title.u-text-green Wait Period for Online Access:
+        %p
+          None.
+          %br
+          You will be redirected back to the GradReady site after payment, upon which you will have full access to the appropriate Online Content.
+
+:javascript
+  $(function(){
+    update_payment_state = function() {
+      paypal_enabled = function(state) {
+        if (state) {
+          $("#paypal-pay").fadeTo('fast', 1.0);
+          $("#paypal-pay-btn").prop('disabled', false);
+          $("#paypal-fees").fadeIn('fast')
+        } else {
+          $("#paypal-pay").fadeTo('fast', 0.3);
+          $("#paypal-pay-btn").prop('disabled', true);
+          $("#paypal-fees").fadeOut('fast')
+        }
+      }
+
+      bank_enabled = function(state) {
+        if (state) {
+          $("#bank-pay").fadeTo('fast', 1.0);
+          $("#bank-pay-btn").removeClass('disabled');
+        } else {
+          $("#bank-pay").fadeTo('fast', 0.3);
+          $("#bank-pay-btn").addClass('disabled');
+        }
+      }
+
+
+      if ($("#terms-condition-check").prop('checked')) {
+        method = $("input:radio[name='payment-method']:checked").val();
+        if (method == 'paypal') {
+          paypal_enabled(true);
+          bank_enabled(false);
+        }
+        if (method == 'bank') {
+          paypal_enabled(false);
+          bank_enabled(true);
+        }
+
+      } else {
+        alert("Please agree to Terms and Conditions before proceeding.");
+        paypal_enabled(false);
+        bank_enabled(false);
+      }
+    }
+
+    $("input:radio[name='payment-method']").change(update_payment_state)
+    $("#terms-condition-check").change(update_payment_state)
+
+  });

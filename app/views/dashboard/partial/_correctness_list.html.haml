@@ -1,0 +1,40 @@
+- @exam_sections.each do |es|
+  - if es.mcqs.present?
+    %span.badge.badge-green= es.title
+    .panel.panel-default
+      .panel-body
+      .table-responsive
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th Name
+              %th
+                Correct
+                %i.fa.fa-check.right
+              %th
+                Incorrect
+                %i.fa.fa-times.right
+              %th
+                Total
+                %i.fa.fa-plus.right
+          - es.mcqs.group_by {|m| m.tag.subject}.each do |s, mcq|
+            %tbody
+              %tr
+                - header_value = Mcq.exam_correctness(mcq, current_user)
+                %td.col-md-6
+                  %strong= s.title
+                %td
+                  %strong= header_value[0]
+                %td
+                  %strong= header_value[1]
+                %td
+                  %strong= header_value[2]
+              - mcq.group_by(&:tag).each do |tag, mcq_array|
+                %tr
+                  - value = Mcq.exam_correctness(mcq_array, current_user)
+                  %td
+                    %i.fa.fa-arrow-right
+                    = tag.name
+                  %td= value[0]
+                  %td= value[1]
+                  %td= value[2]

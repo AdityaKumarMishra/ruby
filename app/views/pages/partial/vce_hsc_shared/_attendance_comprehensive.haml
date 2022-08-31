@@ -1,0 +1,24 @@
+-# local var 'product_line' was passed into this view when rendered
+
+#course-package-details
+  %p.u-word-spacing
+    - if @product_line == "VCE" && params[:id] == "english-advanced-attendance-comprehensive"
+      In this package, we teach you how to reason through and analyse the different question types in the
+      = @product_line
+      %sup ®
+      = '.'
+      The Attendance portion of the course will focus on text and language analysis needed for the end of year exam, understanding and addressing your specific weaknesses, and really delving into the most challenging topics."
+    - else
+      In this package, we teach you how to reason through and analyse the different question types in the
+      = @product_line
+      %sup ®
+      = '.'
+      The Attendance portion of the course will focus on MCQ strategies, understanding and addressing your specific weaknesses, and really delving into the most challenging topics.
+    %p.u-word-spacing In addition you will be able to strengthen your weak points, at your own pace, through our online tutor forum and many hours worth of bite-sized videos.
+  %p.u-word-spacing All online material are immediately available for access after purchase.
+  - if @product_line == "GAMSAT" && !gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'gamsat_improved_percentile'
+  -elsif @product_line == "UMAT" && !umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'umat_improved_percentile'

@@ -1,0 +1,42 @@
+= simple_form_for(@online_exam_attempt, method: :post,  url: create_print_exam_online_exam_attempts_path) do |f|
+  = f.error_notification
+
+  .form-inputs.cstm_score_form
+    %div.form-group
+      .form-inputs
+        = f.hidden_field :course_id, value: current_course.try(:id)
+        = f.hidden_field :section_one_score, value: @online_exam_attempt.section_one_score.nil? ? 0 :  @online_exam_attempt.section_one_score
+        = f.hidden_field :attempt_mode, value: 'Print Exam Questions'
+        = f.input :assessable_id, as: :hidden, input_html: {value: params[:id]}
+      .form-group.score-div
+        - review_path = review_online_exam_attempt_section_attempt_section_item_attempts_path(@online_exam_attempt, @sections.last)
+        -if  @online_exam_attempt.section_three_score != 0 && !@online_exam_attempt.section_three_score.nil?
+          = f.input :section_three_score, label: 'Section three score (Raw score, not percentage)', input_html: {value: @online_exam_attempt.section_three_score, class: 'mg_left20 form-control score-field', id: 'online_exam_attmp_three_score'  }, readonly: true
+          =link_to 'Review', review_path, class: 'default_btn mg_left20 review_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+        -elsif @online_exam_attempt.section_three_score.nil? || @online_exam_attempt.section_three_score.zero?
+          %div.form-group.integer.required.live_exam_section_three_score
+            = f.input :section_three_score, wrapper: false, label: 'Section three score (Raw score, not percentage)', input_html: {value: @online_exam_attempt.section_three_score, class: "flt_left form-control score-field", id: 'online_exam_attmp_three_score' }, readonly: false
+            =link_to 'Review', review_path, class: 'default_btn mg_left20 review_btn hvr-shutter-in-horizontal', onclick: 'dd_loader();'
+            = f.button :submit, value: 'Save score', class: 'mg_left20 black_default_btn  last_btnsave section_three_button hvr-shutter-in-horizontal save-score-button'
+            = f.hidden_field :course_id, value: @current_course.id
+            = f.hidden_field :section_type, value: @current_course.product_version.try(:type)
+
+:javascript
+  $(".section_three_button").click(function(){
+    var score_three = $("#online_exam_attmp_three_score").val()
+    console.log(score_three)
+    if(score_three <= 0 || score_three == "" || score_three > 200){
+     alert("Please enter section three score greater than Zero and less than equal to 200")
+     return false;
+    }else{
+      dd_loader();
+    }
+  });
+
+:css
+  .assessment_attempt_section_three_score{
+    margin-bottom: 0px !important;
+  }
+  input.btn.btn-default.mg_left20, a.default_btn.mg_left20{
+        margin-left:10px;
+  }

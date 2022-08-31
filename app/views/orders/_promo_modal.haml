@@ -1,0 +1,48 @@
+#discount-modal.modal.fade.latest_pop
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"}
+          %span ×
+        %h4.modal-title
+          Earn up to 100% of your course fees back!
+      .modal-body.text-center
+        %p
+          Share this link to your friends to give them a
+          %span.color_green 10% discount
+          on eligible purchases.
+        %p
+          For every friend you refer through this link, you will earn a
+          %span.color_green 5% cashback
+          return of your original purchase price. So this mean that 5 friends = 25% off and 20 friends = you
+          %span.color_green get 100% of your course fees back.
+          You may share the link with your friends via Facebook or email as per below.
+        %p= link_to user_promo_link_url(order.generated_promo.token), user_promo_link_url(order.generated_promo.token)
+        .row.mg0
+          .col-md-12.col-sm-8.col-sm-push-2.col-md-push-0
+            = form_tag({controller: :orders, action: :share_promo_code, id: order.id}) do
+              .input-group.share_email
+                = text_field_tag :email, nil, class: "form-control", placeholder: "enter email", required: true
+                .input-group-btn
+                  = button_tag class: "btn btn-google" do
+                    Share via Email
+                .input-group-btn
+                  = button_tag class: "btn btn-google mob_email" do
+                    Email
+          .col-md-12.col-sm-12
+            .btn.btn-facebook{"data-href" => user_promo_link_url(order.generated_promo.token)}
+              %span.fb_icn
+                %i.fa.fa-facebook
+              %span.fb_txt
+                Share on Facebook
+            %br
+            %br
+        %span.dnt_show
+          - if show_unsubscribe
+            = link_to "Do not show me this again", promo_unsubscribe_path, method: :put
+
+        .clearfix
+
+
+:javascript
+  $(function() { $('#discount-modal').modal('show'); });

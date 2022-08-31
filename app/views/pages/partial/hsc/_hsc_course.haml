@@ -1,0 +1,58 @@
+- if defined? popup
+  .close-btn-hsc.pull-right
+    X
+
+#hsc-packages.hsc_rd_clr
+  .whte_bg_trans
+    .container.no_padding
+      .hsc_content
+        %h2
+          HSC
+          %span Ready COURSES
+        %p
+          We offer the most comprehensive and personalized HSC preparation courses in Australia.
+        %h3.ribbon-banner-hsc
+          All our
+          %b
+            %i Attendance
+          courses are capped at the maximum number of 10 students!
+
+  %center
+    .categor_col
+      %ul.nav.nav-tabs
+        %li.active{:active => "true", :heading => "English Advanced"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#tab1", "tab-heading-transclude" => ""}
+            %i.fa.fa-pencil.subject{"aria-hidden" => "true"}
+            English Advanced
+        %li{:heading => "Mathematics Extension 1"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#tab2", "tab-heading-transclude" => ""}
+            %i.fa.fa-calculator.subject{"aria-hidden" => "true"}
+            Mathematics Extension 1
+    .tab-content
+      #tab1.tab-pane.active
+        = render 'pages/partial/product_version_table/table', product_line: 'hsc', product_info: @hsc_product_info, early_bird: true, subject: 'english'
+
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.hsc
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  = link_to 'CREATE YOUR OWN COURSE', hsc_ready_path(id: 'english-advanced-custom'), class: 'u-white-link'
+
+      / Math Product Versions
+      #tab2.tab-pane.math-tab
+        .tab-pane
+          = render 'pages/partial/product_version_table/table', product_line: 'hsc', product_info: @hsc_product_info, early_bird: true, subject: 'math'
+
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.hsc
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  = link_to 'CREATE YOUR OWN COURSE', hsc_ready_path(id: 'math-extension-1-cutsom'), class: 'u-white-link'

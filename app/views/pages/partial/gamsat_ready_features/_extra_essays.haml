@@ -1,0 +1,14 @@
+#Extra-Essays.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-align-right{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Extra Essays
+        / .label.label-mini.label-enhanced
+        / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+        / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing If you would like extra practise in essay writing, you have the option to purchase more essays in packs of 2, 4, 6 or 8. These essays will of course be marked with the same precision and care as any other essays submitted to the GradReady team.

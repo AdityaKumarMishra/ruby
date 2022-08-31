@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Hi #{@user.first_name},"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Thank you for your recent order of the GradReady hard copy textbook. We're pleased to let you know that your order has been shipped. You can follow its progress using the following tracking number:
+              %a{href: "https://auspost.com.au/mypost/track/#/search",target: :_blank}
+                #{@tracking_number}.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              For an estimate on when your order will reach you, feel free to use
+              %a{href: "https://auspost.com.au/parcels-mail/calculate-postage-delivery-times/#/",target: :_blank}
+                this
+              delivery estimator tool from Australia Post (enter '3000' as the 'From' postcode).
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Should you have any queries regarding your order, please submit a support query on our website, using the tag '4. Textbook Delivery'.
+          %tr
+            %td{style: "margin-top: 20px; margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+              %br
+              GradReady Student Success Team

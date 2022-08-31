@@ -1,0 +1,2 @@
+<% js = escape_javascript(render('vods/index', tag: @tag, vods: @vods, vod_tags: @vod_tags))%>
+$("#filterrific_results").html("<%= js %>");

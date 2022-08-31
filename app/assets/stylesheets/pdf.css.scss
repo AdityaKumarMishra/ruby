@@ -1,0 +1,114 @@
+// For generate_pdf css
+
+@import 'public_pages/bootstrap.min.scss';
+@import 'public_pages/richtext.min.scss';
+@import 'student_pages/admin_dev.scss';
+@import 'styles/exercise_attempt_status.scss';
+@import 'styles/section_attempt.scss';
+
+body{
+  color: inherit !important;
+  font-family: sans-serif;
+  padding-left:40px;
+  padding-right: 40px;
+}
+
+.admin_custom_radio {
+  label {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    line-height: 20px;
+    display: inline-block;
+    color: inherit;
+  }
+}
+
+h4.fnt-20,  h4.fnt-20 p{
+  margin: 3px 0 12px 0;
+  color: inherit;
+  font-size: 14px;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.ques_exam_list{
+  position: relative;
+  float:none !important;
+}
+
+.fnt-20.pos_rel span.mcqNum {
+    position: absolute;
+    left: 0;
+    top: 3px !important;
+    font-family: sans-serif;
+}
+
+.alwaysbreakafter{
+  page-break-after:always !important;
+}
+
+.alwaysbreak{
+  page-break:always !important;
+}
+
+.alwaysbreakbefore{
+  page-break-before:always !important;
+}
+
+.avoidinsidepagebreak{
+  page-break-inside: avoid !important;
+}
+
+.section_head_cont{
+  padding-top: 100px;
+  font-family: sans-serif;;
+}
+
+.section_head_cont h1, .section_head_cont h2, .section_head_cont h4 {
+  font-weight: bold;
+}
+
+
+.admin_custom_radio label p{
+  color: inherit !important;
+  font-weight: normal !important;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+.admin_custom_radio label{
+  color: inherit !important;
+  font-weight: bold !important;
+  font-family: sans-serif;
+}
+
+.stem_title{
+  font-size:18px !important;
+  font-weight: 700;
+}
+
+
+.pdf_footer{
+  padding-top:60px;
+  margin-bottom:30px;
+  width: 100%;
+  text-align: center;
+  color: #909090;
+  font-size: 12px;
+}
+
+.pdf_header{
+  padding-top:20px;
+  padding-bottom:60px;
+  float: right;
+  color: #909090;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+p.img_in_ans img{
+  max-width:50% !important;
+}
+
+
+

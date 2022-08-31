@@ -1,0 +1,22 @@
+%ul.tbl_head.listing{class: "#{score_class}"}
+  %li.width_inc
+    - selected_tags = params[:exercise].present? ? params[:exercise][:tag_ids].present? ? params[:exercise][:tag_ids].include?(tag.id.to_s) : nil : nil
+    = check_box_tag 'exercise[tag_ids][]', tag.id, selected_tags, data: {   autocheck_ids: tag.children.pluck(:id).join(',') }, id: "exercise_tag_ids_#{tag.id}"
+    %label{for: "exercise_tag_ids_#{tag.id}"}= tag.name
+    %span.mobile_mousehover_tool
+      %span.mobile_data_label_show= tag.name
+      %span.heading_tool_tip
+        %p= tag.name
+      %ul.tool_tip.checkbox_tool_tip
+        %li="Total: #{mcq_stat.total}"
+        %li="Viewed: #{mcq_stat.viewed}"
+        %li="Correct: #{mcq_stat.correct}"
+        %li="Used: #{mcq_stat.used.to_s + '%'}"
+        %li="Score: #{mcq_stat.score.to_s + '%'}"
+  %li.mobile_wdt_th.rht56= mcq_stat.used.round.to_s + '%'
+  %li.mobile_wdt_th.rht15= mcq_stat.score.round.to_s + '%'
+  %li= mcq_stat.total
+  %li= mcq_stat.viewed
+  %li= mcq_stat.correct
+  %li= mcq_stat.used.to_s + '%'
+  %li= mcq_stat.score.to_s + '%'

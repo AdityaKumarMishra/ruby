@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @enrolment.try(:purchase_item).try(:user).try(:username)
+%p
+  %b New course:
+  = @enrolment.try(:course).name
+
+%p
+  %b Class Size
+  = @enrolment.try(:course).class_size
+
+%p
+  %b City
+  = @enrolment.try(:course).city
+
+%p
+  %b Product Version name
+  = @enrolment.try(:course).product_version.name
+= link_to 'Back To Purchase Summary', @enrolment.purchase_item.order if @enrolment.purchase_item.present?

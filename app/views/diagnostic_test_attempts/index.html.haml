@@ -1,0 +1,140 @@
+- content_for :page_heading, 'Diagnostics Assessment'
+- if current_user && (current_user.student?)
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'Diagnostic Tests Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/diagnostic_video", announcement: @announcement
+
+        .faq_list_col.table_3_col
+          .faq_list_col
+            -if request.variant.blank?
+              %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+                %thead
+                  %tr
+                    %th Title
+                    %th Mark
+                    %th Percentile
+                    %th Completed at
+                    %th Action
+                %tbody
+                  - if @diagnostic_tests.present?
+                    - @diagnostic_tests.each do |diagnostic_test|
+                      %tr
+                        %td.mobile_mousehover_tool
+                          = diagnostic_test.title
+                        %td
+                        %td
+                        %td
+                        %td
+                          %a.table_icon_col.toggle-plus.create_attempt{"data-original-title" => "", "data-placement" => "top", "data-toggle" => "tooltip", 'data-id' => "#{diagnostic_test.id}", href: "javascript:void(0)"}
+
+                      %tr
+                        %td{colspan:5, id: "new_attempt_div#{diagnostic_test.id}", class: "disable"}
+                          = simple_form_for(@diagnostic_test_attempt, url: diagnostic_test_attempts_path) do |f|
+                            = f.error_notification
+
+                            .form-inputs
+                              = f.hidden_field :course_id, value: current_course.try(:id)
+                              = f.input :assessable_id, as: :hidden, input_html: {value: diagnostic_test.id}
+                            .form-inputs
+                              = f.input :question_style, as: :select, collection: Exercise.exercise_question_styles.map { |k, v| [k, v]  }, label: "Question Style", include_blank: false
+                            .form-inputs
+                              = f.label :timer_option_type, 'Timer Option'
+                              %i.glyphicon.glyphicon-question-sign.question-sign{:title => "If you select Apply Time Limit to Individual Questions, a time limit will be set for each question. Once the allotted time is elapsed you will automatically be moved on to the next question, but you are still able to go back and answer previous question."}
+                              = f.input :timer_option_type, as: :select, collection: [["Apply Time Limit to Entire Exam ", "entire_exam"], ["Apply Time Limit to Individual Questions", "individual_question"]], label: false, include_blank: false
+
+                            .form-actions.text-center
+                              = f.button :submit, "Create Diagnostic Test", class: 'default_btn hvr-shutter-in-horizontal'
+
+                  - if @diagnostic_test_attempts.present?
+                    - @diagnostic_test_attempts.each do |diagnostic_test_attempt|
+                      %tr
+                        %td.mobile_mousehover_tool
+                          = diagnostic_test_attempt.assessable
+                        %td= diagnostic_test_attempt.mark || 0
+                        %td
+                          = diagnostic_test_attempt.percentile.round(1) if diagnostic_test_attempt.percentile.present?
+                        %td= diagnostic_test_attempt.completed_at ? diagnostic_test_attempt.completed_at.strftime("%d-%m-%Y %I:%M %p") : "N/A"
+                        %td= link_to diagnostic_test_attempt.completed_at.nil? ? image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start-img.svg') : image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg'), diagnostic_test_attempt_path(diagnostic_test_attempt), data: {toggle: "tooltip", placement: "top", "original-title" => diagnostic_test_attempt.completed_at.nil? ? 'Attempt' : 'View' }, target: :_blank
+
+            -if request.variant == [:phone]
+              .mobile_table_border
+                %ul.tbl_head
+                  %li.width_inc Title
+                  %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                    M
+                    %span.heading_tool_tip.mrht37
+                      %p Mark
+                  %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                    P
+                    %span.heading_tool_tip.mrht37
+                      %p Percentile
+
+                - if @diagnostic_tests.present?
+                  - @diagnostic_tests.each do |diagnostic_test|
+                    %ul.mobile_table_body.listing.tbl_head.bdr_none
+                      %li.mobile_mousehover_tool.width_inc
+                        = diagnostic_test.title
+                        %ul.tool_tip
+                          %li Mark:
+                          %li Percentile:
+                          %li Completed at:
+                          %li{colspan:5, class: "tooltip_exam_form"}
+                            = simple_form_for(@diagnostic_test_attempt, url: diagnostic_test_attempts_path) do |f|
+                              = f.error_notification
+
+                              .form-inputs
+                                = f.hidden_field :course_id, value: current_course.try(:id)
+                                = f.input :assessable_id, as: :hidden, input_html: {value: diagnostic_test.id}
+                              .form-inputs
+                                = f.input :question_style, as: :select, collection: Exercise.exercise_question_styles.map { |k, v| [k, v]  }, label: "Question Style", include_blank: false
+                              .form-inputs
+                                = f.label :timer_option_type, 'Timer Option'
+                                %i.glyphicon.glyphicon-question-sign.question-sign{:title => "If you select Apply Time Limit to Individual Questions, a time limit will be set for each question. Once the allotted time is elapsed you will automatically be moved on to the next question, but you are still able to go back and answer previous question."}
+                                = f.input :timer_option_type, as: :select, collection: [["Apply Time Limit to Entire Exam ", "entire_exam"], ["Apply Time Limit to Individual Questions", "individual_question"]], label: false, include_blank: false
+
+                              .form-actions.text-center
+                                = f.button :submit, "Create Diagnostic Test", class: 'default_btn hvr-shutter-in-horizontal'
+                      %li.mobile_mousehover_tool.mobile_wdt_th.rht56
+                      %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+                - if @diagnostic_test_attempts.present?
+                  - @diagnostic_test_attempts.each do |diagnostic_test_attempt|
+                    %ul.mobile_table_body.mobile_table_body.listing.tbl_head.bdr_none
+                      %li.mobile_mousehover_tool.width_inc
+                        = diagnostic_test_attempt.assessable
+                        %ul.tool_tip
+                          %li
+                            Mark:
+                            = diagnostic_test_attempt.mark || 0
+                          %li
+                            Percentile:
+                            = diagnostic_test_attempt.percentile.round(1) if diagnostic_test_attempt.percentile.present?
+                          %li
+                            Completed at:
+                            = diagnostic_test_attempt.completed_at ? diagnostic_test_attempt.completed_at.strftime("%d-%m-%Y %I:%M %p") : "N/A"
+                          %li
+                            Action:
+                            = link_to diagnostic_test_attempt.completed_at.nil? ? image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/start-img.svg') : image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg'), diagnostic_test_attempt_path(diagnostic_test_attempt), data: {toggle: "tooltip", placement: "top", "original-title" => diagnostic_test_attempt.completed_at.nil? ? 'Attempt' : 'View' }, target: :_blank, class: "table_icon_col"
+                      %li.mobile_mousehover_tool.mobile_wdt_th.rht56= diagnostic_test_attempt.mark || 0
+                      %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+                        = diagnostic_test_attempt.percentile.round(1) if diagnostic_test_attempt.percentile.present?
+
+:javascript
+  $( ".create_attempt" ).click(function() {
+    var test_id = $(this).attr('data-id');
+    var collapsed = $(this).hasClass('toggle-plus');
+    if(collapsed){
+      $(this).removeClass('toggle-plus');
+      $(this).addClass('toggle-minus');
+    }else{
+      $(this).removeClass('toggle-minus');
+      $(this).addClass('toggle-plus');
+    }
+    $("#new_attempt_div"+test_id).toggleClass("disable");
+    $('[id^="new_attempt_div"]').not($("#new_attempt_div"+test_id)).addClass('disable');
+  });

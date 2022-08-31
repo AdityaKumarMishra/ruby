@@ -1,0 +1,12 @@
+-# A button that links to the issue forum page for a particular piece of content
+-# Requires a 'content' local
+-# This is the small version - used where space is an issue
+-if current_user && current_user.has_clarity_feature.present?
+  -if content.present? && given.present?
+    %a.vid_mcq{class: "new-ticket", href: url_for(controller: 'issue_forum', action: 'list', content_id: content.id, content_type: content.class, given_type: given.try(:class), given_id: given.try(:id))}
+      GetClarity
+  -#%a{'data-toggle':'tooltip', title:'Ask a Question', href: url_for(controller: 'issue_forum', action: 'list', content_id: content.id, content_type: content.class)}
+  -#  %i.fa.fa-question-circle{'aria-hidden' => 'true'}
+-else
+  = link_to get_clarity_path, class: 'vid_mcq', remote: true do
+    GetClarity

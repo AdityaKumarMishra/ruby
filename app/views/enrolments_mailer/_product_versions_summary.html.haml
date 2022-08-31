@@ -1,0 +1,25 @@
+- product_versions = ['online-basic', 'online', 'attendance-basic', 'attendance', 'attendance-all']
+- if product_line == "vce"
+  %center
+    %h3
+      English
+    #vce-sec-1
+      = render 'product_versions_grid',product_versions: product_versions, product_line: product_line, subject: 'english', trial_course: trial_course
+    %h3
+      Mathematical Methods (CAS)
+    #vce-sec-2
+      = render 'product_versions_grid',product_versions: product_versions, product_line: product_line, subject: 'math', trial_course: trial_course
+- elsif product_line == "hsc"
+  %center
+    %h3
+      English Advanced
+    #hsc-se-1
+      = render 'product_versions_grid', product_versions: product_versions, product_line: product_line, subject: 'english', trial_course: trial_course
+    %h3
+      Mathematics Extension 1
+    #hsc-se-2
+      = render 'product_versions_grid', product_versions: product_versions, product_line: product_line, subject: 'math', trial_course: trial_course
+- else
+  = render 'product_versions_grid', product_versions: product_versions, product_line: product_line, subject: nil, trial_course: trial_course
+%center
+  %a{href: "https://gradready.com.au/#{product_line}"} Compare all courses here

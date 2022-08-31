@@ -1,0 +1,23 @@
+.row
+  .col-md-10.col-md-offset-1
+    %p#notice= notice
+
+    %p
+      %b Title:
+      = @exam_section.title
+    %p
+      %b Dificultyrating:
+      = @exam_section.dificultyRating
+
+    - if @exam_section.mcqs.present?
+      %p
+        %strong MCQs:
+        = simple_form_for @exam_section, url: exam_section_delete_mcqs_path(exam_section_id: @exam_section.id, id: @exam_section.id), method: :post do |es|
+          .inline-checkbox= es.collection_check_boxes :mcqs, @exam_section.mcqs, :id, :to_html_safe
+          = es.button :submit, 'Delete marked mcqs', class: 'btn btn-danger'
+
+    %br
+
+    = link_to 'Edit', edit_exam_section_path(@exam_section), class: 'btn btn-default'
+    \|
+    = link_to 'Back', exam_sections_path, class: 'btn btn-default'

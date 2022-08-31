@@ -1,0 +1,15 @@
+%p
+  %strong Title:
+  = @subject.title
+%p
+  %strong Description:
+  = strip_tags @subject.description
+
+=render :partial => 'subjects/partial/course_version', :locals => {:course_version => @subject.course_version}
+
+%h3 Class
+=render :partial => 'student_classes/partial/table', :locals => {:student_classes => @subject.student_classes}
+
+= link_to 'Edit', edit_subject_path(@subject)
+\|
+= link_to 'Back', subjects_path

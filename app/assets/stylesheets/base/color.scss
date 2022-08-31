@@ -1,0 +1,62 @@
+// COLORS
+$black: #000;
+$white: #fff;
+
+$grGreen: #009348;
+$grGreenDark: #00813f;
+$grGrey: #999999;
+$grGreyLight: #B2B2B2;
+$grGreyLightest: #dddddd;
+$grGreyDark: darkGrey;
+$grGreyDarkest: #4d4d4d;
+
+// product lines main color
+$gamsat-color: #007833;
+$umat-color: #007ecc;
+$vce-color: #462c9f;
+$hsc-color: #be382a;
+
+$gamsat-darker: lighten($gamsat-color, 10%);
+$gamsat-dark: lighten($gamsat-color, 20%);
+$gamsat-light: lighten($gamsat-color, 10%);
+$gamsat-lighter: lighten($gamsat-color, 15%);
+
+$umat-darker: lighten($umat-color, 10%);
+$umat-dark: lighten($umat-color, 20%);
+$umat-light: lighten($umat-color, 15%);
+$umat-lighter: lighten($umat-color, 25%);
+
+$vce-darker: lighten($vce-color, 10%);
+$vce-dark: lighten($vce-color, 20%);
+$vce-light: lighten($vce-color, 15%);
+$vce-lighter: lighten($vce-color, 25%);
+
+$hsc-darker: lighten($hsc-color, 10%);
+$hsc-dark: lighten($hsc-color, 20%);
+$hsc-light: lighten($hsc-color, 15%);
+$hsc-lighter: lighten($hsc-color, 25%);
+
+
+$medium-green: #009348;
+$light-red: #eba99e;
+$light-purple: #c6b8f4;
+$light-blue: #66b8e0;
+$light-green: #90c694;
+
+$standard-blue: #428bca;
+$standard-dark-blue: #2e618d;
+
+// For comparison tables
+$green-lgt: #d5f5e5;
+$green-dark: #b3d6c1;
+$blue-lgt: #b0d9ed;
+$blue-dark: rgba(175,216,234,0.4);
+
+$darkGrey: #353535;
+$lightGrey: #4e4e4e;
+$tbl-darkGrey: #3c3c3c;
+$tbl-lightGrey: #575757;
+
+.umat-blue {
+  color: $umat-color !important;
+}

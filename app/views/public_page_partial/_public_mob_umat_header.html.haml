@@ -1,0 +1,205 @@
+.mobile_menu_wrapper
+  %a.close_menu{href: "javascript:void(0)"}
+    %i.fa.fa-times{"aria-hidden" => "true"}
+  %ul
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        Courses
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          UCAT
+          %sup> ®
+          Courses
+          %ul
+            = render 'partial/nav_courses', type: "umat"
+        %li
+          Guides
+          %ul
+            %li
+              %a{:href => "/umat/free_resources"} Free Resources
+            %li
+              %a.recommender_popup{:href => "javascript:void(0);"} Course Recommender
+            %li
+              %a{:href => "/umat-preparation-courses#umat-courses-comparison"} Compare Courses
+        %li
+          %p
+            Important Dates
+          %ul
+            %li
+              %a{:href => "/umat-preparation-courses/attendance-comprehensive#umat-important-date"}
+                UCAT
+                = succeed "Course Dates" do
+                  %sup{style: 'margin-left: -3px'} ®
+    %li
+      %a{:href => "/umat-preparation-courses#comparison_table"} Compare Gradready
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        Testimonials
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          Student Testimonials
+          %ul
+            %li
+              %a{:href => "/umat-preparation-courses/student_testimonials"} Student Results
+            %li
+              %a{:href => "/umat-preparation-courses/our_students"} Satisfaction Survey
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        Scholarship
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          Scholarship
+          %ul
+            %li
+              %a{href: "/umat-preparation-courses/scholarship"} Millennials Scholarship
+            %li
+              %a{:href => "/umat-preparation-courses/principal_scholarship"} Principal's Scholarship
+        %li
+          Financial Aid
+          %ul
+            %li
+              %a{href: "/umat-preparation-courses/access-program"} Access Program
+            %li
+              %a{href: "/umat-preparation-courses/faq/enrolment-and-payment-queries#am-i-able-to-pay"}Paying In Instalments
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        UCAT
+        %sup> ®
+        2022
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          %ul
+            %li
+              %a{href: "/what-is-ucat"}
+                What is UCAT
+                %sup{style: 'margin-left: -3px'} ®
+            %li
+              %a{href: "/ucat-preparation"}
+                How to prepare for the UCAT
+                %sup{style: 'margin-left: -3px'} ®
+            %li
+              %a{href: "/ucat-structure"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                Structure
+            %li
+              %a{href: "/ucat-vs-gamsat"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                vs
+                GAMSAT
+                %sup{style: 'margin-left: -3px'} ®
+            %li
+              %a{href: "/ucat-dentistry"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                Dentistry
+            %li
+              %a{href: "/ucat-parents-guide"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                Parents Guide
+            %li
+              %a{href: "/ucat-students-guide"}
+                UCAT
+                %sup{style: 'margin-left: -3px'} ®
+                Students Guide
+    %li
+      %a.show_submenu{href: "javascript:void(0)"}
+        Contact Us
+        %span.down_submenu
+          %i.fa.fa-angle-down{"aria-hidden" => "true"}
+      %ul.mobile_submenu_col
+        %li
+          Questions?
+          %ul
+            %li
+              %a{href: "/umat-preparation-courses/faq"} FAQ
+            %li
+              %a{href: "/blog/umat-preparation-courses"} Blog
+            %li
+              %a{href: "/umat-preparation-courses/contact"} Get In Touch
+            %li
+              %a{href: "/jobs/available_positions"} JOIN US 
+        %li
+          About
+          %ul
+            %li
+              %a{href: "/umat-preparation-courses/about"} Overview
+            %li
+              %a{href: "/umat-preparation-courses/team"} Team
+            %li
+              %a{:href => "/updates?tab=UMAT"} Recent Updates
+    - if user_signed_in?
+      / %li
+      /   %a{href: '/dashboard/home'} Dashboard
+      %li
+        %a.show_submenu{href: "javascript:void(0)"}
+          .fa.fa-cart-plus
+          %span.down_submenu
+            %i.fa.fa-angle-down{"aria-hidden" => "true"}
+        - if current_user.student?
+          %ul.mobile_submenu_col
+            %li
+              Cart
+              %ul
+                %li
+                  = link_to 'Cart', user_ongoing_order_link if current_user.student?
+                %li
+                  = link_to "Past Orders", orders_path if current_user.student? && current_user.orders.where.not(status: 0).present?
+      %li
+        %a.show_submenu{href: "javascript:void(0)"}
+          Account
+          %span.down_submenu
+            %i.fa.fa-angle-down{"aria-hidden" => "true"}
+        %ul.mobile_submenu_col
+          %li
+            Account
+            %ul
+              %li
+                %a{href: '/dashboard/home'} Dashboard
+              %li
+                = link_to 'Profile', edit_user_registration_path
+              %li
+                = link_to "Log Out", destroy_user_session_path, :method => :delete
+    - else
+      %li
+        %a{href: "/login"} Login
+.overlay_show  
+.body_overlay_home  
+.fixed_social_icon
+  .content.shake.shake-constant
+    %a{href: root_path + "#free_study_guide"}
+      %span.clock
+        Free Study Guide
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/clock_icn.svg', alt: 'Free Trial'
+  .content
+    %a{id: 'public_course_recommender', href: "javascript:void(0)"}
+      %span.book
+        Course Recommender
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/book_icn.svg', alt: 'Course Recommender'
+  .content
+    %a{href: gamsat_path + "#student_infographic"}
+      %span.monitor
+        Who Uses GradReady
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/monitr_icn.svg', alt: 'Course Recommender'
+
+#recommender_div
+  #course-recommender
+  = javascript_include_tag 'course-recommender'
+
+:javascript
+  $(".recommender_popup").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });
+  $("#public_course_recommender").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

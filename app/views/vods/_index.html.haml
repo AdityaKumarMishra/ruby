@@ -1,0 +1,37 @@
+- if current_user && (current_user.student?)
+  - if params[:vods_filter].present?
+    - pro_line = params[:vods_filter][:by_product_line]
+    - lvl2_id = params[:vods_filter][:by_level2_tag]
+    - lvl3_id = params[:vods_filter][:by_level3_tag]
+  .textbook_tabbing_links.swiper-container
+    %ul.swiper-wrapper
+      - @vod_tags.each_with_index do |tag, index|
+        -if @tag.present? && @tag==tag
+          -cls="active"
+        -else
+          -cls=""
+
+        %li.swiper-slide{class: cls}
+          %a{class: 'vod_tabs', 'data-tag': tag.id, role: 'tab', href: vods_path(tag_id: tag, pro_line: pro_line, lvl2_id: lvl2_id, lvl3_id: lvl3_id), 'aria-controls': "tab_#{tag.id}", onclick: 'dd_loader();'}
+            / = tag.id == 363 ? "Live Mock Exam " : tag.id == 362 ? "Online Mock Exam" : tag.name.split.drop(1).join(' ')
+            / Temporary added for GRAD-2936
+            = tag.id == 363 ? "Online Mock Exam 2" : tag.id == 362 ? "Online Mock Exam 1" : tag.name.split.drop(1).join(' ')
+            / = tag.id == 363 ? "Live Mock Exam" : tag.id == 362 ? "Home Mock Exam Day" : tag.name.split.drop(1).join(' ')
+  -if @tag.present?
+    =render 'videos_by_tag', tag: @tag, vods_by_tag: @vods.by_decendent_tag(@tag).order(:title).paginate(page: params[:page], per_page: 9)
+
+-else
+
+  #filterrific_results
+    .tab-content
+      -if @tag.present?
+        .row{id: "tab_#{@tag.id}"}
+          =render 'videos_by_tag', tag: @tag, vods_by_tag: @vods.by_decendent_tag(@tag).order(:title).paginate(page: params[:page], per_page: 9)
+  %br
+
+:javascript
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 'auto',
+    spaceBetween: 0,
+
+  });

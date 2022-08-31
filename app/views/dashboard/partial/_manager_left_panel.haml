@@ -1,0 +1,50 @@
+-# This view handles the logic of rendering dashboard panel (of general admin tasks) for an manager user
+%p.gr-nav-header
+  Administration
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(courses_path))}
+    = link_to courses_path do
+      %i.fa.fa-plus-circle
+      Courses (M)
+  %li{class: ("active" if is_same_route?(essay_responses_path))}
+    = link_to essay_responses_to_mark_path do
+      %i.fa.fa-pencil
+      Essay Marking
+
+= render 'dashboard/partial/shared_left_panel'
+
+%p.gr-nav-header
+  Student Interaction
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(announcements_path))}
+    = link_to announcements_path do
+      %i.fa.fa-bullhorn
+      Announcements (M)
+  %li{class: ("active" if is_same_route?(exit_pop_ups_path))}
+    = link_to exit_pop_ups_path do
+      %i.fa.fa-bullhorn
+      Exit PopUp (M)
+  %li{class: ("active" if is_same_route?(dashboard_unresolved_issues_path))}
+    = link_to dashboard_unresolved_issues_path  do
+      .fa.fa-question-circle
+      GetClarity
+  %li{class: ("active" if is_same_route?(dashboard_count_tutor_appointments_path))}
+    = link_to dashboard_count_tutor_appointments_path  do
+      .fa.fa-plus-circle
+      Private Tutoring Appointments (M)
+  %li{class: ("active" if is_same_route?(textbook_deliveries_path))}
+    = link_to textbook_deliveries_path do
+      .fa.fa-plus-circle
+      Textbook Deliveries
+  %li{class: ("active" if is_same_route?(study_buddies_path))}
+    = link_to study_buddies_path  do
+      .fa.fa-plus-circle
+      Study Buddy (M)
+%br
+%p.gr-nav-header
+  Student Management
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  %li{class: ("active" if is_same_route?(user_emails_path))}
+    = link_to user_emails_path do
+      %i.fa.fa-users
+      User Management

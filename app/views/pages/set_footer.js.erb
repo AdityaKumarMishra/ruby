@@ -1,0 +1,19 @@
+<%if @type== 'gamsat'%>
+  <% js = escape_javascript(
+    render(partial: 'partial/gamsat_footer')
+  ) %>
+<%elsif @type== 'umat'%>
+  <% js = escape_javascript(
+    render(partial: 'partial/umat_footer')
+  ) %>
+<%elsif @type== 'vce'%>
+  <% js = escape_javascript(
+    render(partial: 'partial/vce_footer')
+  ) %>
+<%elsif @type== 'hsc'%>
+  <% js = escape_javascript(
+    render(partial: 'partial/hsc_footer')
+  ) %>
+<%end%>
+
+$("#grad-new-footer").html("<%= js %>");

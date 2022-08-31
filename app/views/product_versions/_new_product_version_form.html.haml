@@ -1,0 +1,3 @@
+= form_tag(new_product_version_path, method: :get) do
+  = submit_tag 'New Product version', class: 'btn btn-gradready green', name: nil
+  = select_tag :product_line_id, options_from_collection_for_select(ProductLine.all, :id, :name)

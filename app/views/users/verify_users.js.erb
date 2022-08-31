@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: '/users/mass_delete_modal', locals: { users: @users, user: nil })
+) %>
+$("#MasDelPartial").html("<%= js %>");
+$('#MassDeleteModal').modal('show');

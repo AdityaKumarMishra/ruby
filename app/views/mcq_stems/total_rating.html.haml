@@ -1,0 +1,15 @@
+%h1 Total Rating
+
+%table.gr-table.gr-table-bordered.table-hover
+  %thead
+    %tr
+      %th Student Email
+      %th Rating
+      %th Comment
+
+  %tbody.mcq-font
+    - @rates.each do |rate|
+      %tr
+        %td.col-md-2= link_to rate.rater.email, url_for(rate.rater), target: :_blank
+        %td.col-md-2= rate.stars.to_f.round(1) rescue 0.0
+        %td.col-md-2= rate.description

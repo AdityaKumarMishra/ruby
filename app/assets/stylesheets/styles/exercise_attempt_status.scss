@@ -1,0 +1,108 @@
+
+.exercise-attempt-countdown {
+  z-index: 9999;
+  position: fixed;
+  right: 0;
+  top: 100px;
+  width: 204px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 14px;
+  background-color: #eeeeee;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+  .mcqa-subtitle {
+    color: #777777;
+    font-size: 12px;
+  }
+  .mcqa-title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 0 10px;
+  }
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+  .mcqa-start,
+  .mcqa-end {
+    display: none;
+  }
+  .progress {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  a {
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+  }
+}
+
+.exercise-attempt-countdown.time_cart {
+  width: 258px;
+  background-color: #fff;
+  box-shadow: 0 1px 11px rgba(0,0,0,.2);
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+}
+.exercise-attempt-countdown.time_cart  .mcqa-title {
+  font-weight: 400;
+  color: #007833;
+  text-transform: capitalize;
+}
+
+.exercise-attempt-countdown.time_cart a {
+  background: #008036;
+  color: #fff;
+  border-radius: 3px;
+  margin-bottom: 13px;
+  border-color: #008036;
+}
+
+.exercise-attempt-countdown.time_cart a:hover{
+  background: #393939;
+  border-color: #393939;
+}
+
+.time_cart_icon{
+  right: -258px !important;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+}
+
+.exercise-attempt-countdown.time_cart .timer_icon{
+  position: absolute;
+  left: -43px;
+  z-index: 999999;
+  background: #fff;
+  overflow: visible;
+  padding: 4px;
+  max-width: 45px;
+  width: 100%;
+  top: 0px;
+  text-align: center;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2);
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  cursor: pointer;
+}
+
+.exercise-attempt-countdown.time_cart .timer_icon img {
+  max-width: 20px;
+  width: 100%;
+}
+.tbl_head.cart_checkbox [type="checkbox"]:not(:checked) + label:before {
+  top: 0px;
+}
+.tbl_head.cart_checkbox [type="checkbox"]:checked + label:before {
+  top: 0px;
+}
+.tbl_head.cart_checkbox [type="checkbox"]:checked + label:after {
+  top: 3px;
+}

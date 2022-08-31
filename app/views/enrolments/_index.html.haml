@@ -1,0 +1,44 @@
+%h1 Listing enrolments
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th User
+      %th Course
+      / %th PayPal Payment
+      / %th PayPal Token
+      %th Paid at
+      %th Enrolment Status
+      %th Invoice
+      %th{ colspan: 3 } Actions
+
+  %tbody
+    - if enrolments.present?
+      - enrolments.each do |enrolment|
+        / %tr{'data-link': url_for(user_enrolment_path(student, enrolment))}
+        - enrolment_features = enrolment_feature_orders(enrolment, @user)
+        %tr
+          %td= enrolment.try(:user).full_name
+          %td= enrolment.try(:course).try(:name)
+          / %td= enrolment.paypal_payment
+          / %td= enrolment.paypal_token
+          %td= enrolment.paid_at
+          %td= enrolment_status(enrolment.state, enrolment.order&.status)
+          %td
+            = enrolment_invoice(enrolment, @user)
+            - if enrolment_features.present?
+              - enrolment_features.each do |ef|
+                = link_to 'Download', invoice_pdf_order_path(ef, format: :pdf), class: 'btn btn-default', style: 'margin-top: 10px;'
+          %td= link_to 'Transfer course', transfer_by_enrolment_path(id: enrolment, user_id: @user.id ), remote: :true, class: 'btn btn-success btn-sm'
+          %td= link_to 'Edit', edit_user_enrolment_path(student, enrolment), class: 'btn btn-info btn-sm'
+          %td= enrolment_status_change_button(enrolment, student)
+          %td= link_to 'Destroy', user_enrolment_path(student, enrolment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+#Transfer-Cousrse-Partail
+
+/ = link_to 'Reset Exams/Essays', reset_exams_user_path(@user.id), class: 'btn btn-gr-light-green'
+= link_to 'Login', view_as_path(@user), class: 'btn btn-info'
+-if student.id.present?
+  = link_to "New Enrolment", "#", "data-toggle" => "modal", 'data-target' => '#courseModal', id: 'course_link', class: 'btn btn-primary'
+
+= render 'enrolments/course_selection_modal', student: student

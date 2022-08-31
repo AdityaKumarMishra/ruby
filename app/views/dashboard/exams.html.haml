@@ -1,0 +1,29 @@
+%h1 Listing exams
+
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Date started
+        %th Date finished
+        %th Exam sections
+        %th{colspan: 2} Actions
+
+    %tbody
+      - @exams.each do |exam|
+        %tr{'data-link': url_for(exam)}
+          %td= format_date_short exam.date_started
+          %td= format_date_short exam.date_finished
+          %td
+            - if exam.exam_sections.present?
+              %ul
+                - exam.exam_sections.each do |es|
+                  %li= es.title
+            - else
+              There are no exam sections.
+          %td= link_to 'Edit', edit_exam_path(exam), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', exam, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Exam', new_exam_path, class: 'btn btn-info'

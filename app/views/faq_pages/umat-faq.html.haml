@@ -1,0 +1,146 @@
+- title "Questions about UCAT Courses? | GradReady"
+- meta_description "Questions about your UCAT Preparation or our Courses?"
+- meta_keywords "UCAT Preparation Courses"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1.mob_wht_points
+        UCAT
+        %sup ®
+        Courses | Frequently Asked Questions
+%section.faq_wrapper
+  .row
+    .container
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_understanding.png', alt: 'Understanding'
+            %h2
+              Understanding UCAT
+              %sup ®
+              Exam
+          %ul
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))+'#what-is-the-umat'}
+                What is the UCAT
+                %sup ®
+                exam?
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))+'#how-frequently-is-the-umat-held'}
+                How frequently is the UCAT
+                %sup ®
+                exam held?
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))+'#how-long-are-the-results-valid'} For how long are the results valid?
+          %a.see_all_faq{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('und_umat'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_preparing.png', alt: 'Understanding'
+            %h2
+              Eligibility
+          %ul
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))+'#when-can'}
+                When can I sit the UCAT
+                %sup ®
+                ?
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))+'#i-am'}
+                I am currently in Year 11 and enrolled....?
+            %li
+              %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))+'#can-i'}
+                Can I sit the UCAT
+                %sup ®
+                if I have already....?
+          %a.see_all_faq{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('eligibility'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_non-science.png', alt: 'Understanding'
+            %h2 Understanding the value of Preparation
+          %ul
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#why-should-i-enrol-in-a-preparation-course'}
+                Why should I enrol in a preparation course....?
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#i-still'}
+                I still don’t quite understand, I’m told the....?
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))+'#how-early'}
+                How early should I sign up to a....?
+          %a.see_all_faq{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('preparation'))}
+            See all related questions
+
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_about.png', alt: 'Understanding'
+            %h2 About GradReady
+          %ul
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))+'#how-is-the'}
+                How is the GradReady UCAT
+                %sup ®
+                course..?
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))+'#does-umatready'}
+                Does GradReady cover everything..?
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))+'#do-i-need'}
+                Do I need any preparation material in....?
+
+            %a.see_all_faq{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('umatready'))}
+              See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('undergraduate'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_admission.png', alt: 'Understanding'
+            %h2 Undergraduate Medical School Admissions
+          %ul
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('undergraduate'))+'#App process'}
+                When do I need to start my med....?
+            %li
+              =link_to 'If I receive an offer, can I defer for a year?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('undergraduate'))+'#defer'
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('undergraduate'))+'#What UMAT score'}
+                What UCAT
+                %sup ®
+                score do I need ..?
+          %a.see_all_faq{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('undergraduate'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_enrolment.png', alt: 'Understanding'
+            %h2 Enrolment, Payment and Refund policy
+          %ul
+            %li
+              %a{:href => faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#how-do-i-enroll'}
+                How do I enrol into a UCAT
+                %sup{ style: "margin-right: -5px;"} ®
+                = "...?"
+            %li
+              =link_to 'Is there a group discount available?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#is-there-a-group-discount'
+            %li
+              =link_to 'Can discounts be combined?', faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))+'#can-discount-be-combined'
+
+          %a.see_all_faq{href: faq_topic_path("umat-preparation-courses", FaqTopic.for_code('enrolment'))} See all related questions
+.join_gradready_col
+  %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"} Didn't Find the Question You Were Searching For?
+  .clear
+  %a.aos-item.default_btn.hvr-shutter-in-horizontal{"data-aos" => "fade-up", "data-aos-duration" => "1200", href: "/umat/contact"}  CONTACT US
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

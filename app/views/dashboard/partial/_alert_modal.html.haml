@@ -1,0 +1,15 @@
+.alert_layout
+  #alert_modal.modal.fade.alert_popup{"aria-hidden" => "true", "aria-labelledby" => "alert_modal", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .alert_icon
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/alert_icon.png'
+        .modal-header
+          %h5#exampleModalLongTitle.modal-title Alert message
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          %p.alert_msg
+            =flash[:alert].present? ? flash[:alert] : "Oops! There seems to be something wrong. Please send through an issue ticket using the button below."
+        .modal-footer
+          %button.btn-gradready.green.tkt_btn{'data-toggle' => 'modal', class: "new-ticket", 'data-dismiss' => "modal"} Send Ticket

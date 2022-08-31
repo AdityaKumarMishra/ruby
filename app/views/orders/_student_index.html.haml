@@ -1,0 +1,69 @@
+-if @orders.present?
+  -if request.variant.blank?
+    %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+      %thead
+        %tr
+          %th Name
+          %th Quantity
+          %th Date of Purchase
+          %th Total Cost
+          %th Action
+      %tbody
+        - @orders.each do |order|
+          %tr
+            %td.mobile_mousehover_tool= order.purchase_details
+            %td= order.quantity_details
+            -if order.paid?
+              -if order.paid_at.present?
+                %td= order.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+              -else
+                %td= ""
+            -elsif order.pending?
+              %td pending
+            -else
+              %td= order.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if order.paid_at.present?
+            %td
+              = "$"
+              = number_with_precision(order.total_cost, precision: 2)
+
+            %td= link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg'), order
+  -else
+    .mobile_table_border
+      %ul.tbl_head
+        %li.width_inc Name
+        %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool Total Cost
+        - @orders.each do |order|
+          %ul.mobile_table_body.listing.tbl_head.bdr_none
+            %li.mobile_mousehover_tool.width_inc
+              %span.mobile_data_label_show.pading_lft= order.purchase_details
+              %span.heading_tool_tip
+                %p= order.purchase_details
+              %ul.tool_tip
+                %li
+                  Quantity :
+                  = order.quantity_details
+                %li
+                  Date of Purchase :
+                  -if order.paid?
+                    -if order.paid_at.present?
+                      = order.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if order.paid_at.present?
+                    -else
+                      = ""
+                  -elsif order.pending?
+                    pending
+                  -else
+                    = order.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if order.paid_at.present?
+                %li
+                  Total Cost :
+                  = "$"
+                  = number_with_precision(order.total_cost, precision: 2)
+                %li
+                  Action :
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/view.svg'), order
+            %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16
+              = "$"
+              = number_with_precision(order.total_cost, precision: 2)
+  = will_paginate @orders, renderer: BootstrapPagination::Rails
+- else
+  .alert.alert-warning.nothing_found.margin_top
+    No Orders

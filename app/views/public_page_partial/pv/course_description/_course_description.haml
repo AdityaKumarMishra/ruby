@@ -1,0 +1,123 @@
+.col-lg-7.col-md-6.col-sm-12.col-xs-12
+  .cr_descr_text_col
+    %p.text_content
+      - if course_type == 3
+        InterviewReady will help you take that final step to medical school. Pioneered by Dr. Stuart Saunders, a former University of Western Australia lecturer in philosophy and a current doctor, InterviewReady is updated yearly - accurately reflecting the latest practices in medical admissions.
+        3 years in a row, InterviewReady has produced an amazing over
+        %a.gmsat_text{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        for its attendees. This unparalleled achievement is made possible by a detailed analysis by the GradReady team on the MMI process and how each student measures up against the process. Firstly, the MMI black box is demystified by a comprehensive breakdown and discussion of various important scenarios in our small interaction-orientated classes of 16. Moreover, you will then attend the most realistic mock-MMI available in Australia and be given detailed feedback of your performance at each station. In accordance with the post Covid updates made by most universities – the GradReady mock-MMIs now run online in most locations to best simulate what you will experience in the real interview. All of your interviewers will be successful medical students who thoroughly understand why each scenario is relevant to the lives of doctors.
+      - elsif course_type == 2
+        Like our InterviewReady Comprehensive package, the Essentials package contains all the useful tips and advice. We will still ensure that the MMI is demystified by someone who understands the process. The only difference between the 2 courses is that the Mock MMI day will be replaced by a tutor facilitated peer-run MMI day, which was the traditional MMI training model - until GradReady introduced its model, which achieved an amazing
+        %a.gmsat_text{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 100%
+        medical school
+        %a.gmsat_text{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u admission rate
+        in 2014 and have achieved an over
+        %a.gmsat_text{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        ever since.
+        Despite the success of our Comprehensive package, we recognise that not every student is able to fund the cost of having 10 staff and 8 rooms needed for the Mock MMI day. Therefore we have created the Essentials package to provide some key pieces of information and opportunities for monitored practise.
+      - elsif course_type == 9
+        InterviewReady will help you take that final step to medical school. Pioneered by Dr. Stuart Saunders, a former University of Western Australia lecturer in philosophy and a current doctor, InterviewReady is updated yearly - accurately reflecting the latest practices in medical admissions.
+
+        3 years in a row, InterviewReady has produced an amazing over
+        %a.gmsat_text{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        for its attendees. The Online Essentials package includes all of the online content from our Online MMI Comprehensive package, making it perfect for students whose interview dates are before when our Attendance Classes are held or who live in rural locations. The exemplar interview response videos and bank of MMI questions will be sure to help you to brush up on your interview skills and become familiar with the qualities medical schools look for in future doctors.
+      - elsif course_type == 12
+        Whilst no one can guarantee medical school entry, we can provide you with the closest opportunity possible. Firstly, in addition to everything offered in our Complete Care Attendance Course, you will have a personal GradReady Success Leader walking alongside you in your GAMSAT
+        %sup ®
+        journey, helping you to identify all your strengths and weaknesses and devising an evolving study plan based on your initial results and ongoing progress. Secondly, in the event you are unsuccessful, you will be able to repeat our Comprehensive Attendance without additional costs, until you are successful in your application. Finally, your personal GradReady Success Leader will be able to continue working with you to identify and seek out alternative career pathways - if in your GAMSAT
+        %sup ®
+        journey you realise that medicine is not for you.
+      - else
+        If you know that you will not have time to use all of our features, then this is the package for you.
+        - if product_line == "UMAT"
+          We understand that not everyone would have the time to work through the comprehensive set of preparation material that GradReady provides. Therefore, we give you the option of choosing any combination of UCAT
+          %sup ®
+          products available (except Attendance classes).
+        - else
+          We understand that not everyone would have the time to work through the comprehensive set of preparation material that GradReady provides. Therefore, we give you the option of choosing any combination of GAMSAT
+          %sup ®
+          products available.
+        Please note that we highly recommend purchasing the Online Course Book, if you purchase Online Videos.
+        All online materials are immediately available for access after purchase.
+    .content-mask
+  %a.read_more_cr_decr{href: "javascript:void(0)"} Read more
+  %a.read_less_cr_decr{href: "javascript:void(0)"} Read less
+
+.col-lg-5.col-md-6.col-sm-12.col-xs-12.pull-right.cr_descr_banner_col
+  #cr_description_col.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
+    .carousel-inner{role: "listbox"}
+      - if course_type == 3
+        .item.active
+          %video.video-js.vjs-default-skin.check-video{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png', :title => "GAMSATReady", :width => "100%", height: "250px"}
+            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/Vincenzo%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/Vincenzo%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ir-slider/interviewready-thumb-1.jpg'
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ir-slider/interviewready-thumb-2.jpg'
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ir-slider/interviewready-thumb-3.jpg'
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ir-slider/interviewready-thumb-4.jpg'
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ir-slider/interviewready-thumb-5.jpg'
+        %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only Previous
+        %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only Next
+
+      - elsif course_type == 2
+        .item.active
+          %video.video-js.vjs-default-skin.check-video{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png', :title => "GAMSATReady", :width => "100%", height: "250px"}
+            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/Carl%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/Carl%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+        .item
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/small_banner_slide_img.jpg'
+        %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only Previous
+        %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only Next
+
+      - elsif course_type == 9
+        .item.active
+          %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "GAMSATReady", :width => "100%", height: "312px"}
+            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/Steven%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/Steven%20InterviewReady%20Experience.mp4", :type => "video/mp4"}
+      -else
+        .item.active
+          %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png', :title => "GAMSATReady", :width => "100%", height: "312px"}
+            %source{:src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+              %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", :type => "video/mp4"}
+        - if product_line == "GAMSAT"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_cstm_txtbk.png', class: "custom_cover_img"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/online_exams_custom.png', class: "custom_cover_img"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/marked_essays_custom.png', class: "custom_cover_img"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/mcq_bank_custom.png', class: "custom_cover_img"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_tut_session.png', class: "custom_cover_img"
+          .item
+            = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/gamsat_mock_exam.png', class: "custom_cover_img"
+          %a.left.carousel-control{"data-slide" => "prev", href: "#cr_description_col", role: "button"}
+            %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+            %span.sr-only Previous
+          %a.right.carousel-control{"data-slide" => "next", href: "#cr_description_col", role: "button"}
+            %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+            %span.sr-only Next

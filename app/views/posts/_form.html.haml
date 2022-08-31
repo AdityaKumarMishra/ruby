@@ -1,0 +1,49 @@
+= simple_form_for @post do |f|
+  = f.input :name
+  = f.input :description, as: :ckeditor, :input_html => { :ckeditor => { :height => 400 } }
+  = f.input :author
+  = f.input :blog_type, collection: Post.blog_types.keys
+  = f.association :blog_categories, collection: post_category_collection(@post), multiple: true, input_html: {class: 'chosen-choices'}
+  = f.input :image, as: :file
+  = f.input :alt_text
+  = f.input :meta_description
+  = f.input :meta_keywords
+  %button.btn.btn-success{:type => "submit"} Save Post
+  %br
+  %br
+  %br
+
+:javascript
+  post_blog_type_changed = function() {
+    select = $("#post_blog_category_ids");
+    product_line = $(this).val()
+    match = '[' + product_line + ']';
+
+    // iterate all of the options
+    select.children().each(function() {
+      option = $(this);
+
+      // disabled non-related elements
+      if (option.text().slice(-match.length) === match) {
+        // if the option text ends with '[product_line]'
+        option.prop('disabled', false);
+      } else {
+        option.prop('disabled', true);
+      }
+    });
+
+    // tell chosen we've updated the select options
+    select.trigger('chosen:updated');
+  };
+
+  $(".chosen-choices").chosen({
+    no_results_text: "Oops, nothing found!",
+    // hide disabled elements
+    display_disabled_options: false
+  });
+
+  // update disabled elements every time the blog_type is changed
+  $("#post_blog_type").change(post_blog_type_changed);
+
+  // update disabled elements every time the page is loaded (for edits)
+  $(post_blog_type_changed);

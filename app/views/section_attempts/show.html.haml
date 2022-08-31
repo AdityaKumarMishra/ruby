@@ -1,0 +1,10 @@
+%h2= @section_attempt.section.title
+%p
+  %b Percentile:
+  = @section_attempt.percentile.nil? ? 'N/A' : number_to_percentage(@section_attempt.percentile,precision: 1)
+
+%p
+  %b Mark:
+  = @section_attempt.mark.nil? ? 'N/A' : @section_attempt.mark
+
+= link_to 'Back', polymorphic_path([@attemptable]), class: 'btn btn-default', onclick: 'dd_loader();'

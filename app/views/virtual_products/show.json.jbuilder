@@ -1,0 +1,1 @@
+json.extract! @product, :id, :sku, :currency, :name, :description, :cost, :type, :weight, :length, :width, :height, :starting_date, :stopping_date, :expiration_date, :course_version_id, :created_at, :updated_at

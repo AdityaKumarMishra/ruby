@@ -1,0 +1,37 @@
+%p
+  %strong Name:
+  = @course_version.course.title
+%p
+  %strong Description:
+  = @course_version.course.description
+%p
+  %strong Version number:
+  = @course_version.version_number
+%p
+  %strong Date added:
+  = format_date_long @course_version.date_added
+%p
+  %strong Class size:
+  = @course_version.class_size
+%p
+  %strong Expiary date:
+  = format_date_long @course_version.expiry_date
+%p
+  %strong Enrolment end added:
+  = format_date_long @course_version.enrolment_end_added
+%p
+  %strong Students count:
+  = @course_version.students_count
+
+-if @address
+  %hr
+  %p
+    %strong Address
+    =render 'addresses/address', {address: @address}
+
+= render :partial => 'course_versions/partial/subject_list', :locals => {:subjects => @course_version.subjects}
+= render :partial => 'course_versions/partial/tutors_list', :locals => {:course_version => @course_version}
+
+= link_to 'Edit', edit_course_course_version_path(@course,@course_version),class: 'btn btn-default'
+|
+= link_to 'Back', course_course_versions_path(@course),class: 'btn btn-primary'

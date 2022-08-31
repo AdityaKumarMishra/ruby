@@ -1,0 +1,32 @@
+%h1{style: 'margin-bottom: 40px;'} Log Hour(s): #{params[:logging_type].to_s.humanize}
+
+%table.gr-table.gr-table-bordered.table-hover
+  %thead
+    %tr
+      %th Tutor
+      %th Hours Logged
+      %th Actions
+
+  %tbody.mcq-font
+    - if @mcq_hours.present?
+      %tr
+        %td.col-md-2= @mcq_hours.first.user.full_name
+        %td.col-md-2= @mcq_hours.map{ |mcq_hour| BigDecimal(mcq_hour.hours.to_s) }.sum
+        %td.col-md-2= link_to 'Delete Last Log', delete_mcq_hour_path(@mcq_stem, logging_type: params[:logging_type]), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm' if Date.today >= @from_filter.to_date && Date.today < @to_filter.to_date
+    - else
+      %tr
+        %td{colspan: 3} No hours logged yet
+
+.form_div
+  = simple_form_for(@mcq_hour, url: create_mcq_hour_path(@mcq_stem), method: :post) do |f|
+    .form-inputs
+      = f.input :user_id, as: :hidden, input_html: { value: @mcq_hour.user_id }
+      = f.input :mcq_stem_id, as: :hidden, input_html: { value: @mcq_hour.mcq_stem.id }
+      = f.input :logging_type, as: :hidden, input_html: { value: params[:logging_type] }
+      = f.input :hours, min: 0, required: true
+      = f.button :submit, 'Log hour(s)'
+
+:javascript
+  $(document).ready(function(){
+    $("#new_mcq_hour").validate()
+  })

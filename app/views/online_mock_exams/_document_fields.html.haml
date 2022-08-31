@@ -1,0 +1,24 @@
+.nested-fields.lesson-fields
+  .cstm_file{ class: ('file_field_wdth' if f.object.document_file_name.present?) }
+    = f.file_field :document,  class: "file_field"
+    .txtbook_titl= f.object.document_file_name
+    = link_to_remove_association "Remove", f, class: "btn btn-danger btn-xs remove_btn"
+  .form-group
+    =f.label :start_date, "Start Date"
+    =f.input :start_date, label: false, class: "form-control"
+  .form-group
+    =f.label :start_time, "Start Time"
+    =f.input :start_time, label: false, class: "form-control"
+  .form-group
+    =f.label :end_date, "End Date"
+    =f.input :end_date, label: false, class: "form-control"
+  .form-group
+    = f.label :end_time, "End Time"
+    =f.input :end_time, label: false, class: "form-control"
+
+
+:css
+  .date {
+    font-size: 14px;
+    line-height: 14px;
+  }

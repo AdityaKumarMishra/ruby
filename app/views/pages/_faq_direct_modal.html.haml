@@ -1,0 +1,62 @@
+#faqDirect.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "faqDirect", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content{style: "height: 300px;"}
+      .modal-header
+        %button.close.btn_close{"data-dismiss" => "modal", type: "button"} ×
+        .text-center
+          %h2 Would you like to consult our FAQs first?
+      .modal-footer.mtop_20
+        .text-center.btn_wrap_mdl
+          %button.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init#faq-yes-btn.mrgn_left{"data-dismiss" => "modal", :type => "button"}
+            Yes
+          %span.fnt_size Please take me to the FAQs
+        .text-center.btn_wrap_mdl
+          %button.aos-item.default_btn.hvr-shutter-in-horizontal.aos-init#faq-no-btn.red_btn{"data-dismiss" => "modal", :type => "button"}
+            No
+          %span.fnt_size I'd like to contact support
+
+:css
+  .mrgn_left{
+    margin-left: 20px;
+  }
+  .fnt_size{
+    font-size: 16px;
+    color: #5c5c5c;
+  }
+  .btn_wrap_mdl{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+  .btn_wrap_mdl button{
+    margin-right: 10px;
+  }
+  .btn_wrap_mdl .red_btn{
+    color: #fff;
+    background-image: linear-gradient(to bottom, #f80101 0%, #f80101 100%) !important;
+  }
+  .btn_wrap_mdl .red_btn:before{
+    background-image: linear-gradient(to bottom, #f80101 0%, #f80101 100%) !important;
+  }
+  #faqDirect .modal-header{
+    padding: 15px 15px 0 15px;
+    border-bottom: 0;
+  }
+  #faqDirect .modal-body{
+    text-align: center;
+  }
+  #faqDirect .modal-header h2{
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  #faqDirect .modal-header .close {
+    margin-top: -29px;
+    margin-right: -29px;
+  }
+  #faqDirect .mtop_20{
+    margin-top: 20px;
+  }
+  #faqDirect .modal-dialog{
+    position: relative;
+    top: 23%;
+  }

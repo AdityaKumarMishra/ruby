@@ -1,0 +1,362 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "httpequiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial; margin-top: 50px; padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Welcome #{@student.first_name} #{@student.last_name}"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 24px;font-size: 15px;"}
+              - if @product_line_type == "GAMSAT" && @course.slug.include?('interviewready')
+                to the Interview Ready
+              - else
+                to the #{@product_line_type}
+                %sup{ style: "margin-left: -4px;"}®
+              = "- #{@course.name} course"
+          %tr
+            %td{style: "margin-top: 30px; float: left; margin-bottom: 40px; font-size: 15px;"}
+              - if @product_line_type == "GAMSAT" && @course.slug.include?('interviewready')
+                Thank you for choosing GradReady and welcome to the Interview Ready program!
+              - elsif @product_line_type == "GAMSAT"
+                Thank you for choosing GradReady and welcome to our #{@product_line_type}
+                %sup{ style: "margin-left: -4px;"}®
+                course!
+              - else
+                Thank you for choosing GradReady and welcome to the #{@product_line_type}
+                %sup{ style: "margin-left: -4px;"}®
+                program!
+          %tr
+            %td{style: "line-height: 24px; float: left; margin-bottom: 10px;font-size: 15px;"}
+              Please take note of the following important admin points:
+          - if @product_line_type == "GAMSAT" && @course.slug.include?('interviewready')
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  All purchased online materials are now available and will expire at the end of the calendar year on the 31st of October.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  Our course manager will send you an email with more information and location details
+                  %strong about 1 week
+                  before classes are due to commence. 
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  3.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  We encourage you to join our
+                  %a{href: "https://www.facebook.com/groups/gradreadygamsatclassof2022", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} GradReady Class of 2021-2022 Alumni Network
+                  on Facebook. It is a community that allows you to get support from other students going through the interview process as well as our tutors.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 22px"}
+                As we are constantly building new features and optimising current ones, we welcome any feedback you may have - please submit your suggestion to
+                %a{href: "http://gradready.com.au/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} Website/IT Enquires.
+            %tr
+              %td{style: "margin-bottom: 12px; float: left;font-size: 15px;"}
+                Also, stay up to date on the latest free seminars and and tips through our Facebook pages
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                a.
+                %a{href: "https://www.facebook.com/GradReadyGAMSAT", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} GAMSAT Prep GradReady
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                b.
+                %a{href: "https://www.facebook.com/GradReadyUMAT", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} UCAT Prep GradReady
+
+
+          - elsif @product_line_type == "GAMSAT"
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  All purchased online material is now available and access will cease after the upcoming March GAMSAT
+                  %sup{ style: "margin-left: -4px;"}®
+                  Exam. However, you will be able to extend your access until the September GAMSAT
+                  %sup{ style: "margin-left: -4px;"}®
+                  Exam for a nominal amount. Please get in touch for specific details regarding the process when the time comes.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have signed up for a live course, please note that our course manager will send you an email with more information and location details
+                  %strong about 1 week
+                  before classes are due to commence.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  3.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have purchased a physical version of the textbook, please note that we send out textbook deliveries twice a week. You will receive an email with the delivery tracking number when your textbook has been shipped.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  4.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you purchased the online version of the textbook and would like to switch to the physical version, please submit a support ticket via the
+                  %a{href: "http://gradready.com.au/gamsat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"}Contact Us
+                  page.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  5.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have purchased a package which includes marked essays we would like to emphasise the importance of respecting the essay submission deadlines. To make workload manageable for our tutors, no late submissions will be accepted.
+            %tr
+              %td{style: "margin-top: 30px; float: left; margin-bottom: 10px; font-size: 18px; font-weight: 700; color: #007833;"}
+                Extra Goodies!
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you've signed up to one of our Attendance Courses, remember that you'll have up to 3 opportunities to review the content with our industry leading tutors! Firstly, the Problem Based Learning (PBL) classes. Secondly, our Online Selective Topic Tutorials will extend upon selected content from the PBL Classes - our tutors have hand-picked topics which they believe are highly valuable or require further focus to fully grasp. Finally, you'll have the opportunity to attend our Revision Weekend, focusing on even more high-yield content right before the GAMSAT Exam.
+                  %br
+                  %br
+                  Note that the teaching for Section 3 will be based on the content within our newly added 'Reasoning' Textbook which can be found on the LMS under the tab
+                  %strong Written Resources
+                  within the category
+                  %strong Reasoning Textbook.
+                  Teaching foundational theory for Biology, Chemistry, and Physics will not be the focus of our live classes; the amount of time spent on foundational content will be minimal. Therefore, self-preparation of BOTH the content covered in the Foundation and Reasoning Textbook is essential to maximise the learning you receive in class.
+                  %br
+                  %br
+                  The Preparation Guidelines and Post-PBL Study Guide for the PBLs, which will provide further study advice and details, can be found on the LMS under the tab
+                  %strong Written Resources
+                  within the category
+                  %strong Attendance Course Additional Resources.
+
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If the above isn't enough to keep you going, we also have regular online Q&A support sessions throughout the course of the year to help you keep your studies on track! Make sure you join the below Facebook Group and check the Announcements tab on your student portal when you see the "new" icon to keep on top of when the sessions are!
+            - if !@course.product_version.name.include?('Free Trial')
+            
+              %tr
+                %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                  %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px; margin-top: 1px;"}
+                    3.
+                  %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                    We encourage you to join our
+                    %a{href: "https://www.facebook.com/groups/gradreadygamsatclassof2023", target: "_blank", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} GradReady Class of 2022-2023 Alumni Network
+                    on Facebook. It is a community that allows you to get support from other students sitting the GAMSAT
+                    %sup{ style: "margin-left: -4px;"}®
+                    Exam as well as our tutors.
+              %tr
+                %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                  %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px; margin-top: 4px;"}
+                    4.
+                  %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                    Studying for the GAMSAT
+                    %sup{ style: "margin-left: -4px;"}®
+                    is easier, more enjoyable, and more successful with a study buddy or group. It can sometimes be tricky finding the right study buddy, which is why we are here to help by matching you up with one or more buddies based on your area and study preferences! To sign up to the program, fill out this form
+                    %a{href: "https://docs.google.com/forms/d/e/1FAIpQLSdVmH0589ACP60ibjk6CMuyXkWmB4LhtIOVo2SQajT4G17BDQ/viewform", target: "_blank", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} here
+                    or see more information under the Announcements tab on your student portal.
+
+            - if @course.product_version.name.include?('Free Trial')
+
+              %tr
+                %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                  %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px; margin-top: 4px;"}
+                    3.
+                  %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                    Studying for the GAMSAT
+                    %sup{ style: "margin-left: -4px;"}®
+                    is easier, more enjoyable, and more successful with a study buddy or group. It can sometimes be tricky finding the right study buddy, which is why we are here to help by matching you up with one or more buddies based on your area and study preferences! To sign up to the program, fill out this form
+                    %a{href: "https://docs.google.com/forms/d/e/1FAIpQLSdVmH0589ACP60ibjk6CMuyXkWmB4LhtIOVo2SQajT4G17BDQ/viewform", target: "_blank", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} here
+                    or see more information under the Announcements tab on your student portal.
+
+
+
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 22px"}
+                As we are constantly building new features and optimising current ones, we welcome any feedback you may have - please submit your suggestion to
+                %a{href: "http://gradready.com.au/gamsat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"}
+                  Website/IT Enquires.
+            %tr
+              %td{style: "margin-bottom: 12px; float: left;font-size: 15px;"}
+                Also, make sure you stay up to date on the latest free seminars and tips through our Facebook pages -
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                a.
+                %a{href: "https://www.facebook.com/GradReadyGAMSAT", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} GAMSAT Prep GradReady
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                b.
+                %a{href: "https://www.facebook.com/GradReadyUCAT/", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} UCAT Prep GradReady
+
+
+          -if @product_line_type == "UMAT"
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  All purchased online material is now available and access will cease after the upcoming July UCAT
+                  %sup{ style: "margin-left: -4px;"}®
+                  Exam.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have signed up for a live course, your local manager will send you an email with more information about 1-2 weeks before classes are due to commence.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 22px;"}
+                As we are constantly building new features and optimising current ones, we welcome any feedback you may have - please submit your suggestion to
+                %a{href: "http://gradready.com.au/umat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} Website/IT Enquires.
+
+            %tr
+              %td{style: "margin-bottom: 12px; float: left;font-size: 15px;"}
+                Also, stay up to date on the latest free seminars and and tips through our Facebook pages -
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                a.
+                %a{href: "https://www.facebook.com/GradReadyGAMSAT", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} GAMSAT Prep GradReady
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                b.
+                %a{href: "https://www.facebook.com/GradReadyUMAT", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} UCAT Prep GradReady
+
+
+          - if @product_line_type == "HSC"
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  All purchased online material are now accessible. Access will cease in December 2019, immediately after your exam for the subject.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have signed up for a live course, your local manager will send you an email with more information about 1-2 weeks before classes are due to commence.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 12px;"}
+                In April 2016 we released a completely new site built with the latest software frameworks, meaning that the site now operates at lightning speed and the foundations have been laid for even more advanced technologies that we will release to
+                %a{href: "http://gradready.com.au/hsc", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} HSC,
+                %a{href: "http://gradready.com.au/vce", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} VCE,
+                %a{href: "http://gradready.com.au/umat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} UCAT
+                and
+                %a{href: "http://gradready.com.au/gamsat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} GAMSAT
+                students throughout the year.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+                As we are constantly building new features and optimising current ones, we welcome any feedback you may have - please submit your suggestion to
+                %a{href: "http://gradready.com.au/umat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} Website/IT Enquires.
+            %tr
+              %td{style: "margin-bottom: 12px; float: left;font-size: 15px;"}
+                Also, stay up to date on the latest free seminars and and tips through our Facebook pages -
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                a.
+                %a{href: "https://www.gradready.com.au/umat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} HSC Prep GradReady,
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                b.
+                %a{href: "https://www.facebook.com/GradReadyVCE", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} VCE Prep GradReady,
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                c.
+                %a{href: "href: http://gradready.com.au/gamsat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} UCAT Prep GradReady
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                d.
+                %a{href: "https://www.gradready.com.au/umat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} GAMSAT Prep GradReady.
+
+
+          - if @product_line_type == "VCE"
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;font-size: 15px;"}
+                  1.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  All purchased online material are now accessible. Access will cease in December 2019, immediately after your exam for the subject.
+            %tr
+              %td{style: "line-height: 25px; margin-bottom: 14px; float: left;font-size: 15px;"}
+                %span{style: "float: left; width: 20px; font-weight: 700;"}
+                  2.
+                %span{style: "display: inline-block; width: 90%;font-size: 15px;"}
+                  If you have signed up for a live course, your local manager will send you an email with more information about 1-2 weeks before classes are due to commence.
+            %tr
+              %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px; margin-bottom: 22px;"}
+                In April 2016 we released a completely new site built with the latest software frameworks, meaning that the site now operates at lightning speed and the foundations have been laid for even more advanced technologies that we will release to
+                %a{href: "http://gradready.com.au/vce", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} VCE,
+                %a{href: "http://gradready.com.au/hsc", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} HSC,
+                %a{href: "http://gradready.com.au/umat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} UCAT
+                and
+                %a{href: "http://gradready.com.au/gamsat-preparation-courses", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} GAMSAT
+                students throughout the year.
+            %tr
+              %td{style: "margin-bottom: 12px; float: left;font-size: 15px;"}
+                Also, stay up to date on the latest free seminars and and tips through our Facebook pages -
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                a.
+                %a{href: "https://www.facebook.com/GradReadyVCE", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} VCE Prep GradReady,
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                b.
+                %a{href: "https://www.facebook.com/GradReadyHSC", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} HSC Prep GradReady,
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                c.
+                %a{href: "https://www.facebook.com/GradReadyUMAT", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} UCAT Prep GradReady
+            %tr
+              %td{style: "margin-bottom: 3px; float: left;"}
+                d.
+                %a{href: "https://www.facebook.com/GradReadyGAMSAT", style: "color: #007833; text-decoration: underline; font-style: italic;font-size: 15px; font-weight: 700;"} GAMSAT Prep GradReady.
+
+          %tr
+            %td{style: "margin: 22px 0; float: left;line-height: 25px;font-size: 15px;"}
+              Our priority is to make sure that the course lives up to everything we have promised and more. If you have any questions about anything at all, please do not hesitate to
+              -if @product_line_type == "UMAT"
+                %a{href: "http://gradready.com.au/umat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} get in touch.
+              -elsif @product_line_type == "GAMSAT" && @course.slug.include?('interviewready')
+                %a{href: "http://gradready.com.au/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} get in touch.
+              -else
+                %a{href: "http://gradready.com.au/gamsat-preparation-courses/contact", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} get in touch.
+          %tr
+            %td{style: "margin-top: 22px; float: left; line-height: 25px;font-size: 15px;"}
+              GradReady students have increased their scores by 20+ percentile points on average, 8 years in a row using GradReady’s Industry-leading Approach and Learning Technologies. In addition, over 90% of our Interview Ready students have gained medical school admission over 4 years - an incredible achievement for our students and tutors. For more information, please see
+              -if @product_line_type == "UMAT"
+                %a{href: "https://gradready.com.au/umat-preparation-courses/student_testimonials", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} here
+                \.
+              -else
+                %a{href: "https://gradready.com.au/gamsat-preparation-courses/student_testimonials", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;font-size: 15px;"} here
+                \.
+          %tr
+            %td{style: "margin-top: 14px; float: left; line-height: 25px;font-size: 15px;"}
+              GradReady is a technology company that helps over 1,000 students each year through Adaptive Learning technologies - we make learning more engaging and efficient. Established in 2010 by a group of medical doctors from the University of Melbourne, we have grown to operate in 5 cities nationwide.
+          %tr
+            %td{style: "margin-top: 14px;margin-bottom: 72px; float: left; line-height: 25px;font-size: 15px;"}
+              Throughout the course of this year, we will be bringing even more advanced resources and materials to GAMSAT
+              %sup{ style: "margin-left: -4px;"}®
+              , UCAT
+              %sup{ style: "margin-left: -4px;"}®
+              preparation. For more information please see:
+              %a{href: "https://gradready.com.au/", style: "color: #007833; text-decoration: underline; font-style: italic; font-weight: 700;"} https://gradready.com.au/
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              GradReady Student Success Team

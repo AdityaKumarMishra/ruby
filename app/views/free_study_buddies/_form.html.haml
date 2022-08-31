@@ -1,0 +1,12 @@
+= simple_form_for(@free_stud_buddy) do |f|
+  .form-group
+    = f.input :title, class: "form-control"
+  .form-group
+    = f.input :info_text, label: "Sub Title", class: "form-control"
+  .form-group
+    = f.input :button_text, class: "form-control"
+  .form-group
+    = f.input :description, label: "Description", as: :ckeditor, :input_html => { :ckeditor => { :height => 500 } }
+    = f.input :active, :as => :hidden, :input_html => { :value => true }
+  .form-actions
+    = f.button :submit, "Update"

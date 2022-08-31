@@ -1,0 +1,35 @@
+%h4
+  =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+  - if product_line == 'UMAT'
+    400+ page Online Textbook
+  - elsif product_line == 'GAMSAT'
+    1200+ Page Textbook (Online or Hardcopy)
+
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+- if product_line == 'UMAT'
+  %p
+    The text comprehensively covers the UCAT
+    %sup®
+    , through sections on overarching strategies (general UCAT ...
+  .show_full_content
+    The text comprehensively covers the UCAT
+    %sup®
+    , through sections on overarching strategies (general UCAT
+    %sup®
+    Strategies + Study Guides), Logical Reasoning (8 topics), Understanding People (3 topics) and Non-Verbal Reasoning (8 topics).
+- elsif product_line == 'GAMSAT'
+  %p
+    The textbook comprehensively covers all 3 sections...
+  .show_full_content
+    The textbook comprehensively covers all 3 Sections of the GAMSAT
+    %sup ®
+    exam. It includes chapters on overarching strategies (general GAMSAT
+    %sup ®
+    Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all foundational sciences (37 topics).
+    %br
+    Updated with the new Reasoning Textbook providing logical reasoning and critical thinking strategies for Section 3, supplemented by our prized worked examples chapter featuring annotated working out and detailed explanations.
+

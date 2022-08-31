@@ -1,0 +1,1172 @@
+$color_1: #696969;
+$color_2: #fff;
+$color_3: #00863e;
+$color_4: #010101;
+$color_5: #3b3a3a;
+$color_6: #428bca;
+$color_7: #007833;
+$color_8: #dadada;
+$color_9: #aaa;
+$font_family_1: "museo-slab";
+$background_color_1: #fff;
+$background_color_2: #eeeeee;
+$border_color_1: #eeeeee;
+
+/*Hide all except first fieldset*/
+/*progressbar*/
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+/*=====================media query====================*/
+/* .control-group.mbot20 {
+    margin-bottom: 9px;
+} */
+.btn_submit_cntr {
+    width: 100%;
+    text-align: center;
+}
+#msform {
+  fieldset* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  max-width: 1054px;
+  width: 100%;
+  margin: 50px auto;
+  position: relative;
+  fieldset {
+    background: white;
+    border-radius: 9px;
+    border: 1px solid #dcdcdc;
+    padding: 10px 22px 32px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    margin-bottom: 30px;
+    &:not(:first-of-type) {
+      display: none;
+    }
+  }
+  fieldset.signup_flds {
+    padding: 10px 210px 32px;
+  }
+}
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
+.panel-body.cstm_body_panel.text-center.padd_bttm10 {
+    padding-bottom: 50px;
+}
+
+.full_container {
+  width: 100%;
+  float: left;
+  padding: 0 30px;
+}
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  counter-reset: step;
+  padding-left: 0;
+  width: 100%;
+  text-align: center;
+  padding-right: 12px;
+  li {
+    list-style-type: none;
+    color: #696969;
+    text-transform: uppercase;
+    font-size: 15px;
+    width: 195px;
+    float: none;
+    position: relative;
+    padding: 14px 0px 9px 13px;
+    margin-left: -25px;
+    padding-left: 25px;
+    display: inline-block;
+    text-align: center;
+    &:before {
+      content: "";
+      background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/incomplt_arrow.png") no-repeat 0 0;
+      position: absolute;
+      right: 0;
+      height: 45px;
+      width: 37px;
+      display: inline-block;
+      right: -25px;
+      top: 0;
+      z-index: 9;
+      background-size: 47px;
+    }
+    &:last-child {
+      &:before {
+        content: "";
+        background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/last_arrow.png") no-repeat 0 0;
+        position: absolute;
+        right: 0;
+        height: 45px;
+        width: 37px;
+        display: inline-block;
+        right: -37px;
+        top: 0;
+        z-index: 9;
+        background-size: 35px;
+      }
+    }
+    &:first-child {
+      &:after {
+        content: none;
+      }
+    }
+  }
+  li.active {
+    color: $color_2;
+    &:before {
+      content: "";
+      background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/current_arrow.png") no-repeat 0 0;
+      position: absolute;
+      right: 0;
+      height: 45px;
+      width: 50px;
+      display: inline-block;
+      right: -37px;
+      top: 0;
+      z-index: 9;
+      background-size: 47px;
+    }
+  }
+  li.current {
+    color: $color_2;
+    &:before {
+      content: "";
+      background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/active_arrow.png") no-repeat 0 0;
+      position: absolute;
+      right: 0;
+      height: 45px;
+      width: 50px;
+      display: inline-block;
+      right: -37px;
+      top: 0;
+      z-index: 9;
+      background-size: 47px;
+    }
+  }
+}
+.signup_nav {
+    width: 100%;
+    margin-bottom: 42px;
+    margin-top: 40px;
+  ul {
+    li {
+      background: #d4d4d4;
+      color: $color_2;
+      display: inline-block;
+      padding: 10px 8px 11px 12px;
+      position: relative;
+      font-size: 14px;
+      margin-right: 21px;
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        display: block;
+        float: left;
+        color: $color_2;
+        font-size: 14px;
+      }
+      &:visited {
+        background: #00863e;
+        color: $color_2;
+        display: inline-block;
+      }
+    }
+    li.completed {
+      background: #00863e;
+      &:after {
+        content: "";
+        background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/compltd_arrow.png") no-repeat 0 0;
+        position: absolute;
+        right: 0;
+        height: 42px;
+        width: 29px;
+        display: inline-block;
+        right: -25px;
+        top: 0;
+        z-index: 9;
+      }
+    }
+    li.ful_completed {
+      background: #00863e;
+      &:after {
+        content: "";
+        background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/fully_compltd.png") no-repeat 0 0;
+        position: absolute;
+        right: 0;
+        height: 42px;
+        width: 29px;
+        display: inline-block;
+        right: -25px;
+        top: 0;
+        z-index: 9;
+      }
+    }
+    li.active {
+      background: #0b6b37;
+    }
+    li.current {
+      background: rgba(0,134,62,0.60);
+      color:#fff;
+    }
+  }
+}
+.form_title {
+  font-size: 28px;
+  color: $color_3;
+  font-family: $font_family_1;
+  margin-bottom: 52px;
+  span {
+    font-size: 20px;
+    color: $color_4;
+  }
+}
+.btm_line {
+  border-bottom: 1px solid #010101;
+}
+.cstm_frm {
+  label {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+  input {
+    margin-bottom: 20px;
+    color: #333;
+    height: 42px;
+    border-radius: 4px;
+    font-weight: normal;
+    font-size: 15px;
+  }
+  .tc {
+    font-size: 15px;
+    line-height: 0px;
+    text-align: left;
+  }
+}
+.cstm_frm .default_green_btn {
+  font-size: 16px;
+  max-width: 140px;
+  width: 100%;
+  height: 40px;
+  background: #00863e;
+  border-radius: 4px;
+  color: $color_2;
+  margin-top: 15px;
+  margin-right: 5px;
+  padding-top: 8px;
+  &:hover {
+    box-shadow: 0 0 5px #00863e;
+    color: $color_3;
+    background: #fff;
+  }
+  &:focus {
+    box-shadow: 0 0 5px #00863e;
+    color: $color_3;
+    background: #fff;
+  }
+}
+.cstm_frm .default_green_btn.payment_btn_toggle{
+  max-width: 207px;
+}
+.default_dark_green_btn {
+  font-size: 16px;
+  max-width: 140px;
+  width: 100%;
+  height: 40px;
+  background: #00863e;
+  border-radius: 4px;
+  color: $color_2;
+  margin-top: 15px;
+  margin-right: 5px;
+}
+.default_green_btn.dis_none_btn {
+  display: none;
+}
+.outer_form {
+  width: 100%;
+  float: left;
+  text-align: left;
+}
+.form_sub_title {
+  font-size: 28px;
+  color: $color_3;
+  font-family: $font_family_1;
+  margin-bottom: 30px;
+  text-align: left;
+}
+.dark_green_btn {
+  background: #025227;
+}
+body.outer_form {
+  overflow-x: hidden;
+}
+.form-control.cstm_select {
+  height: 42px;
+}
+.panel.city_cstm_panel {
+  max-width: 550px;
+  width: 100%;
+  margin: 0 auto;
+  ul {
+    width: 100%;
+    li {
+      display: inline-block;
+      max-width: 130px;
+      width: 100%;
+      vertical-align: top;
+      margin-bottom: 10px;
+      a {
+        text-decoration: none;
+        text-transform: uppercase;
+        float: left;
+        width: 100%;
+        white-space: normal;
+      }
+    }
+    li.active {
+      a {
+        background: #00863e;
+        color: $color_2;
+      }
+    }
+  }
+}
+.panel-heading.cstm_head_panel {
+  background: #00863e;
+  color: $color_2;
+  font-size:15px;
+}
+.cstm_tbl_head {
+  background: #00863e;
+  color: $color_2;
+}
+.cstm_tbl_head th{
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.panel-body.cstm_body_panel {
+  background: #eeeeee;
+}
+.panel_green_btn {
+  border-radius: 0px;
+  padding: 8px 12px;
+  margin: 0;
+}
+.panel_btn {
+  border-radius: 0px;
+  padding: 8px 12px;
+  margin: 0;
+}
+.cstm_panel_desc {
+  width: 100%;
+  float: left;
+  margin-top: 30px;
+  table {
+    width: 100%;
+    float: left;
+  }
+  .table-striped {
+    >tbody {
+      >tr {
+        &:nth-of-type(odd) {
+          background: #eeeeee;
+        }
+      }
+    }
+  }
+}
+.unvrsty_detail {
+  padding: 10px 10px;
+  float: left;
+  width: 100%;
+  p {
+    font-size: 16px;
+  }
+}
+.unvrsty_schedule {
+  padding: 10px 10px;
+  float: left;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+.cstm_panel_desc_content {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  >.row {
+    &:nth-child(odd) {
+      background: #eeeeee;
+    }
+  }
+}
+.panel_summary {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  label {
+    text-align: left;
+    float: left;
+  }
+  span {
+    text-align: left;
+    float: left;
+  }
+}
+.course_selction_wrapper {
+  min-height: 222px;
+}
+.enrolment_wrapper {
+  height: 123px;
+}
+.course_wrapper {
+  height: 100px;
+}
+.panel.city_cstm_panel.course_wrapper {
+  margin-top: 12px;
+}
+.mtop10 {
+  margin-top: 10px;
+}
+.pad_left {
+  padding-left: 0px;
+}
+.brd_btm {
+  border-bottom: 1px solid #cccccc;
+}
+.row_pad {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.tc {
+  a {
+    color: $color_6;
+    vertical-align: middle;
+  }
+  input {
+    height: auto;
+  }
+}
+.table {
+  .cstm_tbl_content {
+    >tr {
+      &:nth-child(odd) {
+        background: #eeeeee;
+      }
+    }
+  }
+}
+.payment_card_wrapper {
+  text-align: left;
+  h1 {
+    margin-bottom: 0px;
+  }
+}
+#bank-pay {
+  h4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+#paypal-pay {
+  h4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+.option_input {
+  width: 20px;
+  height: 20px;
+  &:checked {
+    &:after {
+      content: "";
+      background: #00863e;
+      position: relative;
+      width: 11px;
+      height: 11px;
+      visibility: visible;
+      display: block;
+      border-radius: 14px;
+      right: 0;
+      top: 15px;
+      left: 4px;
+    }
+  }
+}
+
+.table-striped {
+  >.cstm_tbl_content {
+    >tr {
+      >td {
+        line-height: 34px;
+      }
+    }
+  }
+}
+#course {
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: $background_color_1;
+  height: 33px;
+}
+#city {
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: $background_color_1;
+  height: 33px;
+}
+.custom-checkbox {
+  >[type="checkbox"] {
+    margin-bottom: 0px !important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    &:not(:checked) {
+      position: absolute;
+      left: -9999px;
+      &+label {
+        position: relative;
+        padding-left: 25px;
+        cursor: pointer;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-top: -12px;
+          width: 23px;
+          height: 23px;
+          border: 1px solid #ddd;
+          background: #ffffff;
+          border-radius: 2px;
+        }
+        &:after {
+          font: normal normal normal 14px/1 FontAwesome;
+          content: '\f00c';
+          position: absolute;
+          top: 50%;
+          margin-top: -8px;
+          left: 4px;
+          color: $color_7;
+          transition: all .2s;
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+      &:focus {
+        &+label {
+          &:before {
+            border: 1px solid #66afe9;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          }
+        }
+      }
+    }
+    &:checked {
+      position: absolute;
+      left: -9999px;
+      &+label {
+        position: relative;
+        padding-left: 25px;
+        cursor: pointer;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          margin-top: -12px;
+          width: 23px;
+          height: 23px;
+          border: 1px solid #ddd;
+          background: #ffffff;
+          border-radius: 2px;
+        }
+        &:after {
+          font: normal normal normal 14px/1 FontAwesome;
+          content: '\f00c';
+          position: absolute;
+          top: 50%;
+          margin-top: -8px;
+          left: 4px;
+          color: $color_7;
+          transition: all .2s;
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      &:focus {
+        &+label {
+          &:before {
+            border: 1px solid #66afe9;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+          }
+        }
+      }
+    }
+    &:disabled {
+      &:not(:checked) {
+        &+label {
+          &:before {
+            box-shadow: none;
+            background-color: $background_color_2;
+            border-color: $border_color_1;
+            cursor: not-allowed;
+            opacity: 1;
+            color: $color_8;
+          }
+          &:hover {
+            &:before {
+              border: 1px solid #E4E4E4 !important;
+            }
+          }
+        }
+      }
+      &:checked {
+        &+label {
+          &:before {
+            box-shadow: none;
+            background-color: $background_color_2;
+            border-color: $border_color_1;
+            cursor: not-allowed;
+            opacity: 1;
+            color: $color_8;
+          }
+          &:after {
+            color: $color_8;
+            cursor: not-allowed;
+          }
+          &:hover {
+            &:before {
+              border: 1px solid #E4E4E4 !important;
+            }
+          }
+        }
+      }
+      &+label {
+        color: $color_9;
+        cursor: not-allowed;
+      }
+    }
+  }
+  >label {
+    margin-bottom: 0px !important;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    &:hover {
+      &:before {
+        border: 1px solid #88D2FF !important;
+      }
+    }
+  }
+  >[type="checkbox"][data-indeterminate] {
+    &+label {
+      &:after {
+        content: '\f068';
+        content: '\f068';
+        left: 6px;
+        left: 6px;
+        opacity: 1;
+        opacity: 1;
+        transform: scale(1);
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.button_to input.btn.btn-danger {
+    color: #fff;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+  .signup_nav {
+    width: 81%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .signup_nav {
+      margin: 0 auto;
+      width: 92%;
+  }
+
+  .mob_padd_left {
+    padding-left: 0px;
+  }
+
+  .panel.city_cstm_panel {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+}
+#progressbar li {
+
+    font-size: 13px;
+    width: 164px;
+
+}
+}
+@media only screen and (min-width: 260px) and (max-width: 767px) {
+
+  .full_container .enrollment_page p{
+    padding: 11px 0px;
+
+  }
+  #progressbar li:before, #progressbar li.active:before, #progressbar li:last-child:before{display:none}
+  .full_container {
+    padding: 0px 19px 20px 11px;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+  #msform {
+    fieldset.signup_flds {
+      padding: 0px 10px 20px 10px;
+      padding: 10px 15px 32px;
+    }
+  }
+
+  #msform {
+    #newSignUpDiv.inner_new_pad {
+      padding: 0px 10px 20px 10px;
+      padding: 10px 15px 32px;
+    }
+  }
+
+  .form_sub_title {
+    font-size: 21px;
+    margin-top: 0;
+  }
+  .panel.city_cstm_panel {
+    ul {
+      text-align: center;
+      li {
+        &:nth-child(5) {
+          margin-left: 0%;
+        }
+      }
+    }
+  }
+  #course {
+    width: 100%;
+  }
+  .unvrsty_detail {
+    padding: 10px 0px;
+    h4 {
+      font-size: 18px;
+    }
+    p {
+      text-align: left;
+    }
+  }
+  .unvrsty_schedule {
+    padding: 10px 0px;
+    p {
+      font-size: 18px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+  }
+  .mob_padd_left {
+    padding-left: 0px;
+  }
+  .cstm_frm {
+    input {
+      margin-bottom: 0px;
+    }
+    .tc {
+      line-height: 18px;
+    }
+    label {
+      font-size: 15px;
+    }
+  }
+  #bank-pay {
+    h4 {
+      font-size: 18px;
+      text-align: left;
+    }
+    p {
+      font-size: 18px;
+      text-align: left;
+    }
+  }
+  #paypal-pay {
+    h4 {
+      font-size: 18px;
+      text-align: left;
+    }
+    p {
+      font-size: 18px;
+      text-align: left;
+    }
+  }
+  #bank-pay-btn {
+    float: left;
+    margin-top: -13px;
+    margin-left: 29px;
+    width: 100%;
+    font-size: 14px;
+  }
+  #cb1 {
+    float: left;
+  }
+  .form-control.mb_mbottm {
+    margin-bottom: 10px;
+  }
+  .tbl_responsive {
+    width: 100%;
+    float: left;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+  }
+  .table.mb_bottm_scroll {
+    margin-bottom: 10px;
+  }
+  .control-label.mb_bottm10 {
+    margin-top: 10px;
+  }
+  .course_selction_wrapper {
+    min-height: 0px;
+  }
+  #progressbar {
+    li {
+      width: 100%;
+      margin-left: 0;
+      text-align: left;
+    }
+    li.one_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/one.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.one_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+    li.two_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/two.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.two_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+    li.three_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/three.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.three_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+    li.four_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/four.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.four_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+    li.five_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/five.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.five_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+    li.six_no {
+      &::before {
+        background: rgba(0, 0, 0, 0) url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/six.png") no-repeat scroll 11px -14px;
+        display: inline-block;
+        height: 27px;
+        left: 0;
+        right: 0;
+        top: 11px;
+        width: 30px;
+      }
+    }
+    li.six_no.active {
+      &::before {
+        background-position: 11px 4px;
+      }
+    }
+  }
+  .cstm_panel_desc {
+    margin-top: 15px;
+  }
+  .form_title {
+    margin-bottom: 25px;
+  }
+  .payment_card_wrapper h1 {
+    font-size: 27px;
+  }
+}
+/*=======enrollment page======*/
+
+.enrollment_page h2{
+  font-size: 28px;
+  color: #00863e;
+  font-family: "museo-slab";
+  margin-bottom: 30px;
+  margin-top: 26px;
+}
+.enrollment_page p{
+  padding: 11px 163px;
+  font-size: 17px;
+  line-height: 25px;
+  text-align: center;
+}
+a.button.btn.go_to_dashbord {
+  max-width: 370px;
+  line-height: 26px;
+}
+
+/*=========== background page ======*/
+input.remove_height {
+    height: auto;
+}
+input#source {
+    width: 439px;
+    margin-top: 10px;
+}
+.checkbox_row input {
+  margin: 0px;
+  height: auto;
+}
+.controls.mg_bottom20.width60 {
+    width: 439px;
+}
+.outer_form {
+  .mg_bottom20 {
+    margin-bottom: 10px;
+  }
+  .mg_top10 {
+    margin-top: 10px;
+  }
+}
+
+.checkbox_row [type="checkbox"] {
+  &:not(:checked), &:checked {
+    position: absolute;
+    left: -9999px;
+    display: none;
+  }
+  &:not(:checked) + label, &:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+  }
+  &:not(:checked) + label:before, &:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid #ccc;
+    background: #fff;
+    border-radius: 2px;
+  }
+  &:not(:checked) + label:after, &:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: .1em;
+    left: 3px;
+    font-size: 1.3em;
+    line-height: 0.8;
+    color: #09ad7e;
+    transition: all .2s;
+  }
+  &:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+  }
+  &:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+a#newSignUpLink{
+  color: #00863e;
+  cursor: pointer;
+}
+
+a#newSignInLink{
+  color: #000000;
+  cursor: pointer;
+}
+.cstm_frm input.remembercheckbox{
+  margin-top: 4px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#newSignUpDiv .simple_form.new_user .form-group label abbr[title]{
+  border-bottom: 0px;
+}
+
+.outer_form .form-group label abbr[title]{
+  border-bottom: 0px;
+}
+
+.outer_form .control-group label abbr[title]{
+  border-bottom: 0px;
+}
+
+
+
+.dd-online-radio {
+  margin:0 0 0.75em 0;
+}
+
+.dd-online-radio input[type="radio"] {
+    display:none;
+}
+.dd-online-radio input[type="radio"] + label {
+    color: #000;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+.dd-online-radio input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-8px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+.dd-online-radio input[type="radio"] + label span {
+    background-color: #ddd;
+    border: solid 2px #ccc;
+    }
+
+.dd-online-radio input[type="radio"]:checked + label span{
+     background-color:#007833;
+}
+
+.dd-online-radio input[type="radio"] + label span,
+.dd-online-radio input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+.paymnt_radio{
+  display:inline-block;
+}
+
+#newSignUpDiv  form{
+  width: 70%;
+  margin: 0px auto;
+}
+
+#newSignInDiv form {
+  width: 70%;
+  margin: 0px auto;
+}
+
+.dashboard-container .new_shared_links a:not(.btn):visited, .dashboard-container .new_shared_links a:not(.btn):hover, .application-container .new_shared_links a:not(.btn):visited, .application-container .new_shared_links a:not(.btn):hover {
+  color: #00863e;
+
+}
+.new_shared_links{
+  font-size: 15px;
+}
+
+.cstm_frm.forgot_psw .default_green_btn{
+  max-width: 180px;
+}
+
+.cstm_frm .user_address_country{
+  margin-top: 0px;
+}
+.order-word-break .panel_summary span {
+  word-break: break-word;
+  word-break: break-all;
+}
+#newSignUpDiv.inner_new_pad{
+  padding: 10px 210px 32px;
+}
+
+
+@media only screen and (min-width: 260px) and (max-width: 767px) {
+
+  a.button.btn.go_to_dashbord{
+   font-size:13px;
+  }
+
+  }

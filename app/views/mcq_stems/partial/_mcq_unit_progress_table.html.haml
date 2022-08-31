@@ -1,0 +1,118 @@
+= will_paginate mcq_stems, renderer: BootstrapPagination::Rails if mcq_stems.present?
+#filterrific_results.table_scroll{style: 'transform: rotateX(180deg);'}
+  %table.gr-table.gr-table-bordered.table-hover#stem_table{style: 'transform: rotateX(180deg);'}
+    %thead
+      %tr
+        %th MCQ Stem ID & Title
+        %th.brdr_lf_nn
+        %th Tags
+        %th Work Status
+        %th Time of Last Work Status Update
+        %th Published Status
+        %th Appears in
+        %th Author
+        %th Reviewer 1
+        %th Reviewer 2
+        %th Video Explainer
+        %th Video Explanation Reviewer
+        %th MCQ Unit Pool
+        %th Overall Score
+        %th Stem Difficulty
+        %th Number of Questions
+        %th Number of Videos
+        %th Number of Videos Published
+        %th Created on
+        %th Last Updated on
+        %th.brdr_rt_nn Actions
+
+    %tbody.mcq-font
+      -if mcq_stems.present?
+        - mcq_stems.each do |mcq_stem|
+          - has_locked_exams =  mcq_stem.section_items.includes(section: :sectionable).map(&:section).map(&:sectionable).map(&:locked).reject(&:blank?).first
+          %tr
+            %td.col-md-2= link_to "#{mcq_stem.id.to_s} - #{mcq_stem.title.to_s}", edit_mcq_stem_path(mcq_stem), target: :_blank
+            %td
+              .userdown-xls
+                = link_to "Actions", '#', class: 'dropdown-toggle btn btn-primary', "data-toggle" => "dropdown"
+                %ul.dropdown-menu.drop-menu.user-xlsx-down
+                  %li
+                    = link_to 'Update MCQ', edit_mcq_stem_path(mcq_stem), target: :_blank
+                  %li
+                    - if mcq_stem.work_directory.present?
+                      %a{href: "#{mcq_stem.work_directory}", target: :_blank}
+                        Work Directory
+                    - else
+                      %a{style: 'cursor: not-allowed;', disabled: true}
+                        There is currently no Work Directory Link
+                  %li
+                    = link_to 'Student View', mcq_stem_path(mcq_stem), target: :_blank
+            %td.col-md-2
+              - mcq_stem.tags.each do |t|
+                %span.label.label-default= t.name
+            %td.col-md-2= select_tag(:work_status, options_for_select(work_status_collection, selected: mcq_stem.work_status), class: 'work_status', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= mcq_stem.work_status_updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+            %td.col-md-2= mcq_stem.status.split('_').join(' ').titleize if mcq_stem.status.present?
+            %td.col-md-2= appear_in_exam mcq_stem
+            %td.col-md-2= mcq_stem.try(:author).try(:full_name)
+            %td.col-md-2= select_tag(:reviewer_id, options_for_select(tutors_collections, selected: mcq_stem.reviewer_id.present? ? mcq_stem.reviewer_id : 2), class: 'select_reviewer1', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= select_tag(:reviewer2_id, options_for_select(tutors_collections, selected: mcq_stem.reviewer2_id.present? ? mcq_stem.reviewer2_id : 2), class: 'select_reviewer2', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= select_tag(:video_explainer_id, options_for_select(tutors_collections, selected: mcq_stem.video_explainer_id.present? ? mcq_stem.video_explainer_id : 2 ), class: 'select_video_explainer', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= select_tag(:video_reviewer_id, options_for_select(tutors_collections, selected: mcq_stem.video_reviewer_id.present? ? mcq_stem.video_reviewer_id : 2), class: 'update_video_reviewer', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= has_locked_exams == true ? (mcq_stem.pool.present? ? mcq_stem.pool.titleize : '') : select_tag(:pool, options_for_select(pool_collection, selected: mcq_stem.pool), class: 'mcq_stem_pool', mcq_stem_id: mcq_stem.id)
+            %td.col-md-2= mcq_stem.similarity_score
+            %td.col-md-2= difficulty_to_human mcq_stem.difficulty
+            %td.col-md-1= mcq_stem.mcqs.count
+            %td.col-md-1= mcq_stem.mcqs.map(&:mcq_video).compact.count
+            %td.col-md-1= mcq_stem.mcqs.map{|mcq| mcq.mcq_video if mcq.mcq_video.present? &&  mcq.mcq_video.video.present? && mcq.mcq_video.published == true}.compact.count
+            %td.col-md-2= mcq_stem.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+            %td.col-md-2= mcq_stem.updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+            %td= link_to 'Destroy', mcq_stem, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm' unless has_locked_exams == true
+      -else
+        -if section_items.present?
+          - section_items.group_by(&:mcq_stem).each do |section_item|
+            - mcq_stem = section_item[0]
+            - has_locked_exams =  mcq_stem.section_items.includes(section: :sectionable).map(&:section).map(&:sectionable).map(&:locked).reject(&:blank?).first
+            %tr
+              %td.col-md-2= link_to "#{mcq_stem.id.to_s} - #{mcq_stem.title.to_s}", edit_mcq_stem_path(mcq_stem), target: :_blank
+              %td
+                .userdown-xls
+                  = link_to "Actions", '#', class: 'dropdown-toggle btn btn-primary', "data-toggle" => "dropdown"
+                  %ul.dropdown-menu.drop-menu.user-xlsx-down
+                    %li
+                      = link_to 'Update MCQ', edit_mcq_stem_path(mcq_stem), target: :_blank
+                    %li
+                      - if mcq_stem.work_directory.present?
+                        %a{href: "#{mcq_stem.work_directory}", target: :_blank}
+                          Work Directory
+                      - else
+                        %a{style: 'cursor: not-allowed;', disabled: true}
+                          There is currently no Work Directory Link
+                    %li
+                      = link_to 'Student View', mcq_stem_path(mcq_stem), target: :_blank
+              %td.col-md-2
+                - mcq_stem.tags.each do |t|
+                  %span.label.label-default= t.name
+              %td.col-md-2= select_tag(:work_status, options_for_select(work_status_collection, selected: mcq_stem.work_status), class: 'work_status', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= mcq_stem.work_status_updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+              %td.col-md-2= mcq_stem.status.split('_').join(' ').titleize if mcq_stem.status.present?
+              %td.col-md-2= appear_in_exam mcq_stem
+              %td.col-md-2= mcq_stem.try(:author).try(:full_name)
+              %td.col-md-2= select_tag(:reviewer_id, options_for_select(tutors_collections, selected: mcq_stem.reviewer_id.present? ? mcq_stem.reviewer_id : 2), class: 'select_reviewer1', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= select_tag(:reviewer2_id, options_for_select(tutors_collections, selected: mcq_stem.reviewer2_id.present? ? mcq_stem.reviewer2_id : 2), class: 'select_reviewer2', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= select_tag(:video_explainer_id, options_for_select(tutors_collections, selected: mcq_stem.video_explainer_id.present? ? mcq_stem.video_explainer_id : 2 ), class: 'select_video_explainer', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= select_tag(:video_reviewer_id, options_for_select(tutors_collections, selected: mcq_stem.video_reviewer_id.present? ? mcq_stem.video_reviewer_id : 2), class: 'update_video_reviewer', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= has_locked_exams == true ? (mcq_stem.pool.present? ? mcq_stem.pool.titleize : '') : select_tag(:pool, options_for_select(pool_collection, selected: mcq_stem.pool), class: 'mcq_stem_pool', mcq_stem_id: mcq_stem.id)
+              %td.col-md-2= mcq_stem.similarity_score
+              %td.col-md-2= difficulty_to_human mcq_stem.difficulty
+              %td.col-md-1= mcq_stem.mcqs.count
+              %td.col-md-1= mcq_stem.mcqs.map(&:mcq_video).compact.count
+              %td.col-md-1= mcq_stem.mcqs.map{|mcq| mcq.mcq_video if mcq.mcq_video.present? &&  mcq.mcq_video.video.present? && mcq.mcq_video.published == true}.compact.count
+              %td.col-md-2= mcq_stem.created_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+              %td.col-md-2= mcq_stem.updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+              %td= link_to 'Destroy', mcq_stem, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm' unless has_locked_exams == true
+              - if parent_resource&.locked.blank?
+                -if parent_resource.class.name == 'OnlineExam'
+                  %td= link_to 'Remove Question', remove_question_online_exam_section_section_item_path(parent_resource, section, section_item[1].first), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+                - else
+                  %td= link_to 'Remove Question', remove_question_diagnostic_test_section_section_item_path(parent_resource, section,  section_item[1].first), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+

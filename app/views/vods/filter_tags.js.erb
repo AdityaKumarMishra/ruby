@@ -1,0 +1,32 @@
+<% if @level2_tags.present? %>
+  <% level2_tags ="" %>
+  <% level2_tags += "<option value=''>All</option>" %>
+
+  <% @level2_tags.each do |tag| %>
+    <% level2_tags += "<option value='#{tag.id}'>#{tag.name}</option>" %>
+  <%end%>
+  $("#vods_filter_by_level2_tag").html("");
+  $("#vods_filter_by_level2_tag").html("<%= level2_tags.html_safe %>");
+<% end %>
+
+<% if @level3_tags.present? %>
+  <% level3_tags ="" %>
+  <% level3_tags += "<option value=''>All</option>" %>
+
+  <% @level3_tags.each do |tag| %>
+    <% level3_tags += "<option value='#{tag.id}'>#{tag.name}</option>" %>
+  <%end%>
+  $("#vods_filter_by_level3_tag").html("");
+  $("#vods_filter_by_level3_tag").html("<%= level3_tags.html_safe %>");
+<% end %>
+
+<% if (!@level2_tags.nil? && @level2_tags.blank?) || (!@level3_tags.nil? && @level3_tags.blank?)  %>
+  <% level_tags ="" %>
+  <% level_tags += "<option value=''>All</option>" %>
+
+  $("#vods_filter_by_level2_tag").html("");
+  $("#vods_filter_by_level2_tag").html("<%= level_tags.html_safe %>");
+
+  $("#vods_filter_by_level3_tag").html("");
+  $("#vods_filter_by_level3_tag").html("<%= level_tags.html_safe %>");
+<% end %>

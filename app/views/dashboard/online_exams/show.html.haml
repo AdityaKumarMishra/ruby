@@ -1,0 +1,74 @@
+.container
+  .row
+    .panel.panel-warning
+      .panel-heading
+        %h1.panel-title
+          %strong= @exam.title
+      .panel-body
+        - if @exam_sections.present?
+          - if @exam.date_finished.present?
+            .col-md-10.col-md-offset-1.mg-top
+              .panel.panel-success
+                .panel-heading
+                  %h1.panel-title
+                    %strong Exam sections:
+                .panel-body
+                .table-responsive
+                  %table.table.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Title
+                        %th Num questions
+                        %th Difficulty
+                        %th Duration
+                        %th Status
+                    %tbody
+                      - @exam_sections.each do |es|
+                        %tr
+                          %td= es.title
+                          %td
+                            - if es.mcqs.present?
+                              = es.mcqs.size
+                            - else
+                              %i No mcqs.
+                          %td= es.dificultyRating
+                          %td Duration
+                          %td Status
+              = render 'dashboard/partial/correctness_list'
+
+          - else
+            .panel.panel-success
+              .panel-heading
+                %h1.panel-title
+                  %strong Exam sections:
+              .panel-body
+              .table-responsive
+                %table.table.table-bordered.table-hover
+                  %thead
+                    %tr
+                      %th Title
+                      %th Num questions
+                      %th Difficulty
+                      %th Duration
+                      %th Status
+                  %tbody
+                    - @exam_sections.each do |es|
+                      %tr
+                        %td= es.title
+                        %td
+                          - if es.mcqs.present?
+                            = es.mcqs.size
+                          - else
+                            %i No mcqs.
+                        %td= es.dificultyRating
+                        %td Duration
+                        %td Status
+        - else
+          There are not any exam sections.
+      .panel-footer
+        .btn-group
+          = link_to 'Back', dashboard_online_exams_path, class: 'btn btn-default'
+          - if @exam.date_finished.blank?
+            = link_to 'Start', dashboard_online_exam_mcqs_path(online_exam_id: @exam.id, id: @exam.slug), class: 'btn btn-danger cl-white', :data => { :confirm => 'Are you sure?' }
+          - if @exam.date_finished.present?
+            = link_to 'Review', '', class: 'btn btn-warning cl-white'

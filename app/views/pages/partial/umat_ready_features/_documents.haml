@@ -1,0 +1,13 @@
+#feature_Documents.col-md-6
+  .feature-icon-container
+    .clearfix
+      .feature-icon.pull-left
+        %i.fa.fa-book{"aria-hidden" => "true"}
+      .feature-content.pull-right
+        %h4 Documents
+        - if paid
+          %h4
+            $#{price.round(0)} + 10% GST = $#{price_with_gst.round(0)}
+        .text
+          %p.u-word-spacing
+            Access additional documents and resources uploaded by our tutors.

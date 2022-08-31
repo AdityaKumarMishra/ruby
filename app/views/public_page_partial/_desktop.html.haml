@@ -1,0 +1,61 @@
+.top_navi
+  .container-fluid
+    .row
+      .col-sm-6
+        .tp.top_left
+          %ul
+            %li
+              - if product_line_type == "umat"
+                %a{href: "/"}
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_gradready_logo.png', alt: 'img'
+              -else
+                %a.public_gamsat_green{href: "/"}
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/header-logo.svg', alt: 'img'
+                %a.public_umat_blue.disable{href: "/"}
+                  = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/umat_gradready_logo.png', alt: 'img'
+
+            %li.head_fb
+              %a{href: "https://www.facebook.com/GradReadyGAMSAT"}
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/fb.svg', alt: 'img'
+      .col-sm-6
+        .tp.top_right
+          %ul
+            %li.public_gamsat
+              %a{href: "/gamsat-preparation-courses"}
+                GAMSAT
+                %sup> ®
+                Courses
+            %li.public_umat{class: "#{params['controller'] == 'pages' && params['action'] == 'main' ? 'blue_umat' : ''}"}
+              %a{href: "/umat-preparation-courses"}
+                UCAT
+                %sup> ®
+                Courses
+            %li
+              %a{href: "/login"} Login
+            %li.contact
+              %a{href: "javascript:void(0)"} Contact Us
+              %ul.contact_list
+                %li
+                  %p
+                    GAMSAT
+                    = succeed "COURSES" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/gamsat-preparation-courses/faq"} FAQ
+                    %li
+                      %a{href: "/gamsat-preparation-courses/contact"} GET IN TOUCH
+                    %li
+                      %a{href: "/blog/gamsat-preparation-courses"} BLOG
+                %li.umat_menu
+                  %p
+                    UCAT
+                    = succeed "COURSES" do
+                      %sup ®
+                  %ul
+                    %li
+                      %a{href: "/umat-preparation-courses/faq"} FAQ
+                    %li
+                      %a{href: "/umat-preparation-courses/contact"} GET IN TOUCH
+                    %li
+                      %a{href: "/blog/umat-preparation-courses/"} BLOG

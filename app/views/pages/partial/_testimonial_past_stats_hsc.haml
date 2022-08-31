@@ -1,0 +1,87 @@
+.col-md-6
+  = image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/info/" + year.to_s + "_graph-red.jpg")
+  %p.foot_note_margin Footnotes:
+  %ol.foot_note
+    %li Not all students responded to the survey
+    %li=  'Standard Deviation ' + sd1
+    %li
+      A subgroup of the respondents had previously taken the GAMSAT
+      %sup{ style: "margin-right: -4px;font-size: 84%;"} ®
+      exam
+    %li= 'Standard Deviation ' + sd2
+    %li= 'Standard Deviation ' + sd3
+    - if year != 2016
+      %li Not all students responded to the survey
+#my_clas.col-md-6.no_padding
+
+  %p
+    In May
+    = year
+    , we surveyed over 1000 students who we had helped to prepare for the March
+    = year
+    GAMSAT
+    %sup{ style: "margin-right: -4px;"} ®
+    exam.
+  %p
+    The average GradReady student
+    %sup 1
+    scored
+    %span.hsc_txt
+      = score1
+    %sup 2
+    and ranked in the
+    %span.hsc_txt
+      = percentile1 + ' percentile'
+    of the
+    = year
+    March GAMSAT
+    %sup{ style: "margin-right: -4px;"} ®
+    exam.
+  %p
+    The average GradReady student re-taking
+    %sup 3
+    the GAMSAT
+    %sup{ style: "margin-right: -4px;"} ®
+    exam improved from:
+    %br/
+    Score:
+    %span
+      = score2
+    %sup 4
+    %span ->
+    %span.hsc_txt
+      = score3
+    %sup 5
+    %br/
+    Rank:
+    %span
+      = percentile2 + ' percentile ->'
+    %span.hsc_txt
+      = percentile3 + ' percentile'
+  %p
+    The above
+    %span improvement represents an improvement of
+    %span.hsc_txt
+      at least
+      = percentilepoint
+      percentile points
+    %span.hsc_txt .
+    %span This improvement remains statistically significant even when assessed using 99% confidence intervals.
+  %p
+    %a.hsc_txt{:href => "/gamsat/faq/preparing-for-the-gamsat#why-should-i-enrol-in-a-preparation-course"} Learn why
+    %span.text GradReady students score so well.
+  - if year == 2016
+    %p
+      Moreover, in 2016, 91% of InterviewReady Students
+      %sup.list_no 6
+      gained admission into medical school.
+  - if year == 2014
+    %p
+      Moreover, in 2014, 100% of InterviewReady Students
+      %sup.list_no 6
+      gained admission into medical school.
+  - if year == 2015
+    %p
+      Moreover, in 2015, 90% of InterviewReady Students
+      %sup.list_no 6
+      gained admission into medical school.

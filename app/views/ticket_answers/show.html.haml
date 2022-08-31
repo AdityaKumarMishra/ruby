@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @ticket_answer.content
+%p
+  %b Ticket:
+  = @ticket_answer.ticket
+%p
+  %b User:
+  = @ticket_answer.user
+%p
+  %b Public:
+  = @ticket_answer.public
+%p
+  %b Helpfulness:
+  = @ticket_answer.helpfulness
+
+= link_to 'Edit', edit_ticket_ticket_answer_path(@ticket_answer.ticket, @ticket_answer)
+
+= link_to 'Back', ticket_ticket_answers_path(@ticket_answer.ticket.id)

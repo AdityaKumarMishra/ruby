@@ -1,0 +1,414 @@
+// Global CSS style
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   margin:0;
+   padding:0;
+   height:100%;
+
+  .gamsat-placeholder {
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+  }
+}
+
+.dashboard-container,
+.application-container {
+  a:not(.btn) {
+    color: $standard-blue;
+    &:visited, &:hover {
+     color: $standard-blue;
+    }
+    &:active {
+      color: $standard-dark-blue;
+    }
+  }
+  .table .btn {
+    width: 100%;
+  }
+}
+
+
+#container {
+  min-height:100%;
+  position:relative;
+}
+#body {
+  padding-bottom: 120px;
+}
+
+#team-selection {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: 20px;
+  font-size: 14px;
+  margin-left: 15px;
+  ul {
+    list-style: outside none none;
+    margin: 0px;
+    padding: 0px;
+    li {
+      line-height: 20px;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-bottom: 5px;
+      a:link {
+        color: #333333;
+      }
+      a:visited {
+        color: #FFF;
+      }
+      a:hover {
+        color: #333333;
+        text-decoration: none;
+        background: transparent;
+      }
+      &:hover {
+        background: #DDDDDD;
+        @include background-arrow-right(#DDDDDD, 14px);
+      }
+    }
+    .active {
+      @include background-arrow-right($grGreen, 14px);
+
+      a:link {
+        color: #FFF;
+      }
+      &:hover {
+        background: #009348;
+        @include background-arrow-right($grGreen, 14px);
+        color: #FFF;
+        text-decoration: none;
+      }
+    }
+  }
+  h4 {
+    font-weight: bold !important;
+    font-size: 17.5px;
+    margin: 10px 0px;
+  }
+}
+
+.tutors_images {
+  display: inline-block;
+  margin: 10px 10px 0px 0px;
+}
+
+.mg-0 { margin: 0; }
+.mg-top { margin-top: 20px; }
+.mg-20 { margin: 20px; }
+.mg-left { margin-left: 20px; }
+.mg-bottom { margin-bottom: 20px; }
+.cl-white { color: white !important; }
+.table-padded > tbody > tr > td:nth-child(2) { padding-left: 20px;}
+.top { vertical-align: text-top; }
+.disable { display: none; }
+.ticket_comment { display: none; }
+.line-40 { line-height: 40px};
+.badge-green { background-color: green };
+
+.inline_attributes > div {
+  padding: 10px;
+  h4 {
+    display: inline;
+    margin-left: 15px;
+  }
+  h5 {
+    display: inline;
+  }
+}
+
+.padding-0 { padding: 0; }
+.padding-0-vrt { padding-top: 0; padding-bottom: 0; }
+.right { float: right; }
+
+.inline-checkbox > span > label {
+  input { display: inline }
+  label { display: inline }
+}
+
+.collection-checkboxes > span > label {
+  padding: 20px;
+  input {
+    margin-right: 10px;
+  }
+}
+
+.tag_select_form{
+  width: 300px;
+}
+
+.bold {
+  font-weight: bold!important;
+}
+
+.notification-dialog {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+// Carousel
+#carousel_text {
+  background: rgba(28,28,28,0.6);
+  margin-top: 0;
+  position: relative;
+  margin-bottom: 11px;
+}
+
+#carousel_text .carousel_text .carousel-inner .text_slider {
+  height: 110px;
+  margin-left: 30px;
+  width: 93%;
+}
+
+#carousel_text .textCon {
+  text-align: center;
+  width: 83%;
+  display: table;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#carousel_text .textCon p {
+  font-size: 18px;
+  font-weight: bold;
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0;
+  color: #fff;
+}
+
+#carousel_text .carousel-control.left {
+  top: 50%;
+  margin-left: 10px;
+  margin-top: -17px;
+  border: 0px;
+  background: none;
+  cursor: pointer;
+}
+
+#carousel_text .carousel-control.right {
+  top: 50%;
+  margin-right: 10px;
+  margin-top: -17px;
+  border: 0px;
+  background: none;
+  cursor: pointer;
+}
+
+// Suggest a feature stylings
+.all-suggest-feature {
+  text-align: center;
+  margin: 40px 0px 40px;
+  .heading {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000;
+    width: 100;
+    border-bottom: 3px solid #ddd;
+    padding-bottom: 10px;
+  }
+  .content {
+    font-size: 13px;
+    margin: 20px;
+  }
+  .btn {
+    color: white;
+  }
+}
+
+// Footer
+footer {
+  height: auto;
+  font-family: $helvetica;
+  color:#f6f6f6;
+  background:#3b403c;
+  float:left;
+  width:100%;;
+  text-align:left;
+  h5 {
+    padding-top:10px;
+    font-size:12px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .container {
+    padding-top:10px;
+    padding-bottom:20px
+  }
+  .ftLinks {
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+    padding-top: 15px;
+    margin-bottom: 45px;
+    h3 {
+    width:100%;
+    font-weight: bold;
+    color: #fff !important;
+    font-size:12px;
+    text-align: left;
+    border-bottom:1px solid #fff;
+    padding-bottom:2px;
+    margin-top:8px;
+    margin-bottom:3px
+    }
+    ul{
+      a {color: #fff !important;}
+      float:left;
+      font-size:10px;
+      list-style:none;
+      margin:0 22px 0 0;
+      padding:0;
+      line-height:13px;
+      padding-left:5px
+    }
+  }
+  .fwmobile {
+    .gr-logo{
+      float: left;
+      padding-left: 12px;
+      width: 100%;
+    }
+  }
+  .social {
+    float:left;
+    margin-top:12px;
+    margin-left:0px;
+  }
+  .social i {
+    background-color: #333;
+    border-radius: 40px;
+    color: #fff;
+    height: 39px;
+    line-height: 40px;
+    width: 39px;
+    font-size: 15px;
+    text-align: center;
+    margin-right: 3px;
+    z-index: -10;
+  }
+  .social li {
+    float: left;
+    display: inline-block;
+     margin-left: 10px;
+  }
+  .copyright-notice{
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-top:75px;
+    text-align:left;
+    font-size:11px;
+    width:100%;
+    padding-left: 15px;
+  }
+  .notice-links a{
+    color:#fff;
+  }
+}
+
+#how-is-gr-different{
+  text-align: center;
+  h1 {
+    padding: 0px 0px;
+    font-size: 45px;
+    letter-spacing: 1px;
+    color: #3c3c3b;
+
+    span.blue_color{
+      color: #0188ca;
+    }
+  }
+
+  .banner-icon {
+    height: 140px;
+    font-size: 140px;
+    vertical-align: middle;
+    &.green {
+      color: $grGreen;
+    }
+    &.purple {
+      color: $vce-color;
+    }
+    &.red {
+      color: $hsc-color;
+    }
+    &.blue {
+      color: $umat-color;
+    }
+  }
+  h2{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    text-transform: uppercase;
+  }
+  p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+
+.icon-enhance,
+.icon-green-star,
+.icon-green-star-o {
+  color: $grGreen;
+}
+.icon-arrow-down,
+.icon-arrow-up {
+  font-size: 50px;
+  &.green {
+    color: $grGreen;
+  }
+  &.purple {
+    color: $vce-color;
+  }
+  &.red {
+    color: $hsc-color;
+  }
+  &.blue {
+    color: $umat-color;
+  }
+}
+
+.pad-vert {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.chosen-container {
+  .chosen-results li {
+    text-align: left;
+  }
+  .chosen-drop {
+    margin-bottom: 15px;
+  }
+}
+
+tr[data-link] {
+  cursor: pointer;
+}
+
+.font-size-22 {
+  font-size: 22px;
+}
+
+@media only screen and (min-width: 260px) and (max-width: 759px){
+
+
+
+}
+.b_scroll{
+     overflow: visible;
+ }
+ .b_not_scroll{
+     overflow: hidden;
+ }
+
+#how-is-gr-different {float: left;
+    width: 100%;}

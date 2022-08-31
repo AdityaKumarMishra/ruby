@@ -1,0 +1,58 @@
+=image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+%h4 Course Videos
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+- if product_line == 'UMAT'
+  %span
+    %em Logical Reasoning - 4 Hours
+  %span
+    %em Understanding People - 1.5 Hours
+  %span
+    %em Non-verbal Reasoning - 3 Hours
+
+  .show_full_content
+    The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the UCAT
+    %sup®
+    and serve as an excellent starting point for your UCAT
+    %sup®
+    preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.
+- elsif product_line == 'VCE'
+  .text
+    %p.u-word-spacing
+      The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the VCE
+      %sup{ style: "margin-right: -5px;"} ®
+      and serve as an excellent starting point for your VCE
+      %sup{ style: "margin-right: -5px;"} ®
+      preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.
+- elsif product_line == 'HSC'
+  %p.u-word-spacing
+    The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the HSC
+    %sup{ style: "margin-right: -5px;"} ®
+    and serve as an excellent starting point for your HSC
+    %sup{ style: "margin-right: -5px;"} ®
+    preparation. Go at your own pace, and clarify issues through Online Tutor Access. There is no limit on the number of times you may review the videos.
+- elsif product_line == 'GAMSAT'
+  %span
+    %em
+      Humanities - 4 hours
+  %span
+    %em
+      Physics - 3.5 hours
+  %span
+    %em
+      Biology - 7 hours
+  %span
+    %em
+      Chemistry - 7 hours
+  .show_full_content
+    Updated for the new GAMSAT
+    %sup ®
+    Exam: New Section 3 Reasoning Fundamentals videos to accompany the updated textbook.
+    %br
+    The videos are broken up into digestible chunks of approximately 10 minutes each. The videos cover all of the fundamental concepts you'll need to know for the GAMSAT
+    %sup®
+    exam and serve as an excellent starting point for your GAMSAT
+    %sup®
+    exam preparation. Go at your own pace, and clarify issues through the GetClarity System. There is no limit on the number of times you may review the videos.

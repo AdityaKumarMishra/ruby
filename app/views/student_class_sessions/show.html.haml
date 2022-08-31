@@ -1,0 +1,17 @@
+Class session
+%p
+  %b Start time:
+  = @student_class_session.start_time
+%p
+  %b End time:
+  = @student_class_session.end_time
+%p
+  %b Frequency:
+  = @student_class_session.frequency
+%p
+  %b Student classes:
+  = @student_class_session.student_class
+
+= link_to 'Edit', edit_student_class_session_path(@student_class_session)
+\|
+= link_to 'Back', student_class_sessions_path

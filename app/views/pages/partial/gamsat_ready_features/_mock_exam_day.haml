@@ -1,0 +1,13 @@
+.feature-icon-container.col-md-6{:id => "Mock-Exam-Day+Mock-Exam-Day-Recap"}
+  .feature-icon.pull-left
+    %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+  .feature-content.pull-right
+    %h4
+      Mock Exam Day + Mock Exam Day Recap
+      / .label.label-mini.label-new
+      / %i.fa.fa-star.icon-green-star{"aria-hidden" => "true"}
+      / = link_to 'new', recent_update_path, class: 'c_grn'
+    - if paid
+      %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+    .text
+      %p.u-word-spacing The closest thing to the actual GAMSAT - you will be put through time pressures and a well-simulated test environment. Then our expert tutors will go through all the MCQs with you the next day and give you personalised feedback on your essays within the week. In addition, your performance will be compared with those by other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.

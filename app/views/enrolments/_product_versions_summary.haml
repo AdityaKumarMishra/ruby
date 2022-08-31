@@ -1,0 +1,43 @@
+- product_versions = ['online-basic', 'online', 'attendance-basic', 'attendance', 'attendance-all']
+- if product_line == "vce"
+  %center
+    .categor_col
+      %ul.nav.nav-tabs
+        %li.active{:active => "true", :heading => "English", "ng-class" => "{active: active, disabled: disabled}"}
+          %a.u-purple-link{"data-toggle" => "tab", :href => "#vcetab1"}
+            %i.fa.fa-pencil.subject{"aria-hidden" => "true"}
+            English
+        %li.math_bg{:heading => "Mathematical Methods (CAS)", "ng-class" => "{active: active, disabled: disabled}"}
+          %a.u-purple-link{"data-toggle" => "tab", :href => "#vcetab2"}
+            %i.fa.fa-calculator.subject{"aria-hidden" => "true"}
+            Mathematical Methods (CAS)
+    .tab-content
+      #vcetab1.tab-pane.active
+        = render 'enrolments/product_versions_grid',product_versions: product_versions, product_line: product_line, subject: 'english', trial_course: trial_course
+      / Math Product Versions
+      #vcetab2.tab-pane.math-tab
+        = render 'enrolments/product_versions_grid',product_versions: product_versions, product_line: product_line, subject: 'math', trial_course: trial_course
+-elsif product_line == "hsc"
+  %center
+    .categor_col
+      %ul.nav.nav-tabs
+        %li.active{:active => "true", :heading => "English Advanced"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#hsctab1"}
+            %i.fa.fa-pencil.subject{"aria-hidden" => "true"}
+            English Advanced
+        %li{:heading => "Mathematics Extension 1"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#hsctab2"}
+            %i.fa.fa-calculator.subject{"aria-hidden" => "true"}
+            Mathematics Extension 1
+    .tab-content
+      #hsctab1.tab-pane.active
+        = render 'enrolments/product_versions_grid', product_versions: product_versions, product_line: product_line, subject: 'english', trial_course: trial_course
+
+      /Math Product Versions
+      #hsctab2.tab-pane.math-tab
+        .tab-pane
+          = render 'enrolments/product_versions_grid',product_versions: product_versions, product_line: product_line, subject: 'math', trial_course: trial_course
+- else
+  = render 'enrolments/product_versions_grid', product_versions: product_versions, product_line: product_line, subject: nil, trial_course: trial_course
+%center
+  %a{href: "/#{product_line}"} Compare all courses here

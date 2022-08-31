@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for(@surveys_survey_answer) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.association :user
+        = f.association :survey_question
+        = f.input :answer, as: :ckeditor, :input_html => { :ckeditor => { :height => 400 } }
+        = f.input :rating
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'

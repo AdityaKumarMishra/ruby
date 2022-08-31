@@ -1,0 +1,114 @@
+%h1 New user
+
+= simple_form_for(@user, :html => {:multipart => true}) do |f|
+  = f.error_notification
+
+  .form-inputs
+    #staff_attributes
+      %center
+        = f.input :photo, as: :file, accept: 'image/png,image/gif,image/jpeg, image/jpg', required: true, id: 'uploadImage'
+        %a.deleteImage Delete
+    = f.input :email
+    = f.input :password
+    = f.input :role, as: :select, collection: [["Admin", "admin"], ["Manager", "manager"], ["Tutor","tutor"], ["Superadmin", "superadmin"], ['Student', 'student']], selected: "#{@user.role.present? ? @user.role : false}", include_blank: "Please Select Role"
+
+    = f.input :date_of_birth, start_year: Date.today.year - 110, end_year: Date.today.year,order: [:day, :month, :year], required: true
+
+  -if !@user.student?
+    #staff_attributes.staff_only
+      = f.input :bio
+      - if !current_user.tutor?
+        = f.simple_fields_for :tutor_profile do |tutor_profile_form|
+          = render partial: "users/tutor_profile_fields", locals: { f: tutor_profile_form, user: @user }
+
+        = f.simple_fields_for :staff_profile do |staff_profile_form|
+          = render partial: "users/staff_profile_fields", locals: { f: staff_profile_form, user: @user }
+
+        = f.association :overseeing_tags, collection: policy_scope(Tag).sort_by{|tag| tag.name.upcase}, include_blank: true, input_html: { class: 'chosen-select tag-list' }, label: 'Overseeing Email Tags'
+
+  -if !@user.student?
+    #student_att.only_student
+      - if !current_user.student?
+        %label.email_suscribe{:for => "e_subscription"} Email Subscription
+        = f.check_box :email_subscription, { id: '', required: true, id: 'e_subscription'}, "true", "false"
+
+  = f.input :first_name, label: 'First Name' 
+  = f.input :last_name, label: 'Last Name'
+  = f.input :phone_number
+  = render 'addresses/fields', f: f
+  -if (@user.errors.present? && @user.student?) || @user.role.nil?
+    #student_att.only_student
+      = f.simple_fields_for :questionnaire do |q|
+        .row
+          .col-sm-6
+            = q.input :student_level, required: true, as: :select,collection: Questionnaire.student_levels.keys, promt: "Student Level..."
+            = q.input :university_id, required: false, as: :select, collection: University.all, prompt: 'Select University...'
+            = q.input :degree_id, required: false, as: :select, collection: Degree.all, prompt: 'Select Course...'
+            = q.input :year, required: false, label: 'Commencement Year'
+          .col-sm-6
+            = q.input :umat_high_school, required: false, as: :radio_buttons, label: 'Did you sit the UCAT in high school?'
+            = q.input :umat_uni, required: false, as: :radio_buttons, label: 'Are you going to sit/have you sat the UCAT again while at uni?'
+            = q.input :current_highschool, label: 'Current High School'
+            = q.input :target_uni_course, label: 'Target University Course', required: false
+            = q.input :highschool_year_level, required: false, as: :radio_buttons, collection: year_level_collection, prompt: 'Select Year Level...', label: 'Year Level'
+        .col-sm-12
+          -last_source_selected='other'
+          -last_source_val= f.object.questionnaire.try(:last_source)
+          -last_source_cls=''
+          -source_val=""
+          -source_cls='hidden'
+
+          = q.input :source, required: true, as: :check_boxes, collection: source_collection, label: 'How did you hear about GradReady? Please select all that apply.'
+          = text_field_tag 'source',"#{source_val}", class:"hidden_source #{source_cls} form-control", placeholder: "Please enter ..."
+          %p.other_source
+
+          = q.input :last_source, required: true, as: :select, collection: last_source_collection, selected:"#{last_source_selected}", label: 'Where did you LAST see/hear about us before signing up?', prompt_text: 'Please select...'
+          = text_field_tag 'last_source',"#{last_source_val}", class:"hidden_last_source #{last_source_cls} form-control", placeholder: "Please enter ..."
+          %p.other_last_source
+
+        .col-sm-12
+          = q.input :language_spoken, required: true, as: :select, collection: language_collection, label: 'Language Spoken at Home Other than English', prompt: 'Please select a language'
+          = text_field_tag 'language_spoken',"", class:"hidden_language hidden form-control", placeholder: "Please enter a language"
+          %p.no_language_spoken
+
+  .form-actions
+    = f.button :submit
+
+= link_to 'Back', user_emails_path
+
+:javascript
+  $('#user_questionnaire_attributes_language_spoken').on('change',function(){
+    if ($(this).val()=="other"){
+      $("#language_spoken").removeClass('hidden')
+    }else{
+      $("#language_spoken").addClass('hidden')
+    }
+  })
+
+  $('#user_questionnaire_attributes_last_source').on('change',function(){
+    if ($(this).val()=="other"){
+      $("#last_source").removeClass('hidden')
+    }else{
+      $("#last_source").addClass('hidden')
+    }
+  })
+
+  $('#user_questionnaire_attributes_source_other').on('click',function(){
+    if ($(this).val()=="other" && $(this).is(':checked')){
+      $("#source").removeClass('hidden')
+    }else{
+      $("#source").addClass('hidden')
+    }
+  })
+  $('#user_role').on('change',function(){
+    var role = $(this).val();
+    if(role == 'student'){
+      $('#student_att.only_student').show();
+      $('#staff_attributes.staff_only').hide();
+    }else{
+      $('#staff_attributes.staff_only').show();
+      $('#student_att.only_student').hide();
+    }
+  });
+
+

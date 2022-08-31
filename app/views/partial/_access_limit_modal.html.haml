@@ -1,0 +1,17 @@
+#AccessLimitModal.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title Feature Access
+      .modal-body
+        %p
+          You have reached the access limit. We hope you have enjoyed the experience so far. If you would like continued access for this feature, it is available
+          %a{href: '/feature_logs'} here
+          for purchase
+      .modal-footer
+        = link_to 'Continue', path, class: 'btn btn-default btn-danger'
+
+:javascript
+  $('#AccessLimitModal').modal({
+    backdrop: 'static'
+  })

@@ -1,0 +1,16 @@
+%tr
+  %td
+    = form_object.check_box :euser_ids, { multiple: true, class: 'user-id-checkbox' }, blog_user_row.id, false
+
+  %td
+    = blog_user_row.email
+  %td
+    - blog_name = blog_user_row.mailing_list.name
+    - if blog_name == 'blog_gamsat'
+      GAMSAT
+    -elsif blog_name == 'blog_umat'
+      UCAT
+    -elsif blog_name == 'blog_hsc'
+      HSC
+    -else
+      VCE

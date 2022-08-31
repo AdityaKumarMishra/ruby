@@ -1,0 +1,106 @@
+#agreement_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title Ready to Begin Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p
+          / %img{src: "images/question.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/question.png'
+          If you are ready to begin the exam, select the Yes button. Otherwise, select the No button to return to the previous screen.Yes No
+      .modal-footer
+        %button.btn.btn-secondary.go-next{  type: "button"} yes
+        %button.btn.btn-primary{"data-dismiss" => "modal", type: "button"} no
+
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary.go-next{ type: "button", onclick: "stopRunnerTimeSingle(event)","data-dismiss" => "modal"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+#last_end_review_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Review
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png"
+      .modal-body
+        %p{style: "margin-bottom: 15px;"}
+          / %img{src: "images/warning.png"}>/
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/warning.png"
+          %p#ques-warning{style: 'display: none;'}
+            You have chosen to end the current review, but have
+            %span 36 
+            incomplete questions.  If you click Yes, you will NOT
+            be able to return to this review
+          %p#warning
+            You have chosen to end the current review. If you click Yes, you will NOT
+            be able to return to this review
+        %p Are you sure you want to end this review?
+      .modal-footer
+        %button.btn.btn-secondary#review-go-next{"data-dismiss" => "modal", onclick: "goToNextTab();", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+#instructions_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.instctn_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title Review Instructions
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png"
+      .modal-body
+        %p
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png"
+          Below is a summary of your answers. You can review your questions in three (3) different ways.
+        %p The buttons in the lower right-hand corner correspond to these choices:
+        %ul.mdl_list
+          %li Review all of your questions and answers.
+          %li Review questions that are incomplete.
+          %li Review questions that are flagged for review. (Click the 'flag' icon to change the flag for review status.)
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} close
+
+#incomplete_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.instctn_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title No Incomplete Questions
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png"
+      .modal-body
+        %p
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png"
+          There are no incomplete questions to review.
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} OK
+
+#flagged_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.instctn_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title No Questions flagged
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png"
+      .modal-body
+        %p
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png"
+          No questions have been flagged for review.  Please make your selections and try again.
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} OK

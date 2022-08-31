@@ -1,0 +1,7 @@
+-# NOTE: a variable 'product_line' must be passed into this view for the rendering to work
+- if !@announcement.nil? && !@announcement_url.blank?
+  %a.u-white-link.announcement-banner.green-bg{:href => @announcement_url, :class => [('green-bg' if product_line == 'gamsat-preparation-courses'), ('blue-bg' if product_line == 'umat-preparation-courses'), ('purple-bg' if product_line == 'vce'), ('red-bg' if product_line == 'hsc'), ('relative' if relative)]}
+    = @announcement.description
+- elsif !@announcement.nil?
+  .u-white-link.announcement-banner{:class => [('green-bg' if product_line == 'gamsat'), ('blue-bg' if product_line == 'umat'), ('purple-bg' if product_line == 'vce'), ('red-bg' if product_line == 'hsc'), ('relative' if relative)]}
+    = @announcement.description

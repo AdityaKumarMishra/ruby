@@ -1,0 +1,33 @@
+%h1 Listing #{@job_application_form.title} Applications
+%p
+  %b Title:
+  = @job_application_form.title
+%p
+  %b Description:
+  = simple_format(@job_application_form.description)
+%p
+  %b Open For Applications:
+  = @job_application_form.open
+- if !@job_application_form.empty_attachment
+  %p
+    %b Attachment:
+    = render 'job_application_forms/job_description', job_description: @job_application_form.job_description
+
+- @job_application_form.application_questions.each_with_index do |q, i|
+  %p
+    %b Question #{i+1}
+    .form-question
+      %b Question
+      = simple_format(q.content)
+
+      - if ApplicationQuestion.dropdown_question?(q.answer_type)
+        %b Possible Answers
+        %ul
+          - q.answer_options.each do |a|
+            %li= simple_format(a.content)
+
+
+
+= link_to 'Edit', edit_job_application_form_path(@job_application_form)
+\|
+= link_to 'Back', job_application_forms_path

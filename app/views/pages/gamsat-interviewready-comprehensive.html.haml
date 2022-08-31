@@ -1,0 +1,151 @@
+#public-courses
+  .container
+    #course-headers
+      .font_sty1.ir-img
+        =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/InterviewReady.png")
+        .text_green.essen_te
+          Comprehensive
+      %br/
+      %strong.inter_stus
+        %a.gren_font{:href => "/gamsat-preparation-courses/student_testimonials#Interview_Ready"} 100% Admission rate
+        for 2014 InterviewReady students.
+      #public-courses
+        #course-dates-container.none_bg
+          .container
+            .headings
+              %h1.course_page_mrgn.green Course Dates
+              %p.text_italic
+                Please choose your City and Course from the drop down selections below.
+            .course-dates-table-container.date_table_m
+              %br/
+              .course-options
+                .clearfix
+                  .course-city-selection.pull-left
+                    .clearfix
+                      %label.pull-left{:for => "city"} City
+                      %select#city.pull-left
+                  .course-date-selection.pull-left
+                    .clearfix
+                      %label.pull-left{:for => "date"} Course
+                      %select#date.pull-left
+                  .course-enrolment-selection.pull-left
+                    .clearfix
+                      %label.pull-left.enrolment_clo_date{:for => "enrolment date"} Enrolment Closure Date
+                      %span#enrolment_dates.enr_change_dat
+              %form{"accept-charset" => "UTF-8", :action => "/gamsat-preparation-courses/enrolments/account", :method => "get"}
+                %div{:style => "margin:0;padding:0;display:inline"}
+                  %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+                .course-package-access{:style => "display:none;"}
+                  %p.span3
+                    %input#course_access_video_access{:checked => "checked", :name => "course_access[video_access]", :type => "checkbox", :value => "1"}/
+                    Course Videos $159
+                .course-dates-table
+                  %input#enrolment_course{:name => "course", :type => "hidden", :value => ""}/
+                  %input#enrolment_package{:name => "package", :type => "hidden", :value => "interviewready-essential"}/
+                  %table.table
+                    %thead
+                      %tr
+                        %th.date Date
+                        %th.venue Venue
+                        %th.start Start Time
+                        %th.end End Time
+                        %th.items Items Covered
+                    %tbody
+                  .clear
+                    .course-purchase.font_purchase
+                      %span.pricing-details
+                        Price:
+                        $795
+                      %span.pricing-details.price_center
+                        + 10% GST =
+                        $875
+                      / %span.gst_font.price_center.mrgn_0
+                      /   (
+                      /   %a{:href => "/gamsat/faq/enrolment-payment#What%20is%20GST"} What is GST?
+                      /   )
+                      %br/
+                      %p.purchase-button
+                        %br/
+                        %input.course-enrol-button.btn.btn-gr.green{:name => "commit", :type => "submit", :value => "Take this course"}/
+                .discount
+                  .cont_cours_das.cont_chan_da
+                    #a_link_clr
+                      %h4
+                        10% discount if you enrol in a group of 4 or more
+                        %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#group-discount-available"} Learn more
+                      .notice-links
+                        %a{:href => "/gamsat-preparation-courses/faq/about-gradready#Can%20I%20access"} Sample Material
+                        |
+                        %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#For%20how%20long"} Sample Material
+                        |
+                        %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#How%20much%20does"} Post to outside Australia
+                        |
+                        %a{:href => "/gamsat-preparation-courses/faq/enrolment-payment#10%-discount-policy"} Refund Policy
+  .container
+    %br
+    %br
+    .col-md-6.pull-left.cours_des_c
+      .headings
+        %h1.course_page_mrgn.text_green
+          Course Description
+        %p
+          The Comprehensive InterviewReady course has produced an 100% medical admission rate for its attendees in 2014. This unparalleled achievement is made possible by a detailed analysis by the GradReady team on the MMI process and how each student measures up against the process. Firstly, the MMI black box is demystified by a comprehensive breakdown and discussion of various important scenarios. Moreover, you will then attend the most realistic mock-MMI available in Australia and be given detailed feedback of your performance at each station. All of your interviewers will be successful medical students who thoroughly understand why each scenario is relevant to the lives of doctors.
+    .col-md-6.right_feature.mrgn_tp_48
+      #main-banner
+        %video.video-js.vjs-default-skin{:controls => "", "data-autoplay" => "false", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", "data-autoresize" => "fit", :height => "236px", :poster => 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/interviewready-feat.jpg', :title => "GAMSATReady", :width => "100%"}
+          %source{"data-quality" => "hd", :src => "https://gradready-prod.s3.amazonaws.com/public/360pGAMSATReady%20Course%20Overview.mp4", :type => "video/mp4"}
+  .container
+    .col-md-22.feat_lef_c
+      %h3.text_green
+        Features
+      .row
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b1.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              MMI Overview
+            %p
+              To perform well, you need to understand the underlying principles behind the use of MMI. We will discuss why it is used by medical schools and the schools' expectation of student performance.
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b2.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              The "ideal" medical candidates and assessment criteria
+            %p
+              We will discuss in detail the criteria assessors look for in the MMI. We will also explore the concept of the "ideal" medical candidate, why are certain traits considered important and a self reflection of whether you actually would like to be the said ideal.
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b6.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              10 common scenarios
+            %p
+              After understanding the general concepts and expectations with in the medical MMI, we will then turn to applying that knowledge through dissecting some of the common scenarios that will be present in most medical MMIs.
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b4.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              Tutor Facilitated Peer-Run MMI Day
+            %p
+              Short of the Mock MMI day of our Comprehensive InterviewReady course, this is the best practice you can partake in. The stations are well designed to reflect the real MMI scenarios and there will be experienced tutors on hand to observe, facilitate and give feedback on the process.
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b4.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              Tutor facilitated peer interviews
+            %p
+              Our experienced tutors will guide you through the peer interview process, so that you put what you understand about the scenarios into practice.
+        .clear
+        .col-md-6
+          .col-md-2.pull-left.ml0
+            =image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/b5.png")
+          .col-md-10.pull-left.ml0
+            %h4
+              Critiques and discussion
+            %p
+              We will analyse peer performance from both the perspective of the interviewer and the student, so that you understand both how you are being perceived and what it is like being on the other side of the table doing the assessments.
+        .clear

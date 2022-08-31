@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title Gradready
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'ucat_dashboard', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    :css
+      #calc-modal {
+        top: 10%;
+        float: right;
+      }
+  %body
+    = yield
+    .modal#calc-modal{role: "dialog", style: "max-width: 272px;"}
+      .modal-dialog{style: "max-width: 272px;"}
+        .modal-content
+          .modal-body{style: "padding: 0px;"}
+            = render partial: "/ucat_exercises/calculator"
+            :javascript
+              $('#calc-modal').draggable({
+               });

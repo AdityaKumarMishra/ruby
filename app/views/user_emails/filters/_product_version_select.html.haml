@@ -1,0 +1,6 @@
+%select#user-product-version-filter.form-control
+  - reseted_dependent_parameters = request.query_parameters.except(:not_enroled, :by_course, :by_master_feature)
+  %option{ {value: user_emails_path(request.query_parameters.except(:by_product_version))}}= ''
+  - product_versions.each do |product_version|
+    %option{ {value: user_emails_path(reseted_dependent_parameters.merge(by_product_version: product_version.id))}.merge(selected: params[:by_product_version] == product_version.id.to_s) }
+      = "#{product_version.name} (##{product_version.id})"

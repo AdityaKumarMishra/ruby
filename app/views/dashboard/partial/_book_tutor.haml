@@ -1,0 +1,59 @@
+-if availabilities.any?
+  #filterrific_results
+    %p.text-info
+      %b
+    -if request.variant.blank?
+      %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+        %thead
+          %tr
+            %th Tutor
+            %th Subjects
+            %th State
+            %th Suburb
+            %th Actions
+        %tbody
+          - availabilities.each do |availability|
+            %tr
+              %td.mobile_mousehover_tool= availability.tutor.full_name
+              %td
+                - availability.tags.each do |tag|
+                  = tag.name
+              %td= availability.tutor.state ? availability.tutor.state.titleize : ""
+              %td= availability.tutor.suburb ? availability.tutor.suburb.titleize : ""
+              %td
+                = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/appoint-icon.svg'), make_appointments_path(tutor_id:  availability.tutor.id, student_id: @student.try(:id), course_id: @course.try(:id)), remote: true, data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Make Appointment'}, class: 'table_icon_col'
+
+    -if request.variant == [:phone]
+      .mobile_table_border
+        %ul.tbl_head
+          %li.width_inc Tutor
+          %li.mobile_wdt_th.mobile_wdt_th74.rht16.mobile_mousehover_tool State
+
+        - availabilities.each do |availability|
+          %ul.mobile_table_body.listing.tbl_head.exercise_bdr_none
+            %li.mobile_mousehover_tool.width_inc
+              = availability.tutor.full_name
+
+              %ul.tool_tip
+                %li
+                  - availability.tags.each do |tag|
+                    = tag.name
+                %li
+                  State :
+                  %br/
+                  = availability.tutor.state ? availability.tutor.state.titleize : ""
+                %li
+                  Suburb :
+                  %br/
+                  = availability.tutor.suburb ? availability.tutor.suburb.titleize : ""
+                %li
+                  Action :
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/appoint-icon.svg'), make_appointments_path(tutor_id:  availability.tutor.id, student_id: @student.try(:id), course_id: @course.try(:id)), remote: true, data: { toggle: 'tooltip', placement: 'top', "original-title" => 'Make Appointment'}, class: 'table_icon_col'
+            %li.mobile_mousehover_tool.mobile_wdt_th.mobile_wdt_th74.rht16
+              = availability.tutor.state ? availability.tutor.state.titleize : ""
+  #bookAppointment
+-else
+  .alert.alert-warning.nothing_found.margin_top
+    No available sessions
+
+

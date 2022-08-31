@@ -1,0 +1,77 @@
+= simple_form_for(@announcement) do |f|
+  =# f.error_notification
+  .form-inputs
+    -unless @category == 'Dashboardpage' || @category == 'Homepage'
+      - if f.object.persisted?
+        = f.input :product_line_id, collection: ProductLine.where(id: f.object.product_line_id).map { |product_line| [product_line.name.try(:upcase), product_line.id] }, include_blank: false
+      - else
+        = f.input :product_line_id, collection: ProductLine.all.order(:name).map {|product_line| [product_line.name.try(:upcase), product_line.id]}, prompt: "Please select product line", id: 'product-js'
+
+    / Commenting code for product version
+    / #announcement-product-version.hide
+    / =# f.input :product_version_id, collection: []
+    #announcement-master-feature{ class: "#{f.object.try(:product_line_id).present? ? '' : 'hide'}"}
+      - if f.object.persisted?
+        = f.input :master_feature_id, collection: MasterFeature.where(id: f.object.master_feature_id).map { |master_feature| [master_feature.name, master_feature.id] }, include_blank: false
+      - else
+        = f.input :master_feature_id, collection: MasterFeature.includes(:product_versions).where(product_versions: {id: ProductVersion.where(type: @type).ids}).uniq.map {|product_line| [product_line.name, product_line.id]}
+
+    - if @category == 'Dashboardpage' || @category == 'Homepage'
+      = f.input :name, input_html: { value: @name }, readonly: true
+    -else
+      = f.input :name, label: "System Name"
+
+      = f.input :display_name, label: "Display Name"
+
+
+    = f.hidden_field :category, value: @category
+
+    - if @category == 'Homepage'
+      = f.input :description, required: true, label: 'Description (max input characters: 120)', :input_html => { :maxlength => 120, :size => 200 }
+      = f.input :url, label: 'Add go to action link for the announcement here:'
+    - else
+      = f.input :description, label: "Announcement", as: :ckeditor, :input_html => { :ckeditor => { :height => 500 } }
+      = f.hidden_field :highlighted_text, id: "highlighted_text"
+      = f.check_box :show_highlight
+      = f.label :show_highlight, 'Show new icon'
+      %br
+      .btn.btn-default.highlight_text Highlight Selected Text
+
+    - if @category != 'Dashboardpage' && @category != 'Homepage'
+      %br
+      %br
+      = f.input :video, as: :file, label: "Guideline Video"
+
+      = f.input :story, label: "Guidline (How to use feature)", as: :ckeditor, :input_html => { :ckeditor => { :height => 300 } }
+  %br
+  .form-actions
+    = f.button :submit, class: 'btn btn-gradready green'
+
+:javascript
+  $(document).ready(function () {
+    $('#announcement_product_line_id').on("change", function(){
+      var product_line = $(this).val();
+      $.ajax({
+        type: 'get',
+        url: '/announcements/get_versions_and_features',
+        data: { product_line_id: product_line },
+      }).done(function (response) {
+      });
+    })
+
+    function select_highlighted_text() {
+      var iframe = $("div.cke_contents iframe");
+      var sel = iframe[0].contentDocument.getSelection();
+      if (sel.rangeCount > 0) {
+          range = sel.getRangeAt(0);
+          var clonedSelection = range.cloneContents();
+          var result =  $("<div></div>").append(clonedSelection).html();
+          alert('Selection Made. It would be updated when you will submit the form')
+          $('#highlighted_text').val(result);
+      }
+    }
+
+    $(".highlight_text").click(function() {
+      select_highlighted_text();
+    })
+  });

@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Logged Hours" >
+    <% tot_author_hours = 0 %>
+    <% tot_author_hours_per_mcq = 0 %>
+    <% tot_reviewer_1_hours = 0 %>
+    <% tot_reviewer_1_hours_per_mcq = 0 %>
+    <% tot_reviewer_2_hours = 0 %>
+    <% tot_reviewer_2_hours_per_mcq = 0 %>
+    <% tot_video_explainer_hours = 0 %>
+    <% tot_video_explainer_hours_per_mcq = 0 %>
+    <% tot_video_explanation_reviewer_hours = 0 %>
+    <% tot_video_explanation_reviewer_hours_per_mcq = 0 %>
+    <% tot_all_hours = 0 %>
+
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">MCQ Stem ID and Title</Data></Cell>
+        <Cell><Data ss:Type="String">Tags</Data></Cell>
+        <Cell><Data ss:Type="String">Work Status</Data></Cell>
+        <Cell><Data ss:Type="String">Time of Last Work Status Update</Data></Cell>
+        <Cell><Data ss:Type="String">Number Of Child MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Author</Data></Cell>
+        <Cell><Data ss:Type="String">Author Hours</Data></Cell>
+        <Cell><Data ss:Type="String">Author Hours / MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 1</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 1 Hours</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 1 Hours / MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 2</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 2 Hours</Data></Cell>
+        <Cell><Data ss:Type="String">Reviewer 2 Hours / MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explainer</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explainer Hours</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explainer Hours / MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explanation Reviewer</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explanation Reviewer Hours</Data></Cell>
+        <Cell><Data ss:Type="String">Video Explanation Reviewer Hours / MCQs</Data></Cell>
+        <Cell><Data ss:Type="String">Total Hours</Data></Cell>
+      </Row>
+
+      <% if @mcq_stems.present? %>
+        <% @mcq_stems.each do |mcq_stem| %>
+          <% mcq_hours = mcq_stem.mcq_hours %>
+          <% mcqs_size = mcq_stem.mcqs.size %>
+          <% authors = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'author' }.group_by(&:user) %>
+          <% author_hours = authors.map{ |k, v| v.map(&:hours).sum } %>
+          <% author_hours_per_mcq = author_hours.map{ |author_hour| (author_hour.to_f / mcqs_size.to_f).round(2) } %>
+          <% reviewer_1s = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'reviewer_1' }.group_by(&:user) %>
+          <% reviewer_1_hours = reviewer_1s.map{ |k, v| v.map(&:hours).sum } %>
+          <% reviewer_1_hours_per_mcq = reviewer_1_hours.map{ |reviewer_1_hour| (reviewer_1_hour.to_f / mcqs_size.to_f).round(2) } %>
+          <% reviewer_2s = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'reviewer_2' }.group_by(&:user) %>
+          <% reviewer_2_hours = reviewer_2s.map{ |k, v| v.map(&:hours).sum } %>
+          <% reviewer_2_hours_per_mcq = reviewer_2_hours.map{ |reviewer_2_hour| (reviewer_2_hour.to_f / mcqs_size.to_f).round(2) } %>
+          <% video_explainers = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'video_explainer' }.group_by(&:user) %>
+          <% video_explainer_hours = video_explainers.map{ |k, v| v.map(&:hours).sum } %>
+          <% video_explainer_hours_per_mcq = video_explainer_hours.map{ |video_explainer_hour| (video_explainer_hour.to_f / mcqs_size.to_f).round(2) } %>
+          <% video_explanation_reviewers = mcq_hours.select{ |mcq_hour| mcq_hour.logging_type == 'video_explanation_reviewer' }.group_by(&:user) %>
+          <% video_explanation_reviewer_hours = video_explanation_reviewers.map{ |k, v| v.map(&:hours).sum } %>
+          <% video_explanation_reviewer_hours_per_mcq = video_explanation_reviewer_hours.map{ |video_explanation_reviewer_hour| (video_explanation_reviewer_hour.to_f / mcqs_size.to_f).round(2) } %>
+
+          <% max_arr = [author_hours.size, reviewer_1_hours.size, reviewer_2_hours.size, video_explainer_hours.size, video_explanation_reviewer_hours.size].max %>
+          <% max_arr = max_arr.zero? ? 1 : max_arr %>
+
+          <% all_hours = (1..max_arr).to_a.map { |ind| (author_hours[ind - 1].to_f.round(2) + reviewer_2_hours[ind - 1].to_f.round(2) + reviewer_1_hours[ind - 1].to_f.round(2) + video_explainer_hours[ind - 1].to_f.round(2) + video_explanation_reviewer_hours[ind - 1].to_f.round(2)) } %>
+
+          <% (1..max_arr).each do |index| %>
+            <% tot_author_hours += author_hours[index - 1].to_f %>
+            <% tot_author_hours_per_mcq += author_hours_per_mcq[index - 1].to_f %>
+            <% tot_reviewer_1_hours += reviewer_1_hours[index - 1].to_f %>
+            <% tot_reviewer_1_hours_per_mcq += reviewer_1_hours_per_mcq[index - 1].to_f %>
+            <% tot_reviewer_2_hours += reviewer_2_hours[index - 1].to_f %>
+            <% tot_reviewer_2_hours_per_mcq += reviewer_2_hours_per_mcq[index - 1].to_f %>
+            <% tot_video_explainer_hours += video_explainer_hours[index - 1].to_f %>
+            <% tot_video_explainer_hours_per_mcq += video_explainer_hours_per_mcq[index - 1].to_f %>
+            <% tot_video_explanation_reviewer_hours += video_explanation_reviewer_hours[index - 1].to_f %>
+            <% tot_video_explanation_reviewer_hours_per_mcq += video_explanation_reviewer_hours_per_mcq[index - 1].to_f %>
+            <% tot_all_hours += all_hours[index - 1] unless current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id].exclude?(current_user.id) %>
+
+            <% next if current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id].reject(&:blank?).include?(current_user.id) %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= "ID: #{mcq_stem.id}, Title: #{mcq_stem.title}" unless index > 1 %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= mcq_stem.tags.map(&:name).join(', ') unless index > 1 %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= mcq_stem.work_status.humanize.titleize unless index > 1 %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= mcq_stem.work_status_updated_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= mcqs_size unless index > 1 %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= authors.keys[index - 1]&.full_name.to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= author_hours[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= author_hours_per_mcq[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_1s.keys[index - 1]&.full_name.to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_1_hours[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_1_hours_per_mcq[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_2s.keys[index - 1]&.full_name.to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_2_hours[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= reviewer_2_hours_per_mcq[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explainers.keys[index - 1]&.full_name.to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explainer_hours[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explainer_hours_per_mcq[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explanation_reviewers.keys[index - 1]&.full_name.to_s %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explanation_reviewer_hours[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= video_explanation_reviewer_hours_per_mcq[index - 1] %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= all_hours[index - 1] unless current_user.tutor? && [authors.keys[index - 1]&.id, reviewer_1s.keys[index - 1]&.id, reviewer_2s.keys[index - 1]&.id, video_explanation_reviewers.keys[index - 1]&.id, video_explainers.keys[index - 1]&.id].exclude?(current_user.id) %></Data></Cell>
+            </Row>
+          <% end %>
+        <% end %>
+      <% end %>
+      <Row>
+        <Cell><Data ss:Type="String">Page Total</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_author_hours %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_author_hours.zero? ? 0.0 : (tot_author_hours.round(2) / @mcq_stems.select{ |st| @mcq_hours.where(logging_type: 'author').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_reviewer_1_hours %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_reviewer_1_hours.zero? ? 0.0 : (tot_reviewer_1_hours.round(2) / @mcq_stems.select{ |st| @mcq_hours.where(logging_type: 'reviewer_1').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_reviewer_2_hours %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_reviewer_2_hours.zero? ? 0.0 : (tot_reviewer_2_hours.round(2) / @mcq_stems.select{ |st| @mcq_hours.where(logging_type: 'reviewer_2').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_video_explainer_hours %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_video_explainer_hours.zero? ? 0.0 : (tot_video_explainer_hours.round(2) / @mcq_stems.select{ |st| @mcq_hours.where(logging_type: 'video_explainer').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_video_explanation_reviewer_hours %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_video_explanation_reviewer_hours.zero? ? 0.0 : (tot_video_explanation_reviewer_hours.round(2) / @mcq_stems.select{ |st| @mcq_hours.where(logging_type: 'video_explanation_reviewer').pluck(:mcq_stem_id).uniq.include? st.id }.map { |m| m.mcqs.count.to_f }.sum.to_f.round(2)).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= tot_all_hours.round(2) %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">All Total</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:author_hours] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:author_hours_per_mcq] %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:reviewer_1_hours] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:reviewer_1_hours_per_mcq] %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:reviewer_2_hours] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:reviewer_2_hours_per_mcq] %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:video_explainer_hours] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:video_explainer_hours_per_mcq] %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:video_explanation_reviewer_hours] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @totals[:video_explanation_reviewer_hours_per_mcq] %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= @total_hours %></Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

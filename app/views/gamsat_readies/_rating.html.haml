@@ -1,0 +1,12 @@
+.col-md-6.gam_review
+  .row.col-sm-12
+    %div.pull-left
+      %strong
+        = name
+      %small
+        = date
+    .rating.pull-right
+      = render_stars half_stars
+  .row.col-sm-12
+    %p.u-word-spacing= yield
+    %br

@@ -1,0 +1,123 @@
+- title "GradReady Review | Student Results and Testimonials"
+- meta_description "Learn how we have helped our average GAMSAT student improve 20+ percentile points, 5 years in a row and see what our past students have to say!"
+- meta_keywords "gamsat student testimonials, gradready review, gradready gamsat review"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        Student Results - GradReady GAMSAT
+        %sup ®
+        Courses
+%section.pad50
+  .container.text-center
+    %h2.mbot20 GradReady Testimonials
+    %p.sub_heading_txt.mbot_zero
+      We help students across Australia prepare for the GAMSAT
+      %sup ®
+      exam - and we deliver results.
+      %br/
+      Don't just take our word for it though - here are what our students have to say.
+%section
+  .comparison_table_tabbing
+    %ul.nav.attendce_tabbing{role: "tablist"}
+      %li.non_active_review.gradready_vid_testi{role: "presentation", class: [('active' if !params[:type].present?)]}
+        %a{"aria-controls" => "features_col", "data-toggle" => "tab", href: "#gradready_vid_testi", role: "tab"} GRADREADY TESTIMONIALS
+      %li.active_review.interview_vid_testi{role: "presentation", class: [('active' if params[:type].present?)]}
+        %a{"aria-controls" => "reviews_col", "data-toggle" => "tab", href: "#interview_vid_testi", role: "tab"} INTERVIEW READY TESTIMONIAL
+    .tab-content
+      #gradready_vid_testi.tab-pane{role: "tabpanel", class: [('active' if !params[:type].present?)]}
+        .container
+          #grad_video_testimonial.carousel.slide.blog_slider.result_slider{"data-ride" => "carousel", "data-interval" => "false"}
+            .carousel-inner.tab1
+              .item.active
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/christine_manuel.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/christine_manuel.mp4", type: "video/mp4"}
+              .item
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Carl).mp4", type: "video/mp4"}
+              .item
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/GAMSATReady%20Testimonial%20(Vince).mp4", type: "video/mp4"}
+              .item
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/My%20GAMSAT%20Story%20(Part%203)-%20GAMSATReady.mp4", type: "video/mp4"}
+            / Left and right controls
+            %a.left.carousel-control{"data-slide" => "prev", href: "#grad_video_testimonial"}
+              %span.glyphicon.glyphicon-chevron-left
+              %span.sr-only Previous
+            %a.right.carousel-control{"data-slide" => "next", href: "#grad_video_testimonial"}
+              %span.glyphicon.glyphicon-chevron-right
+              %span.sr-only Next
+      #interview_vid_testi.tab-pane{role: "tabpanel", class: [('active' if params[:type].present?)]}
+        .container
+          #inter_video_testimonial.carousel.slide.blog_slider.result_slider{"data-ride" => "carousel", "data-interval" => "false"}
+            .carousel-inner
+              .item.active
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/vincenzo.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/Vincenzo%20Crocitti%20(InterviewReady).mp4", type: "video/mp4"}
+              .item
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/steven.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/Steven%20InterviewReady%20Experience.mp4", type: "video/mp4"}
+              .item
+                %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }", poster: 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/carl.png'}
+                  %source{src: "https://gradready-prod.s3.amazonaws.com/public/Carl%20InterviewReady%20Experience.mp4", type: "video/mp4"}
+            / Left and right controls
+            %a.left.carousel-control{"data-slide" => "prev", href: "#inter_video_testimonial"}
+              %span.glyphicon.glyphicon-chevron-left
+              %span.sr-only Previous
+            %a.right.carousel-control{"data-slide" => "next", href: "#inter_video_testimonial"}
+              %span.glyphicon.glyphicon-chevron-right
+              %span.sr-only Next
+%section.padd_bttm40
+  = render 'public_page_partial/our_students'
+= render 'public_page_partial/gamsat_student_stat'
+
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });
+  $(document).ready(function(){
+    $(".left").click(function(){
+      var current_slider = $(this).parents('div.active.tab-pane');
+      var active_slide = current_slider.find(".item.active");
+      var active_video = active_slide.find('video')[0];
+      if(active_video == undefined) {
+       active_video = current_slider.find('video:last')[0];
+      }
+      active_video.pause();
+    })
+
+    $(".right").click(function(){
+      var current_slider = $(this).parents('div.active.tab-pane');
+      var active_slide = current_slider.find(".item.active");
+      var active_video = active_slide.find('video')[0];
+      if(active_video == undefined) {
+        active_video = current_slider.find('video:first')[0];
+      }
+      active_video.pause();
+    })
+
+    $(".interview_vid_testi").click(function(){
+      var current_slider = $('#gradready_vid_testi');
+      var active_slide = current_slider.find(".item.active");
+      var active_video = active_slide.find('video')[0];
+      if(active_video == undefined) {
+        active_video = current_slider.find('video:first')[0];
+      }
+      active_video.pause();
+    })
+
+    $(".gradready_vid_testi").click(function(){
+      var current_slider = $('#interview_vid_testi');
+      var active_slide = current_slider.find(".item.active");
+      var active_video = active_slide.find('video')[0];
+      if(active_video == undefined) {
+        active_video = current_slider.find('video:first')[0];
+      }
+      active_video.pause();
+    })
+  });

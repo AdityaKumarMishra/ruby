@@ -1,0 +1,100 @@
+.team-page {
+  .gamsat {
+    h1 {
+      color: $gamsat-color;
+    }
+    h2 {
+      color: $gamsat-color;
+    }
+    li.active {
+      background: #009348;
+    }
+  }
+  .umat {
+    h1 {
+      color: $umat-color;
+    }
+    li.active {
+      background: $umat-color !important;
+    }
+  }
+  .vce {
+    h1 {
+      color: $vce-color;
+    }
+    li.active {
+      background: $vce-color !important;
+    }
+  }
+  .hsc {
+    h1 {
+      color: $hsc-color;
+    }
+    ul > li.active {
+      background: $hsc-color !important;
+    }
+  }
+  text-align: left;
+  padding-bottom: 15px;
+  .team-bar {
+    width: 20%;
+    float: left;
+    > ul > li {
+      padding: 5px 10px;
+      width: 70%;
+      margin-bottom: 5px;
+      cursor: pointer;
+      &.active {
+        position: relative;
+        color: white;
+      }
+    }
+  }
+  .team-prof-images {
+    width: 78%;
+    float: right;
+    a {
+      &.profile-pic {
+        img {
+          height: auto;
+          width: 15%;
+          margin: 10px 10px 0 0;
+        }
+      }
+      img {
+        -webkit-transition: opacity 0.5s ease-in-out;
+        -moz-transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
+      }
+    }
+  }
+  .teacher-profile {
+    width: 50%;
+    margin-left: 25%;
+    .modal-content {
+      height: 350px;
+      overflow:auto;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  a {
+    &.profile-pic {
+      img {
+        height: auto;
+        width: 15%;
+        margin: 10px 10px 0 0;
+      }
+    }
+  }
+}
+
+.filterImage img{
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.2;
+}

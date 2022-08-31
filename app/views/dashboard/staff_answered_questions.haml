@@ -1,0 +1,27 @@
+%h1 Issue Ticketing Counter
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    = form_for_filterrific @filterrific, html: { id: 'filterrific-no-ajax-auto-submit' }  do |f|
+      .form-group
+        Directed At Filter
+        = f.select :answerer_filter, @filterrific.select_options[:answerer_filter], {include_blank: 'All'}, {class: 'form-control select2_searchable'}
+      .form-group
+        From
+        =f.text_field(:with_start_filter, class: 'form-control datepicker', required: true)
+      .form-group
+        To
+        =f.text_field(:with_end_filter, class: 'form-control datepicker', required: true)
+      .form-group
+        = f.submit 'Filter', class: 'btn btn-gradready green'
+        =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gr-light-green'
+
+=render(partial: 'dashboard/partial/staff_answered_questions', locals: { tutors: @tutors, tickets: @tickets } )
+
+:javascript
+  $(function () {
+    $(".select2_searchable").select2();
+  });

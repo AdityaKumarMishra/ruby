@@ -1,0 +1,23 @@
+%p
+  %b Title:
+  = @online_exam.title
+%p
+  %b Instruction:
+  %br
+  = sanitize @online_exam.instruction
+%p
+  %b Published
+  = @online_exam.published
+%p
+  %b Finished when Time ends
+  = @online_exam.is_finish
+%p
+  %b Tags
+  - @online_exam.tags.each do |tag|
+    %span.label.label-default=tag.name
+%br
+= link_to 'Manage Sections', online_exam_sections_path(@online_exam)
+\|
+= link_to 'Edit', edit_online_exam_path(@online_exam)
+\|
+= link_to 'Back', online_exams_path

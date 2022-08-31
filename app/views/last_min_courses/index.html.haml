@@ -1,0 +1,36 @@
+%h1 Listing Course for Last Min Preparation Page
+
+#filterrific_results
+  %table.gr-table.gr-table-bordered.table-hover
+    %thead
+      %tr
+        %th
+          Course Name
+        %th
+          Date
+        %th
+          Amount(Without GST)
+        %th
+          Description(Hover Text)
+        %th
+          Type  
+        %th
+          Action  
+    - @last_min_course.each do |course|
+      %tbody
+        %tr
+          %td
+            = course.course_name
+          %td
+            = course.date
+          %td
+            = course.amount
+          %td
+            = course.description.html_safe
+          %td
+            = course.course_type.titleize  
+          %td
+            = link_to "Edit", edit_last_min_course_path(course), class: "btn btn-info btn-sm"
+            = link_to "Delete", last_min_course_path(course), class: "btn btn-danger btn-sm", method: :delete
+.btn.btn-gradready.green.mtop10
+  =link_to "Add Courses to Last Minute Preparation Page" , new_last_min_course_path , style:"all:unset;"

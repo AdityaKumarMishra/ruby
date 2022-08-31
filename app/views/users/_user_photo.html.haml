@@ -1,0 +1,8 @@
+- if @user.tutor?
+  %center
+    .imagePreview.u-sm-square
+      - if @user.photo.exists?
+        = image_tag(@user.photo.url(:standard), size:'200x200', alt: @user.full_name, class: 'img-circle mg-20 imageUpload')
+      - else
+        = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/noname_user.jpg', size:'200x200', alt: @user.full_name, class: 'img-circle imageUpload')
+

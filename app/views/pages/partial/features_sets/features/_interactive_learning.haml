@@ -1,0 +1,45 @@
+.feature-content
+  - if product_line == 'VCE'
+    %h4
+      Interactive Teaching Style
+      %span.enhance-features
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        = link_to 'Enhanced', recent_update_path(tab: product_line), class:appropriate_icon(product_line)
+    - if paid
+      %h4 $#{price.round(0)} + 10% GST = $#{price_with_gst.round(0)}
+    -else
+      %strong
+        %i
+          (Built into our systems)
+          %br
+    .text
+      %p.u-word-spacing In our small classes of 10, GradReady tutors have plenty of opportunities to clarify your specific queries.
+  - elsif product_line == 'HSC'
+    %h4
+      Interactive Teaching Style
+      %span.enhance-features
+        =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+        = link_to 'Enhanced', recent_update_path(tab: product_line), class:appropriate_icon(product_line)
+    - if paid
+      %h4 $#{price.round(0)} + 10% GST = $#{price_with_gst.round(0)}
+    -else
+      %strong
+        %i
+          (Built into our systems)
+          %br
+    .text
+      %p.u-word-spacing In our small classes of 10, GradReady tutors have plenty of opportunities to clarify your specific queries.
+  - elsif product_line == 'GAMSAT'
+    %h4 Interactive Teaching Style
+    %span (Built into our systems)
+    %p
+      In our small classes of 21, GradReady tutors have plenty of opportunities to ...
+    .show_full_content
+      In our small classes of 21, GradReady tutors have plenty of opportunities to clarify your specific queries.
+  -else
+    %h4 Interactive Teaching Style
+    %span (Built into our systems)
+    %p
+      In our small classes of 18, GradReady tutors have plenty of opportunities to ...
+    .show_full_content
+      In our small classes of 18, GradReady tutors have plenty of opportunities to clarify your specific queries.

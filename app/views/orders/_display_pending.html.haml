@@ -1,0 +1,30 @@
+#filterrific_results
+  =will_paginate @orders, renderer: BootstrapPagination::Rails
+  %table.table.table-bordered.table-hover#bank-tranfer-data
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Date
+        %th Total Cost
+        %th Purchase Reference
+        %th{ colspan: 2} Actions
+
+    %tbody
+      - @orders.each do |order|
+        %tr
+          %td= order.user.full_name
+          %td= order.user.email
+          %td{style: "width: 70px;"}= order.updated_at.strftime("%d %b %Y")
+          %td= number_to_currency(order.total_cost)
+          %td= order.reference_number
+          %td= button_to 'Direct Deposit', {:controller => "orders", :action => "confirm_paid", :id => order.id}, method: :post, class: 'btn btn-info btn-sm', :data => { :confirm => 'Are you sure?' }
+          %td.col-md-2= button_to 'Cancel Order', {:controller => "orders", :action => "redact_order", :id => order.id}, method: :post, class: 'btn btn-danger btn-sm', :data => { :confirm => 'Are you sure want to redact your order? Please do not press ‘confirm’ if you have already sent over the bank transfer' }
+
+:javascript
+  $('#bank-tranfer-data').DataTable({
+    "bPaginate": false,
+    "searching": false,
+    "aoColumnDefs" : [
+      { sortable: false, targets: [0,1,3,4,5,6, 7] } ]
+  });

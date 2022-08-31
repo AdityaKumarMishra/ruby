@@ -1,0 +1,22 @@
+%p
+  %b Title:
+  = @surveys_survey.title
+%p
+  %b Date published:
+  = format_date_long @surveys_survey.date_published
+%p
+  %b Date start:
+  = format_date_long @surveys_survey.date_start
+%p
+  %b Published:
+  = @surveys_survey.published
+%p
+  %b Date closed:
+  = format_date_long @surveys_survey.date_closed
+
+=render :partial => 'surveys/surveys/partial/fill_form', :locals => {:questions => @surveys_survey.survey_questions}
+
+
+
+.btn-group
+  = link_to 'Back', :back, class: 'btn btn-default'

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Courses Summary" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Course Name</Data></Cell>
+        <Cell><Data ss:Type="String">City</Data></Cell>
+        <Cell><Data ss:Type="String">Product Version</Data></Cell>
+        <Cell><Data ss:Type="String">Enrolment end date</Data></Cell>
+        <Cell><Data ss:Type="String">Expiry date</Data></Cell>
+        <Cell><Data ss:Type="String">Student count</Data></Cell>
+        <Cell><Data ss:Type="String">Class size</Data></Cell>
+        <Cell><Data ss:Type="String">Tutors Assigned</Data></Cell>
+
+      </Row>
+      <% @all_courses.each do |course| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= course.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.city %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.product_version ? course.product_version.name + ',' + course.product_version.type : 'None' %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.enrolment_end_date.try(:strftime, '%d/%m/%Y') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.expiry_date.try(:strftime, '%d/%m/%Y') %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.users.size %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.class_size %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= course.tutor_assigned? %></Data></Cell>
+
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+

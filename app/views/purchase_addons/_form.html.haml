@@ -1,0 +1,19 @@
+= simple_form_for(@purchase_addon) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :paid_at
+    = f.input :date_activated
+    = f.input :date_deactivated
+    = f.input :features
+    = f.input :subtotal
+    = f.input :gst
+    = f.input :paypal_fee
+    = f.input :paypal_payment
+    = f.input :paypal_token
+    = f.input :banktrans
+    = f.input :paypal
+    = f.input :bank
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,31 @@
+=# link_to edit_mcq_stem_mcq_path(id: mcq, mcq_stem_id: @mcq_stem) do
+
+.panel.panel-default.mcq_sortable{:id => "mcq_#{mcq.id}"}
+  .panel-heading
+    %h3.panel-title= sanitize mcq.question
+  .panel-body
+    .explanation
+      %b Explanation
+      = raw mcq.explanation
+    .mcq-info
+      %span.label.label-default
+        %b difficulty:
+        =mcq.difficulty
+      %span.label.label-default
+        %b examinable:
+        =mcq.examinable
+      %span.label.label-default
+        %b publish:
+        =mcq.publish
+    -if mcq.mcq_answers.any?
+      .panel-body
+        %table.table.table-bordered.table-hover
+          %thead
+            %th Answers
+            %th Is correct
+          %tbody
+            -mcq.mcq_answers.each do |answer|
+              %tr
+                %td= raw answer.answer
+                %td=human_boolean(answer.correct?)
+

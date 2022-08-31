@@ -1,0 +1,35 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Course Summary") do |sheet|
+  date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+  def data_array(enrolment)
+    data_array = []
+    data_array.push(enrolment.user.try(:full_name))
+    data_array.push(enrolment.user.try(:email))
+    data_array.push(enrolment.user.try(:phone_number))
+    data_array.push(enrolment.user.try(:created_at))
+
+    if enrolment.user.present? && enrolment.user.confirmed_at.present?
+      data_array.push("Confirmed")
+    else
+      data_array.push("Not Confirmed")
+    end
+
+
+
+    if enrolment.trial && enrolment.user.upgraded_user?
+      data_array.push("Upgraded")
+    elsif enrolment.trial && enrolment.trial_expired?
+      data_array.push("Expired")
+    elsif enrolment.trial
+      data_array.push("Active")
+    else
+      data_array.push("None")
+    end
+  end
+
+  sheet.add_row ["Name",  "Email", "Phone",  "Registered at", "Email Status", "Status"], :style => [date_format]
+
+  @course.student_list.each do |enrolment|
+    sheet.add_row data_array(enrolment)
+  end
+end

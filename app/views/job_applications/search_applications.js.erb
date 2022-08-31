@@ -1,0 +1,31 @@
+<% js = escape_javascript(
+  render(
+    partial: 'job_applications/list',
+    locals: { job_applications: @job_applications }
+  )
+) %>
+
+<%if @tag%>
+	<%html=""%>
+	<% html += "<option value=''>All</option>" %>
+	<% @tag.children.each do |tag| %>
+		<%if tag.name==params[:filterrific][:with_content_tag]%>
+			<%selected=tag.name%>
+		<%else%>
+			<%selected = "" %>
+		<%end%>
+		
+		<%if selected.blank?%>
+			<% html += "<option value='#{tag.name}'>#{tag.name}</option>" %>
+		<%else%>
+			<% html += "<option selected='#{selected}' value='#{tag.name}'>#{tag.name}</option>" %>
+		<%end%>
+	<%end%>
+
+
+	$("#filterrific_with_content_tag").html("");
+	$("#filterrific_with_content_tag").html("<%= html.html_safe %>");
+	$("#filterrific_with_content_tag").removeClass('hidden');
+<%end%>	
+
+$("#filterrific_results").html("<%= js %>");

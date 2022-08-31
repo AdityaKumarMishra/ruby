@@ -1,0 +1,265 @@
+- if current_user && (current_user.student?)
+  - content_for :show_left_panel, true if current_user.confirmed_at.nil?
+  - content_for :page_heading, 'Edit Profile'
+  -if current_user.confirmed_at.present?
+    .dashbord_right
+      = render 'edit'
+  -else
+    = render 'edit'
+
+-else
+  #msform
+    .full_container
+      %h2
+        Edit Profile
+      = simple_form_for(resource, as: resource_name, url: edit_user_registration_path, html: { method: :put }) do |f|
+        = display_errors resource
+
+        = render 'users/user_photo'
+
+        .form-inputs
+          - if @user.tutor?
+            %center
+              = f.input :photo, as: :file, accept: 'image/png,image/gif,image/jpeg, image/jpg', required: true, id: 'uploadImage'
+              - if @user.photo.exists?
+                = f.check_box :remove_photo
+                Delete Photo
+          = f.input :email, required: true, autofocus: true
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %p
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          = f.input :current_password, hint: "We need your current password to confirm your changes", required: true
+          = f.input :password, autocomplete: "off", hint: "Leave it blank if you don't want to change it", required: false
+          = f.input :password_confirmation, required: false
+          - if f.object.address.persisted? || !@user.student? || f.object.address.new_record?
+            = f.input :phone_number, required: true
+            = f.input :first_name, label: f.object.last_name.present? ? 'First Name' : 'Name', required: true
+            -if f.object.last_name.present?
+              = f.input :last_name, label: 'Last Name', required: true
+            %br
+            %h4 Contact Information
+            = f.simple_fields_for :address_attributes, f.object.address do |a|
+              = a.hidden_field :id
+              = a.input :line_one, label: 'Address line 1', required: true
+              = a.input :line_two, label: 'Address line 2', required: false
+              = a.input :suburb, required: true
+              = a.input :post_code, label: 'Postcode', required: true
+
+              = a.input :state, collection: state_for_select, include_blank: 'Please Select State', selected: a.object.present? ? a.object.state : false, input_html: {class: 'form-control'}
+              = a.input :country, collection: country_for_select, include_blank: 'Please Select Country', selected: a.object.present? ? a.object.country : false, input_html: {class: 'form-control'}
+            %br
+          - if f.object.questionnaire.present? && f.object.questionnaire.persisted? || f.object.questionnaire.nil? || f.object.questionnaire.new_record?
+            %h4 Your Background
+            = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+              = q.hidden_field :id
+              = q.input :student_level, required: true, as: :select, collection: student_collection, label: 'Are you a university or high school student?', prompt: "Select..."
+            #user_questionnaire_university_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .row
+                  .col-sm-6
+                    = q.input :university_id, required: true, as: :select, collection: University.all, prompt: 'Select University...'
+                    = q.input :degree_id, required: true, as: :select, collection: Degree.all, prompt: 'Select Course...'
+                    = q.input :year, required: true, label: 'Commencement Year'
+                  .col-sm-6
+                    = q.input :umat_high_school, required: true, as: :radio_buttons, label: 'Did you sit the UCAT in high school?'
+                    = q.input :umat_uni, required: true, as: :radio_buttons, label: 'Are you going to sit/have you sat the UCAT again while at uni?'
+            #user_questionnaire_highschool_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .row
+                  .col-sm-6
+                    = q.input :current_highschool, label: 'Current High School', required: true
+                    = q.input :target_uni_course, label: 'Target University Course', required: true
+
+                  .col-sm-6
+                    = q.input :highschool_year_level, required: true, as: :radio_buttons, collection: year_level_collection, prompt: 'Select Year Level...', label: 'Year Level'
+            #user_questionnaire_other_questions{:style=>"display:none;"}
+              = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire  do |q|
+                .form-group
+                  .col-sm-6
+                    = q.label :designation, required: true, label: 'Profession/Job/Training'
+                    = q.input :designation, required: true, label: false
+
+                    = q.label :learning_institution, required: true, label: 'Previous University/Learning Institution'
+                    = q.input :learning_institution, required: true, label: false
+
+                    = q.label :year_of_most_recent_completed_qualification, required: true, label: 'Year of Most Recently Completed Qualification'
+                    = q.input :year_of_most_recent_completed_qualification, required: true, label: false
+            = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire do |q|
+              -if last_source_collection.flatten.include? f.object.questionnaire.try(:last_source)
+                -last_source_selected=f.object.questionnaire.try(:last_source)
+                -last_source_val=""
+                -last_source_cls='hidden'
+              -else
+                -last_source_selected='other'
+                -last_source_val= f.object.questionnaire.try(:last_source)
+                -last_source_cls=''
+
+              -if f.object.questionnaire.present?
+                -if f.object.questionnaire.try(:source).include? "other"
+                  -source_val=f.object.questionnaire.try(:source).reject(&:empty?).split("other").last[0]
+                  -source_cls=''
+                -else
+                  -source_val=""
+                  -source_cls='hidden'
+              -else
+                -source_val=""
+                -source_cls='hidden'
+
+              = q.input :student_region, required: true, as: :radio_buttons, collection: student_region_collection, prompt: 'Select Region...', label: 'Are you a domestic or international student?'
+
+              = q.input :source, required: true, as: :check_boxes, collection: source_collection, label: 'How did you hear about GradReady? Please select all that apply.'
+              = text_field_tag 'source',"#{source_val}", class:"hidden_source #{source_cls} form-control", placeholder: "Please enter ..."
+              %p.other_source
+
+              = q.input :last_source, required: true, as: :select, collection: last_source_collection, selected:"#{last_source_selected}", label: 'Where did you LAST see/hear about us before signing up?', prompt_text: 'Please select...'
+              = text_field_tag 'last_source',"#{last_source_val}", class:"hidden_last_source #{last_source_cls} form-control", placeholder: "Please enter ..."
+              %p.other_last_source
+
+            = f.simple_fields_for :questionnaire_attributes, f.object.questionnaire do |q|
+              -if language_collection.flatten.include? f.object.questionnaire.try(:language_spoken)
+                = q.input :language_spoken, required: true, as: :select, collection: language_collection, selected: "#{f.object.questionnaire.try(:language_spoken)}", label: 'Language Spoken at Home Other than English', prompt: 'Please select a language'
+                = text_field_tag 'language_spoken',"", class:"hidden_language hidden form-control", placeholder: "Please enter a language"
+                %p.no_language_spoken
+              -else
+                = q.input :language_spoken, required: true, as: :select, collection: language_collection, selected: "other", label: 'Language Spoken at Home Other than English', prompt: 'Please select a language'
+                = text_field_tag 'language_spoken', f.object.questionnaire.try(:language_spoken), class:"hidden_language form-control", placeholder: "Please enter a language"
+                %p.no_language_spoken
+
+        .form-actions
+          = f.button :submit, "Update"
+
+      - if current_user.superadmin?
+        %h3 Cancel my account
+        %p
+          Unhappy?
+        %p
+          =link_to "Cancel my account", registration_path(resource_name), class: "btn btn-danger", data: { confirm: "Are you sure?" }, method: :delete
+
+:javascript
+  $("#user_questionnaire_attributes_student_level").change(function() {
+    var student_type = $(this).val()
+    check(student_type)
+  });
+
+  function check(student_type){
+    switch (student_type) {
+      case "highschool":
+        $("#user_questionnaire_university_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_highschool_questions").fadeIn('fast');
+        });
+        $("#user_questionnaire_other_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_highschool_questions").fadeIn('fast');
+        });
+        break;
+      case "university":
+        $("#user_questionnaire_highschool_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_university_questions").fadeIn('fast');
+        });
+        $("#user_questionnaire_other_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_university_questions").fadeIn('fast');
+        });
+        break;
+      case "other":
+        $("#user_questionnaire_highschool_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_other_questions").fadeIn('fast');
+        });
+        $("#user_questionnaire_university_questions").fadeOut('fast', function() {
+          $("#user_questionnaire_other_questions").fadeIn('fast');
+        });
+        break;
+      default:
+        $("#user_questionnaire_highschool_questions").fadeOut('fast');
+        $("#user_questionnaire_university_questions").fadeOut('fast');
+        $("#user_questionnaire_other_questions").fadeOut('fast');
+    }
+  }
+
+  $('#user_questionnaire_attributes_language_spoken').on('change',function(){
+    if ($(this).val()=="other"){
+      $("#language_spoken").removeClass('hidden')
+    }else{
+      $("#language_spoken").addClass('hidden')
+    }
+  })
+
+  $('#user_questionnaire_attributes_last_source').on('change',function(){
+    if ($(this).val()=="other"){
+      $("#last_source").removeClass('hidden')
+    }else{
+      $("#last_source").addClass('hidden')
+    }
+  })
+
+  $('#user_questionnaire_attributes_source_other').on('click',function(){
+    if ($(this).val()=="other" && $(this).is(':checked')){
+      $("#source").removeClass('hidden')
+    }else{
+      $("#source").addClass('hidden')
+    }
+  })
+
+  var role = '#{resource.role}';
+  if(role == 'student'){
+    $('#edit_user').submit(function( e ){
+      var language_spoken = $('#user_questionnaire_attributes_language_spoken').val();
+
+      var language_spoken_text = $('#language_spoken').val();
+
+      var last_source = $('#user_questionnaire_attributes_last_source').val();
+      var last_source_text = $('#last_source').val();
+
+      if (language_spoken){
+        if (language_spoken && language_spoken!="other"){
+          $('.no_language_spoken').text("");
+          true;
+        }else{
+          if (language_spoken && language_spoken_text){
+            $('.no_language_spoken').text("");
+            true;
+          }else{
+            $('.no_language_spoken').text('Please select a language');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.no_language_spoken').text('Please select a language');
+        e.preventDefault();
+      }
+
+      if (last_source){
+        if (last_source && last_source!="other"){
+          $('.other_last_source').text("");
+          true;
+        }else{
+          if (last_source && last_source_text){
+            $('.other_last_source').text("");
+            true;
+          }else{
+            $('.other_last_source').text('Please select an option');
+            e.preventDefault();
+          }
+        }
+      }else{
+        $('.other_last_source').text('Please select an option');
+        e.preventDefault();
+      }
+
+
+      if ($('#user_questionnaire_attributes_source_other').is(':checked')){
+        if (!$('.hidden_source').hasClass('hidden') && $('.hidden_source').val()==""){
+          $('.other_source').text('This field is Required.');
+          e.preventDefault();
+        }else{
+          $('.other_source').text("");
+          true;
+        }
+      }else{
+        $('.hidden_source').val("");
+        true;
+      }
+    });
+  }
+
+  $('#user_questionnaire_attributes_current_highschool').autocomplete({
+    source: '/high_schools.json'
+  });

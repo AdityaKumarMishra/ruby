@@ -1,0 +1,7 @@
+= f.simple_fields_for :address do |a|
+  = a.input :line_one, label: 'Address line 1', required: true
+  = a.input :line_two, label: 'Address line 2', required: false
+  = a.input :suburb, required: true
+  = a.input :post_code, label: 'Postcode', required: true
+  = a.input :state, collection: state_for_select, include_blank: 'Please Select State', selected: a.object.present? ? a.object.state : false, input_html: {class: 'form-control cstm_select'}
+  = a.input :country, collection: country_for_select, include_blank: 'Please Select Country', selected: a.object.present? ? a.object.country : false, input_html: {class: 'form-control cstm_select'}

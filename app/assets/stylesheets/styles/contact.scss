@@ -1,0 +1,89 @@
+// Place all the styles related to the Contact controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#contact{
+  margin: 20px auto 50px;
+  .center-content {
+    text-align: center;
+
+    .listen {
+      h2 {
+          font-size: 36px;
+      }
+    }
+    .listen-blue {
+      h1 {
+          font-size: 36px;
+      }
+      @extend .listen;
+      color: #007ecc;
+    }
+    .listen-red {
+      @extend .listen;
+      color: #be382a;
+    }
+    .listen-green {
+      h1 {
+        font-size: 36px;
+      }
+      @extend .listen;
+      color: $gamsat-color;
+    }
+    .listen-purple {
+      @extend .listen;
+      color: $vce-color;
+    }
+  }
+
+  .contact-details{
+    text-align: center;
+
+    .contact-detail{
+      margin-top: 60px;
+    }
+
+  }
+}
+
+.contact-detail h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-form{
+  padding: 20px 0px 40px;
+  background-color: #eee;
+
+  h2{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h3{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h4{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  label{
+//    display: none;
+  }
+
+}
+
+.call-us h3 { padding: 0px 85px; }
+.do_not_refersh {
+  min-height: 397px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 66px;
+  font-weight: bold;
+}
+.site_content{
+  font-size: 15px;
+  line-height: 35px;
+}

@@ -1,0 +1,47 @@
+%h1 Listing Essays
+.row
+  .form-group.col-md-6
+    Unmarked Question
+    = select_tag 'has_answered_filter', options_for_select([["Both"] , ["True" ],["False"]]), class: 'form-control has_answered_filter'
+  .form-group.col-md-6
+    Tags
+    = select_tag 'tag_filter', options_for_select(Tag.options_for_select), class: 'form-control tag_filter'
+%br
+
+= link_to 'New Essay', new_essay_path, class: 'btn btn-primary'
+/ = link_to 'Essay Marking Details', 'essay_responses/to_mark', class: 'btn btn-primary'
+/ = link_to 'Essay Marking Timeline', 'essay_responses/tutor_essays', class: 'btn btn-primary'
+#essay_filter
+  = render 'essays/partial/table'
+
+
+:javascript
+  $(document).ready(function(){
+    $(".has_answered_filter").on("change", function(){
+      var selected = $(".has_answered_filter").val();
+      update_essay_filter_result(selected);
+    });
+
+    $(".tag_filter").on("change", function(){
+      var selected = $(".tag_filter").val();
+      update_essay_result_by_tag(selected);
+    });
+
+  });
+
+  function update_essay_filter_result(selected_option) {
+    jQuery.ajax({
+      url: "/essays/filter_essays",
+      type: "GET",
+      data: {"selected" : selected_option}
+    });
+  }
+
+  function update_essay_result_by_tag(selected_option) {
+    jQuery.ajax({
+      url: "/essays/tag_filter",
+      type: "GET",
+      data: {"selected" : selected_option}
+    });
+  }
+

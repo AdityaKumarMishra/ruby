@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @section.title
+%p
+  %b Duration:
+  = @section.duration
+%p
+  %b Position:
+  = @section.position
+
+= link_to 'Add Question', new_polymorphic_path([@parent_resource, @section, SectionItem]), class: 'btn btn-default'
+\|
+= link_to 'Edit', edit_polymorphic_path([@parent_resource, @section]), class: 'btn btn-default'
+\|
+= link_to 'Back', polymorphic_path([@parent_resource, Section]), class: 'btn btn-default'

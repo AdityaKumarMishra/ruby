@@ -1,0 +1,11 @@
+- if staffs.any?
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Add Staff
+    %tbody
+      - staffs.each do |staff|
+        %tr
+          %td= staff.staff.full_name
+          %td= link_to "Add Staff", append_staff_profiles_path(staff_profile_id: staff.id, div: "#added-staff", attribute: 'course[staff_profile_ids[]'), remote: true

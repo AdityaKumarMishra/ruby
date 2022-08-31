@@ -1,0 +1,88 @@
+#courseModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "courseModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h4#reassignModalLabel.modal-title Please Choose Course
+      .modal-body
+        %p.text-info
+          %b
+            .form-group
+              %p
+                Product Line
+                = select_tag "course_product_line", options_for_select(available_product_line), { prompt: '- All -', class: 'form-control course_product_line'}
+
+              %p
+                Product Version
+                = select_tag "course_product_version", options_for_select(available_product_version), { prompt: '- All -', class: 'form-control pv_select'}
+
+              %p
+                City
+                = select_tag "course_city", options_for_select(available_city), { prompt: '- All -', class: 'form-control select_city'}
+
+            .form-inputs
+              Course
+              = select_tag "course_id", options_for_select(Course.active_courses.order(:name).pluck(:name, :id), disabled: student.courses.ids), { prompt: 'Please Select Course', class: 'form-control chosen-select'}
+            .form-actions.text-center.select_course
+              = link_to 'Enrol', "#", id: "enroll", class: "submit-link btn btn-primary"
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+:javascript
+  $(document).ready(function(){
+    c_id = $('#course_id').val();
+    $('.submit-link').attr('href', '/courses/'+c_id+'/enrolments/student_course_enrolment/?user_id='+ #{student.id});
+
+    $('#course_id').on('change', function(){
+      id = $('#course_id').val();
+      $('.submit-link').attr('href', '/courses/'+id+'/enrolments/student_course_enrolment/?user_id='+ #{student.id});
+    })
+  })
+  $("#enroll").click(function(e){
+    check_course(e)
+  });
+  function check_course(e){
+
+    c_id = $('#course_id').val();
+    if(c_id == ""){
+      alert("Please Select Course")
+      e.preventDefault();
+      return false;
+    }
+  }
+
+  $(".course_product_line").on('change', function(){
+    product_line = $(this).val();
+    product_version = $(course_product_version).val();
+    city = $(course_city).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line},
+    });
+  })
+
+  $(".pv_select").on('change', function(){
+    product_line = $(course_product_line).val();
+    product_version = $(this).val();
+    city = $(course_city).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line, product_version: product_version, city: city},
+    });
+  })
+
+  $(".select_city").on('change', function(){
+    product_line = $(course_product_line).val();
+    product_version = $(course_product_version).val();
+    city = $(this).val();
+    $.ajax({
+      url: "/courses/filtered_transfer_courses",
+      type: "GET",
+      dataType: 'script',
+      data: {product_line: product_line, product_version: product_version, city: city},
+    });
+  })

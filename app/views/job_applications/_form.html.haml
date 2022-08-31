@@ -1,0 +1,158 @@
+%section.faq_wrapper.faq_details.job_application_outer
+  .row
+    .container
+      .col-lg-12
+        %a.pull-left.bk_fa_page{href: "#{available_positions_job_application_forms_path}"}
+          %i.fa.fa-angle-left{"aria-hidden" => "true"}>
+           Back
+      .col-lg-12
+        .job_application_inner
+          = simple_form_for([@job_application_form, @job_application], html: { class: 'job_form'}) do |f|
+            = f.error_notification
+            = f.hidden_field :job_application_form_id, value: @job_application_form.id
+            .row
+              .form-group.col-md-6
+                %label.col-form-label{for: "applicant_type"}
+                  %span> *
+                  What type of applicant are you?
+                = f.input :applicant_type, as: :select, collection:['Current University Student', 'Graduate/Current Professional'], label: false, include_blank: 'Please select applicant type', wrapper: false
+              .form-group.col-md-6
+                %label.col-form-label{for: "name"}
+                  %span> *
+                  Name
+                = f.input :name, label: false, wrapper: false
+            = f.simple_fields_for :address do |address|
+              .row
+                .form-group.col-md-6
+                  %label.col-form-label{for: "phnno"}
+                    %span> *
+                    Phone number
+                  = f.input :phone_number, label: false, wrapper: false
+                .form-group.col-md-6
+                  %label.col-form-label{for: "email"}
+                    %span> *
+                    Email
+                  = f.input :email, label: false, wrapper: false
+              .row
+                .form-group.col-md-12
+                  %label.col-form-label{for: "street"}
+                    %span> *
+                    Street Address
+                  = address.input :line_one, as: :string, label: false, wrapper: false
+              .row
+                .form-group.col-md-6
+                  %label.col-form-label{for: "suburb"}
+                    %span> *
+                    Suburb
+                  = address.input :suburb, label: false, wrapper: false
+                .form-group.col-md-6
+                  %label.col-form-label{for: "city"} City
+                  = address.input :city, label: false, wrapper: false
+              .row
+                .form-group.col-md-6
+                  %label.col-form-label{for: "post"}
+                    %span> *
+                    Postcode
+                  = address.input :post_code, label: false, wrapper: false
+                .form-group.col-md-6
+                  %label.col-form-label{for: "state"}
+                    %span> *
+                    State
+                  = address.input :state, as: :select, collection: area_names_for_select, prompt: "Please Select a State", label: false, wrapper: false
+            .row
+              .form-group.col-md-6
+                %label.col-form-label{for: "atar"}
+                  %span> *
+                  ATAR/OP or equivalent
+                = f.input :atar, label: false, wrapper: false
+              .form-group.col-md-6
+                %label.col-form-label{for: "number"}
+                  %span> *
+                  WAM. Input a single number - eg. 76
+                = f.input :wam, label: false, wrapper: false
+            .row
+              .form-group.col-md-6
+                %label.col-form-label{for: "score"}
+                  %span> *
+                  Other test score
+                = f.input :other_test_score, label: false, wrapper: false
+              .form-group.col-md-6
+                %label.col-form-label{for: "number"}
+                  %span> *
+                  Number of Years of Full Time Work Experience (Input whole numbers only. Put 0 if nil FT work experience or total FT experience is less than 1 year)
+                = f.input :full_time_exp, label: false, wrapper: false
+
+            %div.current_university_student{ style: "display: #{f.object.try(:applicant_type) == 'Current University Student' ? '' : 'none'}" }
+              .row
+                .form-group.col-md-6
+                  = f.input :degree_type, as: :select, collection: JobApplication.degree_types.keys, label: '*Current Degree Type', include_blank: 'Please select current degree type'
+                .form-group.col-md-6
+                  = f.input :degree, label: 'What is your specific degree? Eg. Bachelor of Computer Science'
+              .row
+                .form-group.col-md-6
+                  = f.input :graduation, label: '*Expected graduation date. Please list the year and month in yyyymm format. If you graduate at the middle of the year, write 06 as your month, if you gradate during the end of the year, write 12 as your month. Put down a single number in the answer field - eg. 201612'
+                .form-group.col-md-6
+                  = f.label :hours_available, '*Hours available per week. Put only one number in the answer field - eg. 20'
+                  %i.glyphicon.glyphicon-question-sign.question-sign{:title => "Please consider carefully the maximum hours you are able to commit to alongside any extracurricular or university commitments throughout the entirety of semester."}
+                  = f.input :hours_available, label: false
+              .row
+                .form-group.col-md-6
+                  = f.input :domestic, as: :radio_buttons, collection: [['Domestic Student', true] ,['International Student', false]], label: 'Are you a domestic or international student?'
+            .ques_round
+              - @job_application.application_answers.each do |answer|
+                = f.simple_fields_for :application_answers, answer do |a|
+                  - if answer.application_question
+                    .ques_round
+                      = simple_format(answer.application_question.content)
+                      - if answer.application_question.answer_type.eql?('text')
+                        = a.input :content, label: false
+                      - elsif answer.application_question.answer_type.eql?('dropdown')
+                        = a.input :content, label: false, as: :select, collection: answer.application_question.answer_options.order(:content).pluck(:content), prompt: answer.application_question.try(:content).eql?("Would you prefer to be a Tutor or a Content Developer?") ? 'Please select your preference' : 'Please select position you are applying for', :input_html=> { id: "content_dropdown"}
+                        = a.input :content_tag, label: false, as: :select, collection: [['All', 'all']], prompt: "Select", :input_html=> { id: "content_tag_select", class: "content_tag hidden"}
+                      - elsif answer.application_question.answer_type.eql?('dropdown_multiple')
+                        = a.input :content, label: false, as: :select, collection: answer.application_question.answer_options.order(:content).pluck(:content), input_html: { multiple: true }
+                      = a.input :application_question_id, as: :hidden, value: answer.application_question.id
+
+            .row.input_file
+              .form-group.col-md-12
+                = f.simple_fields_for :cover_letter do |cover_letter|
+                  %label{for: "exampleInputFile"} Upload a cover letter (pdf format)
+                  = cover_letter.input :document, as: :file, label: false, wrapper: false
+            .row.input_file
+              .form-group.col-md-12
+                = f.simple_fields_for :resume do |resume|
+                  %label{for: "exampleInputFile"} Upload a resume (pdf format)
+                  = resume.input :document, as: :file, label: false, wrapper: false
+
+            .row.input_file
+              .col-md-12
+                = link_to_add_association 'Include additional attachment', f, :application_attachments, class: 'xtra_attachment'
+            .col-md-12.text-center
+              = button_tag 'Create Job Application', { class: "default_btn hvr-shutter-in-horizontal mbot10" }
+:javascript
+  $('#job_application_applicant_type').on('change', function(){
+    if($(this).val() == 'Current University Student'){
+      $(".current_university_student").show();
+    }else{
+      $(".current_university_student").hide();
+    }
+  });
+
+  $('#content_dropdown').on('change', function(){
+    var id = "#{params[:job_application_form_id]}"
+    var content_val = $(this).val();
+    $.ajax({
+      type: 'get',
+      url: '/jobs/'+id+'/job-applications/get_tag_childrens/',
+      data: {content: content_val},
+    }).done(function (response) {
+    });
+  })
+
+  $("#job_application_full_time_exp").keypress(function(event){
+   var charCode = event.charCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+      return true;
+  });

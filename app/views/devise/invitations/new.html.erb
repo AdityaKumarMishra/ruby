@@ -1,0 +1,15 @@
+<h2><%= t "devise.invitations.new.header" %></h2>
+
+<%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f| %>
+  <%= devise_error_messages! %>
+
+<% resource.class.invite_key_fields.each do |field| -%>
+  <% if field == :role %>
+    <%= f.input field, as: :select, collection: [["Student", "student"], ["Admin", "admin"], ["Manager", "manager"], ["Tutor","tutor"], ["Superadmin", "superadmin"]], label:false, include_blank: "Please Select Role" %>
+  <% else %>
+    <%= f.input field %>
+  <% end %>
+<% end -%>
+
+<%= f.button :submit, t("devise.invitations.new.submit_button") %>
+<% end %>

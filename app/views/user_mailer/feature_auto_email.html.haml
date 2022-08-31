@@ -1,0 +1,51 @@
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Hello #{@student.first_name},"
+          %tr
+            %td{style: "margin-top: 27px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 32px;"}
+              Thank you for choosing GradReady for your exam preparation. We’re sure by now that you’ve had a go with some of our online study tools, but in order to make sure that you’re taking advantage of the full GradReady experience, we’ve decided to highlight a few of the features that set GradReady apart from the crowd.
+          %tr
+            %td{style: "text-align: center;font-size: 18px;color: #313131; font-weight: 700;  text-transform: uppercase;"}
+              My Performance Profile
+          %tr
+            %td{style: "line-height: 25px; margin-top: 10px; float: left; font-size: 15px; margin-bottom: 32px;"}
+              GradReady's proprietary software system allows for our industry leading analytical tool, showing you where you sit amongst fellow GradReady students and auto recommending topics for you to work on.
+          %tr
+            %td{style: "text-align: center;font-size: 18px;color: #313131; font-weight: 700;  text-transform: uppercase;"}
+              Get Clarity
+          %tr
+            %td{style: "line-height: 25px; margin-top: 10px; float: left; font-size: 15px;"}
+              At GradReady, we believe that they who never ask never learn. That’s why we created our unique;
+              %i{style: "font-weight: 700"}> GetClarity System
+              \. In our Textbooks, Videos, MCQ exercises and Online Exam review screens, you will see an “Ask Question” button that allows you to log questions to our specialised tutors to clear up any confusion you may have about any particular topic. Our tutors will respond within 48 hours to any question you may have on our content.
+          %tr
+            %td{style: "color: #fff; font-size: 12px; font-weight: 700; float: left; margin-bottom: 40px; background: #007833; padding: 7px 8px;"}
+              Note: GetClarity feature needs to be purchased separately for the Essential packages.
+          %tr
+            %td{style: "text-align: center; font-size: 18px; color: #313131; font-weight: 700; text-transform: uppercase;"} Cross-Referencing System
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              We have a wide variety of online resources for you to pull from at GradReady and we want to make sure that you have easy access to them all. Our Cross-Referencing System is designed to help provide this access by making related textbook chapters, videos and MCQ exercises just a click away from each other.
+          %tr
+            %td{style: "float: left; margin-top: 15px;font-size: 15px;"} We are very proud to offer the best Online Learning tools, and we hope you enjoy them.
+          %tr
+            %td{style: "float: left; margin-top: 15px; font-size: 15px;   margin-bottom: 72px;"} We wish you all the best of luck with your studies,
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size:15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size:15px;"} GradReady Student Success Team

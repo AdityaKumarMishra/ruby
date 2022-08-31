@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    :css
+      *{
+      padding: 0px;
+      margin: 0px;
+      }
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Dear students,
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              = "We hope that you found the Mock Exam + Recap Day this weekend helpful and are now feeling a little more confident heading into the #{@type} exam."
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              We are always striving to improve the experience of our students so if you have any feedback as to how the weekend ran we would love to hear it. Please fill in the below survey:
+          %tr
+            %td{style: "text-align: center;"}
+              - if @course.product_version.type == "UmatReady"
+                %a{href: "https://www.surveymonkey.com/r/CZ26WMQ", :style => "text-decoration: none;background-color: #5bc0de;color: #fff;font-size: 16px;text-align: center;border-radius: 5px;padding: 10px 20px;display: inline-block;border-style: solid;border-width: 1px;border-color: #46b8da;"}
+                  Take Survey
+              - else
+                %a{href: "https://www.surveymonkey.com/r/8393736", :style => "text-decoration: none;background-color: #5bc0de;color: #fff;font-size: 16px;text-align: center;border-radius: 5px;padding: 10px 20px;display: inline-block;border-style: solid;border-width: 1px;border-color: #46b8da;"}
+                  Take Survey
+          %tr
+            %td{style: "margin-top: 5px; float: left; line-height: 25px; font-size: 15px;"}
+              We also want to give you a further reminder to not enter your section I and III scores until you have also received your section II score. You will receive your section II scores with feedback by 11:59PM AEDT next Monday and you must have input your scores by 11:59PM AEDT on the Tuesday. You may input your scores for sections I, II and III as soon as you have received your section II score.
+          %tr
+            %td{style: "margin-top: 22px; line-height: 25px; margin-bottom: 60px; float: left; font-size: 15px;"}
+              = "All the best with the #{@type} Exam."
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+          %tr
+            %td{style: "margin-bottom: 34px; float: left;font-size: 15px;"}
+              The GradReady Team

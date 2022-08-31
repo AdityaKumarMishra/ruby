@@ -1,0 +1,116 @@
+- title "GradReady GAMSAT Podcast - From GAMSAT to Med School"
+- meta_description "The journey from the GAMSAT to Medical School is rarely straight-forward. Join GradReady and our team of tutors as we break down the journey, with reflections and advice to help you through every step of the way, from GAMSAT to med interviews to life as a medical student!"
+- content_for :page_heading, true
+%section.pad50.podcast-index
+  .container
+    .encoraging_col
+      .text-center
+        %h1.podcast-intro GradReady GAMSAT Podcast
+        .clear
+        .col-md-12
+          .pod_pragraph.pod_main
+            %p
+              We’re proud to introduce our brand-new GAMSAT
+              %sup ®
+              Podcast - GAMSAT
+              %sup ®
+              to Med School, to provide a platform where you can tune in as our experienced GAMSAT
+              %sup ®
+              tutors explore diverse topics about everything from the GAMSAT
+              %sup ®
+              exam to their journeys through medical school. They’ll discuss topics that cover the entire medical journey, such as the best ways you can structure your GAMSAT
+              %sup ®
+              preparation, tips and tricks to integrate into your GAMSAT
+              %sup ®
+              exam strategy, how to prepare for the medical interviews, navigating the confusing medical admissions process, etc., all the way up to the challenges they’ve faced as medical students.
+            %p
+              With new episodes released regularly, and a revolving cast of tutors from different GAMSAT
+              %sup ®
+              disciplines and medical schools across Australia, make sure you subscribe below to listen to every episode!
+
+  .encoraging_col.talk_to_bg.home_faq.dashboard_bg.responsive_block
+    .text-center-left
+      .col-md-4.podcast-season
+        .img-col
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/podcasts/images/000/000/011/podcast+index+page/Podcast%20-%20Thumbnail.png', class: "img-responsive"
+      .col-md-7.podcast-season-txt.pod_pragraph
+        %h2 GAMSAT To Med School Presented by GradReady
+        %p
+          GAMSAT
+          %sup ®
+          to Med School: Presented by GradReady
+        %p
+          The journey from the GAMSAT
+          %sup ®
+          to Medical School is rarely straight-forward. Join GradReady and our team of tutors as we break down the journey, with reflections and advice to help you through every step of the way, from GAMSAT to med school interviews to life as a medical student!
+        = render 'social_links'
+  .encoraging_col.episodes.grid
+    .clear.custom_grid
+      - @podcasts.each do |podcast|
+        .ep-single
+          .img-col
+            =link_to image_tag(podcast.s3_image_url), podcasts_show_path(id: podcast.slug)
+          .episode-info
+            %ul
+              %li
+                %i.fa.fa-calendar
+                  %span{style: "font-size:14px;font-family: 'Open Sans';"} #{podcast.uploaded_on.strftime('%B %d, %Y')}
+              %li{style: "margin-top:5px;"}
+                %i.fa.fa-clock-o
+                  %span{style: "font-size:14px;font-family: 'Open Sans';"} #{podcast.duration}
+          .episode-desc.pod_pragraph
+            = truncate(podcast.ep_desc.html_safe, length: 310, escape: false)
+          .episode-frame
+            %iframe{src: podcast.frame_url, height: "102px", width: "300px", frameborder: "0", scrolling: "no"}
+%section.faq_wrapper.faq_details.free_sources_sec
+  .container.public_container
+    .preparation_col.head_aftr_none.mg_bottm100{style: "margin-top:-80px"}
+      %h2
+        Further GAMSAT
+        / %sup ®
+        Preparation Materials
+      %p
+        Looking for further information on our courses and materials? You can visit our homepage here to learn more and compare our courses:
+        %a{href: "/gamsat-preparation-courses", target: :_blank}
+          %strong
+            GradReady GAMSAT
+            %sup ®
+            Preparation Courses
+      %p
+        If you’re after free materials, we’ve put together the most comprehensive library of free GAMSAT
+        %sup ®
+        Preparation materials below, with access to free Practice MCQs, Example Essays, Study Schedules and more:
+      .diffr_country
+        %ul.cstm_list_style
+          %li.mtop_zero
+            %a{href: "/free-gamsat-preparation-materials", target: :_blank}
+              %strong
+                GradReady Free GAMSAT
+                %sup ®
+                Preparation Materials
+      %p
+        If you want to try out our industry-leading learning technology and student LMS for yourself, sign up for our GAMSAT
+        %sup ®
+        Free Trial today!
+      .boxed
+        Get Access to:
+        %ul{:style => "list-style-type:none;padding: 16px 0px"}
+          %li 50 Free MCQs
+          %li Week-By-Week Study Guide
+          %li Complete Session 3 Topic List
+          %li Recorded Webinars
+        .free_gamsat_icon
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/free_trial.png', class: "icon30"
+        .button_right_section
+          %a.free_trial_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/free-gamsat-trial", target: :_blank} GAMSAT Free Trial
+
+:css
+  .pod_main p {
+    font-size: 14px;
+  }
+
+   @media only screen and (min-width: 260px) and (max-width: 767px){
+   .episode-frame iframe{
+     width: 100%;
+   }
+   }

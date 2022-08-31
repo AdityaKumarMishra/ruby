@@ -1,0 +1,11 @@
+$("#mcq-exam-review-rating-modal").modal('hide');
+$('.nav-tabs > .active').next('li').find('a').trigger('click');
+$('.gr-nav-tabs > .active').next('li').find('a').trigger('click');
+$('html, body').animate({ scrollTop: 0 }, 'fast');
+
+$('.btnPrevious').off('click');
+$('.btnPrevious').on ('click', function() {
+  $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+  $('.gr-nav-tabs > .active').prev('li').find('a').trigger('click');
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
+});

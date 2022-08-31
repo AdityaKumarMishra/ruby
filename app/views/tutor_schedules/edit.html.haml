@@ -1,0 +1,78 @@
+%h1 Editing Tutor Schedule
+
+.video_div
+  = render 'tutor_schedules/tutor_availability_video_guide'
+
+= simple_form_for(@tutor_schedule) do |f|
+  .form-inputs.tutor-schedule
+    .div_field
+      = f.label :start_time, label: "Appointment Date"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select a date (or start date) on which you are available to conduct the appointment
+      = f.input :start_time, as: :date, label: false, disabled: true, input_html: { class: "schedule_date"}
+
+    .div_field
+      = f.label :start_time, label: "Start Time"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select appropriate start time on the above entered date, ensure that the time is in 24 hour format For example 13:00 means 1 PM
+      = f.input :start_time, as: :time, minute_step: 5, ignore_date: true, label: false, disabled: true
+
+    .div_field
+      = f.label :end_time, label: "End Time"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select appropriate end time, if the time is beyond one hour then the appointments will be divided in 1 hour slots while displaying to student. For Example, if you select 10:00 AM - 12:00PM then student will see 2 appointment 1st from 10:00-11:00 AM and 2nd from 11:00AM-12:00PM
+      = f.input :end_time, as: :time, minute_step: 5, ignore_date: true, label: false, disabled: true
+
+    .div_field
+      = f.label :allow_booking_until, label: "Allow Booking Until"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select days until which you want the booking to be finalised. For example, if you want the student to be able book the appointment atleast 4 days before then select 4.
+      = f.input :allow_booking_until, label: false, as: :select, collection: booking_allow_option, include_blank: false
+
+    .div_field
+      = f.label :repeatability, label: "Ongoing Availability"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select frequency of the availability if its Once Off, Weekly, Fortnighly or Monthly.
+      = f.input :repeatability, label: false, as: :select, disabled: true, collection: TutorSchedule.repeatabilities.keys, input_html: { class: "appointment_type"}
+
+    #appointment_end_date{ :style => "display: #{f.object.repeatability == 'once_off' ? 'none' : 'block'};" }
+      .div_field
+        = f.label :end_time, label: "No More Appointments After This Date"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Select appropriate end date if you have selected anything other that Once Off in ongoing availability.
+        = f.input :end_time, as: :date, label: false, disabled: true, input_html: { class: "schedule_date"}
+
+    .div_field
+      = f.label :location, label: "Location"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Ensure you add proper locality so that it is easier for student to locate and plan his travel.
+      = f.input :location, label: false
+
+  .form-actions
+    = f.button :submit, f.object.persisted? ? 'Update' : 'Create'
+
+= link_to 'Show', @tutor_schedule
+\|
+= link_to 'Back', dashboard_count_tutor_appointments_path(selection: 'Log Hours')
+
+:javascript
+  $(document).ready( function() {
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+  });

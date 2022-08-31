@@ -1,0 +1,25 @@
+.panel.panel-warning
+  .panel-heading
+    .panel-title
+      %h3
+        %strong= "Essay: #{@essay_response.essay.title}"
+  .panel-body.line-40
+    %strong Description:
+    = sanitize @essay_response.essay.question
+    %strong Response:
+    - if @essay_response.response.present?
+      = sanitize @essay_response.response
+    - else
+      %h5
+        %i You are yet to write a response
+
+    %h2 Time
+
+    %h3= @essay_response.time_submited
+    %h2 Slug
+    %p= @essay_response.slug
+
+
+  .panel-footer
+    = link_to 'Back', essays_path, class: 'btn btn-default'
+

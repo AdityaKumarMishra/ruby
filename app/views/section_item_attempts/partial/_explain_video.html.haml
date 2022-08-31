@@ -1,0 +1,40 @@
+-if mcq_video.present? && mcq_video.id.present? && mcq_video.published
+  .video_box.vedio_main_row
+    %video#video-js.video-js.vjs-default-skin.cstm_vedio{vid_id: "mcq-vid-#{mcq_video.id}", controls: "", "data-autoplay" => "false", "data-setup" => '{ "playbackRates": [2, 1.5, 1.2, 1, 0.5], "plugins" : { "resolutionSelector" : { "default_res" : "360" } }}', :height => "270px", :width => "480px", autoplay: false}
+      %source{src: mcq_video.video.url, type: 'video/mp4','data-res' => '360'}
+      %source{src: mcq_video.video.url, type: 'video/mp4','data-res' => '720'}
+  .watchd-vid{id: "watched-#{mcq_video.id}"}
+    - if video_watched(mcq_video)
+      Watched
+  .vid-info
+    = mcq_video.title
+    %br
+    = mcq_video.description
+
+:javascript
+
+  $("video").on("play", function (e) {
+    vidId = e.target.getAttribute('vid_id').split('-')[2];
+    $.ajax({
+      type: "POST",
+      url: '/mcq_vid',
+      dataType: 'script',
+      data: {id: vidId},
+      success: function(data){
+        if(data == 'true'){
+          $('#watched-'+vidId).text('Watched')
+        }
+      }
+    });
+  });
+  
+:css
+  .watchd-vid{
+    text-align: center;
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .vid-info{
+    text-align: center;
+  }

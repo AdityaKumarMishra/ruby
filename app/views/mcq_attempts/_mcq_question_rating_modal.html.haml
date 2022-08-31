@@ -1,0 +1,25 @@
+#mcq-exam-review-rating-modal.modal.latest_pop.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      = simple_form_for(rating , method: :post, url: create_update_question_rating_exercise_exercise_review_path(@exercise.try(:id),mcq_attempt.try(:id)), remote: true, html:{class: "rate_form"}) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"} &times;
+          %h4.modal-title Rate this question
+        .modal-body
+          .form-group
+            .form-inputs
+              =f.label :stars, 'How do you feel this set of questions represented the official ACER practice questions?', required: true
+            = rating_for_user mcq_attempt.mcq_stem, current_user, nil, disable_after_rate: false, star: 10, enable_half: true
+          .form-group
+            .form-inputs
+              = f.input :description, label: 'Please elaborate if appropriate.', as: :text, input_html: { rows: 5, cols: 10}
+        .modal-footer
+          = link_to "Next", "javascript:void(0)", class: 'rate_btn default_btn hvr-shutter-in-horizontal'
+          =# f.button :submit, "Submit", class: "hvr-shutter-in-horizontal btn btn-default auto_wdt"
+= javascript_include_tag "ratyrate"
+:javascript
+  $(document).ready(function(){
+    $(".rate_btn").on('click', function(){
+      $("form.rate_form").submit();
+    });
+  });

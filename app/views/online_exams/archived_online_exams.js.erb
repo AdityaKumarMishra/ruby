@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'online_exams/index', locals: { online_exams: @online_exams }))%>
+$("#filterrific_results").html("<%= js %>");

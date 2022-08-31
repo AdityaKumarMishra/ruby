@@ -1,0 +1,19 @@
+.course_tbl.hide_box
+  #vertical-horizontal-scrollbar-demo.default-skin.demo
+    %table.table.bdr_bottm
+      %thead
+        %tr.table_head_bg
+          %th.date Date
+          %th.venue Venue
+          %th.start Start Time
+          %th.end End Time
+          %th.items Items Covered
+      %tbody
+        - selected_course.lessons.order(:date).each do |lesson|
+          %tr
+            %td= lesson.date.present? ? lesson.date.strftime('%d %b %Y') : ''
+
+            %td= lesson.location
+            %td= lesson.start_time.strftime('%I:%M %p')
+            %td= lesson.end_time.strftime('%I:%M %p')
+            %td= lesson.item_covered

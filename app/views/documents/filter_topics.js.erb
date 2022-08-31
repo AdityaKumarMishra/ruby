@@ -1,0 +1,6 @@
+<%html=""%>
+<% html += "<option value=''>All</option>" %>
+
+$('#filterrific_with_tag').html("<%= escape_javascript options_from_collection_for_select(@options, :id, :name) %>");
+
+$("#filterrific_with_tag").trigger("chosen:updated");

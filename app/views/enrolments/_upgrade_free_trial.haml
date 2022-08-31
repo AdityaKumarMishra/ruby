@@ -1,0 +1,9 @@
+- product_line = trial_course.product_version.type.underscore.split("_")[0]
+- #product_line = "vce"
+#upgrade-free-trial.text-center
+  %h4
+    = upgrade_free_trial_title(trial_enrolment)
+  %p
+    = "Enrol into one of the below courses to continue your #{product_line.upcase} preparations."
+  = render 'enrolments/product_versions_summary', product_line: product_line, trial_course: trial_course
+

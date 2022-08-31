@@ -1,0 +1,5 @@
+<% js = escape_javascript(
+  render(partial: 'incomplete_transactions_modal', locals: { orders: @orders })
+)%>
+$("#incompleteTransactions").html("<%= js %>");
+$('#TransactionModal').modal('show');

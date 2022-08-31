@@ -1,0 +1,98 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+    .btm_header
+  .main_contant.width100
+    .uni_logo
+      / %img{src: "https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png"}/
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png'
+    .para_contant.ipad_scroll.mob_scroll.mob_top
+      %h4.text-center Welcome to the UCAT Practice Test
+      .exam_table
+        %h4 This exam consists of five subtests:
+        %table
+          %thead
+            %th.wdth138 Section
+            %th.wdth179 Title
+            %th.width333 Description
+            %th.wdth138
+              Duration
+              = succeed "(minutes)" do
+                %br/
+            %th.width172 Number of Questions
+          %tbody
+            - get_sections(@exercise).each_with_index do |tag, index|
+              - next if tag.parent_id.blank?
+              %tr
+                %td.wdth138 = index+1
+                %td.wdth179.font_bold = tag.name
+                %td.width333 = tag.description
+                %td.wdth138 21
+                %td.width172 = tag_question_count(tag, @exercise)
+            %tr
+              %td.wdth138 2
+              %td.wdth179.font_bold Decision Making
+              %td.width333 Assesses your ability to make sound decisions and judgements using complex information.
+              %td.wdth138 31
+              %td.width172 29
+            %tr
+              %td.wdth138 3
+              %td.wdth179.font_bold Quantitative Reasoning
+              %td.width333 Assesses your ability to critically evaluate information presented in a numerical form.
+              %td.wdth138 24
+              %td.width172 36
+            %tr
+              %td.wdth138 4
+              %td.wdth179.font_bold Abstract Reasoning
+              %td Assesses your use of convergent and divergent thinking to infer relationships from information.
+              %td.wdth138 13
+              %td.width172 55
+            %tr
+              %td.wdth138 5
+              %td.wdth179.font_bold Situational Judgement
+              %td.width333 Measures your capacity to understand real world situations and to identify critical factors and appropriate behaviour in dealing with them.
+              %td.wdth138 26
+              %td.width172 69
+      %p
+        Preceding each subtest you have
+        %span.font_bold 1
+        minute to read the instructions. In total, you have
+        = succeed "minutes" do
+          %span.font_bold 120
+      %p
+        Click the
+        %span.font_bold Next (N)
+        button to proceed.
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-sign-out{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/welcome"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no

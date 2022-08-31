@@ -1,0 +1,1047 @@
+// If this table view is called as a popup
+- if defined? popup
+  .pull-right{class: [('close-btn-gamsat' if product_line == 'gamsat'), ('close-btn-umat' if product_line == 'umat'), ('close-btn-vce' if product_line == 'vce'), ('close-btn-hsc' if product_line == 'hsc')]}
+    X
+=# render 'pages/partial/product_version_table/product_version_table_headline', product_line: product_line
+
+- product_versions = ['online-basic', 'online', 'attendance-basic', 'attendance', 'attendance-all']
+
+.tbl_wrap
+  .row.m_zero.desk_row
+    %center.table_overflow.reltve.pos_float
+      %table.gr-comparison-table{class: [('gamsat-compare' if product_line == 'gamsat'), ('umat-compare' if product_line == 'umat'), ('vce-compare' if product_line == 'vce'), ('hsc-compare' if product_line == 'hsc')]}
+        %thead
+          %tr
+            %th
+              %a{href: "#"}
+            %th
+              %a{href: dynamic_product_version_uri(product_versions[0], product_line, subject)} ONLINE
+              %p (Essentials)
+            %th
+              %a{href: dynamic_product_version_uri(product_versions[1], product_line, subject)} ONLINE
+              %p (Comprehensive)
+            %th
+              %a{href: dynamic_product_version_uri(product_versions[2], product_line, subject)} ATTENDANCE
+              %p (Essentials)
+            %th.reltve.tbl_head
+              %a.heading_highlght{href: dynamic_product_version_uri(product_versions[3], product_line, subject)}
+                ATTENDANCE
+                =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/most_popular.png', class: 'most-popular')
+              %p.margin_zero (Comprehensive)
+
+            %th
+              %a{href: dynamic_product_version_uri(product_versions[4], product_line, subject)} ATTENDANCE
+              -if (product_line == 'gamsat' || product_line == 'umat')
+                %p (Complete Care)
+              -else
+                %p.fs12 (Comprehensive + Private Tutoring)
+        %tbody
+          %tr.dark_full_raw_green
+            %td.live_comp_green{colspan: 6}
+              = render 'pages/partial/product_version_table/online_component'
+          %tr
+            %td{colspan: "6"}
+              %a.component-title PREPARATION MATERIAL
+          %tr
+            %td
+              %li
+                Diagnostics Test
+                .price_tbl_row_hover
+                  60 question test to assess your familiarity of the fundamental concepts covered in the GAMSAT
+                  %sup ®
+                  exam.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                MCQs with Full Explanations
+                .price_tbl_row_hover 4000+ MCQs which are systematically categorised in 43 subtopics.
+            - (0..4).each do |n|
+              %td
+                = "4000+"
+          %tr
+            %td
+              %li
+                MCQ Tracking System
+                .price_tbl_row_hover Our system tracks and identifies your weaknesses and points you to the appropriate corresponding materials.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Practice Exams
+                .price_tbl_row_hover
+                  GAMSAT
+                  %sup ®
+                  style practice exams that cover Section 1 & 3.
+            - (0..4).each do |n|
+              %td 8
+          %tr
+            %td
+              %li
+                Advanced Auto Reporting System
+                .price_tbl_row_hover Identify your exact weaknesses and compare your performance to 1000s of other GradReady students in each section and overall.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                1200+ Page Textbook
+                .price_tbl_row_hover
+                  The textbook comprehensively covers all 3 Sections of the GAMSAT
+                  %sup ®
+                  exam. It includes chapters on overarching strategies (general GAMSAT
+                  %sup ®
+                  Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all foundational sciences (37 topics).
+                  %br
+                  Updated with the new Reasoning Textbook providing logical reasoning and critical thinking strategies for Section 3, supplemented by our prized worked examples chapter featuring annotated working out and detailed explanations.
+
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                22+ Hours of Videos
+                .price_tbl_row_hover
+                  %ul
+                    %li Humanities (5 hrs).
+                    %li Physics (3 hrs).
+                    %li Biology (7 hrs).
+                    %li Chemistry (7 hrs).
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td{colspan: "6"}
+              %a.component-title LEARNING TOOLS
+          %tr
+            %td
+              %li
+                KeepYouGoing
+                %sup ®
+                .price_tbl_row_hover
+                  Option to join one of the GradReady Study Cohorts to be a part of a community with specific study plan, weekly check-ins and study games.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Study Timeline and Prep Guide
+                .price_tbl_row_hover
+                  Designed to help you navigate through the entirety of your GAMSAT
+                  %sup ®
+                  exam journey.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Essay Guide
+                .price_tbl_row_hover Detailed 8-step guide to crafting the perfect essay.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Example Essays
+                .price_tbl_row_hover Example essays of varying quality, analysed by our expert tutors to help you understand the characteristics of a high quality essay.
+            - (0..4).each do |n|
+              %td 48
+          %tr
+            %td
+              %li
+                GAMSAT
+                %sup ®
+                Preparation Strategy
+                .price_tbl_row_hover
+                  Perform your best by understanding what makes the GAMSAT
+                  %sup ®
+                  exam different to other tests.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Quality Assurance System
+                .price_tbl_row_hover An integrated system to help you provide feedback on everything within the GradReady web system - from MCQs to videos - and help us constantly improve your student experience.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Cross Referencing System
+                .price_tbl_row_hover Match MCQs to precise videos and textbook chapters.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Supplemental Resources
+                .price_tbl_row_hover Access additional documents and resources uploaded by our tutors.
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          / %tr
+          /   %td
+          /     %li
+          /       My Performance Profile
+          /       %sup ®
+          /       .price_tbl_row_hover Compare your progress with GradReady students across Australia.
+          /   - (0..4).each do |n|
+          /     %td
+          /       = image_tag 'public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Mobile Friendly - Study on the Go
+                .price_tbl_row_hover You are able to access every single one of our desktop features seamlessly via your mobile
+            - (0..4).each do |n|
+              %td
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+          %tr
+            %td{colspan: "6"}
+              %a.component-title TARGETED 1 ON 1 TUTOR ASSISTANCE
+          %tr
+            %td
+              %li
+                Marked Essays
+                .price_tbl_row_hover Our Tutors provide detailed feedback and advice to ensure you improve your essay writing skills.
+            %td
+            %td 10
+            %td
+            %td 10
+            %td 10
+          %tr
+            %td
+              %li
+                GetClarity
+                %sup ®
+                System for MCQ
+                .price_tbl_row_hover Ask our excellent tutors relevant questions about MCQs at the click of a button.
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                GetClarity
+                %sup ®
+                System for Online Exams
+                .price_tbl_row_hover Ask our excellent tutors relevant questions about Online Exams at the click of a button.
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                GetClarity
+                %sup ®
+                System for Videos
+                .price_tbl_row_hover Formulate a plan of attack with our expert tutors.
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+          %tr.dark_full_raw_green
+            %td.live_comp_green{colspan: 6}
+              .component-title.live_component-title LIVE COMPONENTS
+          %tr
+            %td
+              %li
+                Weekly Support Sessions
+                .price_tbl_row_hover At GradReady we offer extra online sessions to support you through the multi-month long preparation process.
+            - (0..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Study Buddy Matching
+                .price_tbl_row_hover We will help connect you with 1 or more of the thousands of students who use GradReady's services every year.
+            - (0..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                PBL Classes (6 core days) + Performance Assessments
+                .price_tbl_row_hover
+                  Updated In-Class Curriculum with new MCQs & additional emphasis on reasoning skills.
+                  %ul
+                    %li Humanities (9 hrs).
+                    %li Section 3 Fundamentals (2 hrs).
+                    %li Physics (7 hrs).
+                    %li Biology (8 hrs).
+                    %li Chemistry (7 hrs).
+                  Now also includes Pre and Post Live Class Performance Assessments to assess your GAMSAT readiness before and after our classes.
+                  %br
+                  Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure of the live classes is subject to change. Refer to the specific course pages for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+                  %br
+                  Note: PBL = Problem Based Learning
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Mock Exam + Recap (2 core days)
+                .price_tbl_row_hover
+                  Providing students with the most realistic mock exam experience available.
+                  %br
+                  Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the specific course pages for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Mock Exam Percentile Reporting
+                .price_tbl_row_hover Compare your performance with GradReady students across Australia.
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Selective Topics Tutorials
+                %br
+                (4 optional days)
+                .price_tbl_row_hover
+                  Throughout the evenings of 1 week, we will be covering extension topics – going into depth more difficult topics.
+                  %br
+                  Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the specific course pages for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Revision Weekend Tutorial
+                / Weekend Tutorial
+                / %br
+                / (2 optional days)
+                .price_tbl_row_hover
+                  Recapping some of the issues covered in the 6 day course - for those who want to be taken through some of the content just 1 more time.1200+ Page Textbook
+                  %br
+                  Due to COVID-19 restrictions and the associated uncertainty, the exact format and structure is subject to change. Refer to the specific course pages for further information and please submit a support ticket under the category 1. Course Information if you have further queries.
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Home Mock Exam Day
+                %br
+                (1 optional day)
+                .price_tbl_row_hover Join other students online from your home and complete the day together under real time pressure. Just like the attendance Mock Exam Day, you will be able to receive a percentile ranking and be walked through the answers.
+            - (0..1).each do |n|
+              %td
+            - (2..4).each do |n|
+              %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Diagnostics Results Discussion
+                .price_tbl_row_hover
+                  Formulate a plan of attack with our expert tutors.
+            - (0..3).each do |n|
+              %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+          %tr
+            %td
+              %li
+                Private Tutoring sessions
+                .price_tbl_row_hover
+                  Receive 1 on 1 assistance from the best GAMSAT
+                  %sup ®
+                  tutors.
+            - (0..3).each do |n|
+              %td
+            %td= image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+        %tfoot
+          %tr
+            %td
+            - (0..4).each do |n|
+              %td.pkg_cost
+                - if product_line == 'gamsat' || product_line == 'umat'
+                  = render 'pages/partial/product_version_table/pricing', product_price: product_info[product_versions[n]][:price] , early_bird: product_info[product_versions[n]][:early_bird], product_version: product_versions[n], product_line: product_line, subject: subject, component_value: product_info[product_versions[n]][:component_value]
+                - else
+                  - if subject == 'math'
+                    = render 'pages/partial/product_version_table/pricing', product_price: product_info[product_versions[n]][:price_math] , early_bird: early_bird, product_version: product_versions[n], product_line: product_line, subject: subject
+                  - elsif subject == 'english'
+                    = render 'pages/partial/product_version_table/pricing', product_price: product_info[product_versions[n]][:price_english] , early_bird: early_bird, product_version: product_versions[n], product_line: product_line, subject: subject
+          - if product_line == 'gamsat'
+            %tr.last_row
+              %td{colspan:6}
+                %div.gst
+                  = link_to '* What is GST?', faq_topic_path(type: 'gamsat-preparation-courses', topic: 'enrolment-and-payment', anchor: 'What is GST')
+
+  .row.mobile_row.m_zero
+    .col-xs-12
+      %ul.cstm_tab_lst.wdth100
+        %li.active
+          %label.cstm_label
+            Online
+            %input#online.gam_courses{:checked => "checked", :name => "gam-radio-group", :type => "radio"}/
+            %span.checkmark
+
+        %li
+          %label.cstm_label
+            Attendance
+            %input#attendance.gam_courses{:name => "gam-radio-group", :type => "radio"}/
+            %span.checkmark
+    .tbl_wrapper.wdth100
+      #gam_tbl.online
+        .row.mobile_row.m_zero
+          .col-xs-12
+            .price_table_body.flex_css.just_cntnt
+              .tbl_row_col.grey_bg_col
+                .price_table_row.mob_pkg_bg
+                  %strong ONLINE COMPONENT
+              .tbl_row_col.grey_bg_col.sec_sub_lvl
+                .mobile_tbl_row.pkg_bg.wdth100
+                  .panel-heading
+                    %a{:href => "#ol_prep", "data-toggle" => "collapse"}
+                      %strong PREPARATION MATERIALS
+                      %i.fa.fa-plus{"aria-hidden" => "true"}
+
+                  #ol_prep.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Diagnostic Assessment
+                        .price_tbl_row_hover
+                          60 question test to assess your familiarity of the fundamental concepts covered in the GAMSAT
+                          %sup ®
+                          exam.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        MCQs with Full Explanations
+                        .price_tbl_row_hover 4000+ MCQs which are systematically categorised in 43 subtopics.
+                      %span.tbl_col2
+                        %strong 4000+
+
+                    .price_table_row
+                      %span.tbl_col1
+                        MCQ Tracking System
+                        .price_tbl_row_hover Our system tracks and identifies your weaknesses and points you to the appropriate corresponding materials.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Practice Exams
+                        .price_tbl_row_hover
+                          GAMSAT
+                          %sup ®
+                          practice exams that cover Section 1 & 3
+
+                      %span.tbl_col2
+                        %strong 8
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Advanced Auto Reporting System
+                        .price_tbl_row_hover Identify your exact weaknesses and compare your performance to 1000s of other GradReady students in each section and overall.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        1200+ Page Textbook
+                        .price_tbl_row_hover
+                          The textbook comprehensively covers all 3 Sections of the GAMSAT
+                          %sup ®
+                          exam. It includes chapters on overarching strategies (general GAMSAT
+                          %sup ®
+                          Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all foundational sciences (37 topics).
+                          %br
+                          Updated with the new Reasoning Textbook providing logical reasoning and critical thinking strategies for Section 3, supplemented by our prized worked examples chapter featuring annotated working out and detailed explanations.
+
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .price_table_row
+                      %span.tbl_col1
+                        22+ Hours of Videos
+                        .price_tbl_row_hover
+                          %ul
+                            %li Humanities (5 hrs).
+                            %li Physics (3 hrs).
+                            %li Biology (7 hrs).
+                            %li Chemistry (7 hrs).
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+              .tbl_row_col.grey_bg_col.sec_sub_lvl
+                .mobile_tbl_row.pkg_bg.wdth100
+                  .panel-heading
+                    %a{:href => "#ol_learning_tool", "data-toggle" => "collapse"}
+                      %strong LEARNING TOOLS
+                      %i.fa.fa-plus{"aria-hidden" => "true"}
+                  #ol_learning_tool.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Study Timeline and Prep Guide
+                        .price_tbl_row_hover
+                          Designed to help you navigate through the entirety of your GAMSAT
+                          %sup ®
+                          exam journey.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Essay Guide
+                        .price_tbl_row_hover Detailed 8-step guide to crafting the perfect essay.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Example Essays
+                        .price_tbl_row_hover Example essays of varying quality, analysed by our expert tutors to help you understand the characteristics of a high quality essay.
+                      %span.tbl_col2 48
+
+                    .price_table_row
+                      %span.tbl_col1
+                        GAMSAT
+                        %sup ®
+                        Strategy Preparation
+                        .price_tbl_row_hover
+                          Perform your best by understanding what makes the GAMSAT
+                          %sup ®
+                          exam different to other tests.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Quality Assurance System
+                        .price_tbl_row_hover An integrated system to help you provide feedback on everything within the GradReady web system - from MCQs to videos - and help us constantly improve your student experience.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Cross Referencing System
+                        .price_tbl_row_hover Match MCQs to precise videos and textbook chapters.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Supplemental Resources
+                        .price_tbl_row_hover Access additional documents and resources uploaded by our tutors.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    / .price_table_row
+                    /   %span.tbl_col1
+                    /     My Performance Profile
+                    /     %sup{style: "margin-left: 0px;"} ®
+                    /     .price_tbl_row_hover Compare your progress with GradReady students across Australia.
+                    /   %span.tbl_col2
+                    /     = image_tag 'public_pages/right_tick.png'
+
+                    .price_table_row.prfrmnc_pro.bg_white
+                      %span.tbl_col1
+                        Mobile Friendly - Study on the Go
+                        .price_tbl_row_hover You are able to access every single one of our desktop features seamlessly via your mobile
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+              .tbl_row_col.grey_bg_col
+                .price_table_row.mob_pkg_bg
+                  %a.diffr_anchor{:href => "#ol_live", "data-toggle" => "collapse"}
+                    %strong LIVE COMPONENT (100+ hours, 19 days)
+                    %i.fa.fa-plus{"aria-hidden" => "true"}
+                #go_down_live.mobile_tbl_row.pkg_bg.wdth100
+                  #ol_live.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Weekly Support Sessions
+                        .price_tbl_row_hover
+                          At GradReady we offer extra online sessions to support you through the multi-month long preparation process.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Study Buddy Matching
+                        .price_tbl_row_hover
+                          We will help connect you with 1 or more of the thousands of students who use GradReady's services every year.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                .price_table_body.flex_css.just_cntnt
+                  %a#online_gamsat_upgrade.cstm_green_txt.add_mob_course{:href => "#comp_ol", "data-toggle" => "collapse"}
+                    %strong Upgrade to Comprehensive Online Course
+                    %i.fa.fa-plus{"aria-hidden" => "true"}
+
+              #comp_ol.collapse.wdth100
+                .tbl_row_col.grey_bg_col
+                  .price_table_row.mob_pkg_bg
+                    %strong ONLINE COMPONENT
+                .tbl_row_col.grey_bg_col.sec_sub_lvl
+                  .mobile_tbl_row.pkg_bg.wdth100
+                    .price_table_row.padd20
+                      %strong Includes everything from the Essential course plus:
+                    .panel-heading
+                      %a{:href => "#ol_tutor", "data-toggle" => "collapse"}
+                        %strong TARGETTED 1 ON 1 TUTOR ASSISTANCE
+                        %i.fa.fa-plus{"aria-hidden" => "true"}
+                    #ol_tutor.collapse
+                      .price_table_row
+                        %span.tbl_col1
+                          Marked Essays
+                          .price_tbl_row_hover Our Tutors provide detailed feedback and advice to ensure you improve your essay writing skills.
+                        %span.tbl_col2
+                          %strong 10
+
+                      .price_table_row.bg_white
+                        %span.tbl_col1
+                          GetClarity
+                          %sup ®
+                          System for MCQ
+                          .price_tbl_row_hover Ask our excellent tutors relevant questions about MCQs at the click of a button.
+                        %span.tbl_col2
+                          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                      .price_table_row
+                        %span.tbl_col1.dsp_block
+                          GetClarity
+                          %sup ®
+                          System for Online Exams
+                          .price_tbl_row_hover Ask our excellent tutors relevant questions about Online Exams at the click of a button.
+                        %span.tbl_col2
+                          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                      .price_table_row.bg_white
+                        %span.tbl_col1
+                          GetClarity
+                          %sup ®
+                          System for Videos
+                          .price_tbl_row_hover Ask our excellent tutors relevant questions about Videos at the click of a button.
+                        %span.tbl_col2
+                          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .tbl_row_col.text-center
+                      .pkg_cost
+                        %span Component value
+                        %a.strike 1632
+                        %span.marg_4
+                          = gamsat_product_info['online'][:early_bird] == true ? "Early Bird" : "  "
+                        %span.fnt_size.marg_4
+                          %strong
+                            - oc_price = gamsat_product_info['online'][:price]
+                            = oc_price.round.to_s
+                        %span.fnt_size.price_fnt
+                          = "+ 10% GST = #{(oc_price * 1.1 ).round}"
+                        .clearfix
+                        %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("online", "gamsat")} Secure your place
+                        %span.fs13 Comprehensive Online Course
+              .tbl_row_col.grey_bg_col.sec_sub_lvl#online_downgrade_purchase
+                #go_down_live.mobile_tbl_row.pkg_bg.wdth100
+                  .tbl_row_col.text-center
+                    .pkg_cost.online_frst_pkg
+                      %span Component value
+                      %a.strike 979
+                      %span.marg_4
+                        = gamsat_product_info['online-basic'][:early_bird] == true ? "Early Bird" : "  "
+                      %span.fnt_size.marg_4
+                        %strong
+                          - oe_price = gamsat_product_info['online-basic'][:price]
+                          = oe_price.round.to_s
+                      %span.fnt_size.price_fnt
+                        = "+ 10% GST = #{(oe_price * 1.1 ).round}"
+                      .clearfix
+                      %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("online-basic", "gamsat")} Secure your place
+                      %span.fs13 Essential Online Course
+
+        .row.mobile_row.m_zero
+          .col-xs-12
+
+      #gam_tbl.attendance
+        .row.mobile_row.m_zero
+          .col-xs-12
+            .price_table_body.flex_css.just_cntnt
+              .tbl_row_col.grey_bg_col
+                .price_table_row.mob_pkg_bg
+                  %strong ONLINE COMPONENT
+              .tbl_row_col.grey_bg_col.sec_sub_lvl
+                .mobile_tbl_row.pkg_bg.wdth100
+                  .panel-heading
+                    %a{:href => "#at_prep", "data-toggle" => "collapse"}
+                      %strong PREPARATION MATERIALS
+                      %i.fa.fa-plus{"aria-hidden" => "true"}
+                  #at_prep.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Diagnostic Assessment
+                        .price_tbl_row_hover
+                          60 question test to assess your familiarity of the fundamental concepts covered in the GAMSAT
+                          %sup ®
+                          exam.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        MCQs with Full Explanations
+                        .price_tbl_row_hover 4000+ MCQs which are systematically categorised in 43 subtopics.
+                      %span.tbl_col2
+                        %strong 4000+
+
+                    .price_table_row
+                      %span.tbl_col1
+                        MCQ Tracking System
+                        .price_tbl_row_hover Our system tracks and identifies your weaknesses and points you to the appropriate corresponding materials.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Practice Exams (Online or Paper)
+                        .price_tbl_row_hover
+                          GAMSAT
+                          %sup ®
+                          style practice exams that cover Section 1 & 3.
+                      %span.tbl_col2
+                        %strong 8
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Advanced Auto Reporting System
+                        .price_tbl_row_hover Identify your exact weaknesses and compare your performance to 1000s of other GradReady students in each section and overall.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        1200+ Page Textbook
+                        .price_tbl_row_hover
+                          The textbook comprehensively covers all 3 Sections of the GAMSAT
+                          %sup ®
+                          exam. It includes chapters on overarching strategies (general GAMSAT
+                          %sup ®
+                          Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all foundational sciences (37 topics).
+                          %br
+                          Updated with the new Reasoning Textbook providing logical reasoning and critical thinking strategies for Section 3, supplemented by our prized worked examples chapter featuring annotated working out and detailed explanations.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        22+ Hours of Videos
+                        .price_tbl_row_hover
+                          %ul
+                            %li Humanities (5 hrs).
+                            %li Physics (3 hrs).
+                            %li Biology (7 hrs).
+                            %li Chemistry (7 hrs).
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+              .tbl_row_col.grey_bg_col.sec_sub_lvl
+                .mobile_tbl_row.pkg_bg.wdth100
+                  .panel-heading
+                    %a{:href => "#at_learn", "data-toggle" => "collapse"}
+                      %strong LEARNING TOOLS
+                      %i.fa.fa-plus{"aria-hidden" => "true"}
+                  #at_learn.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Study Timeline and Prep Guide
+                        .price_tbl_row_hover
+                          Designed to help you navigate through the entirety of your GAMSAT
+                          %sup ®
+                          exam journey.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Essay Guide
+                        .price_tbl_row_hover Detailed 8-step guide to crafting the perfect essay.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Example Essays
+                        .price_tbl_row_hover Example essays of varying quality, analysed by our expert tutors to help you understand the characteristics of a high quality essay.
+                      %span.tbl_col2 48
+
+                    .price_table_row
+                      %span.tbl_col1
+                        GAMSAT
+                        %sup ®
+                        Preparation Strategy
+                        .price_tbl_row_hover
+                          Perform your best by understanding what makes the GAMSAT
+                          %sup ®
+                          exam different to other tests.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Quality Assurance System
+                        .price_tbl_row_hover An integrated system to help you provide feedback on everything within the GradReady web system - from MCQs to videos - and help us constantly improve your student experience.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Cross Referencing System
+                        .price_tbl_row_hover Match MCQs to precise videos and textbook chapters.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Supplemental Resources
+                        .price_tbl_row_hover Access additional documents and resources uploaded by our tutors.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    / .price_table_row
+                    /   %span.tbl_col1
+                    /     My Performance Profile
+                    /     %sup{style: "margin-left: 0px;"} ®
+                    /     .price_tbl_row_hover Compare your progress with GradReady students across Australia.
+                    /   %span.tbl_col2
+                    /     = image_tag 'public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Mobile Friendly - Study on the Go
+                        .price_tbl_row_hover You are able to access every single one of our desktop features seamlessly via your mobile
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+              .tbl_row_col.grey_bg_col
+                .price_table_row.mob_pkg_bg
+                  %a.diffr_anchor{:href => "#at_live", "data-toggle" => "collapse"}
+                    %strong LIVE COMPONENT (100+ hours, 19 days)
+                    %i.fa.fa-plus{"aria-hidden" => "true"}
+                .price_table_body.flex_css.just_cntnt
+                  %a.upgrade_complte.cstm_green_txt.add_mob_course{:href => "#comp_at", "data-toggle" => "collapse"}
+                    %strong Upgrade to Comprehensive Attendance Course
+                    %i.fa.fa-plus{"aria-hidden" => "true"}
+                  #comp_at.collapse.wdth100
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row.mob_pkg_bg
+                        %strong ONLINE COMPONENT
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.pkg_bg.wdth100
+                        .price_table_row.padd20
+                          %strong Includes everything from the Essential course plus:
+                        .panel-heading
+                          %a{:href => "#at_tutor", "data-toggle" => "collapse"}
+                            %strong TARGETTED 1 ON 1 TUTOR ASSISTANCE
+                            %i.fa.fa-plus{"aria-hidden" => "true"}
+                        #at_tutor.collapse
+                          .price_table_row
+                            %span.tbl_col1
+                              Marked Essays
+                              .price_tbl_row_hover Our Tutors provide detailed feedback and advice to ensure you improve your essay writing skills.
+                            %span.tbl_col2
+                              %strong 10
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1
+                              GetClarity
+                              %sup ®
+                              System for MCQ
+                              .price_tbl_row_hover Ask our excellent tutors relevant questions about MCQs at the click of a button.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row
+                            %span.tbl_col1.dsp_block
+                              GetClarity
+                              %sup ®
+                              System for Online Exams
+                              .price_tbl_row_hover Ask our excellent tutors relevant questions about Online Exams at the click of a button.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                          .price_table_row.bg_white
+                            %span.tbl_col1
+                              GetClarity
+                              %sup ®
+                              System for Videos
+                              .price_tbl_row_hover Ask our excellent tutors relevant questions about Videos at the click of a button.
+                            %span.tbl_col2
+                              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .tbl_row_col.text-center
+                      .pkg_cost.attend_second_pkg
+                        %span Component value
+                        %a.strike 3493
+                        %span.marg_4
+                          = gamsat_product_info['attendance'][:early_bird] == true ? "Early Bird" : "  "
+                        %span.fnt_size.marg_4
+                          %strong
+                            - ac_price = gamsat_product_info['attendance'][:price]
+                            = ac_price.round.to_s
+                        %span.fnt_size.price_fnt
+                          = "+ 10% GST = #{(ac_price * 1.1 ).round}"
+                        .clearfix
+                        %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("attendance", "gamsat")} Secure your place
+                        %span.fs13 Comprehensive Attendance Course
+                .price_table_body.flex_css.just_cntnt
+                  %a.upgrade_complte.cstm_green_txt.add_mob_course{:href => "#at_cc", "data-toggle" => "collapse"}
+                    %strong Upgrade to Complete Care Course
+                    %i.fa.fa-plus{"aria-hidden" => "true"}
+                  #at_cc.collapse.wdth100
+                    .tbl_row_col.grey_bg_col
+                      .price_table_row.mob_pkg_bg
+                        %a.diffr_anchor
+                          %strong LIVE COMPONENT
+                    .tbl_row_col.grey_bg_col.sec_sub_lvl
+                      .mobile_tbl_row.pkg_bg.wdth100
+                        .price_table_row.padd20
+                          %strong Includes everything from the Comprehensive course plus:
+                        .price_table_row.bg_white
+                          %span.tbl_col1
+                            Private Tutoring sessions
+                            .price_tbl_row_hover Receive 1 on 1 assistance from the best GAMSAT tutors.
+                          %span.tbl_col2
+                            6
+
+
+                        .tbl_row_col.text-center
+                          .pkg_cost
+                            %span Component value
+                            %a.strike 4254
+                            %span.marg_4
+                              = gamsat_product_info['attendance-all'][:early_bird] == true ? "Early Bird" : "  "
+                            %span.fnt_size.marg_4
+                              %strong
+                                - acc_price = gamsat_product_info['attendance-all'][:price]
+                                = acc_price.round.to_s
+                            %span.fnt_size.price_fnt
+                              = "+ 10% GST = #{(acc_price * 1.1 ).round}"
+                            .clearfix
+                            %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("attendance-all", "gamsat")} Secure your place
+                            %span.fs13 Complete Care Course
+                  .tbl_row_col.grey_bg_col.sec_sub_lvl
+                #go_down_live.mobile_tbl_row.pkg_bg.wdth100
+                  #at_live.collapse
+                    .price_table_row
+                      %span.tbl_col1
+                        Weekly Support Sessions
+                        .price_tbl_row_hover
+                          At GradReady we offer extra online sessions to support you through the multi-month long preparation process.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Study Buddy Matching
+                        .price_tbl_row_hover
+                          We will help connect you with 1 or more of the thousands of students who use GradReady's services every year.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Live Classes (6 core days)
+                        .price_tbl_row_hover
+                          %ul
+                            %li Humanities (9 hrs).
+                            %li Physics (7 hrs).
+                            %li Biology (8 hrs).
+                            %li Chemistry (7 hrs).
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Mock Exam + Recap (2 core days)
+                        .price_tbl_row_hover Providing students with the most realistic mock exam experience available.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Mock Exam Percentile Reporting
+                        .price_tbl_row_hover Compare your performance with GradReady students across Australia.
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row.bg_white
+                      %span.tbl_col1
+                        Online Interactive Tutorial
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                    .price_table_row
+                      %span.tbl_col1
+                        Weekend Tutorial
+                      %span.tbl_col2
+                        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/right_tick.png'
+
+                  #care_component
+                    .tbl_row_col.text-center
+                      .pkg_cost.attend_frst_pkg
+                        %span Component value
+                        %a.strike 3055
+                        %span.marg_4
+                          = gamsat_product_info['attendance-basic'][:early_bird] == true ? "Early Bird" : "  "
+                        %span.fnt_size.marg_4
+                          %strong
+                            - ae_price = gamsat_product_info['attendance-basic'][:price]
+                            = ae_price.round.to_s
+                        %span.fnt_size.price_fnt
+                          = "+ 10% GST = #{(ae_price * 1.1 ).round}"
+                        .clearfix
+                        %a.buy_btn{:type => "click", :href => dynamic_product_version_uri("attendance-basic", "gamsat")} Secure your place
+                        %span.fs13 Essential Attendance Course
+
+        .row.mobile_row.m_zero
+          .col-xs-12
+
+
+        .row.mobile_row.m_zero
+          .col-xs-12
+
+
+:javascript
+
+  $(".panel-heading a").click(function(){
+    $(this).find("i").toggleClass("fa-plus fa-minus");
+  });
+
+  $('#online_gamsat_upgrade').click(function(){
+    $('#online_downgrade_purchase').toggleClass('hide');
+  })
+
+  $('.upgrade_complte').click(function(){
+    $('#care_component').toggleClass('hide');
+  })
+

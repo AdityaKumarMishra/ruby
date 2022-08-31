@@ -1,0 +1,372 @@
+@keyframes moveToBottom {
+  0% {
+    bottom: 50%;
+    top: auto;
+  }
+
+  100% {
+    bottom: 100%;
+    top: auto;
+  }
+}
+
+@keyframes moveToTop {
+  0% {
+    top: 50%;
+    bottom: auto;
+  }
+
+  100% {
+    top: 100%;
+    bottom: auto;
+  }
+}
+
+.feedback {
+  position: relative;
+  box-sizing: border-box;
+  height: 400px;
+  margin: 0 -15px;
+  overflow: hidden;
+  background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/bg-quotes.png'), linear-gradient(to right, rgba(0, 120, 51, 0.8), rgba(0, 120, 51, 0.8));
+  background-repeat: no-repeat, no-repeat;
+  background-position: 50% 10%, 50% 50%;
+  background-size: 79px 79px, 100%;
+  color: white;
+
+  &__controls {
+    position: absolute;
+    z-index: 15;
+    bottom: 50%;
+    transform: translateY(50%);
+
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0;
+  }
+
+  &__controls span {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
+    height: 32px;
+    width: 42px;
+  }
+
+  &__controls svg {
+    width: 100%;
+    height: 100%;
+    fill: white;
+  }
+
+  &__control-up {
+    transform: rotate(90deg);
+  }
+
+  &__control-down {
+    transform: rotate(-90deg);
+  }
+
+  &__container {
+    height: 100%;
+    padding: 0 65px;
+    position: absolute;
+    top: 0;
+    z-index: 14;
+
+    transition: top 0.3s ease-in;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+  }
+
+  &__item p {
+    margin: 0;
+    padding-top: 120px;
+    font-size: 16px;
+    font-family: Calibri, Arial, sans-serif;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  &__item p a{
+    color:#fff !important;
+  }
+}
+
+@media (min-width: 550px) {
+  .feedback {
+    &__item {
+      align-items: center;
+    }
+    &__item p {
+      padding-top: 0;
+    }
+    &__item p a{
+      color:#fff !important;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .feedback {
+    height:200px;
+    padding: 0 40px;
+    background-image: url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/bg-quotes.png'), linear-gradient(to right, rgba(0, 120, 51, 0.8), rgba(0, 120, 51, 0.8)), url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/bg-feedbacks.jpg');
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: 95% 50%, 50% 50%, left center;
+    background-size: 109px 109px, 100%, 100% 100%;
+
+    &__container {
+      padding: 0;
+      padding-left: 30px;
+      padding-right: 20%;
+    }
+
+    &__controls {
+      flex-direction: column;
+      justify-content: space-between;
+      bottom: auto;
+      top: 50%;
+      left: 50%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      width: auto;
+    }
+
+    &__controls span {
+      height: 36px;
+      width: 42px;
+    }
+
+    &__controls span {
+      transition: transform 0.3s;
+    }
+
+    &__controls span:hover {
+      transform: scale(1.2);
+    }
+
+    &__controls span:active {
+      opacity: 0.5;
+    }
+
+    &__item {
+      align-items: center;
+    }
+
+    &__item p {
+      padding-top: 0;
+      font-size: 24px;
+      text-align:left;
+    }
+  }
+
+  .feedback__item p a{
+     color:#fff !important;
+     font-size: 24px !important;
+     text-align: left;}
+  .jamset{font-size: 16px !important;}
+  #homepage-component .feedback{
+    height:200px;
+  }
+
+  /**#react-carousel .top_arrow{margin-top: -6px;}
+  #react-carousel .down_arrow{margin-bottom: -6px;}
+  #react-carousel .feedback__controls span {
+    height: 36px;
+    width: 42px;
+  }**/
+
+  #react-carousel .feedback{
+  padding-left:51px;
+  }
+
+}
+
+.feedback.cstm-carousel-wrap{
+  height:auto !important;
+}
+
+.container.caraousel-wrap-in{margin: 61px 35px;
+    max-width: 1000px;width:100%;}
+
+.vertical .carousel-inner {
+  height: 100%;
+}
+
+.carousel.vertical .item {
+  -webkit-transition: 0.6s ease-in-out top;
+     -moz-transition: 0.6s ease-in-out top;
+      -ms-transition: 0.6s ease-in-out top;
+       -o-transition: 0.6s ease-in-out top;
+          transition: 0.6s ease-in-out top;
+}
+
+.carousel.vertical .active {
+  top: 0;
+}
+
+.carousel.vertical .next {
+  top: 400px;
+}
+
+.carousel.vertical .prev {
+  top: -400px;
+}
+
+.carousel.vertical .next.left,
+.carousel.vertical .prev.right {
+  top: 0;
+}
+
+.carousel.vertical .active.left {
+  top: -400px;
+}
+
+.carousel.vertical .active.right {
+  top: 400px;
+}
+
+.carousel.vertical .item {
+    left: 0;
+}
+
+@media screen and (min-width:260px) and (max-width:767px){
+  
+  #react-carousel {
+    width: 100% !important;
+    float: left;
+ }
+
+ .feedback {
+    background-position: 50% 5%, 50% 50%;
+    background-size: 60px 60px, 100%;
+ }
+
+  .feedback.cstm-carousel-wrap{
+      height:auto;
+      min-height:inherit;
+  }
+  .feedback__item p {
+    padding-top: 100px;
+    }
+
+  .container.caraousel-wrap-in {
+    width: 100%;
+    padding-right: 0px;
+    padding-left:0px;
+    margin:0px;
+  } 
+
+  .caraousel-wrap-in .carousel{
+    position: relative;
+    padding: 30px;
+  }
+   
+  .feedback__controls {
+    flex-direction: column;
+    justify-content: space-between;
+    bottom: auto;
+    top: 57%;
+    left: 50%;
+    height: 89%;
+    transform: translate(-50%, -39%);
+    width: auto;
+  } 
+
+  .feedback__controls span {
+    height: 36px;
+  }
+
+}
+
+@media screen and (min-width:768px) and (max-width:990px){
+  #react-carousel {
+    width: 100% !important;
+    float: left;
+  }
+
+  .feedback {
+    background-position: 52% 18%, 50% 50%;
+    background-size: 60px 60px, 100%;
+  }
+
+  .container.caraousel-wrap-in {
+    margin: 61px auto;
+    width: 80%;
+    padding-top: 35px;
+  }
+
+  .feedback__controls {
+    flex-direction: column;
+    justify-content: space-between;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    width: auto;
+  }
+  
+  .feedback__controls .cstm-arrow{
+     padding:1px 0px !important;
+  }
+}
+
+@media screen and (min-width:991px) and (max-width:1023px){
+
+  #react-carousel {
+    width: 100% !important;
+    float: left;
+  }
+  .feedback {
+    background-position: 52% 18%, 50% 50%;
+    background-size: 60px 60px, 100%;
+  }
+  .container.caraousel-wrap-in {
+    margin: 61px auto;
+    width: 80%;
+    padding-top: 35px;
+  }
+
+  .feedback__controls {
+    flex-direction: column;
+    justify-content: space-between;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    width: auto;
+  }
+  
+  .feedback__controls .cstm-arrow{
+     padding:1px 0px !important;
+  }
+  
+}
+
+@media screen and (min-width:1024px) and (max-width:1200px){
+  
+  .container.caraousel-wrap-in {
+    margin: 61px auto;
+    width: 80%;
+    padding-top: 35px;
+  }
+
+  .feedback__item p {
+    text-align:left;
+    }
+}

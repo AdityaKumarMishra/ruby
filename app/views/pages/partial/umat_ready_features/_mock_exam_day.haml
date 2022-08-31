@@ -1,0 +1,12 @@
+#feature_Mock.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-file-text-o{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        - if paid
+          Mock Exam Day + Mock Exam Day Recap <br> $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+        - else
+          Mock Exam Day + Mock Exam Day Recap
+      .text
+        %p.u-word-spacing The closest thing to the actual UCAT - you will be put through time pressures and a well-simulated test environment. Then our expert tutors will go through all the MCQs with you the next day. In addition, your performance will be compared with that of other GradReady students, and you'll be given a percentile in each of the 3 sections and overall.

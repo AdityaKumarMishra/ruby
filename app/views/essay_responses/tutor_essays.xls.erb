@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Course Summary" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Tutor Name</Data></Cell>
+        <Cell><Data ss:Type="String">Tutor Marked Essays count</Data></Cell>
+      </Row>
+      <% @essay_responses.keys.sort! { |a,b| a.staff.full_name.downcase <=> b.staff.full_name.downcase }.each do |response| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= response.staff.full_name %></Data></Cell>
+          <% x=[] %>
+          <% @essay_responses.each do |essay_response| %>
+            <% x << essay_response[1].count if essay_response[0] == response %>
+          <%end%>
+          <Cell><Data ss:Type="Number"><%=x[0]%></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

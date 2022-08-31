@@ -1,0 +1,49 @@
+-if ((mcq_stems) != nil and (mcq_stems.any?))
+  #filterrific_results.table_scroll
+    %table.gr-table.gr-table-bordered.table-hover#stem_table
+      %thead
+        %tr
+          %th Status
+          - work_status_collection.each_with_index do |work_status, index|
+            %th #{index}. #{work_status[0]}
+          %th Total
+      %tbody.mcq-font
+        %tr
+          %td # MCQS
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 0)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 1)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 2)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 3)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 4)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 5)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 6)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 7)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 8)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 9)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 10)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 11)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 12)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 13)
+          %td= fetch_work_status_mcqs_count(@mcq_counts, 14)
+          %td= @total_mcqs
+        %tr
+          %td % MCQs
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 0)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 1)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 2)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 3)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 4)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 5)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 6)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 7)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 8)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 9)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 10)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 11)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 12)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 13)
+          %td= progress_work_status_mcqs_count(@mcq_counts, @total_mcqs, 14)
+          %td= total_percentage(@mcq_counts, @total_mcqs)
+
+-else
+  .alert.alert-warning Nothing found

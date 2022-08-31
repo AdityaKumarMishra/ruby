@@ -1,0 +1,17 @@
+.faq_list.para_fs14
+  .resource_col
+    %h4 Filter
+  .faq_list.para_fs14
+    .faq_list_col
+      .course_frm.filter_box_shadow
+        = form_for_filterrific @filterrific do |f|
+          .form-group
+            %label Search by Braintree/Unique Reference Number
+            = f.text_field :with_reference, class: 'form-control', placeholder: 'Braintree/Unique Reference Number'
+          = f.submit 'Filter', class: 'mg_rht0 default_btn hvr-shutter-in-horizontal'
+          = link_to 'Reset filters', reset_filterrific_url, class: 'mg_rht0 black_default_btn hvr-shutter-in-horizontal'
+  .faq_list.para_fs14
+    .faq_list_col
+      .appointment_div
+        %h4.mbot25 Listing Past Orders
+        = render :partial => 'orders/student_index', locals: { orders: @orders }

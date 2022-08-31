@@ -1,0 +1,187 @@
+.resource_col.mbot21
+  %h4.fl.mtop20= "Review #{@section_attempt.section.title}"
+  .exam_list.side_exam_ques
+    %h3.text-left.sideLeftQues Questions
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      - @sorted_mcq_stems.each_with_index do |mcq_stem, index|
+        - @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |item_attempt, ind|
+          - if (item_attempt.mcq_answer.present? && !(item_attempt.mcq_answer.correct))
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == item_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-times.red_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind+1} #{item_attempt.mcq_stem.title}"
+          - elsif (item_attempt.mcq_answer.present? && item_attempt.mcq_answer.correct)
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == item_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-check.green_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind+1} #{item_attempt.mcq_stem.title}"
+          - elsif item_attempt.mcq_answer.blank?
+            %li{ role: 'presentation', class: ('active' if @selected_tab.present? ? (@selected_tab == item_attempt.mcq) : (index == 0 && ind == 0)) }
+              %a.fa.fa-minus.blk_color{ 'data-toggle': 'tab', role: 'tab', href: "\#m#{index}_#{ind}" }
+                = "#{ind+1} #{item_attempt.mcq_stem.title}"
+
+
+
+.ques_exam_list
+  .tab-content.tab_content_width
+    - @sorted_mcq_stems.uniq.each_with_index do |mcq_stem, index|
+      - attempts_count_for_stem =  @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).count
+      - @section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |item_attempt, ind|
+        .tab-pane{ id: "m#{index}_#{ind}", role: 'tabpanel', class: ('active' if @selected_tab.present? ? (@selected_tab == item_attempt.mcq) : (index == 0 && ind == 0)) }
+          .full_wdt_timer_col
+            = link_to 'Return', :back, class: 'btn btn-danger', onclick: 'dd_loader();'
+            .question_timer
+              %i.fa.fa-clock-o
+              %b Time Taken(M):
+              = @section_attempt.mcq_stem_attempt_time(mcq_stem.id)
+          %h4.fnt-20= mcq_stem.title
+          %h4.mr_btm.fnt-20
+            %span.tags_txt Tags:
+            - tags = mcq_stem.mcq_tags
+            - tags.each do |tag|
+              - if tag != nil
+                %span.tags_name= tag.name
+          .mcq_stem_description.ck_edtr_cstm_list
+            = mcq_stem.description.html_safe
+            .quest-col.question
+              .faq_list.para_fs14.mar5
+                .faq_list_col
+                  .textbook_tabbing_links.written_view_btn.marzero
+                    %ul
+                      - @vods = Vod.by_tags(item_attempt.mcq.tags) unless item_attempt.mcq.tags.include? nil
+                      - if @vods.present?
+                        - if @attemptable.assessable_type == "DiagnosticTest"
+                          %li
+                            = link_to "Show Relevant Videos", exam_review_videos_diagnostic_test_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+                        - else
+                          %li
+                            = link_to "Show Relevant Videos", exam_review_videos_online_exam_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+                      - @textbooks = Textbook.by_tags(item_attempt.mcq.tags) unless item_attempt.mcq.tags.include? nil
+                      - if @textbooks.present?
+                        - if @attemptable.assessable_type == "DiagnosticTest"
+                          %li
+                            = link_to "Show Relevant Textbooks", exam_review_textbooks_diagnostic_test_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+                        - else
+                          %li
+                            = link_to "Show Relevant Textbooks", exam_review_textbooks_online_exam_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+
+                      - @content = item_attempt.mcq
+                      - @given = @section_attempt
+                      - if @attemptable.assessable_type == "DiagnosticTest"
+                        %li
+                          = link_to "Give Feedback", exam_feedback_diagnostic_test_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+                      - else
+                        %li
+                          = link_to "Give Feedback", exam_feedback_online_exam_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id,item_attempt.id), {remote: true}
+                      %li
+                        = render 'issue_forum/query_button', given: @section_attempt, content: item_attempt.mcq
+
+              .statics_static_table.mtop10
+                %ul
+                  - if item_attempt.mcq.tag.present?
+                    %li.bdr_btm_none
+                      %span Tags :
+                      = item_attempt.mcq.tag.name
+                    %li
+                      %span Difficulty Level :
+                      = difficulty_to_human item_attempt.mcq.try(:difficulty)
+
+              %h4.pos_rel.fnt-20
+                %span.mcqNum= "#{ind + 1}."
+                = item_attempt.mcq.question.html_safe
+
+              %ul.exer-list.ques_ans_list
+                .disable{class: "correct_incr que_stat_#{item_attempt.mcq.id}"}
+                  - if (item_attempt.mcq_answer.present? && !(item_attempt.mcq_answer.correct))
+                    %h5.incrt-ans Incorrect
+                  - elsif (item_attempt.mcq_answer.present? && item_attempt.mcq_answer.correct)
+                    %h5.crt-ans Correct
+                  - elsif item_attempt.mcq_answer.blank?
+                    %h5.natmp-ans Not Attempted
+
+                - item_attempt.mcq.mcq_answers.each_with_index do |answer_option, index|
+                  -if item_attempt.mcq_answer && answer_option.correct?
+                    %li.admin_custom_radio{class: "correct_#{item_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{item_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.correct
+                          %span.answer_status{id: "corr_answer#{item_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-check{'aria-hidden'=>'true'}
+                            .itf-query-button-fix
+                          %span{id: "correc_answer#{item_attempt.mcq.id}", class: "disable"}
+
+                  -elsif (answer_option == item_attempt.mcq_answer && !answer_option.correct?)
+                    %li.admin_custom_radio{class: "wrong_#{item_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{item_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.incorrect
+                          %span.answer_status{id: "wrg_answer#{item_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-times{'aria-hidden' =>'true'}
+                            .itf-query-button-fix
+                          %span{id: "incorrec_answer#{item_attempt.mcq.id}", class: "disable"}
+
+                  -elsif (!item_attempt.mcq_answer && answer_option.correct?)
+                    %li.admin_custom_radio{class: "correct_unanswered_#{item_attempt.mcq.id}"}
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{item_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+                        .exam-status-ask-ques.ans_tick_col.correct
+                          %span.answer_status{id: "corr_answer#{item_attempt.mcq.id}", class: "disable"}
+                            %i.fa.fa-check{'aria-hidden'=>'true'}
+                            .itf-query-button-fix
+                          %span{id: "correc_answer#{item_attempt.mcq.id}", class: "disable"}
+
+                  -else
+                    %li.admin_custom_radio
+                      %span.answer_txt
+                        %span.character_list
+                          = list_alphabet_style[index]
+                        = answer_option.answer.html_safe
+                      %span.answer_percentage.disable{class: "mcq_percent_list mcq_per_#{item_attempt.mcq.id}"}
+                        %span.pick_percentage= answer_option.fetch_answer_picked_percentage.to_s + "%"
+
+              .reveal_btn
+                %a{:type => "click", class: "rvl_mcq green_expired_btn status_btn", 'data-id' => "#{item_attempt.mcq.id}"} Reveal
+              %br
+              %br
+              .correct_ans_div{class: "disable", id: "correct_ans_#{item_attempt.mcq.id}"}
+                .statics_static_table.mtop10
+                  %ul
+                    %li.single_correct_ans
+                      %span Answer :
+                      - item_attempt.mcq.mcq_answers.each_with_index do |mcq_ans, index|
+                        = list_alphabet_style[index].split(".")[0] if mcq_ans.correct?
+              .explaination{class: "disable", id: "expl_#{item_attempt.mcq.id}"}
+                %h4.fnt-20 Explanation
+                = item_attempt.mcq.explanation.html_safe
+                -mcq_video = item_attempt.mcq.mcq_video
+                =render '/section_item_attempts/partial/explain_video', mcq_video: mcq_video
+                  
+          .text-center.full_width.mtop30.mbot10
+            - if index != 0 || ind != 0
+              %button.btnPrevious.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Previous
+            - if index != @sorted_mcq_stems.uniq.count - 1
+              - if attempts_count_for_stem-1 == ind
+                =link_to 'Next', mcq_exam_question_rating_online_exam_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id, item_attempt.id), remote: true, class: 'btnNextOnly black_default_btn hvr-shutter-in-horizontal'
+              - else
+                %button.btnNext.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Next
+            - if index == @sorted_mcq_stems.uniq.count - 1
+              -if (@section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).count - 1) > ind
+                - if attempts_count_for_stem-1 == ind
+                  =link_to 'Next', mcq_exam_question_rating_online_exam_attempt_section_attempt_section_item_attempt_path(@attemptable.id,@section_attempt.id, item_attempt.id), remote: true, class: 'btnNextOnly black_default_btn hvr-shutter-in-horizontal'
+                - else
+                  %button.black_default_btn.hvr-shutter-in-horizontal{ type: 'button' } Next
+              -else
+                =nil
+    .div{id: "mod_section_item_attempt"}
+    .div{id: "mod_section_question_rating"}
+    .div{id: "mod_mcq_attempt"}

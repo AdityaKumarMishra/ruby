@@ -1,0 +1,95 @@
+= render 'create_email_template_guideline_video'
+= simple_form_for @custom_email do |f|
+  =# f.error_notification
+  .form-inputs
+    .div_field
+      = f.label :product_version, "Product Version"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Select the Product Versions you want this email to fire for
+      = f.collection_select :product_version_ids, @product_versions ,:id,:name,{ include_blank: false},{ class: 'chosen-select', :multiple=>true, id: 'pv-select'} 
+    %br
+    .div_field#courses-div
+      = render 'courses_select'
+    %br
+    .div_field#features-div
+      = render 'master_features'
+    %br
+    .div_field
+      = f.check_box :publish, as: :boolean
+      = f.label :publish, "Published"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Ensure you select the check box when you want the email to fire for new or add-on enrolments
+
+    .div_field
+      = f.label :email_subject, "Email Subject"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Subject line of the email
+      = f.input :email_subject, label: false
+
+    .div_field
+      = f.label :greeting, "Standard Greeting"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Include text above email: Dear [Student First Name]
+      = f.select(:greeting, EmailCustomise.greetings.map { |value| [ value[0], value[1] ] },{ include_blank: false},{ class: 'chosen-select-course', :multiple=>true})
+
+    .div_field
+      = f.label :content, "Email Content"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        %p
+          1. Add the email content.
+        %p
+          2. When you add links, please go to Link --> Advanced -> Style and add "color:#007833" for GAMSAT and "color:#007ecc" for UCAT to ensure that links colour matches the whole website theme.
+        %p
+          3. Any Links to open in new tab ensure you select Link --> Target and select Target value as "New Window(_blank)"
+      = f.input :content, label: false, as: :ckeditor, input_html: {ckeditor: { height: 300 } }
+
+    .div_field
+      = f.label :attachment, "Attachment"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Attachment will be attached in email
+      = f.file_field :attachment_name, label: 'Document', id: 'email-attachment'
+      = hidden_field_tag :is_attachment, false
+      - if @custom_email.attachment_name.file?
+        .div.attachment-email#attachment-email
+          = link_to 'Remove Attachment', "javascript:", class: 'btn btn-danger', id: "remove-attachment"
+          = @custom_email.attachment_name.original_filename
+          %br
+          = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), @custom_email.attachment_name.url, target: '_blank'
+  %br
+  .form-actions
+    - if @custom_email.id.present?
+      = f.button :submit, "Update Email Template",class: 'btn btn-gradready green'
+    - else 
+      = f.button :submit, "Create Email Template",class: 'btn btn-gradready green'
+    = link_to 'Back', "javascript:history.back();", class: 'btn btn-danger'
+
+:javascript
+  $('.help_link').click(function(){
+    $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+    $(this).closest('.div_field').find('.div_info').toggle();
+  });
+  $('#pv-select').change(function(){
+    var pv_ids = $(this).val()
+    $.ajax({
+      type: 'get',
+      url: '/email_customises/courses',
+      data: {pv_ids: pv_ids },
+    }).done(function (response) {
+    });
+  })
+  $('#remove-attachment').click(function(){
+    $('#attachment-email').remove();
+    $('#is_attachment').val(true);
+  })

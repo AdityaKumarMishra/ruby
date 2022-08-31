@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#m_attempt_to_pool_<%= @m_id %>").removeClass('btn-danger')
+  $("#m_attempt_to_pool_<%= @m_id %>").addClass('btn-success')
+  $("#m_attempt_to_pool_<%= @m_id %>").text('Returned')
+<% end %>

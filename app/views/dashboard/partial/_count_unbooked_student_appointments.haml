@@ -1,0 +1,58 @@
+- tot_unbooked = 0
+- tot_booked = 0
+- tot_remaining = 0
+- if @students.present?
+  =will_paginate @students, renderer: BootstrapPagination::Rails
+%table.table.table-bordered.table-hover#table_id
+  %thead
+    %tr
+      %th Student Name
+      %th
+        Unbooked
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => '(Sessions purchased by student, but not been booked with any tutor, as of 23:59:59 of the date selected)' } }
+      %th
+        Booked
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => '(Sessions purchased by student that have been booked with a specific tutor, as of 23:59:59 of the date selected)' } }
+      %th
+        Completed
+        %i.fa.fa-question-circle{ style: 'font-size: 25px; margin-left: 10px;', data: { toggle: 'tooltip', placement: 'top', "original-title" => '(Sessions purchased by student that have been booked with a specific tutor AND have been confirmed by the tutor as delivered, as of 23:59:59 of the date selected)' } }
+  %tbody
+    - @students.to_a.each do |student|
+      - student_appointments = @appointments.select { |ap| ap.student_id == student.id && ap.status == 'active' }
+
+      %tr
+        - unbooked = (student.private_tutor_time_left(nil, @to_filter) - student_appointments.select{ |sa| sa.hours == 0 }.size)
+        - curr_unbooked = unbooked.positive? ? unbooked : 0
+        - sessions_completed = student_appointments.map{ |sa| sa.appointment_hours.with_end_zero(@to_filter).where.not(hours: nil) }.flatten.map(&:hours).sum
+        - booked = student_appointments.size - sessions_completed
+        - curr_booked = booked.positive? ? booked : 0
+        %td= student.full_name
+        %td= curr_unbooked
+        %td= curr_booked
+        %td= sessions_completed
+        - tot_unbooked += curr_unbooked
+        - tot_booked += curr_booked
+        - tot_remaining += sessions_completed
+  %tfoot
+    %tr
+      %td
+        %b Total
+      %td= tot_unbooked
+      %td= tot_booked
+      %td= tot_remaining
+
+
+:javascript
+
+  $(document).ready(function() {
+      $('#table_id').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+
+      });
+  } );
+
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  })

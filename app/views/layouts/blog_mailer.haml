@@ -1,0 +1,41 @@
+!!!
+%html{:lang => "en"}
+  %head
+    = Gon::Base.render_data
+    %title= "Unsubscribe Email"
+    / Google Tag Manager
+    :javascript
+      logged_user = "#{current_user.present? ? current_user.id : nil}";
+      dataLayer = [{'userID': logged_user}];
+    :javascript
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push(
+      {'gtm.start': new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-M9MF8XK');
+    / End Google Tag Manager
+    = stylesheet_link_tag 'student_page', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'student_page', 'data-turbolinks-track' => true
+    = javascript_include_tag 'jquery.validate', 'data-turbolinks-track' => true
+    = javascript_include_tag Ckeditor.cdn_url
+    = javascript_include_tag 'https://polyfill.io/v3/polyfill.min.js?features=es6'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML.js', id: "MathJax-scrip"
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", rel: "stylesheet"}/
+  %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+  = yield(:head)
+  %body
+    = render partial: 'toastr_rails/flash'
+    .page_wrapper
+      -unless content_for?(:show_dashboard_bg)
+        %section.talk_to_bg.home_faq.dashboard_bg
+          .container
+            .support_col.looking_corse.text-center.gradready_question
+              %h1
+                = yield(:page_heading)
+      %section.faq_wrapper.admin_page.faq_details
+        .row
+          .container
+            = yield
+    = render partial: 'layouts/public_footer', locals: {product_line_type: "gamsat"}

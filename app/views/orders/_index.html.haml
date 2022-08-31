@@ -1,0 +1,40 @@
+=will_paginate @orders, renderer: BootstrapPagination::Rails
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      -if current_user.moderator?
+        %th User name
+        %th Braintree reference number
+      %th Name
+      %th Quantity
+      %th Date of Purchase
+      %th.cost_cl_wd Total Cost
+      -if current_user.moderator?
+        %th Unique Reference Number
+      %th
+  %tbody
+    - @orders.each do |order|
+      %tr
+        -if current_user.moderator?
+          %td= order.user.username
+          %td= order.brain_tree_reference
+        %td= order.purchase_details
+        %td= order.quantity_details
+        -if order.paid?
+          -if order.paid_at.present?
+            %td= order.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s
+          -else
+            %td= ""
+        -elsif order.pending?
+          %td pending
+        -else
+          %td Current Order
+        %td
+          = "$"
+          = number_with_precision(order.total_cost, precision: 2)
+        -if current_user.moderator?
+          %td= order.reference_number
+        %td= link_to 'Details', order , class: 'btn btn-default btn-success'
+    - if @orders.count == 0
+      %tr
+        %td{colspan: 4, class: 'text-center'} No Orders

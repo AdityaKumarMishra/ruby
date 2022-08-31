@@ -1,0 +1,27 @@
+.modal.fade{"aria-labelledby" => "gridSystemModalLabel", :role => "dialog", id: "modal-textbook_delivery"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        = form_tag create_or_update_textbook_textbook_deliveries_path , method: :post do
+          .row
+            .col-md-12
+              %label Tracking Number
+              = text_field_tag "tracking_number", "", class: 'form-control', autocomplete: 'off', required: true
+              %label Date Sent
+              = text_field_tag "date_sent", "", class: 'form-control', autocomplete: 'off', required: true, id: "delivery-date"
+              = hidden_field_tag "user_id", "", class: 'textbook_user_id'
+          .modal-footer
+            .row
+              .col-md-12
+                = submit_tag "Send email", class: 'btn btn-gradready green'
+
+:javascript
+  $( document ).ready(function() {
+    datepicker = $('#delivery-date').datepicker({
+      "format": "yyyy-mm-dd",
+      "endDate": new Date(),
+      orientation: 'bottom'
+    });
+  });

@@ -1,0 +1,61 @@
+#filterrific_results
+  = will_paginate users, renderer: BootstrapPagination::Rails
+  %div
+    = page_entries_info users
+  %br
+  %br
+
+  #user-mgmt-data
+    %table.table.table-bordered.table-hover.user_mgmt_tabl
+      %thead
+        %tr
+          - if current_user.admin? || current_user.manager?
+            %th Enrolment Date
+          %th Firstname
+          %th Lastname
+          %th Username
+          %th Email
+          %th Role
+          %th State
+          %th{ colspan: '6' } Actions
+
+      %tbody
+        - users.each do |user|
+          %tr
+            - if current_user.admin? || current_user.manager?
+              %td= format_date_long(user.created_at.to_date)
+            %td= user.first_name
+            %td= user.last_name
+            %td= user.username
+            %td= user.email
+            %td= user.role
+            %td= user.state.try(:titleize)
+
+            - unless current_user.tutor?
+              - if user.student?
+                %td
+                  %p
+                    = link_to 'Enrolments', user_enrolments_path(user), class: 'btn btn-default btn-sm'
+                  %p
+                    = link_to 'Reset Exams', reset_exams_user_path(user.id), class: 'btn btn-default btn-sm'
+              - else
+                %td N/A
+              - if current_user == user || (User.roles[current_user.role] > User.roles[user.role] && !current_user.tutor?)
+                %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-info btn-sm'
+              -else
+                %td
+              %td= link_to changed_status_link_text(user), deactivate_user_path(user,
+                                          status: changed_status(user)), method: :put,
+                                          data: { confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+              - if  current_user == user || (User.roles[current_user.role] > User.roles[user.role])
+                %td= link_to 'Login', view_as_path(user), class: 'btn btn-info btn-sm'
+              - else
+                %td
+              -if user.confirmed_at.nil?
+                %td= link_to 'Resend Invitation', resend_invitation_user_path(user), method: :put, class: 'btn btn-info btn-sm'
+              -else
+                %td
+            - if  current_user == user && current_user.tutor?
+              %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-info btn-sm'
+            -else
+              %td= link_to 'View', user_path(user), class: 'btn btn-success btn-sm'

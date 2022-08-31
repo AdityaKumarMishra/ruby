@@ -1,0 +1,26 @@
+%h1 Listing subjects
+
+.table-responsive
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Title
+        %th Description
+        %th Tags
+        %th{colspan: 2} Actions
+
+    %tbody
+      - if @subjects.present?
+        - @subjects.each do |subject|
+          %tr{'data-link': url_for(subject)}
+            %td= subject.title
+            %td= subject.description
+            %td= link_to 'Associated tags',subject_tags_path(subject), class: 'btn btn-default'
+            %td= link_to 'Edit', edit_subject_path(subject), class: 'btn btn-info btn-sm'
+            %td= link_to 'Destroy', subject, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+      - else
+        %h2 There are no subjects.
+
+%br
+
+= link_to 'New Subject', new_subject_path, class: 'btn btn-default'

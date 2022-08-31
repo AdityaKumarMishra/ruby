@@ -1,0 +1,610 @@
+$color_1: #00863e;
+$color_2: #fff;
+$color_3: #09ad7e;
+$color_4: #000;
+$font_family_1: 'Museo 500';
+$font_family_2: 'Museo 700';
+$font_family_3: 'Museo 300';
+$background_color_1: #ddd;
+$border_color_1: #bbb;
+$border_color_2: #007833;
+
+/* checkbox aspect */
+/* checked mark aspect */
+/* checked mark aspect changes */
+/* disabled checkbox */
+
+.box_content.min_height_90 {
+  min-height: 74px;
+}
+.text_green {
+  font-weight: 300;
+}
+.box_content.course_shedule {
+  padding: 0px 14px;
+  background: none;
+  >.row {
+    &:nth-child(odd) {
+      background: #eeeeee;
+    }
+    &:last-child {
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+.unvrsty_detail.fnt_famly {
+  h4 {
+    font-family: $font_family_2;
+    font-size: 17px;
+  }
+  p {
+    font-family: $font_family_1;
+    font-size: 16px;
+  }
+}
+.unvrsty_schedule.fnt_famly {
+  h4 {
+    font-family: $font_family_1;
+    font-size: 17px;
+  }
+  p {
+    font-family: $font_family_1;
+    font-size: 15px;
+  }
+}
+.course_date {
+  span {
+    margin-bottom: 4px;
+    width: 100%;
+    float: left;
+    font-family: $font_family_1;
+    font-size: 15px;
+  }
+}
+
+
+section.course_detail_col {
+  width: 100%;
+  float: left;
+}
+.box_header {
+  width: 100%;
+  background: #00863e;
+  text-align: center;
+  padding: 10px 0px;
+  float: left;
+  h3 {
+    color: $color_2;
+    height: 20px;
+    font-size: 21px;
+    margin: 0px;
+  }
+}
+.course_download {
+  text-align: center;
+  font-family: $font_family_1;
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+.box_content {
+  background: #eeeeee;
+  width: 100%;
+  padding: 12px 14px;
+  float: left;
+  position: relative;
+}
+.form-group.myfrm_grp {
+  margin: 0px;
+}
+.myfrm_grp {
+  [type="checkbox"] {
+    &:not(:checked) {
+      position: absolute;
+      left: -9999px;
+      &+label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        font-family: $font_family_1;
+        font-size: 17px;
+        display: inline-block;
+        line-height: 20px;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 17px;
+          height: 17px;
+          border: 1px solid #d5d5d5;
+          background: #fff;
+        }
+        &:after {
+          content: '✔';
+          position: absolute;
+          top: 4px;
+          left: 3px;
+          font-size: 13px;
+          line-height: 0.8;
+          color: $color_3;
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+    }
+    &:checked {
+      &+label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        font-family: $font_family_3;
+        font-size: 17px;
+        display: inline-block;
+        line-height: 20px;
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 17px;
+          height: 17px;
+          border: 1px solid #d5d5d5;
+          background: #fff;
+        }
+        &:after {
+          content: '✔';
+          position: absolute;
+          top: 4px;
+          left: 3px;
+          font-size: 13px;
+          line-height: 0.8;
+          color: $color_3;
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+    &:disabled {
+      &:not(:checked) {
+        &+label {
+          &:before {
+            box-shadow: none;
+            border-color: $border_color_1;
+            background-color: $background_color_1;
+          }
+        }
+      }
+      &:checked {
+        &+label {
+          &:before {
+            box-shadow: none;
+            border-color: $border_color_1;
+            background-color: $background_color_1;
+          }
+        }
+      }
+    }
+  }
+  [type="c32heckbox"] {
+    &:checked {
+      position: absolute;
+      left: -9999px;
+    }
+  }
+  input[type=checkbox] {
+    display: none;
+  }
+}
+span.circle_offer {
+  z-index: 1;
+  position: relative;
+  top: -20px;
+  img {
+    vertical-align: top;
+  }
+}
+span.offr33 {
+  position: absolute;
+  top: 22px;
+  padding: 0px 0;
+  font-weight: 600;
+  right: 6px;
+}
+span.offr_off {
+  position: relative;
+  font-size: 17px;
+  top: 12px;
+}
+.packages_col {
+  width: 100%;
+  float: left;
+  margin-top: 14px;
+}
+.package_box {
+  width: 32%;
+  float: left;
+  border: 4px solid #fff;
+  margin: 6px;
+  position: relative;
+  display: none;
+  img {
+    width: 100%;
+  }
+  &:hover {
+    >.package_box_footer {
+      height: 100%;
+    }
+    >span.most_popular {
+      bottom: 80%;
+    }
+  }
+}
+.packages_col.more_feature_col {
+  .package_box {
+    display: block;
+  }
+}
+.package_box.show {
+  display: block;
+}
+.package_box_footer {
+  position: absolute;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.58);
+  bottom: 0px;
+  padding: 12px 0px 10px 0px;
+  height: 80px;
+  overflow: hidden;
+  -webkit-transition: 300ms;
+  -moz-transition: 300ms;
+  transition: 500ms;
+  p {
+    color: $color_2;
+    padding: 5px 8px;
+    margin: 0px;
+    font-size: 17px;
+    text-shadow: 1px 1px 1px #000;
+    padding-bottom: 0px;
+    font-family: $font_family_2;
+    text-align: left;
+  }
+  ul {
+    li {
+      color: $color_2;
+      padding: 5px 8px;
+      margin: 0px;
+      font-size: 17px;
+      text-shadow: 1px 1px 1px #000;
+      padding-bottom: 0px;
+      font-family: $font_family_2;
+      text-align: left;
+      display: block;
+      font-size: 15px;
+    }
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    float: left;
+    transition: 300ms;
+  }
+  span.strike {
+    color: $color_1;
+    font-size: 18px;
+    padding-left: 9px;
+    font-family: $font_family_1;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000;
+  }
+  span.lrge {
+    font-size: 27px;
+    color: $color_2;
+    padding: 0 6px;
+    font-family: $font_family_1;
+    text-shadow: 2px 1px 0px #000;
+    font-weight: 700;
+  }
+  span.off {
+    color: $color_2;
+    font-size: 18px;
+    font-family: $font_family_1;
+    font-weight: 700;
+    text-shadow: 2px 1px 0px #000;
+  }
+  ul.pckg_points {
+    list-style-type: disc;
+    li {
+      font-size: 12px;
+      line-height: 15px;
+      list-style-type: disc;
+      list-style: disc;
+      color: $color_2;
+      background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/small_circle.png");
+      background-repeat: no-repeat;
+      padding: 0px 13px;
+      margin-bottom: 5px;
+      margin-left: 10px;
+      background-position: 0% 49%;
+      background-size: 6px;
+    }
+  }
+  .cart_wrapper {
+    margin-top: 18px;
+    padding-bottom: 16px;
+    text-align: center;
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: top;
+      margin: 0 3px;
+      padding: 0;
+      select {
+        color: $color_4;
+        padding: 6px 6px;
+        border: none;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        width: 100%;
+        padding-right: 24px;
+        background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/arrow_down.png") #fff;
+        background-repeat: no-repeat;
+        background-position: 88%;
+      }
+      a.cart_btn {
+        background: #007833;
+        max-width: 113px;
+        width: 100%;
+        color: $color_2;
+        text-align: center;
+        border-radius: 4px;
+        border-color: $border_color_2;
+        transition: 300ms;
+        text-shadow: none;
+        &:hover {
+          box-shadow: 0 0 5px #00863e;
+          color: $color_1;
+          background: #fff;
+        }
+      }
+    }
+    li.width_inc {
+      width: 70px;
+    }
+  }
+}
+.crse_shedule_btn.cstm_frm {
+  margin-top: 20px;
+  width: 100%;
+  float: left;
+  margin-bottom: 9px;
+}
+section.course_detail_col.mg_top {
+  margin-top: 20px;
+}
+span.most_popular {
+  position: absolute;
+  background: #f15924;
+  font-size: 11px;
+  border-radius: 3px;
+  color: $color_2;
+  padding: 2px 6px;
+  bottom: 20%;
+  transition: 300ms;
+  right: -14px;
+  z-index: 2;
+}
+a.toggle_caret {
+  position: absolute;
+  left: 50%;
+  bottom: -25px;
+  margin-left: -54px;
+}
+.panel.cstm_panel_desc.cstm_condition{
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  box-shadow: 0 0 0 #fff;
+  border-radius: 0;
+}
+.form-group.myfrm_grp.mg_top {
+  margin-top: 7px;
+}
+.package_box.featured_pro_aded {
+  border: 4px solid #00863e;
+}
+.featured_pro_aded {
+  .package_box_footer {
+    display: none;
+  }
+  .most_popular {
+    display: none;
+  }
+  .pro_cart_added_col {
+    display: block;
+  }
+}
+.pro_cart_added_col {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  //z-index: 99999;
+  display: none;
+  text-align: center;
+  span.prod_cart_heading {
+    font-size: 19px;
+    font-family: $font_family_1;
+    background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/product_cart_icon.png") no-repeat center top;
+    color: $color_2;
+    padding-top: 37px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    margin-top: -38px;
+  }
+  a.remove_cart_col {
+    position: absolute;
+    color: $color_2;
+    text-decoration: underline;
+    bottom: 5px;
+    font-family: $font_family_1;
+    font-size: 12px;
+    right: 7px;
+  }
+}
+h3.desktop_display {
+  display: block;
+  height: 20px;
+}
+h3.mob_display {
+  display: none;
+  strong {
+    background: #fff none repeat scroll 0 0;
+    color: $color_1;
+    margin: 0 3px;
+    padding: 0 6px;
+  }
+}
+a.btn.btn-default.margin-30.pay {
+    line-height: 26px;
+    font-size: 16px;
+}
+#msform.course_addon_form{
+    margin: 26px auto;
+  .signup_nav{
+    margin-top: 9px;
+    margin-bottom: 9px;
+  }
+  .box_header h3{
+    font-size:15px;
+  }
+  .panel-heading.cstm_head_panel{
+    font-size:15px;
+  }
+  .form_sub_title{
+    margin-bottom: 14px;
+  }
+}
+.course_row_lesson{
+  display: none;
+  padding-bottom: 10px;
+}
+
+.cstm_panel_desc_content.more_feature_col .course_row_lesson{
+  display: block;
+}
+.cstm_panel_desc.pos_rel{position: relative;}
+a.toggle_courses{
+  position: absolute;
+  left: 51.5%;
+  bottom: -30px;
+  margin-left: -69px;
+}
+#check_textbook{
+  margin-top: 35px;
+}
+.course_detail_col i{
+  color: #fff;
+}
+#msform.course_addon_form .box_header h3.question_mark{
+  display: inline-block;
+}
+
+@media only screen and (min-width:768px) and (max-width:999px) {
+  .package_box {
+    width: 48.2%;
+  }
+  .package_box.show_ipad {
+    display: block;
+  }
+}
+@media only screen and (min-width:267px) and (max-width:767px) {
+  .package_box {
+    width: 100%;
+    margin: 6px 0px;
+    &:hover {
+      >span.most_popular {
+        bottom: 20%;
+      }
+    }
+  }
+  .myfrm_grp {
+    [type="checkbox"] {
+      &:not(:checked) {
+        &+label {
+          font-size: 14px;
+        }
+      }
+      &:checked {
+        &+label {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .package_box_footer {
+    height: 100%;
+    position: relative;
+    .cart_wrapper {
+      li {
+        select {
+          padding: 6px 10px;
+        }
+      }
+    }
+  }
+  .package_box.show_ipad {
+    display: block;
+  }
+}
+@media only screen and (min-width:468px) and (max-width:767px) {
+  .box_header {
+    h3 {
+      font-size: 16px;
+      font-size: 16px;
+    }
+  }
+}
+@media only screen and (min-width:550px) and (max-width:767px) {
+  .package_box {
+    width: 50%;
+    margin: 6px 0px;
+  }
+}
+@media only screen and (min-width:267px) and (max-width:467px) {
+  .box_header {
+    h3 {
+      font-size: 16px;
+      height: auto;
+    }
+  }
+  span.circle_offer {
+    display: none;
+  }
+  h3.desktop_display {
+    display: none;
+  }
+  h3.mob_display {
+    display: block;
+  }
+  .package_box_footer {
+    span.lrge {
+      font-size: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
+    ul {
+      li {
+        font-size: 14px;
+      }
+    }
+    span.off {
+      font-size: 14px;
+    }
+    span.strike {
+      font-size: 15px;
+    }
+  }
+}

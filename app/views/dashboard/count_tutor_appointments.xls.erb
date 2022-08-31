@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <% if @ap_type == "all_session" %>
+    <Worksheet ss:Name= "All Tutor Appointments" >
+      <Table>
+        <Row><Cell><Data ss:Type='String'><%= @display_date %></Data></Cell></Row>
+        <Row>
+          <Cell><Data ss:Type="String">Tutor</Data></Cell>
+          <Cell><Data ss:Type="String">State</Data></Cell>
+          <Cell><Data ss:Type="String">Subject</Data></Cell>
+          <Cell><Data ss:Type="String">Appointments Count</Data></Cell>
+          <Cell><Data ss:Type="String">Sessions Remaining</Data></Cell>
+          <Cell><Data ss:Type="String">Sessions Used</Data></Cell>
+
+        </Row>
+        <%if @tuts.present? %>
+          <% appointments_count_total = 0 %>
+          <% sessions_remaining_total = 0 %>
+          <% sessions_used_total = 0 %>
+          <% @tuts.each do |tutor| %>
+            <% tutor_appointments = @appointments.where(status: 0,tutor_id: tutor.id) %>
+            <% tutor_ap_hours_start = @ah_start.where(appointment_id: @appointments_with_start.where(tutor_id: tutor.id).ids).group_by(&:appointment_id) %>
+            <% tutor_ap_hours_start.keys.each { |k| tutor_ap_hours_start[k] = tutor_ap_hours_start[k].map(&:hours).sum } %>
+            <% tutor_ap_hours = @ah.where(appointment_id: tutor_appointments.ids).group_by(&:appointment_id) %>
+            <% tutor_ap_hours.keys.each { |k| tutor_ap_hours[k] = tutor_ap_hours[k].map(&:hours).sum } %>
+            <% tutor_appointments_start_count = tutor_ap_hours_start.values.sum %>
+            <% tutor_appointments_end = @appointments_with_end.where(status: 0, tutor_id: tutor.id) %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= tutor.full_name %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= tutor.state %></Data></Cell>
+
+              <Cell><Data ss:Type="String"><%= tutor.tutor_profile.tags.pluck(:name).join(", ")%></Data></Cell>
+              <% sessions_completed_in_range = tutor_ap_hours.values.sum %>
+              <Cell><Data ss:Type="Number"><%= sessions_completed_in_range %></Data></Cell>
+              <% appointments_count_total += sessions_completed_in_range %>
+              <%  ap_hours = @appointment_hours.values_at(*tutor_appointments.pluck(:id)).compact %>
+              <% if ap_hours.present? %>
+                <% ap_hours_with_end_sum = tutor_appointments_end.where(hours: 0).size %>
+                <Cell><Data ss:Type="Number"><%= ap_hours_with_end_sum %></Data></Cell>
+                <% sessions_remaining_total += ap_hours_with_end_sum %>
+                <Cell><Data ss:Type="Number"><%= tutor_appointments_start_count %></Data></Cell>
+                <% sessions_used_total += tutor_appointments_start_count %>
+              <% else %>
+                <Cell><Data ss:Type="Number">0</Data></Cell>
+                <Cell><Data ss:Type="Number">0</Data></Cell>
+              <% end %>
+            </Row>
+          <% end %>
+          <Row>
+            <Cell><Data ss:Type="String">Total</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= appointments_count_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= sessions_remaining_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= sessions_used_total %></Data></Cell>
+          </Row>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% elsif @ap_type == "private_tutor" %>
+    <Worksheet ss:Name= "Private Tutor Appointments" >
+      <Table>
+        <Row><Cell><Data ss:Type='String'><%= @display_date %></Data></Cell></Row>
+        <Row>
+          <Cell><Data ss:Type="String">Tutor</Data></Cell>
+          <Cell><Data ss:Type="String">Student</Data></Cell>
+          <Cell><Data ss:Type="String">Appointments Count</Data></Cell>
+          <Cell><Data ss:Type="String">Sessions Remaining</Data></Cell>
+          <Cell><Data ss:Type="String">Sessions Used</Data></Cell>
+
+        </Row>
+        <%if @tuts.present? %>
+          <% appointments_count_total = 0 %>
+          <% sessions_remaining_total = 0 %>
+          <% sessions_used_total = 0 %>
+          <% @tuts.each do |tutor| %>
+            <% tutor_appointments_end_itr = @appointments_with_end.where(status: 0, tutor_id: tutor.id) %>
+            <% tutor_appointments = @appointments.where(status: 0, tutor_id: tutor.id) %>
+            <Row><Cell><Data ss:Type="String"><%= tutor.full_name %></Data></Cell></Row>
+            <% tutor_appointments_end_itr.group_by(&:student).each do |student, ap| %>
+              <% student_appointments = tutor_appointments.where(student_id: student.id) %>
+              <% tutor_ap_hours_start = @ah_start.where(appointment_id: @appointments_with_start.where(tutor_id: tutor.id, student_id: student.id).ids).group_by(&:appointment_id) %>
+              <% tutor_ap_hours_start.keys.each { |k| tutor_ap_hours_start[k] = tutor_ap_hours_start[k].map(&:hours).sum } %>
+              <% tutor_ap_hours = @ah.where(appointment_id: student_appointments.ids).group_by(&:appointment_id) %>
+              <% tutor_ap_hours.keys.each { |k| tutor_ap_hours[k] = tutor_ap_hours[k].map(&:hours).sum } %>
+              <% tutor_appointments_start_count = tutor_ap_hours_start.values.sum %>
+              <% tutor_appointments_end = @appointments_with_end.includes(:student).where(status: 0, tutor_id: tutor.id, student_id: student.id) %>
+              <% sessions_completed_in_range = tutor_ap_hours.values.sum %>
+              <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                <Cell><Data ss:Type="String"><%= student.full_name %></Data></Cell>
+                <Cell><Data ss:Type="String"><%= sessions_completed_in_range %></Data></Cell>
+                <% appointments_count_total += sessions_completed_in_range %>
+                <% ap_hours = @appointment_hours.values_at(*student_appointments.pluck(:id)).compact %>
+                <% ap_hours_with_end_sum = tutor_appointments_end.where(hours: 0).size %>
+                <Cell><Data ss:Type="Number"><%= ap_hours_with_end_sum %></Data></Cell>
+                <% sessions_remaining_total += ap_hours_with_end_sum %>
+                <Cell><Data ss:Type="Number"><%= tutor_appointments_start_count %></Data></Cell>
+                <% sessions_used_total += tutor_appointments_start_count %>
+              </Row>
+            <% end %>
+          <% end %>
+          <Row>
+            <Cell><Data ss:Type="String">Total</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= appointments_count_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= sessions_remaining_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= sessions_used_total %></Data></Cell>
+          </Row>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% elsif @ap_type == "unbooked_session" %>
+    <Worksheet ss:Name='Unbooked Tutor Appointments'>
+      <Table>
+        <Row><Cell><Data ss:Type='String'><%= @display_date %></Data></Cell></Row>
+        <Row>
+          <Cell><Data ss:Type='String'>Student Name</Data></Cell>
+          <Cell><Data ss:Type='String'>Unbooked</Data></Cell>
+          <Cell><Data ss:Type='String'>Booked</Data></Cell>
+          <Cell><Data ss:Type='String'>Completed</Data></Cell>
+        </Row>
+        <% if @students.present? %>
+          <% unbooked_total = 0 %>
+          <% booked_total = 0 %>
+          <% completed_total = 0 %>
+          <% @students.each do |student| %>
+            <% student_appointments =  @appointments.select { |ap| ap.student_id == student.id && ap.status == 'active' } %>
+
+            <Row>
+              <% unbooked = (student.private_tutor_time_left(nil, @to_filter) - student_appointments.select{ |sa| sa.hours == 0 }.size) %>
+              <% curr_unbooked = unbooked.positive? ? unbooked : 0 %>
+              <% sessions_completed = student_appointments.map{ |sa| sa.appointment_hours.with_end_zero(@to_filter).where.not(hours: nil) }.flatten.map(&:hours).sum %>
+              <% booked = student_appointments.size - sessions_completed %>
+              <% curr_booked = booked.positive? ? booked : 0 %>
+              <Cell><Data ss:Type='String'><%= student.full_name %></Data></Cell>
+              <Cell><Data ss:Type='Number'><%= curr_unbooked %></Data></Cell>
+              <% unbooked_total += curr_unbooked %>
+              <Cell><Data ss:Type='Number'><%= curr_booked %></Data></Cell>
+              <% booked_total += curr_booked %>
+              <Cell><Data ss:Type='Number'><%= sessions_completed %></Data></Cell>
+              <% completed_total += sessions_completed %>
+            </Row>
+          <% end %>
+          <Row>
+            <Cell><Data ss:Type="String">Total</Data></Cell>
+            <Cell><Data ss:Type="Number"><%= unbooked_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= booked_total %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= completed_total %></Data></Cell>
+          </Row>
+        <% end %>
+      </Table>
+    </Worksheet>
+  <% end %>
+</Workbook>

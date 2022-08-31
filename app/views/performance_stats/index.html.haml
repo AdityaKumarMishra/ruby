@@ -1,0 +1,489 @@
+- content_for :page_heading, 'Performance Profile'
+-# if @my_stats.present?
+.dashbord_right
+  .resource_col
+    %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+  .faq_list.para_fs14
+    .faq_list_col
+      %h2.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#first_section", role: "button"}
+        %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}>
+        Overall Content Review Progress
+      #first_section.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+        #container{:style => " width: 100%; margin-top:40px; height: 600px;"}
+        .graph_label{:style => "margin-bottom:50px; margin-top:50px;"}
+          %span.overall_legend.legend_col Your Performance
+          %span.average_legend.legend_col Average GR student
+
+
+    .faq_list_col
+      %h2.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#second_section", role: "button"}
+        %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}>
+        Overall Performance
+      #second_section.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+        #container1{:style => " width: 100%; margin-top:40px; height: 600px;"}
+        .graph_label{:style => "margin-bottom:50px; margin-top:50px;"}
+          %span.overall_legend.legend_col Your Performance
+          %span.average_legend.legend_col Average GR student
+    .faq_list_col
+      %h2.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "true", "data-parent" => "#accordion", "data-toggle" => "collapse", href: "#third_section", role: "button"}
+        %i.fa.fa-angle-up.pull-right{"aria-hidden" => "true"}>
+        Recommended topics to work on
+      #third_section.panel-collapse.collapse.in{"aria-labelledby" => "headingOne", role: "tabpanel"}
+        / Coming Soon
+      .recommended_top_col
+        %p.topic_heading.red_heading More than 25% below AGS
+        - red_tags = @topicss["red_tags"]
+        - red_tags.each do |tag|
+          .recommended_pro_col.red_bg
+            %h3
+              = tag[1]
+              %span %
+            .smily_icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/smily_icon.png'
+            .tag_line
+              %span= tag[0]
+      .recommended_top_col
+        %p.topic_heading.orange_heading Between 10 to 20%
+        - orange_tags = @topicss["orange_tags"]
+        - orange_tags.each do |tag|
+          .recommended_pro_col.orange_bg
+            %h3
+              = tag[1]
+              %span %
+            .smily_icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/between10-20.png'
+            .tag_line
+              %span= tag[0]
+      .recommended_top_col
+        %p.topic_heading.yellow_heading less or equal to 10% below average
+        - yellow_tags = @topicss["yellow_tags"]
+        - yellow_tags.each do |tag|
+          .recommended_pro_col.yellow_bg
+            %h3
+              = tag[1]
+              %span %
+            .smily_icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/less_10_icon.png'
+            .tag_line
+              %span= tag[0]
+      .recommended_top_col
+        %p.topic_heading.red_heading Unassessed Topics
+        - unassessed_topics_tags = @topicss["unassessed_topics_tags"]
+        - unassessed_topics_tags.each do |tag|
+          .recommended_pro_col.red_bg.yellow_tooltip{"data-toggle": "tooltip", "data-placement": "top", title: "Please complete at least 10 questions from these topics as soon as you can - so that you have some basic understanding of your level of performance"}
+            %h3
+              = tag[1]
+              %span %
+            .smily_icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/smily_icon.png'
+            .tag_line
+              %span= tag[0]
+  :javascript
+
+    $(document).ready(function(){
+      $(".faq_list h2").click(function(){
+        $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+      });
+    });
+
+    var result = #{@result}
+    var section_2_result = #{@section_2_result}
+
+    var chart, merge = Highcharts.merge;
+    $(document).ready(function() {
+      initBarChart()
+      initBarChart1()
+      initTitleTooltip()
+      initTitleTooltip1()
+    });
+    function initBarChart() {
+      var perShapeGradient = {
+        x1: 0,
+        y1: 100,
+        x2: 0,
+        y2: 1
+      };
+      var colors = Highcharts.getOptions().colors;
+      colors = [{
+        linearGradient: perShapeGradient,
+        //GREY-COLOR-0
+        stops: [
+          [0, 'rgb(147, 147, 147)'],
+          [1, 'rgb(183, 183, 183)']//TOP
+          ]
+        }, {
+        //RED-COLOR-1
+        linearGradient: merge(perShapeGradient),
+        stops: [
+          [0, 'rgb(204, 6, 9)'],
+          [1, 'rgb(244, 26, 37)']//TOP
+          ]
+        }, {
+        linearGradient: merge(perShapeGradient),
+        //GREEB-COLOR-2
+        stops: [
+          [0, 'rgb(12, 167, 0)'],
+          [1, 'rgb(14, 194, 0)']  //TOP
+          ]
+        },
+      ]
+
+      Highcharts.setOptions({
+        lang: {
+        drillUpText: 'Back'
+        }
+      });
+
+      if (#{@overall_per} >= #{@avg_overall_per}) {
+        show_color = colors[2]
+      }else
+      {
+        show_color = colors[1]
+      }
+      $('#container').highcharts({
+        chart: {
+          type: 'bar',
+          /*events: {
+            load: function() {
+              var chart = this,
+              renderer = chart.renderer,
+              pattern = renderer.createElement('pattern').add(renderer.defs).attr({
+                width: 1,
+                height: 1,
+                id: 'arrow'
+              });
+
+              renderer.image('http://demo2.ongraph.com/demo/NOIDA-TEAM/stats_gradready/images/back_green_btn.svg').add(pattern);
+
+              pattern = renderer.createElement('pattern').add(renderer.defs).attr({
+                width: 1,
+                height: 1,
+                id: 'coloured-arrow'
+              });
+
+              renderer.rect(0, 0, 0, 0).add(pattern);
+              renderer.image('http://demo2.ongraph.com/demo/NOIDA-TEAM/stats_gradready/images/back_green_btn.svg').add(pattern);
+            }
+          }*/
+        },
+
+        title: {
+          text: 'Your Performance vs average GR student '
+        },
+        /*xAxis: {
+          type: 'category',
+
+          labels: {
+            style: {fontSize: '12px'},
+
+          },
+        },*/
+         yAxis:{
+          min:0,
+          max:100,
+          title: {
+            text: 'Percentage (%)'
+          },
+        },
+
+        xAxis: {
+          type: 'category',
+          title: {
+            text: null
+          },
+          labels: {
+            style: {fontSize: '12px'},
+            formatter: function () {
+              var text = this.value,
+                formatted = text.length > 100 ? text.substring(0, 25) + '...' : text;
+
+              return '<div class="js-ellipse" title="' + text + '">' + formatted + '</div>';
+            },
+
+            useHTML: true
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0,
+            dataLabels: {
+              enabled: true,
+
+            }
+          }
+        },
+        tooltip: {
+          shared: true,
+          useHTML: true,
+          headerFormat: '<small style="font-size:14px;"><b>{point.key}</b></small><table>',
+          pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+            '<td style="text-align: right"><b>{point.y}%</b></td></tr>',
+          footerFormat: '</table>',
+        },
+        series: [{
+          name: 'Your Performance',
+          colorByPoint: true,
+
+          data: [{
+            name: 'Overall Performance',
+            y: #{@overall_per},
+            color: show_color,
+
+            drilldown: 'overall_per'
+          }]
+
+        }, {
+          name: 'Average GR student',
+          colorByPoint: true,
+          data: [{
+            name: 'Overall Performance',
+            y: #{@avg_overall_per},
+            color: colors[0],
+            drilldown: 'overall_per1'
+          }]
+        }],
+        drilldown: {
+          drillUpButton: {
+
+            theme: {
+              r: 20,
+
+            }
+          },
+          _animation: {
+            duration: 2000
+          },
+
+          series: result
+        }
+      })
+    }
+    function initTitleTooltip() {
+      /*$(document).on('mousehover', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).addClass("show_title");
+      })
+
+      $(document).on('mouseout', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).removeClass("show_title");
+      })*/
+
+      $(document).on('touchstart', '.js-ellipse', function(e) {
+        e.preventDefault()
+        if($(this).hasClass("show_title")) {
+          $(this).removeClass("show_title");
+        } else {
+          $(".show_title").removeClass("show_title");
+          $(this).addClass("show_title");
+        }
+
+      })
+
+    /*  $(document).on('touchend', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).removeClass("show_title");
+      })*/
+    }
+
+
+
+    function initBarChart1() {
+      var perShapeGradient = {
+        x1: 0,
+        y1: 100,
+        x2: 0,
+        y2: 1
+      };
+      var colors = Highcharts.getOptions().colors;
+      colors = [{
+        linearGradient: perShapeGradient,
+        //GREY-COLOR-0
+        stops: [
+          [0, 'rgb(147, 147, 147)'],
+          [1, 'rgb(183, 183, 183)']//TOP
+          ]
+        }, {
+        //RED-COLOR-1
+        linearGradient: merge(perShapeGradient),
+        stops: [
+          [0, 'rgb(204, 6, 9)'],
+          [1, 'rgb(244, 26, 37)']//TOP
+          ]
+        }, {
+        linearGradient: merge(perShapeGradient),
+        //GREEB-COLOR-2
+        stops: [
+          [0, 'rgb(12, 167, 0)'],
+          [1, 'rgb(14, 194, 0)']  //TOP
+          ]
+        },
+      ]
+
+      Highcharts.setOptions({
+        lang: {
+        drillUpText: 'Back'
+        }
+      });
+      if (#{@sec_2_overall} >= #{@sec_2_average}) {
+        show_sec2_color = colors[2]
+      }else
+      {
+        show_sec2_color = colors[1]
+      }
+      $('#container1').highcharts({
+        chart: {
+          type: 'bar',
+          /*events: {
+            load: function() {
+              var chart = this,
+              renderer = chart.renderer,
+              pattern = renderer.createElement('pattern').add(renderer.defs).attr({
+                width: 1,
+                height: 1,
+                id: 'arrow'
+              });
+
+              renderer.image('http://demo2.ongraph.com/demo/NOIDA-TEAM/stats_gradready/images/back_green_btn.svg').add(pattern);
+
+              pattern = renderer.createElement('pattern').add(renderer.defs).attr({
+                width: 1,
+                height: 1,
+                id: 'coloured-arrow'
+              });
+
+              renderer.rect(0, 0, 0, 0).add(pattern);
+              renderer.image('http://demo2.ongraph.com/demo/NOIDA-TEAM/stats_gradready/images/back_green_btn.svg').add(pattern);
+            }
+          }*/
+        },
+
+        title: {
+          text: 'Your Performance vs average GR student '
+        },
+        /*xAxis: {
+          type: 'category',
+
+          labels: {
+            style: {fontSize: '12px'},
+
+          },
+        },*/
+        yAxis:{
+          min:0,
+          max:100,
+          title: {
+            text: 'Percentage (%)'
+          },
+        },
+        xAxis: {
+          type: 'category',
+          title: {
+            text: null
+          },
+          labels: {
+            style: {fontSize: '12px'},
+            formatter: function () {
+              var text = this.value,
+                formatted = text.length > 100 ? text.substring(0, 25) + '...' : text;
+
+              return '<div class="js-ellipse" title="' + text + '">' + formatted + '</div>';
+            },
+
+            useHTML: true
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          series: {
+            borderWidth: 0,
+            dataLabels: {
+              enabled: true,
+
+            }
+          }
+        },
+        tooltip: {
+          shared: true,
+          useHTML: true,
+          headerFormat: '<small style="font-size:14px;"><b>{point.key}</b></small><table>',
+          pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
+            '<td style="text-align: right"><b>{point.y}%</b></td></tr>',
+          footerFormat: '</table>',
+        },
+        series: [{
+          name: 'Your Performance',
+          colorByPoint: true,
+
+          data: [{
+            name: 'Overall Performance',
+            y: #{@sec_2_overall},
+            color: show_sec2_color,
+
+            drilldown: 'overall_per'
+          }]
+
+        }, {
+          name: 'Average GR student',
+          colorByPoint: true,
+          data: [{
+            name: 'Overall Performance',
+            y: #{@sec_2_average},
+            color: colors[0],
+            drilldown: 'overall_per1'
+          }]
+        }],
+        drilldown: {
+          drillUpButton: {
+
+            theme: {
+              r: 20,
+
+            }
+          },
+          _animation: {
+            duration: 2000
+          },
+
+          series: section_2_result
+        }
+      })
+    }
+    function initTitleTooltip1() {
+      /*$(document).on('mousehover', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).addClass("show_title");
+      })
+
+      $(document).on('mouseout', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).removeClass("show_title");
+      })*/
+
+      $(document).on('touchstart', '.js-ellipse', function(e) {
+        e.preventDefault()
+        if($(this).hasClass("show_title")) {
+          $(this).removeClass("show_title");
+        } else {
+          $(".show_title").removeClass("show_title");
+          $(this).addClass("show_title");
+        }
+
+      })
+
+    /*  $(document).on('touchend', '.js-ellipse', function(e) {
+        e.preventDefault()
+        $(this).removeClass("show_title");
+      })*/
+    }
+
+
+/ - else
+/   .dashbord_right
+/     .resource_col.text-center.mtop50
+/       %h2 Performance stats yet to start

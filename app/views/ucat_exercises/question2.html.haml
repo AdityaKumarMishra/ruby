@@ -1,0 +1,132 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+      .head_timer
+        %h4#clock
+          %i.fa.fa-clock-o{"aria-hidden" => "true"}
+          %span.time
+            Time Remaining
+            %span 14:21
+        %h4#all_ques
+          %i.fa.fa-book{"aria-hidden" => "true"}
+          %span.number 1 of 44
+    .btm_header.padd
+      %a.calc{href: "javascript:",'data-toggle'=>"modal", 'data-target'=>"#calc-modal"}
+        %i.fa.fa-calculator{"aria-hidden" => "true"}
+        = succeed "alculator" do
+          %span C
+      %a.calc{href: "#"}
+        %i.fa.fa-flag-checkered{"aria-hidden" => "true"}
+        = succeed "lag" do
+          %span F
+  .para_contant.ipad_scroll.mob_scroll
+    %p All countries provide Visas to the passport holders of country X; country B provides Visas to the passport holders of only two countries; country A provides Visas to the passport holders of country B and vice versa.
+    %p Place 'Yes' if the conclusion does follow. Place 'No' if the conclusion does not follow.
+    .drag_wrap
+      .drag_list_col
+        %ul.drag_list
+          %li All diplomatic passport holders receive Visas in country B.
+          %li A man received a Visa in country C so he must have a passport of country X.
+          %li Country B passport holders are eligible for Visas in country X.
+          %li Passport holders of country X never have to worry about applying for a Visa in advance.
+          %li Samantha received a Visa in country B so she must have a passport of either country X or country A.
+      / .drag_box_col
+      /   %ul.drag_box
+      /     %li{ondragover: "allowDrop(event)", ondrop: "drop(event)"}
+      /     %li{ondragover: "allowDrop(event)", ondrop: "drop(event)"}
+      /     %li{ondragover: "allowDrop(event)", ondrop: "drop(event)"}
+      /     %li{ondragover: "allowDrop(event)", ondrop: "drop(event)"}
+      /     %li{ondragover: "allowDrop(event)", ondrop: "drop(event)"}
+      / .drag_ans_col
+      /   %ul.drag_ans
+      /     %li#yes{ondragover: "allowDrop(event)", ondrop: "drop(event)", draggable: "true", ondragstart: "drag(event)"} yes
+      /     %li#no{ondragover: "allowDrop(event)", ondrop: "drop(event)", draggable: "true", ondragstart: "drag(event)"} no
+
+      .drag_box_col
+        %ul.drag_box
+          %li.droppable
+          %li.droppable
+          %li.droppable
+          %li.droppable
+          %li.droppable
+      .drag_ans_col
+        %ul.drag_ans
+          %li.draggable yes
+          %li.draggable no
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-step-forward{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question1"}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question3"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+:css
+  .dropbox{
+    height: 56px !important;
+    width: 99px !important;
+    border: 1px solid #000 !important;
+    background-color: #fff !important;
+    color: #000;
+    margin-bottom: 10px !important;
+    text-transform: capitalize;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+:javascript
+
+  $('.draggable').draggable({
+    revert: "invalid",
+    stack: ".draggable",
+    helper: 'clone'
+  });
+  $('.droppable').droppable({
+    accept: ".draggable",
+    drop: function(event, ui) {
+      var droppable = $(this);
+      var draggable = ui.draggable;
+      text = ui.draggable.text();
+      $(this).addClass('dropbox')
+      $(this).text(text);
+    }
+  });
+
+  $('#all_ques').click(function(){
+   $('.number').toggleClass('none');
+   });
+  $('#clock').click(function(){
+    $('.time').toggleClass('none');
+  });

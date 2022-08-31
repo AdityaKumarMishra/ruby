@@ -1,0 +1,19 @@
+development:
+  bucket_url: "http://gradready-development.s3-ap-southeast-2.amazonaws.com/"
+  paperclip_path: ":rails_root/public/system/:class/:id/:filename"
+  paperclip_url: "/public/system/:class/:id/:filename"
+
+test:
+  bucket_url: "http://gradready-development.s3-ap-southeast-2.amazonaws.com/"
+  paperclip_path: ":rails_root/public/system/:class/:id/:filename"
+  paperclip_url: "/public/system/:class/:id/:filename"
+
+stage:
+  bucket_url: "http://gradready-development.s3-ap-southeast-2.amazonaws.com/"
+  paperclip_path: ":class/:id/:basename.:extension"
+  paperclip_url: "/textbooks/:id/textbook_document"
+
+production:
+  bucket_url: "http://gradready.s3-ap-southeast-2.amazonaws.com/"
+  paperclip_path: ":class/:id/:basename.:extension"
+  paperclip_url: "/textbooks/:id/textbook_document"

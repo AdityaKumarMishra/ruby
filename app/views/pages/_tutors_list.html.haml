@@ -1,0 +1,7 @@
+- User.tutor.each do |t|
+  = render 'modal_tutor', object: t
+  .tutors_images{id: "tutor-#{t.id}"}
+    - if t.profile_image.present?
+      = link_to image_tag(t.profile_image, alt: t.full_name, height: '150px', width: '150px'), "#modal-tutor-#{t.id}", 'data-toggle'=>'modal'
+    - else
+      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/noname_user.jpg', alt: t.full_name, height: '150px', width: '150px'), "#modal-tutor-#{t.id}", 'data-toggle'=>'modal'

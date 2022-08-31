@@ -1,0 +1,13 @@
+.container
+  .row
+    .panel.panel-info
+      .panel-heading
+        %h1.panel-title
+          %strong Overall
+      .panel-body
+        %p
+          Number of All MCQ:
+          =Mcq.all.count
+    =render :partial => 'statistic/partial/by_difficulty', :locals => {:levels => @defficulty_levels }
+    =render :partial => 'statistic/partial/by_difficulty_in_subjects', :locals => {:items => @subjects_by_difficutly }
+    =render :partial => 'statistic/partial/by_difficulty_in_tags', :locals => {:items => @tags_by_difficutly }

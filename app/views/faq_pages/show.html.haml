@@ -1,0 +1,11 @@
+- if @faq_page.present?
+  %p
+    %b Faq topic:
+    = @faq_page.faq_topic
+  %p
+    %b Content:
+    = @faq_page.content.html_safe
+
+  = link_to 'Edit', [:edit, @faq_type.to_sym, :admin, @faq_page], class: 'btn btn-info'
+
+  = link_to 'Back', [@faq_type.to_sym, :admin, :faq_pages], class: 'btn btn-danger'

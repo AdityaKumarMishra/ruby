@@ -1,0 +1,37 @@
+.panel.panel-warning
+  .panel-heading
+    .panel-title
+      %h3
+        %strong Mock Exam Essays
+  .panel-body.line-40.cstm_exam_cntnt
+    - if MockExamEssay.statuses[@mock_exam_essay.status] == 0
+      = render 'form', course: @current_course
+    - else
+      - if MockExamEssay.statuses[@mock_exam_essay.status] == 2
+        .row
+          .col-md-3
+            %label
+              = "Average Rating"
+          .col-md-7
+            %span
+              = @mock_exam_essay.average_rating
+      - @mock_exam_essay.mock_essays.each_with_index do |essay, index|
+        .row
+          .col-md-2
+            %label
+              = "Essay #{index + 1}"
+          .col-md-10
+            %span
+              %strong= link_to essay.title, download_file_mock_essay_path(essay, format: :pdf)
+    .row
+      .col-md-2
+        %label
+          Status:
+      .col-md-10
+        %span
+          = @mock_exam_essay.status.titleize
+    .row
+      .col-md-12
+        - if MockExamEssay.statuses[@mock_exam_essay.status] == 2
+          = link_to "View Feedback", feedbacks_mock_exam_essay_path(@mock_exam_essay.id), class: "btn btn-default"
+

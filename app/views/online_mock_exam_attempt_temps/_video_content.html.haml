@@ -1,0 +1,108 @@
+- if vod.omes_document_start_time > Time.zone.now && vod.omes_document_end_time > Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Will Open
+        %span.timer{id: "countdown_timer#{vod.id}"}
+
+  :javascript
+    var vyear#{vod.id} = parseInt("#{vod.try(:start_date).try(:year)}");
+    var vmonth#{vod.id} = parseInt("#{vod.try(:start_date).try(:month)}");
+    var vdate#{vod.id} = parseInt("#{vod.try(:start_date).try(:day)}");
+    var vhour#{vod.id} = parseInt("#{vod.try(:start_time).try(:hour)}");
+    var vminutes#{vod.id} = parseInt("#{vod.try(:start_time).try(:min)}");
+    var vaustDay#{vod.id} = new Date(vyear#{vod.id}, vmonth#{vod.id}-1, vdate#{vod.id}, vhour#{vod.id}, vminutes#{vod.id});
+    var vx#{vod.id} = setInterval(function() {
+      // Get today's date and time
+      var now#{vod.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var vdistance#{vod.id} = vaustDay#{vod.id} - now#{vod.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var vdays#{vod.id} = Math.floor(vdistance#{vod.id} / (1000 * 60 * 60 * 24));
+      var vhours#{vod.id} = Math.floor((vdistance#{vod.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var vminutes#{vod.id} = Math.floor((vdistance#{vod.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var vseconds#{vod.id} = Math.floor((vdistance#{vod.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{vod.id}").innerHTML = vdays#{vod.id} + "d " + vhours#{vod.id} + "h "
+      + vminutes#{vod.id} + "m " + vseconds#{vod.id} + "s ";
+
+      // If the count down is over, write some text
+      if (vdistance#{vod.id} < 0) {
+        clearInterval(vx#{vod.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{vod.id}"}
+          });
+      }
+    }, 1000);
+-elsif vod.omes_document_start_time <= Time.zone.now && vod.omes_document_end_time >= Time.zone.now
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Time Remaining:
+        %span.timer{id: "countdown_timer#{vod.id}"}
+
+  :javascript
+    var vsyear#{vod.id} = parseInt("#{vod.try(:end_date).try(:year)}");
+    var vsmonth#{vod.id} = parseInt("#{vod.try(:end_date).try(:month)}");
+    var vsdate#{vod.id} = parseInt("#{vod.try(:end_date).try(:day)}");
+    var vshour#{vod.id} = parseInt("#{vod.try(:end_time).try(:hour)}");
+    var vsminutes#{vod.id} = parseInt("#{vod.try(:end_time).try(:min)}");
+    var vsaustDay#{vod.id} = new Date(vsyear#{vod.id}, vsmonth#{vod.id}-1, vsdate#{vod.id}, vshour#{vod.id}, vsminutes#{vod.id});
+    var vsx#{vod.id} = setInterval(function() {
+      // Get today's date and time
+      var vsnow#{vod.id} = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var vsdistance#{vod.id} = vsaustDay#{vod.id} - vsnow#{vod.id};
+
+      // Time calculations for days, hours, minutes and seconds
+      var vsdays#{vod.id} = Math.floor(vsdistance#{vod.id} / (1000 * 60 * 60 * 24));
+      var vshours#{vod.id} = Math.floor((vsdistance#{vod.id} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var vsminutes#{vod.id} = Math.floor((vsdistance#{vod.id} % (1000 * 60 * 60)) / (1000 * 60));
+      var vsseconds#{vod.id} = Math.floor((vsdistance#{vod.id} % (1000 * 60)) / 1000);
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown_timer#{vod.id}").innerHTML = vsdays#{vod.id} + "d " + vshours#{vod.id} + "h "
+      + vsminutes#{vod.id} + "m " + vsseconds#{vod.id} + "s ";
+
+      // If the count down is over, write some text
+      if (vsdistance#{vod.id} < 0) {
+        clearInterval(vsx#{vod.id});
+        $.ajax({
+            type: "GET",
+            url: "#{refresh_document_online_mock_exam_attempt_temps_path}",
+            dataType: 'script',
+            data: {document_id: "#{vod.id}"}
+          });
+      }
+    }, 1000);
+
+  .video_box{id: "sub_vod#{vod.id}"}
+    %video{:autoplay => "true", :controls => "", :width => "100%", height: "320px"}
+      %source{src: vod.generate_output_url_for('original') , type: 'video/mp4','data-res' => '360'}
+- else
+  .time_wrapper{:style => "position: inherit"}
+    .time_heading
+      .question_timer
+        %i.fa.fa-clock-o
+        %b Closed
+        %span.timer{id: "countdown_timer#{vod.id}"}
+
+:javascript
+  $(document).ready(function(){
+    var reload_flag = false
+    if ($(".question_timer b").length == $('b:contains("Closed")').length){
+      reload_flag  = true
+      $("#redirect_msg").html("You have successfully Completed the Exam. Please wait while we are redirecting you to fill the score...");
+    }
+    if(reload_flag == true){
+      $("#redirect_msg").show();
+      setTimeout(function(){location.reload()},5000)
+    }
+  });

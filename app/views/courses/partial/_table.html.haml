@@ -1,0 +1,144 @@
+#filterrific_results.filter_btm_space
+  %p
+    Total Courses:
+    = courses.count
+  =will_paginate courses, renderer: BootstrapPagination::Rails
+  %table#table_id.gr-table-bordered.table-hover.courses_data_table
+    %thead
+      %tr
+        %th Course ID
+        %th Name
+        %th City
+        %th Product version
+        %th Enrolment end date
+        %th Expiry date
+        %th Paid Students
+        %th Unpaid Students
+        %th
+          PH Students
+          %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Automatically generated custom courses associated with free trials", style: 'margin: -2em; padding:2em;'}
+        %th Enrolment Limit
+        %th Waitlist Number
+        %th Tutors Assigned?
+        - if !current_user.student?
+          %th.action_edit Actions
+          %th.action_enrolment
+          %th.action_download
+          %th.action_destroy
+          %th.action_duplicate
+          - if params[:action] == "archived_courses" 
+            %th.action_unarchived
+        %th
+          = check_box_tag :select_all,nil,true,  id: "paypal_check"
+          Paypal Only
+        
+
+    %tbody
+      - courses.each do |course|
+        %tr 
+          %td= course.id
+          %td= course.name
+          %td= course.city
+          %td
+            = course.product_version.name if course.product_version
+            = "(#{course.product_version.type})" if course.product_version
+          %td= course.enrolment_end_date.try(:strftime, '%d/%m/%Y')
+          %td= course.expiry_date.try(:strftime, '%d/%m/%Y')
+          %td= course.enroled_paid_student_list.count
+          %td= course.enroled_unpaid_student_list.count
+          %td= course.placeholder_student_list.count
+          %td= course.class_size
+          %td= course.waitlist_users.count
+          %td= course.tutor_assigned?
+          - if !current_user.student?
+            %td= link_to 'Edit', edit_course_path(course), class: 'btn btn-info btn-sm', target: :_blank
+            %td= link_to 'Enrolment', course , class: 'btn btn-info btn-sm', target: :_blank
+            %td= link_to 'Download Waitlist', waitlist_users_path(format: "csv",course_id: course.id ), class: 'btn btn-success btn-sm'
+            %td
+              - if course.users.size == 0
+                = link_to 'Destroy', course, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+          %td= link_to 'Duplicate', duplicate_course_path(course), method: :post, data: { confirm: 'It will create duplicate course' }, class: 'btn btn-success btn-sm', target: :_blank
+          - if params[:action] == "archived_courses"
+            %td= link_to 'Unarchived', unarchived_course_path(course), method: :post, data: { confirm: 'It will unarchive the course' }, class: 'btn btn-success btn-sm'
+          %td= check_box_tag :paypal_only, true, course.paypal_only, id: "#{course.id}-paypal", class: "paypal-only" 
+:javascript
+
+  $(document).ready(function() {
+    changeMainCheckBox();
+  });
+
+  function changeMainCheckBox() {
+    var isAllChecked = 0;
+    $(".paypal-only").each(function() {
+      if (!this.checked)
+        isAllChecked = 1;
+    });
+
+    if (isAllChecked == 0) {
+      $("#paypal_check").prop("checked", true);
+    }
+    else{
+      $("#paypal_check").prop("checked",false);
+    }
+  };
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $('.paypal-only').change(function(){
+    var courseId = this.id.split('-')[0]
+    var checked = this.checked
+    changeMainCheckBox();
+    $.ajax({
+      url: "/courses/update_paypal",
+      type: "POST",
+      dataType: 'script',
+      data: {course_id: [courseId], paypal_only: checked},
+    }).done(function(){});
+  });
+
+  $('#table_id').DataTable({
+    "bPaginate": false,
+    "aoColumnDefs" : [
+      { orderable: false, targets: [8,9] } ]
+  });
+
+  function checkBoxToggle(ids){
+    $(".paypal-only").each(function(){
+        ids.push(this.id.split('-')[0]);
+    });
+  };
+
+  $('#paypal_check').change(function () {
+    var checked;
+    var ids = new Array();
+    checked=this.checked;
+    if(this.checked){
+      if (confirm('Would you like to enable PayPal only for all courses on current page?')) {
+        $('.paypal-only').prop("checked",true);
+        checkBoxToggle(ids);
+      }
+    }
+    else{
+      if (confirm('Would you like to disable PayPal only for all courses on current page?')) {
+        $('.paypal-only').prop("checked",false);
+        checkBoxToggle(ids);
+      }
+    }
+
+    $.ajax({
+      url: "/courses/update_paypal",
+      type: "POST",
+      dataType: 'script',
+      data: {course_id: ids, paypal_only: checked},
+      success: function(){
+        if(checked){
+          alert('PayPal only enabled for all courses on this page');
+        }
+        else{
+          alert('PayPal only disabled for all courses on this page');
+        }
+      }
+    }).done(function(){});
+  });

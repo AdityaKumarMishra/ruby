@@ -1,0 +1,22 @@
+// Place all the styles related to the Essays::Essays controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.submit_tut_btn{
+	margin-top: 21px;
+}
+#tutor_essay_table th::after { display: none;}
+.tutor_search span.select2-selection {
+  height: 34px;
+  color: #555555;
+  padding: 3px 7px;
+  font-size: 16px;
+  box-shadow: inset 0px 1px 1px rgba(204, 204, 204, 0.33);
+  border: 1px solid #ccc;
+}
+.tutor_search span.select2-selection__arrow b {top: 60% !important; border-color: #555 transparent transparent transparent !important;}
+#select2-tutor_filter-container{color: #555555 !important;}
+
+.tutor_search .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent #888 transparent !important; color: #555555 !important; }
+#responses_table th::after { display: none};
+#mock_essay_table th::after { display: none};

@@ -1,0 +1,16 @@
+%a.profile-pic{"data-category" => data_category, "data-toggle" => "modal", :href => "#"+tutor_id, :role => "button"}
+  = image_tag("https://gradready.s3.ap-southeast-2.amazonaws.com/static/new_staff/"+tutor_image, :size=> "140x140", :alt=> tutor_name)
+.modal.fade.teacher-profile{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", :id => tutor_id}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", type: "button"} ×
+      .modal-body.teamdetail_cl
+        %span.teamdetail_img
+          = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/new_staff/"+tutor_image, :alt=> tutor_name, class: 'img-responsive'
+          %h5= tutor_name
+          %span.subhead= course
+        .teamdetail_desc
+          %p= tutor_info
+      .modal-footer

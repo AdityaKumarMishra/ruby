@@ -1,0 +1,140 @@
+-#options is a hash containing options for the form inputs (see /home/miguel/Programming/gradready/app/views/tickets/_form_inputs.haml)
+-# The only extra key is :edit_ticket which is an optional ticket record that we want to edit as opposed
+-# to creating a new one
+
+-# This is hidden by default but will be shown when used as a modal
+%script{:src => "//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"}
+#ticket-modal.modal-input-edit.modal.latest_pop.fade.mdl_cls{:role => "dialog"}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content.mdl_cntn
+      - edit_ticket = options.include?(:edit_ticket) ? options[:edit_ticket] : Ticket.new(asker: current_user)
+      = simple_form_for(edit_ticket, html: {class: 'ticket-form new_ticket_form', id: "#{options[:edit_ticket].present? ? 'tranfer-edit-ticket' : ''}"}) do |f|
+        = hidden_field_tag :is_admin_ticket, true 
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title New Ticket
+        .modal-body
+          = render 'tickets/form_inputs', f: f, options: options, locals: {}
+          - if @policy_fail.present? && @policy_fail == "policy_fail"
+            = hidden_field_tag "current_path", request.path
+            = hidden_field_tag "given_type", "policy_fail"
+          - else
+            = hidden_field_tag "current_path", request.path
+            = hidden_field_tag "type", "unresolved_issues"
+        .modal-footer
+          = link_to "Create Ticket", "javascript:void(0)", class: 'submit-ticket default_btn hvr-shutter-in-horizontal new_ticket_submit', id: "#{options[:edit_ticket].present? ? 'tranfer-edit-ticket-btn' : ''}"
+= render 'issue_forum/tag_confirm_modal'
+
+:javascript
+  $( document ).ready(function() {
+      $(".new_ticket_form").validate({
+        rules: {
+            "ticket[email]": {
+                            required:true,
+                            email: true
+                        },
+            "ticket[phone_number]": {
+                                    required:true
+
+            },
+            "ticket[first_name]": {
+                                    required:true
+
+            },
+            "ticket[last_name]": {
+                                    required:true
+
+            }
+        },
+        messages: {
+
+            "ticket[email]":{
+                  required: "Please enter your email",
+                  email: "Please enter a valid email address"
+            },
+            "ticket[phone_number]":{
+                  required: "Please enter your phone number"
+            },
+            "ticket[first_name]":{
+                  required: "Please enter your first name"
+            },
+            "ticket[last_name]":{
+                  required: "Please enter your last name"
+            }
+
+
+        },
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+
+      var cs;
+      $(".new_ticket_submit").off('click');
+      $(".new_ticket_submit").on('click', function(){
+        var button_val = $(this).text();
+        if(button_val == 'Transfer Ticket'){
+          cs = '.transfer-Created-ticket';
+        }
+        else if(button_val == 'Edit Ticket'){
+          cs = '.edit-Created-ticket';
+        }else
+        {
+          cs = '.new_ticket_submit';
+        }
+
+        if( $(cs).attr('disabled') ) {
+          return false;
+        }
+        else {
+          $('.add_details').text('');
+          $('#ticket_title').removeClass('error_box');
+          $('#ticket_answerer_id').removeClass('error_box');
+          $("#cke_ticket_question").removeClass('error_box');
+          var ticket_title = $("#ticket_title").val();
+          var ticket_answerer = $("#ticket_answerer_id").val();
+          var ticket_question = $(".ticket_question iframe").contents().find("body").text();
+          if (ticket_title == '' || ticket_answerer == '' || ticket_question == ''){
+            $('.add_details').text('Please enter valid details');
+            if (ticket_title == ''){
+            $('#ticket_title').addClass('error_box'); }
+            if (ticket_answerer == ''){
+            $('#ticket_answerer_id').addClass('error_box'); }
+            if (ticket_question == ''){
+            $("#cke_ticket_question").addClass('error_box'); }
+            e.preventDefault();
+          }
+          else{
+            $('#confirmTag').modal();
+          }
+        }
+      });
+    $(".submit_ticket_confirm_tag").off('click');
+    $(".submit_ticket_confirm_tag").on('click', function(){
+      if( $(cs).attr('disabled') ) {
+        return false;
+      }
+      $('#confirmTag').hide();
+      $("#ticket-modal").hide();
+      $(cs).submit();
+      $('a').bind("click.myDisable", function() { return false; });
+      $(cs).attr("disabled", true);
+      $(".application-container").html("Please do not press back");
+      $(".application-container").addClass("do_not_refersh");
+      $(".modal-backdrop").remove();
+    });
+
+    $(".close_confirm_tag").click(function(){
+      $(".modal-backdrop").remove();
+    });
+  });
+
+:css
+  .mdl_cls{
+    overflow: auto;
+  }
+  .mdl_cntn{
+    margin: 65px !important;
+    width: 95%;
+  }

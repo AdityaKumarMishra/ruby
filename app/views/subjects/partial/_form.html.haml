@@ -1,0 +1,13 @@
+= simple_form_for(@subject) do |f|
+  = f.error_notification
+
+  .form-inputs
+    - if @course
+      = f.association :course, collection: [@course], selected: @course, :readonly => true
+    - else
+      = f.association :course
+    = f.input :title
+    = f.input :description
+
+  .form-actions
+    = f.button :submit

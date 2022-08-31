@@ -1,0 +1,67 @@
+.nested-fields.lesson-fields
+  = link_to_remove_association "Remove", f, class: "btn btn-danger btn-xs remove_btn"
+  .form-group
+    %label Type
+    = f.select :section_type, options_for_select((OnlineMockExamSection.section_types.keys.map{|ct| [ct.gsub("_", " ").titleize, ct.to_sym]}),(f.object.try(:section_type))),{}, class: "form-control",id: 'types'
+  #divdocument.online_exam_sub{:style => "padding: 10px"}
+    .div_info
+      * Upload Document.
+    .cstm_file{ class: ('file_field_wdth' if f.object.document_file_name.present?) }
+      = f.file_field :document,  class: "file_field"
+      .txtbook_titl= f.object.document_file_name
+  #divessay.online_exam_sub{:style => "padding: 10px"}
+    .form-group.essay
+      .div_info
+        * Choose Essay Specific Tutor.
+      = f.input :staff_id, collection: policy_scope(StaffProfile), label_method: :staff, label: false, input_html: { class: 'chosen-select-course', required: true, data: { placeholder: "Click Here to Select Staff" }}
+      = f.input :essay_id, collection: Essay.all.map{|ct| [ct.title, ct.id]} , label: false, input_html: { class: 'chosen-select-course', required: true, data: { placeholder: "Click Here to Select Essay" }}
+      = f.input :essay_expire_time, label: "Essay Expiry Date", class: "form-control"
+
+  #divvideo.online_exam_sub{:style => "padding: 10px"}
+    .div_info
+      * Upload Video.
+    .cstm_file.video{ class: ('file_field_wdth' if f.object.video_file_name.present?) }
+      = f.file_field :video,  class: "file_field"
+      .txtbook_titl= f.object.video_file_name
+  #divonline_exam.online_exam_sub{:style => "padding: 10px"}
+    .div_info
+      * Choose Online Exam.
+    .form-group.online_exam
+      = f.input :online_exam_id, collection: OnlineExam.all.map{|ct| [ct.title, ct.id]} , label: false, input_html: { class: 'chosen-select-course', required: true, data: { placeholder: "Click Here to Select Exam" }}
+  .time
+    / .form-group
+    /   = f.input :published, label: false
+    /   = f.label :published, label: "* Make Section Visible to Student"
+    .form-group
+      =f.label :position, "Position"
+      =f.input :position, label: false, class: "form-control"
+    .form-group
+      =f.label :start_date, "Start Date"
+      =f.input :start_date, label: false, class: "form-control"
+    .form-group
+      =f.label :start_time, "Start Time"
+      =f.input :start_time, label: false, class: "form-control"
+    .form-group
+      =f.label :end_date, "End Date"
+      =f.input :end_date, label: false, class: "form-control"
+    .form-group
+      = f.label :end_time, "End Time"
+      =f.input :end_time, label: false, class: "form-control"
+
+
+:css
+  .date {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+
+
+:javascript
+  $('.online_exam_sub').hide()
+
+  $(document).on("click","#types",function(){
+    $(this.parentElement.parentElement).find('.online_exam_sub').hide();
+    sel=this.value;
+    $(this.parentElement.parentElement).find('#div'+sel).show();
+  });

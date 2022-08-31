@@ -1,0 +1,31 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Listing virtual products
+      .panel-body
+      .table-responsive
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th Name
+              %th Description
+              %th Cost (currency)
+              %th Starting date
+              %th Stopping date
+              %th Expiration date
+              %th{colspan: 2} Actions
+          %tbody
+            - @products.each do |vp|
+              %tr{'data-link': url_for(virtual_product_path(vp))}
+                %td= vp.name
+                %td.col-md-5= vp.description
+                %td= "#{vp.cost} (#{vp.currency})"
+                %td= format_date_short vp.starting_date
+                %td= format_date_short vp.stopping_date
+                %td= format_date_short vp.expiration_date
+                %td= link_to 'Edit', edit_virtual_product_path(vp), class: 'btn btn-info btn-sm'
+                %td= link_to 'Destroy', virtual_product_path(vp), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+      .panel-footer
+        = link_to 'New Virtual Product', new_virtual_product_path, class: 'btn btn-success cl-white'

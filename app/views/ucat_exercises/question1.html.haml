@@ -1,0 +1,91 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+      .head_timer
+        %h4#clock
+          %i.fa.fa-clock-o{"aria-hidden" => "true"}
+          %span.time
+            Time Remaining
+            %span 14:21
+        %h4#all_ques
+          %i.fa.fa-book{"aria-hidden" => "true"}
+          %span.number 1 of 44
+    .btm_header.padd
+      %a.calc{href: "javascript:",'data-toggle'=>"modal", 'data-target'=>"#calc-modal"}
+        %i.fa.fa-calculator{"aria-hidden" => "true"}
+        = succeed "alculator" do
+          %span C
+      %a.calc{href: "#"}
+        %i.fa.fa-flag-checkered{"aria-hidden" => "true"}
+        = succeed "lag" do
+          %span F
+  .que_wrap
+    .que_contant
+      %p Restorative justice was promoted as a response to the 2011 riots in the UK, bringing victims and offenders face to face. By helping each to understand the other, it breaks down rigid stereotypes – youngsters seeing the elderly as hostile and unsympathetic, the elderly seeing all youngsters as violent and threatening – and seems to be successful in helping to reduce crime and reoffending.
+      %p When a 15-year-old boy convicted of violent disorder heard from the owners of local businesses how they had been affected, he not only apologised but added that he had been foolish. Roy, manager of a fast-food outlet in Brixton, said: 'I was willing to tell him how the attack made me and my staff feel. Judging by his reaction a lot of good has come from this, for both of us. I could tell he was being genuine and was facing up to his actions. We both got a lot out of our meeting; we can move on from all that now.'
+      %p Ministry of Justice research into restorative justice for serious offences such as violent crime and burglary showed the approach reduced reoffending by 27%. For every £1 spent on providing restorative justice £9 are saved for the criminal justice system in reduced crime compared to community punishments or prison services alone.
+    .que_ans
+      %h2 Restorative justice works because it:
+      %ul.radio_ans_list
+        %li
+          .radio_wrap
+            %input#a.answer{name: "answer", type: "radio"}/
+            %label#a_text{for: "a"} deters others from committing offences in future.
+        %li
+          .radio_wrap
+            %input#b.answer{name: "answer", type: "radio"}/
+            %label#b_text{for: "b"} reduces the cost of the criminal justice system.
+        %li
+          .radio_wrap
+            %input#c.answer{name: "answer", type: "radio"}/
+            %label#c_text{for: "c"} makes the offender aware of the effect of her or his actions on others.
+        %li
+          .radio_wrap
+            %input#d.answer{name: "answer", type: "radio"}/
+            %label#d_text{for: "d"} exposes the offender as a wrongdoer to the rest of the world.
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal"}
+        %i.fa.fa-sign-out{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/instructions"}
+        %i.fa.fa-arrow-left{"aria-hidden" => "true"}
+        = succeed "revious" do
+          %span p
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question2"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          / %img{src: "images/close.png"}/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          / %img{src: "images/que_not.png"}>/
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+
+:javascript
+  $('#all_ques').click(function(){
+   $('.number').toggleClass('none');
+
+   });
+  $('#clock').click(function(){
+   $('.time').toggleClass('none');
+   });

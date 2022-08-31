@@ -1,0 +1,79 @@
+.container
+  .row
+    .panel.panel-success
+      .panel-heading
+        %h1.panel-title
+          %strong Virtual Product
+      .panel-body
+        %table.table.table-bordered.table-hover
+          %tr
+            %td
+              %h5 Name
+            %td
+              %h4= @product.name
+          %tr
+            %td
+              %h5 Description
+            %td
+              %h4= @product.description
+          %tr
+            %td
+              %h5 Sku
+            %td
+              %h4= @product.sku
+          %tr
+            %td
+              %h5 Cost
+            %td
+              %h4= "#{@product.cost} #{@product.currency}"
+          %tr
+            %td
+              %h5 Starting date
+            %td
+              %h4= format_date_long @product.starting_date
+          %tr
+            %td
+              %h5 Stopping date
+            %td
+              %h4= format_date_long @product.stopping_date
+          %tr
+            %td
+              %h5 Expiration date
+            %td
+              %h4= format_date_long @product.expiration_date
+          - if @product.course_version.present?
+            %tr
+              %td
+                %h5 Course Version
+              %td
+                %h4= @product.course_version
+          %tr
+            %td
+              %h5 Is Active
+            %td
+              %h4= @product.is_active
+          %tr
+            %td
+              %h5 Product Type
+            %td
+              %h4= @product.product_type
+          %tr
+            %td
+              %h5 Quantity
+            %td
+              %h4= @product.quantity
+          %tr.top
+            %td
+              %h5 Photos
+            %td
+              - if @product.photos.present?
+                .row
+                  - @product.photos.each do |photo|
+                    .col-md-3= image_tag(photo.image.url, alt: "#{photo.product.name} image.", class: 'img-responsive')
+              - else
+                .row
+                  .col-md-3= image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/no-product-image.png', class: 'img-responsive', alt: 'No product image.')
+      .panel-footer
+        .btn-group
+          = link_to 'Edit', edit_virtual_product_path(@product), class: 'btn btn-success cl-white'
+          = link_to 'Back', virtual_products_path, class: 'btn btn-default'

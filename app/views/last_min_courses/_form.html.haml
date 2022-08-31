@@ -1,0 +1,15 @@
+= simple_form_for(@last_min_course) do |f|
+  .form-group
+    = f.input :course_name, class: "form-control"
+  .form-group
+    = f.input :date, label: "Date", class: "form-control"
+  .form-group
+    = f.input :amount, label: "Amount",  class: "form-control"
+  .form-group
+    %label Type
+    %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "This define the URL of SECURE YOUR PLACE NOW button."}
+    = f.select :course_type, options_for_select((LastMinCourse.course_types.keys.map{|ct| [ct.gsub("_", " ").titleize, ct.to_sym]}),(@last_min_course.course_type)),{}, class: "form-control" 
+  .form-group
+    = f.input :description, label: "Description", as: :ckeditor, :input_html => { :ckeditor => { :height => 300 } }
+  .form-actions
+    = f.button :submit, "Submit"

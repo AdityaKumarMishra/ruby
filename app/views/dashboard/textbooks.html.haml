@@ -1,0 +1,18 @@
+- if current_user && (current_user.student?)
+  - content_for :page_heading, 'Textbook'
+  .dashbord_right
+    .resource_col
+      %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+    .faq_list.para_fs14
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'Textbooks Announcements', user_announcement: @user_announcement
+        - if @announcement.video.present? || @announcement.story.present?
+          .faq_list_col
+            = render "pages/partial/feature_videos/document_video", announcement: @announcement
+    = render 'dashboard/partial/textbooks'
+- else
+  = render 'dashboard/partial/textbooks'
+
+-if params[:access] == 'false'
+  = render 'partial/access_limit_modal', type: 'textbook', path: dashboard_textbooks_path
+

@@ -1,0 +1,117 @@
+// Place all the styles related to the IssueForum controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "base/color";
+
+// itf = issue ticketing forum
+.itf-query-button-fix{
+  font-size: 1.5em;
+  color: black !important;
+  display: inline;
+}
+.itf-btn-spacing{
+  margin-bottom: 20px;
+}
+.itf-show {
+  &.best {
+    border: 3px solid $grGreen;
+  }
+  &.worst {
+    border: 3px solid $light-red;
+  }
+  .title {
+    margin-top: 0;
+    display: inline-block;
+  }
+  .author {
+    color: #767676;
+    font-size: 16px;
+    margin-bottom: 10px;
+    a {
+      color: #767676 !important;
+      text-decoration: none;
+      &:hover {
+        color: #767676;
+      }
+    }
+  }
+  .body {
+    margin-bottom: 0;
+  }
+  .att-img {
+    width: 100%;
+    object-fit: cover;
+    margin-top: 14px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .files {
+    margin-top: 10px;
+  }
+  .tick {
+    color: #FFFFFF;
+    background-color: #007833;
+    border-radius: 100%;
+    vertical-align: middle;
+    padding: 4px;
+    margin-right: 4px;
+  }
+  .star {
+    color: #FFFFFF;
+    background-color: #eea236;
+    border-radius: 100%;
+    vertical-align: middle;
+    padding: 4px;
+    padding-left: 5px;
+    margin-right: 4px;
+  }
+  .useful {
+    font-size: 14px;
+    font-weight: normal;
+    display: inline;
+    float: right;
+    margin-top: 5px;
+    a {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+  }
+}
+.itf-comment {
+  .panel-footer {
+    text-align: right;
+  }
+}
+.itf-sum {
+  &, &:hover, &:active {
+    color: initial;
+    text-decoration: none;
+  }
+  &:hover .panel {
+    background-color: #f5f5f5;
+  }
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  .answers {
+    margin: 0;
+    background-color: #ffffff;
+  }
+  h3 {
+    margin-top: 4px;
+  }
+}
+
+.itf-show .author .btn_white{
+  color: #fff !important;
+      margin: 5px 5px 5px 0;
+}
+.tkt_cmnt_btn {
+  margin: 0px 0px 10px 10px;
+}
+.tkt_ans_tag {
+  display: inline-block;
+}

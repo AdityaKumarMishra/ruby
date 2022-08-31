@@ -1,0 +1,210 @@
+.online-exam-filter.float_initial
+  %h1 Editing section
+  = render 'form'
+  %br
+  %h1.new_online= "New #{@parent_resource.class.name.underscore.humanize.downcase} Question"
+  .div_field.online_helpbtn
+    = link_to 'Help', 'javascript:void(0)', class: 'help_link online_help_btn'
+    .fa.fa-minus.icn_sze
+  .div_info.online_info
+    If the question you're looking for doesn't appear, find the MCQ and make sure the 'put MCQ in exam pool' is ticked.
+
+  .alert.alert-info.online_alert All child MCQs will be added in the exam/test.
+  - error ||= nil
+  - if error
+    .alert.alert-danger=error
+  = form_tag polymorphic_path([@parent_resource, @section, SectionItem]), method: :post do
+
+    = select_tag('mcq_stem_ids[]', options_from_collection_for_select(policy_scope(McqStem).where(examinable: true), 'id', 'title'), multiple: true, class: 'chosen-select')
+    %br
+    %br
+    = submit_tag 'Add Question(s)', class: 'btn btn-gradready green'
+
+  %hr
+/ = render "section_items/index"
+- section_items = policy_scope(SectionItem).includes(:mcq, :mcq_stem).where(section: @section).where(mcq_stems: {published: true, examinable: true}).order('mcq_stems.title')
+#table_content
+  =render(partial: 'mcq_stems/partial/mcq_unit_progress_table', locals: { mcq_stems: nil, section_items: section_items, parent_resource: @parent_resource, section: @section })
+%br
+= link_to 'Back', edit_polymorphic_path([@parent_resource]), class: 'btn btn-danger'
+:javascript
+  $(document).ready(function(){
+    $('.online_help_btn').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $('.online_info').toggle();
+    });
+
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.work_status', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.work_status', function(event){
+    $('.work_status').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_work_status",
+      type: "POST",
+      data: {work_status: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Work Status')
+      $('.work_status').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Work Status')
+      $(event.target).val(oldVal)
+      $('.work_status').attr('disabled', false)
+    });
+  });
+
+  var oldPool = null;
+  var newPool = null;
+
+  $(document).on('focus click', '.mcq_stem_pool', function(event){
+    oldPool = $(event.target).val();
+  });
+
+  $(document).on('change', '.mcq_stem_pool', function(event){
+    $('.mcq_stem_pool').attr('disabled', true)
+    newPool = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_pool",
+      type: "POST",
+      data: {pool: newPool}
+    }).done(function (data) {
+      alert('Successfully Updated Pool')
+      $('.mcq_stem_pool').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Pool')
+      $(event.target).val(oldPool)
+      $('.mcq_stem_pool').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_reviewer1', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_reviewer1', function(event){
+    $('.select_reviewer1').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_reviewer1",
+      type: "POST",
+      data: {reviewer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Reviewer1')
+      $('.select_reviewer1').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Reviewer1')
+      $(event.target).val(oldVal)
+      $('.select_reviewer1').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_reviewer2', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_reviewer2', function(event){
+    $('.select_reviewer2').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_reviewer2",
+      type: "POST",
+      data: {reviewer2_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Reviewer2')
+      $('.select_reviewer2').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Reviewer2')
+      $(event.target).val(oldVal)
+      $('.select_reviewer2').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.select_video_explainer', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.select_video_explainer', function(event){
+    $('.select_video_explainer').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_video_explainer",
+      type: "POST",
+      data: {video_explainer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Video Explainer')
+      $('.select_video_explainer').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Video Explainer')
+      $(event.target).val(oldVal)
+      $('.select_video_explainer').attr('disabled', false)
+    });
+  });
+
+  var oldVal = null;
+  var newVal = null;
+
+  $(document).on('focus click', '.update_video_reviewer', function(event){
+    oldVal = $(event.target).val();
+  });
+
+  $(document).on('change', '.update_video_reviewer', function(event){
+    $('.update_video_reviewer').attr('disabled', true)
+    newVal = $(event.target).val();
+
+    $.ajax({
+      url: "/mcq_stems/" + $(event.target).attr('mcq_stem_id') + "/update_video_reviewer",
+      type: "POST",
+      data: {video_reviewer_id: newVal}
+    }).done(function (data) {
+      alert('Successfully Updated Video Reviewer')
+      $('.update_video_reviewer').attr('disabled', false)
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+      alert('Unable to update Video Reviewer')
+      $(event.target).val(oldVal)
+      $('.update_video_reviewer').attr('disabled', false)
+    });
+  });
+
+  $(document).ready(function() {
+    $('#stem_table').DataTable({
+      "bPaginate": false,
+      "bFilter": false,
+      "bInfo": false,
+      "aoColumnDefs" : [
+        { orderable: false, targets: [7,8,9,10] } ]
+    });
+    $('tbody').append("<tr><td colspan='16' style='height:35px;'></td></tr>")
+  });
+
+:css
+  .online-exam-filter.float_initial{
+    float: initial;
+  }
+
+  #stem_table_wrapper th, #stem_table_wrapper td{
+    white-space: normal;
+  }
+  #stem_table_wrapper .work_status, .select_reviewer1, .select_reviewer2, .select_video_explainer, .update_video_reviewer {
+    width: 150px;
+  }

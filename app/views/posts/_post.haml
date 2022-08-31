@@ -1,0 +1,32 @@
+- @posts.each_with_index do |post, index|
+  .col-lg-6.col-md-6.col-sm-12.col-xs-12.blog_list.text-center.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+    %span.blog_img
+      - if post.image.url(:thumb) == "/images/thumb/missing.png"
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/blog_list_img1_no_image.png'
+      - else
+        -if post.alt_text.present?
+          = image_tag post.image.url(:thumb), alt: "#{post.try(:alt_text)}", class: 'img-responsive'
+        -else
+          = image_tag post.image.url(:thumb), class: 'img-responsive'
+
+    .blog_desc
+      %span.blog_head
+        -if post.blog_categories.present?
+          %h5= post.blog_categories.first.name
+        -else
+          %h5 Medical School Entry
+      %p.blog_post_date
+        by
+        = succeed "" do
+          - if post.author == "Amer Husakovic" || post.author == "Amer H"
+            %span.blog_by= "Unknown, #{post.created_at.strftime("%d %B, %Y")}"
+          - else
+            %span.blog_by= "#{post.author}, #{post.created_at.strftime("%d %B, %Y")}"
+      %h2
+        %a{href: "javascript:void(0)"}= post.name
+      .blog_list_hide
+        %p
+          = raw post_lead(post)
+      %a.default_btn.hvr-shutter-in-horizontal{href: "#{posts_by_product_line_path(id: post.friendly_id, type: post.product_line_type)}"} Read More
+  -if (index+1) % 2 == 0
+    .clearfix

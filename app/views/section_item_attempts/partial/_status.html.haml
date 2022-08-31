@@ -1,0 +1,61 @@
+- if !cookies[:current_sa].blank? && !current_user.nil?
+  - csa_data = JSON.parse(cookies[:current_sa])
+  - if csa_data['end'] - csa_data['time_elapsed'] > 0
+    - csa = SectionAttempt.where(id: csa_data['id']).first
+    - if  csa_data['url'] != request.path && csa_data['exam_finish'] == true && csa && csa.completed_at.nil?
+      :javascript
+        $.ajax({
+          type: 'PUT',
+          url: "#{csa_data["url"]}/complete",
+        }).done(function (response) {
+        });
+    - else
+      -if csa && csa.user.present? && csa.user==current_user && csa.completed_at.nil?
+        .section-attempt-countdown.time_cart
+          %span.timer_icon
+            .img_left_exam
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/arrow_left.png'
+            .img_right_exam{style: 'display: none;'}
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/arrow_right.png'
+
+          .sa-title= csa.section.title
+          - atmp = (csa_data['time_elapsed'] / csa_data['end']) * 100
+          %p
+            Time Remaining:
+            %b
+              %span.sa-remaining= ((csa_data['end'] - csa_data['time_elapsed']) / 60.to_f).ceil.to_i.to_s
+              mins
+          .progress
+            .progress-bar.progress-bar-striped.active{style: "width: #{atmp.to_i}%", 'aria-valuenow': atmp.to_i, 'aria-valuemin': '0', 'aria-valuemax': '100', role: 'progressbar'}
+              %span.sr-only= atmp.to_i.to_s + '% Complete'
+
+          - unless request.fullpath.include?(csa_data['url'])
+            = link_to 'Go To Attempt', csa_data['url'] + "?mcq_stem=#{csa_data['mcq_stem']}", class: 'btn btn-success', onclick: 'dd_loader();'
+          - else
+            %br
+            / unless false
+            - unless csa.section.sectionable.is_finish
+              = link_to (csa_data['paused'] == true ? 'Resume' : 'Pause'), "#", class: "btn #{csa_data['paused'] == true ? 'btn-danger' : 'btn-success.btn_green'}", id: 'section-exam-pause', data: { 'pause' => csa_data['paused'] }, onclick: 'dd_loader();'
+              - unless csa.assessment_attempt.is_finish
+                .tbl_head.cart_checkbox
+                  %input#sa-checkbox-end{type: 'checkbox'}
+                  %label.sa-checkbox-end{for: 'sa-checkbox-end'} Finish when time ends
+
+:javascript
+  $("#section-exam-pause").click(function(){
+    pauseExam()
+    var timer_text = $(this).text();
+    timer_state(timer_text);
+  });
+
+  $(document).ready(function(){
+    var timer_text = $("#section-exam-pause").text();
+    timer_state(timer_text);
+  })
+
+  $(".timer_icon").click(function(){
+    $('.section-attempt-countdown').toggleClass('time_cart_icon');
+    $('.img_right_exam').toggle();
+    $('.img_left_exam').toggle();
+  });
+

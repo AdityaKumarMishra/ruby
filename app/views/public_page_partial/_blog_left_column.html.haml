@@ -1,0 +1,45 @@
+.blog_subscribe_cl.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1350"}
+  - unless blog_type.nil?
+    - m_list = MailingList.find_by(name: "blog_#{blog_type}")
+    - mail_list = MailingListSubscription.find_by(mailing_list_id: m_list.try(:id), email: current_user.email) if current_user.present?
+    - if mail_list.present?
+      #Subscribe-Blog-List.alert.alert-success
+        = "You have already subscribed to our #{m_list.type} Blog using the below email."
+    -else
+      #Subscribe-Blog-List.alert
+
+  %h3 Subscribe To Blog
+  = form_tag mailing_list_subscribe_path(list: "blog_#{blog_type}"), method: :post, remote: true do
+    = text_field_tag :email, nil, placeholder: 'Email', required: true, class: "subscribe_input"
+    = button_tag 'Subscribe', { class: "subscribe_btn hvr-shutter-in-horizontal" }
+.facebook_cl.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1400"}
+  %h3 Facebook Feed
+  = fb_feed_iframe params[:blog].nil? ? 'gamsat' : params[:blog]
+
+.blog_search_cl.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+  = form_tag request.original_url, method: :get do
+    = text_field_tag :q, nil, label: 'Search Blog', required: false, placeholder: "Search Blog", class: "blog_search_input"
+    = submit_tag '', {class: "blog_search_btn"}
+
+.blog_category_cl.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+  %h3 Categories
+  %ul
+    -if params[:blog]=="gamsat"
+      -params[:blog]= "gamsat-preparation-courses"
+    -elsif params[:blog]=="umat"
+      -params[:blog]= "umat-preparation-courses"
+    -else
+      -params[:blog]=params[:blog]
+    - @categories.each do |category|
+      - if params[:blog].nil? || params[:blog].blank?
+        - if category.blog_type == "gamsat"
+          - params[:blog] = "gamsat-preparation-courses"
+        - elsif category.blog_type == "umat"
+          - params[:blog] = "umat-preparation-courses"
+        - else
+          - params[:blog]=category.blog_type
+      %li
+        = link_to posts_by_category_path(category: category.friendly_id.parameterize, blog: params[:blog]) do
+          = category.name
+          %span
+            = "(#{category.posts.length})"

@@ -1,0 +1,31 @@
+%h1 Listing Tutor Availabilities
+
+%h3 Available Times
+
+- if @tutor_availabilities.any?
+  %p.text-info
+    %b
+      Total:
+      = @time_slots.count
+  %table.gr-table.gr-table-bordered.gr-table-green-hover
+    %thead
+      %tr
+        %th Date
+        %th Start time
+        %th End time
+        %th Location
+
+
+    %tbody
+      - @time_slots.each do |t|
+        %tr
+          %td= format_date_long t[1][0].to_date
+          %td= format_time t[1][0]
+          %td= format_time t[1][1]
+          %td= t[0].location
+
+  = will_paginate @time_slots, renderer: BootstrapPagination::Rails
+
+- else
+  .alert.alert-warning No available sessions
+

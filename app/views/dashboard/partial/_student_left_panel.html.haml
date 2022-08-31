@@ -1,0 +1,155 @@
+.dashbord_left.mob_width100
+  %h3
+    RESOURCES
+    #sidebar-tab
+      %a.side_toggle{href: "javascript:void(0)"} Toggle Menu
+
+  - @courses = current_user.active_enrolled_courses
+  .course_tab
+    - if @courses.count > 1
+      Courses
+      =  form_tag set_current_course_courses_path do |f|
+        = select_tag 'course_id', options_for_select(@courses.collect{ |u| [u.name, u.id] }, selected: current_course.id), class: 'course_select', onchange: "this.form.submit();"
+    -else
+      - current_user.update_active_course(@courses.first.try(:id)) if @courses.first.try(:id) != current_user.active_course_id
+  %ul.admin_m_menu_hide
+    %li{class: [("active" if is_same_route?(dashboard_home_path)), ('new_side_tab' if dashboard_user_announcement_changed)]}
+      = link_to dashboard_home_path, onclick: 'dd_loader();' do
+        %span Announcements
+        %i.fa.fa-bell-o{"aria-hidden" => "true"}
+    - tr_exp = current_user.enrolments.where(course_id: current_course&.id).first&.trial_expiry
+    - if (@courses.present? && current_course&.trial_enabled? && tr_exp.present? && tr_exp < Time.zone.now)
+      %li{class: ("active" if is_same_route?(dashboard_upgrade_path))}
+        = link_to dashboard_upgrade_path, onclick: 'dd_loader();' do
+          %span Upgrade
+          %i.fa.fa-arrow-circle-up{"aria-hidden" => "true"}
+    / - if !current_user.has_only_expired_course? && !current_user.current_enrolment.nil?
+    /   %li{class: ("active" if is_same_route?(dashboard_calender_path))}
+    /     = link_to dashboard_calender_path, onclick: 'dd_loader();' do
+    /       %span Calendar
+    /       %i.fa.fa-calendar-check-o{"aria-hidden" => "true"}
+
+    - if current_course.present?
+      - if !current_user.has_only_expired_course? && !current_user.current_enrolment.nil?
+        / %li{class: ("active" if is_same_route?(performance_stats_path))}
+        /   = link_to performance_stats_path, onclick: 'dd_loader();' do
+        /     %span
+        /       My Performance Profile
+        /       %sup ®
+        /     %i.fa.fa-pencil{"aria-hidden" => "true"}
+      - user_features = current_user.accessible_features
+      - all_features = MasterFeature.by_product_version(current_course.product_version)
+    - if current_course.present? && current_user.paid_courses.any?
+      - all_features.order(:position).select{|f|f.respond_to? :url}.uniq{|f| f.url}.each do |feature_type|
+        - if feature_type.show_in_sidebar
+          - if feature_type.url.present?
+            -if user_features.include?(feature_type) || ((feature_type.document_feature? || feature_type.textbook?) && user_features.where('name iLIKE ANY(array[?])', ['%DocumentsFeature%', '%TextbookFeature%']).present?)
+              -unless feature_type.title.include?("Diagnostics")
+                %li{class: [("active" if is_same_route?(send(feature_type.url))), ('new_side_tab' if get_student_announcement_changed(current_course.try(:product_version).try(:product_line_id), feature_type.id))]}
+                  -if feature_type.name.include?('TextbookFeature') || feature_type.name.include?('DocumentsFeature')
+                    = link_to send(feature_type.url), onclick: 'dd_loader();' do
+                      %span Written Resources
+                      %i{class: 'fa fa-book'}
+                  -else
+                    = link_to send(feature_type.url), onclick: 'dd_loader();' do
+                      - if feature_type.title == "Exams"
+                        %span Diagnostics and Exams
+                      - else
+                        %span= feature_type.title
+                      %i{class: feature_type.icon}
+            - else
+              -unless feature_type.title.include?("Diagnostics")
+                - new_course_type = ProductVersion.course_types[current_course.product_version.course_type]
+                - if !((new_course_type == 0 || new_course_type == 1 || new_course_type == 4 || new_course_type == 5) && current_course.city == "Other" && feature_type.live_exam?)
+                  %li.not_access{class: [("active" if check_for_same_route?(feature_type.id.to_s))]}
+                    -if feature_type.name.include?('TextbookFeature') || feature_type.name.include?('DocumentsFeature')
+                      = link_to feature_logs_path(feature_type: feature_type), onclick: 'dd_loader();' do
+                        %span Written Resources
+                        %i{class: 'fa fa-book'}
+                    -else
+                      = link_to feature_logs_path(feature_type: feature_type), onclick: 'dd_loader();' do
+                        %span= feature_type.title == 'Exams' ? 'Diagnostics and Exams' : feature_type.title
+                        %i{class: feature_type.icon}
+
+          - elsif feature_type.get_clarity? && feature_type.url.present?
+            %li{class: [("active" if is_same_route?(send(feature_type.url)))]}
+              = link_to dashboard_unresolved_issues_path, onclick: 'dd_loader();' do
+                %span= feature_type.title
+                %i{class: feature_type.icon}
+
+    %li{class: ("active" if is_same_route?(feature_logs_path))}
+      = link_to feature_logs_path, onclick: 'dd_loader();' do
+        %span More Features
+        %i.fa.fa-shopping-cart{"aria-hidden" => "true"}
+
+  .mob_admin_menu_show
+    %select#sample{"data-usesprite" => "smallIcons", :onchange => "dd_loader_mob_menu(this);"}
+      %option.announcement_icon{value: dashboard_home_path, selected: is_same_route?(dashboard_home_path)} Announcements
+      - if @courses.present? && current_course.trial_enabled?
+        %option.calendar_icon{value: dashboard_upgrade_path, selected: is_same_route?(dashboard_upgrade_path)} Upgrade
+      - if !current_user.has_only_expired_course? && !current_user.current_enrolment.nil?
+        / %option.calendar_icon{value: dashboard_calender_path, selected: is_same_route?(dashboard_calender_path)} Calendar
+        / %option.my_essay_icon{value: performance_stats_path, selected: is_same_route?(performance_stats_path)}
+        /   My Performance Profile
+        /   %sup ®
+
+      - if current_course.present? && current_user.paid_courses.any?
+        - all_features.order(:position).select{|f|f.respond_to? :url}.uniq{|f| f.url}.each do |feature_type|
+          - if feature_type.show_in_sidebar
+            - if feature_type.url.present?
+              -if user_features.include?(feature_type) || ((feature_type.document_feature? || feature_type.textbook?) && user_features.where('name iLIKE ANY(array[?])', ['%DocumentsFeature%', '%TextbookFeature%']).present?)
+                -if feature_type.name.include?('TextbookFeature') || feature_type.name.include?('DocumentsFeature')
+                  %option.written_res_icon{value: send(feature_type.url), selected: is_same_route?(send(feature_type.url))} Written Resources
+                -else
+                  - unless feature_type.title.include?("Diagnostics")
+                    %option{class: feature_icon(feature_type.url), value: send(feature_type.url), selected: is_same_route?(send(feature_type.url))}= feature_type.title == 'Exams' ? 'Diagnostics and Exams' : feature_type.title
+              - else
+                -unless feature_type.title.include?("Diagnostics")
+                  - new_course_type = ProductVersion.course_types[current_course.product_version.course_type]
+                  - if !((new_course_type == 0 || new_course_type == 1 || new_course_type == 4 || new_course_type == 5) && current_course.city == "Other" && feature_type.live_exam?)
+                    %li.not_access{class: [("active" if check_for_same_route?(feature_type.id.to_s))]}
+                      -if feature_type.name.include?('TextbookFeature') || feature_type.name.include?('DocumentsFeature')
+                        %option.written_res_icon{value: feature_logs_path, selected: is_same_route?(feature_logs_path)} Written Resources
+                      -else
+                        %option{class: feature_icon(feature_type.url), value: feature_logs_path, selected: is_same_route?(feature_logs_path)}= feature_type.title
+
+            - elsif feature_type.get_clarity? && feature_type.url.present?
+              %option.getclarity_icon{value: dashboard_unresolved_issues_path, selected: is_same_route?(dashboard_unresolved_issues_path)}= feature_type.title
+      %option.feature_icon{value: feature_logs_path, selected: is_same_route?(feature_logs_path)} More Features
+:javascript
+  function dd_loader_mob_menu(ref){
+    if(navigator.userAgent.match(/iPhone|iPad|iPod/)){
+      $('.loader_onclick').show();
+      setTimeout(function(){
+        window.location = ref.value;
+        $('.loader_onclick').hide();
+      }, 500);
+    }else{
+      window.location = ref.value;
+      $('.loader_onclick').show();
+    }
+  }
+
+  if ( $('.admin_m_menu_hide li').length > 12 ) {
+    $('.admin_m_menu_hide').addClass('scrol');
+  }
+
+:css
+  .scrol{
+    max-height: 576px;
+    overflow: auto;
+  }
+  @media only screen and (min-width: 260px) and (max-width: 767px){
+    .mob_width100{
+      max-width:100%!important;
+    }
+    .faq_wrapper.hide_sidebar .dashbord_right{
+      padding-left:0;
+    }
+    .side_exam_ques{
+      max-width:100%!important;
+    }
+  }
+
+
+

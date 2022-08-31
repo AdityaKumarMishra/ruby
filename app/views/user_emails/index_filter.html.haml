@@ -1,0 +1,237 @@
+
+%h1 SignUp/Invite new user
+= simple_form_for(User.new, url: user_invitation_path,  html: {class: 'form-inline'}) do |f|
+  .form-inputs.cstm_input
+    %label.cstm_label Email:
+    = f.input :email, placeholder: 'Email', label:false
+  .form-inputs.cstm_input
+    %label.cstm_label Role:
+    = f.input :role, as: :select, collection: [["Admin", "admin"], ["Manager", "manager"], ["Tutor","tutor"], ["Superadmin", "superadmin"]], label:false, include_blank: "Please Select Role"
+  .form-inputs.cstm_input
+    = f.button :submit, 'Invite User'
+
+%br
+= link_to "Sign Up New User", new_user_path, class: "btn btn-default"
+-if current_user.admin? || current_user.superadmin?
+  = link_to "View UI Guide", "/ui_guide.html", class: "btn btn-primary"
+
+%h1#scrolhere Listing users
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title
+      Filter
+  .panel-body
+    %ul.gr-nav.gr-nav-pills#filter_types
+      %li.active
+        =link_to "Enrolled Users", user_emails_path(filter_type: 'enrolled'), type: 'enrolled', 'data-target': "#enrolled_users", 'data-toggle': "tabajax"
+      %li
+        =link_to "Enquiry Users", user_emails_path(filter_type: 'enquiry'), type: 'enquiry','data-target':"#enquiry_users", 'data-toggle': "tabajax"
+      %li
+        =link_to "Blog Users", user_emails_path(filter_type: 'blog'), type: 'blog', 'data-target': "#blog_users", 'data-toggle': "tabajax"
+    .clearfix
+    %br
+    .tab-content
+      #enrolled_users.tab-pane.fade.in.active
+        = render 'user_emails/enrolled_users_filter_form'
+      #enquiry_users.tab-pane.fade
+        = render 'user_emails/enquiry_users_filter_form'
+      #blog_users.tab-pane.fade
+        = render 'user_emails/blog_users_filter_form'
+    %br
+    #filterrific_download_xls
+      = render 'users/download_analytics', all_users: @all_users, all_enquiry_users: @all_enquiry_users, all_blog_users: @all_blog_users
+
+    %br
+    -if current_user.admin? || current_user.superadmin?
+      #massDeleteUser
+        = link_to "Delete User", 'javascript:void(0)', class: 'btn btn-primary btn-danger disabled', id: 'deleteAllUser'
+
+=render :partial => 'user_emails/list', locals: { users: @users, enquiry_users: @enquiry_users, blog_users: @blog_users }
+#MasDelPartial
+
+-unless params[:filterrific].nil?
+  :javascript
+    if (!("#{params[:filterrific][:filter_type]}" == "")){
+      $('[type = "#{params[:filterrific][:filter_type]}"]').tab('show');
+      $(".tab-pane").not($("##{params[:filterrific][:filter_type]}_users")).html("");
+      $('html, body').animate({
+        scrollTop: $("#filterrific_results").offset().top
+      });
+    }
+
+:javascript
+
+  if ("#{params[:filter_type]}" == ""){
+  }else{
+    $('[type = "#{params[:filter_type]}"]').tab('show');
+    $(".tab-pane").not($("##{params[:filter_type]}_users")).html("");
+    $('html, body').animate({
+      scrollTop: $("#scrolhere").offset().top
+    });
+  }
+
+  $(".select2_searchable").select2();
+
+  $(document).ready(function(){
+    if ($("#filterrific_with_role").val() == "0"){
+      $("#massDeleteUser").show();
+    }else{
+      $("#massDeleteUser").hide();
+    }
+
+    if ($("#filterrific_by_users").val() == "0" || $("#filterrific_by_users").val() == "2") {
+      $('.gradready_users').addClass('hidden');
+    }
+
+    if ($("#filterrific_with_role").val() != "0"){
+      $('.student_filters').addClass('hidden');
+    }
+
+    if ($("#filterrific_by_enroled").val() == "0"){
+      $("#filterrific_by_product_line").val("");
+      $('.for_enrolled_users').addClass('hidden');
+      $('.non_trial_filters').addClass('hidden');
+    }
+    else if ($("#filterrific_by_enroled").val() == "1"){
+      $('.for_enrolled_users').removeClass('hidden');
+      if ($("#filterrific_by_product_line").val() != "") {
+        $('.massEmailPvlabel').removeClass('hide');
+        $('.massEmailPvlabel').removeClass('hide');
+      }
+      if ($("#filterrific_by_product_version").val() != "") {
+        $('.massEmailMslabel').removeClass('hide');
+        $('.massEmailCrlabel').removeClass('hide');
+      }
+    }
+    else if ($("#filterrific_by_enroled").val() == "2"){
+      $("#filterrific_by_subscription").val("");
+      $("#filterrific_by_state").val("");
+      $("#filterrific_by_product_line").val("");
+      $('.non_trial_filters').addClass('hidden');
+      $('.for_enrolled_users').addClass('hidden');
+      $('.for_enrolled_users').removeClass('hidden');
+    }
+
+  });
+
+  $("#filterrific_by_users").on('change', function(){
+    if ($(this).val()=="0" || $(this).val()== "2"){
+      $('.gradready_users').addClass('hidden');
+    }
+    else
+    {
+      $('.gradready_users').removeClass('hidden');
+      $('.student_filters').removeClass('hidden');
+    }
+  })
+
+  $("#filterrific_with_role").on('change', function(){
+    if ($(this).val()=="0"){
+      mass_delete_student('student');
+      $('.student_filters').removeClass('hidden');
+    }
+    else
+    {
+      mass_delete_student('staff');
+      $("#filterrific_by_enroled").val("");
+      $("#filterrific_by_product_line").val("");
+      $("#filterrific_by_subscription").val("");
+      $("#filterrific_by_state").val("");
+      $("#filterrific_by_product_version").val("");
+      $("#filterrific_by_master_feature").val("");
+      $("#filterrific_by_course").val("");
+      $('.student_filters').addClass('hidden');
+    }
+  })
+
+  $("#filterrific_by_enroled").on('change', function(){
+    if ($(this).val()=="2"){
+      $("#filterrific_by_subscription").val("");
+      $("#filterrific_by_state").val("");
+      $("#filterrific_by_product_line").val("");
+      $("#filterrific_by_product_version").val("");
+      $("#filterrific_by_master_feature").val("");
+      $("#filterrific_by_course").val("");
+      $('.non_trial_filters').addClass('hidden');
+      $('.for_enrolled_users').removeClass('hidden');
+    }
+    else if ($(this).val()=="0"){
+      $("#filterrific_by_product_line").val("");
+      $('.for_enrolled_users').addClass('hidden');
+      $('.non_trial_filters').addClass('hidden');
+     }
+    else
+    {
+      $('.non_trial_filters').removeClass('hidden');
+      $('.for_enrolled_users').removeClass('hidden');
+    }
+  })
+
+  function mass_delete_student(role){
+    if(role == 'student'){
+      $("#massDeleteUser").show();
+    }else{
+      $("#massDeleteUser").hide();
+    }
+  }
+
+  $(document).on('click', '.user-id-checkbox', function(){
+    if($("#filterrific_with_role").val() == "0"){
+      if($('.user-id-checkbox:checked').length > 0){
+        $('#deleteAllUser').removeClass('disabled');
+      }else{
+        $('#deleteAllUser').addClass('disabled');
+      }
+    }
+  })
+
+  $(document).on('click', '#select_all', function(){
+    if($("#filterrific_with_role").val() == "0"){
+      setTimeout(function(){
+        if($('.user-id-checkbox:checked').length > 0){
+          $('#deleteAllUser').removeClass('disabled');
+        }else{
+          $('#deleteAllUser').addClass('disabled');
+        }
+      }, 200);
+    }
+  })
+
+  $(document).on('click', '#deleteAllUser', function(){
+    if($("#filterrific_with_role").val() == "0"){
+      var checkedValues = $('.user-id-checkbox:checked').map(function() {
+        return this.value;
+      }).get();
+
+      $.ajax({
+        type: 'GET',
+        url: '/users/verify_users',
+        data: {user_ids: checkedValues},
+      }).done(function (response) {
+
+      });
+    }
+  })
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  })
+
+
+  $("#filterrific_with_name").on('keyup', function(){
+  });
+
+  $(".datepicker").datepicker().on('change', function(){
+    $(".loader_payment").show();
+    dd_loader();
+  });
+
+  $("#filterrific_filter select").on('change', function(){
+    $(".loader_payment").show();
+    dd_loader();
+  });
+
+  $("#filter_types li, .pagination li").not($("li.disabled")).on('click', function(){
+    $(".loader_payment").show();
+    dd_loader();
+  });

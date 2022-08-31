@@ -1,0 +1,18 @@
+%p#notice= notice
+%p
+  %b Start:
+  = format_date_short(@tutor_availability.start_time.to_date)
+  \-
+  = format_time( @tutor_availability.start_time.time)
+%p
+  %b End:
+  = format_date_short(@tutor_availability.end_time.to_date)
+  \-
+  = format_time(@tutor_availability.end_time.time)
+%p
+  %b Location:
+  = @tutor_availability.location
+
+= link_to 'Edit', edit_tutor_availability_path(@tutor_availability)
+\|
+= link_to 'Back', tutor_availabilities_path

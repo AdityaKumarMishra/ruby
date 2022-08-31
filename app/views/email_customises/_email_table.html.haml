@@ -1,0 +1,43 @@
+#filterrific_results
+  =#will_paginate @custom_email, renderer: BootstrapPagination::Rails
+  %table.table-hover.table.table-bordered#pv_table.pv_data_table
+    %thead
+      %tr
+        %th Email Subject
+        %th Product Version
+        %th Courses
+        %th Master Features
+        %th Attachment
+        %th Published
+        %th
+        - if current_user.admin? || current_user.superadmin?
+          %th
+          %th
+
+    %tbody
+      - @custom_emails.each do |email|
+        %tr
+          %td= email.email_subject
+          %td
+            %ul
+              - email.product_versions.each do |pv|
+                %li{style: "list-style: inside;"}= pv.name
+          %td
+            %ul
+              - email.courses.each do |course|
+                %li{style: "list-style: inside;"}= course.name
+          %td
+            %ul
+              - email.master_features.each do |feature|
+                %li{style: "list-style: inside;"}= feature.name.titleize.camelize :lower
+          %td
+            -if email.attachment_name.file?
+              = link_to image_tag( 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/PDF_file_icon.svg', width: 50, height: 50), email.attachment_name.url
+            - else
+              -
+          / %td= EmailCustomise.greetings[email.greeting]
+          %td= email.publish
+          %td= link_to 'Edit', edit_email_customise_path(email), class: 'btn btn-info btn-sm'
+          - if current_user.admin? || current_user.superadmin?
+            %td= link_to 'Delete', email_customise_path(email), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm'
+            %td= link_to 'Duplicate', "/email_customises/duplicate?id=#{email.id}", class: 'btn btn-info btn-sm'

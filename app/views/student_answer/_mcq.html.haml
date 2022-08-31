@@ -1,0 +1,35 @@
+.panel.panel-default.mcq
+  .panel-heading
+    %h1.panel-title
+      %strong Mcqs list
+  .panel-body
+    - @mcqs.each do |mcq|
+      %table.gr-table.gr-table-bordered.gr-table-green-hover
+        %tr
+          %td
+            %strong Explanation
+          %td= raw mcq.explanation
+      .mcq-info
+        %span.label.label-default
+          %b difficulty:
+          =mcq.difficulty
+      -if mcq.mcq_answers.any?
+        .panel-body
+          %table.gr-table.gr-table-bordered.gr-table-green-hover
+            %thead
+              %th Answers
+              %th Is correct
+              %th Your answer
+            %tbody
+              -mcq.mcq_answers.each do |answer|
+                %tr
+                  %td= raw answer.answer
+                  %td=human_boolean(answer.correct?)
+                  %td
+                    - if answer.mcq_student_answers.present?
+                      - if answer.mcq_student_answers.pluck(:user_id).include?(current_user.id)
+                        %i.fa.fa-check
+                      - else
+                        %i.fa.fa-times
+                    - else
+                      %i.fa.fa-times

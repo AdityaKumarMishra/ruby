@@ -1,0 +1,15 @@
+%h1 Admin Controls
+
+%table.table-hover.table.table-bordered#pv_table.pv_data_table
+  %thead
+    %tr
+      %th Name
+      %th View Type
+      %th Actions
+
+  %tbody
+    - @admin_controls.each do |admin_control|
+      %tr
+        %td= admin_control.name
+        %td= admin_control.new_view ? 'New View' : 'Old View'
+        %td= link_to 'Edit', edit_admin_control_path(admin_control), class: 'btn btn-success btn-sm'

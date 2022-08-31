@@ -1,0 +1,23 @@
+-if student_class.students.any?
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th Email
+        %th First name
+        %th Last name
+        %th Username
+        %th Date of Birth
+        %th Actions
+
+    %tbody
+      - student_class.students.each do |student|
+        %tr
+          %td= student.email
+          %td= student.first_name
+          %td= student.last_name
+          %td= student.username
+          %td= format_date_long student.date_of_birth
+          %td= link_to 'Remove from class', student_class_remove_student_path(:student_class_id => student_class, :student_id => student), method: :delete, class: 'btn btn-danger btn-sm'
+
+-else
+  %p No classes attached

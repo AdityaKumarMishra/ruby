@@ -1,0 +1,83 @@
+%br
+%p.gr-nav-header
+  Content Management (Paying Customers)
+%ul.gr-nav.gr-nav-pills.gr-nav-stacked
+  / - if current_user.superadmin?
+  /   %li{class: ("active" if is_same_route?(diagnostic_tests_path))}
+  /     = link_to diagnostic_tests_path do
+  /       %i.fa.fa-pencil-square-o
+  /       Diagnostic Tests
+  %li{class: ("active" if is_same_route?(essays_path))}
+    = link_to essays_path do
+      %i.fa.fa-pencil
+      Essay Creation
+  %li{class: ("active" if is_same_route?(mcq_stems_path))}
+    = link_to mcq_unit_progress_dashboard_mcq_stems_path do
+      %i.fa.fa-question
+      MCQs
+  / %li{class: ("active" if is_same_route?(dashboard_mcq_counter_path))}
+  /   = link_to dashboard_mcq_counter_path do
+  /     %i.fa.fa-list
+  /     MCQ Counter
+  %li{class: ("active" if is_same_route?(online_exams_path))}
+    = link_to online_exams_path do
+      %i.fa.fa-pencil-square-o
+      Online Exams
+  %li{class: ("active" if is_same_route?(vods_path))}
+    = link_to online_mock_exams_path do
+      %i.fa.fa-pencil-square-o
+      Online Mock Exams
+  %li{class: ("active" if is_same_route?(dashboard_textbooks_path))}
+    = link_to dashboard_textbooks_path do
+      %i.fa.fa-user
+      Written Resources
+  %li{class: ("active" if is_same_route?(vods_path))}
+    = link_to vods_path do
+      %i.fa.fa-video-camera
+      Videos
+%br
+- if !current_user.tutor?
+  %p.gr-nav-header
+    Content Management (Public Pages)
+  %ul.gr-nav.gr-nav-pills.gr-nav-stacked
+    %li{class: ("active" if is_same_route?(posts_path))}
+      = link_to posts_path do
+        %i.fa.fa-rss
+        Blogs
+    / - if !current_user.manager?
+    /   %li{class: ("active" if is_same_route?(blog_categories_path))}
+    /     = link_to blog_categories_path do
+    /       %i.fa.fa-bookmark
+    /       Blog Categories (M)
+    %li{class: ("active" if is_same_route?(faq_pages_path))}
+      = link_to faq_pages_path do
+        %i.fa.fa-question-circle
+        FAQs Pages
+    %li{class: ("active" if is_same_route?(job_application_forms_path))}
+      = link_to job_application_forms_path do
+        %i.fa.fa-plus-circle
+        Job Applications (M)
+    %li{class: ("active" if is_same_route?(common_contents_path))}
+      = link_to edit_common_content_path(1) do
+        %i.fa.fa-bookmark
+        Common Content (M)
+    %li{class: ("active" if is_same_route?(free_study_buddies_path))}
+      = link_to free_study_buddies_path do
+        %i.fa.fa-plus-circle
+        Main Page Display (M)
+    %li{class: ("active" if is_same_route?(countdown_timers_path))}
+      = link_to countdown_timers_path do
+        %i.fa.fa-calendar
+        Countdown Timer (M)
+    %li{class: ("active" if is_same_route?(download_hit_counters_path))}
+      = link_to download_hit_counters_path do
+        %i.fa.fa-download
+        Download Stats (M)
+    / %li{class: ("active" if is_same_route?(course_pages_path))}
+    /   = link_to course_pages_path do
+    /     %i.fa.fa-plus-circle
+    /     Gamsat Preparation Courses Page (M)
+    %li{class: ("active" if is_same_route?(notifications_path))}
+      = link_to notifications_path do
+        %i.fa.fa-plus-circle
+        Notifications Box (M)

@@ -1,0 +1,185 @@
+%h1 Reset Student Functions
+
+= link_to "Back", user_emails_path, class: 'btn btn-default'
+%br
+%br
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Function Name
+      %th Select
+      %th Action
+
+  %tbody
+    - if @exams.present?
+      %tr
+        %td EXAMS
+        %td= select_tag 'exam', options_for_select(@exams.collect{ |u| [u.assessable.title, u.id] }), { class: 'form-control', include_blank: 'All'}
+        %td= link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_exam', remote: true
+
+    - if @diagnostics.present?
+      %tr
+        %td Diagnostic Assessment
+        %td= select_tag 'diagnostic', options_for_select(@diagnostics.collect{ |u| [u.assessable.title, u.id] }), { class: 'form-control', include_blank: 'All'}
+        %td= link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_diagnostic', remote: true
+    - if @essay.present?
+      %tr
+        %td Essay
+        %td
+          - essay = { 'Submitted' => @submit_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] }, 'Not Submitted' => @not_submit_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] }, 'Expired' => @expired_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] },'Marked' => @marked_essay.collect{ |e| ["#{e.essay.title} - #{e.course.name.gsub('GAMSAT -', '')}", e.id] } }
+          = select_tag :essay, grouped_options_for_select(essay), class: 'form-control essay_select', include_blank: 'All'
+          .expry_date{style: 'display: none; margin-top:5px; margin-left:5px;'}
+        %td
+          %input{:type => "text", :id => "dta", :placeholder => "Allow Submission" ,:class => "reset_essay", remote: true}
+
+    %tr
+      %td Mock Exam
+      %td= select_tag 'mock_exam', options_for_select(reset_mock_exam_select), { class: 'form-control', include_blank: 'All'}
+      %td= link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_mock_exam', remote: true
+
+    %tr
+      %td Textbook
+      %td Reset Print Access
+      %td
+        = link_to "Reset", reset_textbook_access_user_email_path(@student.id), {class: "btn btn-default btn-sm", remote: true}
+
+    - if @appointment.present?
+      %tr
+        %td Booked Private Tutoring sessions
+        %td= select_tag 'appointment', options_for_select(@appointment.collect{ |ap| [ap.appointment_info, ap.id] }), { class: 'form-control', include_blank: 'All'}
+        %td= link_to 'Cancel', '#', class: 'btn btn-default btn-sm cancel_appointment', remote: true
+
+    %tr
+      %td Book New Session
+      %td= select_tag 'active_course', options_for_select(@student.paid_courses.map{|course| [course.name, course.id]}), { class: 'form-control', include_blank: '- Please select course -'}
+      %td= link_to 'Book Tutor', admin_book_tutor_path(@student.id), class: 'btn btn-default btn-sm', id: 'book_tutor_by_admin'
+
+    - if @online_mock_exam_attempt.present?
+      %tr
+        %td Online Mock Exam Attempt
+        %td= select_tag 'online_mock_exam_at', options_for_select(@online_mock_exam_attempt.collect{ |u| [u.assessable.title, u.id] }), { class: 'form-control', include_blank: 'All'}
+        %td= link_to 'Reset', '#', class: 'btn btn-default btn-sm reset_online_mock_exam_at', remote: true
+
+
+.div{id: "reset_access_div"}
+.loader_div
+
+- loader_img = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/payment_loader.svg'
+
+:javascript
+  var img = '#{loader_img}';
+  var loader = "<div id='loading'><div class='loader_col'>" +  img + "loading...</div></div>"
+
+  $(".reset_exam").on('click', function(){
+    if(confirm("Are you sure to reset Online Exam ?")){
+      var student_id = #{@student.id};
+      var exam_id = $("#exam").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_ol_exam",
+        data: { exam_id: exam_id , user_id: student_id}
+      })
+    }
+  });
+
+
+  $('#test-select').select2({
+      minimumResultsForSearch: -1
+  });
+
+  $(".reset_online_mock_exam_at").on('click', function(){
+    if(confirm("Are you sure to reset Online Mock Exam Attempt?")){
+      var student_id = #{@student.id};
+      var online_mock_exam_at_id = $("#online_mock_exam_at").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_online_mock_exam_attempt",
+        data: { online_mock_exam_at_id: online_mock_exam_at_id , user_id: student_id}
+      })
+    }
+  });
+
+  $(".reset_diagnostic").on('click', function(){
+    if(confirm("Are you sure to reset Diagnostic Test ?")){
+      var student_id = #{@student.id};
+      var diagnostic_id = $("#diagnostic").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_diganostic",
+        data: { diagnostic_id: diagnostic_id , user_id: student_id}
+      })
+    }
+  });
+
+
+  $('#dta').datepicker({
+        format: "dd/mm/yyyy",
+        orientation: "bottom left"
+    })
+
+    .on("changeDate", function(e) {
+      var expiry_date = $('#dta').val();
+      var curnt_dte = new Date().toLocaleDateString('en-US', { timeZone: 'Australia/Queensland' });
+      var current_date = moment(curnt_dte,"MM/DD/YYYY").format("DD/MM/YYYY");
+      if (new Date(current_date) >= new Date(expiry_date)) {
+        alert("Can't select past date.");
+      }
+      else {
+        if(confirm("Are you sure to reset Essay ?")){
+          var student_id = #{@student.id};
+          var essay_response_id = $("#essay").val();
+          $('.loader_div').html(loader);
+          $.ajax({
+            type: 'GET',
+            url: "/users/reset_essay",
+            data: { essay_response_id: essay_response_id , user_id: student_id, expiry_date: expiry_date}
+          })
+        }
+      }
+    });
+
+
+  $(".reset_mock_exam").on('click', function(){
+    if(confirm("Are you sure to reset Mock Exam ?")){
+      var student_id = #{@student.id};
+      var section_type = $("#mock_exam").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/reset_mock_exam",
+        data: { section_type: section_type , user_id: student_id}
+      })
+    }
+  });
+
+  $(".cancel_appointment").on('click', function(){
+    if(confirm("Are you sure to cancel Appointment ?")){
+      var student_id = #{@student.id};
+      var appointment_id = $("#appointment").val();
+      $('.loader_div').html(loader);
+      $.ajax({
+        type: 'GET',
+        url: "/users/cancel_appointment",
+        data: { appointment_id: appointment_id , user_id: student_id}
+      })
+    }
+  });
+
+  $("#active_course").on('change', function(){
+    var course_id = $(this).val();
+    var student_id = '#{@student.id}';
+
+    $('#book_tutor_by_admin').attr("href", "/dashboard/"+ student_id + "/book_tutor?course_id="+ course_id);
+  })
+
+  $(".essay_select").on('change', function(){
+    var essay_id = $(this).val();
+    $.ajax({
+      type: 'GET',
+      url: "/users/display_expiry_date",
+      data: { essay_id: essay_id}
+    })
+  })

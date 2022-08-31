@@ -1,0 +1,35 @@
+.hsc_rd_clr .btn-gr {
+    background-color: #BE382A;
+    color: #fff;
+    background-image: none !important;
+}
+
+.hsc_rd_clr #course-packages .description-tag-text.down {
+    display: inline-block;
+    font-size: 13px;
+    padding: 5px 30px;
+    margin-bottom: 26px;
+    color: white;
+    background: asset-url('https://gradready.s3.ap-southeast-2.amazonaws.com/static/banner-bg-red.png') no-repeat center top;
+    height: 28px;
+    max-width: 533px;
+    line-height: 24px;
+}
+
+.hsc_rd_clr .umat_ready_page.course-packages .tbl_color_prpl .min_hgt730 .content.green_col_box strong {
+    color: #BE382A !important;
+}
+
+.hsc_rd_clr #course-packages .min_hgt730 .content.green_col_box strong {
+    color: #BE382A;
+}
+
+.hsc_rd_clr .gst_font  a{
+    color: #BE382A !important;
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 268px){
+ #course-packages .min_hgt730.min_hg_959 {
+      min-height: 695px !important;
+  }
+}

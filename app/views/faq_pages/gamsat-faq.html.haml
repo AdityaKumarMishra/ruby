@@ -1,0 +1,126 @@
+- title "Questions About GAMSAT Courses? | GradReady"
+- meta_description "Questions about your GAMSAT Preparation or our Courses? Visit our FAQs for more information."
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1.mob_wht_points GAMSAT® Courses | FAQ
+%section.faq_wrapper
+  .row
+    .container
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: what_is_gamsat_path}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_understanding.png', alt: 'Understanding'
+            %h2
+              Understanding GAMSAT
+              %sup ®
+              Exam
+          %ul
+            %li
+              %a{href: what_is_gamsat_path}
+                What is the GAMSAT
+                %sup ®
+                exam?
+            %li
+              %a{href: what_is_gamsat_path}
+                How frequently is the GAMSAT
+                %sup ®
+                exam held?
+            %li
+              %a{href: gamsat_scores_path + "#medical_School"} For how long are the results valid?
+          %a.see_all_faq{href: what_is_gamsat_path} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_preparing.png', alt: 'Understanding'
+            %h2
+              Preparing for the GAMSAT
+              %sup ®
+              Exam
+          %ul
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#Do_GAMSAT_preparation_courses_work?'}
+                Do GAMSAT
+                %sup ®
+                preparation courses work?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#when-should-i-enrol-in-interview-ready'} When should I enroll in InterviewReady courses?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))+'#how-does-essay-expiration-work?'} How does GradReady's essay expiration work?
+          %a.see_all_faq{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('preparing-gamsat'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_about.png', alt: 'Understanding'
+            %h2 About GradReady
+          %ul
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#how-is-gradready-different'} How is GradReady different from...?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#will-i-have-to-do-study-outside-the-gradready-program'} Will I have to do study outside the...?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))+'#What topics are covered'} What topics are covered in the...?
+          %a.see_all_faq{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('about-gradready'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_enrolment.png', alt: 'Understanding'
+            %h2 Enrolment, Payment and Refund Policy
+          %ul
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#how-do-i-enrol-into-a-gradready-course'}
+                How do I enrol into a GAMSAT
+                %sup ®
+                = "..?"
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#group-discount-available'} Is there a group discount available?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))+'#Discount%20combination'} Can discounts be combined?
+          %a.see_all_faq{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('enrolment-payment'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('non-science-background'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_non-science.png', alt: 'Understanding'
+            %h2 For Students from a Non-Science Background
+          %ul
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('non-science-background'))+'#will-i-need-to-purchase-addi'} Will I need to purchase additional materials?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('non-science-background'))+'#should-i-practice-gamsat-style'}
+                Should I practice GAMSAT
+                %sup ®
+                exam...?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('non-science-background'))+'#how-do-i-stydy-for-the'} How do I study for the humanities...?
+          %a.see_all_faq{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('non-science-background'))} See all related questions
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .faq_box
+          %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('postgraduate-medical-school-admissions'))}
+            .icon
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/faq_admission.png', alt: 'Understanding'
+            %h2 Postgraduate Medical School Admissions
+          %ul
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('postgraduate-medical-school-admissions'))+'#what-should-i-expect'} What should I expect on the interview?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('postgraduate-medical-school-admissions'))+'#when-are-interviews'} When are interviews held?
+            %li
+              %a{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('postgraduate-medical-school-admissions'))+'#can-i-prepare'} Can I prepare for the interview?
+          %a.see_all_faq{href: faq_topic_path("gamsat-preparation-courses", FaqTopic.for_code('postgraduate-medical-school-admissions'))} See all related questions
+.join_gradready_col
+  %h2.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"} Didn't Find the Question You Were Searching For?
+  .clear
+  %a.aos-item.default_btn.hvr-shutter-in-horizontal{"data-aos" => "fade-up", "data-aos-duration" => "1200", href: "/gamsat/contact"} CONTACT US
+:javascript
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

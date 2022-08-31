@@ -1,0 +1,20 @@
+// For public pages css
+
+@import 'public_pages/bootstrap.min.scss';
+@import 'public_pages/style.scss';
+@import 'public_pages/richtext.min.scss';
+@import 'public_pages/jquery.countdown.scss';
+@import 'public_pages/slick.scss';
+@import 'public_pages/slick-theme.scss';
+
+@import 'base/course-recommender.scss';
+@import 'styles/videos.scss';
+
+@import 'toastr_rails';
+@import "video-js";
+@import "videojs-resolution-selector/video-quality-selector";
+
+@import 'base/variables.scss';
+@import 'base/color.scss';
+@import 'base/mixins.scss';
+@import 'partial/table_layout_five_columns.scss';

@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'exercises/mcq_stems', locals: { mcq_stems: @mcq_stems, exercises: @exercises, s_query: @s_query }))%>
+$("#filterrific_results").html("<%= js %>");

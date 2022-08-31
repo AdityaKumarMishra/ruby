@@ -1,0 +1,191 @@
+- title "User Profile"
+.row
+  .col-sm-12
+    .page-header
+      %h1.mg-left Profile
+
+.row
+  .col-md-offset-1.col-md-7.inline_attributes
+    %ul.user_details
+      %li
+        .user_label Email
+        .user_value= @user.email
+      %li
+        .user_label First name
+        .user_value= @user.first_name
+      %li
+        .user_label Last name
+        .user_value= @user.last_name
+      - if @user.username.present?
+        %li
+          .user_label Username
+          .user_value= @user.username
+      %li
+        .user_label Date of Birth
+        .user_value= format_date_long @user.date_of_birth
+      -if @user.phone_number.present?
+        %li
+          .user_label Contact Number
+          .user_value= @user.phone_number
+
+  .col-md-offset-1.col-md-3.text-center
+    - if @user.photo.exists?
+      = image_tag(@user.photo.url, width: '150px', alt: @user.full_name, class: 'img-circle mg-20')
+    - else
+      = image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/noname_user.jpg', alt: @user.full_name, class: 'img-circle')
+
+%hr
+.row
+  .col-md-offset-1.col-md-8.inline_attributes
+    %ul.user_details
+      %li
+        .user_label Role
+        .user_value= @user.role
+
+      - if @user.tutor? && !@user.tutor_profile.nil?
+        %li
+          .user_label Private Tutor
+          .user_value= @user.private_tutor?
+        %li
+          .user_label Tags
+          .user_value
+            - @user.tutor_profile.tags.each do |t|
+              %span.full_wdt= t.name
+
+      - elsif @user.manager? || @user.tutor?
+        %li
+          .user_label Tags
+          .user_value
+            - @user.staff_profile.tags.each do |t|
+              %span.full_wdt= t.name
+
+      %li
+        .user_label Biography
+        .user_value= @user.bio
+
+
+- if @user.address.present?
+  %hr
+  .row
+    .col-md-offset-1.col-md-8
+      %h3
+        User's Address
+
+  .row
+    .col-sm-offset-1.col-sm-8.inline_attributes
+      %ul.user_details
+        %li
+          .user_label Address Line One
+          .user_value= @address.line_one
+        %li
+          .user_label Address Line Two
+          .user_value= @address.line_two
+        %li
+          .user_label Suburb
+          .user_value= @address.suburb
+
+        %li
+          .user_label Post code
+          .user_value= @address.post_code
+
+        %li
+          .user_label State
+          .user_value= @address.state
+        %li
+          .user_label Country
+          .user_value= @address.country
+
+- if @user.questionnaire.present?
+  %hr
+  .row.user_profile_row
+    .col-md-offset-1.col-md-8
+      %h2
+        User's Questionnaire
+        %h3
+          Student Level
+          %h4= @user.questionnaire.student_level.titleize
+  - if @user.questionnaire.student_level == 'university'
+    .row.user_profile_row
+      .col-sm-offset-1.col-sm-8.inline_attributes
+        %ul.user_details
+          %li
+            .user_label University
+            .user_value= @user.questionnaire.university.name if @user.questionnaire.university
+          %li
+            .user_label Degree
+            .user_value= @user.questionnaire.degree.name if @user.questionnaire.degree
+          %li
+            .user_label Year
+            .user_value= @user.questionnaire.year
+          %li
+            .user_label Last Source
+            .user_value= @user.questionnaire.last_source
+          %li
+            .user_label Source
+            .user_value= @user.questionnaire.source
+          %li
+            .user_label Umat in High School
+            .user_value= @user.questionnaire.umat_high_school
+          %li
+            .user_label Umat in Uni
+            .user_value= @user.questionnaire.umat_uni
+  -else
+    .row.user_profile_row
+      .col-sm-offset-1.col-sm-8.inline_attributes
+        %ul.user_details
+          %li
+            .user_label High School
+            .user_value= @user.questionnaire.current_highschool
+          %li
+            .user_label Target Uni Course
+            .user_value= @user.questionnaire.target_uni_course
+          %li
+            .user_label High School Year
+            .user_value= @user.questionnaire.highschool_year_level
+          %li
+            .user_label Last Source
+            .user_value= @user.questionnaire.last_source
+          %li
+            .user_label Source
+            .user_value= @user.questionnaire.source
+
+/ - if (current_user.admin? || current_user.superadmin? || current_user.manager?)
+/   .row
+/     .col-sm-12
+/       %h1.invoice_header
+/         %strong Order History
+/         %br
+/       = render :partial => 'users/order_details', locals: { orders: @orders }
+
+- if (current_user.admin? || current_user.superadmin?) && @user.student?
+  .row
+    .col-sm-12
+      %h1.invoice_header
+        %strong Invoices
+  .row
+    .col-sm-12
+      %table.table.table-bordered
+        %theader
+          %tr
+            %td Invoice Number
+            %td Action
+        %tbody
+          - @user.enrolments.each_with_index do |en, index|
+            %tr
+              %td= en.order.reference_number
+              -if en.paid_at.present?
+                %td= link_to 'Download', enrolment_path(en, format: :pdf), class: 'btn btn-default'
+              -else
+                %td= link_to 'Pending','javascript:void(0)', class: 'btn btn-default'
+
+- if (current_user.admin? || current_user.superadmin? || current_user.manager? || current_user.tutor?) && @user.student?
+  .row
+    %h1.invoice_header
+      %strong User's Interaction Log
+  = render partial: "users/user_interaction_log", locals: { records: @user.tickets + Ticket.where(email: @user.email, asker_id: nil) +  @user.interaction_logs }
+%hr
+.row
+  .col-sm-8.mg-bottom
+    = link_to "Edit", edit_user_path(@user), class: 'btn btn-default btn-md'
+    = link_to 'Back', user_emails_path, class: 'btn btn-default'
+

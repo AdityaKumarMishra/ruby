@@ -1,0 +1,149 @@
+- title "UCAT Millennials Scholarships | GradReady"
+- meta_description "GradReady's UCAT Millennials Scholarship program is designed to provide a helping hand to resourceful, dedicated, and motivated students."
+- meta_keywords "UCAT Preparation courses"
+
+%section.talk_to_bg.home_faq
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container
+    .support_col.looking_corse.text-center
+      %h1
+        GradReady Millennials Scholarship for UCAT
+        %sup ®
+        Courses
+%section.pad50
+  .container
+    .encoraging_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1100"}
+      .text-center
+        %h2 Encouraging Resourcefulness, Ingenuity and Initiative
+      .col-md-6.encorag_box.encrgbox_none.mg_right35
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_1.png'
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#background_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down>
+              Background
+            #background_tab.panel-collapse.collapse
+              %p GradReady was founded on the belief that "there has to be a better way". We saw the opportunity to make learning more effective and efficient through doing something new and different. It is this change-for-better attitude that we would like to encourage in all applicants of the GradReady Millennials Scholarship.
+              %p We would like to help build a culture where people are encouraged to look for novel solutions, to think outside the box and to leverage and build upon the amazing tools of this new information age.
+              %p One of the main challenges we will face in the coming decades is the provision of adequate healthcare to the aging population in the developed world and the expanding population in the developing world. As a prospective medical student and future clinician, you will be leading the efforts to address this challenge - through pioneering new tools and methods.
+              %p GradReady Millennials Scholarship is set up to help you to take the first step in becoming a part of the solution.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#eligibility_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right>
+              Eligibility criteria
+            #eligibility_tab.panel-collapse.collapse
+              %p Prospective medical students.
+      .col-md-6.encorag_box.encrgbox_none
+        = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_2.png'
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#scholarship_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Scholarship details
+            #scholarship_tab.panel-collapse.collapse
+              %p
+                Full fee paid for a UCAT
+                %sup ®
+                Attendance (Comprehensive) Course + $500 cash
+              %p
+                If you have already signed up for a UCAT
+                %sup ®
+                Attendance Comprehensive Course and are awarded the scholarship, your payment will be refunded.
+              %p 5 scholarships available Australia wide.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#apply_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              How to apply
+            #apply_tab.panel-collapse.collapse
+              %p 1. Compose a 600 - 800 word essay outlining how you have demonstrated one or more of the following 3 qualities - resourcefulness, ingenuity and initiative - through achieving positive results for yourself or for the people and wider community around you. Also explain how your experiences will help you in your future endeavours and achieving your aspirations.
+              %p 2. Update your CV.
+              %p 3. Email the essay and CV, in a single PDF Document, to millennials@gradready.com.au
+              %p Title both the email and the document in the following manner
+              %p
+                = 'Eg. "UCAT'
+                %sup ®
+                = '- 2017 Millennials Application - John Jackson"'
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#timeline_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Timeline
+            #timeline_tab.panel-collapse.collapse
+              %p 2019 Applications are now open.
+              %p Applications will close 11:59pm AEDT on Sunday 5th of June. No late applications will be accepted.
+              %p Interviews will be held between 9th and 13th of June.
+              %p Recipients will be notified by 14th of June.
+              %p To read the personal stories of our past recipients, please see below for past Millennials Scholarship winners.
+      .col-md-12.encorag_box.encorag_box_fr_mbl.histry_right
+        #overview_vert_slider.carousel.slide.vertical{"data-ride" => "carousel"}
+          / Wrapper for slides
+          .carousel-inner{role: "listbox"}
+            .item
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_1.png', alt: "history_img"
+            .item.active
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/scholarship_banner_2.png', alt: "history_img"
+        .faq_list
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_background_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down>
+              Background
+            #mobile_background_tab.panel-collapse.collapse
+              %p GradReady was founded on the belief that "there has to be a better way". We saw the opportunity to make learning more effective and efficient through doing something new and different. It is this change-for-better attitude that we would like to encourage in all applicants of the GradReady Millennials Scholarship.
+              %p We would like to help build a culture where people are encouraged to look for novel solutions, to think outside the box and to leverage and build upon the amazing tools of this new information age.
+              %p One of the main challenges we will face in the coming decades is the provision of adequate healthcare to the aging population in the developed world and the expanding population in the developing world. As a prospective medical student and future clinician, you will be leading the efforts to address this challenge - through pioneering new tools and methods.
+              %p GradReady Millennials Scholarship is set up to help you to take the first step in becoming a part of the solution.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_eligibility_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right>
+              Eligibility criteria
+            #mobile_eligibility_tab.panel-collapse.collapse
+              %p Prospective medical students.
+          .faq_list_col
+            %h3.faq_question.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_scholarship_tab", role: "button"}
+              %i.fa.pull-right.fa-angle-down{"aria-hidden" => "true"}>
+              Scholarship details
+            #mobile_scholarship_tab.panel-collapse.collapse
+              %p
+                Full fee paid for a UCAT
+                %sup ®
+                Attendance (Comprehensive) Course + $500 cash
+              %p
+                If you have already signed up for a UCAT
+                %sup ®
+                Attendance Comprehensive Course and are awarded the scholarship, your payment will be refunded.
+              %p 5 scholarships available Australia wide.
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_apply_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              How to apply
+            #mobile_apply_tab.panel-collapse.collapse
+              %p 1. Compose a 600 - 800 word essay outlining how you have demonstrated one or more of the following 3 qualities - resourcefulness, ingenuity and initiative - through achieving positive results for yourself or for the people and wider community around you. Also explain how your experiences will help you in your future endeavours and achieving your aspirations.
+              %p 2. Update your CV.
+              %p 3. Email the essay and CV, in a single PDF Document, to millennials@gradready.com.au
+              %p Title both the email and the document in the following manner
+              %p
+                = 'Eg. "UCAT'
+                %sup ®
+                = '- 2017 Millennials Application - John Jackson"'
+          .faq_list_col
+            %h3.faq_question{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#mobile_timeline_tab", role: "button"}
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}>
+              Timeline
+            #mobile_timeline_tab.panel-collapse.collapse
+              %p 2019 Applications are now open.
+              %p Applications will close 11:59pm AEDT on Sunday 5th of June. No late applications will be accepted.
+              %p Interviews will be held between 9th and 13th of June.
+              %p Recipients will be notified by 14th of June.
+              %p To read the personal stories of our past recipients, please see below for past Millennials Scholarship winners.
+
+:javascript
+  $(document).ready(function(){
+    $(".faq_question").click(function(){
+        $(this).find(".pull-right").toggleClass("fa-angle-down fa-angle-up");
+    });
+  });
+
+  AOS.init({
+    easing: "ease-in-out-sine"
+  });

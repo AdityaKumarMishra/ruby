@@ -1,0 +1,35 @@
+##### old and obsolete code #####
+%html
+  %head
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+  %body
+    -if @student.present?
+      %h3= "Dear #{@student.first_name} #{@student.last_name},"
+      %p= "Thank you for purchasing the #{@course.name} Course."
+      %br
+      %h3 Please ensure you have made a direct deposit
+      %p using the banking reference <b> #{@banktrans} </b>
+      %p for the amount of <b> #{number_to_currency @amount} </b>
+      %p Online material will be made available to you once your payment is confirmed by the GradReady Enrolment Department. Depending on your bank, the payment may take between 3-5 working days to arrive.
+      %br
+      %h4 Invoice
+      %br
+      %table.table.table-bordered.table-hover
+        %tbody
+          %tr
+            %td Item
+            %td Payment Method
+            %td Amount
+            %td GST
+            %td Total
+          %tr
+            %td= "#{@course.name}"
+            %td
+              Bank Transfer - ref:
+              = @banktrans
+            %td= "#{number_to_currency(@course.price).to_s}"
+            %td= "#{number_to_currency(@course.tax).to_s}"
+            %td= "#{number_to_currency(@course.bank_total).to_s}"
+
+    %p Kind regards,
+    %p GradReady Student Success Team

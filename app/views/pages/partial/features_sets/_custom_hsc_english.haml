@@ -1,0 +1,50 @@
+.col-md-12
+  .span12
+    .feature-icon-container
+      %h3#feature_Upgrade
+        .blu_heading
+          %strong.hsc_txt You are able to purchase the following items after registering and logging into the Custom course:
+  .span12
+    %h4.feature_sub_heading
+      %span.text_line.hsc_txt Preparation material
+  .grid_wall_wrapper
+    .feature-description.clearfix
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/online_questions', paid: true, product_line: 'HSC', paid: true, price: 255, price_with_gst: 281
+  .span12
+    %h4.feature_sub_heading
+      %span.text_line.hsc_txt Learning Tools
+  .grid_wall_wrapper
+    .feature-description.clearfix
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/strategy', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/quality_assurance_system', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/cross_referencing_system', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/vce_ready_features/english_study_guide', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/discovery_guide', product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/essay_writing_guide', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/course_videos', paid: true, price: 159, price_with_gst: 175, product_line: 'HSC'
+  .span12
+    %h4.feature_sub_heading
+      %span.text_line.hsc_txt Targeted 1 on 1 tutor assistance
+  .grid_wall_wrapper
+    .feature-description.clearfix
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/get_clarity', paid: true, price: 250, price_with_gst: 275, product_line: 'HSC'
+  .span12
+    %h4.feature_sub_heading
+      %span.text_line.hsc_txt Live component
+  .grid_wall_wrapper
+    .feature-description.clearfix
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/private_tutoring', paid: true, price: 495, price_with_gst: 545, hours: 5, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/interactive_learning', paid: false, product_line: 'HSC'
+      .grid_single_item
+        = render 'pages/partial/features_sets/features/attendance_tutorials', paid: true, price: 320, price_with_gst: 352,product_line: 'HSC'

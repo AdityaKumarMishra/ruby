@@ -1,0 +1,2 @@
+class OutOfStock < ApplicationRecord
+end

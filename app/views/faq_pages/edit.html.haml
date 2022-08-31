@@ -1,0 +1,8 @@
+%h1 Editing faq_page
+
+= render 'form'
+
+%br
+= link_to 'Show', faq_topic_path(topic: @faq_page.faq_topic.slug ), class: 'btn btn-success'
+
+= link_to 'Back', [@faq_type.to_sym, :admin, :faq_pages], class: 'btn btn-danger'

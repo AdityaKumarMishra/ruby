@@ -1,0 +1,31 @@
+#english_study_guide.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Comprehensive study guide for your selected text of study
+        %span.enhance-features
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          = link_to 'Enhanced', recent_update_path(tab: product_line), class:appropriate_icon(product_line)
+      .text
+        All students will receive the following
+        %ul
+          %li.u-word-spacing All students will be provided with a comprehensive and detailed study guide specific to the novel/film/poem that has been prescribed to them in their Area of Study. We have detailed material covering the following 12 texts:
+          %li.u-word-spacing
+            %ul
+              %li.u-word-spacing The Complete Maus, Art Spiegelman
+              %li.u-word-spacing Mabo (Film)
+              %li.u-word-spacing Death of a Salesman, Arthur Miller
+              %li.u-word-spacing Burial Rites, Hannah Kent
+              %li.u-word-spacing Medea (Play)
+              %li.u-word-spacing This Boy’s Life, by Tobias Wolf
+              %li.u-word-spacing The White Tiger, Aravind Adiga
+              %li.u-word-spacing Into the Wild (Film)
+              %li.u-word-spacing Invictus (Film)
+              %li.u-word-spacing Life of Galileo, Bertolt Brecht
+              %li.u-word-spacing 1984 + Stasiland
+              %li.u-word-spacing Ransom + Invictus
+
+        Each text-specific guide provides you with an in-depth analysis of the themes, concepts, characters and provides you with a range of annotated essays.
+

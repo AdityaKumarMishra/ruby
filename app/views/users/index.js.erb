@@ -1,0 +1,9 @@
+<% js = escape_javascript(
+  render(partial: 'users/list', locals: { users: @users, all_users: @all_users })
+) %>
+$("#filterrific_results").html("<%= js %>");
+<% js1 = escape_javascript(
+  render(partial: 'users/download_analytics', locals: { all_users: @all_users })
+) %>
+
+$("#filterrific_download_xls").html("<%= js1 %>");

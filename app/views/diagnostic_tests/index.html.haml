@@ -1,0 +1,17 @@
+.filter_btm_space
+  %h1 Listing Diagnostic Test
+
+  %h4 Filter Diagnostic Tests
+  .panel.panel-default
+    .panel-body
+      = form_for_filterrific @filterrific do |f|
+        .form-group
+          %label Type
+          =f.select(:by_product_line, @filterrific.select_options[:by_product_line],{ include_blank: '- All -' }, class: 'form-control')
+        = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default'
+
+  = link_to 'New Diagnostic Test', new_diagnostic_test_path, class: 'btn btn-gradready green'
+  %br
+  %br
+  #filterrific_results
+    =render(partial: 'diagnostic_tests/index', locals: { diagnostic_tests: @diagnostic_tests })

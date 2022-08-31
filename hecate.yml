@@ -1,0 +1,20 @@
+# Required: an admin contact for errors, billing issues, and the like
+admin_email: michael.qiu@gradready.com.au
+# Optional: timezone for when to send and how to format emails
+#           defaults to "Australia/Melbourne"
+timezone: "Australia/Melbourne"
+
+# Required: config for shipping news (notify on merged PRs)
+shipping:
+  # Array of release notifications to send
+  -
+    rollup: daily
+    # Required: who to send notification to
+    emails:
+      - michael.qiu@gradready.com.au
+    # Required: config for which repos to listen to
+    matching:
+      # Manually whitelist repos
+      # whitelist: ["product", "other-product"]
+      all: true
+ 

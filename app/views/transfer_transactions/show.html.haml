@@ -1,0 +1,31 @@
+%span{align: 'center'}
+  %h2 Thank you for your purchase
+  -if !@transfer_transaction.paid
+    %h4 We will contact you as soon as we have received your transfer.
+  %div
+    %b Course:
+    =Course.find_by_id(@transfer_transaction.course_id).name
+    for
+    =@transfer_transaction.user.full_name
+  %div
+    %b Amount Owed:
+    = number_to_currency(Course.find_by_id(@transfer_transaction.course_id).bank_total)
+    %b Amount Paid:
+    - if ! @transfer_transaction.amount
+      $0.00
+    - else
+      =number_to_currency @transfer_transaction.amount
+
+  - if @transfer_transaction.paid
+    %h3 We have received your transfer <i class= "fa fa-check fa-lg"></i>
+
+  - else
+    %h3 We are waiting for your transfer <i class= "fa fa-circle-o-notch fa-spin fa-lg"></i>
+
+  %p
+    %b Banking reference:
+    = @transfer_transaction.banking_reference
+- if(current_user.role != 'student')
+  = link_to 'Edit', edit_transfer_transaction_path(@transfer_transaction)
+  \|
+  = link_to 'Back', transfer_transactions_path

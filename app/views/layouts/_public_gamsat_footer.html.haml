@@ -1,0 +1,72 @@
+.col-md-4.col-xs-12.col-sm-12.pad_lt
+  %ul.footer_left
+    %li.gr_logo
+      %a{href: "/"}
+        - if params["action"] == "main"
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT and UCAT Preparation Courses"
+        - elsif params["action"] == "gamsat"
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_gamsat.svg', alt: "GradReady GAMSAT Preparation Courses"
+        - elsif params["action"] == "umat"
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/footter_logo_umat.svg', alt: "GradReady GAMSAT Preparation Courses"
+    %li
+      %a.default_btn.hvr-shutter-in-horizontal{href: "/gamsat-preparation-courses/contact#call_back_overlay"} Call Us
+    %li
+      %a.default_btn.hvr-shutter-in-horizontal.email_query_icon{href: "javascript:void(0)"} Email
+.fotter_right_section
+  .footer_rt_top
+    %ul
+      %li
+        %a{href: "#{root_url}terms"} Terms &amp; Conditions
+      %li
+        %a{href: "#{root_url}privacy"} Privacy Policy
+      %li
+        %a{href: "/sitemap.html"} Sitemap
+      %li
+        %a{href: "/gamsat-preparation-courses/faq"} FAQ
+      %li
+        %a{href: "/gamsat-preparation-courses/contact"} Get In Touch
+      %li
+        %a{href: "/blog/gamsat-preparation-courses"} Blog
+  .clearfix
+  .footer_rt_bottom
+    %span Connect With Us :
+    %ul
+      %li
+        %a{href: "https://www.facebook.com/GradReadyGAMSAT/", target: "_blank"}
+          %i.fa.social_icn.fa-facebook.fb_icon{"aria-hidden" => "true"}
+      %li
+        %a{href: "https://www.youtube.com/channel/UCNlMQp7pKMWP65uoGSrl4oA", target: "_blank"}
+          %i.fa.social_icn.fa-youtube.utube_icon{"aria-hidden" => "true"}
+    .address_new
+      %a{:href => "https://www.google.com/maps/place/17%2F31+Queen+St,+Melbourne+VIC+3000,+Australia/@-37.8182055,144.9597209,17z/data=!3m1!4b1!4m5!3m4!1s0x6ad642b33740a6f7:0xc0023970a5f3aa00!8m2!3d-37.8182055!4d144.9619149" , :target => "_blank"}
+        GradReady Pty. Ltd.
+        17/31 Queen St
+        Melbourne VIC 3000
+        ABN: 21 152 121 456
+      / %p
+      /   Phone: +61 484 247 729 &emsp;
+      /   %a.email_query_icon{:href => "javascript:void(0)"}
+      /     Email: Click Here to Contact Us
+      .detail{:style => 'display: flex;'}
+        .contact
+          %p Phone:
+          - contact = CommonContent.first
+          %p.fs12= contact.contact_number + " 9AM - 5PM Melbourne Time Mon - Fri" if contact.contact_number.present?
+          %p.fs12= contact.contact_number2 + " 9AM - 5PM Melbourne Time Mon - Fri" if contact.contact_number2.present?
+          .email
+            %p Email: 
+            %a.email_query_icon{:href => "javascript:void(0)"} 
+              Click Here to Contact Us
+
+:CSS
+  .address_new p, .address_new a  {
+    
+    font-size: 13px;
+    margin-bottom: 4px;
+    line-height: 22px;
+    display: block;
+  }
+
+ 
+  
+

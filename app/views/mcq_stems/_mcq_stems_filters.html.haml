@@ -1,0 +1,99 @@
+.panel.panel-success
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    = form_for_filterrific @filterrific, html: { class: "main_form" } do |f|
+      = hidden_field_tag :current_page, ''
+      .form-group.user-mgmt-filter-p1
+        MCQ Stem Creation Date Start
+        =f.text_field(:with_start, class: 'form-control datepicker', autocomplete: 'off')
+      .form-group.user-mgmt-filter-p2
+        MCQ Stem Creation Date End
+        =f.text_field(:with_end, class: 'form-control datepicker', autocomplete: 'off')
+      .form-group.user-mgmt-filter-p1
+        Children Min Range
+        =f.select(:with_min, @filterrific.select_options[:with_min],{ include_blank: '- Any -' }, class: 'form-control')
+      .form-group.user-mgmt-filter-p2
+        Children Max Range
+        =f.select(:with_max, @filterrific.select_options[:with_max],{ include_blank: '- Any -' }, class: 'form-control')
+      .form-group.user-mgmt-filter-p1
+        Work Status Last Updated (Start Date)
+        %i.fa.fa-question-circle{ style: 'cursor: pointer;', data: { toggle: 'tooltip', placement: 'top', "original-title" => 'This filters for MCQ Stems that have had their Work Status updated at least once, between 00:00:00 of the Start Date to 23:59:59 of the End Date' } }
+        =f.text_field(:work_status_updated_at_min_days, class: 'form-control datepicker from_filter',placeholder: 'Choose date')
+      .form-group.user-mgmt-filter-p2
+        Work Status Last Updated (Finish Date)
+        =f.text_field(:work_status_updated_at_max_days, class: 'form-control datepicker from_filter',placeholder: 'Choose date')
+      .form-group
+        Last Updated
+        %i.fa.fa-question-circle{ data: { toggle: 'tooltip', placement: 'top', "original-title" => 'The MCQ was last updated at 23:59:59 of selected date or earlier' } }
+        =f.text_field(:last_updated, class: 'datepicker filterrific-periodically-observed form-control', placeholder: 'Last updated on')
+      .form-group
+        Title
+        =f.text_field(:search_query, class: 'filterrific-periodically-observed form-control', placeholder: 'Search for...')
+      .form-group
+        Question Topic (Tag)
+        =f.select(:with_tag_id, @filterrific.select_options[:tag],{ include_blank: '- Any -' }, class: 'chosen-select')
+      .form-group{style: 'margin-bottom: 5px;'}
+        %div{style: 'margin-bottom: 2px;'}
+          Skill Tags
+        = f.select('with_skill_tag_id', @filterrific.select_options[:skill_tag], { include_blank: ' - Any - ' }, { class: 'chosen-select' })
+      .form-group{style: 'margin-bottom: 5px;'}
+        %div{style: 'margin-bottom: 2px;'}
+          Overall Score
+        = f.select('with_similarity_score', @filterrific.select_options[:similarity_score], { include_blank: ' - Any - ' }, { class: 'chosen-select' })
+      / .form-group
+      /   Graphics Required
+      /   =f.select(:with_graphic, @filterrific.select_options[:with_graphic], { include_blank: '- Any -' }, class: 'form-control')
+      .form-group
+        Published Status
+        =f.select(:with_status, @filterrific.select_options[:with_status],{ include_blank: 'All' }, class: 'form-control')
+      .form-group
+        Author
+        =f.select(:with_author_id, @filterrific.select_options[:author],{ include_blank: '- Any -' }, class: 'chosen-select')
+      .form-group
+        Reviewer 1
+        =f.select(:with_reviewer_id, @filterrific.select_options[:reviewer],{ include_blank: '- Any -', :include_hidden => false }, class: 'chosen-select',:multiple=>true)
+      .form-group
+        Reviewer 2
+        =f.select(:with_reviewer2_id, @filterrific.select_options[:reviewer2],{ include_blank: '- Any -', :include_hidden => false }, class: 'chosen-select',:multiple=>true)
+      .form-group
+        Video Explainer 
+        =f.select(:with_video_explainer_id, @filterrific.select_options[:reviewer],{ include_blank: '- Any -' }, class: 'chosen-select')
+      .form-group
+        Video Explanation Reviewer 
+        =f.select(:with_video_reviewer_id, @filterrific.select_options[:reviewer2],{ include_blank: '- Any -' }, class: 'chosen-select')
+      .form-group
+        MCQ Unit Pool
+        =f.select(:with_pool, @filterrific.select_options[:with_pool],{ include_blank: 'All' }, class: 'form-control chosen-select')
+      .form-group.exam_id_container{style: @filterrific.with_pool != 1 ? 'display: none;' : ''}
+        Specific Online Exam
+        = f.select :with_exam_id, options_for_select(OnlineExam.order(:title).pluck(:title, :id)), { include_blank: 'All' }, class: 'form-control chosen-select'
+      .form-group
+        Work Status
+        =f.select(:with_work, @filterrific.select_options[:with_work],{ include_blank: 'All' , :include_hidden => false}, class: 'chosen-select',:multiple=>true)
+      .form-group
+        Stem Difficulty
+        =f.select(:with_difficulty,  
+          @filterrific.select_options[:difficulty],
+          { include_blank: '- Any -', :include_hidden => false },
+          class: 'chosen-select', :multiple=>true,
+          as: :grouped_select,
+          group_method: :last)
+      .form-group
+        Sorted by
+        =f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: 'Created_at'}, class: 'form-control')
+      .form-group
+        =link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-gradready green'
+
+:javascript
+  $(document).on('change', '#filterrific_with_pool', function(event){
+    if ($(event.target).val() == '1') {
+      $('.exam_id_container').show();
+    }
+    else {
+      $('#filterrific_with_exam_id').val('')
+      $('.exam_id_container').hide();
+    }
+  });

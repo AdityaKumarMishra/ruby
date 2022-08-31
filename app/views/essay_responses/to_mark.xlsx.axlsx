@@ -1,0 +1,37 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Marking-Overdue Stats") do |sheet|
+  date_format = wb.styles.add_style :format_code => 'DD-MM-YYYY'
+  def data_array(tutor)
+    data_array = []
+    current_week_day = Time.zone.now.wday
+    case current_week_day
+      when 4,5
+        submitted_at_range = Time.zone.now - 3.days
+      when 1,2,3
+        submitted_at_range = Time.zone.now - 5.days
+      when 6
+        submitted_at_range = ((Time.zone.now - 1.days).end_of_day - 3.days)
+      when 0
+        submitted_at_range = ((Time.zone.now - 2.days).end_of_day - 3.days)
+    end
+    data_array.push(tutor.full_name)
+    data_array.push(tutor.marked_essays_count)
+    data_array.push(EssayResponse.where("status = ? AND time_submited < ? AND tutor_id = ? AND old_tutor_id IS NULL", EssayResponse.statuses["unmarked"], submitted_at_range, tutor.id).count)
+    data_array.push(EssayResponse.where("status = ? AND time_submited > ? AND old_tutor_id = ?", EssayResponse.statuses["unmarked"], submitted_at_range, tutor.id).count)
+    data_array.push(EssayResponse.where("status = ? AND time_submited < ? AND old_tutor_id = ?", EssayResponse.statuses["unmarked"], submitted_at_range, tutor.id).count)
+  end
+
+  sheet.add_row [
+      'Tutor Name',
+      'Essay Marked',
+      'Overdue Essays Number',
+      'Essay Transferred (Before Overdue Email Sent)',
+      'Essay Transferred (After Overdue Email Sent)'
+    ]
+
+  @all_essay_responses.pluck(:tutor_id).uniq.each do |tutor_id|
+    sheet.add_row data_array(User.find(tutor_id)) rescue nil
+  end
+
+end

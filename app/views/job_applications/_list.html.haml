@@ -1,0 +1,122 @@
+#rejected_popup
+#assessment_popup
+#filterrific_results
+  = page_entries_info job_applications # provided by will_paginate
+  %br
+  %br
+
+  %table.table.table-bordered.table-hover#job-table
+    %thead
+      %tr
+        %th Submission Date
+        %th Application Status
+        %th Interview Date
+        %th Assessment Sender
+        %th Assessment Sent Time
+        %th Name
+        %th State
+        %th Hours Available
+        %th Domestic International
+        %th Degree
+        %th Expected Graduation Date
+        %th Full Time Work Experience
+        %th GR Score
+        %th ATAR/OP
+        %th WAM
+        / %th Other Test Score
+        %th Cover Letter
+        %th Resume
+        %th View
+        / %th Edit
+        - if current_user.admin? || current_user.superadmin?
+          %th Delete
+
+    %tbody
+      - job_applications.each do |job_application|
+        %tr
+          %td= format_date_long(job_application.created_at.to_date)
+          -if @job_application_form.present?
+            %td= select_tag "job_application[status]", options_for_select(JobApplication.statuses.keys, job_application.status), "data-remote"=> "true", "data-url"=>job_application_form_job_application_path(@job_application_form.friendly_id.parameterize, job_application), "data-method"=> "PATCH", class: 'form-control application_select'
+          -else
+            %td= select_tag "job_application[status]", options_for_select(JobApplication.statuses.keys, job_application.status), "data-remote"=> "true", "data-url"=>job_application_form_job_application_path(job_application.job_application_form.friendly_id.parameterize, job_application), "data-method"=> "PATCH", class: 'form-control application_select'
+          - assessment_sender = User.find(job_application.assessment_sender_id) if job_application.assessment_sender_id.present?
+          - if job_application.interview_date.present?
+            %td
+              %input{:type => "text", :id => "interview-date", :placeholder => "Select interview date" ,:class => "interview_date", 'data-id' => job_application.id, value: job_application.interview_date.strftime('%d %b, %Y')}
+          - else
+            %td
+              %input{:type => "text", :id => "interview-date", :placeholder => "Select interview date" ,:class => "interview_date", 'data-id' => job_application.id, value: job_application.interview_date}
+          %td= assessment_sender.present? ? assessment_sender.full_name : 'N/A'
+          %td= job_application.assessment_sent_time ? job_application.assessment_sent_time.strftime('%a, %d %b %Y %H:%M') : 'N/A'
+          %td= link_to job_application.name, job_application_form_job_application_path(job_application.job_application_form, job_application)
+          %td= job_application.address.try(:state) if User.areas.keys.include?(job_application.address.try(:state))
+          %td= job_application.hours_available
+          - if job_application.domestic.nil?
+            %td
+          - else
+            %td= job_application.domestic ? 'Domestic' : 'International'
+          %td= job_application.degree_type || 'N/A'
+          %td= job_application.graduation
+          %td= job_application.full_time_exp
+          %td= job_application.gr_score
+          %td= job_application.atar
+          %td= job_application.wam
+          / %td= job_application.other_test_score
+          %td= link_to 'Cover Letter', job_application.cover_letter.document.url(:original, false), target: "_blank"
+          %td= link_to 'Resume', job_application.resume.document.url(:original, false), target: "_blank"
+          %td= link_to 'View', job_application_form_job_application_path(job_application.job_application_form.friendly_id, job_application), class: 'btn btn-info btn-sm'
+          / %td= link_to 'Edit', edit_job_application_form_job_application_path(job_application.job_application_form.friendly_id, job_application), class: 'btn btn-info btn-sm'
+          - if current_user.admin? || current_user.superadmin?
+            %td= link_to 'Destroy', job_application_form_job_application_path(job_application.job_application_form.friendly_id.parameterize, job_application), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+  = will_paginate job_applications, renderer: BootstrapPagination::Rails # provided by will_paginate
+
+%br
+
+:javascript
+  $(document).ready(function(){
+    var selectTags = $("select.application_select");
+    selectTags.each(function( i ) {
+      if(selectTags[i].value == '0.0 Not Reviewed'){
+        $(selectTags[i]).css('color', '#ddd');
+        $(selectTags[i]).find('option:not(:disabled)').css('color', '#555555')
+      }else{
+        $(selectTags[i]).css('color', '#555555');
+      }
+    })
+  })
+
+  $('.application_select').on('change', function(){
+    var selectTags = $("select.application_select");
+    selectTags.each(function( i ) {
+      if(selectTags[i].value == '0.0 Not Reviewed'){
+        $(selectTags[i]).css('color', '#ddd');
+        $(selectTags[i]).find('option:not(:disabled)').css('color', '#555555')
+      }else{
+        $(selectTags[i]).css('color', '#555555');
+      }
+    })
+  })
+
+
+  $('.interview_date').datepicker({
+      format: "dd/mm/yyyy",
+      orientation: "bottom left"
+  }).on("changeDate", function(e) {
+    var date = $(this).val();
+    var job_id = $(this).attr('data-id');
+    $.ajax({
+      type: 'POST',
+      url: "/job-applications/update_interview_date",
+      data: {date: date, job_id: job_id}
+    }).done(function (data) {
+      alert('Interview date successfully udpated ')
+      window.location.reload();
+    })
+  });
+
+:css 
+  .interview_date{
+    width: 140px;
+  }
+

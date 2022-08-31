@@ -1,0 +1,62 @@
+.page_Wrapper.width100
+  .header
+    .top_header
+      .head_title
+        %h2
+          Practice
+          = succeed "est" do
+            %span.tile_t T
+    .btm_header
+  .main_contant.width100
+    .uni_logo
+      = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/univer.png'
+    .para_contant.ipad_scroll.mob_scroll.mob_top
+      %h4.text-center UCAT Practice Test
+      %h4.terms_hdng VERBAL REASONING INSTRUCTIONS
+      %h4.terms_hdng You have 1 minute to read these instructions.
+      %p In this subtest you will be presented with 11 passages to read, each associated with four questions.
+      %p Some questions assess critical reasoning skills, requiring candidates to make inferences and draw conclusions from information. You will need to read the passage of text carefully. You will then be presented with a question or incomplete statement and four response options. You are required to pick the best or most suitable response.
+      %p For other questions, your task is to read each passage of text carefully and then decide whether the statement provided follows logically. There are three answer options you can choose from:
+      %p.mrgbtm0
+        %span.font_bold True:
+        On the basis of the information in the passage, the statement is true.
+      %p.mrgbtm0
+        %span.font_bold> False:
+        On the basis of the information in the passage, the statement is false.
+      %p
+        %span.font_bold Can’t Tell:
+        You cannot tell from the information in the passage whether the statement is true or false.
+      %p You will only be able to select one response.
+      %p You have 21 minutes to answer 44 questions.
+      %p It is in your best interest to answer all questions as there is no penalty for guessing. All unanswered questions will be scored as incorrect.
+      %p
+        Click the
+        %span.font_bold Next (N)
+        button to proceed.
+  .footer
+    .end_exam
+      %a.ftr_btn.btn_bdr_rgt{"data-target" => "#endexam_modal", "data-toggle" => "modal", href: "#"}
+        %i.fa.fa-sign-out{"aria-hidden" => "true"}
+        = succeed "nd" do
+          %span e
+    .end_exam.step_btn_wrap
+      %a.ftr_btn.btn_bdr_lft{href: "/ucat_exercises/question1"}
+        %span> n
+        ext
+        %i.fa.fa-arrow-right{"aria-hidden" => "true"}
+#endexam_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog.exam_ready_modal.end_review_modal{role: "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title End Exam
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/close.png'
+      .modal-body
+        %p.mrgbtm20
+          = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/ucat/que_not.png'
+          You have chosen to end this exam
+        %p Are you sure you want to end this exam
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", onclick: "window.location.href='/ucat/dashboard/home'", type: "button"} yes
+        %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} no
+

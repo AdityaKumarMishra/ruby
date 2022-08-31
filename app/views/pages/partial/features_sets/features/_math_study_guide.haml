@@ -1,0 +1,12 @@
+#math_study_guide.feature-icon-container
+  .clearfix
+    .feature-icon
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content
+      %h4
+        Comprehensive study guide for your selected text of study
+        %span.enhance-features
+          =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+          = link_to 'Enhanced', recent_update_path(tab: product_line), class:appropriate_icon(product_line)
+      .text
+        %p.u-word-spacing All students will be provided with a comprehensive and detailed study guide for each topic under the Math Methods (CAS) Curriculum. These guides include step by step solutions, and cover all the fundamental concepts that will help you build a thorough knowledge and understanding of all the Mathematical concepts covered in the curriculum.

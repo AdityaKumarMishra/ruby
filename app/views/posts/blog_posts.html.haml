@@ -1,0 +1,65 @@
+- title "Blog"
+.container.pad-vert
+  .row.carousel-wrapper
+    .col-md-8
+      #blog-corousel.carousel.slide{"data-ride" => "carousel"}
+        / Indicators
+        / Wrapper for slides
+        .carousel-inner{:role => "listbox"}
+          - @posts.reverse.each_with_index do |post, index|
+            .item{ class: "#{ "active" if index == 0 }"}
+              -# This filters out posts without images
+              - if post.image.url(:medium) == "/images/medium/missing.png"
+                .missing-image
+              - else
+                -if post.alt_text.present?
+                  = image_tag post.image.url(:thumb), alt: "#{post.try(:alt_text)}"
+                -else
+                  = image_tag post.image.url(:thumb)
+              = link_to posts_by_product_line_path(id: post.friendly_id, type: post.product_line_type) do
+                .carousel-caption
+                  %h3
+                    = post.name
+                  %p
+                    = raw post.lead
+
+    .col-md-4.testdfg
+      %div#slider-nav.list-unstyled
+        - @posts.reverse.each_with_index do |post, index|
+          .list-item
+            = link_to posts_by_product_line_path(id: post.friendly_id, type: post.product_line_type) do
+              %h4= post.name
+            %a{"data-slide-to" => "#{index}", "data-target" => "#blog-corousel"}
+              %p By #{post.author}
+
+  .row
+
+    .col-md-4.pull-right
+      - if current_user && (current_user.superadmin? || current_user.admin?)
+        %br
+        = link_to 'New Post', new_post_path, class: "btn btn-default post-new-btn"
+        %br
+      #aside-posts
+        .categories
+          = simple_form_for :search, {url: posts_path, method: 'GET' } do |f|
+            = f.input :search, label: 'Search post', required: false
+            = f.submit 'Search',{class: "btn btn-default"}
+          %hr
+          %h4 CATEGORIES
+          - @categories.each do |category|
+            = link_to "#{category.name}(#{category.posts.length})", blog_category_path(category.id)
+            %br
+          %hr
+          %h4 Archive
+          - @archives.each do |date, count|
+            = link_to "#{date.strftime("%B")}(#{count})", posts_path(blog: params[:blog], search: {month: date.month, year: date.year})
+          %br
+          %a{:href => "https://www.facebook.com/GradReadyGAMSAT", :target => "_blank"}
+            %i.fa.fa-facebook-f{"aria-hidden" => "true"}
+          -# %a{:href => "", :target => "_blank"}
+            %i.fa.fa-twitter{"aria-hidden" => "true"}
+
+    .col-md-8
+      #post-list
+        = render @posts.reverse
+        = will_paginate @posts, renderer: BootstrapPagination::Rails

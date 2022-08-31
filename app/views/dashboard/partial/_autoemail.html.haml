@@ -1,0 +1,55 @@
+.panel.panel-default.flt_left
+	.panel-body.autoemai-form
+		= simple_form_for(@autoemail, html: {id: 'autoemail-form'}) do |f|
+			=f.hidden_field :category, value: @autoemail.category
+			.div_field
+				= f.label :title, "Title"
+				= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+				.fa.fa-minus.icn_sze
+				.div_info
+					Title of autoemail
+				= f.input :title, label: false
+			.div_field
+				= f.check_box :is_active, as: :boolean
+				= f.label :is_active, "Active Auto Response"
+				= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+				.fa.fa-minus.icn_sze
+				.div_error
+				.div_info
+					Ensure you select the check box when you want the email to fire as auto response
+			.div_field
+				= f.label :subject, "Email Subject"
+				= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+				.fa.fa-minus.icn_sze
+				.div_info
+					Subject line of the email
+				= f.input :subject, label: false
+			.div_field
+				= f.label :greeting, "Standard Greeting"
+				= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+				.fa.fa-minus.icn_sze
+				.div_info
+					Include text above email: Dear [Student First Name]
+				= f.select(:greeting, Autoemail.greetings.map { |value| [ value[0], value[1] ] },{ include_blank: false}, class: "form-control")
+			.div_field
+				= f.label :content, "Email Content"
+				= link_to 'Help', 'javascript:void(0)', class: 'help_link'
+				.fa.fa-minus.icn_sze
+				.div_info
+					%p
+						1. Add the email content.
+					%p
+						2. When you add links, please go to Link --> Advanced -> Style and add "color:#007833" for GAMSAT and "color:#007ecc" for UCAT to ensure that links colour matches the whole website theme.
+					%p
+						3. Any Links to open in new tab ensure you select Link --> Target and select Target value as "New Window(_blank)"
+				= f.input :content, label: false, as: :ckeditor, input_html: {ckeditor: { height: 300 } }
+			.div_field
+				- if @autoemail.id.present?
+					= f.button :submit, "Update Autoemail",class: 'btn 	btn-gradready green'
+				- else
+					= f.button :submit, "Create Autoemail",class: 'btn btn-gradready green'
+:javascript
+	$('.help_link').click(function(){
+		$(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+		$(this).closest('.div_field').find('.div_info').toggle();
+	});

@@ -1,0 +1,24 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Question
+      %th Date added
+      %th Expiration date
+      %th Tutor
+      %th Student
+      - if ["Administrator","Manager"].include? current_user.role
+        %th{colspan: 2} Actions
+
+  %tbody
+    - @essays.each do |essay|
+      %tr{'data-link': url_for(essay)}
+        %td= essay.title
+        %td= essay.question.html_safe
+        %td= format_date_short essay.date_added
+        %td= format_date_short essay.expiration_date
+        %td= essay.tutor
+        %td= essay.student
+        - if ["Administrator","Manager"].include? current_user.role
+          %td= link_to 'Edit', edit_essay_path(essay), class: 'btn btn-info btn-sm'
+          %td= link_to 'Destroy', essay, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'

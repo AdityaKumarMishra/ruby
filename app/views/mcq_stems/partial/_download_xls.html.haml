@@ -1,0 +1,10 @@
+- if @total_size <= 30
+  = link_to "Download Analytics", 'javascript:void(0)', class: 'btn btn-primary csv_btn csv_clicker'
+- else
+  = link_to "Download Analytics", '#', class: 'dropdown-toggle btn btn-primary csv_clicker', "data-toggle" => "dropdown"
+  %ul.dropdown-menu.drop-menu.user-xlsx-down
+    - (1..((@total_size.to_f / 1500.to_f).ceil)).each do |page_no|
+      - start = ((page_no - 1) * 1500) + 1
+      - ending = (start) + 1499
+      %li
+        = link_to "Download Data Rows #{start} - #{ending}", 'javascript:void(0)', class: 'csv_btn', pageno: page_no

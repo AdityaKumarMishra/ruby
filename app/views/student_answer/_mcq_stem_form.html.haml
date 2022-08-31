@@ -1,0 +1,44 @@
+#mcq_stem
+  .panel-body
+    .col-md-10.col-md-offset-1
+      #timer.pull-right.btn.btn-success
+        Time:
+        %span#minutes
+        %span :
+        %span#seconds
+      %h2
+        %strong= @mcq_stem.title.html_safe
+      = @mcq_stem.description.html_safe
+      - @mcq_stem.mcqs.each do |mcq|
+        = mcq.question.html_safe
+        = i.simple_fields_for :answers, index: mcq.id do |f|
+          =f.hidden_field :time_taken, id: "secondsTimer"
+          -# =f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+          =f.input :time_started, as: :hidden, input_html: { value: DateTime.now }
+          =f.collection_radio_buttons :mcq_answer_id, mcq.mcq_answers, :id, :answer, label: false, item_label_class: 'radio mg-left'
+
+  .panel-footer
+    .btn-group
+      =i.button :submit, "Submit answers", class: 'btn btn-default'
+
+      -#=link_to "Finish", student_answer_summary_path, class: "btn btn-danger cl-white"
+      -# =link_to "Finish", dashboard_manage_mcqs_path, class: "btn btn-danger cl-white"
+:javascript
+  var pad, sec, secT;
+  sec = 120;
+  secT = 0;
+  pad = function(val) {
+    if (val > 9) {
+      return val;
+    } else {
+      return '0' + val;
+    }
+  };
+  setInterval((function() {
+    $('#seconds').html(pad(--sec % 60));
+    $('#minutes').html(pad(parseInt(sec / 60, 10)));
+    $('#secondsTimer').val(pad(++secT));
+    if (sec === 0) {
+      console.log('end time');
+    }
+  }), 1000);

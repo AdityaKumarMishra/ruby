@@ -1,0 +1,22 @@
+%h1 Listing Job Application Forms
+
+%h4 Filter Job Application Forms
+.panel.panel-default
+  .panel-body
+    = form_for_filterrific @filterrific do |f|
+      .form-group
+        %label Type
+        =f.select(:with_open, @filterrific.select_options[:with_open],{include_blank: 'All'}, class: 'form-control')
+      .form-group
+        %label Search Application Form
+        = f.text_field :with_title, class: 'form-control', placeholder: 'Title'
+      = link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default'
+
+= link_to 'Search for Applicants', search_applications_job_applications_path, class: 'btn btn-gradready green'
+= link_to 'New Job application form', new_job_application_form_path, class: 'btn btn-gradready green'
+= link_to 'Archived Job applications', archived_jobs_job_application_forms_path, class: 'btn btn-primary'
+
+%br
+%br
+
+=render(partial: 'job_application_forms/table', locals: { job_application_forms: @job_application_forms })

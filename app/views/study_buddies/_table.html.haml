@@ -1,0 +1,87 @@
+#filterrific_results.filter_btm_space
+  %p
+    Total Buddies:
+    = study_buddies.count
+  =will_paginate study_buddies, renderer: BootstrapPagination::Rails
+  .wrapper1
+    .div1
+  .wrapper2
+    .div2
+      %table#table_id.gr-table-bordered.table-hover.courses_data_table
+        %thead
+          %tr
+            %th Name
+            %th Email Address
+            %th Phone number
+            %th Are you currently a GradReady student?
+            %th Which exam are you preparing for?
+            %th University
+            %th Degree
+            %th City
+            %th City area (your approximate location in your city)
+            %th Suburb/further location details
+            %th Which area of are you focusing on?
+            %th If you selected 'Other' for the previous question, please briefly describe what you are focusing your study on
+            %th Would you prefer an online or in-person Study Buddy?
+            %th Any other information you want to provide?
+
+        %tbody
+          - study_buddies.each do |buddy|
+            %tr
+              %td= buddy.name
+              %td= buddy.email
+              %td= buddy.phone_number
+              %td= buddy.grad_student == true ? "Yes" : "No"
+              %td= buddy.exam_to_prepare 
+              %td= buddy.university.name
+              %td= buddy.degree.name
+              %td= buddy.city.titleize rescue nil
+              %td= buddy.city_area.titleize rescue nil
+              %td= buddy.suburb
+              %td= buddy.focus_area.titleize rescue nil
+              %td.col_min_wdh= buddy.focus_study
+              %td.col_min_wdh= buddy.buddy_type.titleize rescue nil
+              %td= buddy.other_info
+
+  %p
+    Total Buddies:
+    = study_buddies.count
+  =will_paginate study_buddies, renderer: BootstrapPagination::Rails
+
+:javascript
+
+  $('#table_id').DataTable({
+    "bPaginate": false,
+    "ordering": false
+
+  });
+
+  $(function() {
+    $(".wrapper1").scroll(function() {
+      $(".wrapper2").scrollLeft($(".wrapper1").scrollLeft());
+    });
+    $(".wrapper2").scroll(function() {
+      $(".wrapper1").scrollLeft($(".wrapper2").scrollLeft());
+    });
+  });
+
+:css
+  .wrapper1,.wrapper2 {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .wrapper1 {
+    height: 20px;
+  }
+  .wrapper2 {
+    height: 100%;
+  }
+  .div1 {
+    width: 1500px;
+    height: 20px;
+  }
+  .div2 {
+    width: 1500px;
+    height:100%;
+  }

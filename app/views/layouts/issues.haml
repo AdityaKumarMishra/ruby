@@ -1,0 +1,11 @@
+-#This layout is nested inside of the application layout
+= content_for :content do
+  .col-md-8.col-md-offset-2{style: 'margin-top: 50px'}
+    -#= render 'issue_forum/new_ticket_button'
+    = content_for?(:issues_content) ? yield(:issues_content) : yield
+= render :template => 'layouts/application'
+- default_tag ||= nil
+- if defined? @content
+  = render partial: 'issue_forum/submit_ticket_modal', options: {content: @content}
+- else
+  / = render partial: 'issue_forum/submit_ticket_modal', options: {tag: @default_tag}

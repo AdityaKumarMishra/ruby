@@ -1,0 +1,107 @@
+.form_div
+  = simple_form_for(@online_mock_exam) do |f|
+    .form-inputs
+      = f.input :title
+      .div_field
+        = f.input :published, label: false
+        = f.label :published, label: "* Make Exam Visible to Student"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          Only tick this box if the exam is definitely ready to be seen and taken by the students.
+      %br
+      .div_field
+        = f.label :tags, label: "* Tags"
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+      .div_info
+        Only choose one tag
+      .div_field
+        = f.association :tags, collection: policy_scope(Tag).level_one_exclude_pt_public, label: false, input_html: { class: 'chosen-select tag-list' }
+      .div_field
+        - city = @online_mock_exam[:id] ? @online_mock_exam[:city] : ""
+        = f.input :city, collection: available_cities, include_blank: true, required: true, label: :City, selected: OnlineMockExam::cities[city], class: 'form-control'
+    %br
+
+      .div_field
+        = f.label :instruction, label: "* Instruction"
+        = f.input :instruction, as: :ckeditor, input_html: { ckeditor: { height: 400 }}, required: true, label: false
+      / %options_btns
+      /   %a{class: 'btn btn-gradready green options', id: 'video'}Videos
+      /   %a{class: 'btn btn-gradready green options',id: 'document'}Document
+      /   %a{class: 'btn btn-gradready green options',id: 'online_exam'}Videos
+      /   %a{class: 'btn btn-gradready green options',id: 'online_essay'}Essays
+      / #divvideo.online_exam_sub
+      /   .div_field{:style => "padding: 10px"}
+      /     %label *Upload Video
+      /     = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      /     .fa.fa-minus.icn_sze
+      /     .div_info
+      /       * Upload Exam Specific Video.
+      /     = f.simple_fields_for :online_mock_vods, @online_mock_vods do |t|
+      /       .form-group.lesson-form
+      /         = render 'online_mock_exams/online_mock_exam_vods', f: t
+      /       .links
+      /         = link_to_add_association 'Add Video', f , :online_mock_vods, partial: 'online_mock_exams/online_mock_exam_vods', class: "btn btn-primary btn-xs"
+      / #divdocument.online_exam_sub
+      /   .div_field{:style => "padding: 10px"}
+      /     %label * Upload Documents
+      /     = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      /     .fa.fa-minus.icn_sze
+      /     .div_info
+      /       Upload Exam Specific documents.
+      /     = f.simple_fields_for :online_mock_documents, @online_mock_documents do |t|
+      /       .form-group.lesson-form
+      /         = render 'online_mock_exams/document_fields', f: t
+      /       .links
+      /         = link_to_add_association 'Add Document', f, :online_mock_documents, partial: 'online_mock_exams/document_fields', class: "btn btn-primary btn-xs"
+      / #divonline_exam.online_exam_sub
+      /   .div_field{:style => "padding: 10px"}
+      /     %label * Select Online Exam
+      /     = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      /     .fa.fa-minus.icn_sze
+      /     .div_info
+      /       * Choose Online Exam.
+      /     = f.simple_fields_for :online_mock_exam_online_exams, @online_mock_exam_online_exams do |t|
+      /       .form-group.lesson-form
+      /         = render 'online_mock_exams/online_exam_fields', f: t
+      /       .links
+      /         = link_to_add_association 'Add Online Exam', f, :online_mock_exam_online_exams, partial: 'online_mock_exams/online_exam_fields', class: "btn btn-primary btn-xs"
+      / #divonline_essay.online_exam_sub
+      /   .div_field{:style => "padding: 10px"}
+      /     %label * Select Online Essays
+      /     = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      /     .fa.fa-minus.icn_sze
+      /     .div_info
+      /       * Choose Essay Specific Tutor.
+      /     = f.simple_fields_for :online_mock_exam_online_essays, @online_mock_exam_online_essays do |t|
+      /       .form-group.lesson-form
+      /         = render 'online_mock_exams/online_essay_fields', f: t
+      /       .links
+      /         = link_to_add_association 'Add Online Essays', f, :online_mock_exam_online_essays, partial: 'online_mock_exams/online_essay_fields', class: "btn btn-primary btn-xs"
+      .div_field
+        %label * Select Section
+        = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+        .fa.fa-minus.icn_sze
+        .div_info
+          * Choose Section.
+        - obj= f.object.new_record? ? @online_mock_exam.online_mock_exam_sections.new : @online_mock_exam_sections
+        = f.simple_fields_for :online_mock_exam_sections, obj do |t|
+          .form-group.lesson-form
+            = render 'online_mock_exams/online_mock_exam_sections', f: t
+          .links
+            = link_to_add_association 'Add Section', f, :online_mock_exam_sections, partial: 'online_mock_exams/online_mock_exam_sections', class: "btn btn-primary btn-xs"
+    .form-actions
+      %br
+      = f.button :submit, class: 'btn btn-gradready green extra', onclick: "show_loader();", data:{disable_with: "Please wait..."}
+:javascript
+  function show_loader(){
+    $(".loader_payment").show();
+    dd_loader();
+  }
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+  });

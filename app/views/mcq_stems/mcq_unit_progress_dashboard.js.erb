@@ -1,0 +1,2 @@
+<% js = escape_javascript(render(partial: 'mcq_stems/partial/mcq_unit_progress_table', locals: { mcq_stems: @mcq_stems, mcqs: @mcqs, section_items: nil }))%>
+$("#table_content").html("<%= js %>");

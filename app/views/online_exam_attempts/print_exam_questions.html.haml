@@ -1,0 +1,163 @@
+- content_for :page_heading, @online_exam.try(:title)
+.dashbord_right
+  .resource_col
+    %a.show_all_faq.default_btn.hvr-shutter-in-horizontal{href: "javascript:void(0)"} Hide All
+  .faq_list.para_fs14
+    - if current_user && (current_user.student?)
+      - if !@announcement.nil?
+        = render 'announcements/student_announcement', announcement: @announcement, title: 'Online Exams Announcements', user_announcement: @user_announcement
+        .faq_list_col
+          = render "pages/partial/feature_videos/exam_video", announcement: @announcement
+
+      .faq_list_col
+        %h4.mbot25
+        .statics_static_table.mtop_botm
+          %ul
+            %li
+              %span
+                %strong Overall Percentile
+            %li
+              %span
+              %strong
+                = percentile(@online_exam_attempt)
+        -if @online_exam_attempt.persisted?
+          -if request.variant == [:phone]
+            .mobile_table_border
+              %ul.tbl_head
+                %li.width_inc Section
+                %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                  M
+                  %span.heading_tool_tip.mrht37
+                    %p Marks scored
+                %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                  P
+                  %span.heading_tool_tip.mrht37
+                    %p Percentile
+              - @sections.each_with_index do |sa, index|
+                %ul.mobile_table_body.listing.tbl_head.bdr_none
+                  %li.mobile_mousehover_tool.width_inc
+                    =truncate(sa.section.title, length: 30)
+                    %ul.tool_tip
+                      %li
+                        =sa.section.title
+                      %li
+                        Marks:
+                        = sa.mark.nil? ? 0 : sa.mark
+                      %li
+                        Percentile:
+                        -if sa.completed_at.present?
+                          - sa.calculate_percentile
+                        -if !sa.percentile.nil?
+                          -if !sa.percentile.nan?
+                            = sa.percentile.round(1) if sa.percentile.present?
+                          -else
+                            N/A
+                        -else
+                          N/A
+                  %li.mobile_mousehover_tool.mobile_wdt_th.rht56
+                    = sa.mark.nil? ? 0 : sa.mark
+                  %li.mobile_mousehover_tool.mobile_wdt_th.rht15
+                    -if !sa.percentile.nil?
+                      -if !sa.percentile.nan?
+                        = sa.percentile.round(1) if sa.percentile.present?
+                      -else
+                        N/A
+                    -else
+                      N/A
+          -else
+            %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+              %thead
+                %tr
+                  %th Section
+                  %th Marks scored
+                  %th Percentile
+              %tbody
+                - @sections.each_with_index do |sa, index|
+                  %tr
+                    %td.mobile_mousehover_tool
+                      =sa.section.title
+                    %td
+                      =sa.mark.nil? ? 0 : sa.mark
+                    %td
+                      -if sa.completed_at.present?
+                        - sa.calculate_percentile
+                      -if !sa.percentile.nil?
+                        -if !sa.percentile.nan?
+                          = sa.percentile.round(1) if sa.percentile.present?
+                        -else
+                          N/A
+                      -else
+                        N/A
+        - else
+          -if request.variant == [:phone]
+            .mobile_table_border
+              %ul.tbl_head
+                %li.width_inc Section
+                %li.mobile_wdt_th.rht56.mobile_mousehover_tool
+                  M
+                  %span.heading_tool_tip.mrht37
+                    %p Marks scored
+                %li.mobile_wdt_th.rht15.mobile_mousehover_tool
+                  P
+                  %span.heading_tool_tip.mrht37
+                    %p Percentile
+
+              - @sections.each_with_index do |sa, index|
+                %ul.mobile_table_body.listing.tbl_head.bdr_none
+                  %li.mobile_mousehover_tool.width_inc
+                    =truncate(section, length: 30)
+                    %ul.tool_tip
+                      %li
+                        =sa.section.title
+                      %li
+                        Marks:
+                        N/A
+                      %li
+                        Percentile:
+                        N/A
+                  %li.mobile_mousehover_tool.mobile_wdt_th.rht56 N/A
+                  %li.mobile_mousehover_tool.mobile_wdt_th.rht15 N/A
+          -else
+            %table.table.mobile_data_table.table-bordered.table-hover.essay_table.exer-table
+              %thead
+                %tr
+                  %th Section
+                  %th Marks
+                  %th Percentile
+              %tbody
+                - @sections.each_with_index do |sa, index|
+                  %tr
+                    %td.mobile_mousehover_tool
+                      =sa.section.title
+                    %td N/A
+                    %td N/A
+
+
+
+      .faq_list_col.table-martop
+        %h4 Please enter scores
+        .course_frm.score-form
+          = render 'print_exam_questions_form', course: @current_course
+          = render 'print_exam_questions_form_2', course: @current_course unless @online_exam.try(:title).strip == "Diagnostic Assessment"
+
+      - unless @online_exam.document_file_name.nil?
+        #hover-text
+        .written_view_col
+          %iframe.embed-responsive-item.auto-hide-navbar#onlineexamGrad{src:"/pdfjs/web/student_viewer.html?file=#{@online_exam.full_url}", name: Time.now.to_i, style: "border: 0",width: "100%",height:"800"}
+
+:javascript
+
+  $('#onlineexamGrad').load(function(){
+    var iframe = $('#onlineexamGrad').contents();
+    iframe.find(".toolbarButton.print").addClass('disabled');
+    iframe.find(".toolbarButton.print").prop('disabled', true);
+    iframe.find(".toolbarButton.print").click(function(){
+      tid = "#{@online_exam.id}";
+      $.ajax({
+        url: "/online_exam_attempts/"+ tid + "/print_count",
+        type: "GET",
+        dataType: 'script',
+        data: {},
+      });
+    });
+  });

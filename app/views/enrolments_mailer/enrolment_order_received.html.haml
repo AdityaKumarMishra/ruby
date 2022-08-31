@@ -1,0 +1,35 @@
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "httpequiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+  %body
+    .wrapper{style: "padding: 30px 0px; font-family:arial"}
+      %table{style: "margin: 0 auto;max-width: 677px;width: 100%; font-family:arial;margin-top: 50px;padding: 12px 12px;"}
+        %tbody
+          %tr
+            %td{style: "font-weight: 700;"}
+              = "Dear #{@student.first_name}"
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Thank you for choosing GradReady.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Your enrolment has now been registered and is pending activation once your bank transfer payment has been confirmed. Note that this may take up to 3-5 business days to be processed. If after this time your account has yet to be activated, please notify us via a support ticket on the GradReady website.
+
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Once your enrolment is confirmed you will receive further emails, including a tax invoice. For hardcopy textbook orders, further details on when your textbook has been shipped and a tracking ID will also be provided.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px;"}
+              Once your enrolment is confirmed any relevant online components will become available through the student LMS on the GradReady website.
+          %tr
+            %td{style: "margin-top: 10px; float: left; line-height: 25px; font-size: 15px; margin-bottom: 50px;"}
+              If you have any queries during the interim period, please submit a support ticket on our website.
+          %tr
+            %td{style: "margin-bottom: 24px; float: left;font-size: 15px;"}
+              Kind regards,
+              %br
+              GradReady Student Success Team
+
+

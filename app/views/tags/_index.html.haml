@@ -1,0 +1,29 @@
+#filterrific_results
+  %table.gr-table.gr-table-bordered.table-hover
+    %thead
+      %tr
+        %th Name
+        %th Parent
+        %th{ colspan: '2' } Actions
+    %tbody
+      - @tags.each do |tag|
+        %tr
+          %td= tag.name
+          %td= tag.parent.name if tag.parent
+          %td= link_to 'Edit', edit_tag_path(tag), class: 'btn btn-info btn-sm'
+          -if current_user.superadmin? || current_user.admin?
+            -if tag.taggings.count == 0
+              %td= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+  - if !current_user.student?
+    %h3 Tree view
+    - Tag.walk_tree do |tag, level|
+      - if level==0
+        = link_to "#{tag.name}", "javascript:void(0)"
+        %br
+      - elsif level == 1
+        = link_to "|_ #{tag.name}", "javascript:void(0)"
+        %br
+      - else
+        = link_to "#{'__' * level} |_ #{tag.name}", "javascript:void(0)"
+        %br

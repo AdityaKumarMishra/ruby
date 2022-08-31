@@ -1,0 +1,276 @@
+- title "GAMSAT Quote Generator - Section 2"
+- meta_description "Take advantage of our free GAMSAT Quote Generator to access over 90 GAMSAT Section 2 Essay Topics that cover both Task A and B. Our GAMSAT Section 2 Quote Generator provides you with 5 quotes for each prompt, as well as the overarching theme."
+
+%section.talk_to_bg.home_faq.dashboard_bg
+  #typed.notification_bar
+    %p
+      = render 'pages/partial/announcement', product_line: map_path_to_prodline(request.env['PATH_INFO']), relative: false
+  .container.public_container
+    .support_col.looking_corse.text-center.gradready_question
+      %h1
+        Free GAMSAT
+        %sup ®
+        Quote Generator - Section 2 Essays
+%section.faq_wrapper.faq_details
+  .row
+    .container.public_container
+      .preparation_col.head_aftr_none
+        %p.mtop_zero
+          One of the key steps in preparing for Section 2 of the GAMSAT
+          %sup ®
+          exam is getting into the habit of writing GAMSAT
+          %sup ®
+          essays regularly - The earlier, the better. To help you do this, we’ve put together a free and comprehensive GAMSAT
+          %sup ®
+          Quote Generator with over 90 Section 2 Essay Prompts, covering 40+ themes to help you generate Quotes for GAMSAT Section 2 Essays.
+        %p
+          Take advantage of our GAMSAT
+          %sup ®
+          Quote Generator to get you started on your GAMSAT Essay Writing Preparation - Click the generate button to display a new random essay prompt!
+        .col-md-2
+        .col-md-8
+          #main_quote.highlight_box.gamsat-prep.mbot20
+            %h4#theme.blur
+              = "Theme: #{random_theme}"
+            %ol
+              -random_quote.each do |quote|
+                %li
+                  = quote.quote
+                  %i= quote.author
+          .gamsat_quote_btn{:style => "text-align: center;"}
+            %button.default_btn.hvr-shutter-in-horizontal.mbot10{:style => "color: #fff;font-size: 20px;outline: none",data: {remote: true}} Generate
+          .reveal_btn{:style => "text-align: center;"}
+            %button#reveal_theme_btn.default_btn.hvr-shutter-in-horizontal.mbot10{:style => "color: #fff;font-size: 15px;outline: none;padding-left: 10px;padding-right: 10px;"} Reveal Theme
+      .preparation_col.head_aftr_none
+        %h2#bestUseOfQuoteGenerator
+          How to make best use of GAMSAT Quote Generator
+        %p
+          The best way to use the GAMSAT
+          %sup ®
+          Random Quote Generator is to emulate the real exam as best you can. This means limiting the materials you have available to you, putting on a timer and trying your best to treat the essay like the real thing. This will help you build up important examination skills, whilst also improving the writing itself.
+        %p
+          You don’t have to do this from the start - but rather build up to this kind of situation gradually. This will allow you to focus on getting the quality of writing first, and then achieving this same quality under pressure.
+        %p
+          The other essential ingredient in practicing for this section of the GAMSAT
+          %sup ®
+          exam is to have your essays read and critiqued by people other than yourself. Although sometimes daunting, getting feedback on your writing is one of the most effective ways to improve. The more people you share your work with, the more likely you are to receive valuable and memorable feedback for developing your ideas and limiting your mistakes. It is worth consulting the GradReady essay marking service, where you can get 10 essays marked by our expert tutors with personal feedback within 72 hours.
+          %a{href: 'https://gradready.com.au/gamsat-preparation-courses/custom', target: :_blank}
+            %strong Learn more here.
+      .preparation_col.head_aftr_none
+        %h2
+          How do GAMSAT
+          %sup ®
+          Essay Quotes work?
+        %p
+          In each of the two tasks in GAMSAT
+          %sup ®
+          Section 2, you will be presented with five quotes that relate to one or more themes. Your task is to identify one of these themes and write a piece in response. Thus, it is important to remember that the quotes are there as a prompt or a guide, rather than a traditional essay question. It is not necessary to respond directly to any or all of the quotes, but rather to respond to the themes and ideas contained in the quotes.
+      .preparation_col.head_aftr_none
+        %h2#whatIsSection2
+          Understanding the Theme
+        %p.mtop_zero
+          The first step to writing your GAMSAT
+          %sup ®
+          essay is to dissect and understand the themes presented to you. This is not always as straightforward as it seems - There are often multiple themes included within a set of quotes. Nevertheless, the process can be summarised as below:
+          %ol
+            %li
+              Read the first two quotes
+            %li
+              Compare both quotes - Are there any related words or ideas?
+            %li
+              Note down any common words/themes
+            %li
+              Read the third quote - Are there any common ideas you can add to your list?
+            %li
+              Repeat with the rest of the quotes
+        %p.mtop_zero
+          After this process you should have a “word cloud” that points to the key overarching theme - However, it’s important to note that the stimuli are often designed such that there are a number of sub-themes that may be relevant. The point here is not to limit the scope of your writing but to expand it and bring in other relevant ideas - In fact it’s fine to draw on either the overarching theme or a sub-theme, so long as you demonstrate that you have actively engaged with the stimuli.
+        %p.mtop_zero
+          Let’s look at a worked example below:
+        .highlight_box.gamsat-prep.mbot20
+          %ol
+            %li
+              I don’t know half of you half as well as I shouldn’t like; and I like less than half of you half as well as you deserve.
+              %i (J.R.R. Tolkien)
+            %li
+              After a good dinner one can forgive anybody, even one’s own relations.
+              %i (Oscar Wilde)
+            %li
+              Water cannot be cut and blood is thicker than water.
+              %i (Malaysian Proverb)
+            %li
+              It is an absolute human certainty that no one can know his own beauty or perceive a sense of his own worth until it has been reflected back to him in the mirror of another loving, caring human being.
+              %i (John Joseph Powell)
+            %li
+              Isn’t everyone a part of everyone else?
+              %i (Budd Schulberg)
+        %p.mtop_zero
+          What are some themes you can identify? Let’s break it down quote by quote:
+        .tbl_responsive.fl_none
+          %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+            %thead
+              %th.text-center.width75 Quote
+              %th.text-center Themes
+            %tbody
+              %tr
+                %td
+                  %i
+                    I don’t know half of you half as well as I shouldn’t like; and I like less than half of you half as well as you deserve.
+                %td
+                  Relationship & Friendships
+                  %br
+                  Community & Social Norms
+                  %br
+                  Commentary on modern relationships
+              %tr
+                %td
+                  %i
+                    After a good dinner one can forgive anybody, even one’s own relations.
+                %td
+                  Family
+                  %br
+                  Forgiveness & Reconciliation
+                  %br
+                  Conflict
+              %tr
+                %td
+                  %i
+                    Water cannot be cut and blood is thicker than water.
+                %td
+                  Family
+                  %br
+                  Loyalty
+              %tr
+                %td
+                  %i
+                    It is an absolute human certainty that no one can know his own beauty or perceive a sense of his own worth until it has been reflected back to him in the mirror of another loving, caring human being.
+                %td
+                  Relationships
+                  %br
+                  Self-worth
+                  %br
+                  Commentary of social interaction
+              %tr
+                %td
+                  %i
+                    Isn’t everyone a part of everyone else?
+                %td
+                  Community & Society
+                  %br
+                  Individualism vs Collectivism
+        %p
+          As you can see there are multiple themes that you could draw from the above stimuli - It’s important to note that you don’t need to write about a theme that is presented in all of the quotes provided, you can choose a theme that may only appear once or twice in the stimuli.
+
+      .preparation_col.head_aftr_none
+        %h2#whatIsSection2
+          GAMSAT Essay Writing Tips
+        %p.mtop_zero
+          Developing and practising your essay writing skills is arguably the most important aspect of your
+          %a{href: "/gamsat-section-2", target: "_blank"}
+            %strong Section 2 Preparation,
+          and something you should aim to start from early on. Indeed, a lot of the preparation for Section 2 of the GAMSAT
+          %sup ®
+          Exam should revolve around simply writing a lot of essays, at least one a week. However, this advice comes with several caveats:
+          %ol
+            %li
+              %p.mtop_zero
+                You need to get feedback on your essays. It is vital that you get your friends, family, tutors and anyone else to read these essays, and be modest and inviting of critique. It is of utmost importance to be criticised and then learn from your mistakes. GradReady has an essay marking service where you can get 10 essays marked by our expert tutors with personal feedback within 72 hours.
+                %a{href: "/gamsat-preparation-courses/custom", target: "_blank"}
+                  %strong Learn more here.
+            %li
+              %p.mtop_zero
+                You need to possess a great deal of self-critique. After every essay you write, you must read it out loud to yourself, and listen if it makes sense. You can find some free
+                %a{href: "/gamsat-example-essay",target: "_blank"}
+                  %strong
+                    example Marked GAMSAT
+                    %sup ®
+                    Essays here.
+            %li
+              %p.mtop_zero
+                Don’t feel the need to write under time pressure from the word go. It’s more important that you develop and improve your essay writing skills before gradually applying realistic time pressure.
+            %li
+              %p.mtop_zero
+                You need to vary the type of essays that you write! You should make sure you try argumentative, personal reflective essays,
+                %a{href: "/posts/gamsat-preparation-courses/writing-the-creative-gamsat-essay",target: "_blank"}
+                  %strong fictional creative essays,
+                poetry, and any other medium that can work in the GAMSAT
+                %sup ®
+                exam. Even though it’s recommended you write an argumentative essay, you are able to write in almost any style in the ‘reflective’ essay segment – this is meant to be a creative endeavour and demonstrate that you can identify, and express emotions of the characters involved.
+      .preparation_col{:style => "margin-top: -40px;"}
+        %p.mtop_zero
+          Make sure to also sign up to our
+          %a.green{href: "/gamsat-preparation-courses/free-gamsat-trial",target: "_blank"}
+            %strong{:style => "font-size: 15px;"}
+              GAMSAT
+              %sup ®
+              Free Trial
+          to watch a recording of our GAMSAT
+          %sup ®
+          Essay Writing Workshop! Check out the 10 minute excerpt below:
+        .tab-content.mtop40
+          .container.video_container_width
+            #grad_video_testimonial.carousel.slide.blog_slider.result_slider{"data-ride" => "carousel", "data-interval" => "false"}
+              .carousel-inner.tab1
+                .item.active
+                  %video.video-js.vjs-default-skin.test_slide_height{controls: "", "data-autoplay" => "false", "data-autoresize" => "fit", "data-controls" => "true", "data-setup" => "{ \"playbackRates\": [2, 1.5, 1.2, 1, 0.5] }"}
+                    %source{src: "https://gradready-prod.s3-ap-southeast-2.amazonaws.com/public/Section2EssayWritingVideoExcerpt.mp4", type: "video/mp4"}
+
+        %p.mtop_zero
+          %ol.ordr_list
+            .boxed{:style => "margin-top: -30px;"}
+              Get Access to:
+              %ul{:style => "list-style-type:none;padding: 16px 0px;line-height: 0.9;"}
+                %li 50 Free MCQs
+                %li Diagnostics Exam
+                %li Week-By-Week Study Guide
+                %li Complete Session 3 Topic List
+                %li Recorded Webinars
+              .free_gamsat_icon
+                = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/free_trial.png', class: "icon30"
+              .button_right_section
+                %a.free_trial_btn.hvr-shutter-in-horizontal{href: "https://gradready.com.au/gamsat-preparation-courses/free-gamsat-trial", target: :_blank} GAMSAT Free Trial
+      .preparation_col.head_aftr_none.mg_bottm100
+        %p.mtop15
+          For more free advice and materials make sure to check out the list below:
+        %ol.ordr_list
+          %li
+            %h5
+              %a{href: "/gamsat-preparation",target: "_blank"}
+                How to study for the GAMSAT
+                %sup ®
+                Exam
+            %p.mtop_zero
+              A breakdown of how to approach study effectively and how to set up a GAMSAT® study schedule.
+          %li
+            %h5
+              %a{href: "/gamsat-section-2",target: "_blank"}
+                How to prepare for GAMSAT
+                %sup ®
+                Section 2
+            %p.mtop_zero
+              An overview of what to expect in Section 2 of the GAMSAT® Exam, how to prepare and how to perfect your essay technique.
+          %li
+            %h5
+              %a{href: "/gamsat-example-essay",target: "_blank"}
+                Free GAMSAT
+                %sup ®
+                Example Essays
+            %p.mtop_zero
+              Download our Essay Writing Guide and read through our free Example Essays featuring low, medium and high quality responses with feedback from tutors.
+
+
+:javascript
+  $('.quote_generate_btn.hvr-shutter-in-horizontal').on('ajax:success', function(evt, data) {
+  var target = $('#main_quote');
+  $(target).html(data);
+  });
+
+  $(document).on('click', '#reveal_theme_btn', function(evt, data){
+    $('.blur').removeClass('blur');
+  });
+
+:css
+  .blur {
+    color: transparent;
+    text-shadow: 0 0 12px #000;
+  }

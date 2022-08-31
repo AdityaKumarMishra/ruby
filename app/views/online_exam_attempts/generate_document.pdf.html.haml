@@ -1,0 +1,45 @@
+- section_attempts.each do |section_attempt|
+  .resource_col.mbot21.alwaysbreakbefore.alwaysbreakafter
+    - $question_num = 0
+    -sec_def = section_attempt.section.title.split(":")
+    .section_head_cont
+      %h1
+        =sec_def[0]
+      %h2
+        =sec_def[1]
+      %h4
+        = "#{section_attempt.section.duration} minutes"
+      %h4
+        = "(#{hourtominstr(section_attempt.section.duration)})"
+  - section_item_attempts = section_attempt.section_item_attempts
+  - sorted_mcq_stems = section_attempt.mcq_stems.uniq.sort_by{|s| s.to_s.scan(/\d+/).map{|s| s.to_i}}
+  .ques_exam_list
+    - sorted_mcq_stems.each_with_index do |mcq_stem, index|
+      - title = mcq_stem.title.split(":").last.gsub(/\d+/, ' \0 ').squish
+      - if index != 0
+        %h4.fnt-20.stem_title.alwaysbreakbefore
+          = title
+      -else
+        %h4.stem_title.fnt-20
+          = title
+      .mcq_stem_description{id: "#{mcq_stem.id}"}
+        = mcq_stem.description.html_safe
+      .clearfix
+      - section_attempt.section_item_attempts.where(mcq_stem: mcq_stem).includes(:section_item).order('section_items.mcq_id ASC').each_with_index do |s_attempt, ind|
+        .quest-col.question.avoidinsidepagebreak
+          %h4.pos_rel.fnt-20
+            - $question_num = $question_num + 1
+            %span.mcqNum= "#{$question_num}."
+            = s_attempt.mcq.question.html_safe if s_attempt.mcq.present?
+
+          = simple_fields_for "section_item_attempts[#{s_attempt.id}]", s_attempt do |e|
+            %ul.exer-list.ques_ans_list
+              - ans_ind = 0
+              = e.collection_radio_buttons(:mcq_answer_id, s_attempt.mcq.mcq_answers, :id, :answer,  { boolean_style: :inline, item_wrapper_tag: false }) do |builder|
+                - answer_text = builder.text.include?('<p>') ? builder.text : "<p>#{builder.text}</p>"
+                %li.admin_custom_radio{style: "list-style-type: none"}
+                  - answer_text =  answer_text.gsub("<p>", "<p class = 'img_in_ans'>") if answer_text.html_safe.include?("img")
+                  = list_exam_alphabet_style(ans_ind, answer_text.html_safe, "section_item_attempts_#{s_attempt.id}_mcq_answer_id_#{builder.object.id}").html_safe
+                  - ans_ind += 1
+
+- $question_num = nil

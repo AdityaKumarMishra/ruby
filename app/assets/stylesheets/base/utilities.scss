@@ -1,0 +1,192 @@
+/* Define low-level structural and positional traits that can be reused throughout the entire site. (EXPERIMENT STAGE)
+*/
+
+.u-text-spacing {
+  letter-spacing: 0.5px;
+}
+.u-word-spacing {
+  word-spacing: 2px;
+  font-size: 14px;
+}
+.u-line-height {
+  line-height: 1;
+}
+.u-text-black {
+  color: $black !important;
+}
+.u-text-green {
+  color: $gamsat-color !important;
+}
+.u-text-mgreen {
+  color: $medium-green !important;
+}
+.u-text-blue {
+  color: $umat-color !important;
+}
+.u-text-purple{
+  color: $vce-color !important;
+}
+.u-text-red {
+  color: $hsc-color !important;
+}
+.u-standard-link{
+  color: $black !important;
+}
+.u-standard-blink {
+  color: $standard-blue !important;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:visited {
+    color: $standard-blue !important;
+  }
+}
+.u-standard-text {
+  font-weight: normal;
+  font-size: 15px;
+}
+.u-standard-title {
+  @extend .u-standard-text;
+  font-weight: bold;
+}
+.u-standard-para {
+  @extend .u-standard-text;
+  line-height: 1.5;
+}
+.u-brown-link {
+  color: #C3834C !important;
+  &:hover {
+    color: #C3834C !important;
+    text-decoration: underline;
+  }
+}
+.u-green-link {
+  color: #4ca070 !important;
+}
+.u-lgreen-link {
+  color: #cce4d6 !important;
+}
+.u-dgreen-link {
+  color: $gamsat-color !important;
+}
+.u-blue-link {
+  color: $standard-blue !important;
+}
+.u-red-link {
+  color: #d17369 !important;
+}
+.u-darkred-link {
+  color: $hsc-color !important;
+}
+.u-purple-link {
+  color: #6a56b2 !important;
+}
+.u-green-bg {
+  background-color: $gamsat-color;
+}
+.u-blue-bg {
+  background-color: $umat-color;
+}
+.u-purple-bg {
+  background-color: $vce-color;
+}
+.u-red-bg {
+  background-color: $hsc-color;
+}
+.u-banner-title {
+  font-family: $font-subhead;
+  font-size: 18px;
+  line-height: 1.3;
+  color: $black;
+}
+.u-green-title {
+  color: $gamsat-color;
+  font-family: $font-head;
+  //font-weight: bold;
+}
+.u-green-big-title {
+  @extend .u-green-title;
+  font-size: 46px;
+}
+.u-big-title {
+  font-size: $font-head-size;
+  font-family: $font-head;
+}
+.u-blue-big-title {
+  @extend .u-big-title;
+  color: $umat-color;
+}
+.u-purple-big-title {
+  @extend .u-big-title;
+  color: $vce-color;
+}
+.u-red-big-title {
+  @extend .u-big-title;
+  color: $hsc-color;
+}
+.u-green-medium-title {
+  @extend .u-green-title;
+  font-size: 23px;
+}
+.u-green-title {
+  @extend .u-green-title;
+  font-size: 24px;
+}
+.u-medium-title {
+  font-size: 23px;
+  text-align: center;
+}
+.u-black-link {
+  color: $black !important;
+}
+.u-white-link {
+  color: $white !important;
+}
+.u-keep-left {
+  margin-left: -5px;
+}
+.u-hidden {
+  display: hidden;
+}
+.u-padding-left {
+  margin-left: 30px;
+}
+.u-spacing-top{
+  padding-top: 70px;
+}
+.u-sm-square {
+  width: 210px;
+  height: 210px;
+  margin-bottom: 1em;
+}
+.u-standard-form{
+  font-family: $font-subhead;
+  font-size: 17px;
+  label {
+    font-weight: normal !important;
+  }
+}
+.u-transparent-bg{
+  background-color: rgba(255,255,255,0.5);
+}
+.u-padding-top {
+  padding-top: 30px;
+}
+// Utility for image overlay for videos
+.u-img-container {
+  position: relative;
+  width: 192px;
+  height: 108px;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 47%;
+    right:0;
+    transform: translate(-48%);
+    display: none;
+    color: #FFF;
+    display: block;
+    background: rgba(0, 0, 0, .6);
+    width:97%;
+  }
+}

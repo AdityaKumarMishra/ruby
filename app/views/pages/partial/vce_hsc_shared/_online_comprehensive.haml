@@ -1,0 +1,11 @@
+#course-package-details
+  %p.u-word-spacing The Online package is an ideal alternative for students who cannot attend an Attendance course because of location or timing issues.
+  %p.u-word-spacing Through compiling student feedback, we picked our best tutors to develop an online classroom consisting of many hours of engaging and bite-sized videos.
+  %p.u-word-spacing Moreover, you will have online access to our team of devoted tutors.
+  %p.u-word-spacing All online materials are immediately available for access after purchase
+  - if @product_line == "GAMSAT" && !gamsat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'gamsat_improved_percentile'
+  -elsif @product_line == "UMAT" && !umat_improvment_scores[ProductVersion.course_types[@product_version.course_type].to_s.to_sym].nil?
+    %p.u-word-spacing
+      = render 'umat_improved_percentile'

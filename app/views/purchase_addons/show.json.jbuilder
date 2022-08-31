@@ -1,0 +1,1 @@
+json.extract! @purchase_addon, :id, :paid_at, :date_activated, :date_deactivated, :features, :subtotal, :gst, :paypal_fee, :paypal_payment, :paypal_token, :banktrans, :paypal, :bank, :created_at, :updated_at

@@ -1,0 +1,12 @@
+#review-exercssise-vid-modal.modal.latest_pop.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title GetClarity
+      .modal-body
+        You do not currently have access to GetClarity. Please visit the
+        = link_to 'Purchase Addons Tab', feature_logs_path
+        to purchase GetClarity feature.
+      .modal-footer

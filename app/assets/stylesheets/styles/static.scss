@@ -1,0 +1,408 @@
+.mtob {
+  margin: 30px 0px;
+}
+.full_wdt {
+  width: 100%;
+  float: left;
+}
+.pricing_onln_freeresources {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  h1 {
+    color: #009348;
+    font-size: 36px;
+  }
+
+  h4 {
+    font-size: 18px;
+    color: #fff;
+    background: #007833;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 0px;
+  }
+
+  p {
+    margin: 0px 0 10px 0;
+    padding: 0px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 24px;
+
+    &.fnt_14 {
+      font-size: 14px;
+    }
+    &.margntop {
+      margin: 40px 0px 0px;
+    }
+    .fnt_bold {
+      font-weight: 700;
+    }
+  }
+}
+
+a.trial_btn {
+  display: inline-block;
+}
+
+.greendot_img {
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/green_circle.png") no-repeat center top;
+  height: 17px;
+}
+
+.green_box_wdt {
+  width: 45%;
+}
+
+.green_box_img {
+  width: 50%;
+}
+
+.arrow_wdt {
+  width: 57px;
+  padding: 0px;
+  text-align: center;
+
+}
+
+.green_box {
+  border: 1px solid #00853e;
+  padding: 20px;
+  min-height: 265px;
+}
+
+.green_arrow {
+  margin: 137px 0px;
+  float: none;
+  display: inline-block;
+}
+
+.box_shadow {
+  box-shadow: 0px 5px 10px #e0e0e0;
+  margin-top: 75px;
+}
+
+.resource_img_box {
+  width: 25%;
+  float: left;
+  border: 1px solid #00853e;
+  border-right: 0px;
+  height: 217px;
+  padding: 10px 10px 15px;
+  box-shadow: inset 4px 4px 10px #e0e0e0;
+}
+
+.application-container a.resource_link {
+  font-size: 16px;
+  color: #333333 !important;
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/resource_arrow.png") no-repeat 0px 0px;
+  display: inline-block;
+  text-decoration: none;
+  padding-left: 40px;
+  width: 100%;
+  float: left;
+  text-align: left;
+  background-size: 22px;
+  &:hover {
+  color: #00853e;
+  }
+}
+
+.resource_txt_box {
+  width: 75%;
+  float: left;
+}
+
+.green_box.resource_box {
+  min-height: 182px;
+  box-shadow: inset 4px 4px 10px #e0e0e0;
+}
+
+.container.green_container {
+  max-width: 909px;
+}
+
+.green_bg {
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/price_green_bg.jpg") repeat-x;
+  padding: 45px 0px 16px;
+  margin: 30px 0px 0px;
+}
+
+.green_in_box {
+  width: 84.3%;
+  display: inline-block;
+  background: url("https://gradready.s3.ap-southeast-2.amazonaws.com/static/green_line.png") no-repeat center bottom;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  &.non_bg {
+  background: none;
+  }
+}
+
+.afford_live_btn {
+  background: rgba(35, 153, 90, 0.75);
+  text-transform: uppercase;
+  text-shadow: 0px 0px 10px #336f4e;
+  box-shadow: 0px 0px 5px #ccc;
+  line-height: 24px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: 300;
+  margin: 10px 0 25px 0;
+  padding: 8px 20px;
+  display: inline-block;
+}
+
+.price {
+  font-size: 42pt;
+  color: #00853e;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.per_hour {
+  font-size: 12pt;
+  color: #00853e;
+  font-weight: normal;
+  &.orget {
+    font-size: 14pt;
+    font-weight: bold;
+  }
+}
+
+p.green_txt {
+  color: #00853e;
+  line-height: 20px;
+  margin: 20px 0px;
+}
+.study_resource {height: 231px;}
+.application-container a.learn_more {
+  color:#fff !important;
+  font-size: 13pt;
+  font-weight: bold;
+  width: 122px;
+  height: 35px;
+  border-radius: 3px;
+  background: #007833;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 35px;
+  display: inline-block;
+}
+
+ul.price_list {
+  width: 100%;
+  float: left;
+  margin: 10px 0px 20px;
+  padding: 0px 20%;
+  li {
+    list-style: none;
+    float: left;
+    width: 100%;
+    color: #00853e;
+    text-align: left;
+    margin: 10px 0px;
+    span {
+      font-size: 23pt;
+      font-weight: bold;
+      float: left;
+      margin: -5px 5px;
+      width: 28px;
+    }
+    p {
+        font-size: 14px;
+        color: #00853e;
+        float: left;
+        width: 90%;
+    }
+  }
+}
+
+.frequently_head {
+  font-size: 24px;
+  color: #fff;
+  background: #007833;
+  margin: 0 0 30px 0;
+  padding: 8px 0px;
+
+}
+
+ul.faq_lst {
+  width: 100%;
+  float: left;
+  margin: 0px 0px 20px;
+  padding: 0px;
+  li {
+    list-style: none;
+    float: left;
+    text-align: center;
+    width: 100%;
+    margin:20px 0px 0;
+    h5 {
+        color: #00853e;
+        font-size: 20px;
+        text-transform: uppercase;
+        margin: 0 0 15px 0;
+        font-weight: bold;
+    }
+    p {
+        font-size: 14px;
+        color: #333333;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .green_box_img {
+    width: 49%;
+  }
+  .resource_img_box {
+    width: 30%;
+    padding: 20px 10px 20px;
+    min-height: 282px;
+  }
+  .green_box.resource_box {
+    min-height: 222px;
+  }
+  .resource_txt_box {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  h3 {
+    font-size: 30pt;
+  }
+  p {
+    font-size: 15.5pt;
+  }
+  .green_box_wdt {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .green_arrow {
+    display: none;
+  }
+  .green_box_img {
+    width: 100%;
+  }
+  .text-center {
+    text-align: center;
+  }
+  h4 {
+    font-size: 26pt;
+  }
+  .resource_img_box {
+    width: 40%;
+    padding: 20px 10px 20px;
+    min-height: 366px;
+  }
+  .green_box.resource_box {
+    min-height: 312px;
+  }
+  .resource_txt_box {
+    width: 60%;
+  }
+  ul.price_list {
+    padding: 0px 10%;
+  }
+  .frequently_head {
+    font-size: 25pt;
+  }
+  ul.faq_lst li h5 {
+    font-size: 18pt;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 767px) {
+  h3 {
+    font-size: 25pt;
+  }
+  p {
+    font-size: 14pt;
+    text-align: center;
+  }
+  .green_box_wdt {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .green_arrow {
+    display: none;
+  }
+  .green_box_img {
+    width: 100%;
+  }
+  .text-center {
+    text-align: center;
+  }
+  h4 {
+    font-size: 20pt;
+  }
+  a.trial_btn {
+    width: 65%;
+  }
+  .resource_img_box {
+    width: 100%;
+    padding: 20px 10px 20px;
+    min-height: auto;
+    height: auto;
+    border-right: 1px solid #00853e;
+  }
+  .application-container a.resource_link {
+    padding: 0 0 0 29px !important;
+    display: inline-block;
+    float:none;
+    width:auto;
+  }
+  ul.price_list li p {
+
+    width: 80%;
+}
+  .box_shadow {
+    margin-top: 25px;
+  }
+  .green_box.resource_box {
+    min-height: auto;
+  }
+  .resource_txt_box {
+    width: 100%;
+  }
+  ul.price_list {
+    padding: 0px 10%;
+  }
+  .frequently_head {
+    font-size: 20pt;
+  }
+  ul.faq_lst li h5, .afford_live_btn {
+    font-size: 16pt;
+  }
+  .price {
+    font-size: 32pt;
+  }
+  ul.faq_lst li p {
+    font-size: 13pt;
+  }
+}
+
+.overview_heading {
+  color: green;
+  margin-top: 18px;
+  padding-left: 0px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  margin: 0.67em 0;
+}
+.green_arrow img {
+  width: 35px;
+  height: auto;
+}
+.resource_icon {
+  margin-top: 10px;
+    height: auto;
+    width: 170px;
+}

@@ -1,0 +1,11 @@
+#confirm-ol-mock_exam-checkin-modal.modal.latest_pop.fade{:role => "dialog", :tabindex => "-1", }
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+        %h4.modal-title Online Mock Exam 1 Check in
+      .modal-body
+        = "Are you sure?"
+      .modal-footer
+        =link_to "Yes", online_mock_exam_attempt_temps_path, method: :post, class: "default_btn hvr-shutter-in-horizontal"
+        %button.default_btn.hvr-shutter-in-horizontal.mtop_zero{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} No

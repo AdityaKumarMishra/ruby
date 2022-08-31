@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%h1= @feature_log.master_feature.friendly_feature_name
+
+%p
+  %b Product Version
+  %p= @feature_log.master_feature.types.first
+
+%p
+  %b Cost (excluding GST):
+  = number_to_currency(@feature_log.product_version_feature_price.price_with_gst)
+
+%p
+  - if @feature_log.master_feature.essay?
+    %b Number of Essays
+    %b key:
+    = @feature_log.qty
+  - if @feature_log.master_feature.private_tutoring?
+    %b Hours Tutoring:
+    %b key:
+    = @feature_log.qty
+
+%p
+
+= link_to 'Back to Purchase Addons', feature_logs_path

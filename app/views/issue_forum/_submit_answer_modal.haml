@@ -1,0 +1,44 @@
+-options ||= {}
+.modal.modal-input-edit.latest_pop.fade{role: "dialog", id: options.include?(:edit_answer) ?  "edit-answer_#{options[:edit_answer].id}"  : 'answer-modal'}
+  .modal-dialog.modal-lg{:role => "document"}
+    .modal-content
+      -edit_answer = options.include?(:edit_answer) ? options[:edit_answer] : TicketAnswer.new
+      =simple_form_for([@question, edit_answer]) do |f|
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4.modal-title New Ticket
+        .modal-body
+          =f.error_notification
+          %label Student Question
+          .well
+            =@question.question.html_safe
+          .form-inputs
+            -if edit_answer.id.present?
+              =f.input :content, value: 'sdfs', as: :ckeditor, input_html: { id: "answer_content_#{edit_answer.id}", value: edit_answer.content.html_safe, ckeditor: { height: 400 }, required: true }
+            -else
+              =f.input :content, value: 'sdfs', as: :ckeditor, input_html: { id: "answer_content", value: "<br/><br/><br/>Kind Regards<br/>GradReady".html_safe, ckeditor: { height: 400 }, required: true }
+        .modal-footer
+          =f.button :submit, class: 'default_btn hvr-shutter-in-horizontal'
+
+:javascript
+  CKEDITOR.on("instanceCreated", function(event) {});
+
+  CKEDITOR.on('instanceReady', function (e) {
+    e.editor.on('change', function (event) {
+      var text = CKEDITOR.instances['answer_content'].getData();
+      window.sessionStorage.setItem("cke_text", text);
+    });
+  });
+
+  $('.submit-ticket').on('click', function () {
+    if ("#{escape_javascript edit_answer.id.nil?}"){
+      CKEDITOR.instances['answer_content'].setData(window.sessionStorage.getItem("cke_text"))
+    }
+  });
+
+  $('.default_btn').on('click', function () {
+    window.sessionStorage.clear();
+  });
+
+

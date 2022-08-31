@@ -1,0 +1,9 @@
+<% js = escape_javascript(
+  render(partial: '/appointments/partial/book', locals: { :@student_id => @student_id, :@tutor_id => @tutor_id, :@course_id => @course_id, :@appointment => @appointment })
+) %>
+$("#bookAppointment").html("<%= js %>");
+
+$('#makeAppointmentModal').modal({
+  show: true
+});
+CKEDITOR.replace('appointment_content');

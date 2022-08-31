@@ -1,0 +1,352 @@
+:javascript
+  vars = {};
+- @m_in_cart = 0
+-if request.variant.blank?
+  %table#feature_table.table.mobile_data_table.table-bordered.table-hover.essay_table
+    %thead
+      %tr
+        %th Name
+        %th.wdth180 Price (excluding gst)
+        %th.wdth250 Unit
+        %th.wdth20 Status
+        %th Actions
+    %tbody
+      %tr
+        %td.bdr_rght0{:colspan => "2"}
+          %h4.captl For Purchase
+        %td.bdr0
+        %td.bdr0
+        %td.bdr_left0
+      -if @selected_course.is_a? Integer
+        @selected_course = Course.find_by(id: @selected_course)
+      - @selected_course.product_version_feature_prices.order('id DESC').to_a.group_by(&:master_feature).each do |master_feature, pvfps|
+        %tr.parent_row
+          - unless master_feature.friendly_feature_name.include?('Diagnostics')
+            - pvfp = pvfps.select{|pfp| !pfp.is_additional }.sort_by(&:created_at).last
+            = hidden_field_tag :one_unit_price, pvfp.price, class: 'hidden_price'
+            = hidden_field_tag :feature_units_inputs, 1, class: 'hidden_units'
+
+            - if master_feature.essay?
+              - total_rem = Essay::MAX_COUNT - @essays_responses_count - @in_cart_essays.to_i
+              - @max_essays_range = total_rem > 10 ? 10 : total_rem
+
+            - if master_feature.exam_feature?
+              - @one_exam_price = pvfp.price
+              - @max_exams_range = @remaining_online_exams_count - @in_cart_exam_qty.to_i
+
+            %td= master_feature.friendly_feature_name
+            %td.PriceGeneric= number_to_currency(pvfp.price)
+            - if pvfp.subtype == 'subtype_1'
+              %td
+                .range-slider
+                  %input.js-range-slider-generic{:type => "text", :value => ""}
+              %td
+                %span.incart_status.not_cart Not In Cart
+              %td
+                .GenericAddToCart
+                  = render 'add_to_cart', a: pvfp
+            - else
+              %td 1
+              %td
+                %span.incart_status.not_cart Not In Cart
+
+              %td
+                .GenericAddToCart
+                  = render 'add_to_cart', a: pvfp
+      -if in_cart.present?
+        %tr
+          %td.bdr_rght0{:colspan => "2"}
+            %h4.captl In cart
+          %td.bdr0
+          %td.bdr0
+          %td.bdr_left0
+
+        - in_cart.each do |a|
+          %tr
+            -if a.master_feature.mcq_feature? || a.master_feature.exam_feature?
+              -a.feature_logs.each do |flog|
+                %tr
+                  - @m_in_cart = @m_in_cart + flog.qty.to_i
+                  %td= a.master_feature.friendly_feature_name
+                  %td= number_to_currency(flog.purchase_item.initial_cost)
+                  %td= flog.qty
+                  %td
+                    %span.incart_status In Cart
+                  %td
+                    = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), flog.purchase_item, method: :delete, data: {toggle: 'tooltip', placement: 'top', title: 'Cancel'}, onclick: 'dd_loader();'
+            -else
+              %td= a.master_feature.attendance? ? a.master_feature.title : a.master_feature.friendly_feature_name
+              %td= number_to_currency(a.price)
+              - if a.subtype == 'subtype_1'
+                - if a.master_feature.private_tutoring?
+                  %td= "#{a.qty} hours"
+                - elsif a.master_feature.essay?
+                  %td= "#{a.qty} essays"
+                - elsif a.master_feature.exam_feature? || a.master_feature.online_mock_exam?
+                  %td= "#{a.qty} exams"
+                - else
+                  %td= "#{a.qty}"
+              -else
+                %td 1
+              %td
+                %span.incart_status In Cart
+              %td
+                = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), a.feature_logs.first.try(:purchase_item), method: :delete, data: {toggle: 'tooltip', placement: 'top', title: 'Cancel'}, onclick: 'dd_loader();'
+
+      -if pending_confirmation.present?
+        %tr
+          %td.bdr_rght0{:colspan => "3"}
+            %h4.captl Features awaiting bank transfer confirmation
+          %td.bdr0
+          %td.bdr_left0
+        - pending_confirmation.each do |a|
+          %tr
+            -if a.master_feature.mcq_feature?
+              -a.feature_logs.each do |flog|
+                %tr
+                  %td= a.master_feature.friendly_feature_name
+                  %td= number_to_currency(flog.purchase_item.initial_cost)
+                  %td= flog.qty
+                  %td
+                    %span.incart_status.await Awaiting Confirmation
+                  %td
+            -else
+              %td= a.master_feature.attendance? ? a.master_feature.title : a.master_feature.friendly_feature_name
+              %td= number_to_currency(a.price)
+              - if a.subtype == 'subtype_1'
+                - if a.master_feature.private_tutoring?
+                  %td= "#{a.qty} hours"
+                - elsif a.master_feature.essay?
+                  %td= "#{a.qty} essays"
+                - elsif a.master_feature.exam_feature? || a.master_feature.online_mock_exam?
+                  %td= "#{a.qty} exams"
+                - else
+                  %td= "#{a.qty}"
+              -else
+                %td 1
+              %td
+                %span.incart_status.await Awaiting Confirmation
+              %td
+-else
+  %div.table_scrol_bar
+    %table#feature_table.table.table-bordered.table-hover.essay_table
+      %thead
+        %tr
+          %th Name
+          %th.wdth180 Price (excluding gst)
+          %th.wdth250 Unit
+          %th.wdth20 Status
+          %th Actions
+      %tbody
+        %tr
+          %td.bdr_rght0{:colspan => "2"}
+            %h4.captl For Purchase
+          %td.bdr0
+          %td.bdr0
+          %td.bdr_left0
+        - @selected_course.product_version_feature_prices.order('id DESC').to_a.group_by(&:master_feature).each do |master_feature, pvfps|
+          %tr.parent_row
+            - # Add code to not show acquired ones
+            - # Book Club Final
+            - unless master_feature.friendly_feature_name.include?('Diagnostics')
+              - pvfp = pvfps.select{|pfp| !pfp.is_additional }.sort_by(&:created_at).last
+              = hidden_field_tag :one_unit_price, pvfp.price, class: 'hidden_price'
+              = hidden_field_tag :feature_units_inputs, 1, class: 'hidden_units'
+
+              - if master_feature.essay?
+                - total_rem = Essay::MAX_COUNT - @essays_responses_count - @in_cart_essays.to_i
+                - @max_essays_range = total_rem > 10 ? 10 : total_rem
+
+              - if master_feature.exam_feature?
+                - @one_exam_price = pvfp.price
+                - @max_exams_range = @remaining_online_exams_count - @in_cart_exam_qty.to_i
+
+              %td= master_feature.friendly_feature_name
+              %td.PriceGeneric= number_to_currency(pvfp.price)
+              - if pvfp.subtype == 'subtype_1'
+                %td{ style: 'width: 200px;'}
+                  .range-slider
+                    %input.js-range-slider-generic{:type => "text", :value => ""}
+                %td
+                  %span.incart_status.not_cart Not In Cart
+                %td
+                  .GenericAddToCart
+                    = render 'add_to_cart', a: pvfp
+              - else
+                %td 1
+                %td
+                  %span.incart_status.not_cart Not In Cart
+
+                %td
+                  .GenericAddToCart
+                    = render 'add_to_cart', a: pvfp
+                  
+        / For Mobile In Cart
+        -if in_cart.present?
+          %tr
+            %td.bdr_rght0{:colspan => "2"}
+              %h4.captl In cart
+            %td.bdr0
+            %td.bdr0
+            %td.bdr_left0
+
+          - in_cart.each do |a|
+            %tr
+              -if a.master_feature.mcq_feature? || a.master_feature.exam_feature?
+                -a.feature_logs.each do |flog|
+                  %tr
+                    - @m_in_cart = @m_in_cart + flog.qty.to_i
+                    %td= a.master_feature.friendly_feature_name
+                    %td= number_to_currency(flog.purchase_item.initial_cost)
+                    %td= flog.qty
+                    %td
+                      %span.incart_status In Cart
+                    %td
+                      = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), flog.purchase_item, method: :delete, data: {toggle: 'tooltip', placement: 'top', title: 'Cancel'}, onclick: 'dd_loader();'
+              -else
+                %td= a.master_feature.attendance? ? a.master_feature.title : a.master_feature.friendly_feature_name
+                %td= number_to_currency(a.price)
+                - if a.subtype == 'subtype_1'
+                  - if a.master_feature.private_tutoring?
+                    %td= "#{a.qty} hours"
+                  - elsif a.master_feature.essay?
+                    %td= "#{a.qty} essays"
+                  - elsif a.master_feature.exam_feature? || a.master_feature.online_mock_exam?
+                    %td= "#{a.qty} exams"
+                  - else
+                    %td= "#{a.qty}"
+                -else
+                  %td 1
+                %td
+                  %span.incart_status In Cart
+                %td
+                  = link_to image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/cancel-icon.svg'), a.feature_logs.first.try(:purchase_item), method: :delete, data: {toggle: 'tooltip', placement: 'top', title: 'Cancel'}, onclick: 'dd_loader();'
+
+        -if pending_confirmation.present?
+          %tr
+            %td.bdr_rght0{:colspan => "3"}
+              %h4.captl Features awaiting bank transfer confirmation
+            %td.bdr0
+            %td.bdr_left0
+          - pending_confirmation.each do |a|
+            %tr
+              -if a.master_feature.mcq_feature?
+                -a.feature_logs.each do |flog|
+                  %tr
+                    %td= a.master_feature.friendly_feature_name
+                    %td= number_to_currency(flog.purchase_item.initial_cost)
+                    %td= flog.qty
+                    %td
+                      %span.incart_status.await Awaiting Confirmation
+                    %td
+              -else
+                %td= a.master_feature.attendance? ? a.master_feature.title : a.master_feature.friendly_feature_name
+                %td= number_to_currency(a.price)
+                - if a.subtype == 'subtype_1'
+                  - if a.master_feature.private_tutoring?
+                    %td= "#{a.qty} hours"
+                  - elsif a.master_feature.essay?
+                    %td= "#{a.qty} essays"
+                  - elsif a.master_feature.exam_feature? || a.master_feature.online_mock_exam?
+                    %td= "#{a.qty} exams"
+                  - else
+                    %td= "#{a.qty}"
+                -else
+                  %td 1
+                %td
+                  %span.incart_status.await Awaiting Confirmation
+                %td
+:javascript
+  $(".mobile_mousehover_tool").click(function(){
+    $(".mobile_mousehover_tool").removeClass("acitve");
+    $(this).addClass("acitve");
+    $(".overlay_show").addClass("show_tool_wrapper");
+  });
+
+  $(document).on('change', '#course_selector', function(event){
+    dd_loader();
+    window.location = '/feature_logs';
+  });
+
+  $(".PurchaseAddonsDropdown").on('change', function(){
+    var id = $(this).val()
+    $.ajax({
+      type: 'GET',
+      url: "/feature_logs/" + id +"/find_feature_price"
+    })
+  });
+
+  $(document).ready(function(){
+    var maxEssaysrange = parseInt('#{@max_essays_range}');
+    var maxExamsRange = parseInt('#{@max_exams_range}');
+    var maxRange = null;
+
+    if (maxEssaysrange != NaN)
+      maxRange = maxEssaysrange;
+    else if (maxExamsRange != NaN)
+      maxRange = maxExamsRange;
+    else
+      maxRange = 10;
+
+    var $range = $(".js-range-slider-generic");
+
+    $range.ionRangeSlider({
+      type: "single",
+      min: 1,
+      max: maxRange,
+      grid: true,
+      step: 1,
+      grid_num: 9,
+      hide_min_max: true,
+      onChange: function (data) {
+        var price = parseFloat($(data.input).parents('.parent_row').find('.hidden_price').val())
+        $(data.input).parents('.parent_row').find('.hidden_units').val(data['from']);
+
+        var cartWidget = $(data.input).parents('.parent_row').find(".GenericAddToCart").find('a');
+        var urlWithoutQueryString = cartWidget.attr('href').split('?')[0];
+        cartWidget.attr('href', urlWithoutQueryString + '?quantity=' + data['from']);
+
+        $(data.input).parents('.parent_row').find('.PriceGeneric').text(
+          Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format((price * data['from']))
+        );
+      }
+    });
+  });
+
+:css
+
+  @media only screen and (min-width: 267px) and (max-width: 767px){
+  #feature_table{
+    width:600px;
+    max-width: none;
+  }
+  .table_scrol_bar{
+    overflow-x: auto;
+  }
+  .faq_list .faq_list_col ul.tbl_head > li.mobile_wdt_th.mobile_wdt_th67 {
+      width: 100%;
+      line-height: 33px;
+  }
+  .faq_list .faq_list_col ul.tbl_head > li.mobile_wdt_th.mobile_wdt_th{
+       position: static;
+  }
+  .faq_list .faq_list_col ul.mobile_table_body.listing.tbl_head.bdr_none li {
+      border-bottom: 1px solid #ddd;
+  }
+    .faq_list .faq_list_col ul.tbl_head .mob_purchase_head {
+      border-bottom: 1px solid #ddd;
+  }
+
+    span.mobile_data_label_show.feature_log {
+        padding-left: 0px;
+        margin: 10px 0px;
+    }
+        .faq_list .faq_list_col ul.mobile_table_body.listing.tbl_head.bdr_none li:first-child {
+        border-bottom: 1px solid #ddd;
+    }
+  }

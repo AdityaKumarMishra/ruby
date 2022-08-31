@@ -1,0 +1,73 @@
+<% if @product_versions.present? %>
+  <% options = "" %>
+  <% @product_versions.each do |p| %>
+    <% options += "<option value=#{p.id} #{params[:filterrific][:by_product_version]&.include?(p.id.to_s) ? 'selected' : ''}> #{p.name}  </option>" %>
+  <% end %>
+  <% options = options.html_safe %>
+  $('.massEmailPvlabel, .massEmailMslabel').removeClass('hide');
+  $("#filterrific_by_product_version").removeClass('hide');
+  $("#filterrific_by_master_feature").removeClass('hide');
+  $("#filterrific_by_product_version").html('<%= options %>');
+  $("#filterrific_by_product_version").trigger("chosen:updated");
+<% else %>
+  $('.massEmailPvlabel, .massEmailMslabel').addClass('hide');
+  $("#filterrific_by_product_version").html('<option value> </option>')
+  $("#filterrific_by_product_version").addClass('hide');
+  $("#filterrific_by_master_feature").addClass('hide');
+<% end %>
+
+<% if @master_features %>
+  <% options = "" %>
+  <% @master_features.each do |p| %>
+    <% options += "<option value=#{p.id} #{params[:filterrific][:by_master_feature]&.include?(p.id.to_s) ? 'selected' : ''}> #{p.name} </option>" %>
+  <% end %>
+  <% options = options.html_safe %>
+  // $('.massEmailMslabel').removeClass('hide');
+  // $("#filterrific_by_master_feature").removeClass('hide');
+  $("#filterrific_by_master_feature").html('<%= options %>');
+  $("#filterrific_by_master_feature").trigger("chosen:updated");
+<%# else %>
+  // $('.massEmailMslabel').addClass('hide');
+  // $("#filterrific_by_master_feature").html('<option value> </option>')
+  // $("#filterrific_by_master_feature").addClass('hide');
+<% end %>
+
+var hr = $('#MassEmailCsvLink').attr('href');
+<% if params['filterrific'].present? %>
+  <% params['filterrific'].each do|k,v| %>
+    hr += "&filterrific[<%= k%>]=<%=v%>"
+  <%end %>
+<%end %>
+$('#MassEmailCsvLink').attr('href', hr);
+<% if @courses.present? %>
+  <% options = "" %>
+  <% options += "<option value>All</option>"%>
+  <% @courses.each do |p| %>
+    <% options += "<option value=#{p.id} #{p.id.to_s == params[:filterrific][:by_course] ? 'selected' : ''}> #{p.name} </option>" %>
+  <% end %>
+  <% options = options.html_safe %>
+  $('.massEmailCrlabel').removeClass('hide');
+  $("#filterrific_by_course").removeClass('hide');
+  $("#filterrific_by_course").html('<%= options %>');
+<% else %>
+  $('.massEmailCrlabel').addClass('hide');
+  $("#filterrific_by_course").html('<option value> </option>')
+  $("#filterrific_by_course").addClass('hide');
+<% end %>
+
+<% js = escape_javascript(
+  render(partial: 'user_emails/list', locals: { users: @users, all_users: @all_users, users_type: @users_type })
+) %>
+$("#filterrific_results").html("<%= js %>");
+
+<% js1 = escape_javascript(
+  render(partial: 'users/download_analytics', locals: { all_users: @all_users, users: @users, users_type: @users_type })
+)   %>
+
+$("#filterrific_download_xls").html("<%= js1 %>");
+ var editor = CKEDITOR.instances['email_users_content'];
+if (editor){
+  editor.destroy(true); 
+  CKEDITOR.replace('email_users_content');
+}
+$(".loader_payment").hide();

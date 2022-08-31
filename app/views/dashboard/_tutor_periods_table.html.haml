@@ -1,0 +1,20 @@
+- if @tutors.present?
+  =will_paginate @tutors, renderer: BootstrapPagination::Rails
+%table.table.table-bordered.table-hover#table_id
+  %thead
+    %tr
+      %th Tutor
+      %th State
+      %th Subject
+      %th Appointments Count
+  %tbody
+    - if @tutors.present?
+      - @tutors.each do |tutor|
+        - tutor_appointments = appointments.where(status: 0, tutor_id: tutor.id)
+        %tr{'data-link': tutor_appointments_path(tutor)}
+          %td= tutor.full_name
+          %td= tutor.state
+          - tut_tags = tutor.tutor_profile.tags
+          %td= tut_tags.first.name if tut_tags.present?
+          - ap_hours = appointment_hours.values_at(*tutor_appointments.pluck(:id)).compact.flatten
+          %td= ap_hours.present? ? ap_hours.map(&:hours).compact.sum : 0

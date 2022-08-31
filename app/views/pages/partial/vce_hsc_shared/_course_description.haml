@@ -1,0 +1,62 @@
+#course-package-details
+  -if defined? product_version
+    - course_type = ProductVersion.course_types[product_version.course_type]
+    - if course_type == 3
+      %p.u-word-spacing Interview Ready will help you take that final step to medical school. Pioneered by Dr. Stuart Saunders, a former University of Western Australia lecturer in philosophy and a current doctor, Interview Ready is updated yearly - accurately reflecting the latest practices in medical admissions.
+      %p.u-word-spacing
+        3 years in a row, InterviewReady has produced an amazing over
+        %a.u-green-link{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        for its attendees. This unparalleled achievement is made possible by a detailed analysis by the GradReady team on the MMI process and how each student measures up against the process. Firstly, the MMI black box is demystified by a comprehensive breakdown and discussion of various important scenarios in our small interaction-orientated classes of 16. Moreover, you will then attend the most realistic mock-MMI available in Australia and be given detailed feedback of your performance at each station. All of your interviewers will be successful medical students who thoroughly understand why each scenario is relevant to the lives of doctors.
+    - elsif course_type == 2
+      %p.u-word-spacing
+        Like our InterviewReady Comprehensive package, the Essentials package contains all the useful tips and advice. We will still ensure that the MMI is demystified by someone who understands the process. The only difference between the 2 courses is that the Mock MMI day will be replaced by a tutor facilitated peer-run MMI day, which was the traditional MMI training model - until GradReady introduced its model, which achieved an amazing
+        %a.u-green-link{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 100%
+        medical school
+        %a.u-green-link{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u admission rate
+        in 2014 and have achieved an over
+        %a.u-green-link{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        ever since.
+      %p.u-word-spacing
+        Despite the success of our Comprehensive package, we recognise that not every student is able to fund the cost of having 10 staff and 8 rooms needed for the Mock MMI day. Therefore we have created the Essentials package to provide some key pieces of information and opportunities for monitored practise.
+    - elsif course_type == 9
+      %p.u-word-spacing
+        Interview Ready will help you take that final step to medical school. Pioneered by Dr. Stuart Saunders, a former University of Western Australia lecturer in philosophy and a current doctor, Interview Ready is updated yearly - accurately reflecting the latest practices in medical admissions.
+      %p.u-word-spacing
+        3 years in a row, Interview Ready has produced an amazing over
+        %a.u-green-link{:href => gamsat_preparation_courses_student_testimonials_path(type: 'interviewready')}
+          %b
+            %u 90% admission rate
+        for its attendees. The Online package includes all of the online content from our Attendance Comprehensive and Attendance Essentials packages, making it perfect for students whose interview dates are before when our Attendance Classes are held or who live in rural locations. The exemplar interview response videos and bank of MMI questions will be sure to help you to brush up on your interview skills and become familiar with the qualities medical schools look for in future doctors.
+
+    - else
+      %p.u-word-spacing If you know that you will not have time to use all of our features, then this is the package for you.
+      - if @product_line == "UMAT"
+        %p.u-word-spacing
+          We understand that not everyone would have the time to work through the comprehensive set of preparation material that GradReady provides. Therefore, we give you the option of choosing any combination of UCAT
+          %sup ®
+          products available (except Attendance classes).
+      - else
+        %p.u-word-spacing
+          We understand that not everyone would have the time to work through the comprehensive set of preparation material that GradReady provides. Therefore, we give you the option of choosing any combination of GAMSAT
+          %sup ®
+          products available (except Attendance classes).
+      %p.u-word-spacing Please note that we highly recommend purchasing the Online Course Book, if you purchase Online Videos.
+      %p.u-word-spacing All online materials are immediately available for access after purchase.
+  - else
+    %p.u-word-spacing If you know that you will not have time to use all of our features, then this is the package for you.
+
+    %p.u-word-spacing
+      We understand that not everyone would have the time to work through the comprehensive set of preparation material that GradReady provides. Therefore, we give you the option of choosing any combination of
+      = "#{@product_line}"
+      %sup ®
+      products available (except Attendance classes)."
+    %p.u-word-spacing Please note that we highly recommend purchasing the Online Course Book, if you purchase Online Videos.
+    %p.u-word-spacing All online materials are immediately available for access after purchase.

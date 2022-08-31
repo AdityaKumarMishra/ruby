@@ -1,0 +1,2 @@
+module FeatureLogsHelper
+end

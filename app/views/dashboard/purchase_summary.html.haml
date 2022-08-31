@@ -1,0 +1,72 @@
+%h2 Purchase Summary
+
+%h3 Course Enrolments
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Course
+      %th Payment Method
+      %th Date Purchased
+      %th Total
+      %th Additional Info
+      %th Discount Code
+  %tbody
+    - @purchased_enrolments.each do |c|
+      %tr
+        %td
+          = c.course.name
+        - if c.purchase_item.present?
+          %td
+            =c.purchase_item.order.purchase_method
+
+          %td
+            = c.purchase_item.order.paid_at.getlocal.strftime("%d %b %Y %l:%M:%S %p") if c.purchase_item.order.paid_at.present?
+          %td
+            = c.purchase_item.total_item_cost
+          %td
+            = link_to "See Purchase Summary", c.purchase_item.order
+          %td
+            - if c.purchase_item.order.generated_promo.present? && c.purchase_item.order.generated_promo.token.present?
+              = link_to user_promo_link_url(c.purchase_item.order.generated_promo.token), user_promo_link_url(c.purchase_item.order.generated_promo.token)
+        -elsif c.course.price == 0
+          %td
+            Free
+          %td
+          %td
+          %td
+        - else
+          %td
+          %td
+          %td
+          %td
+
+
+%h3 Addon Purchases
+%table.table.table-bordered.table-hover
+  %tbody
+    %tr
+      %td Addons Purchased
+      %td Payment Method
+      %td Date Purchased
+      %td Total
+      %td Additional Info
+
+    - @purchased_addons.each do |a|
+      %tr
+        %td
+          = a.master_feature.name
+        - if a.purchase_item.present?
+          %td
+            =a.purchase_item.order.purchase_method ||= ''
+
+          %td
+            = a.purchase_item.order.paid_at.getlocal.strftime("%d %b %Y %l:%M:%S %p") if a.purchase_item.order.paid_at.present?
+          %td
+            = a.purchase_item.total_item_cost
+          %td
+            = link_to "See Purchase Summary", a.purchase_item.order
+        - else
+          %td
+          %td
+          %td
+          %td

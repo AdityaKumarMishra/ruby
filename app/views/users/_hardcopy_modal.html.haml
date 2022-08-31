@@ -1,0 +1,15 @@
+#hardCopyCheck.modal.fade.latest_pop{"aria-hidden" => "true", "aria-labelledby" => "textbookCheck", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.no_confirm.close#hardcopy-modal-close{ "aria-label"=>"Close", "data-dismiss" => "modal", :type => "button"}  
+          %span{"aria-hidden"=>"true"}×
+        %h4.modal-title Select Textbooks
+      .modal-body
+        %p
+          You have the option of choosing either online OR hardcopy textbook at no extra charge. Alternatively, you may choose both options for an extra charge of
+          / = "$#{hardcopy_feature.first.price_after_discount.to_i}"
+          = "$#{hardcopy_feature.first.price.to_i}"
+      .modal-footer
+        .text-center
+          %button.btn.default_btn.resp_btn.no_confirm.hvr-shutter-in-horizontal{"data-dismiss" => "modal", :type => "button"} OK

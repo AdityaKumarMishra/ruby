@@ -1,0 +1,37 @@
+= simple_form_for(@diagnostic_test) do |f|
+  =# f.error_notification
+
+  .form-inputs
+    = f.input :title
+    .div_field
+      = f.input :published, label: false
+      = f.label :published, label: "Make Exam Visible to Student"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Only tick this box if the exam is definitely ready to be seen and taken by the students.
+    .div_field
+      = f.input :is_finish, label: false
+      = f.label :is_finish, label: "Force student to complete test within allotted time"
+    .div_field
+      = f.label :tags, label: "Tags"
+      = link_to 'Help', 'javascript:void(0)', class: 'help_link'
+      .fa.fa-minus.icn_sze
+      .div_info
+        Only choose one tag
+      .div_field
+        = f.association :tags, collection: policy_scope(Tag).level_one_exclude_pt_public, label: false, input_html: { class: 'chosen-select tag-list' }
+    = f.input :instruction
+
+
+  .form-actions
+    = f.button :submit , class: 'btn btn-gradready green'
+
+:javascript
+  $(document).ready(function(){
+    $('.help_link').click(function(){
+      $(this).closest('.div_field').find('.icn_sze').toggleClass('fa fa-minus fa fa-plus');
+      $(this).closest('.div_field').find('.div_info').toggle();
+    });
+
+  });

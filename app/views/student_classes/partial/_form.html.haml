@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for(@student_class) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :name
+        = f.input :size
+        = f.input :item_coverd
+        = f.association :tutors
+        = f.association :students, :collection => @student_class.availeble_students
+        = f.association :active_subject, :collection => ActiveSubject.with_course_version_by_title,  as: :grouped_select, :group_method => :last, :label => 'Subject'
+
+        -#- if @student_class.subject
+        -#  = f.input :subject, :collection => Subject.with_course_by_title, selected: @student_class.subject.id, as: :grouped_select, :group_method => :last
+        -#- else
+        -#  = f.input :subject, :collection => Subject.with_course_by_title,  as: :grouped_select, :group_method => :last
+      .form-actions
+        = f.button :submit

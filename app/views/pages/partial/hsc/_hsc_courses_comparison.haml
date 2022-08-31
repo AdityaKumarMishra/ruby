@@ -1,0 +1,68 @@
+- if defined? popup
+  .close-btn-hsc.pull-right
+    X
+
+#hsc-packages.hsc_rd_clr
+  .whte_bg_trans
+    .container.no_padding
+      .hsc_content
+        %h2
+          HSC
+          %sup.r_icon{ style: "margin-right: -30px;left: -21px;"} ®
+          %span Ready COURSES
+        %p
+          Comprehensive and Personalised HSC
+          %sup.r_icon{ style: "margin-right: -4px;"} ®
+          prep courses
+        %h3.ribbon-banner-hsc
+          All our
+          %b
+            %i Attendance
+          courses are capped at the maximum number of 10 students!
+
+      %span.grn_clr.mbottom.imgg-mang.red_color
+        =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_hsc.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+        Enhanced
+        =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/str_hsc.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+        New
+
+  %center
+    .categor_col.margin-bt-30
+      %ul.nav.nav-tabs
+        %li.active{:active => "true", :heading => "English Advanced"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#tab1", "tab-heading-transclude" => ""}
+            %i.fa.fa-pencil.subject{"aria-hidden" => "true"}
+            English Advanced
+        %li{:heading => "Mathematics Extension 1"}
+          %a.u-darkred-link{"data-toggle" => "tab", :href => "#tab2", "tab-heading-transclude" => ""}
+            %i.fa.fa-calculator.subject{"aria-hidden" => "true"}
+            Mathematics Extension 1
+    .tab-content
+      #tab1.tab-pane.active
+        = render 'pages/partial/product_version_table/table', product_line: 'hsc', product_info: @hsc_product_info, early_bird: false, subject: 'english'
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.hsc
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  %a.u-white-link{:href => dynamic_product_version_uri('custom', 'HSC', 'english')} CREATE YOUR OWN COURSE
+
+        = render 'pages/partial/hsc/hsc_discount_links'
+      / Math Product Versions
+      #tab2.tab-pane.math-tab
+        .tab-pane
+          = render 'pages/partial/product_version_table/table', product_line: 'hsc', product_info: @hsc_product_info, early_bird: false, subject: 'math'
+        %br
+        %br
+        .course-description.gamsatready
+          .col-md-12.ml12
+            .package-description
+              .description-tag
+                %span.description-tag-text.hsc
+                  %span.txt_blck LOOKING FOR SOMETHING DIFFERENT?
+                  %a.u-white-link{:href => dynamic_product_version_uri('custom', 'HSC', 'math')} CREATE YOUR OWN COURSE
+
+          = render 'pages/partial/hsc/hsc_discount_links'

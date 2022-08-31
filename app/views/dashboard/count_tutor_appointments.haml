@@ -1,0 +1,12 @@
+= select_tag 'appointment_view', options_for_select(appointment_view_selections, :selected=> params[:selection] || appointment_view_selections_default), { class: 'form-control ap_select' }
+%br
+#filterrific_results
+  = render(**display_args(params[:selection]))
+
+:javascript
+  $(function () {
+    $(".ap_select").on('change', function(){
+      var selection = $(this).val()
+      window.location.href = '/dashboard/count_tutor_appointments?selection='+selection+'&reset=true';
+    })
+  });

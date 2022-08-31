@@ -1,0 +1,103 @@
+- if product_line == 'gamsat' || product_line == 'umat'
+  .component-title.under_line
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'learning_tools')}
+      LEARNING TOOLS
+-else
+  .component-title LEARNING TOOLS
+
+- if product_line == 'gamsat'
+
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_1000')}
+    1000 page Online Text
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_timeline')}
+    Study Timeline and Prep Guide
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'Essay-Writing-Guide')}
+    Comprehensive Essay Writing Guide
+  / %li
+  /   =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+  /   My Performance Profile®
+  %li
+    =image_tag dynamic_new_star_images(product_line), width: '15', height: 'auto'
+    Mobile Friendly - Study on the Go
+
+- elsif product_line == 'umat'
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_umat.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_1000')}
+    Comprehensive Online Text
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_umat.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_timeline')}
+    Study Timeline Guide
+
+- elsif (product_line == 'hsc' || 'vce') && subject == 'math'
+  %li
+    =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'math_study_guide')}
+      Comprehensive Study Guide
+
+%li
+  =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    = product_line.upcase
+    %sup{ style: "top: -0.4em;font-size: 77%;"} ®
+    Preparation Strategy
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_strategy')}
+      = product_line.upcase
+      %sup{ style: "top: -0.4em;font-size: 77%;"} ®
+      Strategy
+%li
+  =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    Quality Assurance System
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_quality')}
+      Quality Assurance System
+%li
+  =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+  - if product_line == 'gamsat' || product_line == 'umat'
+    Cross Referencing System
+  -else
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_Cross')}
+      Cross Referencing System
+
+- if product_line == 'gamsat'
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_Documents')}
+    Supplemental Resources
+
+  %li
+    =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '15', height: 'auto'
+    / %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'feature_Documents')}
+    48 Example Essays
+
+- if (product_line == 'hsc' || 'vce') && subject == 'english'
+  %li
+    =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'english_study_guide')}
+      Individual and Comparative text based study guides
+  - if product_line == 'vce'
+    %li
+      =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+      %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'language_analysis')}
+        Language Analysis Guide
+  - else
+    %li
+      =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+      %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'discovery_guide')}
+        Area of Study: Discovery Guide
+
+  %li
+    =image_tag dynamic_enhance_images(product_line), width: '15', height: 'auto'
+    %a{:href => dynamic_product_version_uri(product_version, product_line, subject, 'Essay-Writing-Guide')}
+      Essay Writing Guide
+
+

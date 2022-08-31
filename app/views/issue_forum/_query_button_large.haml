@@ -1,0 +1,16 @@
+-# A button that links to the issue forum page for a particular piece of content
+-# Requires a 'content' local
+-# This is the large version - used where space is not an issue
+
+-if current_user && current_user.has_clarity_feature.present?
+  = render 'issue_forum/get_clarity', content: content
+- if current_user.student?
+  - if @previous_vod.present?
+    %a.btn.btn-default{class: "new-ticket large", href: url_for(controller: 'vods', action: 'show', id: @previous_vod)}
+      %i.fa.fa-arrow-left{'aria-hidden' => 'true'}
+      Previous Video
+
+  - if @next_vod.present?
+    %a.btn.btn-default{class: "new-ticket large", href: url_for(controller: 'vods', action: 'show', id: @next_vod)}
+      Next Video
+      %i.fa.fa-arrow-right{'aria-hidden' => 'true'}

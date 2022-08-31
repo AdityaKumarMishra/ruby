@@ -1,0 +1,43 @@
+-if documents.present?
+  #filterrific_results
+    -if !current_user.student?
+      %p.text-info
+        %b
+          Results:
+          = documents.count
+    = will_paginate documents, renderer: BootstrapPagination::Rails
+    %table.table.table-bordered.table-hover
+      %thead
+        %tr
+          %th Name
+          %th Topic
+          - unless current_user.student?
+            %th Timetable
+            %th Uploaded by
+            %th Uploaded at
+
+          - if current_user.student?
+            %th{ colspan: 2 } Actions
+          -else
+            %th{ colspan: 4 } Actions
+
+      %tbody
+        - documents.each do |document|
+          %tr
+            %td= document.title
+            %td= document.tags.map{|t| t.name}.join.html_safe
+            - unless current_user.student?
+              %td= document.for_timetable
+              %td= format_date_long document.created_at.in_time_zone("Australia/Melbourne")
+              %td= document.user
+
+            %td= link_to 'View', document_path(document), class: 'btn btn-success btn-sm', target: :_blank
+            %td= link_to 'Download', download_file_document_path(document, format: :pdf), class: 'btn btn-info btn-sm'
+
+            - unless current_user.student?
+              %td= link_to 'Edit', edit_document_path(document), class: 'btn btn-info btn-sm', target: :_blank
+              %td= link_to 'Destroy', document, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+-else
+  .alert.alert-warning Nothing found
+.div{id: "doc_feedback_section"}

@@ -1,0 +1,14 @@
+#1000-page-Text.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-book{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        1000 Page Online Textbook
+        / .label.label-mini.label-enhanced
+        / %i.fa.fa-magic.icon-enhance{"aria-hidden" => "true"}
+        / = link_to 'enhanced', recent_update_path, class: 'c_grn'
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing The online textbook comprehensively covers the GAMSAT. It includes sections on overarching strategies (general GAMSAT Strategies and Study Guides), essay writing strategies (9 topics), humanities (6 topics) and all sciences (37 topics).

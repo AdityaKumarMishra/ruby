@@ -1,0 +1,39 @@
+-if products.any?
+  .container
+    .panel.panel-primary
+      .panel-heading
+        %h3.panel-title
+          Purchase Additional Features
+      .panel-body
+        = simple_form_for :products, url: details_purchases_path do |f|
+          .row
+            .col-md-offset-1.col-md-3= f.error_notification
+          .row
+            .col-md-offset-1.col-md-3
+              .form-inputs
+                -products.each  do |product|
+                  %p
+                    = check_box_tag 'items[]', product.id, current_user.product_purchased?(product), {disabled: current_user.product_purchased?(product)}
+                    = label :products, product
+            .col-md-3
+              = f.input :payment, as: :radio_buttons, collection: [['Stripe', 'stripe'], ['Paypal', 'paypal']], label: 'Choose the payment method:', checked: ['Stripe', 'stripe']
+              = f.input :currency, collection: Rails.application.config.currency_dictionary, include_blank: false
+          .row.mg-top
+            .col-md-offset-1.col-md-3
+              .form-actions= f.button :submit, 'Create order', class: 'btn btn-primary btn-disabled', id: 'create_order', disabled: 'disabled'
+
+:javascript
+  var products = #{raw(products.pluck(:id))};
+  products.forEach(function(p) {
+    $("#products_product_" + p).change(function() {
+       if(this.checked) {
+        $('#create_order').prop('disabled', false);
+       } else {
+        if ($(".products input:checkbox:checked").length > 0){
+          $('#create_order').prop('disabled', false);
+        } else {
+          $('#create_order').prop('disabled', true);
+        }
+       }
+     });
+   });

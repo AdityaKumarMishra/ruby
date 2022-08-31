@@ -1,0 +1,11 @@
+%h1 Editing class
+
+= render 'student_classes/partial/form'
+
+-if @student_class.student_class_sessions.any?
+  %h3 Sessions
+  = render :partial => 'student_class_sessions/partial/table', :locals => {:student_class_sessions => @student_class.student_class_sessions}
+
+= link_to 'Show', @student_class, class: 'btn btn-default'
+= link_to 'Add session', new_student_class_session_path(:class_id => @student_class.id), class: 'btn btn-default'
+= link_to 'Back', student_classes_path, class: 'btn btn-default'

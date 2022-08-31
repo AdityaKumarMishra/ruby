@@ -1,0 +1,156 @@
+
+%p
+  %b Name:
+  = @course.name
+%p
+  %b Class size:
+  = @course.class_size
+%p
+  %b Student count:
+  = @course.enroled_paid_student_list.count
+%p
+  %b Placeholder student count:
+  = @placeholder_student_list.count
+  %i.userFilterTooltip.fa.fa-question-circle{"data-placement" => "top", "data-toggle" => "tooltip", title: "Automatically generated custom courses associated with free trials", style: 'margin: -2em; padding:2em;'}
+%p
+  %b Expiry date:
+  = @course.expiry_date
+%p
+  %b Enrolment end date:
+  = @course.enrolment_end_date
+%p
+  %b Product version:
+  = @course.product_version_id
+
+%p
+  = link_to 'Download CSV', course_path(@course, format: "xlsx"), class: 'btn btn-primary'
+
+
+%strong Students Enrolled
+.course_enrol_student
+  = will_paginate @enroled_student_list, renderer: BootstrapPagination::Rails
+  %table.table.table-bordered.table-hover.enrol_tabl#enrol_table
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Phone Numbers
+        %th{:style => "min-width: 100px"} Essay Marker
+        %th Average No. of time Logged in per day
+        %th Average No. of minutes spent using the system per day
+        %th No. of time Logged in from registration until now
+        %th No. of minutes spent from registration until now
+        %th Paid at
+        %th Email Status
+        %th Status
+        %th Payment Status
+        %th Actions
+        %th
+        %th
+
+
+    %tbody
+      - @enroled_student_list.each do |enrolment|
+        %tr
+          %td= enrolment.user.full_name
+          %td= enrolment.user.email
+          %td= enrolment.user.phone_number
+          %td
+            - avl_tutors = @course.staff_tutor_profiles.collect {|u| [ "#{u.staff.full_name}", u.staff.id ]}
+            - sel_tutor = user_essay_resp_tutor(enrolment.user, @course.id).first
+            -if sel_tutor.present?
+              = select_tag 'staff_profiles', options_for_select(avl_tutors, sel_tutor), class: 'chosen-select-course chosen-select-staff', multiple: "multiple", data: enrolment.user.id
+            .div{class: "updated_#{enrolment.user.id}" ,:style => 'display: none'}
+          %td= enrolment.user.average_number_of_time_logged_in_per_day
+          %td= enrolment.user.average_number_of_minutes_spend_per_day
+          %td= enrolment.user.sign_in_count
+          %td= enrolment.user.total_online_time
+          %td= enrolment.paid_at.in_time_zone("Australia/Melbourne").strftime('%a, %d %b %Y %H:%M:%S').to_s if enrolment.paid_at
+          %td
+            -if enrolment.user.confirmed_at.present?
+              %span.label.label-success Confirmed
+            -else
+              %span.label.label-danger Not Confirmed
+          %td
+            -if enrolment.trial && enrolment.user.upgraded_user?
+              %span.label.label-success= "Upgraded"
+            -elsif enrolment.trial && enrolment.trial_expired?
+              %span.label.label-warning= "Expired"
+            - elsif enrolment.trial
+              %span.label.label-danger= "Active"
+          %td
+            - enrolment_status = enrolment.order.status
+            - if enrolment_status == 'pending'
+              %span.label.label-danger Not Confirmed
+            -elsif enrolment_status == 'paid' || enrolment_status == 'free'
+              %span.label.label-success Confirmed
+
+          %td= link_to 'Unenroll', user_enrolment_path(enrolment.user, enrolment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+          %td= link_to 'Login', view_as_path(enrolment.user), class: 'btn btn-info btn-sm'
+          %td= link_to 'Edit', edit_user_path(enrolment.user), class: 'btn btn-success btn-sm'
+  = will_paginate @enroled_student_list, renderer: BootstrapPagination::Rails
+
+%br
+%strong Tutors Assigned
+
+%table.table.table-bordered.table-striped.table-responsive.table-hover
+  %thead
+    %tr
+      %th Firstname
+      %th Lastname
+      %th Username
+
+
+
+  %tbody
+    - @course.staff_profiles.each do |staff_profile|
+      %tr
+        %td= staff_profile.staff.first_name
+        %td= staff_profile.staff.last_name
+        %td= staff_profile.staff.username
+
+
+
+-#Sudent / Invoice / Package/ Enrolment Date/ Unenroll / Diagnostic Test
+
+
+= link_to 'Edit', edit_course_path(@course)
+\|
+= link_to 'Back', courses_path
+
+:javascript
+  $(document).ready(function() {
+      $('#enrol_table').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "aoColumnDefs" : [
+          { orderable: false, targets: [3,4,11,12] } ]
+      });
+
+      $('.chosen-select-staff').on('change', function(){
+        current_ele = $(this)
+        var sel_tutor_id = current_ele.val()
+        var user_id = current_ele.attr("data")
+        var course_id = "#{@course.id}"
+        if (sel_tutor_id){
+          $.ajax({
+            url: "/essay_responses/update_essays_tutor",
+            type: "POST",
+            dataType: 'json',
+            data: {tutor_id: sel_tutor_id, user_id: user_id, course_id: course_id},
+            success:function(result){
+              if(result.response){
+                var iden = ".updated_" + user_id
+                $(iden).html(result.response)
+                $(iden).show().delay(2000).fadeOut();
+              }
+            }
+          });
+        }
+      })
+  } );
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });

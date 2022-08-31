@@ -1,0 +1,19 @@
+.container
+  .row
+    .panel.panel-info
+      .panel-heading
+        %h1.panel-title
+          %strong Overall
+      .panel-body
+        %p
+          Number of All MCQ Steam:
+          =McqStem.all.count
+        -#%p
+        -#  Number of All MCQ Steam with subjects assigned:
+        -#  =McqStem.includes(:subject_mcq_stems).where.not(subject_mcq_stems: {mcq_stem_id: nil}).uniq.count
+        -#%p
+        -#  Number of All MCQ Steam with tags assigned:
+        -#  =McqStem.where.not(:tag_id => nil).uniq.count
+    =render :partial => 'statistic/partial/by_difficulty', :locals => {:levels => @defficulty_levels }
+    =render :partial => 'statistic/partial/by_difficulty_in_subjects', :locals => {:items => @subjects_by_difficutly }
+    =render :partial => 'statistic/partial/by_difficulty_in_tags', :locals => {:items => @tags_by_difficutly }

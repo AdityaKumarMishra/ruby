@@ -1,0 +1,36 @@
+test: &default
+
+  # Credentials for REST APIs
+  client_id: ATeE90ZEN77W5oRoSIGE05DB2haygoDiWPkk_prhNE1cY4fJkDldeFf1dNEKVddXj4vhiRha3y7IwrN1
+  client_secret: EBookmViDmoPG4_8vkqYVQ5bA0dl8UonW1X_z1vEE5VaRuo307MaYIrLlfRUaeXsdIJZGTz9-awCMoYT
+
+  # Mode can be 'live' or 'sandbox'
+  mode: sandbox
+
+  # Credentials for Classic APIs
+  # app_id: APP-80W284485P519543T
+  # username: board-facilitator@gradready.com.au
+  # password: 4L9EXZ5ABL6SLTGF
+  # signature: Axu7DHQPCgK5zC82FE7GR2OTVhQxAotEj2K-A4Nr0T0vUWZAAN-i5eNs
+  # # With Certificate
+  # cert_path: "config/cert_key.pem"
+  sandbox_email_address: board-facilitator@gradready.com.au
+
+  # # IP Address
+  # ip_address: 127.0.0.1
+  # # HTTP Proxy
+  # http_proxy: http://proxy-ipaddress:3129/
+
+development:
+  <<: *default
+
+stage:
+  <<: *default
+  mode: sandbox
+
+production:
+  client_id: ATfQ7gESqoxySf3PDZduR72kvCM4CzUKB3zxHuvOww8IexaMmwkK1SxlxsKQ6eAAMpWcr-ft1tol4RDT
+  client_secret: ENzVo2sXc5YLa_FlD01n71FTvmKY3yMT3hDzMJ106dSMbzgtFqO_uaessSXBtHajTG7x6j6WeoeaChDO
+  mode: live
+  # we need a stage env to set this to sandbox
+  # set to sandbox for stage environment

@@ -1,0 +1,45 @@
+-# #mcq-students-answer.panel.panel-default.col-md-6.col-md-offset-3
+-#   #timer.pull-right
+-#     %span#minutes
+-#     %span :
+-#     %span#seconds
+-#   =@mcq.question.html_safe
+-#   =simple_form_for(@mcq_student_answer, :remote => true) do |f|
+-#     =f.hidden_field :time_taken, id: "secondsTimer"
+-#     =f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+-#     =f.input :time_started, as: :hidden, input_html: { value: DateTime.now }
+-#     =f.collection_radio_buttons :mcq_answer_id, @mcq.mcq_answers, :id, :answer
+-#     .btn-group
+-#       =f.button :submit, "Submit answer", class: 'btn btn-default'
+-#       =link_to "Finish", student_answer_summary_path, class: "btn btn-danger"
+
+.container
+  .panel.panel-success
+    .panel-heading
+      %h1.panel-title
+        %strong Listing Mcq Stems
+    .panel-body
+    .table-responsive
+      %table.table.table-bordered.table-hover
+        %thead
+          %tr
+            %th No.
+            %th Title
+            %th Description
+            -# %th Questions
+        %tbody
+          - @mcq_stems.each_with_index do |ms, i|
+            %tr
+              %td= "#{i + 1}."
+              %td= ms.title.html_safe
+              %td= ms.description.html_safe
+              -# - if ms.mcqs.present?
+              -#   %td
+              -#     %ul
+              -#       - ms.mcqs.each do |m|
+              -#         %li= m.question.html_safe
+    %ul.list-group
+      #mcq_stem
+
+    #landing-footer.panel-footer
+  = link_to 'Start Stems', student_answer_mcqs_path, class: 'btn btn-success cl-white', method: :post

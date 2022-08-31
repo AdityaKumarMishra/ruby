@@ -1,0 +1,83 @@
+-# This shows a list of tickets for something, along with a 'New Ticket' button
+
+
+- if current_user && current_user.student?
+  = render 'issue_forum/new_ticket_button', classes: 'itf-btn-spacing'
+  = render 'issue_forum/submit_ticket_modal', options: {content: @content}
+
+  - if tickets.size == 0
+    %h4=@title
+    .comment_section_col.ticketing-col-margin.full_col
+      .parent_comment_col.btm_wht_space
+        %h3 No tickets have been created
+
+  -else
+    .faq_list.para_fs14
+      .faq_list_col
+        .course_frm.filter_box_shadow
+          = form_tag('', method: 'get') do
+            %strong Sort By:
+            = select_tag :sort_by, options_for_select(@sort_options, params[:sort_by]), { class: 'form-control', onchange: 'this.form.submit()' }
+
+    %h4=@title
+    .comment_section_col.ticketing-col-margin
+      - tickets.each do |ticket|
+        %a.itf-sum.itf-show{href: issue_path(id: ticket.id)}
+          .parent_comment_col.btm_wht_space{class:(ticket.ticket_answers.any? ? "best" : "worst")}
+            %h3.tickt_ttl=ticket.title
+            - if ticket.ticket_answers.any?
+              = image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/attend-icon.png", title:'This question has been answered',class: 'ans_tick'
+            %span.comment_date
+              Asked on:
+              %strong #{ticket.created_at.strftime('%-d %B, %Y %k:%M')}
+            .comment_mesg_col
+              %p #{sanitize ticket.question[0, 140]} #{if ticket.question.length > 140 then "..." end}
+
+
+
+-else
+  = render 'issue_forum/new_ticket_button', classes: 'itf-btn-spacing'
+
+  - if tickets.size == 0
+    .panel.panel-default
+      .panel-body
+        No tickets have been created
+  - else
+    = form_tag('', method: 'get') do
+      %strong Sort By:
+      = select_tag :sort_by, options_for_select(@sort_options, params[:sort_by]), { class: 'form-control', onchange: 'this.form.submit()' }
+      %br
+      - tickets.each do |ticket|
+        %a.itf-sum.itf-show{href: issue_path(id: ticket.id)}
+          .panel.panel-default.itf-show{class:(ticket.ticket_answers.any? ? "best" : "worst")}
+            .panel-body
+              .row
+                .col-md-9
+                  %h4.list-group-item-heading
+                    =ticket.title
+                    - if ticket.ticket_answers.any?
+                      %span.glyphicon.glyphicon-ok.tick{title:'This question has been answered', 'data-toggle' => 'tooltip', 'data-placement'=>'right'}
+                  - if current_user.student? && current_user.present?
+                    .author
+                      Asked on:
+                      %strong #{ticket.created_at.strftime('%-d %B, %Y')}
+                  - else
+                    %p
+                      Question asked by
+                      %strong #{ticket.asker_full_name}
+                      on
+                      %strong #{ticket.created_at.to_date.to_formatted_s(:human)}
+                      - if ticket.ticket_answers.any?
+                        answered on
+                        %strong #{ticket.ticket_answers.first.created_at.to_date.to_formatted_s(:human)}
+                  %p #{sanitize ticket.question[0, 140]} #{if ticket.question.length > 140 then "..." end}
+                -#
+                  .col-md-3
+                    - if !ticket.ticket_answers.first.nil?
+                      %img.img-rounded{:src => "https://gradready.s3.ap-southeast-2.amazonaws.com/static/noname_user.jpg", :alt => ""}
+                .col-md-3
+                -# Requires a 'tickets' local variable, which is an array of Ticket objects
+                  .panel.panel-default.answers
+                    .panel-body.text-center
+                      %h3 #{ticket.ticket_answers.length}
+                      %p answers for this question

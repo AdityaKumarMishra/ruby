@@ -1,0 +1,7 @@
+%h1 Listing classes
+
+=render :partial => 'student_classes/partial/table', :locals => {:student_classes => @student_classes}
+
+%br
+
+= link_to 'New Student class', new_student_class_path, class: 'btn btn-primary'

@@ -1,0 +1,11 @@
+= simple_form_for(@shipping) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :country, collection: Shipping.countries, selected: f.object[:country], required: true, include_blank: 'Please Select Country'
+    = f.input :shipping_amount, required: true , class: "form-control", input_html: { min: '1' }
+
+  .form-actions
+    = f.button :submit, class: 'btn-gradready green'
+
+%br
+= link_to 'Back', shippings_path, class: 'btn btn-default'

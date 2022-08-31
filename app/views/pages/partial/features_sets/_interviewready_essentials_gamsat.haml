@@ -1,0 +1,64 @@
+.col-md-12
+  .span12
+    = render 'pages/partial/features_sets/feature_head'
+  .features_section_wrapper
+    %h4 Online Component
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-video-camera{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/examplar_response_videos'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-question{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/mmi_question_bank'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/documents', paid: false, product_line: 'GAMSAT'
+
+  .features_section_wrapper
+    %h4 Live Component
+    .clearfix
+    .row
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-question{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/mmi_overview'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-trophy{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/ideal_medical'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-lightbulb-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/common_scenarios'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-comments-o{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/critiques_discussion'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-book{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/in_class_booklet'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-users{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/peer_interviews'
+      .col-lg-4.col-md-4.col-sm-6.col-xs-12
+        .features_content_section
+          .features_img_circle
+            %i.fa.fa-calendar{"aria-hidden" => "true"}
+          = render 'pages/partial/features_sets/features/no_offer_refund'
+
+

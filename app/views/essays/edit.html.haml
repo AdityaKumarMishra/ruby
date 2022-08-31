@@ -1,0 +1,9 @@
+%h1 Editing Essay
+
+.essay_form
+  = render 'essays/partial/form'
+
+%br
+
+= link_to 'Show', @essay, class: 'btn btn-default'
+= link_to 'Back', essays_path, class: 'btn btn-default'

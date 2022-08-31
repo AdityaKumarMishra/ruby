@@ -1,0 +1,69 @@
+%h4
+  =image_tag('https://gradready.s3.ap-southeast-2.amazonaws.com/static/updated_green.png', class: 'most-popular')
+  - if product_line == 'UMAT'
+    4 Online Exams
+  - elsif product_line == 'VCE'
+    - if subject == "comprehensive-private-tutoring" || subject == "online-comprehensive" || subject == "online-essentials" || subject == "attendance-essentials" || subject == "attendance-comprehensive"
+      2 Online Exams
+    - else
+      5 Online Exams
+  - elsif product_line == 'HSC'
+    5 Online Exams
+  - elsif product_line == 'GAMSAT'
+    8 Online Exams (Essay Not Included)
+
+- if paid
+  %span Individual value of item: $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+-else
+  %span (Built into our systems)
+
+- if product_line == 'UMAT'
+  %p
+    Our online test system mimics the style of the UCAT
+    %sup®
+    by putting you under real time pressure...
+    .show_full_content
+      Our online test system mimics the style of the UCAT
+      %sup®
+      by putting you under real time pressure.
+      The exam results will be automatically broken down according to the applicable topics (from a pool of 19 topics), giving you a precise overview of your strengths and weaknesses. In addition, your performance will be automatically compared to that of other GradReady students, and you will be given the resulting percentile in the applicable sections and overall. Other than our Mock Exam Days, this is as close as it gets to the actual UCAT
+      %sup®
+      = '.'
+- elsif product_line == 'GAMSAT'
+  %p
+    Our online test system mimics the style of the GAMSAT
+    %sup®
+    exam by putting you under real time pressure...
+    .show_full_content
+      Updated for the new GAMSAT
+      %sup ®
+      Exam: New Digital Exam System to match the GAMSAT
+      %sup ®
+      exam.
+      %br
+      Our online test system mimics the style of the GAMSAT
+      %sup®
+      exam by putting you under real time pressure.
+      The exam results will be automatically broken down according to the applicable topics (from a pool of 43 topics), giving you a precise overview of your strengths and weaknesses. In addition, your performance will automatically be compared to that of other GradReady students, and you will be given your resulting percentile in each section and overall. Other than our Mock Exam Days, this is as close as it gets to the actual GAMSAT
+      %sup®
+      exam.
+- elsif product_line == 'VCE'
+  .text
+    %p.u-word-spacing
+      Our online test system mimics the style of the VCE
+      %sup{ style: "margin-right: -7px;"} ®
+      exams by putting you under real time pressure. The exam results are automatically broken down according to the applicable topics, giving you a precise overview of your strengths and weaknesses. In addition, your performance will be automatically compared to that of other VCE
+      %sup{ style: "margin-right: -7px;"} ®
+      Ready students, and you will be given the resulting percentile in the applicable topics and overall. Other than our Mock Exam Days, this is as close as it gets to the actual VCE
+      %sup{ style: "margin-right: -7px;"} ®
+      exams.
+- elsif product_line == 'HSC'
+  .text
+    %p.u-word-spacing
+      Our online test system mimics the style of the HSC
+      %sup{ style: "margin-right: -7px;"} ®
+      exams by putting you under real time pressure. The exam results are automatically broken down according to the applicable topics, giving you a precise overview of your strengths and weaknesses. In addition, your performance will be automatically compared to that of other HSC
+      %sup{ style: "margin-right: -7px;"} ®
+      Ready students, and you will be given the resulting percentile in the applicable topics and overall. Other than our Mock Exam Days, this is as close as it gets to the actual HSC
+      %sup{ style: "margin-right: -7px;"} ®
+      exams.

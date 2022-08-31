@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name= "Application Summary" >
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Application Status</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Address</Data></Cell>
+        <Cell><Data ss:Type="String">State</Data></Cell>
+        <Cell><Data ss:Type="String">Hours Available</Data></Cell>
+        <Cell><Data ss:Type="String">Domestic/International</Data></Cell>
+        <Cell><Data ss:Type="String">Degree</Data></Cell>
+        <Cell><Data ss:Type="String">Expected Graduation Date</Data></Cell>
+        <Cell><Data ss:Type="String">ATAR</Data></Cell>
+        <Cell><Data ss:Type="String">WAM</Data></Cell>
+        <Cell><Data ss:Type="String">Cover Letter File Name</Data></Cell>
+        <Cell><Data ss:Type="String">Resume File Name</Data></Cell>
+
+        <% @job_application_form.application_questions.each do |a| %>
+          <Cell><Data ss:Type="String"><%= (a.content) %></Data></Cell>
+        <% end %>
+
+        <Cell><Data ss:Type="String">Notes</Data></Cell>
+      </Row>
+      <% @job_applications.each do |job_application| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= job_application.status %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.email %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.phone_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.address.try(:one_line_address) %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.address.state %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.hours_available %></Data></Cell>
+          <% if !job_application.domestic.nil? %>
+            <Cell><Data ss:Type="String"><%= job_application.hours_available ? 'Domestic' : 'International' %></Data></Cell>
+          <% else %>
+            <Cell><Data ss:Type="String"></Data></Cell>
+          <% end %>
+          <Cell><Data ss:Type="String"><%= job_application.degree_type %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.graduation %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.atar %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.wam %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.cover_letter.document_file_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= job_application.resume.document_file_name %></Data></Cell>
+
+          <% @job_application_form.application_questions.each do |a| %>
+            <% answer = job_application.application_answers.find_by(application_question_id: a.id) %>
+            <% if answer && answer.application_question %>
+              <% if answer.application_question.answer_type.eql?('dropdown_multiple') %>
+                <Cell><Data ss:Type="String"><%= answer.parse_answer %></Data></Cell>
+              <% else %>
+                <% if is_a_number?(answer.content) %>
+                  <Cell><Data ss:Type="Number"><%= answer.content.to_f %></Data></Cell>
+                <% else %>
+                  <Cell><Data ss:Type="String"><%= simple_format(answer.content) %></Data></Cell>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <Cell><Data ss:Type="String"><%= job_application.notes %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+

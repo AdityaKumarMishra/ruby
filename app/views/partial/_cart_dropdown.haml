@@ -1,0 +1,9 @@
+%li
+  -if current_user.present?
+    .dropdown
+      %a.btn.dropdown-toggle.no_icon{ 'data-toggle' => 'dropdown', 'aria-haspopup'=>'true','aria-expanded'=>"true" }
+        .fa.fa-cart-plus
+        %span.caret
+      %ul.dropdown-menu.home_mg_top{ 'aria-labelledby' => 'users' }
+        %li= link_to 'Cart', user_ongoing_order_link if current_user.student?
+        %li= link_to "Past Orders", orders_path if current_user.student? && current_user.orders.where.not(status: 0).present?

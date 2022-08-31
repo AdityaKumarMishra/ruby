@@ -1,0 +1,26 @@
+%h1 Listing sections
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Duration
+      %th Position
+      - if current_user.admin? || current_user.superadmin?
+        %th{colspan: 2} Actions
+      - else
+        %th Actions
+
+  %tbody
+    - @sections.each do |section|
+      %tr
+        %td= section.title
+        %td= section.duration
+        %td= section.position
+        %td= link_to 'Edit', edit_polymorphic_path([@parent_resource, section]), class: 'btn btn-info btn-sm', target: :_blank
+        - if (current_user.admin? || current_user.superadmin?) && section.sectionable.locked.blank?
+          %td= link_to 'Destroy', polymorphic_path([@parent_resource, section]), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+
+%br
+
+= link_to 'New Section', new_polymorphic_path([@parent_resource, Section]), class: 'btn btn-gradready green'

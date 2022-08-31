@@ -1,0 +1,7 @@
+-if current_user && (current_user.student?)
+  - classes ||= ''
+  %a.default_btn.black_default_btn.resp_btn.hvr-shutter-in-horizontal.submit-ticket{'data-toggle' => 'modal', 'data-target' => '#ticket-modal', class: "#{classes} new-ticket"} GetClarity
+
+-else
+  - classes ||= ''
+  %a.btn.btn-default.submit-ticket{'data-toggle' => 'modal', 'data-target' => '#ticket-modal', class: "#{classes} new-ticket"} GetClarity

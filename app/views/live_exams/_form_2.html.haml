@@ -1,0 +1,23 @@
+= simple_form_for(@live_exam) do |f|
+  = f.error_notification
+
+  .form-inputs.cstm_score_form
+    .form-group.score-div
+      -if @live_exam.section_three_score != 0
+        = f.input :section_three_score, label: 'Section three score (Raw score, not percentage)', input_html: {value: @live_exam.section_three_score, class: 'form-control score-field', id: 'live_exam_section_three_score'  }, readonly: true
+      -else
+        %div.form-group.integer.required.live_exam_section_three_score
+          = f.input :section_three_score, wrapper: false, label: 'Section three score (Raw score, not percentage)', input_html: {value: @live_exam.section_three_score, class: "flt_left form-control score-field", id: 'live_exam_section_three_score' }, readonly: false
+          = f.button :submit, value: 'Save score', class: 'mg_left20 black_default_btn  last_btnsave section_three_button hvr-shutter-in-horizontal save-score-button'
+
+          = f.hidden_field :course_id, value: @current_course.id
+          = f.hidden_field :section_type, value: @current_course.product_version.try(:type)
+
+:javascript
+  $(".section_three_button").click(function(){
+    var score_one = $("#live_exam_section_three_score").val()
+    if(score_one <= 0 || score_one == ""){
+     alert("Please enter section three score greater than Zero ")
+     return false;
+    }
+  });

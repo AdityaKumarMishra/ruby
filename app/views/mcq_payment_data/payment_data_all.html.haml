@@ -1,0 +1,28 @@
+= select_tag 'mcq_stem_view', options_for_select(mcq_stem_collection, selected: select_option_values(params[:action])), { class: 'form-control stem_dropdown' }
+%h1 Payment Data - All
+= render '/mcq_stems/mcq_stems_filters'
+#download_xls_btn.col-md-10
+  = render(partial: 'mcq_payment_data/partial/download_xls', locals: { total_size: @total_size })
+
+.div#tutor-apt-table
+  = render(partial: 'mcq_payment_data/partial/logged_hours', locals: { date_range: false })
+:css
+  .stem_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }
+
+:javascript
+  $(function(){
+    $("[data-toggle='tooltip']").tooltip();
+  });
+
+  $(function(){
+    $('.stem_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });

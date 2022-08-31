@@ -1,0 +1,75 @@
+- content_for :show_left_panel, true
+- content_for :show_dashboard_bg, true
+.step_full_wdt
+  .register_col.steps_col_wrapper.stap_from_field
+    / .register_lft_col.enrolment_lft_bg
+    /   = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/student_pages/enrollment_banner_img_mobile.jpg'
+    .register_rgt_col.enrol_rht_col.payment_page_width100
+      %h2.form_title.text-center
+        Enrolment Success
+      -if @order.purchase_method.eql?('direct_deposit')
+        .preparation_col
+          %p
+            Thank you for enrolling! We have received the details of your enrolment - Please check your email for further details.
+          %p
+            Please note that it may take between 3 to 5 working days to receive your payment. Upon receiving your payment, your account will be automatically activated and you’ll be notified of this via email—we appreciate your patience in this regard. Alternatively, you may choose to pay via PayPal or Credit Card for immediate access.
+          %p
+            If 3 to 5 working days have passed and your account has yet to be activated, please get in touch by submitting a support ticket under the topic: 3. Payment Query.
+          .text-center
+            = link_to 'Support', 'javascript:void(0)', class: 'default_btn hvr-shutter-in-horizontal', id: 'email_back_btn'
+          %p
+            To ensure that you receive important notifications and updates regarding your enrolment, please make sure to whitelist the GradReady email domain (@gradready.com.au) - You can do so by
+            %a{href: "https://www.lifewire.com/how-to-whitelist-email-addresses-4588603", target: "_blank"} following the steps for your particular email service here.
+
+      -else
+        .preparation_col
+          %p
+            Congratulations - You are now enrolled in your chosen course.
+          %p
+            The online component of your course is now accessible through the student dashboard.
+          %p
+            If you have yet to do so, please ensure that you confirm your email address - You will receive a confirmation email for this. You will also receive a course enrolment email shortly. Please ensure that you check your spam/junk folder.
+          %p
+            If you are unable to see these emails please get in touch by submitting a support ticket under the topic: 2. Course Administration.
+          .text-center
+            = link_to 'Support', 'javascript:void(0)', class: 'default_btn hvr-shutter-in-horizontal', id: 'email_back_btn'
+          %p
+            To ensure that you receive important notifications and updates regarding your enrolment, please make sure to whitelist the GradReady email domain (@gradready.com.au) - You can do so by
+            %a{href: "https://www.lifewire.com/how-to-whitelist-email-addresses-4588603", target: "_blank"} following the steps for your particular email service here.
+      .text-center.enrol_btn_col
+        -if current_user.confirmed_at.nil?
+          = link_to 'Confirm Email Address to Complete Registration', dashboard_home_path, class: 'default_btn hvr-shutter-in-horizontal'
+        %br
+        -if @order.purchase_method.eql?('direct_deposit')
+          = link_to 'Pay via Credit Card/PayPal', @order, class: 'black_default_btn hvr-shutter-in-horizontal'
+
+
+/ %div
+/   #msform.cstm_frm
+/     .full_container
+/       %fieldset
+/         .col-md-12.col-sm-12.col-xs-12.enrollment_page
+/           %h2
+/             Enrolment Success
+/           = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/enrolment_icon.png'
+/           -if @order.purchase_method.eql?('direct_deposit')
+/             %p It may take between 3 to 5 working days to receive your payment, upon which you will be sent a confirmation email. Please be patient. Alternatively, you may choose to pay via PayPal or Credit Card for immediate access.
+/           -else
+/             %p
+/               Congratulations! You are now enrolled in your chosen course.
+/               %br
+/               You will receive a confirmation email shortly. The online component of your course is now accessible through the Dashboard.
+/               %br
+/               If you have any questions, please let us know.
+
+/         = link_to 'Confirm Email Address to Complete Registration', dashboard_home_path, class: 'button btn default_green_btn dark_green_btn go_to_dashbord'
+/         %br
+/         -if @order.purchase_method.eql?('direct_deposit')
+/           = link_to 'Pay via Credit Card/PayPal', @order, class: 'btn btn-default margin-30 pay'
+
+:javascript
+  $(document).ready(function(){
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(gon.orderData);
+  });
+

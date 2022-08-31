@@ -1,0 +1,97 @@
+= select_tag 'mcq_stem_view', options_for_select(mcq_stem_collection, selected: select_option_values(params[:action])), { class: 'form-control stem_dropdown' }
+%h1 MCQ Counter
+.panel.panel-success
+  .panel-heading
+    %h3.panel-title
+      Filter
+      =render_filterrific_spinner
+  .panel-body
+    = form_tag '', id: 'counter_form' , :method => :get do
+      .form-group
+        %p
+          Level 1 Tags
+          = select_tag 'with_level', options_for_select(["All"]+Tag.level_one.map{|t| [t.name, t.id]}, params[:with_level]), { prompt: 'Please Select Tag', class: 'form-control level_filter'}
+      -if @difficulties.present?
+        .form-group.mc_filter
+          %p
+            Made available to students?
+            = select_tag 'published_tag_count', options_for_select([["Yes"] , ["No" ]], params[:published_tag_count]), { include_blank: 'All', class: 'form-control mcq_filter' }
+      -if @difficulties.present?
+        .form-group.mc_filter
+          %p
+            Location of MCQ
+            = select_tag 'locate_tag_count', options_for_select([["MCQ Bank"] , ["Online Exams" ], ["Tutor Use"]], params[:locate_tag_count]), { include_blank: 'All', class: 'form-control location_filter mcq_filter' } if @difficulties.present?
+      .form-group.exam_filter.disable
+        %p
+          Specific Online Exam
+          = select_tag 'exam_tag_count', options_for_select(params[:with_level] &&  (params[:with_level] != "All" && params[:with_level] != "") ? @tags.tag_online_exams(params[:published_tag_count]).insert(0,['All - Duplicates Counted', 'All - Duplicates Counted']) : policy_scope(OnlineExam).order(:title).map{|x| [x.title, x.id]}.insert(0,['All - Duplicates Counted', 'All - Duplicates Counted']), params[:exam_tag_count]), { include_blank: 'All - Duplicates Not Counted', class: 'form-control exam_count mcq_filter' }
+      .form-group
+        %p
+          %input#clear-form.btn.btn-gradready.green{type: "button", value: "Reset filters"}
+
+          = submit_tag "Download CSV", name: "excel", class: 'btn btn-primary'
+
+#mcq_counter
+  = render 'dashboard/partial/mcq_counter' if @difficulties.present?
+
+
+:javascript
+  $(document).ready(function(){
+    location_change_filter();
+
+    $(".location_filter").on("change", function(){
+     location_change_filter();
+    });
+
+    $(function() {
+      $('.mcq_filter').change(function() {
+            this.form.submit();
+      });
+    });
+
+    $(function() {
+      $('.level_filter').change(function() {
+          if ($(this).val()!=""){
+            this.form.submit();
+          }
+      });
+    });
+
+    $('#csv_downlaod_link').on('click', function(){
+      $('#counter_form').submit();
+    });
+
+    $('#clear-form').on('click', function()
+      {
+        $('#counter_form').find('input:text, input:password, select, textarea').val('');
+        this.form.submit();
+    });
+
+  });
+  function location_change_filter() {
+    var location_select = $(".location_filter").val();
+    if (location_select == "Online Exams" && location_select!="")
+      {
+      $(".exam_filter").removeClass("disable");
+      }
+    else
+      { $("#exam_tag_count").val("");
+        $(".exam_filter").addClass("disable");
+      }
+  }
+
+  $(function(){
+    $('.stem_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });
+
+:css
+  .stem_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }

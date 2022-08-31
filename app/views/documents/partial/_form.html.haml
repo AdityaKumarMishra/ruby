@@ -1,0 +1,52 @@
+= simple_form_for(@document) do |f|
+  = f.error_notification
+
+  .form-inputs
+    -if @document.persisted?
+      %b Name:
+      = @document.title
+      %br
+      %br
+    = f.input :attachment, as: :file, label: 'Upload a document (doc, docx, pdf, jpg)'
+    #document-paid-trial{ style: "display: #{f.object.try(:for_timetable) ? 'none' : ''}" }
+      = f.input :for_paid, label: 'Paid Courses'
+      = f.input :for_trial, label: 'Trial Courses'
+
+    -if f.object.persisted?
+      #document-timetable{ style: "display: #{f.object.try(:for_timetable) ? '' : 'none'}" }
+        = f.input :for_timetable, label: 'Timetable'
+    -else
+      #document-timetable
+        = f.input :for_timetable, label: 'Timetable'
+
+    #document-product-line{ style: "display: #{f.object.try(:for_timetable) ? '' : 'none'}" }
+      = f.input :product_line_id, collection: ProductLine.where.not(id: @for_timetable_ids).order(:name).map {|product_line| [product_line.name.try(:upcase), product_line.id]}, prompt: "Please select product line"
+
+    = f.association :tags, collection: @tags, input_html: { class: 'chosen-select tag-list' , data: { placeholder: "Please Select Tag" }}
+
+  .form-actions
+    = f.button :submit
+
+:javascript
+  $('#document_for_timetable').on('change', function(){
+    if ($('#document_for_timetable').is(":checked")){
+      $("#document-product-line").show();
+      $("#document-paid-trial").hide();
+      $('#document_for_paid').prop('checked', false);
+      $('#document_for_trial').prop('checked', false);
+    }else{
+      $("#document-product-line").hide();
+      $("#document_product_line_id").val('');
+      $("#document-paid-trial").show();
+    }
+  });
+
+  $('#document_for_paid, #document_for_trial').on('change', function(){
+    if ($('#document_for_paid').is(":checked") || $('#document_for_trial').is(":checked")){
+      $("#document-timetable").hide();
+      $("#document_product_line_id").val('');
+      $('#document_for_timetable').prop('checked', false);
+    }else{
+      $("#document-timetable").show();
+    }
+  });

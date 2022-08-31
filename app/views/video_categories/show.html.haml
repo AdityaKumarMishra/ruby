@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @video_category.name
+%p
+  %b Subject:
+  = @video_category.subject
+
+= link_to 'Edit', edit_video_category_path(@video_category)
+\|
+= link_to 'Back', video_categories_path

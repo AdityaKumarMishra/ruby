@@ -1,0 +1,10 @@
+#feature_1000.feature-icon-container.col-md-6
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-book{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4 Comprehensive Textbook
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing The text comprehensively covers the UCAT, through sections on overarching strategies (general UCAT Strategies + Study Guides), Logical Reasoning (8 topics), Understanding People (3 topics) and Non-Verbal Reasoning (8 topics).

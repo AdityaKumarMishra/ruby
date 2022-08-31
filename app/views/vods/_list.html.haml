@@ -1,0 +1,23 @@
+- if vods.any?
+  #filterrific_results
+    %p.text-info
+      %b
+        Results:
+        = vods.count
+    %h1 Listing vods
+    -# New add begin
+    .row
+      - @vods.each do |vod|
+        .col-xs-6.col-lg-4
+          = image_tag vod.video.url(:thumb)
+          .li
+            = link_to vod.title, vod
+            = vod.date_published
+          .li
+            = link_to 'Edit', edit_vod_path(vod), class: 'btn btn-primary btn-xs'
+            = link_to 'Destroy', vod, class: 'btn btn-danger btn-xs', :method => :delete, :data => { :confirm => 'Are you sure?' }
+    %br
+    -#  NEW add end
+    = will_paginate vods, renderer: BootstrapPagination::Rails
+- else
+  .alert.alert-warning Nothing found

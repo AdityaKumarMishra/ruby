@@ -1,0 +1,7 @@
+%h1 Auto Email List
+%br
+
+  .row
+    .col-md-4
+      = link_to 'Download CSV', download_email_email_deliveries_path, class: 'btn btn-primary u-white-link'
+=render(partial: 'email_deliveries/table', locals: { email_deliveries: @email_deliveries })

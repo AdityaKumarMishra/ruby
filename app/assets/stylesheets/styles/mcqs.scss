@@ -1,0 +1,26 @@
+// Place all the styles related to the MCQs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.tag-column {
+  width: 250px;
+}
+.mcq-font{
+  p, ol, ul, td {
+    font-size: 16px;
+    font-family: "Times New Roman", Times, serif;
+  }
+  h1{
+    font-family: "Times New Roman", Times, serif;
+  }
+}
+
+.mcq img {
+  width: 100% !important;
+  height: auto !important;
+}
+#reassignModal .form-actions{
+  text-align: center;
+}
+#reassignModal input[type="submit"]{
+  margin-top: 10px;
+}

@@ -1,0 +1,41 @@
+- if product_line == 'gamsat'
+  #course-packages
+    .container.no_padding
+      .course-description-container
+        .course-description.gamsatready
+          %span.grn_clr.mbottom.imgg-mang
+            =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+            Enhanced
+            =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/grn_star.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+            New
+- elsif product_line == 'umat'
+  #course-packages
+    .whte_bg_trans
+      .container.no_padding
+        .umat_content
+          %h2
+            UCAT
+            %sup.r_icon{ style: "left: -17px;margin-right: -21px;"} ®
+            %span PREPARATION COURSES
+          %p
+            Comprehensive and Personalised UCAT
+            %sup{ style: "margin-right: -4px;"} ®
+            prep courses
+          %h3.description-tag-text
+            All our
+            %b
+              %i Attendance
+            courses are capped at the maximum number of 18 students!
+
+          %span.grn_clr.mbottom.imgg-mang.blu-color
+            =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/enhance_umat.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+            Enhanced
+            =image_tag "https://gradready.s3.ap-southeast-2.amazonaws.com/static/icons/str_umat.png", width: '20', class: "banner-icon , mrgn_right , imgg-mang"
+            New
+#recommender_div
+  #course-recommender
+  = javascript_include_tag 'course-recommender'
+:javascript
+  $(".description-tag-text.pop-up").click(function(){
+    $("#course-recommender .cr").addClass("cr--on")
+  });

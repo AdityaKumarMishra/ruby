@@ -1,0 +1,11 @@
+#feature-attendance.feature-icon-container.col-md-6{:id => "hsc-attendance_tutorials"}
+  .clearfix
+    .feature-icon.pull-left
+      %i.fa.fa-user{"aria-hidden" => "true"}
+    .feature-content.pull-right
+      %h4
+        Attendance Tutorials
+      - if paid
+        %h4 $#{price.ceil} + 10% GST = $#{price_with_gst.ceil}
+      .text
+        %p.u-word-spacing Our expert HSC English tutors will teach you techniques and concepts by working through questions with you and dissecting difficult concepts. To reap the full benefits of our Attendance Tutorials please ensure that you prepare by working through all videos prior to class - our tutors will assume that you are familiar with the fundamental concepts covered in the videos.

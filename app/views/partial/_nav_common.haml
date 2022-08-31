@@ -1,0 +1,160 @@
+-if (current_user.nil?)
+  -if type == 'gamsat-preparation-courses'
+    = render 'partial/nav_gamsat', type: type
+  - else
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "/#{type}"} Courses
+      %ul.dropdown-menu.courses-dropdown.home_mg_top{class: [('header_sub_tog_menu' if type == "hsc"), ('header_sub_tog_menu' if type == "vce")]}
+        = render 'partial/nav_courses', type: type
+    -if type == 'umat-preparation-courses' || 'hsc' || 'vce'
+
+      %li
+        %a{:href => "/#{type}/scholarship"} Scholarship
+
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} ABOUT
+      %ul.dropdown-menu.home_mg_top
+        / %li
+        /   %a{:href => "/#{type}/about"} Core Values
+        %li
+          %a{:href => "/#{type}/team"} Team
+        %li
+          %a{:href => "/updates?tab=GAMSAT"} Recent Updates
+
+    // Temporary hardcode gamsat url across all product lines until we have testimonials for each product line - replace gamsat to type
+    -if type == 'umat-preparation-courses'
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} TESTIMONIALS
+        %ul.dropdown-menu.home_mg_top
+          %li
+            %a{:href => "/umat-preparation-courses/our_students"} Satisfaction Survey
+          %li
+            %a{:href => "/umat-preparation-courses/student_testimonials"} Student Results
+
+    -if type == 'hsc'
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} TESTIMONIALS
+        %ul.dropdown-menu.home_mg_top
+          %li
+            %a{:href => "/hsc/our_students"} Satisfaction Survey
+          %li
+            %a{:href => "/hsc/student_testimonials"} Student Results
+    -if type == 'vce'
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} TESTIMONIALS
+        %ul.dropdown-menu.home_mg_top
+          %li
+            %a{:href => "/vce/our_students"} Satisfaction Survey
+          %li
+            %a{:href => "/vce/student_testimonials"} Student Results
+    -if type == 'gamsat-preparation-courses'
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"} TESTIMONIALS
+        %ul.dropdown-menu.home_mg_top
+          %li
+            %a{:href => "/gamsat-preparation-courses/our_students"} Satisfaction Survey
+          %li
+            %a{:href => "/gamsat-preparation-courses/student_testimonials"} Student Results
+    %li
+      %a{:href => "/#{type}/faq"} FAQ
+    -if(current_user && current_user.has_only_free_trial?)
+      %li
+        %a{'data-toggle' => 'modal',
+              'data-target'=> '#upgrade-free-trial-modal', class: ""} Upgrade your free trial
+    %li
+      %a{:href => "/blog/#{type}"} Blog
+
+-if (!current_user.nil? and !current_user.current_enrolment.nil? and type.empty?)
+  %li
+    %a{:href => "/"+map_prodline(current_user.current_enrolment.course.product_version.type)+"/faq"} FAQ
+  %li
+    %a{:href => "/blog/"+map_prodline(current_user.current_enrolment.course.product_version.type)} Blog
+
+-if current_user.nil?
+  -if type != 'gamsat-preparation-courses'
+    %li
+      %a{:href => "/#{type}/contact"} Contact Us
+  %li
+    %a{href: "/login"} Login
+  / -if type == 'gamsat-preparation-courses'
+  /   %li.border_trial
+  /     %a.gam_trial_btn{:href => dynamic_product_version_uri('free-trial', "gamsat", '')}
+  /       Free Trial
+  -if type == 'umat-preparation-courses'
+    %li.border_trial
+      %a.um_trial_btn{:href => dynamic_product_version_uri('free-trial', "umat", '')}
+        Free Trial
+  -if type == 'hsc'
+    %li.dropdown.border_trials
+      %a.dropdown-toggle.point.trial_brdr{"data-toggle" => "dropdown", :href => "#"} Free Trial
+      %ul.dropdown-menu.home_mg_top
+        %li
+          %a{:href => dynamic_product_version_uri('hsc-free-trial', "#{type}", 'english')}
+            HSC
+            %sup ®
+            English Advanced - Free Trial
+        %li
+          %a{:href => dynamic_product_version_uri('hsc-free-trial', "#{type}", 'math')}
+            HSC
+            %sup ®
+            Math Extension 1 - Free Trial
+  -if type == 'vce'
+    %li.dropdown.border_trials
+      %a.dropdown-toggle.point.trial_brdr{"data-toggle" => "dropdown", :href => "#"} Free Trial
+      %ul.dropdown-menu.home_mg_top
+        %li
+          %a{:href => dynamic_product_version_uri('vce-free-trial', "#{type}", 'english')}
+            VCE
+            %sup ®
+            English - Free Trial
+        %li
+          %a{:href => dynamic_product_version_uri('vce-free-trial', "#{type}", 'math')}
+            VCE
+            %sup ®
+            Mathematical Methods (CAS)- Free Trial
+-else
+  -if current_user.student?
+    -if params['controller'] == 'dashboard' && params['action'] == 'home'
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle" => "dropdown", href: "javascript:void(0)"} Important Dates
+        %ul.dropdown-menu.home_mg_top
+          -if type == 'umat-preparation-courses'
+            %li
+              %a{:href => "/umat-preparation-courses/attendance-comprehensive#umat-important-date"}
+                UCAT
+                = succeed "Course Dates" do
+                  %sup{style: 'margin-left: 1px'} ®
+          -else
+            %li
+              %a{:href => "/gamsat-preparation-courses/attendance-comprehensive#gamsat-important-date"}
+                GAMSAT
+                = succeed "Course Dates" do
+                  %sup{style: 'margin-left: 1px'} ®
+            %li
+              %a{:href => "/gamsat-preparation-courses/interview-attendance-comprehensive#gamsat-important-date"} InterviewReady Course Dates
+
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "/#{type}"} Courses
+      %ul.dropdown-menu.courses-dropdown.home_mg_top{class: [('header_sub_tog_menu' if type == "hsc"), ('header_sub_tog_menu' if type == "vce")]}
+        = render 'partial/nav_courses', type: type
+        = render 'partial/nav_courses', type: 'gamsat_interview' if type == 'gamsat-preparation-courses'
+
+  %li.dropdown
+    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "/#{type}/about"} Contact Us
+    %ul.dropdown-menu.home_mg_top
+      %li
+        %a{:href => "/#{type}/faq"} FAQ
+      %li
+        %a{:href => "/#{type}/contact"} Get In Touch
+      %li
+        %a{:href => "/blog/#{type}"} Blog
+  %li
+    %a{href: '/dashboard/home'} Dashboard
+  %li
+    = render 'partial/cart_dropdown'
+  = render 'devise/shared/login_menu'
+
+-if(current_user && current_user.has_only_free_trial?)
+  = render 'enrolments/upgrade_free_trial_modal', trial_enrolment: current_user.trial_enrolment, trial_course: current_user.trial_course
+
+

@@ -1,0 +1,1199 @@
+%section#course_different.pad50
+  .container
+    .text-center.full_width.mbot30.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1200"}
+      %h2
+        -if page_name =='main'
+          - @type = "gamsat"
+          How are
+          %span.grad_logo_head
+            %span.green
+              Grad
+            %span.black
+              Ready
+          %br/
+          Preparation Courses Different?
+        -else
+          -if page_name =='umat'
+            - @type = "umat"
+            How are
+            %span.grad_logo_head
+              %span.blue
+                Grad
+              %span.black
+                Ready
+          -else
+            - @type = "gamsat"
+            How are
+            %span.grad_logo_head
+              %span.green.strong
+                Grad
+              %span.black
+                Ready
+          %br/
+          -#= "#{@type.upcase}"
+          - if (@type == 'umat')
+            UCAT
+          - else
+            ="#{@type.upcase}"
+          %sup ®
+          Preparation Courses Different?
+    .row
+      .cstm_row
+        .col-lg-4.col-md-4.col-sm-4.col-xs-12.ordr_col1
+          .different_course_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+            -if params["action"] == "umat"
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img1.png', alt: "UCAT Study and Tutoring"
+            -else
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img1.png', alt: "GAMSAT Study and Prep Courses"
+            .course_overlay.for_desktop
+              %a{href: "/#{@type}-preparation-courses#comparison_table"}
+                %h4 Most Value
+                %p.tag_line_txt Pound for pound, GradReady offers the best value - by far. Find out in detail what's included in packages of each provider and see GradReady's unparalleled value.
+                %p
+                  We consistently reinvest in our internal operational technology to ensure higher efficiency within the GradReady team. These ongoing improvements allow our staff to be more productive every year, allowing us to stand head and shoulder above our competition in the comprehensiveness of tools we offer, response time of study related questions, and effectiveness of our teachings - all the while being the best priced. See
+                  %b
+                    GradReady vs the rest.
+
+            .course_overlay.for_mobile
+              %a{href: "/#{@type}-preparation-courses#comparison_table"}
+                %h4 Most Value
+              %p.tag_line_txt Pound for pound, GradReady offers the best value - by far. Find out in detail what's included in packages of each provider and see GradReady's unparalleled value.
+              %p
+                We consistently reinvest in our internal operational technology to ensure higher efficiency within the GradReady team. These ongoing improvements allow our staff to be more productive every year, allowing us to stand head and shoulder above our competition in the comprehensiveness of tools we offer, response time of study related questions, and effectiveness of our teachings - all the while being the best priced. See
+                %a{href: "/#{@type}-preparation-courses#comparison_table"}
+                  GradReady vs the rest.
+
+        .col-lg-4.col-md-4.col-sm-4.col-xs-12
+          .different_course_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+            -if params["action"] == "umat"
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img2.png', alt: "UCAT Online Learning and Courses"
+            -else
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img2.png', alt: "GAMSAT Online Learning and Courses"
+            .course_overlay.for_desktop
+              %a{href: "/#{@type}-preparation-courses/student_testimonials#student_improved_score"}
+                %h4 Best Results
+                %p.tag_line_txt GradReady has achieved unparalleled results for our student. We are the only provider to have achieved statistically significant improvements for our students.
+                %p
+                  The most important part of our job is to ensure that we achieve results for our students. We are extremely data driven - using student performance data to fine tune our practice questions, study content, and teaching style. Over time, we have achieved statistically significant and marked improvements for our students every single year - and we continue to improve and innovate every year. See the results that we have achieved for
+                  %b
+                    our students.
+
+            .course_overlay.for_mobile
+              %a{href: "/#{@type}-preparation-courses/student_testimonials#student_improved_score"}
+                %h4 Best Results
+              %p.tag_line_txt GradReady has achieved unparalleled results for our student. We are the only provider to have achieved statistically significant improvements for our students.
+              %p
+                The most important part of our job is to ensure that we achieve results for our students. We are extremely data driven - using student performance data to fine tune our practice questions, study content, and teaching style. Over time, we have achieved statistically significant and marked improvements for our students every single year - and we continue to improve and innovate every year. See the results that we have achieved for
+                %a{href: "/#{@type}-preparation-courses/student_testimonials#student_improved_score"}
+                  our students.
+
+        .col-lg-4.col-md-4.col-sm-4.col-xs-12.ordr_col2
+          .different_course_col.aos-item{"data-aos" => "fade-up", "data-aos-duration" => "1300"}
+            -if params["action"] == "umat"
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img3.png', alt: "UCAT Preparation Courses"
+            -else
+              = image_tag 'https://gradready.s3.ap-southeast-2.amazonaws.com/static/public_pages/differ_img3.png', alt: "GAMSAT Preparation Courses"
+            .course_overlay.for_desktop
+              %a{href: dynamic_product_version_uri("attendance", "#{@type}") + "#reviews_col_tabbing"}
+                %h4 Trailblazing Technology
+                %p.tag_line_txt Experience algorithmic assisted targeted learning. Access tutors and relevant material through a click of a button.
+                %p
+                  We make learning into a science and are the only provider with a proprietary online system; other providers’ online systems usually consists of the basic pricing tier of 1-size-fits-all 3rd party systems. Our suite of online tools and data driven approach allow objective and best practices to be applied to every student online - quickly identifying your weakness and pointing you to the most relevant material. See
+                  %b
+                    what we offer in our packages.
+
+            .course_overlay.for_mobile
+              %a{href: dynamic_product_version_uri("attendance", "#{@type}") + "#reviews_col_tabbing", target: :_blank}
+                %h4 Trailblazing Technology
+              %p.tag_line_txt Experience algorithmic assisted targeted learning. Access tutors and relevant material through a click of a button.
+              %p
+                We make learning into a science and are the only provider with a proprietary online system; other providers’ online systems usually consists of the basic pricing tier of 1-size-fits-all 3rd party systems. Our suite of online tools and data driven approach allow objective and best practices to be applied to every student online - quickly identifying your weakness and pointing you to the most relevant material. See
+                %a{href: "/#{@type}-preparation-courses/attendance-comprehensive#reviews_col_tabbing"}
+                  what we offer in our packages.
+
+    -if params["action"] == 'main' || params["action"] == 'gamsat' || params["action"] == "umat"
+      .faq_list
+        -if page_name == 'main' || page_name == 'gamsat'
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#prep_approach", :role => "button"}
+              -if page_name == 'main'
+                GradReady Learning Philosophy
+              -else
+                GradReady Preparation Philosophy
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #prep_approach.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                GradReady was founded in 2010 by a group of Medical Doctors from the University of Melbourne. Our original aim was to help students in their GAMSAT
+                %sup ®
+                (Graduate Australian Medical School Admissions Test) Preparation - We found existing preparation courses to be overly didactic, inattentive to individual student needs, and lacking in online tools.
+              %p
+                Using our experience in Education and IT, we founded GradReady as a provider dedicated to providing the most advanced online learning experience and personalised, targeted GAMSAT
+                %sup ®
+                prep.
+              %p
+                In the years since, we’ve created a proprietary online LMS featuring the most advanced learning technology on the market with performance tracking over 43 different GAMSAT
+                %sup ®
+                topics and percentile reporting that compares you to thousands of other GradReady students, past and present.
+                -if page_name == "main" || page_name == "umat"
+                  We’ve also grown to provide the same targeted learning experience for UCAT
+                  %sup ®
+                  Students with our UCAT
+                  %sup ®
+                  Preparation Courses.
+              %p
+                Our personalised approach is also reflected in our
+                %strong
+                  %a{href: "/gamsat-preparation-courses/team", target: :_blank }
+                    tuition team
+                which consists of successful current medical students, former university level lecturer &amp; PhD candidates. What’s more, our interactive classes are capped at 21 students to ensure that you have a chance to engage directly and frequently with our expert team. We run our
+                -if page_name == 'main'
+                  GAMSAT
+                  %sup ®
+                  &amp; UCAT
+                  %sup ®
+                -elsif page_name == 'gamsat'
+                  GAMSAT
+                  %sup ®
+                Preparation Courses around Australia in Melbourne, Sydney, Brisbane, Adelaide and Perth.
+              %p
+                This approach has helped our students achieve the best results at the best value, with our average student achieving an Improvement of 20+ Percentile Points over the last 7 years. Our InterviewReady students have also achieved an average Medical Admissions Rate of 90% over 4 years. To learn more about our student results, visit our
+                %strong
+                  %a{href: "/gamsat-preparation-courses/student_testimonials", target: :_blank }
+                    Student Testimonials.
+              %p
+                To learn more about our
+                GAMSAT
+                %sup ®
+                teaching philosophy, visit our
+                %strong
+                  %a{href: "/gamsat-preparation-courses/overview", target: :_blank }
+                    GradReady GAMSAT
+                    %sup ®
+                    Strategy Page.
+        -elsif page_name == "umat"
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#prep_approach", :role => "button"}
+              GradReady Preparation Philosophy
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #prep_approach.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                GradReady was founded in 2010 by a group of Medical Doctors from the University of Melbourne. Our original aim was to help students in their GAMSAT
+                %sup ®
+                (Graduate Australian Medical School Admissions Test) Preparation - We found existing preparation courses to be overly didactic, inattentive to differing student needs, and lacking in online tools.
+              %p
+                Using our experience in Education and IT, we founded GradReady as a provider dedicated to providing the most advanced online learning experience and personalised, targeted GAMSAT
+                %sup ®
+                prep. By the end of 2014, our GAMSAT
+                %sup ®
+                Courses had become the most widely used GAMSAT
+                %sup ®
+                exam preparation course with over 1000 students each year. Moreover, we were able to help our students achieve many milestones, including an average rise in percentile ranking of more than 24 percentage points and a medical school admission rate of over 90% year after year. Subsequently, we asked ourselves - "can our tools and methods help to bring the same level of success to undergraduate medical students?" The answer was a resounding yes.
+              %p
+                In response, we created our own UCAT
+                %sup ®
+                Courses – with the aim of bringing the same success stories to undergraduate medicine. In the years since, we’ve created a proprietary online LMS featuring the most advanced learning technology on the market with performance tracking over 19 different UCAT
+                %sup ®
+                topics and percentile reporting that compares you to GradReady UCAT
+                %sup ®
+                students past and present.
+              %p
+                Our personalised approach is also reflected in our
+                %strong
+                  %a{href: "/umat-preparation-courses/team.html", target: :_blank }
+                    tuition team
+                which consists of successful current medical students, former university level lecturer &amp; PhD candidates. What’s more, our interactive classes are capped at 18 students to ensure that you have a chance to engage directly and frequently with our expert team. We run our UCAT
+                %sup ®
+                Preparation Courses around Australia in Melbourne, Sydney, Brisbane, Adelaide and Perth.
+              %p
+                This approach has helped our students achieve the best results at the best value, with our average student achieving an Improvement of 25 Percentile Points over the last 4 years. Our InterviewReady students have achieved an average Medical Admissions Rate of 90% over the same period. To learn more about our student results, visit our
+                %strong
+                  %a{href: "/umat-preparation-courses/student_testimonials", target: :_blank }
+                    Student Testimonials.
+              %p
+                To learn more about our
+                UCAT
+                %sup ®
+                teaching philosophy, visit our
+                %strong
+                  %a{href: "/umat-preparation-courses/about", target: :_blank }
+                    GradReady UCAT
+                    %sup ®
+                    Strategy Page.
+
+        -if page_name == 'main' || page_name == 'gamsat'
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#about_gamsat", :role => "button"}
+              About the GAMSAT
+              %sup ®
+              Exam
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #about_gamsat.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                The Graduate Medical School Admissions Test (GAMSAT
+                %sup ®
+                ) is a standardised exam coordinated by the Australian Council for Education Research
+                %strong
+                  %a{href: "https://gamsat.acer.org", target: :_blank} (ACER)
+                designed to <i>‘assess the capacity to undertake high-level intellectual studies in the medical and health professional programs’</i>. It is a test required for applications to all but one Graduate Entry Medical course in Australia, as well as various other dentistry, optometry and podiatry courses. In essence, the exam is designed to assess your analytical and critical thinking skills as well as how you organise and communicate your ideas in order to select candidates for Graduate Entry Medical Studies.
+              %p
+                The GAMSAT
+                %sup ®
+                Exam is made up of three sections:
+                %ol.same_font.margin_shift
+                  %li
+                    %h3
+                      %a.green{href: "/gamsat-section-1", target: :_blank} Section 1: Reasoning in Humanities and Social Sciences
+                  %li
+                    %h3
+                      %a.green{href: "/gamsat-section-2", target: :_blank} Section 2: Written Communication
+                  %li
+                    %h3
+                      %a.green{href: "/gamsat-section-3", target: :_blank} Section 3: Reasoning in Biological and Physical Sciences
+              %p
+                Your overall GAMSAT
+                %sup ®
+                score is determined as follows:
+              .full_width
+                .overall_box_col
+                  %p Overall Score = (1 x Section I + 1 x Section II + 2 x Section III) / 4
+
+              %p
+                Note however that there are some exceptions to this formula - to learn more about how GAMSAT
+                %sup ®
+                scoring works and view different university cutoff scores for medical courses, visit our
+                %strong
+                  %a{href: "/gamsat-scores", target: :_blank}
+                    GAMSAT
+                    %sup ®
+                    Results Guide.
+              %p
+                The GAMSAT
+                %sup ®
+                Exam runs twice a year in March and September. To learn the exact dates and learn more about registration deadlines and the GAMSAT
+                %sup ®
+                Exam Test locations, visit
+                %strong
+                  %a{href: "/gamsat-2021", target: :_blank}
+                    our guide to sitting the GAMSAT
+                    %sup ®
+                    Exam in 2021.
+              %p
+                To get more information about the GAMSAT
+                %sup ®
+                Exam and an overview of the day, visit our guide to the GAMSAT
+                %sup ®
+                Exam here:
+                %strong
+                  %a{href: "/what-is-gamsat", target: :_blank}
+                    What is the GAMSAT
+                    %sup ®
+                    ?
+        -if page_name == "umat"
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#about_umat", :role => "button"}
+              About the UCAT
+              %sup ®
+              Exam
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #about_umat.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                The University Clinical Aptitude Test (UCAT
+                %sup ®
+                ) is a standardised, 2 hour computer based multiple-choice exam designed to help <i>‘universities to select applicants with the most appropriate mental abilities, attitudes and professional behaviours required for new doctors and dentists to be successful in their clinical careers</i>&nbsp;’. The UCAT
+                %sup ®
+                exam replaces the UMAT
+                %sup ®
+                exam and is required for applications to the majority of Undergraduate Entry Medical courses in Australia, as well as various other dentistry, and health science courses.
+              %p
+                The UCAT
+                %sup ®
+                exam comprises of multiple sections, with different question types and various numbers of answer options. These sections can be considered subtests and are separately timed. There is a one minute break before the start of each section which will display instructions. Your overall time will not pause until either every subtest if finished or the allotted time runs out. These sections include:
+                %ol.umat_same_font.margin_shift
+                  %li
+                    %h4
+                      Section 1: Verbal Reasoning (44 questions | 21 minutes)
+                  %li
+                    %h4
+                      Section 2: Decision Making (29 questions | 31 minutes)
+                  %li
+                    %h4
+                      Section 3: Quantitative Reasoning (36 questions | 24 minutes)
+                  %li
+                    %h4
+                      Section 4: Abstract Reasoning (55 questions | 13 minutes)
+                  %li
+                    %h4
+                      Section 5 – Situational Judgement (69 questions | 26 minutes)
+              %p
+                Scoring information has yet to be released regarding the UCAT
+                %sup ®
+                exam but it is worth noting that your score reports will be available immediately after completion of the test.
+
+        -if page_name == 'main' || page_name == 'gamsat'
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#gamsat_prep_basics", :role => "button"}
+              GAMSAT
+              %sup ®
+              Preparation Basics
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #gamsat_prep_basics.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                The secret to preparing for the Graduate Australian Medical School Admissions Test ( GAMSAT
+                %sup ®
+                ) lies in the approach. The GAMSAT
+                %sup ®
+                is designed to ‘assess the capacity to undertake high-level intellectual studies in the medical and health professional programs’, and it does this by assessing your analytical and critical thinking skills. Make no mistake, the GAMSAT
+                %sup ®
+                Exam is focused on examining your reasoning and problem solving skills rather than your recall of specific content and in this respect, it requires a different approach to preparation compared with a typical university assessment.
+              %p
+                Here at GradReady, we organise our GAMSAT
+                %sup ®
+                Preparation Strategy under three key stages:
+
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width11
+                      %h3 Steps
+                    %th.text-center.width40
+                      %h3 Description
+
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h4 Build the foundational content and knowledge
+                      %td.text-center
+                        Our
+                        %strong
+                          %a.green{href: "/gamsat-preparation-courses/student_testimonials", target: :_blank}GradReady Students
+                        have access to our 1200+ pg GAMSAT
+                        %sup ®
+                        Textbook as well as over 25 hours of videos to provide them with all the tools they need to establish this essential foundation. In addition, if you ever need any further help with a particular concept or subject, our GetClarity system allows you to directly contact a GAMSAT
+                        %sup ®
+                        Tutor who specialises in your area of query anytime you need it - it’s basically like having a personal tutor at your fingertips.
+
+                    %tr
+                      %td.text-center
+                        %h4
+                          Apply this knowledge and develop a GAMSAT
+                          %sup ®
+                          Exam and MCQ Strategy
+                      %td.text-center
+                        We ask our students to
+                        %strong
+                          %a.green{href: "/gamsat-preparation-courses/attendance-comprehensive", target: :_blank}
+                            prepare for our live classes
+                        by reviewing the content beforehand, in order to allow our GAMSAT
+                        %sup ®
+                        tutors to focus their time on teaching you to develop an Exam Strategy and providing you with the skills to take MCQs apart. With classes capped at 21 students, the interactive environment provides students with plenty of opportunities to ask our tutors for advice &amp; feedback.
+                    %tr
+                      %td.text-center
+                        %h4
+                          Practice with realistic questions under accurate conditions
+                      %td.text-center
+                        GradReady students have access to up to 8 Intelligent Online Exams as well as the most realistic Mock Exam out there, featuring percentile reporting for your overall performance and a breakdown for each section that compares you to thousands of GradReady students, past and present.
+
+
+              %p
+                To get more tips on how to organise and plan your study, read our guide on
+                %strong
+                  %a{href: "/gamsat-preparation", target: :_blank}
+                    How to Prepare for the GAMSAT
+                    %sup ®
+                    Exam.
+
+        -if page_name == 'gamsat'
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#gamsat_daily_schedule", :role => "button"}
+              GAMSAT
+              %sup ®
+              Course Daily Schedule
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #gamsat_daily_schedule.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                Curious about what we cover in our Attendance Courses? Have a look at an example daily schedule below:
+              %h3.table_heading
+                Day 1: GAMSAT
+                %sup ®
+                Humanities (Section 2), Biology &amp; Chemistry (Section 3)
+
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Introduction to Section 2
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Theme Finding
+                          %br/
+                          %br/
+                          Writing Something Interesting
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Respiratory System
+                          %br/
+                          %br/
+                          Gastrointestinal System
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          The Atom
+                          %br/
+                          %br/
+                          Chemical Equations &amp; Stoichiometry
+                          %br/
+                          %br/
+                          Electrons &amp; Chemical Bonds
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Gases
+                          %br/
+                          %br/
+                          Thermodynamics &amp; Kinetics
+
+              %h3.table_heading
+                Day 2: GAMSAT
+                %sup ®
+                Humanities (Section 2), Physics &amp; Biology (Section 3)
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Renal System
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Endocrine Systems
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Argumentative Essay
+                          %br/
+                          %br/
+                          Reflective Essay
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Linear Motion
+                          %br/
+                          %br/
+                          Motion in Two Dimensions
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Newton’s Laws
+                          %br/
+                          %br/
+                          Mechanical Equilibrium
+
+              %h3.table_heading
+                Day 3: GAMSAT
+                %sup ®
+                Humanities (Section 1), Physics &amp; Chemistry (Section 3)
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Work, Energy &amp; Momentum
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Electromagnetism
+                          %br/
+                          %br/
+                          Fluids, Pressure &amp; Heat
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Acids &amp; Bases
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Electrical Circuits
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Vocabulary Questions
+                          %br/
+                          %br/
+                          Perspective Questions
+              %h3.table_heading
+                Day 4: GAMSAT
+                %sup ®
+                Humanities (Section 1), Chemistry &amp; Biology (Section 3)
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Immune Systems
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Genetics &amp; Evolution
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Poetry
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Acids &amp; Bases
+                          %br/
+                          %br/
+                          Electrochemistry
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Common Organic Reactions
+                          %br/
+                          %br/
+                          Special Organic Reactions
+              %h3.table_heading
+                Day 5: GAMSAT
+                %sup ®
+                Humanities (Section 1), Biology &amp; Chemistry (Section 3)
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Stereochemistry
+                          %br/
+                          %br/
+                          Biochemistry
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Chemistry
+                      %td.text-center
+                        %h6
+                          Spectroscopies
+                          %br/
+                          %br/
+                          Laboratory Techniques
+                          %br/
+                          %br/
+                          Review
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Reproductive System
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Fiction
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Cartoons
+              %h3.table_heading
+                Day 6: GAMSAT
+                %sup ®
+                Humanities (Section 1), Physics &amp; Biology (Section 3)
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:00 - 11:00
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Waves &amp; Optics
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Physics
+                      %td.text-center
+                        %h6
+                          Nuclear Physics
+                          %br/
+                          %br/
+                          Revision
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:15
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:15 - 2:15
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Experimental Design
+                    %tr
+                      %td.text-center
+                        %h6
+                          2:30 - 3:30
+                      %td.text-center
+                        %h6
+                          Biology
+                      %td.text-center
+                        %h6
+                          Revision
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:45 - 4:45
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Charts &amp; Diagrams
+                          %br/
+                          %br/
+                          Non-Fiction
+                    %tr
+                      %td.text-center
+                        %h6
+                          5:00 - 6:00
+                      %td.text-center
+                        %h6
+                          Humanities
+                      %td.text-center
+                        %h6
+                          Exam Techniques
+              %h3.table_heading
+                Day 7: GAMSAT
+                %sup ®
+                Mock Exam Day
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          9:00 - 9:10
+                      %td.text-center
+                        %h6
+                          Section 1: Reasoning in Humanities and Social Sciences
+                      %td.text-center
+                        %h6
+                          Reading Time
+                    %tr
+                      %td.text-center
+                        %h6
+                          9:10 - 10:50
+                      %td.text-center
+                        %h6
+                          Section 1: Reasoning in Humanities and Social Sciences
+                      %td.text-center
+                        %h6
+                          Writing Time
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:50 - 10:55
+                      %td.text-center
+                        %h6
+                          Section 2: Written Communication
+                      %td.text-center
+                        %h6
+                          Reading Time
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:55 - 11:55
+                      %td.text-center
+                        %h6
+                          Section 2: Written Communication
+                      %td.text-center
+                        %h6
+                          Writing Time
+                    %tr
+                      %td.text-center
+                        %h6
+                          11:55 - 12:55
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:55 - 1:05
+                      %td.text-center
+                        %h6
+                          Section 3: Reasoning in Biological &amp; Physical Sciences
+                      %td.text-center
+                        %h6
+                          Reading Time
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:05 - 3:55
+                      %td.text-center
+                        %h6
+                          Section 3: Reasoning in Biological &amp; Physical Sciences
+                      %td.text-center
+                        %h6
+                          Writing Time
+              %h3.table_heading
+                Day 8: GAMSAT
+                %sup ®
+                Mock Exam Review Day
+              .tbl_responsive.fl_none
+                %table.table.cstm_tbl.table-bordered.table-condensed.custom_table_data
+                  %thead
+                    %th.text-center.width22
+                      %h6
+                        Time
+                    %th.text-center.width22
+                      %h6
+                        Topic
+                    %th.text-center
+                      %h6
+                        Description
+                  %tbody
+                    %tr
+                      %td.text-center
+                        %h6
+                          8:00 - 10:00
+                      %td.text-center
+                        %h6
+                          Humanities Section 1
+                      %td.text-center
+                        %h6
+                          Recap &amp; Review
+                    %tr
+                      %td.text-center
+                        %h6
+                          10:15 - 12:15
+                      %td.text-center
+                        %h6
+                          Humanities Section 1
+                          %br/
+                          %br/
+                          Humanities Section 2
+                      %td.text-center
+                        %h6
+                          Recap &amp; Review
+                    %tr
+                      %td.text-center
+                        %h6
+                          12:15 - 1:00
+                      %td.text-center
+                        %h6
+                          Lunch
+                      %td.text-center
+                        %h6
+                          Lunch
+                    %tr
+                      %td.text-center
+                        %h6
+                          1:00 - 3:00
+                      %td.text-center
+                        %h6
+                          Section 3 Biology
+                      %td.text-center
+                        %h6
+                          Recap &amp; Review
+                    %tr
+                      %td.text-center
+                        %h6
+                          3:15 - 6:00
+                      %td.text-center
+                        %h6
+                          Section 3 Chemistry
+                      %td.text-center
+                        %h6
+                          Recap &amp; Review
+                    %tr
+                      %td.text-center
+                        %h6
+                          6:00 - 7:00
+                      %td.text-center
+                        %h6
+                          Dinner
+                      %td.text-center
+                        %h6
+                          Dinner
+                    %tr
+                      %td.text-center
+                        %h6
+                          7:00 - 9:00
+                      %td.text-center
+                        %h6
+                          Section 3 Physics
+                      %td.text-center
+                        %h6
+                          Recap &amp; Review
+
+        -if page_name == 'gamsat'
+          .faq_list_col.new_add_section
+            %h2#what-is-the-gamsat.faq_question{"aria-controls" => "collapseOne", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#gamsat_prep_material", :role => "button"}
+              Free GAMSAT
+              %sup ®
+              Preparation Materials
+              %i.fa.fa-angle-down.pull-right{"aria-hidden" => "true"}
+            #gamsat_prep_material.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel"}
+              %p
+                Here at GradReady we aim to provide students with the most comprehensive free resources available to help you make a start on your GAMSAT
+                %sup ®
+                Prep. In order to do so, we’ve prepared guides and other free preparation material to give you a glimpse of how we’ve been able to achieve a 25 Percentile Point improvement on average for our students over the last 4 years:
+              %ul.margin_shift
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-preparation-courses/free-gamsat-trial", target: :_blank}
+                      GAMSAT
+                      %sup ®
+                      Free Trial
+                    %p
+                      The Most Comprehensive Library of Free GAMSAT Resources Available - Get Access to MCQs, a Diagnostic Test, a week-by-week Study Guide and more.
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-preparation", target: :_blank}
+                      How to Prepare for the GAMSAT
+                      %sup ®
+                      Exam
+                    %p
+                      Get tips on how to schedule and plan your study to ensure you’re always working on the right things.
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-section-1", target: :_blank}
+                      Section 1: How to Prepare
+                    %p
+                      Get specific exam strategies and tips to help you ace Section 1.
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-section-2", target: :_blank}
+                      Section 2: How to Prepare
+                    %p
+                      Get expert advice on how to write, plan and improve your GAMSAT
+                      %sup ®
+                      Section 2 Essays.
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-section-3", target: :_blank}
+                      Section 3: How to Prepare
+                    %p
+                      With exam and study tips for Chemistry, Biology and Physics, read our guide to give you the tools to ace Section 3.
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-free-practice", target: :_blank}
+                      Free GAMSAT
+                      %sup ®
+                      Practice Questions
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-example-essay", target: :_blank}
+                      Free GAMSAT
+                      %sup ®
+                      Example Essays
+                %li
+                  %h3
+                    %a.green{href: "/gamsat-quote-generator", target: :_blank}
+                      Free GAMSAT
+                      %sup ®
+                      Quote Generator
+
+
+
+
+:javascript
+
+  $(document).ready(function(){
+    $(".new_add_section h2").click(function(){
+      $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+    });
+  });
+
+
+

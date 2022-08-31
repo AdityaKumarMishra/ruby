@@ -1,0 +1,47 @@
+%html
+  %head
+    %meta{ content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+  %body
+    %h3= "New DirectDebit for #{@student_name}"
+    %p= "In #{@course.name}"
+    %br
+    %h3 Transfer Info
+    %p <b> Amount </b> #{number_to_currency @amount}
+    %p <b> Banking Reference </b> #{@banktrans}
+    %p <b> Paid </b> #{@paid}
+    %br
+    %h3 Student Info
+    %h4 Contact
+    %p <b>Name</b> #{@student_name}
+    %p <b>Email</b> #{@student_email}
+    %p <b>City</b> #{@course_city}
+    -if @student.present?
+      -if !@student.address.nil?
+        %p <b>Phone Number </b> #{@student.phone_number}
+        %p <b>Address Line 1</b> #{@student.address.line_one}
+        %p <b>Address Line 2</b> #{@student.address.line_two}
+        %p <b>Suburb</b> #{@student.address.suburb}
+        %p <b>State</b> #{@student.address.state}
+        %p <b>Country</b> #{@student.address.country}
+      -else
+        %p Contact Details not added
+      -if !@student.questionnaire.nil?
+        %h4 Background
+        -if @student.questionnaire.student_level == 'university' && @student.questionnaire.university.present?
+          %p <b>University</b> #{@student.questionnaire.university.name.nil? ? '' : @student.questionnaire.university.name}
+          %p <b>Degree</b> #{@student.questionnaire.degree.name.nil? ? '' : @student.questionnaire.degree.name}
+          %p <b>Year</b> #{@student.questionnaire.year.nil? ? '' : @student.questionnaire.year}
+          %p <b>UMAT in High School</b> #{@student.questionnaire.umat_high_school.nil? ? '' : @student.questionnaire.umat_high_school}
+          %p <b>UMAT again in Uni</b> #{@student.questionnaire.umat_uni.nil? ? '' : @student.questionnaire.umat_uni}
+        -else
+          %p <b>High School</b> #{@student.questionnaire.current_highschool.nil? ? '' : @student.questionnaire.current_highschool}
+          %p <b>Target Uni Course</b> #{@student.questionnaire.target_uni_course.nil? ? '' : @student.questionnaire.target_uni_course}
+          %p <b>High School Year</b> #{@student.questionnaire.highschool_year_level.nil? ? '' : @student.questionnaire.highschool_year_level}
+
+        %p <b>How they heard about GR</b> #{@student.questionnaire.source.nil? ? '' : @student.questionnaire.source}
+        %p <b>Last saw/heard GR through</b> #{@student.questionnaire.last_source.nil? ? '' :@student.questionnaire.last_source}
+      -else
+        %p Background Information not added
+    %br
+    %p Kind regards,
+    %p GradReady Student Success Team

@@ -1,0 +1,217 @@
+.about {
+  h1, h4 {
+    text-align: center;
+  }
+  h1 {
+    font-family: $font-head;
+    font-size: $font-head-size;
+  }
+  .description {
+    font-family: $font-subhead;
+    font-size: $font-normal;
+    text-align: left;
+    .bold_about {
+        font-weight: bold;
+    }
+    .heading {
+        font-family: inherit;
+        font-size: 18px;
+        padding: 15px 0 10px;
+        min-height: 75px;
+    }
+    i {
+      font-size: 70px;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+      &.green {
+        background-color: $grGreen;
+      }
+      &.blue {
+        background-color: $umat-color;
+      }
+      &.red {
+        background-color: $hsc-color;
+      }
+      &.purple {
+        background-color: $vce-color;
+      }
+    }
+    a {
+      &.green {
+        color: $gamsat-color;
+      }
+      &.blue {
+        color: $umat-color;
+      }
+      &.purple {
+        color: $vce-color;
+      }
+      &.red {
+        color: $hsc-color;
+      }
+    }
+  }
+}
+
+
+.about-strategy-description {
+    width: 19%;
+    float: left;
+    margin: 0 .5%;
+}
+a {
+    color: #08c;
+    text-decoration: none;
+}
+#public-page .about-strategy-description {
+    text-align: left;
+    .bold_about {
+        font-weight: bold;
+    }
+    .heading {
+        font-family: inherit;
+        font-size: 18px;
+        padding: 15px 0 10px;
+        min-height: 75px;
+    }
+    i {
+      font-size: 70px;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+      &.green {
+        background-color: $grGreen;
+      }
+      &.blue {
+        background-color: $umat-color;
+      }
+      &.red {
+        background-color: $hsc-color;
+      }
+      &.purple {
+        background-color: $vce-color;
+      }
+    }
+    a {
+      &.green {
+        color: $gamsat-color;
+      }
+      &.blue {
+        color: $umat-color;
+      }
+      &.purple {
+        color: $vce-color;
+      }
+      &.red {
+        color: $hsc-color;
+      }
+    }
+
+}
+#public-page .carousel_text .carousel-inner .text_slider {
+    height: 110px;
+    margin-left: 30px;
+    width: 93%;
+}
+.carousel-inner {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+#public-page .carousel_text {
+    background: none repeat scroll 0 0 #F1F1F1;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin: 0px -15px;
+}
+#public-page .textCon p {
+    font-size: 16px;
+    font-weight: bold;
+    display: table-cell;
+    vertical-align: middle;
+    margin: 0;
+    padding: 30px 0px 30px 20px;
+}
+.student_score {
+  font-size: 17px !important;
+}
+
+.mrg_txt {
+    margin-bottom: 0px;
+    margin-top: 14px;
+}
+
+// All [PRODUCT]-about stylings are temporarily placed
+// here for reference and inheritance purposes
+.u-green-link {
+  &:hover {
+    color: $gamsat-color;
+    text-decoration: underline;
+  }
+}
+.u-blue-link {
+  color: #428bca;
+}
+.u-title {
+  font-family: $font-head;
+  font-size: 40px;
+  text-align: center;
+}
+.u-description {
+  padding: 25px 0px 25px 0px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 1.5;
+  a {
+    color: #428bca;
+    &:hover {
+      color: #428bca !important;
+      text-decoration: underline;
+    }
+  }
+}
+
+.hsc_rd_clr {
+  .scho_red_color {
+    h1 {
+      @extend .u-title;
+      color: $hsc-color !important;
+    }
+  }
+}
+.umat {
+  .scho_blu_color {
+    h1 {
+      @extend .u-title;
+      color: $umat-color;
+    }
+    h2 {
+      font-family: "museo-slab";
+      font-size: 40px;
+      text-align: center;
+      color: $umat-color;
+      margin: 0.67em 0;
+    }
+  }
+}
+.scho_green_color {
+  font-family: $font-head;
+  font-size: 20px;
+  text-align: center;
+  color: $gamsat-color;
+}
+
+
+@media only screen and (max-width: 759px) and (min-width: 470px){
+  .about-strategy-description {
+      width: 100%;
+      margin: 0;
+  }
+  #public-page .about-strategy-description {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+}

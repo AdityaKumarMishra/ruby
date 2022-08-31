@@ -1,0 +1,33 @@
+= simple_form_for(@promo) do |f|
+  = f.error_notification
+
+  .form-group
+    = f.input :name, label: "Name"
+
+    = f.input :token, placeholder: "Leave blank to generate one automatically", label: "Code"
+
+  .form-group
+    = f.input :amount, label: "Amount to discount (percentage value between 0 and 100)"
+
+  .form-group
+    = f.label :product_version_id, label: 'For Product Version'
+    =f.select(:product_version_id, options_for_select(available_product_versions, @promo.product_version_id), { include_blank: 'All'}, class: 'form-control')
+
+  .form-group
+    = f.input :stackable, label: "Can be used together with other discount codes"
+
+  .form-group
+    = f.input :expiry_date, label: "Expiry Date", class: "form-control"
+
+  .form-group
+    = f.input :used_times, label: "Can be used how may times", input_html: { min: '1' }
+
+  .form-actions
+    = f.button :submit
+
+:javascript
+    $(".chosen-choices").chosen({
+      no_results_text: "Oops, nothing found!",
+      // hide disabled elements
+      display_disabled_options: false
+    });

@@ -1,0 +1,42 @@
+%p#notice= notice
+
+%p
+  %b Paid at:
+  = @purchase_addon.paid_at
+%p
+  %b Date activated:
+  = @purchase_addon.date_activated
+%p
+  %b Date deactivated:
+  = @purchase_addon.date_deactivated
+%p
+  %b Features:
+  = @purchase_addon.features
+%p
+  %b Subtotal:
+  = @purchase_addon.subtotal
+%p
+  %b Gst:
+  = @purchase_addon.gst
+%p
+  %b Paypal fee:
+  = @purchase_addon.paypal_fee
+%p
+  %b Paypal payment:
+  = @purchase_addon.paypal_payment
+%p
+  %b Paypal token:
+  = @purchase_addon.paypal_token
+%p
+  %b Banktrans:
+  = @purchase_addon.banktrans
+%p
+  %b Paypal:
+  = @purchase_addon.paypal
+%p
+  %b Bank:
+  = @purchase_addon.bank
+
+= link_to 'Edit', edit_purchase_addon_path(@purchase_addon)
+\|
+= link_to 'Back', purchase_addons_path

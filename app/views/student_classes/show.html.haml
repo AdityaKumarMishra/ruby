@@ -1,0 +1,29 @@
+%h1 Class
+%p
+  %b Name:
+  = @student_class.name
+%p
+  %b Size:
+  = @student_class.size
+%p
+  %b Item Coverd:
+  = @student_class.item_coverd
+%p
+  %b Subject:
+  = link_to @student_class.subject, subject_path(@student_class.subject) if @student_class.subject
+%p
+  %b Tutors:
+  = @student_class.tutors_to_s
+%p
+  %b Students:
+  = @student_class.students_to_s
+
+-if @student_class.student_class_sessions.any?
+  %h3 Session
+  = render :partial => 'student_class_sessions/partial/table', :locals => {:student_class_sessions => @student_class.student_class_sessions}
+
+= render :partial => 'student_classes/partial/students', :locals => {:student_class => @student_class}
+
+= link_to 'Edit', edit_student_class_path(@student_class), class: 'btn btn-default'
+= link_to 'Add session', new_student_class_session_path(:class_id => @student_class.id), class: 'btn btn-default'
+= link_to 'Back', student_classes_path, class: 'btn btn-default'

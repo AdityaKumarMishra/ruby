@@ -1,0 +1,116 @@
+.dashboard-calendar-header
+  = select_tag 'essays_view', options_for_select(essay_dropdown, selected: essays_select_option_values(params[:action])), { class: 'form-control essay_select_dropdown' }
+
+  .row
+    .form-group.col-md-6
+      Essay Status
+      = select_tag 'essay_count_filter', options_for_select([["Essay To Mark", "Unmarked"] , ["Essay Marked", "Marked" ]]), class: 'form-control'
+    - if !current_user.tutor?
+      .form-group.col-md-6.tutor_search
+        Tutor Name
+        = select_tag 'tutor_filter', options_for_select(User.tutor.where('first_name is NOT ?', nil).sort { |a, b| a.full_name <=> b.full_name }.map { |u| [u.full_name, u.id] }), class: 'form-control tag_filter select2_searchable', include_blank: "All"
+
+    .form-group.col-md-12.payperiod_check.hide
+      = check_box_tag 'pay_period'
+      Download Data by Pay Period
+
+    .form-group.col-md-6.paycycle_select.hide
+      Pay Period
+      = select_tag 'pay_cycle', options_for_select(marked_essays_pay_period, selected: marked_essays_pay_period[25]), class: 'form-control'
+
+  #tutor_essays
+    = render 'essay_responses/partial/tutor_essays'
+:css
+  .essay_select_dropdown{
+    width: 40%;
+    margin-bottom: 25px;
+  }
+
+:javascript
+  $(document).ready(function(){
+
+    download_sheet_data();
+
+    $("#essay_count_filter, #tutor_filter").on('change', function(){
+      var essay_status = $("#essay_count_filter").val();
+      var tutor_selected = $("#tutor_filter").val();
+      if($("#pay_period").is(':checked')){
+
+      }else{
+        $.ajax({
+          url: "/essay_responses/tutor_essays",
+          type: "GET",
+          dataType: 'script',
+          data: {"essay_status" : essay_status, "tutor_selected" : tutor_selected},
+        });
+      }
+    })
+
+    $("#essay_count_filter").on('change', function(){
+      download_marked_essay()
+    })
+
+    $("#pay_period").on('click', function(){
+      download_marked_essay()
+    })
+
+    $("#pay_cycle").on('change', function(){
+      add_marked_url();
+    })
+
+    $("#tutor_filter").on('change', function(){
+      add_marked_url();
+    })
+  });
+
+  $(function () {
+    $(".select2_searchable").select2();
+  });
+
+  function download_sheet_data() {
+    var year = $(".calendar-month-header span").text().split(" ")[1]
+    var month = $(".calendar-month-header span").text().split(" ")[0]
+    var status = $("#essay_count_filter").val();
+    var tutor = $("#tutor_filter").val();
+    var aa = $(".downlod_stat1")
+    var _href = aa.attr("href");
+    aa.attr("href", "/essay_responses/download_tutor_essays?year=" + year + "&month=" + month + "&status=" + status + "&tutor=" + tutor + "&format=" + "xls");
+  }
+
+  function download_marked_essay(){
+    if($("#essay_count_filter").val() == 'Marked'){
+      $('.dashboard-calendar-header .payperiod_check').removeClass('hide')
+
+      if($("#pay_period").is(':checked')){
+        $('.dashboard-calendar-header .paycycle_select').removeClass('hide')
+        $('#tutor_essays #calendar #my-calendar').hide();
+        add_marked_url();
+      }else{
+        $('.dashboard-calendar-header .paycycle_select').addClass('hide')
+        $('#tutor_essays #calendar #my-calendar').show();
+        download_sheet_data();
+      }
+    }else{
+      $('.dashboard-calendar-header .payperiod_check').addClass('hide')
+      $('.dashboard-calendar-header .paycycle_select').addClass('hide')
+      $('#tutor_essays #calendar #my-calendar').show();
+      download_sheet_data();
+    }
+  }
+
+  function add_marked_url(){
+    var tutor = $("#tutor_filter").val();
+    var aa = $(".downlod_stat1");
+    var period = $("#pay_cycle").val();
+    aa.attr("href", "/essay_responses/download_marked_essays?period=" + period + "&tutor=" + tutor + "&format=" + "xls");
+  }
+
+  $(function(){
+    $('.essay_select_dropdown').bind('change', function () {
+     var url = $(this).val()
+      if (url) {
+        window.location = url;
+      }
+      return false;
+    });
+  });

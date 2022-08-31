@@ -1,0 +1,26 @@
+=will_paginate @diagnostic_tests, renderer: BootstrapPagination::Rails
+
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Instruction
+      %th Attempted by (no. of student)
+      %th Published
+      - if current_user.admin? || current_user.superadmin?
+        %th{colspan: 4} Actions
+      - else
+        %th Actions
+
+  %tbody
+    - @diagnostic_tests.each do |diagnostic_test|
+      %tr
+        %td= diagnostic_test.title
+        %td= diagnostic_test.instruction
+        %td= diagnostic_test.assessment_attempts.completed.count
+        %td= diagnostic_test.published
+        %td= link_to 'Edit', edit_diagnostic_test_path(diagnostic_test), class: 'btn btn-info btn-sm', target: :_blank
+        - if current_user.admin? || current_user.superadmin?
+          %td= link_to 'Destroy', diagnostic_test, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+          %td= link_to "#{diagnostic_test.locked ? 'Unlock' : 'Lock'}", change_lock_diagnostic_test_path(diagnostic_test), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-info btn-sm'
+          %td= diagnostic_test.show_stat ? link_to("Do not show stat to students", change_show_stat_diagnostic_test_path(diagnostic_test), class: 'btn btn-danger btn-sm') : link_to("Show stat to students", change_show_stat_diagnostic_test_path(diagnostic_test), class: 'btn btn-success btn-sm')

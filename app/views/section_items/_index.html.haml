@@ -1,0 +1,104 @@
+%h1 Listing Questions
+.wrapper1
+  .div1
+.wrapper2
+  .div2
+    #edit-online-exam-scroll.edit-online-exam-scroll
+      %table.gr-table.gr-table-bordered.gr-table-green-hover.edit-online-exam-scroll#stem_table
+        %thead
+          %tr
+            %th Title
+            %th Difficulty
+            %th Number of Questions
+            %th Tags
+            %th Appears in
+            %th Put MCQ in Exam Pool?
+            %th.brdr_rt_nn Actions
+            %th.brdr_lf_nn.brdr_rt_nn
+            %th.brdr_lf_nn
+            %th.brdr_lf_nn.brdr_rt_nn
+
+        %tbody.mcq-font
+          - @section_items.group_by(&:mcq_stem).each do |section_item|
+            - mcq_stem = section_item[0]
+            - has_locked_exams = mcq_stem.section_items.map(&:section).map(&:sectionable).compact.map(&:locked).reject(&:blank?).first
+            %tr
+              %td.col-md-2= link_to mcq_stem.title, edit_mcq_stem_path(mcq_stem)
+              %td.col-md-2= difficulty_to_human mcq_stem.difficulty
+              %td.col-md-1= mcq_stem.mcqs.count
+              %td.col-md-2
+                - mcq_stem.tags.each do |t|
+                  %span.label.label-default= t.name
+              %td.col-md-2= appear_in_exam mcq_stem if mcq_stem.published?
+              - if has_locked_exams.blank?
+                %td= mcq_stem.examinable ? link_to("Put in MCQ Pool", change_examinable_mcq_stem_path(mcq_stem, pool_type: "mcq_pool"), class: 'btn btn-danger btn-sm') : link_to("Put in Exam Pool", change_examinable_mcq_stem_path(mcq_stem, pool_type: "exam_pool"), class: 'btn btn-success btn-sm')
+              - else
+                %td
+              %td= link_to 'Update MCQ', edit_mcq_stem_path(mcq_stem), class: 'btn btn-info btn-sm'
+              %td= link_to 'Student View', mcq_stem_path(mcq_stem), class: 'btn btn-info btn-sm'
+              - if has_locked_exams.blank?
+                %td= link_to 'Destroy', mcq_stem, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+              - else
+                %td
+              - if @parent_resource&.locked.blank?
+                -if @parent_resource.class.name == 'OnlineExam'
+                  %td= link_to 'Remove Question', remove_question_online_exam_section_section_item_path(@parent_resource, @section, section_item[1].first), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+                - else
+                  %td= link_to 'Remove Question', remove_question_diagnostic_test_section_section_item_path(@parent_resource, @section,  section_item[1].first), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+              - else
+                %td
+:javascript
+
+  $(document).ready(function() {
+      $('#stem_table').DataTable({
+        "bPaginate": false,
+        "bFilter": false,
+        "bInfo": false,
+        "aoColumnDefs" : [
+          { orderable: false, targets: [5,6,7,8] } ]
+      });
+
+
+      $(function() {
+        $(".wrapper1").scroll(function() {
+          $(".wrapper2").scrollLeft($(".wrapper1").scrollLeft());
+        });
+        $(".wrapper2").scroll(function() {
+          $(".wrapper1").scrollLeft($(".wrapper2").scrollLeft());
+        });
+      });
+
+     
+
+  });
+
+
+:CSS 
+    .wrapper1,.wrapper2
+      {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+
+      .wrapper1 {
+        height: 20px;
+      }
+
+      .wrapper2 {
+        height: 100%;
+      }
+
+      .div1 {
+        width: 1500px;
+        height: 20px;
+      }
+
+      .div2 {
+        width: 1500px;
+        height:100%;
+        overflow: auto;
+      }
+
+
+    
